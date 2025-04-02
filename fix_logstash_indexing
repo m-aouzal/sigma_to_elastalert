@@ -1,0 +1,69 @@
+
+  
+POST _reindex
+{
+  "source": {
+    "index": "winlogbeat-8.17.4"
+  },
+  "dest": {
+    "index": "winlogbeat-8.17.4-2025.03.29"
+  }
+}
+
+
+
+
+PUT winlogbeat-test-000001
+
+GET winlogbeat-8.17.4-2025.03.29/_mapping
+
+POST _reindex
+{
+  "source": {
+    "index": "winlogbeat-8.17.4"
+  },
+  "dest": {
+    "index": "winlogbeat-8.17.4-2025.03.29"
+  }
+}
+
+
+
+
+
+
+
+PUT winlogbeat-*/
+{
+  "settings": {
+    "analysis": {
+      "normalizer": {
+        "lowercase_normalizer": {
+          "type": "custom",
+          "filter": ["lowercase"]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "strings_as_text_with_keyword": {
+          "match_mapping_type": "string",
+          "mapping": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "normalizer": "lowercase_normalizer"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
+get /winlogbeat-*/_mapping
+
