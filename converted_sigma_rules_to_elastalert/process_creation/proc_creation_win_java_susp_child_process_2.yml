@@ -1,0 +1,10 @@
+description: |
+  Detects shell spawned from Java host process, which could be a sign of exploitation (e.g. log4j exploitation)
+name: Shell Process Spawned by Java.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.parent.executable.keyword:*\java.exe AND (process.executable.keyword:(*\bash.exe OR *\cmd.exe OR *\powershell.exe OR *\pwsh.exe))) AND (NOT (process.parent.executable.keyword:*build* AND process.command_line.keyword:*build*))
+type: any
+priority: 2

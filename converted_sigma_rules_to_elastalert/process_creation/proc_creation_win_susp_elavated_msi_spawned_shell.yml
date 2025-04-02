@@ -1,0 +1,10 @@
+description: |
+  Detects Windows Installer service (msiexec.exe) spawning "cmd" or "powershell"
+name: Always Install Elevated MSI Spawned Cmd And Powershell
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\cmd.exe OR *\powershell.exe OR *\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(cmd.exe OR powershell.exe OR pwsh.dll))) AND ((process.parent.executable.keyword:*\windows\installer* AND process.parent.executable.keyword:*msi*) AND process.parent.executable.keyword:*tmp)
+type: any
+priority: 2

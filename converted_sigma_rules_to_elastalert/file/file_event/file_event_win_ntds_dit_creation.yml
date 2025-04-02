@@ -1,0 +1,10 @@
+description: |
+  Detects creation of a file named "ntds.dit" (Active Directory Database)
+name: NTDS.DIT Created
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*ntds.dit
+type: any
+priority: 1

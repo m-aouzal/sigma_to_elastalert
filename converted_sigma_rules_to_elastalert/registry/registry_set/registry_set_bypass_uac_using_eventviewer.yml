@@ -1,0 +1,10 @@
+description: |
+  Bypasses User Account Control using Event Viewer and a relevant Windows Registry modification
+name: Bypass UAC Using Event Viewer
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*_classes\mscfile\shell\open\command\(default) AND (NOT winlog.event_data.Details.keyword:%systemroot%\system32\mmc.exe "%1" %*)
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of Radmin which can be abused by an adversary to remotely control Windows machines
+name: PUA - Radmin Viewer Utility Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.description.keyword:radmin viewer OR winlog.event_data.product.keyword:radmin viewer OR winlog.event_data.originalfilename.keyword:radmin.exe
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects PowerShell scripts to set the ACL to a file in the Windows folder
+name: PowerShell Set-Acl On Windows Folder - PsScript
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (powershell.file.script_block_text.keyword:*set-acl* AND powershell.file.script_block_text.keyword:*-aclobject*) AND (powershell.file.script_block_text.keyword:(*-path "c:\windows* OR *-path "c:/windows* OR *-path 'c:\windows* OR *-path 'c:/windows* OR *-path c:\windows* OR *-path c:/windows* OR *-path $env:windir* OR *-path "$env:windir* OR *-path '$env:windir*)) AND (powershell.file.script_block_text.keyword:(*fullcontrol* OR *allow*))
+type: any
+priority: 3

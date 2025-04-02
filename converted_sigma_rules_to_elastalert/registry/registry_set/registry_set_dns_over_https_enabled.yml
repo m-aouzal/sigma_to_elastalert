@@ -1,0 +1,13 @@
+description: |
+  Detects when a user enables DNS-over-HTTPS.
+This can be used to hide internet activity or be used to hide the process of exfiltrating data.
+With this enabled organization will lose visibility into data such as query type, response and originating IP that are used to determine bad actors.
+
+name: DNS-over-HTTPS Enabled by Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:*\software\policies\microsoft\edge\builtindnsclientenabled AND winlog.event_data.Details.keyword:dword (0x00000001)) OR (registry.path.keyword:*\software\google\chrome\dnsoverhttpsmode AND winlog.event_data.Details.keyword:secure) OR (registry.path.keyword:*\software\policies\mozilla\firefox\dnsoverhttps\enabled AND winlog.event_data.Details.keyword:dword (0x00000001))
+type: any
+priority: 2

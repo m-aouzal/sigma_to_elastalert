@@ -1,0 +1,12 @@
+description: |
+  This tool enables enumeration and exporting of all DNS records in the zone for recon purposes of internal networks Python 3 and python.exe must be installed,
+Usee to Query/modify DNS records for Active Directory integrated DNS via LDAP
+
+name: PUA - Adidnsdump Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\python.exe AND process.command_line.keyword:*adidnsdump*
+type: any
+priority: 1

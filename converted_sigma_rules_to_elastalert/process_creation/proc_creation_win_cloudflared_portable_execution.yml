@@ -1,0 +1,11 @@
+description: |
+  Detects the execution of the "cloudflared" binary from a non standard location.
+  
+name: Cloudflared Portable Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\cloudflared.exe AND (NOT (process.executable.keyword:(*:\program files (x86)\cloudflared* OR *:\program files\cloudflared*)))
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects Windows Installer service (msiexec.exe) trying to install MSI packages with SYSTEM privilege
+name: Always Install Elevated Windows Installer
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (((process.executable.keyword:*\windows\installer* AND process.executable.keyword:*msi*) AND process.executable.keyword:*tmp) OR (process.executable.keyword:*\msiexec.exe AND (winlog.event_data.IntegrityLevel.keyword:(system OR s-1-16-16384)))) AND (user.name.keyword:(*authori* OR *autori*)) AND (NOT (process.parent.executable.keyword:c:\windows\system32\services.exe OR (winlog.event_data.commandline.keyword:*\system32\msiexec.exe /v OR winlog.event_data.parentcommandline.keyword:*\system32\msiexec.exe /v) OR process.parent.executable.keyword:c:\programdata\sophos* OR process.parent.executable.keyword:c:\programdata\avira* OR (process.parent.executable.keyword:(c:\program files\avast software* OR c:\program files (x86)\avast software*)) OR (process.parent.executable.keyword:(c:\program files\google\update* OR c:\program files (x86)\google\update*))))
+type: any
+priority: 2

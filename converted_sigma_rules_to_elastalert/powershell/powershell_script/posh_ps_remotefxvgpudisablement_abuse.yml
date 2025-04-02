@@ -1,0 +1,10 @@
+description: |
+  Detects PowerShell module creation where the module Contents are set to "function Get-VMRemoteFXPhysicalVideoAdapter". This could be a sign of potential abuse of the "RemoteFXvGPUDisablement.exe" binary which is known to be vulnerable to module load-order hijacking.
+name: Potential RemoteFXvGPUDisablement.EXE Abuse - PowerShell ScriptBlock
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:function get-vmremotefxphysicalvideoadapter {*
+type: any
+priority: 3

@@ -1,0 +1,11 @@
+description: |
+  Detects usage of the "dir" command part of Widows CMD with the "/S" command line flag in order to enumerate files in a specified directory and all subdirectories.
+  
+name: File And SubFolder Enumeration Via Dir Command
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe) AND process.command_line.keyword:(*dir*-s* OR *dir*/s* OR *dir*–s* OR *dir*—s* OR *dir*―s*)
+type: any
+priority: 1

@@ -1,0 +1,12 @@
+description: |
+  Detects usage of the built-in PowerShell cmdlet "Enable-WindowsOptionalFeature" used as a Deployment Image Servicing and Management tool.
+Similar to DISM.exe, this cmdlet is used to enumerate, install, uninstall, configure, and update features and packages in Windows images
+
+name: Potential Suspicious Windows Feature Enabled - ProcCreation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.command_line.keyword:*enable-windowsoptionalfeature* AND process.command_line.keyword:*-online* AND process.command_line.keyword:*-featurename*) AND (process.command_line.keyword:(*telnetserver* OR *internet-explorer-optional-amd64* OR *tftp* OR *smb1protocol* OR *client-projfs* OR *microsoft-windows-subsystem-linux*))
+type: any
+priority: 2

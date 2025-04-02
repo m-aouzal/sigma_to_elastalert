@@ -1,0 +1,10 @@
+description: |
+  Detects when an attacker register a new SIP provider for persistence and defense evasion
+name: Persistence Via New SIP Provider
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((registry.path.keyword:(*\software\microsoft\cryptography\providers* OR *\software\microsoft\cryptography\oid\encodingtype* OR *\software\wow6432node\microsoft\cryptography\providers* OR *\software\wow6432node\microsoft\cryptography\oid\encodingtype*)) AND (registry.path.keyword:(*\dll* OR *\$dll*))) AND (NOT ((winlog.event_data.Details.keyword:(wintrust.dll OR mso.dll)) OR (process.executable.keyword:c:\windows\system32\poqexec.exe AND registry.path.keyword:*\cryptsipdll* AND winlog.event_data.Details.keyword:c:\windows\system32\psfsip.dll)))
+type: any
+priority: 2

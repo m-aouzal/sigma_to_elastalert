@@ -1,0 +1,11 @@
+description: |
+  Detects a network connection initiated by IMEWDBLD.EXE. This might indicate potential abuse of the utility as a LOLBIN in order to download arbitrary files or additional payloads.
+  
+name: Network Connection Initiated By IMEWDBLD.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: network.direction.keyword:true AND process.executable.keyword:*\imewdbld.exe
+type: any
+priority: 3

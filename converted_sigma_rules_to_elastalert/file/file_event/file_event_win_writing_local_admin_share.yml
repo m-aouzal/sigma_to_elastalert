@@ -1,0 +1,12 @@
+description: |
+  Aversaries may use to interact with a remote network share using Server Message Block (SMB).
+This technique is used by post-exploitation frameworks.
+
+name: Writing Local Admin Share
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\\127.0.0* AND file.path.keyword:*\admin$*
+type: any
+priority: 2

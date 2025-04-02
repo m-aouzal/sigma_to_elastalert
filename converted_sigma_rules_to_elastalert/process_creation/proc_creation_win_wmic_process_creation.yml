@@ -1,0 +1,10 @@
+description: |
+  Detects new process creation using WMIC via the "process call create" flag
+name: New Process Created Via Wmic.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\wmic.exe OR winlog.event_data.originalfilename.keyword:wmic.exe) AND (process.command_line.keyword:*process* AND process.command_line.keyword:*call* AND process.command_line.keyword:*create*)
+type: any
+priority: 2

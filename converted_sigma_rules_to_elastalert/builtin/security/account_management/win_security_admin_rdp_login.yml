@@ -1,0 +1,10 @@
+description: |
+  Detect remote login by Administrator user (depending on internal pattern).
+name: Admin User Remote Logon
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:10 AND winlog.event_data.AuthenticationPackageName.keyword:negotiate AND winlog.event_data.TargetUserName.keyword:admin*)
+type: any
+priority: 1

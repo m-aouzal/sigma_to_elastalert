@@ -1,0 +1,11 @@
+description: |
+  Detects the execution of Evil-WinRM via PowerShell Module logs by leveraging the hardcoded strings inside the utility.
+  
+name: HackTool - Evil-WinRm Execution - PowerShell Module
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.ContextInfo.keyword:(*:\windows\system32\wsmprovhost.exe* OR *:\windows\syswow64\wsmprovhost.exe*)) AND ((powershell.file.script_block_text.keyword:(*value="(get-location).path* OR *value="(get-item*).length* OR *invoke-binary* OR *donut-loader -process_id*-donutfile* OR *bypass-4msi* OR *iex ([system.text.encoding]::ascii.getstring([system.convert]::frombase64string($a))).replace('???','')*)) OR (powershell.file.script_block_text.keyword:*$servicios = get-itemproperty "registry::hklm\system\currentcontrolset\services\"* AND powershell.file.script_block_text.keyword:*where-object {$_.imagepath -notmatch "system" -and $_.imagepath -ne $null } | select-object pschildname,imagepath*) OR (powershell.file.script_block_text.keyword:*$a +=  \"$($_.fullname.replace('\','/'))/\"}else{  $a += \"$($_.fullname.replace('\', '/'))\" }* AND powershell.file.script_block_text.keyword:*$a=@();$*))
+type: any
+priority: 3

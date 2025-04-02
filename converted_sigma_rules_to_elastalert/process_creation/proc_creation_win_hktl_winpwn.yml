@@ -1,0 +1,11 @@
+description: |
+  Detects commandline keywords indicative of potential usge of the tool WinPwn. A tool for Windows and Active Directory reconnaissance and exploitation.
+  
+name: HackTool - WinPwn Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:(*offline_winpwn* OR *winpwn* OR *winpwn.exe* OR *winpwn.ps1*)
+type: any
+priority: 3

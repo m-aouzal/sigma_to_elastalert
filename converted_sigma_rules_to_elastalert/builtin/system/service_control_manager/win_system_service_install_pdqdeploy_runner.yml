@@ -1,0 +1,12 @@
+description: |
+  Detects PDQDeploy service installation on the target system.
+When a package is deployed via PDQDeploy it installs a remote service on the target machine with the name "PDQDeployRunner-X" where "X" is an integer starting from 1
+
+name: New PDQDeploy Service - Client Side
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:System AND ((winlog.provider_name.keyword:service control manager AND event.code.keyword:7045) AND (winlog.event_data.imagepath.keyword:*pdqdeployrunner-* OR winlog.event_data.servicename.keyword:pdqdeployrunner-*))
+type: any
+priority: 2

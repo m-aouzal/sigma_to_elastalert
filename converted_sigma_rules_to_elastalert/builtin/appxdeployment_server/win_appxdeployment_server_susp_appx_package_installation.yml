@@ -1,0 +1,10 @@
+description: |
+  Detects an appx package installation with the error code "0x80073cff" which indicates that the package didn't meet the signing requirements and could be suspicious
+name: Suspicious AppX Package Installation Attempt
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-AppXDeploymentServer/Operational AND (event.code.keyword:401 AND winlog.event_data.ErrorCode.keyword:0x80073cff)
+type: any
+priority: 2

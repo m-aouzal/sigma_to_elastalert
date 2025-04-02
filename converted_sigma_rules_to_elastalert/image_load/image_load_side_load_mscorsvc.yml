@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading of "mscorsvc.dll".
+name: Potential DLL Sideloading Of MsCorSvc.DLL
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\mscorsvc.dll AND (NOT (file.path.keyword:(c:\windows\microsoft.net\framework* OR c:\windows\microsoft.net\framework64* OR c:\windows\winsxs*)))
+type: any
+priority: 2

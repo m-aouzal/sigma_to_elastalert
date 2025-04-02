@@ -1,0 +1,10 @@
+description: |
+  Detects UAC Bypass Attempt Using Microsoft Connection Manager Profile Installer Autoelevate-capable COM Objects (e.g. UACMe ID of 41, 43, 58 or 65)
+name: CMSTP UAC Bypass via COM Object Access
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\dllhost.exe AND (process.parent.command_line.keyword:(* /processid:{3e5fc7f9-9a51-4367-9063-a120244fbec7}* OR * /processid:{3e000d72-a845-4cd9-bd83-80c07c3b881f}* OR * /processid:{bd54c901-076b-434e-b6c7-17c531f4ab41}* OR * /processid:{d2e7041b-2927-42fb-8e9f-7ce93b6dc937}* OR * /processid:{e9495b87-d950-4ab5-87a5-ff6d70bf3e90}*)) AND (winlog.event_data.IntegrityLevel.keyword:(high OR system OR s-1-16-16384 OR s-1-16-12288))
+type: any
+priority: 3

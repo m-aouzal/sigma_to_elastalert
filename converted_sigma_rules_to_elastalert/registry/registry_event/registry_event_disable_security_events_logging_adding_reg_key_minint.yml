@@ -1,0 +1,10 @@
+description: |
+  Detects the addition of a key 'MiniNt' to the registry. Upon a reboot, Windows Event Log service will stopped write events.
+name: Disable Security Events Logging Adding Reg Key MiniNt
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.targetobject.keyword:hklm\system\currentcontrolset\control\minint AND winlog.event_data.EventType.keyword:createkey) OR winlog.event_data.newname.keyword:hklm\system\currentcontrolset\control\minint
+type: any
+priority: 3

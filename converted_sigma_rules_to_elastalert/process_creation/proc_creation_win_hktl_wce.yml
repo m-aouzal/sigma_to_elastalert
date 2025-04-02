@@ -1,0 +1,10 @@
+description: |
+  Detects the use of Windows Credential Editor (WCE)
+name: HackTool - Windows Credential Editor (WCE) Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.Hashes.keyword:(*imphash=a53a02b997935fd8eedcb5f7abab9b9f* OR *imphash=e96a73c7bf33a464c510ede582318bf2*)) OR (process.command_line.keyword:*.exe -s AND process.parent.executable.keyword:*\services.exe)) AND (NOT process.executable.keyword:*\clussvc.exe)
+type: any
+priority: 4

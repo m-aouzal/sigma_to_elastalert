@@ -1,0 +1,10 @@
+description: |
+  Detects possible Sysmon filter driver unloaded via fltmc.exe
+name: Sysmon Driver Unloaded Via Fltmc.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\fltmc.exe OR winlog.event_data.originalfilename.keyword:fltmc.exe) AND (process.command_line.keyword:*unload* AND process.command_line.keyword:*sysmon*)
+type: any
+priority: 3

@@ -1,0 +1,12 @@
+description: |
+  Detects powershell scripts that adds a Name Resolution Policy Table (NRPT) rule for the specified namespace.
+This will bypass the default DNS server and uses a specified server for answering the query.
+
+name: Powershell Add Name Resolution Policy Table Rule
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*add-dnsclientnrptrule* AND powershell.file.script_block_text.keyword:*-namesp* AND powershell.file.script_block_text.keyword:*-namese*
+type: any
+priority: 3

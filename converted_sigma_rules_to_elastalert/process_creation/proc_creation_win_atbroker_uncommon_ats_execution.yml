@@ -1,0 +1,10 @@
+description: |
+  Detects the start of a non built-in assistive technology applications via "Atbroker.EXE".
+name: Uncommon  Assistive Technology Applications Execution Via AtBroker.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\atbroker.exe OR winlog.event_data.originalfilename.keyword:atbroker.exe) AND process.command_line.keyword:*start*) AND (NOT (process.command_line.keyword:(*animations* OR *audiodescription* OR *caretbrowsing* OR *caretwidth* OR *colorfiltering* OR *cursorindicator* OR *cursorscheme* OR *filterkeys* OR *focusborderheight* OR *focusborderwidth* OR *highcontrast* OR *keyboardcues* OR *keyboardpref* OR *livecaptions* OR *magnifierpane* OR *messageduration* OR *minimumhitradius* OR *mousekeys* OR *narrator* OR *osk* OR *overlappedcontent* OR *showsounds* OR *soundsentry* OR *speechreco* OR *stickykeys* OR *togglekeys* OR *voiceaccess* OR *windowarranging* OR *windowtracking* OR *windowtrackingtimeout* OR *windowtrackingzorder*))) AND (NOT process.command_line.keyword:*oracle_javaaccessbridge*)
+type: any
+priority: 2

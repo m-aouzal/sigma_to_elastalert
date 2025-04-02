@@ -1,0 +1,10 @@
+description: |
+  Detects the use of SharpEvtHook, a tool that tampers with the Windows event logs
+name: HackTool - SharpEvtMute Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.image.keyword:*\sharpevtmute.exe OR winlog.event_data.description.keyword:sharpevtmute OR (winlog.event_data.commandline.keyword:(*--filter "rule* OR *--encoded --filter \"*))
+type: any
+priority: 3

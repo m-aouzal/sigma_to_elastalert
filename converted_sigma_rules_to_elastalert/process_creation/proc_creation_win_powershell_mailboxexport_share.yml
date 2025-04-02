@@ -1,0 +1,10 @@
+description: |
+  Detects usage of the powerShell New-MailboxExportRequest Cmdlet to exports a mailbox to a remote or local share, as used in ProxyShell exploitations
+name: Suspicious PowerShell Mailbox Export to Share
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*new-mailboxexportrequest* AND process.command_line.keyword:* -mailbox* AND process.command_line.keyword:* -filepath \*
+type: any
+priority: 4

@@ -1,0 +1,13 @@
+description: |
+  Detects an executable initiating a network connection to "ngrok" domains.
+Attackers were seen using this "ngrok" in order to store their second stage payloads and malware.
+While communication with such domains can be legitimate, often times is a sign of either data exfiltration by malicious actors or additional download.
+
+name: Process Initiated Network  Connection To Ngrok Domain
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: network.direction.keyword:true AND (destination.domain.keyword:(*.ngrok-free.app OR *.ngrok-free.dev OR *.ngrok.app OR *.ngrok.dev OR *.ngrok.io))
+type: any
+priority: 3

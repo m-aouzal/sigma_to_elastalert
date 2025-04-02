@@ -1,0 +1,10 @@
+description: |
+  Detects changes to the ClickOnce trust prompt registry key in order to enable an installation from different locations such as the Internet.
+name: ClickOnce Trust Prompt Tampering
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\software\microsoft\.netframework\security\trustmanager\promptinglevel* AND (registry.path.keyword:(*\internet OR *\localintranet OR *\mycomputer OR *\trustedsites OR *\untrustedsites)) AND winlog.event_data.Details.keyword:enabled
+type: any
+priority: 2

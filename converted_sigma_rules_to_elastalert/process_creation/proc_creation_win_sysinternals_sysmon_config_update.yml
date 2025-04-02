@@ -1,0 +1,10 @@
+description: |
+  Detects updates to Sysmon's configuration. Attackers might update or replace the Sysmon configuration with a bare bone one to avoid monitoring without shutting down the service completely
+name: Sysmon Configuration Update
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\sysmon64.exe OR *\sysmon.exe)) OR winlog.event_data.description.keyword:system activity monitor) AND process.command_line.keyword:(*-c* OR */c* OR *–c* OR *—c* OR *―c*)
+type: any
+priority: 2

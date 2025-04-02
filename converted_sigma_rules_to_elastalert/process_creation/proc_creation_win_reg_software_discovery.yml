@@ -1,0 +1,10 @@
+description: |
+  Adversaries may attempt to enumerate software for a variety of reasons, such as figuring out what security measures are present or if the compromised system has a version of software that is vulnerable.
+name: Detected Windows Software Discovery
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\reg.exe AND (process.command_line.keyword:*query* AND process.command_line.keyword:*\software* AND process.command_line.keyword:*/v* AND process.command_line.keyword:*svcversion*)
+type: any
+priority: 2

@@ -1,0 +1,11 @@
+description: |
+  Detects the execution of the "wusa.exe" (Windows Update Standalone Installer) utility to extract ".cab" files using the "/extract" argument from potentially suspicious paths.
+  
+name: Cab File Extraction Via Wusa.EXE From Potentially Suspicious Paths
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\wusa.exe AND process.command_line.keyword:*/extract:*) AND (process.command_line.keyword:(*:\perflogs* OR *:\users\public* OR *:\windows\temp* OR *\appdata\local\temp*))
+type: any
+priority: 3

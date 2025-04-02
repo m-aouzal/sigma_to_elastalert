@@ -1,0 +1,10 @@
+description: |
+  Detects using WorkFolders.exe to execute an arbitrary control.exe
+name: Execution via WorkFolders.exe
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\control.exe AND process.parent.executable.keyword:*\workfolders.exe) AND (NOT process.executable.keyword:c:\windows\system32\control.exe)
+type: any
+priority: 3

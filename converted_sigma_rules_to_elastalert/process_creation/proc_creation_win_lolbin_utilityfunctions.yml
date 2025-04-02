@@ -1,0 +1,10 @@
+description: |
+  Detects the use of a Microsoft signed script executing a managed DLL with PowerShell.
+name: UtilityFunctions.ps1 Proxy Dll
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:(*utilityfunctions.ps1* OR *regsnapin*)
+type: any
+priority: 2

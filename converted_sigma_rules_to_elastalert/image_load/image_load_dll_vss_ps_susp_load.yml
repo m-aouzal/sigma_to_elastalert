@@ -1,0 +1,10 @@
+description: |
+  Detects the image load of vss_ps.dll by uncommon executables
+name: Suspicious Volume Shadow Copy VSS_PS.dll Load
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\vss_ps.dll AND (NOT ((process.executable.keyword:c:\windows* AND (process.executable.keyword:(*\clussvc.exe OR *\dismhost.exe OR *\dllhost.exe OR *\inetsrv\appcmd.exe OR *\inetsrv\iissetup.exe OR *\msiexec.exe OR *\rundll32.exe OR *\searchindexer.exe OR *\srtasks.exe OR *\svchost.exe OR *\system32\systempropertiesadvanced.exe OR *\taskhostw.exe OR *\thor.exe OR *\thor64.exe OR *\tiworker.exe OR *\vssvc.exe OR *\wmiprvse.exe OR *\wsmprovhost.exe))) OR (process.executable.keyword:(c:\program files* OR c:\program files (x86)*)) OR (winlog.event_data.CommandLine.keyword:c:\$winreagent\scratch* AND winlog.event_data.CommandLine.keyword:*\dismhost.exe {*) OR (NOT _exists_:process.executable)))
+type: any
+priority: 3

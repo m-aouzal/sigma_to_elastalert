@@ -1,0 +1,10 @@
+description: |
+  Use of hostname to get information
+name: Suspicious Execution of Hostname
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\hostname.exe
+type: any
+priority: 1

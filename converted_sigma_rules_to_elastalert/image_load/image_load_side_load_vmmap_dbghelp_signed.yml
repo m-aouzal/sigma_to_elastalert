@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading of a signed dbghelp.dll by the Sysinternals VMMap.
+name: VMMap Signed Dbghelp.DLL Potential Sideloading
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*c:\debuggers\dbghelp.dll* AND (process.executable.keyword:(*\vmmap.exe OR *\vmmap64.exe)) AND file.code_signature.signed.keyword:true
+type: any
+priority: 2

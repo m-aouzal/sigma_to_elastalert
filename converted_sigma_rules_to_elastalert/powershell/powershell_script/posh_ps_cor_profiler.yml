@@ -1,0 +1,15 @@
+description: |
+  Adversaries may leverage the COR_PROFILER environment variable to hijack the execution flow of programs that load the .NET CLR.
+The COR_PROFILER is a .NET Framework feature which allows developers to specify an unmanaged (or external of .NET) profiling DLL to be loaded into each .NET process that loads the Common Language Runtime (CLR).
+These profiliers are designed to monitor, troubleshoot, and debug managed code executed by the .NET CLR.
+(Citation: Microsoft Profiling Mar 2017)
+(Citation: Microsoft COR_PROFILER Feb 2013)
+
+name: Registry-Free Process Scope COR_PROFILER
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*$env:cor_enable_profiling* AND powershell.file.script_block_text.keyword:*$env:cor_profiler* AND powershell.file.script_block_text.keyword:*$env:cor_profiler_path*
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects the addition of a new member to the local administrator group, which could be legitimate activity or a sign of privilege escalation activity
+name: User Added to Local Administrator Group
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:4732 AND (winlog.event_data.targetusername.keyword:administr* OR winlog.event_data.targetsid.keyword:s-1-5-32-544)) AND (NOT user.name.keyword:*$))
+type: any
+priority: 2

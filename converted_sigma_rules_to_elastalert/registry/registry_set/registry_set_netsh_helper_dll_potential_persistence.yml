@@ -1,0 +1,11 @@
+description: |
+  Detects changes to the Netsh registry key to add a new DLL value. This change might be an indication of a potential persistence attempt by adding a malicious Netsh helper
+  
+name: Potential Persistence Via Netsh Helper DLL - Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\software\microsoft\netsh* AND winlog.event_data.Details.keyword:*.dll*
+type: any
+priority: 2

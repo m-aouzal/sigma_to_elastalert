@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of a renamed "NirCmd.exe" binary based on the PE metadata fields.
+name: Renamed NirCmd.EXE Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.pe.original_file_name.keyword:nircmd.exe AND (NOT (process.executable.keyword:(*\nircmd.exe OR *\nircmdc.exe)))
+type: any
+priority: 3

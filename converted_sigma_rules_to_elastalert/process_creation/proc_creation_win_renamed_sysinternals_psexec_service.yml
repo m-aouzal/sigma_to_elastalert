@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious launch of a renamed version of the PSEXESVC service with, which is not often used by legitimate administrators
+name: Renamed PsExec Service Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.pe.original_file_name.keyword:psexesvc.exe AND (NOT process.executable.keyword:c:\windows\psexesvc.exe)
+type: any
+priority: 3

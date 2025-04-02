@@ -1,0 +1,10 @@
+description: |
+  Detects default CSExec pipe creation
+name: PUA - CSExec Default Named Pipe
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.name.keyword:*\csexecsvc*
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects Invoke-Mimikatz PowerShell script and alike. Mimikatz is a credential dumper capable of obtaining plaintext Windows account logins and passwords.
+name: Potential Invoke-Mimikatz PowerShell Script
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (powershell.file.script_block_text.keyword:*dumpcreds* AND powershell.file.script_block_text.keyword:*dumpcerts*) OR powershell.file.script_block_text.keyword:*sekurlsa::logonpasswords* OR (powershell.file.script_block_text.keyword:*crypto::certificates* AND powershell.file.script_block_text.keyword:*cert_system_store_local_machine*)
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of certutil with the "encode" flag to encode a file to base64 where the extensions of the file is suspicious
+name: Suspicious File Encoded To Base64 Via Certutil.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\certutil.exe OR winlog.event_data.originalfilename.keyword:certutil.exe) AND process.command_line.keyword:(*-encode* OR */encode* OR *–encode* OR *—encode* OR *―encode*) AND (process.command_line.keyword:(*.acl* OR *.bat* OR *.doc* OR *.gif* OR *.jpeg* OR *.jpg* OR *.mp3* OR *.pdf* OR *.png* OR *.ppt* OR *.tmp* OR *.xls* OR *.xml*))
+type: any
+priority: 3

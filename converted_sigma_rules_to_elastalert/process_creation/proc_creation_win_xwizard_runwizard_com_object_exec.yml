@@ -1,0 +1,12 @@
+description: |
+  Detects the execution of Xwizard tool with the "RunWizard" flag and a GUID like argument.
+This utility can be abused in order to run custom COM object created in the registry.
+
+name: COM Object Execution via Xwizard.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:runwizard AND process.command_line.keyword:/{[a-fa-f0-9]{8}-[a-fa-f0-9]{4}-[a-fa-f0-9]{4}-[a-fa-f0-9]{4}-[a-fa-f0-9]{12}}/
+type: any
+priority: 2

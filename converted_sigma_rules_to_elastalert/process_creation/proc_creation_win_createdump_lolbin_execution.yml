@@ -1,0 +1,10 @@
+description: |
+  Detects uses of the createdump.exe LOLOBIN utility to dump process memory
+name: CreateDump Process Dump
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\createdump.exe OR winlog.event_data.originalfilename.keyword:fx_ver_internalname_str) AND (process.command_line.keyword:(* -u* OR * --full* OR * -f* OR * --name* OR *.dmp*))
+type: any
+priority: 3

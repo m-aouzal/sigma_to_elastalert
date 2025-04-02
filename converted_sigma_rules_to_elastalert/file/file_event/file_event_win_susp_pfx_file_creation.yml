@@ -1,0 +1,10 @@
+description: |
+  A general detection for processes creating PFX files. This could be an indicator of an adversary exporting a local certificate to a PFX file.
+name: Suspicious PFX File Creation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*.pfx AND (NOT (file.path.keyword:*\templates\windows\windows_temporarykey.pfx* AND file.path.keyword:*\cmake*))
+type: any
+priority: 2

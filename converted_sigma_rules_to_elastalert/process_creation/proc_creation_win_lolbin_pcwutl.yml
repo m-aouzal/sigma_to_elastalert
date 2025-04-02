@@ -1,0 +1,10 @@
+description: |
+  Detects launch of executable by calling the LaunchApplication function from pcwutl.dll library.
+name: Code Execution via Pcwutl.dll
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe) AND (process.command_line.keyword:*pcwutl* AND process.command_line.keyword:*launchapplication*)
+type: any
+priority: 2

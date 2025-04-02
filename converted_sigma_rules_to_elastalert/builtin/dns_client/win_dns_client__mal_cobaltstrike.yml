@@ -1,0 +1,10 @@
+description: |
+  Detects a program that invoked suspicious DNS queries known from Cobalt Strike beacons
+name: Suspicious Cobalt Strike DNS Beaconing - DNS Client
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-DNS Client Events/Operational AND (event.code.keyword:3008 AND ((dns.question.name.keyword:(aaa.stage.* OR post.1*)) OR dns.question.name.keyword:*.stage.123456.*))
+type: any
+priority: 4

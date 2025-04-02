@@ -1,0 +1,10 @@
+description: |
+  Detects remote PowerShell sessions
+name: Remote PowerShell Session (PS Classic)
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.Data.keyword:*hostname=serverremotehost* AND winlog.event_data.Data.keyword:*wsmprovhost.exe*
+type: any
+priority: 1

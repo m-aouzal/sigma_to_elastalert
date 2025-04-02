@@ -1,0 +1,12 @@
+description: |
+  Adversaries may interrupt availability of system and network resources by inhibiting access to accounts utilized by legitimate users.
+Accounts may be deleted, locked, or manipulated (ex: changed credentials) to remove access to accounts.
+
+name: Remove Account From Domain Admin Group
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*remove-adgroupmember* AND powershell.file.script_block_text.keyword:*-identity* AND powershell.file.script_block_text.keyword:*-members*
+type: any
+priority: 2

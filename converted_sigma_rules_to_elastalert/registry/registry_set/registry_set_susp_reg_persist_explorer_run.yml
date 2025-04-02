@@ -1,0 +1,10 @@
+description: |
+  Detects a possible persistence mechanism using RUN key for Windows Explorer and pointing to a suspicious folder
+name: Registry Persistence via Explorer Run Key
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\microsoft\windows\currentversion\policies\explorer\run AND (winlog.event_data.Details.keyword:(*:\$recycle.bin* OR *:\programdata* OR *:\temp* OR *:\users\default* OR *:\users\public* OR *:\windows\temp* OR *\appdata\local\temp*))
+type: any
+priority: 3

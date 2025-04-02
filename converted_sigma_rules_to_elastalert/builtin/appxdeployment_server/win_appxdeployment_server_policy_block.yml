@@ -1,0 +1,10 @@
+description: |
+  Detects an appx package deployment that was blocked by the local computer policy
+name: Deployment Of The AppX Package Was Blocked By The Policy
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-AppXDeploymentServer/Operational AND (event.code.keyword:(441 OR 442 OR 453 OR 454))
+type: any
+priority: 2

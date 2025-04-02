@@ -1,0 +1,10 @@
+description: |
+  Detects uncommon or suspicious child processes of "eventvwr.exe" which might indicate a UAC bypass attempt
+name: Potentially Suspicious Event Viewer Child Process
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\eventvwr.exe AND (NOT (process.executable.keyword:(*:\windows\system32\mmc.exe OR *:\windows\system32\werfault.exe OR *:\windows\syswow64\werfault.exe)))
+type: any
+priority: 3

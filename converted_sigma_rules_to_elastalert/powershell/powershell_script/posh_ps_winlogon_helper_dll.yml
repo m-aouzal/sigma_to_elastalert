@@ -1,0 +1,14 @@
+description: |
+  Winlogon.exe is a Windows component responsible for actions at logon/logoff as well as the secure attention sequence (SAS) triggered by Ctrl-Alt-Delete.
+Registry entries in HKLMSoftware[Wow6432Node]MicrosoftWindows NTCurrentVersionWinlogon and HKCUSoftwareMicrosoftWindows NTCurrentVersionWinlogon are
+used to manage additional helper programs and functionalities that support Winlogon. Malicious modifications to these Registry keys may cause Winlogon to
+load and execute malicious DLLs and/or executables.
+
+name: Winlogon Helper DLL
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*currentversion\winlogon* AND (powershell.file.script_block_text.keyword:(*set-itemproperty* OR *new-item*))
+type: any
+priority: 2

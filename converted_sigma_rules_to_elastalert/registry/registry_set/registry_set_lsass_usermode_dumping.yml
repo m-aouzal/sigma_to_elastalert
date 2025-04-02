@@ -1,0 +1,10 @@
+description: |
+  Detects the setting of the "DumpType" registry value to "2" which stands for a "Full Dump". Technique such as LSASS Shtinkering requires this value to be "2" in order to dump LSASS.
+name: Lsass Full Dump Request Via DumpType Registry Settings
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:(*\software\microsoft\windows\windows error reporting\localdumps\dumptype* OR *\software\microsoft\windows\windows error reporting\localdumps\lsass.exe\dumptype*)) AND winlog.event_data.Details.keyword:dword (0x00000002)
+type: any
+priority: 3

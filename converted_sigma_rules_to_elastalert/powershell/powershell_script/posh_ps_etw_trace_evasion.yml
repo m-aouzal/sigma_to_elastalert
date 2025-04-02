@@ -1,0 +1,10 @@
+description: |
+  Detects usage of powershell cmdlets to disable or remove ETW trace sessions
+name: Disable of ETW Trace - Powershell
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*remove-etwtraceprovider* OR (powershell.file.script_block_text.keyword:*set-etwtraceprovider* AND powershell.file.script_block_text.keyword:*0x11*)
+type: any
+priority: 3

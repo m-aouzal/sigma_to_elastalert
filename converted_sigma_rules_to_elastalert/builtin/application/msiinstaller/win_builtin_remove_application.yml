@@ -1,0 +1,10 @@
+description: |
+  An application has been removed. Check if it is critical.
+name: Application Uninstalled
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Application AND (winlog.provider_name.keyword:msiinstaller AND (event.code.keyword:(1034 OR 11724)))
+type: any
+priority: 1

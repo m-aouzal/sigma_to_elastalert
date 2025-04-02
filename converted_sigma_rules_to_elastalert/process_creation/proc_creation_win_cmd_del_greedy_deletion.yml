@@ -1,0 +1,10 @@
+description: |
+  Detects execution of the "del" builtin command to remove files using greedy/wildcard expression. This is often used by malware to delete content of folders that perhaps contains the initial malware infection or to delete evidence.
+name: Greedy File Deletion Using Del
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe) AND (process.command_line.keyword:(*del* OR *erase*)) AND (process.command_line.keyword:(*\*.au3* OR *\*.dll* OR *\*.exe* OR *\*.js*))
+type: any
+priority: 2

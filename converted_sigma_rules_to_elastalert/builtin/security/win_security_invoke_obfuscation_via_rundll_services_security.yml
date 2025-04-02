@@ -1,0 +1,10 @@
+description: |
+  Detects Obfuscated Powershell via RUNDLL LAUNCHER
+name: Invoke-Obfuscation RUNDLL LAUNCHER - Security
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4697 AND (winlog.event_data.ServiceFileName.keyword:*rundll32.exe* AND winlog.event_data.ServiceFileName.keyword:*shell32.dll* AND winlog.event_data.ServiceFileName.keyword:*shellexec_rundll* AND winlog.event_data.ServiceFileName.keyword:*powershell*))
+type: any
+priority: 2

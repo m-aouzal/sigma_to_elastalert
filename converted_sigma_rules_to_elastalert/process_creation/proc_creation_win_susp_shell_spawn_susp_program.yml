@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious child processes of a Windows shell and scripting processes such as wscript, rundll32, powershell, mshta...etc.
+name: Windows Shell/Scripting Processes Spawning Suspicious Programs
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((process.parent.executable.keyword:(*\mshta.exe OR *\powershell.exe OR *\pwsh.exe OR *\rundll32.exe OR *\cscript.exe OR *\wscript.exe OR *\wmiprvse.exe OR *\regsvr32.exe)) AND (process.executable.keyword:(*\schtasks.exe OR *\nslookup.exe OR *\certutil.exe OR *\bitsadmin.exe OR *\mshta.exe))) AND (NOT (process.working_directory.keyword:*\ccmcache* OR (process.parent.command_line.keyword:(*\program files\amazon\workspacesconfig\scripts\setup-scheduledtask.ps1* OR *\program files\amazon\workspacesconfig\scripts\set-selfhealing.ps1* OR *\program files\amazon\workspacesconfig\scripts\check-workspacehealth.ps1* OR *\nessus_*)) OR process.command_line.keyword:*\nessus_* OR (process.parent.executable.keyword:*\mshta.exe AND process.executable.keyword:*\mshta.exe AND (process.parent.command_line.keyword:*c:\mem_configmgr_* AND process.parent.command_line.keyword:*\splash.hta* AND process.parent.command_line.keyword:*{1e460bd7-f1c3-4b2e-88bf-4e770a288af5}*) AND (process.command_line.keyword:*c:\mem_configmgr_* AND process.command_line.keyword:*\smssetup\bin* AND process.command_line.keyword:*\autorun.hta* AND process.command_line.keyword:*{1e460bd7-f1c3-4b2e-88bf-4e770a288af5}*))))
+type: any
+priority: 3

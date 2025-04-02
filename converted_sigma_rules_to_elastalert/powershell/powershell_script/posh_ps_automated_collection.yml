@@ -1,0 +1,10 @@
+description: |
+  Once established within a system or network, an adversary may use automated techniques for collecting internal data.
+name: Automated Collection Command PowerShell
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (powershell.file.script_block_text.keyword:(*.doc* OR *.docx* OR *.xls* OR *.xlsx* OR *.ppt* OR *.pptx* OR *.rtf* OR *.pdf* OR *.txt*)) AND (powershell.file.script_block_text.keyword:*get-childitem* AND powershell.file.script_block_text.keyword:* -recurse* AND powershell.file.script_block_text.keyword:* -include*)
+type: any
+priority: 2

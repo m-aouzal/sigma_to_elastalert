@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading of "RjvPlatform.dll" by "SystemResetPlatform.exe" located in a non-default location.
+name: Potential RjvPlatform.DLL Sideloading From Non-Default Location
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (file.path.keyword:*\rjvplatform.dll AND process.executable.keyword:\systemresetplatform.exe) AND (NOT process.executable.keyword:c:\windows\system32\systemresetplatform*)
+type: any
+priority: 3

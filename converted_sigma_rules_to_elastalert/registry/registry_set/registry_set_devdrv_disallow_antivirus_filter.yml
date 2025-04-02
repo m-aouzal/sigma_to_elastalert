@@ -1,0 +1,11 @@
+description: |
+  Detects activity that indicates a user disabling the ability for Antivirus mini filter to inspect a "Dev Drive".
+  
+name: Antivirus Filter Driver Disallowed On Dev Drive - Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\filtermanager\fltmgrdevdriveallowantivirusfilter AND winlog.event_data.Details.keyword:dword (0x00000000)
+type: any
+priority: 3

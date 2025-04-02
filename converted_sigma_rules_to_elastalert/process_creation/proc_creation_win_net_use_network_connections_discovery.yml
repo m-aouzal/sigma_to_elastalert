@@ -1,0 +1,10 @@
+description: |
+  Adversaries may attempt to get a listing of network connections to or from the compromised system they are currently accessing or from remote systems by querying for information over the network.
+name: System Network Connections Discovery Via Net.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\net.exe OR *\net1.exe)) OR (winlog.event_data.originalfilename.keyword:(net.exe OR net1.exe))) AND ((winlog.event_data.commandline.keyword:(* use OR * sessions)) OR (winlog.event_data.commandline.keyword:(* use* OR * sessions*)))
+type: any
+priority: 1

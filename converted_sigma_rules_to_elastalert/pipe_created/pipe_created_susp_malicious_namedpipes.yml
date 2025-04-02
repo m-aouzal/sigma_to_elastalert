@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of a named pipe seen used by known APTs or malware.
+name: Malicious Named Pipe Created
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.name.keyword:(\46a676ab7f179e511e30dd2dc41bd388 OR \583da945-62af-10e8-4902-a8f205c72b2e OR \6e7645c4-32c5-4fe3-aabf-e94c2f4370e7 OR \9f81f59bc58452127884ce513865ed20 OR \adschemerpc OR \ahexec OR \anonymouspipe OR \bc31a7 OR \bc367 OR \bizkaz OR \csexecsvc OR \dce_3d OR \e710f28d59aa529d6792ca6ff0ca1b34 OR \gruntsvc OR \isapi_dg OR \isapi_dg2 OR \isapi_http OR \jaccdpqnvbrrxlaf OR \lsassw OR \namepipe_morewindows OR \pcheap_reuse OR \posh* OR \rpchlp_3 OR \sdlrpc OR \svcctl OR \testpipe OR \winsession)
+type: any
+priority: 4

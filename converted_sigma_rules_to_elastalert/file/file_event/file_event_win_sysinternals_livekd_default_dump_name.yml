@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of a file that has the same name as the default LiveKD kernel memory dump.
+name: LiveKD Kernel Memory Dump File Created
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:c:\windows\livekd.dmp
+type: any
+priority: 3

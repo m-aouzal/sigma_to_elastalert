@@ -1,0 +1,10 @@
+description: |
+  Detects changes to of the IIS server configuration in order to disable HTTP logging for successful requests.
+name: HTTP Logging Disabled On IIS Server
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: event.code.keyword:29 AND winlog.event_data.Configuration.keyword:/system.webserver/httplogging/@dontlog AND winlog.event_data.NewValue.keyword:true
+type: any
+priority: 3

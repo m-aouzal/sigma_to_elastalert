@@ -1,0 +1,10 @@
+description: |
+  Detects a DNS server error in which a specified plugin DLL (in registry) could not be loaded
+name: DNS Server Error Failed Loading the ServerLevelPluginDLL
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:DNS Server AND (event.code.keyword:(150 OR 770 OR 771))
+type: any
+priority: 3

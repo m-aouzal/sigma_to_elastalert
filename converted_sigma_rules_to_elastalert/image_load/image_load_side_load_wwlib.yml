@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading of "wwlib.dll"
+name: Potential WWlib.DLL Sideloading
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\wwlib.dll AND (NOT ((process.executable.keyword:(c:\program files (x86)\microsoft office* OR c:\program files\microsoft office*)) AND process.executable.keyword:*\winword.exe AND (file.path.keyword:(c:\program files (x86)\microsoft office* OR c:\program files\microsoft office*))))
+type: any
+priority: 2

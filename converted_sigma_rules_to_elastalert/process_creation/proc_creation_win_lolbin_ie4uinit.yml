@@ -1,0 +1,10 @@
+description: |
+  Detect use of ie4uinit.exe to execute commands from a specially prepared ie4uinit.inf file from a directory other than the usual directories
+name: Ie4uinit Lolbin Use From Invalid Path
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\ie4uinit.exe OR winlog.event_data.originalfilename.keyword:ie4uinit.exe) AND (NOT ((process.working_directory.keyword:(c:\windows\system32\ OR c:\windows\syswow64\)) OR (NOT _exists_:process.working_directory)))
+type: any
+priority: 2

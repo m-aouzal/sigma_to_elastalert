@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of the LiveKD driver, which is used for live kernel debugging
+name: LiveKD Driver Creation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:c:\windows\system32\drivers\livekdd.sys AND (process.executable.keyword:(*\livekd.exe OR *\livek64.exe))
+type: any
+priority: 2

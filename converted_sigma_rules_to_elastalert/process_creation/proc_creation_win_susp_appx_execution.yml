@@ -1,0 +1,10 @@
+description: |
+  Detects potentially suspicious child process of applications launched from inside the WindowsApps directory. This could be a sign of a rogue ".appx" package installation/execution
+name: Potentially Suspicious Windows App Activity
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*c:\program files\windowsapps* AND ((process.executable.keyword:(*\cmd.exe OR *\cscript.exe OR *\mshta.exe OR *\powershell.exe OR *\pwsh.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\wscript.exe)) OR (process.command_line.keyword:(*cmd /c* OR *invoke-* OR *base64*))) AND (NOT (process.parent.executable.keyword:*:\program files\windowsapps\microsoft.windowsterminal* AND process.parent.executable.keyword:*\windowsterminal.exe AND (process.executable.keyword:(*\powershell.exe OR *\cmd.exe OR *\pwsh.exe))))
+type: any
+priority: 2

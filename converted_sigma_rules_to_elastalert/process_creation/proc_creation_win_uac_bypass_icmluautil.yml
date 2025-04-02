@@ -1,0 +1,10 @@
+description: |
+  Detects the pattern of UAC Bypass using ICMLuaUtil Elevated COM interface
+name: UAC Bypass via ICMLuaUtil
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.parent.executable.keyword:*\dllhost.exe AND (process.parent.command_line.keyword:(*/processid:{3e5fc7f9-9a51-4367-9063-a120244fbec7}* OR */processid:{d2e7041b-2927-42fb-8e9f-7ce93b6dc937}*))) AND (NOT (winlog.event_data.image.keyword:*\werfault.exe OR winlog.event_data.originalfilename.keyword:werfault.exe))
+type: any
+priority: 3

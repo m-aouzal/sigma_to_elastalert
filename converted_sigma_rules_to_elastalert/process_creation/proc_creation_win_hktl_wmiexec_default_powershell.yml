@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of PowerShell with a specific flag sequence that is used by the Wmiexec script
+name: HackTool - Wmiexec Default Powershell Command
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*-nop -nol -sta -noni -w hidden -exec bypass -enc*
+type: any
+priority: 3

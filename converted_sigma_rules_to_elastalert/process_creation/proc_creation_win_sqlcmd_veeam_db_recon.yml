@@ -1,0 +1,10 @@
+description: |
+  Detects potentially suspicious SQL queries using SQLCmd targeting the Veeam backup databases in order to steal information.
+name: Veeam Backup Database Suspicious Query
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\sqlcmd.exe AND (process.command_line.keyword:*veeambackup* AND process.command_line.keyword:*from*)) AND (process.command_line.keyword:(*backuprepositories* OR *backups* OR *credentials* OR *hostcreds* OR *smbfileshares* OR *ssh_creds* OR *vsphereinfo*))
+type: any
+priority: 2

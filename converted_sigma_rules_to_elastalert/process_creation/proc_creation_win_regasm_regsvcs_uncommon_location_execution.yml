@@ -1,0 +1,10 @@
+description: |
+  Detects potentially suspicious execution of the Regasm/Regsvcs utilities from a potentially suspicious location
+name: Potentially Suspicious Execution Of Regasm/Regsvcs From Uncommon Location
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\regsvcs.exe OR *\regasm.exe)) OR (winlog.event_data.originalfilename.keyword:(regsvcs.exe OR regasm.exe))) AND (process.command_line.keyword:(*\appdata\local\temp* OR *\microsoft\windows\start menu\programs\startup* OR *\perflogs* OR *\users\public* OR *\windows\temp*))
+type: any
+priority: 2

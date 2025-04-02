@@ -1,0 +1,10 @@
+description: |
+  Detects execution of VMware Xfer utility (VMwareXferlogs.exe) from the non-default directory which may be an attempt to sideload arbitrary DLL
+name: DLL Sideloading by VMware Xfer Utility
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\vmwarexferlogs.exe AND (NOT process.executable.keyword:c:\program files\vmware*)
+type: any
+priority: 3

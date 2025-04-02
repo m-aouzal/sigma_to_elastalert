@@ -1,0 +1,10 @@
+description: |
+  Detects renamed vmnat.exe or portable version that can be used for DLL side-loading
+name: Renamed Vmnat.exe Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.pe.original_file_name.keyword:vmnat.exe AND (NOT process.executable.keyword:*vmnat.exe)
+type: any
+priority: 3

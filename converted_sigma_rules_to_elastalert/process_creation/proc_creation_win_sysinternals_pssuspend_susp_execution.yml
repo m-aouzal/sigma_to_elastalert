@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious execution of Sysinternals PsSuspend, where the utility is used to suspend critical processes such as AV or EDR to bypass defenses
+name: Sysinternals PsSuspend Suspicious Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.originalfilename.keyword:pssuspend.exe OR (winlog.event_data.image.keyword:(*\pssuspend.exe OR *\pssuspend64.exe))) AND process.command_line.keyword:*msmpeng.exe*
+type: any
+priority: 3

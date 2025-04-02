@@ -1,0 +1,11 @@
+description: |
+  Detects a command that accesses the VolumeShadowCopy in order to extract sensitive files such as the Security or SAM registry hives or the AD database (ntds.dit)
+  
+name: Sensitive File Access Via Volume Shadow Copy Backup
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*\\?\globalroot\device\harddiskvolumeshadowcopy* AND (process.command_line.keyword:(*\ntds.dit* OR *\system* OR *\security*))
+type: any
+priority: 3

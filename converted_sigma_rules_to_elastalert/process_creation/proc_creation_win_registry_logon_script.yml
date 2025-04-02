@@ -1,0 +1,10 @@
+description: |
+  Detects the addition of a new LogonScript to the registry value "UserInitMprLogonScript" for potential persistence
+name: Potential Persistence Via Logon Scripts - CommandLine
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*userinitmprlogonscript*
+type: any
+priority: 3

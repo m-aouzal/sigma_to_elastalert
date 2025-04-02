@@ -1,0 +1,10 @@
+description: |
+  Detects Obfuscated Powershell via Stdin in Scripts
+name: Invoke-Obfuscation Via Stdin - Powershell
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:/(?i)(set).*&&s?set.*(environment|invoke|${?input).*&&.*"/
+type: any
+priority: 3

@@ -1,0 +1,12 @@
+description: |
+  Detects file access requests to the Windows Credential History File by an uncommon application.
+This can be a sign of credential stealing. Example case would be usage of mimikatz "dpapi::credhist" function
+
+name: Access To Windows Credential History File By Uncommon Applications
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\microsoft\protect\credhist AND (NOT ((process.executable.keyword:(c:\program files* OR c:\program files (x86)* OR c:\windows\system32* OR c:\windows\syswow64*)) OR process.executable.keyword:c:\windows\explorer.exe))
+type: any
+priority: 2

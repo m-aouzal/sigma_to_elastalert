@@ -1,0 +1,10 @@
+description: |
+  Detect possible persistence using Fax DLL load when service restart
+name: Change the Fax Dll
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:*\software\microsoft\fax\device providers* AND registry.path.keyword:*\imagename*) AND (NOT winlog.event_data.Details.keyword:%systemroot%\system32\fxst30.dll)
+type: any
+priority: 3

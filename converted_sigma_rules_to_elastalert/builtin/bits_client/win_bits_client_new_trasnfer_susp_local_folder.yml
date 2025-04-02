@@ -1,0 +1,10 @@
+description: |
+  Detects new BITS transfer job where the LocalName/Saved file is stored in a potentially suspicious location
+name: BITS Transfer Job Download To Potential Suspicious Folder
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-Bits-Client/Operational AND (event.code.keyword:16403 AND (winlog.event_data.LocalName.keyword:(*\desktop* OR *c:\users\public* OR *c:\perflogs*)))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects usage of bitsadmin downloading a file
+name: File Download Via Bitsadmin
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\bitsadmin.exe OR winlog.event_data.originalfilename.keyword:bitsadmin.exe) AND (process.command_line.keyword:* /transfer* OR ((process.command_line.keyword:(* /create* OR * /addfile*)) AND process.command_line.keyword:*http*))
+type: any
+priority: 2

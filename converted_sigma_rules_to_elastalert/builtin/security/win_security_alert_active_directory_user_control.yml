@@ -1,0 +1,10 @@
+description: |
+  Detects scenario where if a user is assigned the SeEnableDelegationPrivilege right in Active Directory it would allow control of other AD user objects.
+name: Enabled User Right in AD to Control User Objects
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4704 AND winlog.event_data.PrivilegeList.keyword:*seenabledelegationprivilege*)
+type: any
+priority: 3

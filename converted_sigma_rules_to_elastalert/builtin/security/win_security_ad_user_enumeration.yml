@@ -1,0 +1,10 @@
+description: |
+  Detects read access to a domain user from a non-machine account
+name: Potential AD User Enumeration From Non-Machine Account
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:4662 AND winlog.event_data.ObjectType.keyword:*bf967aba-0de6-11d0-a285-00aa003049e2* AND (winlog.event_data.AccessMask.keyword:(*1? OR *3? OR *4? OR *7? OR *9? OR *b? OR *d? OR *f?))) AND (NOT (user.name.keyword:(*$ OR msol_*))))
+type: any
+priority: 2

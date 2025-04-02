@@ -1,0 +1,10 @@
+description: |
+  Detects a driver load from a temporary directory
+name: Driver Load From A Temporary Directory
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\temp*
+type: any
+priority: 3

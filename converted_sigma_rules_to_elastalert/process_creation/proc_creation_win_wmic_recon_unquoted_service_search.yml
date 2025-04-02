@@ -1,0 +1,10 @@
+description: |
+  Detects known WMI recon method to look for unquoted service paths using wmic. Often used by pentester and attacker enumeration scripts
+name: Potential Unquoted Service Path Reconnaissance Via Wmic.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.originalfilename.keyword:wmic.exe OR winlog.event_data.image.keyword:*\wmic.exe) AND (process.command_line.keyword:* service get* AND process.command_line.keyword:*name,displayname,pathname,startmode*)
+type: any
+priority: 2

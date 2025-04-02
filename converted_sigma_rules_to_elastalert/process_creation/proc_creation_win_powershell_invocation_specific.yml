@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious PowerShell invocation command parameters
+name: Suspicious PowerShell Invocations - Specific - ProcessCreation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((process.command_line.keyword:*-nop* AND process.command_line.keyword:* -w* AND process.command_line.keyword:*hidden* AND process.command_line.keyword:* -c* AND process.command_line.keyword:*[convert]::frombase64string*) OR (process.command_line.keyword:* -w* AND process.command_line.keyword:*hidden* AND process.command_line.keyword:*-noni* AND process.command_line.keyword:*-nop* AND process.command_line.keyword:* -c* AND process.command_line.keyword:*iex* AND process.command_line.keyword:*new-object*) OR (process.command_line.keyword:* -w* AND process.command_line.keyword:*hidden* AND process.command_line.keyword:*-ep* AND process.command_line.keyword:*bypass* AND process.command_line.keyword:*-enc*) OR (process.command_line.keyword:*powershell* AND process.command_line.keyword:*reg* AND process.command_line.keyword:*add* AND process.command_line.keyword:*\software*) OR (process.command_line.keyword:*bypass* AND process.command_line.keyword:*-noprofile* AND process.command_line.keyword:*-windowstyle* AND process.command_line.keyword:*hidden* AND process.command_line.keyword:*new-object* AND process.command_line.keyword:*system.net.webclient* AND process.command_line.keyword:*.download*) OR (process.command_line.keyword:*iex* AND process.command_line.keyword:*new-object* AND process.command_line.keyword:*net.webclient* AND process.command_line.keyword:*.download*)) AND (NOT (process.command_line.keyword:(*(new-object system.net.webclient).downloadstring('https://community.chocolatey.org/install.ps1* OR *write-chocolateywarning*)))
+type: any
+priority: 2

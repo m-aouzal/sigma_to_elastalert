@@ -1,0 +1,10 @@
+description: |
+  Detects the use of getsystem Meterpreter/Cobalt Strike command by detecting a specific service installation
+name: Meterpreter or Cobalt Strike Getsystem Service Installation - System
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:System AND ((winlog.provider_name.keyword:service control manager AND event.code.keyword:7045) AND (((winlog.event_data.ImagePath.keyword:*/c* AND winlog.event_data.ImagePath.keyword:*echo* AND winlog.event_data.ImagePath.keyword:*\pipe*) AND (winlog.event_data.ImagePath.keyword:(*cmd* OR *%comspec%*))) OR (winlog.event_data.ImagePath.keyword:*rundll32* AND winlog.event_data.ImagePath.keyword:*.dll,a* AND winlog.event_data.ImagePath.keyword:*/p:*) OR winlog.event_data.ImagePath.keyword:\\127.0.0.1\admin$*))
+type: any
+priority: 3

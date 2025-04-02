@@ -1,0 +1,10 @@
+description: |
+  Detects the addition of the "Debugger" value to the "DbgManagedDebugger" key in order to achieve persistence. Which will get invoked when an application crashes
+name: Potential Registry Persistence Attempt Via DbgManagedDebugger
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\microsoft\.netframework\dbgmanageddebugger AND (NOT winlog.event_data.Details.keyword:"c:\windows\system32\vsjitdebugger.exe" pid %d appdom %d extext "%s" evthdl %d)
+type: any
+priority: 2

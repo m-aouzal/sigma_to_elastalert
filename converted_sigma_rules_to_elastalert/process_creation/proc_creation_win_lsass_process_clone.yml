@@ -1,0 +1,10 @@
+description: |
+  Detects a suspicious LSASS process process clone that could be a sign of credential dumping activity
+name: Potential Credential Dumping Via LSASS Process Clone
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\windows\system32\lsass.exe AND process.executable.keyword:*\windows\system32\lsass.exe
+type: any
+priority: 4

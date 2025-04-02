@@ -1,0 +1,10 @@
+description: |
+  Detects a certain command line flag combination used by mpiexec.exe LOLBIN from HPC pack that can be used to execute any other binary
+name: MpiExec Lolbin
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\mpiexec.exe OR winlog.event_data.hashes.keyword:*imphash=d8b52ef6aaa3a81501bdfff9dbb96217*) AND (process.command_line.keyword:(* /n 1* OR * -n 1*))
+type: any
+priority: 3

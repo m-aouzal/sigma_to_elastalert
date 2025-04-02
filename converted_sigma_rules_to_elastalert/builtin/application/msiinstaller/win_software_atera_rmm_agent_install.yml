@@ -1,0 +1,10 @@
+description: |
+  Detects successful installation of Atera Remote Monitoring & Management (RMM) agent as recently found to be used by Conti operators
+name: Atera Agent Installation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Application AND (event.code.keyword:1033 AND winlog.provider_name.keyword:msiinstaller AND winlog.event_data.Message.keyword:*ateraagent*)
+type: any
+priority: 3

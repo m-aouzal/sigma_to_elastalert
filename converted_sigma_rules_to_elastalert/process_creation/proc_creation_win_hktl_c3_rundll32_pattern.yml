@@ -1,0 +1,10 @@
+description: |
+  F-Secure C3 produces DLLs with a default exported StartNodeRelay function.
+name: HackTool - F-Secure C3 Load by Rundll32
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*rundll32.exe* AND process.command_line.keyword:*.dll* AND process.command_line.keyword:*startnoderelay*
+type: any
+priority: 4

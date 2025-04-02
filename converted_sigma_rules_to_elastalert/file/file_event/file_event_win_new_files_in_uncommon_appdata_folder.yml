@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of suspicious files and folders inside the user's AppData folder but not inside any of the common and well known directories (Local, Romaing, LocalLow). This method could be used as a method to bypass detection who exclude the AppData folder in fear of FPs
+name: Suspicious File Creation In Uncommon AppData Folder
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (file.path.keyword:c:\users* AND file.path.keyword:*\appdata* AND (file.path.keyword:(*.bat OR *.cmd OR *.cpl OR *.dll OR *.exe OR *.hta OR *.iso OR *.lnk OR *.msi OR *.ps1 OR *.psm1 OR *.scr OR *.vbe OR *.vbs))) AND (NOT (file.path.keyword:c:\users* AND (file.path.keyword:(*\appdata\local* OR *\appdata\locallow* OR *\appdata\roaming*))))
+type: any
+priority: 3

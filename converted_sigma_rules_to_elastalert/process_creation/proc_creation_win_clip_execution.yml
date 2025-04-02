@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of clip.exe in order to copy data to the clipboard. Adversaries may collect data stored in the clipboard from users copying information within or between applications.
+name: Data Copied To Clipboard Via Clip.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.image.keyword:*\clip.exe OR winlog.event_data.originalfilename.keyword:clip.exe
+type: any
+priority: 1

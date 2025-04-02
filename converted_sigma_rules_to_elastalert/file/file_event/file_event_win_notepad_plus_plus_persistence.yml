@@ -1,0 +1,10 @@
+description: |
+  Detects creation of new ".dll" files inside the plugins directory of a notepad++ installation by a process other than "gup.exe". Which could indicates possible persistence
+name: Potential Persistence Via Notepad++ Plugins
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (file.path.keyword:*\notepad++\plugins* AND file.path.keyword:*.dll) AND (NOT (process.executable.keyword:*\notepad++\updater\gup.exe OR (process.executable.keyword:c:\users* AND process.executable.keyword:*\appdata\local\temp* AND (process.executable.keyword:(*\target.exe OR *installer.x64.exe)))))
+type: any
+priority: 2

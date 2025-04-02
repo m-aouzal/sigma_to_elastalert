@@ -1,0 +1,10 @@
+description: |
+  Detects a suspicious process command line that uses whoami as first parameter (as e.g. used by EfsPotato)
+name: WhoAmI as Parameter
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*.exe whoami*
+type: any
+priority: 3

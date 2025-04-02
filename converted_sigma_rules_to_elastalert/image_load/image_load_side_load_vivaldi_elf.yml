@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading of "vivaldi_elf.dll"
+name: Potential Vivaldi_elf.DLL Sideloading
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\vivaldi_elf.dll AND (NOT (process.executable.keyword:*\vivaldi\application\vivaldi.exe AND file.path.keyword:*\vivaldi\application*))
+type: any
+priority: 2

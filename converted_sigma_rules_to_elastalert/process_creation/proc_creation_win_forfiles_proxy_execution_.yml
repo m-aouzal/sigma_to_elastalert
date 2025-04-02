@@ -1,0 +1,13 @@
+description: |
+  Detects the execution of "forfiles" with the "/c" flag.
+While this is an expected behavior of the tool, it can be abused in order to proxy execution through it with any binary.
+Can be used to bypass application whitelisting.
+
+name: Forfiles Command Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\forfiles.exe OR winlog.event_data.originalfilename.keyword:forfiles.exe) AND process.command_line.keyword:(* -c* OR * /c* OR * –c* OR * —c* OR * ―c*)
+type: any
+priority: 2

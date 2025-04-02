@@ -1,0 +1,10 @@
+description: |
+  Detects usage of the "Get-AdGroup" cmdlet to enumerate Groups within Active Directory
+name: Active Directory Group Enumeration With Get-AdGroup
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*get-adgroup* AND powershell.file.script_block_text.keyword:*-filter*
+type: any
+priority: 1

@@ -1,0 +1,10 @@
+description: |
+  Detects the registration of a debugger for a program that is available in the logon screen (sticky key backdoor).
+name: Suspicious Debugger Registration Cmdline
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*\currentversion\image file execution options* AND (process.command_line.keyword:(*sethc.exe* OR *utilman.exe* OR *osk.exe* OR *magnify.exe* OR *narrator.exe* OR *displayswitch.exe* OR *atbroker.exe* OR *helppane.exe*))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of a renamed office binary
+name: Renamed Office Binary Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.originalfilename.keyword:(excel.exe OR msaccess.exe OR mspub.exe OR onenote.exe OR onenotem.exe OR outlook.exe OR powerpnt.exe OR winword.exe)) OR (winlog.event_data.description.keyword:(microsoft access OR microsoft excel OR microsoft onenote OR microsoft outlook OR microsoft powerpoint OR microsoft publisher OR microsoft word OR sent to onenote tool))) AND (NOT (process.executable.keyword:(*\excel.exe OR *\excelcnv.exe OR *\msaccess.exe OR *\mspub.exe OR *\onenote.exe OR *\onenotem.exe OR *\outlook.exe OR *\powerpnt.exe OR *\winword.exe)))
+type: any
+priority: 3

@@ -1,0 +1,13 @@
+description: |
+  Adversaries may enumerate browser bookmarks to learn more about compromised hosts.
+Browser bookmarks may reveal personal information about users (ex: banking sites, interests, social media, etc.) as well as details about
+internal network resources such as servers, tools/dashboards, or other related infrastructure.
+
+name: Automated Collection Bookmarks Using Get-ChildItem PowerShell
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*get-childitem* AND powershell.file.script_block_text.keyword:* -recurse* AND powershell.file.script_block_text.keyword:* -path* AND powershell.file.script_block_text.keyword:* -filter bookmarks* AND powershell.file.script_block_text.keyword:* -erroraction silentlycontinue* AND powershell.file.script_block_text.keyword:* -force*
+type: any
+priority: 1

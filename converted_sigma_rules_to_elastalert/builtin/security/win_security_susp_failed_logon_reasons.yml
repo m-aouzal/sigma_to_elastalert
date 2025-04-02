@@ -1,0 +1,10 @@
+description: |
+  This method uses uncommon error codes on failed logons to determine suspicious activity and tampering with accounts that have been disabled or somehow restricted.
+name: Account Tampering - Suspicious Failed Logon Reasons
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (((event.code.keyword:(4625 OR 4776)) AND (winlog.event_data.Status.keyword:(0xc0000072 OR 0xc000006f OR 0xc0000070 OR 0xc0000413 OR 0xc000018c OR 0xc000015b))) AND (NOT user.id.keyword:s-1-0-0))
+type: any
+priority: 2

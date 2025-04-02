@@ -1,0 +1,10 @@
+description: |
+  Detects well-known credential dumping tools execution via specific named pipe creation
+name: HackTool - Credential Dumping Tools Named Pipe Created
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.name.keyword:(*\cachedump* OR *\lsadump* OR *\wceservicepipe*)
+type: any
+priority: 4

@@ -1,0 +1,12 @@
+description: |
+  Detects the dump of highly sensitive files such as "NTDS.DIT" and "SECURITY" hive.
+Attackers can leverage the "wbadmin" utility in order to dump sensitive files that might contain credential or sensitive information.
+
+name: Sensitive File Dump Via Wbadmin.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\wbadmin.exe OR winlog.event_data.originalfilename.keyword:wbadmin.exe) AND (process.command_line.keyword:(*start* OR *backup*)) AND (process.command_line.keyword:(*\config\sam* OR *\config\security* OR *\config\system* OR *\windows\ntds\ntds.dit*))
+type: any
+priority: 3

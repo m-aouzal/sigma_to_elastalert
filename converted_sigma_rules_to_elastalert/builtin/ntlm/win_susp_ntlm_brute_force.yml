@@ -1,0 +1,10 @@
+description: |
+  Detects common NTLM brute force device names
+name: NTLM Brute Force
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-NTLM/Operational AND (event.code.keyword:8004 AND (source.domain.keyword:(rdesktop OR remmina OR freerdp OR windows7 OR windows8 OR windows2012 OR windows2016 OR windows2019)))
+type: any
+priority: 2

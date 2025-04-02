@@ -1,0 +1,10 @@
+description: |
+  Detects the deletion of the TeamViewer log files which may indicate an attempt to destroy forensic evidence
+name: TeamViewer Log File Deleted
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (file.path.keyword:*\teamviewer_* AND file.path.keyword:*.log) AND (NOT process.executable.keyword:c:\windows\system32\svchost.exe)
+type: any
+priority: 1

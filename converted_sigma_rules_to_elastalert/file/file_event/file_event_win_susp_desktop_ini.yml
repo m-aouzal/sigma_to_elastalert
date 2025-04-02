@@ -1,0 +1,10 @@
+description: |
+  Detects unusual processes accessing desktop.ini, which can be leveraged to alter how Explorer displays a folder's content (i.e. renaming files) without changing them on disk.
+name: Suspicious desktop.ini Action
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\desktop.ini AND (NOT ((process.executable.keyword:(c:\windows* OR c:\program files* OR c:\program files (x86)*)) OR (process.executable.keyword:*\appdata\local\jetbrains\toolbox\bin\7z.exe AND file.path.keyword:*\jetbrains\apps*) OR file.path.keyword:c:\$windows.~bt\newos*))
+type: any
+priority: 2

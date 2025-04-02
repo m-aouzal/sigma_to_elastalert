@@ -1,0 +1,10 @@
+description: |
+  Detects an executable that isn't dropbox but communicates with the Dropbox API
+name: Suspicious Dropbox API Usage
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (network.direction.keyword:true AND (destination.domain.keyword:(*api.dropboxapi.com OR *content.dropboxapi.com))) AND (NOT process.executable.keyword:*\dropbox*)
+type: any
+priority: 3

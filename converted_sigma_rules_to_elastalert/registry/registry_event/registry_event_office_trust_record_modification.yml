@@ -1,0 +1,10 @@
+description: |
+  Alerts on trust record modification within the registry, indicating usage of macros
+name: Windows Registry Trust Record Modification
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\security\trusted documents\trustrecords*
+type: any
+priority: 2

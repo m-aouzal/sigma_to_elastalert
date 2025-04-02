@@ -1,0 +1,10 @@
+description: |
+  Detects usage of the Quarks PwDump tool via commandline arguments
+name: HackTool - Quarks PwDump Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\quarkspwdump.exe OR (process.command_line.keyword:( -dhl OR  --dump-hash-local OR  -dhdc OR  --dump-hash-domain-cached OR  --dump-bitlocker OR  -dhd  OR  --dump-hash-domain  OR --ntds-file))
+type: any
+priority: 3

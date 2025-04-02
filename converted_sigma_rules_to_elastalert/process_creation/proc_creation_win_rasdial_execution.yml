@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious process related to rasdial.exe
+name: Suspicious RASdial Activity
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*rasdial.exe
+type: any
+priority: 2

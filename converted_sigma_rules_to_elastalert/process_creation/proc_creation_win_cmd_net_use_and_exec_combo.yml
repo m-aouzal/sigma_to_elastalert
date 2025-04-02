@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of the "net use" command to mount a WebDAV server and then immediately execute some content in it. As seen being used in malicious LNK files
+name: Suspicious File Execution From Internet Hosted WebDav Share
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\cmd.exe* OR winlog.event_data.originalfilename.keyword:cmd.exe) AND (process.command_line.keyword:* net use http* AND process.command_line.keyword:*& start /b* AND process.command_line.keyword:*\davwwwroot*) AND (process.command_line.keyword:(*.exe* OR *.dll* OR *.bat* OR *.vbs* OR *.ps1*))
+type: any
+priority: 3

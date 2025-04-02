@@ -1,0 +1,10 @@
+description: |
+  Detects changes to the registry values related to outlook security settings
+name: Outlook Security Settings Updated - Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\software\microsoft\office* AND registry.path.keyword:*\outlook\security*
+type: any
+priority: 2

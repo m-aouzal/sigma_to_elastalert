@@ -1,0 +1,10 @@
+description: |
+  Detects execution of Windows Problem Steps Recorder (psr.exe), a utility used to record the user screen and clicks.
+name: Screen Capture Activity Via Psr.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\psr.exe AND (process.command_line.keyword:(*/start* OR *-start*))
+type: any
+priority: 2

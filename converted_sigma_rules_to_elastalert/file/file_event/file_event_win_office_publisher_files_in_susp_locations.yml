@@ -1,0 +1,10 @@
+description: |
+  Detects creation of files with the ".pub" extension in suspicious or uncommon locations. This could be a sign of attackers abusing Publisher documents
+name: Publisher Attachment File Dropped In Suspicious Location
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (file.path.keyword:(*\appdata\local\temp* OR *\users\public* OR *\windows\temp* OR *c:\temp*)) AND file.path.keyword:*.pub
+type: any
+priority: 2

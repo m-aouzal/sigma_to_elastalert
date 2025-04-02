@@ -1,0 +1,12 @@
+description: |
+  Detects creation of a file named "ErrorHandler.cmd" in the "C:WINDOWSSetupScripts" directory which could be used as a method of persistence
+The content of C:WINDOWSSetupScriptsErrorHandler.cmd is read whenever some tools under C:WINDOWSSystem32oobe (e.g. Setup.exe) fail to run for any reason.
+
+name: Potential Persistence Attempt Via ErrorHandler.Cmd
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\windows\setup\scripts\errorhandler.cmd
+type: any
+priority: 2

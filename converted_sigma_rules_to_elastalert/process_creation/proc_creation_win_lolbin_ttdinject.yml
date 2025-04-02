@@ -1,0 +1,10 @@
+description: |
+  Detects the executiob of TTDInject.exe, which is used by Windows 10 v1809 and newer to debug time travel (underlying call of tttracer.exe)
+name: Use of TTDInject.exe
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.image.keyword:*ttdinject.exe OR winlog.event_data.originalfilename.keyword:ttdinject.exe
+type: any
+priority: 2

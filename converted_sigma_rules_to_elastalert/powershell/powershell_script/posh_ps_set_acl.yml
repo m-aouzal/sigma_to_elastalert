@@ -1,0 +1,10 @@
+description: |
+  Detects PowerShell scripts set ACL to of a file or a folder
+name: PowerShell Script Change Permission Via Set-Acl - PsScript
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*set-acl* AND powershell.file.script_block_text.keyword:*-aclobject* AND powershell.file.script_block_text.keyword:*-path*
+type: any
+priority: 1

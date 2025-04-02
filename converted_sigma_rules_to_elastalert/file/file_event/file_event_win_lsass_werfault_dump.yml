@@ -1,0 +1,10 @@
+description: |
+  Detects WerFault creating a dump file with a name that indicates that the dump file could be an LSASS process memory, which contains user credentials
+name: WerFault LSASS Process Memory Dump
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:c:\windows\system32\werfault.exe AND (file.path.keyword:(*\lsass* OR *lsass.exe*))
+type: any
+priority: 3

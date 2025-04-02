@@ -1,0 +1,10 @@
+description: |
+  Detects default RemCom pipe creation
+name: PUA - RemCom Default Named Pipe
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.name.keyword:*\remcom*
+type: any
+priority: 2

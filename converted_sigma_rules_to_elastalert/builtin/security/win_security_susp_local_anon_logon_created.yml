@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of suspicious accounts similar to ANONYMOUS LOGON, such as using additional spaces. Created as an covering detection for exclusion of Logon Type 3 from ANONYMOUS LOGON accounts.
+name: Suspicious Windows ANONYMOUS LOGON Local Account Created
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4720 AND (winlog.event_data.SamAccountName.keyword:*anonymous* AND winlog.event_data.SamAccountName.keyword:*logon*))
+type: any
+priority: 3

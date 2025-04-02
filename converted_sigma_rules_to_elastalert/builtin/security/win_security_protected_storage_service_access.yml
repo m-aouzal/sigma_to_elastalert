@@ -1,0 +1,10 @@
+description: |
+  Detects access to a protected_storage service over the network. Potential abuse of DPAPI to extract domain backup keys from Domain Controllers
+name: Protected Storage Service Access
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:5145 AND winlog.event_data.ShareName.keyword:*ipc* AND winlog.event_data.RelativeTargetName.keyword:protected_storage)
+type: any
+priority: 3

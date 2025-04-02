@@ -1,0 +1,10 @@
+description: |
+  Detects potential abuse of the provisioning registry key for indirect command execution through "Provlaunch.exe".
+name: Potential Provisioning Registry Key Abuse For Binary Proxy Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*software\microsoft\provisioning\commands*
+type: any
+priority: 3

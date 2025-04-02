@@ -1,0 +1,10 @@
+description: |
+  Detects Obfuscated Powershell via Stdin in Scripts
+name: Invoke-Obfuscation Via Stdin - Security
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4697 AND (winlog.event_data.ServiceFileName.keyword:*set* AND winlog.event_data.ServiceFileName.keyword:*&&*) AND (winlog.event_data.ServiceFileName.keyword:(*environment* OR *invoke* OR *${input)*)))
+type: any
+priority: 3

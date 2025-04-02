@@ -1,0 +1,10 @@
+description: |
+  Detects a Chromium based browser process with the 'load-extension' flag to start a instance with a custom extension
+name: Chromium Browser Instance Executed With Custom Extension
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:(*\brave.exe OR *\chrome.exe OR *\msedge.exe OR *\opera.exe OR *\vivaldi.exe)) AND process.command_line.keyword:*--load-extension=*
+type: any
+priority: 2

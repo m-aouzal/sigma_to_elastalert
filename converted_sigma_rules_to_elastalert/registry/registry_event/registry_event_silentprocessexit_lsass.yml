@@ -1,0 +1,10 @@
+description: |
+  Detects changes to the Registry in which a monitor program gets registered to dump the memory of the lsass.exe process
+name: Potential Credential Dumping Via LSASS SilentProcessExit Technique
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*microsoft\windows nt\currentversion\silentprocessexit\lsass.exe*
+type: any
+priority: 4

@@ -1,0 +1,10 @@
+description: |
+  Detects WMI command line event consumers
+name: WMI Persistence - Command Line Event Consumer
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:c:\windows\system32\wbem\wmiprvse.exe AND file.path.keyword:*\wbemcons.dll
+type: any
+priority: 3

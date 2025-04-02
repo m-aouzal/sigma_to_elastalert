@@ -1,0 +1,10 @@
+description: |
+  Detects a potential command line flag anomaly related to "regsvr32" in which the "/i" flag is used without the "/n" which should be uncommon.
+name: Potential Regsvr32 Commandline Flag Anomaly
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\regsvr32.exe AND process.command_line.keyword:(* -i:* OR * /i:* OR * –i:* OR * —i:* OR * ―i:*)) AND (NOT process.command_line.keyword:(* -n* OR * /n* OR * –n* OR * —n* OR * ―n*))
+type: any
+priority: 2

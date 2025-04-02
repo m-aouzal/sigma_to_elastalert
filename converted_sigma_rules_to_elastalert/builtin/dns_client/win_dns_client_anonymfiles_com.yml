@@ -1,0 +1,10 @@
+description: |
+  Detects DNS queries for anonfiles.com, which is an anonymous file upload platform often used for malicious purposes
+name: DNS Query for Anonfiles.com Domain - DNS Client
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-DNS Client Events/Operational AND (event.code.keyword:3008 AND dns.question.name.keyword:*.anonfiles.com*)
+type: any
+priority: 3

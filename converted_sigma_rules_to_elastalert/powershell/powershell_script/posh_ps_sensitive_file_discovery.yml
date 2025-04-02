@@ -1,0 +1,10 @@
+description: |
+  Detect adversaries enumerate sensitive files
+name: Powershell Sensitive File Discovery
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (powershell.file.script_block_text.keyword:(*ls* OR *get-childitem* OR *gci*)) AND powershell.file.script_block_text.keyword:*-recurse* AND (powershell.file.script_block_text.keyword:(*.pass* OR *.kdbx* OR *.kdb*))
+type: any
+priority: 2

@@ -1,0 +1,13 @@
+description: |
+  The Tasks folder in system32 and syswow64 are globally writable paths.
+Adversaries can take advantage of this and load or influence any script hosts or ANY .NET Application
+in Tasks to load and execute a custom assembly into cscript, wscript, regsvr32, mshta, eventvwr
+
+name: Tasks Folder Evasion
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.command_line.keyword:(*echo* OR *copy* OR *type* OR *file createnew*)) AND (process.command_line.keyword:(* c:\windows\system32\tasks* OR * c:\windows\syswow64\tasks*))
+type: any
+priority: 3

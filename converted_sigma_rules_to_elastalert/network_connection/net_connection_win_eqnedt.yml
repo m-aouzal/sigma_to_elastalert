@@ -1,0 +1,10 @@
+description: |
+  Detects network connections from the Equation Editor process "eqnedt32.exe".
+name: Network Connection Initiated By Eqnedt32.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\eqnedt32.exe
+type: any
+priority: 3

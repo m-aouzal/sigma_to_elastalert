@@ -1,0 +1,10 @@
+description: |
+  Detects the use of NPPSpy hacktool that stores cleartext passwords of users that logged in to a local file
+name: HackTool - NPPSpy Hacktool Usage
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:(*\nppspy.txt OR *\nppspy.dll)
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects potentially suspicious execution of the Regasm/Regsvcs utilities with an uncommon extension.
+name: Potentially Suspicious Execution Of Regasm/Regsvcs With Uncommon Extension
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\regsvcs.exe OR *\regasm.exe)) OR (winlog.event_data.originalfilename.keyword:(regsvcs.exe OR regasm.exe))) AND (process.command_line.keyword:(*.dat* OR *.gif* OR *.jpeg* OR *.jpg* OR *.png* OR *.txt*))
+type: any
+priority: 2

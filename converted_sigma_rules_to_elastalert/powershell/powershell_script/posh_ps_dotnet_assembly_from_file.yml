@@ -1,0 +1,10 @@
+description: |
+  Detects usage of "Reflection.Assembly" load functions to dynamically load assemblies in memory
+name: Potential In-Memory Execution Using Reflection.Assembly
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*[reflection.assembly]::load*
+type: any
+priority: 2

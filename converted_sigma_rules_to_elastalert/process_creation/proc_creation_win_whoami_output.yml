@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of "whoami.exe" with the "/FO" flag to choose CSV as output format or with redirection options to export the results to a file for later use.
+name: Whoami.EXE Execution With Output Option
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\whoami.exe OR winlog.event_data.originalfilename.keyword:whoami.exe) AND (process.command_line.keyword:(* /fo csv* OR * -fo csv*))) OR process.command_line.keyword:*whoami*>*
+type: any
+priority: 2

@@ -1,0 +1,12 @@
+description: |
+  Detects "svchost.exe" spawning "rundll32.exe" with command arguments like "C:windowssystem32davclnt.dll,DavSetCookie".
+This could be an indicator of exfiltration or use of WebDav to launch code (hosted on a WebDav server).
+
+name: WebDav Client Execution Via Rundll32.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\svchost.exe AND (winlog.event_data.image.keyword:*\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe) AND process.command_line.keyword:*c:\windows\system32\davclnt.dll,davsetcookie*
+type: any
+priority: 2

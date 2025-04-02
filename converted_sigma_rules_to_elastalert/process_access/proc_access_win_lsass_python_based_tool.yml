@@ -1,0 +1,10 @@
+description: |
+  Detects LSASS process access for potential credential dumping by a Python-like tool such as LaZagne or Pypykatz.
+name: Credential Dumping Activity By Python Based Tool
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.TargetImage.keyword:*\lsass.exe AND (winlog.event_data.CallTrace.keyword:*_ctypes.pyd+* AND winlog.event_data.CallTrace.keyword:*:\windows\system32\kernelbase.dll+* AND winlog.event_data.CallTrace.keyword:*:\windows\system32\ntdll.dll+*) AND (winlog.event_data.CallTrace.keyword:(*python27.dll+* OR *python3*.dll+*)) AND winlog.event_data.GrantedAccess.keyword:0x1fffff
+type: any
+priority: 3

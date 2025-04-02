@@ -1,0 +1,10 @@
+description: |
+  Detects when a user installs certificates by using CertOC.exe to loads the target DLL file.
+name: DLL Loaded via CertOC.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\certoc.exe OR winlog.event_data.originalfilename.keyword:certoc.exe) AND process.command_line.keyword:(* -loaddll* OR * /loaddll* OR * –loaddll* OR * —loaddll* OR * ―loaddll*)
+type: any
+priority: 2

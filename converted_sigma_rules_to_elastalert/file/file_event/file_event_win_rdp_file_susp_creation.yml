@@ -1,0 +1,11 @@
+description: |
+  Detects creation of a file with an ".rdp" extension by an application that doesn't commonly create such files.
+  
+name: .RDP File Created By Uncommon Application
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*.rdp AND (process.executable.keyword:(*\brave.exe OR *\ccleaner browser\application\ccleanerbrowser.exe OR *\chromium.exe OR *\firefox.exe OR *\google\chrome\application\chrome.exe OR *\iexplore.exe OR *\microsoftedge.exe OR *\msedge.exe OR *\opera.exe OR *\vivaldi.exe OR *\whale.exe OR *\olk.exe OR *\outlook.exe OR *\runtimebroker.exe OR *\thunderbird.exe OR *\discord.exe OR *\keybase.exe OR *\msteams.exe OR *\slack.exe OR *\teams.exe))
+type: any
+priority: 3

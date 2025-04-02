@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of regini.exe which can be used to modify registry keys, the changes are imported from one or more text files.
+name: Registry Modification Via Regini.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\regini.exe OR winlog.event_data.originalfilename.keyword:regini.exe) AND (NOT process.command_line.keyword:/:[^ \]/)
+type: any
+priority: 1

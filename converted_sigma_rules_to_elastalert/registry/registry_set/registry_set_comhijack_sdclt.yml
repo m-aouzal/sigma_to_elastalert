@@ -1,0 +1,10 @@
+description: |
+  Detects changes to 'HKCUSoftwareClassesFoldershellopencommandDelegateExecute'
+name: COM Hijack via Sdclt
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\software\classes\folder\shell\open\command\delegateexecute*
+type: any
+priority: 3

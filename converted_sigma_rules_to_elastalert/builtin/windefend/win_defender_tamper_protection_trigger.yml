@@ -1,0 +1,10 @@
+description: |
+  Detects blocked attempts to change any of Defender's settings such as "Real Time Monitoring" and "Behavior Monitoring"
+name: Microsoft Defender Tamper Protection Trigger
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-Windows Defender/Operational AND (event.code.keyword:5013 AND (winlog.event_data.Value.keyword:(*\windows defender\disableantispyware OR *\windows defender\disableantivirus OR *\windows defender\scan\disablearchivescanning OR *\windows defender\scan\disablescanningnetworkfiles OR *\real-time protection\disablerealtimemonitoring OR *\real-time protection\disablebehaviormonitoring OR *\real-time protection\disableioavprotection OR *\real-time protection\disablescriptscanning)))
+type: any
+priority: 3

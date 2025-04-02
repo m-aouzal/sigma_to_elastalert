@@ -1,0 +1,13 @@
+description: |
+  Adversaries may attempt to find local system groups and permission settings.
+The knowledge of local system permission groups can help adversaries determine which groups exist and which users belong to a particular group.
+Adversaries may use this information to determine which users have elevated permissions, such as the users found within the local administrators group.
+
+name: Suspicious Get Local Groups Information
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.payload.keyword:(*get-localgroup* OR *get-localgroupmember*)) OR (winlog.event_data.contextinfo.keyword:(*get-localgroup* OR *get-localgroupmember*))) OR ((winlog.event_data.payload.keyword:*get-wmiobject* AND winlog.event_data.payload.keyword:*win32_group*) OR (winlog.event_data.contextinfo.keyword:*get-wmiobject* AND winlog.event_data.contextinfo.keyword:*win32_group*))
+type: any
+priority: 1

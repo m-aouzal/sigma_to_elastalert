@@ -1,0 +1,10 @@
+description: |
+  Detect use of icacls to deny access for everyone in Users folder sometimes used to hide malicious files
+name: Use Icacls to Hide File to Everyone
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.originalfilename.keyword:icacls.exe OR winlog.event_data.image.keyword:*\icacls.exe) AND (process.command_line.keyword:*/deny* AND process.command_line.keyword:*s-1-1-0:*)
+type: any
+priority: 2

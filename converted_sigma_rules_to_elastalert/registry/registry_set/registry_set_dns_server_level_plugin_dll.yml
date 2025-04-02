@@ -1,0 +1,10 @@
+description: |
+  Detects the installation of a DNS plugin DLL via ServerLevelPluginDll parameter in registry, which can be used to execute code in context of the DNS server (restart required)
+name: New DNS ServerLevelPluginDll Installed
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\services\dns\parameters\serverlevelplugindll
+type: any
+priority: 3

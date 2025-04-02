@@ -1,0 +1,10 @@
+description: |
+  Detects parameters used by WMImplant
+name: WMImplant Hack Tool
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:(*wmimplant* OR * change_user* OR * gen_cli* OR * command_exec* OR * disable_wdigest* OR * disable_winrm* OR * enable_wdigest* OR * enable_winrm* OR * registry_mod* OR * remote_posh* OR * sched_job* OR * service_mod* OR * process_kill* OR * active_users* OR * basic_info* OR * power_off* OR * vacant_system* OR * logon_events*)
+type: any
+priority: 3

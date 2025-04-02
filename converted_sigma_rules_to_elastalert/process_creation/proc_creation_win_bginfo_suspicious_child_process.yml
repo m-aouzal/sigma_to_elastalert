@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious child processes of "BgInfo.exe" which could be a sign of potential abuse of the binary to proxy execution via external VBScript
+name: Suspicious Child Process Of BgInfo.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.parent.executable.keyword:(*\bginfo.exe OR *\bginfo64.exe)) AND ((winlog.event_data.image.keyword:(*\calc.exe OR *\cmd.exe OR *\cscript.exe OR *\mshta.exe OR *\notepad.exe OR *\powershell.exe OR *\pwsh.exe OR *\wscript.exe)) OR (winlog.event_data.image.keyword:(*\appdata\local* OR *\appdata\roaming* OR *:\users\public* OR *:\temp* OR *:\windows\temp* OR *:\perflogs*)))
+type: any
+priority: 3

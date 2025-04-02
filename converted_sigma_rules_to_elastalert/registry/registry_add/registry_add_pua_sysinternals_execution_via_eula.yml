@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of a Sysinternals Tool via the creation of the "accepteula" registry key
+name: PUA - Sysinternal Tool Execution - Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.EventType.keyword:createkey AND registry.path.keyword:*\eulaaccepted
+type: any
+priority: 1

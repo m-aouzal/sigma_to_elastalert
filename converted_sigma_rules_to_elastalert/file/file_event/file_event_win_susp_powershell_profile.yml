@@ -1,0 +1,10 @@
+description: |
+  Detects the creation or modification of a powershell profile which could indicate suspicious activity as the profile can be used as a mean of persistence
+name: PowerShell Profile Modification
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:(*\microsoft.powershell_profile.ps1 OR *\powershell\profile.ps1 OR *\program files\powershell\7-preview\profile.ps1 OR *\program files\powershell\7\profile.ps1 OR *\windows\system32\windowspowershell\v1.0\profile.ps1 OR *\windowspowershell\profile.ps1)
+type: any
+priority: 2

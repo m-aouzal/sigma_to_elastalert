@@ -1,0 +1,10 @@
+description: |
+  Detects Obfuscated Powershell via use Clip.exe in Scripts
+name: Invoke-Obfuscation Via Use Clip - Security
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4697 AND winlog.event_data.ServiceFileName.keyword:*(clipboard|i*)
+type: any
+priority: 3

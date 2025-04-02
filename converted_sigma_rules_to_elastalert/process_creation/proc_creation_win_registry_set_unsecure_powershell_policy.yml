@@ -1,0 +1,10 @@
+description: |
+  Detects changes to the PowerShell execution policy registry key in order to bypass signing requirements for script execution from the CommandLine
+name: Potential PowerShell Execution Policy Tampering - ProcCreation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.command_line.keyword:(*\shellids\microsoft.powershell\executionpolicy* OR *\policies\microsoft\windows\powershell\executionpolicy*)) AND (process.command_line.keyword:(*bypass* OR *remotesigned* OR *unrestricted*))
+type: any
+priority: 3

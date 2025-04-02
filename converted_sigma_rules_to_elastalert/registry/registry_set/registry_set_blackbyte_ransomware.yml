@@ -1,0 +1,10 @@
+description: |
+  BlackByte set three different registry values to escalate privileges and begin setting the stage for lateral movement and encryption
+name: Blackbyte Ransomware Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:(hklm\software\microsoft\windows\currentversion\policies\system\localaccounttokenfilterpolicy OR hklm\software\microsoft\windows\currentversion\policies\system\enablelinkedconnections OR hklm\system\currentcontrolset\control\filesystem\longpathsenabled)) AND winlog.event_data.Details.keyword:dword (0x00000001)
+type: any
+priority: 3

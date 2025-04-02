@@ -1,0 +1,13 @@
+description: |
+  Detects the execution of WMIC with the "format" flag to potentially load XSL files.
+Adversaries abuse this functionality to execute arbitrary files while potentially bypassing application whitelisting defenses.
+Extensible Stylesheet Language (XSL) files are commonly used to describe the processing and rendering of data within XML files.
+
+name: XSL Script Execution Via WMIC.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\wmic.exe AND process.command_line.keyword:(*-format* OR */format* OR *–format* OR *—format* OR *―format*)) AND (NOT (process.command_line.keyword:(*format:list* OR *format:htable* OR *format:hform* OR *format:table* OR *format:mof* OR *format:value* OR *format:rawxml* OR *format:xml* OR *format:csv*)))
+type: any
+priority: 2

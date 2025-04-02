@@ -1,0 +1,10 @@
+description: |
+  Detects calls to the AtomicTestHarnesses "Invoke-ATHRemoteFXvGPUDisablementCommand" which is designed to abuse the "RemoteFXvGPUDisablement.exe" binary to run custom PowerShell code via module load-order hijacking.
+name: RemoteFXvGPUDisablement Abuse Via AtomicTestHarnesses
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:(*invoke-athremotefxvgpudisablementcommand* OR *invoke-athremotefxvgpudisableme*)
+type: any
+priority: 3

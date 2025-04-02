@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of SecurityXploded Tools
+name: HackTool - SecurityXploded Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.company.keyword:securityxploded OR winlog.event_data.image.keyword:*passworddump.exe OR winlog.event_data.originalfilename.keyword:*passworddump.exe
+type: any
+priority: 4

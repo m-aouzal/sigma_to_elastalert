@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious powershell command line parameters used in Empire
+name: HackTool - Empire PowerShell Launch Parameters
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:(* -nop -sta -noni -w hidden -enc* OR * -nop -sta -w 1 -enc* OR * -nop -noni -w hidden -enc* OR * -nop -sta -w 1 -enc* OR * -enc  sqb* OR * -nop -exec bypass -encodedcommand*)
+type: any
+priority: 3

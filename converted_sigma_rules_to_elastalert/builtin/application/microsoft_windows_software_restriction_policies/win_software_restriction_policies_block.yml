@@ -1,0 +1,10 @@
+description: |
+  Detects restricted access to applications by the Software Restriction Policies (SRP) policy
+name: Restricted Software Access By SRP
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Application AND (winlog.provider_name.keyword:microsoft-windows-softwarerestrictionpolicies AND (event.code.keyword:(865 OR 866 OR 867 OR 868 OR 882)))
+type: any
+priority: 3

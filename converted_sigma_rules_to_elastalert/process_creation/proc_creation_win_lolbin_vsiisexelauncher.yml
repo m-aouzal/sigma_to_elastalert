@@ -1,0 +1,10 @@
+description: |
+  The "VSIISExeLauncher.exe" binary part of the Visual Studio/VS Code can be used to execute arbitrary binaries
+name: Use of VSIISExeLauncher.exe
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\vsiisexelauncher.exe OR winlog.event_data.originalfilename.keyword:vsiisexelauncher.exe) AND (process.command_line.keyword:(* -p* OR * -a*))
+type: any
+priority: 2

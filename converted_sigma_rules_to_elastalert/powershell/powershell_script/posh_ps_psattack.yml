@@ -1,0 +1,10 @@
+description: |
+  Detects the use of PSAttack PowerShell hack tool
+name: PowerShell PSAttack
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*ps attack!!!*
+type: any
+priority: 3

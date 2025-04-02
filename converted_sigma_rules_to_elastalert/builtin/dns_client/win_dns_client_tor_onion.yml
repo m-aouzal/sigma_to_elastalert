@@ -1,0 +1,10 @@
+description: |
+  Detects DNS resolution of an .onion address related to Tor routing networks
+name: Query Tor Onion Address - DNS Client
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-DNS Client Events/Operational AND (event.code.keyword:3008 AND dns.question.name.keyword:*.onion*)
+type: any
+priority: 3

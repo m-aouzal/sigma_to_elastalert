@@ -1,0 +1,10 @@
+description: |
+  Detects that a vulnerable Netlogon secure channel connection was allowed, which could be an indicator of CVE-2020-1472.
+name: Vulnerable Netlogon Secure Channel Connection Allowed
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:System AND (winlog.provider_name.keyword:netlogon AND event.code.keyword:5829)
+type: any
+priority: 3

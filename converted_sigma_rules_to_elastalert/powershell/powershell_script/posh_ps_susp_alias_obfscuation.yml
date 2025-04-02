@@ -1,0 +1,10 @@
+description: |
+  Detects specific techniques often seen used inside of PowerShell scripts to obfscuate Alias creation
+name: Potential PowerShell Obfuscation Using Character Join
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*-alias* AND powershell.file.script_block_text.keyword:* -value (-join(*
+type: any
+priority: 1

@@ -1,0 +1,10 @@
+description: |
+  Detects the creation or modification of a vscode related powershell profile which could indicate suspicious activity as the profile can be used as a mean of persistence
+name: VsCode Powershell Profile Modification
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\microsoft.vscode_profile.ps1
+type: any
+priority: 2

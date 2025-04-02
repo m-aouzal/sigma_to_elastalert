@@ -1,0 +1,10 @@
+description: |
+  Enumerates Active Directory to determine computers that are joined to the domain
+name: DirectorySearcher Powershell Exploitation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*new-object* AND powershell.file.script_block_text.keyword:*system.directoryservices.directorysearcher* AND powershell.file.script_block_text.keyword:*.propertiestoload.add* AND powershell.file.script_block_text.keyword:*.findall()* AND powershell.file.script_block_text.keyword:*properties.name*
+type: any
+priority: 2

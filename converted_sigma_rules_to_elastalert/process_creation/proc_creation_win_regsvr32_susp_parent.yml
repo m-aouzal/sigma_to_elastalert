@@ -1,0 +1,10 @@
+description: |
+  Detects various command line and scripting engines/processes such as "PowerShell", "Wscript", "Cmd", etc. spawning a "regsvr32" instance.
+name: Scripting/CommandLine Process Spawned Regsvr32
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((process.parent.executable.keyword:(*\cmd.exe OR *\cscript.exe OR *\mshta.exe OR *\powershell_ise.exe OR *\powershell.exe OR *\pwsh.exe OR *\wscript.exe)) AND process.executable.keyword:*\regsvr32.exe) AND (NOT (process.parent.executable.keyword:c:\windows\system32\cmd.exe AND process.command_line.keyword:* /s c:\windows\system32\rpcproxy\rpcproxy.dll))
+type: any
+priority: 2

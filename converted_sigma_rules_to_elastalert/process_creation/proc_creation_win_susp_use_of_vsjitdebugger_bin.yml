@@ -1,0 +1,13 @@
+description: |
+  There is an option for a MS VS Just-In-Time Debugger "vsjitdebugger.exe" to launch specified executable and attach a debugger.
+This option may be used adversaries to execute malicious code by signed verified binary.
+The debugger is installed alongside with Microsoft Visual Studio package.
+
+name: Malicious PE Execution by Microsoft Visual Studio Debugger
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\vsjitdebugger.exe AND (NOT (process.executable.keyword:(*\vsimmersiveactivatehelper*.exe OR *\devenv.exe)))
+type: any
+priority: 2

@@ -1,0 +1,12 @@
+description: |
+  Detects a network connection initiated by the certutil.exe utility.
+Attackers can abuse the utility in order to download malware or additional payloads.
+
+name: Uncommon Network Connection Initiated By Certutil.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\certutil.exe AND network.direction.keyword:true AND (destination.port:(80 OR 135 OR 443 OR 445))
+type: any
+priority: 3

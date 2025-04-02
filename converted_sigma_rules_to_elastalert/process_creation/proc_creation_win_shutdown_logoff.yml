@@ -1,0 +1,10 @@
+description: |
+  Detects the rare use of the command line tool shutdown to logoff a user
+name: Suspicious Execution of Shutdown to Log Out
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\shutdown.exe AND process.command_line.keyword:*/l*
+type: any
+priority: 2

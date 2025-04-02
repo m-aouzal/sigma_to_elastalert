@@ -1,0 +1,10 @@
+description: |
+  Detects Obfuscated Powershell via use MSHTA in Scripts
+name: Invoke-Obfuscation Via Use MSHTA - System
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:System AND (winlog.provider_name.keyword:service control manager AND event.code.keyword:7045 AND (winlog.event_data.ImagePath.keyword:*mshta* AND winlog.event_data.ImagePath.keyword:*vbscript:createobject*))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects the "iscsicpl.exe" UAC bypass technique that leverages a DLL Search Order hijacking technique to load a custom DLL's from temp or a any user controlled location in the users %PATH%
+name: UAC Bypass Using Iscsicpl - ImageLoad
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:c:\windows\syswow64\iscsicpl.exe AND file.path.keyword:*\iscsiexe.dll) AND (NOT (file.path.keyword:*c:\windows* AND file.path.keyword:*iscsiexe.dll*))
+type: any
+priority: 3

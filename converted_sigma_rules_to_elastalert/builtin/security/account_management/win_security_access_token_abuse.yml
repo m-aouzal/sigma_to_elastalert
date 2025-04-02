@@ -1,0 +1,10 @@
+description: |
+  Detects potential token impersonation and theft. Example, when using "DuplicateToken(Ex)" and "ImpersonateLoggedOnUser" with the "LOGON32_LOGON_NEW_CREDENTIALS flag".
+name: Potential Access Token Abuse
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:9 AND winlog.event_data.LogonProcessName.keyword:advapi AND winlog.event_data.AuthenticationPackageName.keyword:negotiate AND winlog.event_data.ImpersonationLevel.keyword:%%1833)
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  This rule detects that the path to the DLL written in the registry is different from the default one. Launched WAB.exe tries to load the DLL from Registry.
+name: Execution DLL of Choice Using WAB.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\software\microsoft\wab\dllpath AND (NOT winlog.event_data.Details.keyword:%commonprogramfiles%\system\wab32.dll)
+type: any
+priority: 3

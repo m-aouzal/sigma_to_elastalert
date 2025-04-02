@@ -1,0 +1,10 @@
+description: |
+  Detects when an attacker register a new SIP provider for persistence and defense evasion
+name: Potential Persistence Via Mpnotify
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\software\microsoft\windows nt\currentversion\winlogon\mpnotify*
+type: any
+priority: 3

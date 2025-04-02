@@ -1,0 +1,11 @@
+description: |
+  Detects the creation of a file with the name "code_tunnel.json" which indicate execution and usage of VsCode tunneling utility by an "Image" or "Process" other than VsCode.
+  
+name: Renamed VsCode Code Tunnel Execution - File Indicator
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\code_tunnel.json AND (NOT (process.executable.keyword:(*\code-tunnel.exe OR *\code.exe)))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects a certain command line flag combination used by "devinit.exe", which can be abused as a LOLBIN to download arbitrary MSI packages on a Windows system
+name: Arbitrary MSI Download Via Devinit.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:* -t msi-install* AND process.command_line.keyword:* -i http*
+type: any
+priority: 2

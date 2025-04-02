@@ -1,0 +1,12 @@
+description: |
+  Detects the execution of a potential recon command where the results are piped to "findstr". This is meant to trigger on inline calls of "cmd.exe" via the "/c" or "/k" for example.
+Attackers often time use this technique to extract specific information they require in their reconnaissance phase.
+
+name: Recon Command Output Piped To Findstr.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:(*ipconfig*|*find* OR *net*|*find* OR *netstat*|*find* OR *ping*|*find* OR *systeminfo*|*find* OR *tasklist*|*find* OR *whoami*|*find*)
+type: any
+priority: 2

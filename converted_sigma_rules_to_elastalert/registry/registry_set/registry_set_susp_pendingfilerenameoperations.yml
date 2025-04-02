@@ -1,0 +1,11 @@
+description: |
+  Detect changes to the "PendingFileRenameOperations" registry key from uncommon or suspicious images locations to stage currently used files for rename or deletion after reboot.
+  
+name: Potential PendingFileRenameOperations Tampering
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.EventType.keyword:setvalue AND registry.path.keyword:*\currentcontrolset\control\session manager\pendingfilerenameoperations*) AND ((process.executable.keyword:(*\appdata\local\temp* OR *\users\public*)) OR (process.executable.keyword:(*\reg.exe OR *\regedit.exe)))
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects possible execution via LNK file accessed on a WebDAV server.
+name: Potentially Suspicious WebDAV LNK Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\explorer.exe AND (process.executable.keyword:(*\cmd.exe OR *\cscript.exe OR *\mshta.exe OR *\powershell.exe OR *\pwsh.exe OR *\wscript.exe)) AND process.command_line.keyword:*\davwwwroot*
+type: any
+priority: 2

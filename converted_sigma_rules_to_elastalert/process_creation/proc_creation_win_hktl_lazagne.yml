@@ -1,0 +1,12 @@
+description: |
+  Detects the execution of the LaZagne. A utility used to retrieve multiple types of passwords stored on a local computer.
+LaZagne has been leveraged multiple times by threat actors in order to dump credentials.
+
+name: HackTool - LaZagne Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\lazagne.exe OR ((process.executable.keyword:(*:\perflogs* OR *:\programdata* OR *:\temp* OR *:\tmp* OR *:\windows\temp* OR *\appdata* OR *\downloads* OR *\users\public*)) AND (process.command_line.keyword:(*.exe all OR *.exe browsers OR *.exe chats OR *.exe databases OR *.exe games OR *.exe git OR *.exe mails OR *.exe maven OR *.exe memory OR *.exe multimedia OR *.exe sysadmin OR *.exe unused OR *.exe wifi OR *.exe windows))) OR ((process.command_line.keyword:(*all* OR *browsers* OR *chats* OR *databases* OR *games* OR *git* OR *mails* OR *maven* OR *memory* OR *multimedia* OR *php* OR *svn* OR *sysadmin* OR *unused* OR *wifi* OR *windows*)) AND (process.command_line.keyword:(*-oa* OR *-oj* OR *-on* OR *-output* OR *-password* OR *-1password* OR *-apachedirectorystudio* OR *-autologon* OR *-chromiumbased* OR *-composer* OR *-coreftp* OR *-credfiles* OR *-credman* OR *-cyberduck* OR *-dbvis* OR *-eyecon* OR *-filezilla* OR *-filezillaserver* OR *-ftpnavigator* OR *-galconfusion* OR *-gitforwindows* OR *-hashdump* OR *-iisapppool* OR *-iiscentralcertp* OR *-kalypsomedia* OR *-keepass* OR *-keepassconfig* OR *-lsa_secrets* OR *-mavenrepositories* OR *-memory_dump* OR *-mozilla* OR *-mremoteng* OR *-mscache* OR *-opensshforwindows* OR *-openvpn* OR *-outlook* OR *-pidgin* OR *-postgresql* OR *-psi-im* OR *-puttycm* OR *-pypykatz* OR *-rclone* OR *-rdpmanager* OR *-robomongo* OR *-roguestale* OR *-skype* OR *-sqldeveloper* OR *-squirrel* OR *-tortoise* OR *-turba* OR *-ucbrowser* OR *-unattended* OR *-vault* OR *-vaultfiles* OR *-vnc* OR *-windows* OR *-winscp* OR *-wsl*)))
+type: any
+priority: 2

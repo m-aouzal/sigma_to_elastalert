@@ -1,0 +1,10 @@
+description: |
+  Detects potential "ShellDispatch.dll" functionality abuse to execute arbitrary binaries via "ShellExecute"
+name: Potential ShellDispatch.DLL Functionality Abuse
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe) AND process.command_line.keyword:*rundll_shellexecutew*
+type: any
+priority: 2

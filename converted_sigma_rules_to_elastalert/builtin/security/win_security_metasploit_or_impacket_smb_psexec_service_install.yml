@@ -1,0 +1,10 @@
+description: |
+  Detects usage of Metasploit SMB PsExec (exploit/windows/smb/psexec) and Impacket psexec.py by triggering on specific service installation
+name: Metasploit Or Impacket Service Installation Via SMB PsExec
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:4697 AND winlog.event_data.ServiceFileName.keyword:/^%systemroot%\[a-za-z]{8}.exe$/ AND service.name.keyword:/(^[a-za-z]{4}$)|(^[a-za-z]{8}$)|(^[a-za-z]{16}$)/ AND winlog.event_data.ServiceStartType.keyword:3 AND winlog.event_data.ServiceType.keyword:0x10) AND (NOT service.name.keyword:psexesvc))
+type: any
+priority: 3

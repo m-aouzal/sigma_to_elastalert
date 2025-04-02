@@ -1,0 +1,12 @@
+description: |
+  Adversaries may target user email on local systems to collect sensitive information.
+Files containing email data can be acquired from a users local system, such as Outlook storage or cache files.
+
+name: Powershell Local Email Collection
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:(*get-inbox.ps1* OR *microsoft.office.interop.outlook* OR *microsoft.office.interop.outlook.oldefaultfolders* OR *-comobject outlook.application*)
+type: any
+priority: 2

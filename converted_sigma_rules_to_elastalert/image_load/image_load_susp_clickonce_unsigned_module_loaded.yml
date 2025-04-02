@@ -1,0 +1,10 @@
+description: |
+  Detects unsigned module load by ClickOnce application.
+name: Unsigned Module Loaded by ClickOnce Application
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\appdata\local\apps\2.0* AND (winlog.event_data.signed.keyword:false OR winlog.event_data.signaturestatus.keyword:expired)
+type: any
+priority: 2

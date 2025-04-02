@@ -1,0 +1,10 @@
+description: |
+  Detects Obfuscated Powershell via VAR++ LAUNCHER
+name: Invoke-Obfuscation VAR++ LAUNCHER OBFUSCATION - PowerShell
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:/(?i)&&set.*({d}){2,}\"s+?-f.*&&.*cmd.*/c/
+type: any
+priority: 3

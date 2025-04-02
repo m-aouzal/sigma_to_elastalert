@@ -1,0 +1,10 @@
+description: |
+  Detect DLL Load from Spooler Service backup folder
+name: Windows Spooler Service Suspicious Binary Load
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\spoolsv.exe AND (file.path.keyword:(*\windows\system32\spool\drivers\x64\3* OR *\windows\system32\spool\drivers\x64\4*)) AND file.path.keyword:*.dll
+type: any
+priority: 0

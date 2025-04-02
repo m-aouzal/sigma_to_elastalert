@@ -1,0 +1,10 @@
+description: |
+  Detects SyncAppvPublishingServer process execution which usually utilized by adversaries to bypass PowerShell execution restrictions.
+name: SyncAppvPublishingServer Execution to Bypass Powershell Restriction
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*syncappvpublishingserver.exe*
+type: any
+priority: 2

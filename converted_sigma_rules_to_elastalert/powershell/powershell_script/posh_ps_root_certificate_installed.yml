@@ -1,0 +1,10 @@
+description: |
+  Adversaries may install a root certificate on a compromised system to avoid warnings when connecting to adversary controlled web servers.
+name: Root Certificate Installed - PowerShell
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (powershell.file.script_block_text.keyword:*move-item* AND powershell.file.script_block_text.keyword:*cert:\localmachine\root*) OR (powershell.file.script_block_text.keyword:*import-certificate* AND powershell.file.script_block_text.keyword:*cert:\localmachine\root*)
+type: any
+priority: 2

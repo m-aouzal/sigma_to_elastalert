@@ -1,0 +1,10 @@
+description: |
+  Detects the extraction of password protected ZIP archives. See the filename variable for more details on which file has been opened.
+name: Password Protected ZIP File Opened
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:5379 AND winlog.event_data.TargetName.keyword:*microsoft_windows_shell_zipfolder:filename*) AND (NOT winlog.event_data.TargetName.keyword:*\temporary internet files\content.outlook*))
+type: any
+priority: 2

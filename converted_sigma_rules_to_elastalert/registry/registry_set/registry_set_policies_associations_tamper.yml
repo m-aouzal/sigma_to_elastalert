@@ -1,0 +1,10 @@
+description: |
+  Detects tampering with attachment manager settings policies associations to lower the default file type risks (See reference for more information)
+name: Potential Attachment Manager Settings Associations Tamper
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\software\microsoft\windows\currentversion\policies\associations* AND ((registry.path.keyword:*\defaultfiletyperisk AND winlog.event_data.Details.keyword:dword (0x00006152)) OR (registry.path.keyword:*\lowriskfiletypes AND (winlog.event_data.Details.keyword:(*.zip;* OR *.rar;* OR *.exe;* OR *.bat;* OR *.com;* OR *.cmd;* OR *.reg;* OR *.msi;* OR *.htm;* OR *.html;*))))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Adversaries may establish persistence and elevate privileges by executing malicious content triggered by a Windows Management Instrumentation (WMI) event subscription.
+name: Powershell WMI Persistence
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.scriptblocktext.keyword:*new-ciminstance* AND winlog.event_data.scriptblocktext.keyword:*-namespace root/subscription* AND winlog.event_data.scriptblocktext.keyword:*-classname __eventfilter* AND winlog.event_data.scriptblocktext.keyword:*-property*) OR (winlog.event_data.scriptblocktext.keyword:*new-ciminstance* AND winlog.event_data.scriptblocktext.keyword:*-namespace root/subscription* AND winlog.event_data.scriptblocktext.keyword:*-classname commandlineeventconsumer* AND winlog.event_data.scriptblocktext.keyword:*-property*)
+type: any
+priority: 2

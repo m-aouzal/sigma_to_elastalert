@@ -1,0 +1,10 @@
+description: |
+  Detects msdt.exe creating files in suspicious directories which could be a sign of exploitation of either Follina or Dogwalk vulnerabilities
+name: File Creation In Suspicious Directory By Msdt.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\msdt.exe AND (file.path.keyword:(*\desktop* OR *\start menu\programs\startup* OR *c:\perflogs* OR *c:\programdata* OR *c:\users\public*))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects a service binary running in a suspicious directory
+name: Suspicious Service Binary Directory
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:(*\users\public* OR *\$recycle.bin* OR *\users\all users* OR *\users\default* OR *\users\contacts* OR *\users\searches* OR *c:\perflogs* OR *\config\systemprofile* OR *\windows\fonts* OR *\windows\ime* OR *\windows\addins*)) AND (process.parent.executable.keyword:(*\services.exe OR *\svchost.exe))
+type: any
+priority: 3

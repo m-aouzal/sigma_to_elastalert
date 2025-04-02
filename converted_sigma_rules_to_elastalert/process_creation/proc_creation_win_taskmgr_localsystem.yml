@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of taskmgr.exe process in context of LOCAL_SYSTEM
+name: Taskmgr as LOCAL_SYSTEM
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (user.name.keyword:(*authori* OR *autori*)) AND process.executable.keyword:*\taskmgr.exe
+type: any
+priority: 3

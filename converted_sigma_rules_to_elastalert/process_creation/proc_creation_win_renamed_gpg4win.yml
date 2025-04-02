@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of a renamed "gpg.exe". Often used by ransomware and loaders to decrypt/encrypt data.
+name: Renamed Gpg.EXE Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.pe.original_file_name.keyword:gpg.exe AND (NOT (process.executable.keyword:(*\gpg.exe OR *\gpg2.exe)))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects setting of a new registry database value related to BgInfo configuration. Attackers can for example set this value to save the results of the commands executed by BgInfo in order to exfiltrate information.
+name: New BgInfo.EXE Custom DB Path Registry Configuration
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.EventType.keyword:setvalue AND registry.path.keyword:*\software\winternals\bginfo\database
+type: any
+priority: 2

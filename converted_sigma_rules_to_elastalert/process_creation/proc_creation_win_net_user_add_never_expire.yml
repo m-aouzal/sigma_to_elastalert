@@ -1,0 +1,10 @@
+description: |
+  Detects creation of local users via the net.exe command with the option "never expire"
+name: New User Created Via Net.EXE With Never Expire Option
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\net.exe OR *\net1.exe)) OR (winlog.event_data.originalfilename.keyword:(net.exe OR net1.exe))) AND (process.command_line.keyword:*user* AND process.command_line.keyword:*add* AND process.command_line.keyword:*expires:never*)
+type: any
+priority: 3

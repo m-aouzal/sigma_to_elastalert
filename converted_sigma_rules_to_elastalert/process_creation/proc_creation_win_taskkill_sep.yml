@@ -1,0 +1,13 @@
+description: |
+  Detects one of the possible scenarios for disabling Symantec Endpoint Protection.
+Symantec Endpoint Protection antivirus software services incorrectly implement the protected service mechanism.
+As a result, the NT AUTHORITY/SYSTEM user can execute the taskkill /im command several times ccSvcHst.exe /f, thereby killing the process belonging to the service, and thus shutting down the service.
+
+name: Taskkill Symantec Endpoint Protection
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*taskkill* AND process.command_line.keyword:* /f* AND process.command_line.keyword:* /im* AND process.command_line.keyword:*ccsvchst.exe*
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects when the a stored procedure is set or cleared for automatic execution in MSSQL. A stored procedure that is set to automatic execution runs every time an instance of SQL Server is started
+name: MSSQL SPProcoption Set
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Application AND (winlog.provider_name.keyword:*mssql* AND event.code.keyword:33205 AND (winlog.event_data.Data.keyword:*object_name:sp_procoption* AND winlog.event_data.Data.keyword:*statement:exec*))
+type: any
+priority: 3

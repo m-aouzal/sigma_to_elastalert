@@ -1,0 +1,10 @@
+description: |
+  Detects a remote DLL load event via "rundll32.exe".
+name: Remote DLL Load Via Rundll32.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\rundll32.exe AND file.path.keyword:\*
+type: any
+priority: 2

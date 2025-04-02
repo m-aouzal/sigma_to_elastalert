@@ -1,0 +1,10 @@
+description: |
+  Detects command line parameters used by Koadic hack tool
+name: HackTool - Koadic Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe) AND (process.command_line.keyword:*/q* AND process.command_line.keyword:*/c* AND process.command_line.keyword:*chcp*)
+type: any
+priority: 3

@@ -1,0 +1,13 @@
+description: |
+  Detects the deletion of backups or system state backups via "wbadmin.exe".
+This technique is used by numerous ransomware families and actors.
+This may only be successful on server platforms that have Windows Backup enabled.
+
+name: Windows Backup Deleted Via Wbadmin.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\wbadmin.exe OR winlog.event_data.originalfilename.keyword:wbadmin.exe) AND (process.command_line.keyword:*delete* AND process.command_line.keyword:*backup*)) AND (NOT process.command_line.keyword:*keepversions:0*)
+type: any
+priority: 2

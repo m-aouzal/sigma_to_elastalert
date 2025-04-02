@@ -1,0 +1,10 @@
+description: |
+  Shadow Copies storage symbolic link creation using operating systems utilities
+name: VolumeShadowCopy Symlink Creation Via Mklink
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*mklink* AND process.command_line.keyword:*harddiskvolumeshadowcopy*
+type: any
+priority: 3

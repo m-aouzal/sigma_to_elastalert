@@ -1,0 +1,10 @@
+description: |
+  Detects changes to the registry for the currently logged-in user. In order to disable PowerShell module logging, script block logging or transcription and script execution logging
+name: PowerShell Logging Disabled Via Registry Key Tampering
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:(*\microsoft\windows\powershell* OR *\microsoft\powershellcore*)) AND (registry.path.keyword:(*\modulelogging\enablemodulelogging OR *\scriptblocklogging\enablescriptblocklogging OR *\scriptblocklogging\enablescriptblockinvocationlogging OR *\transcription\enabletranscripting OR *\transcription\enableinvocationheader OR *\enablescripts)) AND winlog.event_data.Details.keyword:dword (0x00000000)
+type: any
+priority: 3

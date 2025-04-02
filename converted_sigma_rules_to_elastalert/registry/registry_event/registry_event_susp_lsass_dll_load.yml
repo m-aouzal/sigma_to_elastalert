@@ -1,0 +1,10 @@
+description: |
+  Detects a method to load DLL via LSASS process using an undocumented Registry key
+name: DLL Load via LSASS
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:(*\currentcontrolset\services\ntds\directoryserviceextpt* OR *\currentcontrolset\services\ntds\lsadbextpt*)) AND (NOT (process.executable.keyword:c:\windows\system32\lsass.exe AND (winlog.event_data.Details.keyword:(%%systemroot%%\system32\ntdsa.dll OR %%systemroot%%\system32\lsadb.dll))))
+type: any
+priority: 3

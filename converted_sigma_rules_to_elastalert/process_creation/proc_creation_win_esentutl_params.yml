@@ -1,0 +1,10 @@
+description: |
+  Conti recommendation to its affiliates to use esentutl to access NTDS dumped file. Trickbot also uses this utilities to get MSEdge info via its module pwgrab.
+name: Esentutl Gather Credentials
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*esentutl* AND process.command_line.keyword:* /p*
+type: any
+priority: 2

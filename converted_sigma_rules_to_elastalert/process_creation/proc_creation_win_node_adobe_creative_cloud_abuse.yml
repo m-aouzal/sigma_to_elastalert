@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of other scripts using the Node executable packaged with Adobe Creative Cloud
+name: Node Process Executions
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\adobe creative cloud experience\libs\node.exe AND (NOT process.command_line.keyword:*adobe creative cloud experience\js*)
+type: any
+priority: 2

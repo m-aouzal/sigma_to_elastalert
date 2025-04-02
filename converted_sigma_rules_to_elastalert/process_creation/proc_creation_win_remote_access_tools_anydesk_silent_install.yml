@@ -1,0 +1,10 @@
+description: |
+  Detects AnyDesk Remote Desktop silent installation. Which can be used by attackers to gain remote access.
+name: Remote Access Tool - AnyDesk Silent Installation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*--install* AND process.command_line.keyword:*--start-with-win* AND process.command_line.keyword:*--silent*
+type: any
+priority: 3

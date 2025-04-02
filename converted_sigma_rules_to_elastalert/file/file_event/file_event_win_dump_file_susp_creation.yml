@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of a file with the ".dmp"/".hdmp" extension by a shell or scripting application such as "cmd", "powershell", etc. Often created by software during a crash. Memory dumps can sometimes contain sensitive information such as credentials. It's best to determine the source of the crash.
+name: Potentially Suspicious DMP/HDMP File Creation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:(*\cmd.exe OR *\cscript.exe OR *\mshta.exe OR *\powershell.exe OR *\pwsh.exe OR *\wscript.exe)) AND (file.path.keyword:(*.dmp OR *.dump OR *.hdmp))
+type: any
+priority: 2

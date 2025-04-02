@@ -1,0 +1,10 @@
+description: |
+  Detects a WMI backdoor in Exchange Transport Agents via WMI event filters
+name: WMI Backdoor Exchange Transport Agent
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\edgetransport.exe AND (NOT (process.executable.keyword:c:\windows\system32\conhost.exe OR (process.executable.keyword:c:\program files\microsoft\exchange server* AND process.executable.keyword:*\bin\oleconverter.exe)))
+type: any
+priority: 4

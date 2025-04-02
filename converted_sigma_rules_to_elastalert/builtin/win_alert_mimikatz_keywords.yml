@@ -1,0 +1,10 @@
+description: |
+  This method detects mimikatz keywords in different Eventlogs (some of them only appear in older Mimikatz version that are however still used by different threat groups)
+name: Mimikatz Use
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (*dpapi::masterkey* OR *eo.oe.kiwi* OR *event::clear* OR *event::drop* OR *gentilkiwi.com* OR *kerberos::golden* OR *kerberos::ptc* OR *kerberos::ptt* OR *kerberos::tgt* OR *kiwi legit printer* OR *lsadump::* OR *mimidrv.sys* OR *\mimilib.dll* OR *misc::printnightmare* OR *misc::shadowcopies* OR *misc::skeleton* OR *privilege::backup* OR *privilege::debug* OR *privilege::driver* OR *sekurlsa::*) AND (NOT event.code.keyword:15)
+type: any
+priority: 3

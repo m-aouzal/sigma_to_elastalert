@@ -1,0 +1,10 @@
+description: |
+  Detects a suspicious command line execution that invokes PowerShell with reference to an AppData folder
+name: PowerShell Script Run in AppData
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.command_line.keyword:(*powershell.exe* OR *\powershell* OR *\pwsh* OR *pwsh.exe*)) AND ((process.command_line.keyword:*/c* AND process.command_line.keyword:*\appdata*) AND (process.command_line.keyword:(*local* OR *roaming*)))
+type: any
+priority: 2

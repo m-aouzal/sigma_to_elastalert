@@ -1,0 +1,10 @@
+description: |
+  Detects tampering with the MacroRuntimeScanScope registry key to disable runtime scanning of enabled macros
+name: Disable Macro Runtime Scan Scope
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:*\software* AND registry.path.keyword:*\microsoft\office* AND registry.path.keyword:*\common\security*) AND registry.path.keyword:*\macroruntimescanscope AND winlog.event_data.Details.keyword:dword (0x00000000)
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects disabling of the Windows Defender virus scanning feature
+name: Windows Defender Virus Scanning Feature Disabled
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-Windows Defender/Operational AND event.code.keyword:5012
+type: any
+priority: 3

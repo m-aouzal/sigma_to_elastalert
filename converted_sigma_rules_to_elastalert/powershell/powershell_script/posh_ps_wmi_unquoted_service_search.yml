@@ -1,0 +1,10 @@
+description: |
+  Detects known WMI recon method to look for unquoted service paths, often used by pentest inside of powershell scripts attackers enum scripts
+name: WMIC Unquoted Services Path Lookup - PowerShell
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (powershell.file.script_block_text.keyword:(*get-wmiobject* OR *gwmi*)) AND (powershell.file.script_block_text.keyword:* win32_service* AND powershell.file.script_block_text.keyword:*name* AND powershell.file.script_block_text.keyword:*displayname* AND powershell.file.script_block_text.keyword:*pathname* AND powershell.file.script_block_text.keyword:*startmode*)
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious use of an .exe extension after a non-executable file extension like .pdf.exe, a set of spaces or underlines to cloak the executable file in spear phishing campaigns
+name: Suspicious Double Extension File Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:(*.doc.exe OR *.docx.exe OR *.xls.exe OR *.xlsx.exe OR *.ppt.exe OR *.pptx.exe OR *.rtf.exe OR *.pdf.exe OR *.txt.exe OR *      .exe OR *______.exe OR *.doc.js OR *.docx.js OR *.xls.js OR *.xlsx.js OR *.ppt.js OR *.pptx.js OR *.rtf.js OR *.pdf.js OR *.txt.js)) AND (process.command_line.keyword:(*.doc.exe* OR *.docx.exe* OR *.xls.exe* OR *.xlsx.exe* OR *.ppt.exe* OR *.pptx.exe* OR *.rtf.exe* OR *.pdf.exe* OR *.txt.exe* OR *      .exe* OR *______.exe* OR *.doc.js* OR *.docx.js* OR *.xls.js* OR *.xlsx.js* OR *.ppt.js* OR *.pptx.js* OR *.rtf.js* OR *.pdf.js* OR *.txt.js*))
+type: any
+priority: 4

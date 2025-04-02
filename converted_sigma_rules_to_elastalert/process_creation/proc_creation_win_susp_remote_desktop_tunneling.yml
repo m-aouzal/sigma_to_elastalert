@@ -1,0 +1,10 @@
+description: |
+  Detects potential use of an SSH utility to establish RDP over a reverse SSH Tunnel. This can be used by attackers to enable routing of network packets that would otherwise not reach their intended destination.
+name: Potential Remote Desktop Tunneling
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*:3389* AND (process.command_line.keyword:(* -l* OR * -p* OR * -r* OR * -pw* OR * -ssh*))
+type: any
+priority: 2

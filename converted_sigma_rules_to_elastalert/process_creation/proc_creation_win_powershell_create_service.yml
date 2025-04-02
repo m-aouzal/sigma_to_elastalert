@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of a new service using powershell.
+name: New Service Creation Using PowerShell
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*new-service* AND process.command_line.keyword:*-binarypathname*
+type: any
+priority: 1

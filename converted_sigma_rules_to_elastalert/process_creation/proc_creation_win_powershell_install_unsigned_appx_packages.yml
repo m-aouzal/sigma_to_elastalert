@@ -1,0 +1,10 @@
+description: |
+  Detects usage of the "Add-AppxPackage" or it's alias "Add-AppPackage" to install unsigned AppX packages
+name: Unsigned AppX Installation Attempt Using Add-AppxPackage
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\powershell.exe OR *\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (process.command_line.keyword:(*add-apppackage* OR *add-appxpackage*)) AND process.command_line.keyword:* -allowunsigned*
+type: any
+priority: 2

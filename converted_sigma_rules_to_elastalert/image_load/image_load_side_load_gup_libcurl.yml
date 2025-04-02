@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading of "libcurl.dll" by the "gup.exe" process from an uncommon location
+name: Potential DLL Sideloading Of Libcurl.DLL Via GUP.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\gup.exe AND file.path.keyword:*\libcurl.dll) AND (NOT process.executable.keyword:*\notepad++\updater\gup.exe)
+type: any
+priority: 2

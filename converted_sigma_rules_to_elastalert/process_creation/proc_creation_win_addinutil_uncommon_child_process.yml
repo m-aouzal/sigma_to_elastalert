@@ -1,0 +1,11 @@
+description: |
+  Detects uncommon child processes of the Add-In deployment cache updating utility (AddInutil.exe) which could be a sign of potential abuse of the binary to proxy execution via a custom Addins.Store payload.
+  
+name: Uncommon Child Process Of AddinUtil.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\addinutil.exe AND (NOT (process.executable.keyword:(*:\windows\system32\conhost.exe OR *:\windows\system32\werfault.exe OR *:\windows\syswow64\werfault.exe)))
+type: any
+priority: 2

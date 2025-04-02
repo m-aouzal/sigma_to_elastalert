@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of the PoC that can be used to exploit Sysmon CVE-2022-41120
+name: HackTool - SysmonEOP Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\sysmoneop.exe OR (winlog.event_data.Hashes.keyword:(*imphash=22f4089eb8aba31e1bb162c6d9bf72e5* OR *imphash=5123fa4c4384d431cd0d893eeb49bbec*))
+type: any
+priority: 4

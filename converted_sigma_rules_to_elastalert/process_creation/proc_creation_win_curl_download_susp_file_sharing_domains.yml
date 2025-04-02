@@ -1,0 +1,10 @@
+description: |
+  Detects potentially suspicious file download from file sharing domains using curl.exe
+name: Suspicious File Download From File Sharing Domain Via Curl.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\curl.exe OR winlog.event_data.originalfilename.keyword:curl.exe) AND (process.command_line.keyword:(*.githubusercontent.com* OR *anonfiles.com* OR *cdn.discordapp.com* OR *ddns.net* OR *dl.dropboxusercontent.com* OR *ghostbin.co* OR *glitch.me* OR *gofile.io* OR *hastebin.com* OR *mediafire.com* OR *mega.nz* OR *onrender.com* OR *pages.dev* OR *paste.ee* OR *pastebin.com* OR *pastebin.pl* OR *pastetext.net* OR *pixeldrain.com* OR *privatlab.com* OR *privatlab.net* OR *send.exploit.in* OR *sendspace.com* OR *storage.googleapis.com* OR *storjshare.io* OR *supabase.co* OR *temp.sh* OR *transfer.sh* OR *trycloudflare.com* OR *ufile.io* OR *w3spaces.com* OR *workers.dev*)) AND process.command_line.keyword:*http* AND (process.command_line.keyword:(* -o* OR *--remote-name* OR *--output*)) AND (process.command_line.keyword:(*.ps1 OR *.ps1' OR *.ps1" OR *.dat OR *.dat' OR *.dat" OR *.msi OR *.msi' OR *.msi" OR *.bat OR *.bat' OR *.bat" OR *.exe OR *.exe' OR *.exe" OR *.vbs OR *.vbs' OR *.vbs" OR *.vbe OR *.vbe' OR *.vbe" OR *.hta OR *.hta' OR *.hta" OR *.dll OR *.dll' OR *.dll" OR *.psm1 OR *.psm1' OR *.psm1"))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  TeamViewer_Desktop.exe is create during install
+name: Installation of TeamViewer Desktop
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\teamviewer_desktop.exe
+type: any
+priority: 2

@@ -1,0 +1,12 @@
+description: |
+  Detects a process that initiated a network connection over ports 5985 or 5986 from a non-network service account.
+This could potentially indicates a remote PowerShell connection.
+
+name: Potential Remote PowerShell Session Initiated
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((destination.port:(5985 OR 5986)) AND network.direction.keyword:true AND winlog.event_data.SourceIsIpv6:false) AND (NOT (((winlog.event_data.user.keyword:(*network service* OR *netzwerkdienst* OR *servicio de red* OR *servizio di rete*)) OR (winlog.event_data.user.keyword:*service r* AND winlog.event_data.user.keyword:*seau*)) OR ((source.ip.keyword:(::1 OR 127.0.0.1)) AND (destination.ip.keyword:(::1 OR 127.0.0.1))))) AND (NOT (process.executable.keyword:(c:\program files\avast software\avast\avastsvc.exe OR c:\program files (x86)\avast software\avast\avastsvc.exe)))
+type: any
+priority: 3

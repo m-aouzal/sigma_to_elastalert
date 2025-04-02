@@ -1,0 +1,10 @@
+description: |
+  Detects Set-Alias or New-Alias cmdlet usage. Which can be use as a mean to obfuscate PowerShell scripts
+name: Potential PowerShell Obfuscation Using Alias Cmdlets
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:(*set-alias* OR *new-alias*)
+type: any
+priority: 1

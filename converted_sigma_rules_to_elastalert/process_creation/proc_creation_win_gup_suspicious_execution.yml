@@ -1,0 +1,10 @@
+description: |
+  Detects execution of the Notepad++ updater in a suspicious directory, which is often used in DLL side-loading attacks
+name: Suspicious GUP Usage
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\gup.exe AND (NOT ((process.executable.keyword:(*\program files\notepad++\updater\gup.exe OR *\program files (x86)\notepad++\updater\gup.exe)) OR (process.executable.keyword:*\users* AND (process.executable.keyword:(*\appdata\local\notepad++\updater\gup.exe OR *\appdata\roaming\notepad++\updater\gup.exe)))))
+type: any
+priority: 3

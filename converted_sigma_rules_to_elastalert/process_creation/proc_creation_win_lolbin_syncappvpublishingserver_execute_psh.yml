@@ -1,0 +1,10 @@
+description: |
+  Executes arbitrary PowerShell code using SyncAppvPublishingServer.exe.
+name: SyncAppvPublishingServer Execute Arbitrary PowerShell Code
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\syncappvpublishingserver.exe OR winlog.event_data.originalfilename.keyword:syncappvpublishingserver.exe) AND process.command_line.keyword:*"n;*
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects usage of the "type" command to download/upload data from WebDAV server
+name: Potential Download/Upload Activity Using Type Command
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.command_line.keyword:*type* AND process.command_line.keyword:* > \*) OR (process.command_line.keyword:*type \* AND process.command_line.keyword:* >*)
+type: any
+priority: 2

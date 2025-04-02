@@ -1,0 +1,10 @@
+description: |
+  Detects a suspicious call to the user32.dll function that locks the user workstation
+name: Suspicious Workstation Locking via Rundll32
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe) AND process.parent.executable.keyword:*\cmd.exe AND process.command_line.keyword:*user32.dll,* AND process.command_line.keyword:*lockworkstation*
+type: any
+priority: 2

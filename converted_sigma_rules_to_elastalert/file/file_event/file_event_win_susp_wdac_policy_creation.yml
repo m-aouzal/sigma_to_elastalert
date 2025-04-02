@@ -1,0 +1,11 @@
+description: |
+  Detects suspicious Windows Defender Application Control (WDAC) policy file creation from abnormal processes that could be abused by attacker to block EDR/AV components while allowing their own malicious code to run on the system.
+  
+name: Potentially Suspicious WDAC Policy File Creation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\windows\system32\codeintegrity* AND (NOT ((process.executable.keyword:(*\microsoft.configurationmanagement.exe OR *\wdac wizard.exe OR *c:\program files\powershell\7-preview\pwsh.exe OR *c:\program files\powershell\7\pwsh.exe OR *c:\windows\system32\dllhost.exe OR *c:\windows\system32\windowspowershell\v1.0\powershell_ise.exe OR *c:\windows\system32\windowspowershell\v1.0\powershell.exe OR *c:\windows\syswow64\dllhost.exe OR *c:\windows\syswow64\windowspowershell\v1.0\powershell_ise.exe OR *c:\windows\syswow64\windowspowershell\v1.0\powershell.exe)) OR ((winlog.event_data.commandline.keyword:*convertfrom-cipolicy -xmlfilepath* AND winlog.event_data.commandline.keyword:*-binaryfilepath*) OR winlog.event_data.commandline.keyword:*citool --update-policy* OR (winlog.event_data.commandline.keyword:*copy-item -path* AND winlog.event_data.commandline.keyword:*-destination*))))
+type: any
+priority: 2

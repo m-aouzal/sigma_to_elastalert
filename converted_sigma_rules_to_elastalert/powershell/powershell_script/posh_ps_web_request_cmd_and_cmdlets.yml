@@ -1,0 +1,10 @@
+description: |
+  Detects the use of various web request commands with commandline tools and Windows PowerShell cmdlets (including aliases) via PowerShell scriptblock logs
+name: Usage Of Web Request Commands And Cmdlets - ScriptBlock
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (powershell.file.script_block_text.keyword:(*[system.net.webrequest]::create* OR *curl* OR *invoke-restmethod* OR *invoke-webrequest* OR *iwr* OR *net.webclient* OR *resume-bitstransfer* OR *start-bitstransfer* OR *wget* OR *winhttp.winhttprequest*)) AND (NOT winlog.event_data.Path.keyword:c:\packages\plugins\microsoft.guestconfiguration.configurationforwindows*)
+type: any
+priority: 2

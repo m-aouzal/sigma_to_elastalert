@@ -1,0 +1,10 @@
+description: |
+  Detects removal of an exported Exchange mailbox which could be to cover tracks from ProxyShell exploit
+name: Remove Exported Mailbox from Exchange Webserver
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:MSExchange Management AND (*remove-mailboxexportrequest* AND * -identity* AND * -confirm "false"*)
+type: any
+priority: 3

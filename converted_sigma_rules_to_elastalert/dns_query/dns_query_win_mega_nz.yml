@@ -1,0 +1,10 @@
+description: |
+  Detects DNS queries for subdomains related to MEGA sharing website
+name: DNS Query To MEGA Hosting Website
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: dns.question.name.keyword:*userstorage.mega.co.nz*
+type: any
+priority: 2

@@ -1,0 +1,11 @@
+description: |
+  Detects a renamed Powershell execution, which is a common technique used to circumvent security controls and bypass detection logic that's dependent on process names and process paths.
+  
+name: Renamed Powershell Under Powershell Channel
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.Data.keyword:*hostname=consolehost* AND (NOT ((winlog.event_data.Data.keyword:(*hostapplication=powershell* OR *hostapplication=c:\windows\system32\windowspowershell\v1.0\powershell* OR *hostapplication=c:\windows\syswow64\windowspowershell\v1.0\powershell* OR *hostapplication=c:/windows/system32/windowspowershell/v1.0/powershell* OR *hostapplication=c:/windows/syswow64/windowspowershell/v1.0/powershell* OR *hostapplication=c:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe* OR *hostapplication=c:\\windows\\syswow64\\windowspowershell\\v1.0\\powershell.exe*)) OR winlog.event_data.Data.keyword:/hostid=[a-za-z0-9-]{36}s+engineversion=/))
+type: any
+priority: 1

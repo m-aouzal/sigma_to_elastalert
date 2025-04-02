@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of "hh.exe" to open ".chm" files.
+name: HH.EXE Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.originalfilename.keyword:hh.exe OR winlog.event_data.image.keyword:*\hh.exe) AND process.command_line.keyword:*.chm*
+type: any
+priority: 1

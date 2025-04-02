@@ -1,0 +1,10 @@
+description: |
+  Detects the image load of "Python Core" by a non-Python process. This might be indicative of a Python script bundled with Py2Exe.
+name: Python Image Load By Non-Python Process
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.pe.description.keyword:python core AND (NOT (winlog.event_data.image.keyword:*python* OR (winlog.event_data.image.keyword:(c:\program files* OR c:\program files (x86)* OR c:\programdata\anaconda3*)))) AND _exists_:process.executable
+type: any
+priority: 2

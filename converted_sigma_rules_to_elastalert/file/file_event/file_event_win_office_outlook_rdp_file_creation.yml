@@ -1,0 +1,12 @@
+description: |
+  Detects the creation of files with the ".rdp" extensions in the temporary directory that Outlook uses when opening attachments.
+This can be used to detect spear-phishing campaigns that use RDP files as attachments.
+
+name: .RDP File Created by Outlook Process
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*.rdp AND ((winlog.event_data.targetfilename.keyword:(*\appdata\local\packages\microsoft.outlook_* OR *\appdata\local\microsoft\olk\attachments*)) OR (winlog.event_data.targetfilename.keyword:*\appdata\local\microsoft\windows* AND winlog.event_data.targetfilename.keyword:*\content.outlook*))
+type: any
+priority: 3

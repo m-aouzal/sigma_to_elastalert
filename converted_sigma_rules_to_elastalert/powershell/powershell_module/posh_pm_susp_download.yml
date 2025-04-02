@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious PowerShell download command
+name: Suspicious PowerShell Download - PoshModule
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.ContextInfo.keyword:*system.net.webclient* AND (winlog.event_data.ContextInfo.keyword:(*.downloadfile(* OR *.downloadstring(*))
+type: any
+priority: 2

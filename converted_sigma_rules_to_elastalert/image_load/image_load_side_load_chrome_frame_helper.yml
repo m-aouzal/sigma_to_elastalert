@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading of "chrome_frame_helper.dll"
+name: Potential Chrome Frame Helper DLL Sideloading
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\chrome_frame_helper.dll AND (NOT (file.path.keyword:(c:\program files\google\chrome\application* OR c:\program files (x86)\google\chrome\application*))) AND (NOT file.path.keyword:*\appdata\local\google\chrome\application*)
+type: any
+priority: 2

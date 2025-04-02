@@ -1,0 +1,10 @@
+description: |
+  Detects a suspicious execution of a Microsoft HTML Help (HH.exe)
+name: Suspicious HH.EXE Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.originalfilename.keyword:hh.exe OR winlog.event_data.image.keyword:*\hh.exe) AND (process.command_line.keyword:(*.application* OR *\appdata\local\temp* OR *\content.outlook* OR *\downloads* OR *\users\public* OR *\windows\temp*))
+type: any
+priority: 3

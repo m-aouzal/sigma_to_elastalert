@@ -1,0 +1,10 @@
+description: |
+  Detects uncommon "conhost" child processes. This could be a sign of "conhost" usage as a LOLBIN or potential process injection activity.
+name: Uncommon Child Process Of Conhost.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\conhost.exe AND (NOT (process.executable.keyword:*:\windows\system32\conhost.exe OR (NOT _exists_:process.executable) OR process.executable.keyword:"")) AND (NOT winlog.provider_name.keyword:systemtraceprovider-process)
+type: any
+priority: 2

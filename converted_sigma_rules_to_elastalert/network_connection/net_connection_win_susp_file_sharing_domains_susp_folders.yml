@@ -1,0 +1,10 @@
+description: |
+  Detects executables located in potentially suspicious directories initiating network connections towards file sharing domains.
+name: Network Communication Initiated To File Sharing Domains From Process Located In Suspicious Folder
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:(*:\$recycle.bin* OR *:\perflogs* OR *:\temp* OR *:\users\default* OR *:\users\public* OR *:\windows\fonts* OR *:\windows\ime* OR *:\windows\system32\tasks* OR *:\windows\tasks* OR *:\windows\temp* OR *\appdata\temp* OR *\config\systemprofile* OR *\windows\addins*)) AND (network.direction.keyword:true AND (destination.domain.keyword:(*.githubusercontent.com OR *anonfiles.com OR *cdn.discordapp.com OR *ddns.net OR *dl.dropboxusercontent.com OR *ghostbin.co OR *glitch.me OR *gofile.io OR *hastebin.com OR *mediafire.com OR *mega.co.nz OR *mega.nz OR *onrender.com OR *pages.dev OR *paste.ee OR *pastebin.com OR *pastebin.pl OR *pastetext.net OR *pixeldrain.com OR *privatlab.com OR *privatlab.net OR *send.exploit.in OR *sendspace.com OR *storage.googleapis.com OR *storjshare.io OR *supabase.co OR *temp.sh OR *transfer.sh OR *trycloudflare.com OR *ufile.io OR *w3spaces.com OR *workers.dev)))
+type: any
+priority: 3

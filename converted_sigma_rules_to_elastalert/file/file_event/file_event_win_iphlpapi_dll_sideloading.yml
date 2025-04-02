@@ -1,0 +1,12 @@
+description: |
+  Detects creation of a malicious DLL file in the location where the OneDrive or Team applications
+Upon execution of the Teams or OneDrive application, the dropped malicious DLL file ("iphlpapi.dll") is sideloaded
+
+name: Malicious DLL File Dropped in the Teams or OneDrive Folder
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*iphlpapi.dll* AND file.path.keyword:*\appdata\local\microsoft*
+type: any
+priority: 3

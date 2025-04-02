@@ -1,0 +1,10 @@
+description: |
+  Detects usage of cmdkey to look for cached credentials on the system
+name: Potential Reconnaissance For Cached Credentials Via Cmdkey.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\cmdkey.exe OR winlog.event_data.originalfilename.keyword:cmdkey.exe) AND process.command_line.keyword:(* -l* OR * /l* OR * –l* OR * —l* OR * ―l*)
+type: any
+priority: 3

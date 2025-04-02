@@ -1,0 +1,10 @@
+description: |
+  Detects the usage of the "sftp.exe" binary as a LOLBIN by abusing the "-D" flag
+name: Use Of The SFTP.EXE Binary As A LOLBIN
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\sftp.exe AND (process.command_line.keyword:(* -d ..* OR * -d c:*))
+type: any
+priority: 2

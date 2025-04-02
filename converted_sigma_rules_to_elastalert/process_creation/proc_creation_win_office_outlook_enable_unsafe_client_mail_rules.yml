@@ -1,0 +1,10 @@
+description: |
+  Detects an attacker trying to enable the outlook security setting "EnableUnsafeClientMailRules" which allows outlook to run applications or execute macros
+name: Outlook EnableUnsafeClientMailRules Setting Enabled
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*\outlook\security\enableunsafeclientmailrules*
+type: any
+priority: 3

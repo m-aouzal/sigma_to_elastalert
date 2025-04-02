@@ -1,0 +1,10 @@
+description: |
+  Detect modification of services configuration (ImagePath, FailureCommand and ServiceDLL) in registry by processes with Medium integrity level
+name: Potential Privilege Escalation via Service Permissions Weakness
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.IntegrityLevel.keyword:(medium OR s-1-16-8192)) AND (process.command_line.keyword:*controlset* AND process.command_line.keyword:*services*) AND (process.command_line.keyword:(*\imagepath* OR *\failurecommand* OR *\servicedll*))
+type: any
+priority: 3

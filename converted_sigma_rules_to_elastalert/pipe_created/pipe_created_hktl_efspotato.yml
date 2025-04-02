@@ -1,0 +1,10 @@
+description: |
+  Detects the pattern of a pipe name as used by the hack tool EfsPotato
+name: HackTool - EfsPotato Named Pipe Creation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (file.name.keyword:(*\pipe* OR *\pipe\srvsvc*)) AND (NOT (file.name.keyword:(*\ctxshare* OR \pipe*)))
+type: any
+priority: 3

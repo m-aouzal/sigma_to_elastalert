@@ -1,0 +1,10 @@
+description: |
+  Detects DNS queries initiated by "Regsvr32.exe"
+name: DNS Query Request By Regsvr32.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\regsvr32.exe
+type: any
+priority: 2

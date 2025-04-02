@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of "reg.exe" for enabling/disabling the RDP service on the host by tampering with the 'CurrentControlSetControlTerminal Server' values
+name: Potential Tampering With RDP Related Registry Keys Via Reg.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND (process.command_line.keyword:* add* AND process.command_line.keyword:*\currentcontrolset\control\terminal server* AND process.command_line.keyword:*reg_dword* AND process.command_line.keyword:* /f*)) AND ((process.command_line.keyword:*licensing core* AND process.command_line.keyword:*enableconcurrentsessions*) OR (process.command_line.keyword:(*winstations\rdp-tcp* OR *maxinstancecount* OR *fenablewinstation* OR *tsuserenabled* OR *tsenabled* OR *tsappcompat* OR *idlewinstationpoolcount* OR *tsadvertise* OR *allowtsconnections* OR *fsinglesessionperuser* OR *fdenytsconnections*)))
+type: any
+priority: 3

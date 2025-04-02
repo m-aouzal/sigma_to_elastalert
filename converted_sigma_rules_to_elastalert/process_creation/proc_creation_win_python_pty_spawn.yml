@@ -1,0 +1,10 @@
+description: |
+  Detects python spawning a pretty tty
+name: Python Spawning Pretty TTY on Windows
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:(*python.exe OR *python3.exe OR *python2.exe)) AND ((process.command_line.keyword:*import pty* AND process.command_line.keyword:*.spawn(*) OR process.command_line.keyword:*from pty import spawn*)
+type: any
+priority: 3

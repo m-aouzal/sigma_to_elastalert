@@ -1,0 +1,10 @@
+description: |
+  Detects the clearing of one of the Windows Core Eventlogs. e.g. caused by "wevtutil cl" command execution
+name: Important Windows Eventlog Cleared
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:System AND (event.code.keyword:104 AND winlog.provider_name.keyword:microsoft-windows-eventlog AND (winlog.channel.keyword:(microsoft-windows-powershell/operational OR microsoft-windows-sysmon/operational OR powershellcore/operational OR security OR system OR windows powershell)))
+type: any
+priority: 3

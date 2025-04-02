@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of the default dump file used by Outflank Dumpert tool. A process dumper, which dumps the lsass process memory
+name: HackTool - Dumpert Process Dumper Default File
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*dumpert.dmp
+type: any
+priority: 4

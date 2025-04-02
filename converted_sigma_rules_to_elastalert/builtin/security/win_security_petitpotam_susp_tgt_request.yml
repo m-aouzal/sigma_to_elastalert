@@ -1,0 +1,15 @@
+description: |
+  Detect suspicious Kerberos TGT requests.
+Once an attacer obtains a computer certificate by abusing Active Directory Certificate Services in combination with PetitPotam, the next step would be to leverage the certificate for malicious purposes.
+One way of doing this is to request a Kerberos Ticket Granting Ticket using a tool like Rubeus.
+This request will generate a 4768 event with some unusual fields depending on the environment.
+This analytic will require tuning, we recommend filtering Account_Name to the Domain Controller computer accounts.
+
+name: PetitPotam Suspicious Kerberos TGT Request
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:4768 AND winlog.event_data.TargetUserName.keyword:*$ AND winlog.event_data.CertThumbprint.keyword:*) AND (NOT (source.ip.keyword:::1 OR winlog.event_data.CertThumbprint.keyword:"")))
+type: any
+priority: 3

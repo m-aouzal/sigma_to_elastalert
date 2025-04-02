@@ -1,0 +1,10 @@
+description: |
+  Detects modification of autostart extensibility point (ASEP) in registry.
+name: CurrentControlSet Autorun Keys Modification
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:*\system\currentcontrolset\control* AND (registry.path.keyword:(*\terminal server\winstations\rdp-tcp\initialprogram* OR *\terminal server\wds\rdpwd\startupprograms* OR *\securityproviders\securityproviders* OR *\safeboot\alternateshell* OR *\print\providers* OR *\print\monitors* OR *\networkprovider\order* OR *\lsa\notification packages* OR *\lsa\authentication packages* OR *\bootverificationprogram\imagepath*))) AND (NOT (winlog.event_data.Details.keyword:(empty) OR (process.executable.keyword:c:\windows\system32\spoolsv.exe AND registry.path.keyword:*\print\monitors\cutepdf writer monitor* AND (winlog.event_data.Details.keyword:(cpwmon64_v40.dll OR cutepdf writer))) OR (process.executable.keyword:c:\windows\system32\spoolsv.exe AND registry.path.keyword:*print\monitors\appmon\ports\microsoft.office.onenote_* AND (user.name.keyword:(*authori* OR *autori*))) OR (process.executable.keyword:c:\windows\system32\poqexec.exe AND registry.path.keyword:*\networkprovider\order\providerorder) OR (process.executable.keyword:c:\windows\system32\spoolsv.exe AND registry.path.keyword:*\print\monitors\monvnc\driver AND winlog.event_data.Details.keyword:vncpm.dll)))
+type: any
+priority: 2

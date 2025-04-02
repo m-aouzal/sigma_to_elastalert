@@ -1,0 +1,10 @@
+description: |
+  Detects the use of Advanced IP Scanner. Seems to be a popular tool for ransomware groups.
+name: PUA - Advanced IP Scanner Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\advanced_ip_scanner* OR winlog.event_data.originalfilename.keyword:*advanced_ip_scanner* OR winlog.event_data.description.keyword:*advanced ip scanner*) OR (process.command_line.keyword:*/portable* AND process.command_line.keyword:*/lng*)
+type: any
+priority: 2

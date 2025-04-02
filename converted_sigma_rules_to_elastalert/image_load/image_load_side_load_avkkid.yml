@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading of "AVKkid.dll"
+name: Potential AVKkid.DLL Sideloading
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\avkkid.dll AND (NOT ((process.executable.keyword:(*c:\program files (x86)\g data* OR *c:\program files\g data*)) AND process.executable.keyword:*\avkkid.exe AND (file.path.keyword:(c:\program files (x86)\g data* OR c:\program files\g data*))))
+type: any
+priority: 2

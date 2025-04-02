@@ -1,0 +1,10 @@
+description: |
+  Detects when the "index" value of a scheduled task is removed or deleted from the registry. Which effectively hides it from any tooling such as "schtasks /query"
+name: Removal Of Index Value to Hide Schedule Task - Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.EventType.keyword:deletekey AND (registry.path.keyword:*\software\microsoft\windows nt\currentversion\schedule\taskcache\tree* AND registry.path.keyword:*index*)
+type: any
+priority: 2

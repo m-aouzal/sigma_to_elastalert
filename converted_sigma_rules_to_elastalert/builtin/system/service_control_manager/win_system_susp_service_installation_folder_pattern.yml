@@ -1,0 +1,10 @@
+description: |
+  Detects service installation with suspicious folder patterns
+name: Service Installation with Suspicious Folder Pattern
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:System AND ((winlog.provider_name.keyword:service control manager AND event.code.keyword:7045) AND (winlog.event_data.imagepath.keyword:/^[cc]:\[pp]rogram[dd]ata\.{1,9}.exe/ OR winlog.event_data.imagepath.keyword:/^[cc]:\.{1,9}.exe/))
+type: any
+priority: 3

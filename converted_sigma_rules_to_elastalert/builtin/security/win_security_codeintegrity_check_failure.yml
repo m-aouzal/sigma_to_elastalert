@@ -1,0 +1,11 @@
+description: |
+  Detects code integrity failures such as missing page hashes or corrupted drivers due unauthorized modification. This could be a sign of tampered binaries.
+  
+name: Failed Code Integrity Checks
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:(5038 OR 6281)) AND (NOT ((winlog.event_data.param1:(*\csfalconserviceuninstalltool_* OR *\program files\crowdstrike* OR *\system32\drivers\crowdstrike* OR *\windows\system32\scriptcontrol64_*)) OR winlog.event_data.param1:*\program files\sophos*)))
+type: any
+priority: 0

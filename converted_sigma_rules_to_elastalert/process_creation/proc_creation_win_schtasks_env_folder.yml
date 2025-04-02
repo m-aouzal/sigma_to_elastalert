@@ -1,0 +1,10 @@
+description: |
+  Detects Schtask creations that point to a suspicious folder or an environment variable often used by malware
+name: Schedule Task Creation From Env Variable Or Potentially Suspicious Path Via Schtasks.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (((process.executable.keyword:*\schtasks.exe AND process.command_line.keyword:* /create*) AND (process.command_line.keyword:(*:\perflogs* OR *:\users\all users* OR *:\users\default* OR *:\users\public* OR *:\windows\temp* OR *\appdata\local* OR *\appdata\roaming* OR *%appdata%* OR *%public%*))) OR (process.parent.command_line.keyword:*\svchost.exe -k netsvcs -p -s schedule AND (process.command_line.keyword:(*:\perflogs* OR *:\windows\temp* OR *\users\public* OR *%public%*)))) AND (NOT ((winlog.event_data.parentcommandline.keyword:*unattended.ini* OR winlog.event_data.commandline.keyword:*update_task.xml*) OR process.command_line.keyword:*/create /tn tvinstallrestore /tr* OR (process.command_line.keyword:*/create /xml "c:\users* AND process.command_line.keyword:*\appdata\local\temp\.cr.* AND process.command_line.keyword:*avira_security_installation.xml*) OR ((process.command_line.keyword:*/create /f /tn* AND process.command_line.keyword:*/xml* AND process.command_line.keyword:*\appdata\local\temp\is-* AND process.command_line.keyword:*avira_*) AND (process.command_line.keyword:(*.tmp\updatefallbacktask.xml* OR *.tmp\watchdogservicecontrolmanagertimeout.xml* OR *.tmp\systrayautostart.xml* OR *.tmp\maintenancetask.xml*))) OR (process.command_line.keyword:*\appdata\local\temp* AND process.command_line.keyword:*/create /tn "klcp_update" /xml* AND process.command_line.keyword:*\klcp_update_task.xml*)))
+type: any
+priority: 2

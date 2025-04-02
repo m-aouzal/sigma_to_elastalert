@@ -1,0 +1,10 @@
+description: |
+  Detects a write of an Exchange CSR to an untypical directory or with aspx name suffix which can be used to place a webshell
+name: Certificate Request Export to Exchange Webserver
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:MSExchange Management AND ((*new-exchangecertificate* AND * -generaterequest* AND * -binaryencoded* AND * -requestfile*) AND (*\\localhost\c$* OR *\\127.0.0.1\c$* OR *c:\inetpub* OR *.aspx*))
+type: any
+priority: 4

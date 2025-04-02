@@ -1,0 +1,10 @@
+description: |
+  Detect set Notification_Suppress to 1 to disable the Windows security center notification
+name: Activate Suppression of Windows Security Center Notifications
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*software\policies\microsoft\windows defender\ux configuration\notification_suppress AND winlog.event_data.Details.keyword:dword (0x00000001)
+type: any
+priority: 2

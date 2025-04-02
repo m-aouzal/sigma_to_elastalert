@@ -1,0 +1,10 @@
+description: |
+  Detects the process injection of a LittleCorporal generated Maldoc.
+name: HackTool - LittleCorporal Generated Maldoc Injection
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\winword.exe AND (winlog.event_data.CallTrace.keyword:*:\windows\microsoft.net\framework64\v2.* AND winlog.event_data.CallTrace.keyword:*unknown*)
+type: any
+priority: 3

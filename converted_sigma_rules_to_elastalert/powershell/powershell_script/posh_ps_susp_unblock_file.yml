@@ -1,0 +1,10 @@
+description: |
+  Remove the Zone.Identifier alternate data stream which identifies the file as downloaded from the internet.
+name: Suspicious Unblock-File
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*unblock-file* AND powershell.file.script_block_text.keyword:*-path*
+type: any
+priority: 2

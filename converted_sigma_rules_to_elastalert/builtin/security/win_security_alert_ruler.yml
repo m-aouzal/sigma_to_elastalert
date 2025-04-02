@@ -1,0 +1,10 @@
+description: |
+  This events that are generated when using the hacktool Ruler by Sensepost
+name: Hacktool Ruler
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:4776 AND winlog.event_data.Workstation.keyword:ruler) OR ((event.code.keyword:(4624 OR 4625)) AND source.domain.keyword:ruler))
+type: any
+priority: 3

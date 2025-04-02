@@ -1,0 +1,12 @@
+description: |
+  Detects the enumeration and query of interesting and in some cases sensitive services on the system via "sc.exe".
+Attackers often try to enumerate the services currently running on a system in order to find different attack vectors.
+
+name: Interesting Service Enumeration Via Sc.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\sc.exe OR winlog.event_data.originalfilename.keyword:sc.exe) AND process.command_line.keyword:*query* AND process.command_line.keyword:*termservice*
+type: any
+priority: 1

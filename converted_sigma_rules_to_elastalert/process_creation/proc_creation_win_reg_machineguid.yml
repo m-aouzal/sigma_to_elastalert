@@ -1,0 +1,10 @@
+description: |
+  Use of reg to get MachineGuid information
+name: Suspicious Query of MachineGUID
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\reg.exe AND (process.command_line.keyword:*software\microsoft\cryptography* AND process.command_line.keyword:*/v* AND process.command_line.keyword:*machineguid*)
+type: any
+priority: 1

@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious processes including shells spawnd from WinRM host process
+name: Suspicious Processes Spawned by WinRM
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\wsmprovhost.exe AND (process.executable.keyword:(*\cmd.exe OR *\sh.exe OR *\bash.exe OR *\powershell.exe OR *\pwsh.exe OR *\wsl.exe OR *\schtasks.exe OR *\certutil.exe OR *\whoami.exe OR *\bitsadmin.exe))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects potentially suspicious child processes of "GoogleUpdate.exe"
+name: Potentially Suspicious GoogleUpdate Child Process
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\googleupdate.exe AND (NOT ((winlog.event_data.image.keyword:*\google* OR (winlog.event_data.image.keyword:(*\setup.exe OR *chrome_updater.exe OR *chrome_installer.exe))) OR (NOT _exists_:process.executable)))
+type: any
+priority: 3

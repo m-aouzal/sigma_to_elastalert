@@ -1,0 +1,10 @@
+description: |
+  Detects service principal name (SPN) enumeration used for Kerberoasting
+name: Potential SPN Enumeration Via Setspn.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\setspn.exe OR winlog.event_data.originalfilename.keyword:setspn.exe OR (winlog.event_data.description.keyword:*query or reset the computer* AND winlog.event_data.description.keyword:*spn attribute*)) AND (process.command_line.keyword:(* -q* OR * /q*))
+type: any
+priority: 2

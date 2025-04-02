@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious invocation of the Get-ADDBAccount script that reads from a ntds.dit file and may be used to get access to credentials without using any credential dumpers
+name: Suspicious Get-ADDBAccount Usage
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*get-addbaccount* AND powershell.file.script_block_text.keyword:*bootkey* AND powershell.file.script_block_text.keyword:*databasepath*
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Shadow Copies deletion using operating systems utilities
+name: Shadow Copies Deletion Using Operating Systems Utilities
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (((winlog.event_data.image.keyword:(*\powershell.exe OR *\pwsh.exe OR *\wmic.exe OR *\vssadmin.exe OR *\diskshadow.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll OR wmic.exe OR vssadmin.exe OR diskshadow.exe))) AND (process.command_line.keyword:*shadow* AND process.command_line.keyword:*delete*)) OR ((winlog.event_data.image.keyword:*\wbadmin.exe OR winlog.event_data.originalfilename.keyword:wbadmin.exe) AND (process.command_line.keyword:*delete* AND process.command_line.keyword:*catalog* AND process.command_line.keyword:*quiet*)) OR ((winlog.event_data.image.keyword:*\vssadmin.exe OR winlog.event_data.originalfilename.keyword:vssadmin.exe) AND ((process.command_line.keyword:*resize* AND process.command_line.keyword:*shadowstorage*) AND (process.command_line.keyword:(*unbounded* OR */maxsize=*))))
+type: any
+priority: 3

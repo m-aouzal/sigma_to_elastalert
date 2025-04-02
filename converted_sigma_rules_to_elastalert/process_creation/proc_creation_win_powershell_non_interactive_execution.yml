@@ -1,0 +1,10 @@
+description: |
+  Detects non-interactive PowerShell activity by looking at the "powershell" process with a non-user GUI process such as "explorer.exe" as a parent.
+name: Non Interactive PowerShell Process Spawned
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\powershell.exe OR *\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (NOT ((process.parent.executable.keyword:(*:\windows\explorer.exe OR *:\windows\system32\compattelrunner.exe OR *:\windows\syswow64\explorer.exe)) OR process.parent.executable.keyword::\$windows.~bt\sources\setuphost.exe)) AND (NOT ((process.parent.executable.keyword:*\appdata\local\programs\microsoft vs code\code.exe AND process.parent.command_line.keyword:* --ms-enable-electron-run-as-node*) OR (process.parent.executable.keyword:*:\program files\windowsapps\microsoft.windowsterminal_* AND process.parent.executable.keyword:*\windowsterminal.exe)))
+type: any
+priority: 1

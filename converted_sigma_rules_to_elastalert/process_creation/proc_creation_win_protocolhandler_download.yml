@@ -1,0 +1,11 @@
+description: |
+  Detects usage of "ProtocolHandler" to download files. Downloaded files will be located in the cache folder (for example - %LOCALAPPDATA%MicrosoftWindowsINetCacheIE)
+  
+name: File Download Using ProtocolHandler.exe
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\protocolhandler.exe OR winlog.event_data.originalfilename.keyword:protocolhandler.exe) AND (process.command_line.keyword:(*ftp://* OR *http://* OR *https://*))
+type: any
+priority: 2

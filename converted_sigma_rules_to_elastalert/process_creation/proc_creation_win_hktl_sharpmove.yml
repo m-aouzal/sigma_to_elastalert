@@ -1,0 +1,11 @@
+description: |
+  Detects the execution of SharpMove, a .NET utility performing multiple tasks such as "Task Creation", "SCM" query, VBScript execution using WMI via its PE metadata and command line options.
+  
+name: HackTool - SharpMove Tool Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\sharpmove.exe OR winlog.event_data.originalfilename.keyword:sharpmove.exe) OR (process.command_line.keyword:*computername=* AND (process.command_line.keyword:(*action=create* OR *action=dcom* OR *action=executevbs* OR *action=hijackdcom* OR *action=modschtask* OR *action=modsvc* OR *action=query* OR *action=scm* OR *action=startservice* OR *action=taskscheduler*)))
+type: any
+priority: 3

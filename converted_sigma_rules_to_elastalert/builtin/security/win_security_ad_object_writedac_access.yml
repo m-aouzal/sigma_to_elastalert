@@ -1,0 +1,10 @@
+description: |
+  Detects WRITE_DAC access to a domain object
+name: AD Object WriteDAC Access
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4662 AND winlog.event_data.ObjectServer.keyword:ds AND winlog.event_data.AccessMask.keyword:0x40000 AND (winlog.event_data.ObjectType.keyword:(19195a5b-6da0-11d0-afd3-00c04fd930c9 OR domaindns)))
+type: any
+priority: 4

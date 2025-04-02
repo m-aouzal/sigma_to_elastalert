@@ -1,0 +1,10 @@
+description: |
+  Detects Obfuscated Powershell via RUNDLL LAUNCHER
+name: Invoke-Obfuscation RUNDLL LAUNCHER - PowerShell Module
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*rundll32.exe* AND powershell.file.script_block_text.keyword:*shell32.dll* AND powershell.file.script_block_text.keyword:*shellexec_rundll* AND powershell.file.script_block_text.keyword:*powershell*
+type: any
+priority: 2

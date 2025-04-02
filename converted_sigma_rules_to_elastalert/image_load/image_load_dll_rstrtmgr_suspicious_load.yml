@@ -1,0 +1,13 @@
+description: |
+  Detects the load of RstrtMgr DLL (Restart Manager) by a suspicious process.
+This library has been used during ransomware campaigns to kill processes that would prevent file encryption by locking them (e.g. Conti ransomware, Cactus ransomware). It has also recently been seen used by the BiBi wiper for Windows.
+It could also be used for anti-analysis purposes by shut downing specific processes.
+
+name: Load Of RstrtMgr.DLL By A Suspicious Process
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.imageloaded.keyword:*\rstrtmgr.dll OR winlog.event_data.originalfilename.keyword:rstrtmgr.dll) AND ((process.executable.keyword:(*:\perflogs* OR *:\users\public* OR *\temporary internet*)) OR ((winlog.event_data.image.keyword:*:\users* AND winlog.event_data.image.keyword:*\favorites*) OR (winlog.event_data.image.keyword:*:\users* AND winlog.event_data.image.keyword:*\favourites*) OR (winlog.event_data.image.keyword:*:\users* AND winlog.event_data.image.keyword:*\contacts*)))
+type: any
+priority: 3

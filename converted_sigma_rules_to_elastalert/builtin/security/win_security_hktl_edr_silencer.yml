@@ -1,0 +1,11 @@
+description: |
+  Detects execution of EDRSilencer, a tool that abuses the Windows Filtering Platform (WFP) to block the outbound traffic of running EDR agents based on specific hardcoded filter names.
+  
+name: HackTool - EDRSilencer Execution - Filter Added
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:(5441 OR 5447)) AND winlog.event_data.FilterName.keyword:*custom outbound filter*)
+type: any
+priority: 3

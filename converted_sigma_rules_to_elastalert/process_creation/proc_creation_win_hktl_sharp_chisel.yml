@@ -1,0 +1,10 @@
+description: |
+  Detects usage of the Sharp Chisel via the commandline arguments
+name: HackTool - SharpChisel Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.image.keyword:*\sharpchisel.exe OR winlog.event_data.product.keyword:sharpchisel
+type: any
+priority: 3

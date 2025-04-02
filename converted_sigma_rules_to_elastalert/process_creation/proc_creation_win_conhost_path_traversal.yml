@@ -1,0 +1,10 @@
+description: |
+  detects the usage of path traversal in conhost.exe indicating possible command/argument confusion/hijacking
+name: Conhost.exe CommandLine Path Traversal
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.command_line.keyword:*conhost* AND process.command_line.keyword:*/../../*
+type: any
+priority: 3

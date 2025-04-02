@@ -1,0 +1,10 @@
+description: |
+  Detects signs of potential use of the WSMAN provider from uncommon processes locally and remote execution.
+name: Suspicious WSMAN Provider Image Loads
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (((winlog.event_data.imageloaded.keyword:(*\wsmsvc.dll OR *\wsmauto.dll OR *\microsoft.wsman.management.ni.dll)) OR (winlog.event_data.originalfilename.keyword:(wsmsvc.dll OR wsmanautomation.dll OR microsoft.wsman.management.dll))) OR (process.executable.keyword:*\svchost.exe AND file.pe.original_file_name.keyword:wsmwmipl.dll)) AND (NOT ((process.executable.keyword:(*\powershell.exe OR *c:\windows\system32\sdiagnhost.exe OR *c:\windows\system32\services.exe)) OR (winlog.event_data.CommandLine.keyword:(*svchost.exe -k netsvcs -p -s bits* OR *svchost.exe -k graphicsperfsvcgroup -s graphicsperfsvc* OR *svchost.exe -k networkservice -p -s wecsvc* OR *svchost.exe -k netsvcs*)) OR ((process.executable.keyword:(c:\windows\microsoft.net\framework64\v* OR c:\windows\microsoft.net\framework\v*)) AND process.executable.keyword:*\mscorsvw.exe) OR (process.executable.keyword:(c:\windows\system32\configure-smremoting.exe OR c:\windows\system32\servermanager.exe)) OR process.executable.keyword:c:\windows\temp\asgard2-agent* OR process.executable.keyword:c:\program files\citrix* OR process.executable.keyword:*\powershell_ise.exe OR process.executable.keyword:c:\$windows.~bt\sources*)) AND (NOT (process.executable.keyword:*\svchost.exe AND (NOT _exists_:winlog.event_data.CommandLine)))
+type: any
+priority: 2

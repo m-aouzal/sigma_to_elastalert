@@ -1,0 +1,10 @@
+description: |
+  Detects when the MSSQL "xp_cmdshell" stored procedure is used to execute commands
+name: MSSQL XPCmdshell Suspicious Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Application AND (winlog.provider_name.keyword:*mssql* AND event.code.keyword:33205 AND (winlog.event_data.Data.keyword:*object_name:xp_cmdshell* AND winlog.event_data.Data.keyword:*statement:exec*))
+type: any
+priority: 3

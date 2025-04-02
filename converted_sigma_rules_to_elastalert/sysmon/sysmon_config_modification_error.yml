@@ -1,0 +1,10 @@
+description: |
+  Detects when an adversary is trying to hide it's action from Sysmon logging based on error messages
+name: Sysmon Configuration Error
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.Description.keyword:(*failed to open service configuration with error* OR *failed to connect to the driver to update configuration*)) AND (NOT ((winlog.event_data.Description.keyword:*failed to open service configuration with error* AND winlog.event_data.Description.keyword:*last error: the media is write protected.*) OR (winlog.event_data.Description.keyword:(*failed to open service configuration with error 19* OR *failed to open service configuration with error 93*))))
+type: any
+priority: 3

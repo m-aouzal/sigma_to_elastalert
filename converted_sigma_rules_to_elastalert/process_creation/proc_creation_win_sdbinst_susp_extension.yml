@@ -1,0 +1,12 @@
+description: |
+  Detects installation of a potentially suspicious new shim with an uncommon extension using sdbinst.exe.
+Adversaries may establish persistence and/or elevate privileges by executing malicious content triggered by application shims
+
+name: Uncommon Extension Shim Database Installation Via Sdbinst.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\sdbinst.exe OR winlog.event_data.originalfilename.keyword:sdbinst.exe) AND (NOT (process.command_line.keyword:*.sdb* OR ((winlog.event_data.commandline.keyword:(* -c OR * -f OR * -mm OR * -t)) OR winlog.event_data.commandline.keyword:* -m -bg*) OR (NOT _exists_:process.command_line) OR process.command_line.keyword:""))
+type: any
+priority: 2

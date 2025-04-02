@@ -1,0 +1,10 @@
+description: |
+  Detects basic PowerShell Remoting (WinRM) by monitoring for network inbound connections to ports 5985 OR 5986
+name: Remote PowerShell Sessions Network Connections (WinRM)
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:5156 AND (destination.port:(5985 OR 5986)) AND winlog.event_data.LayerRTID.keyword:44)
+type: any
+priority: 3

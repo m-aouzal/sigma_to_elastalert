@@ -1,0 +1,10 @@
+description: |
+  Detects modifications to the registry key "HKLMSoftwareMicrosoftWindows NTCurrentVersionWinlogonSpecialAccountsUserlist" where the value is set to "0" in order to hide user account from being listed on the logon screen.
+name: Hiding User Account Via SpecialAccounts Registry Key
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.EventType.keyword:setvalue AND registry.path.keyword:*\software\microsoft\windows nt\currentversion\winlogon\specialaccounts\userlist* AND winlog.event_data.Details.keyword:dword (0x00000000)
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects the pattern of UAC Bypass using IEInstal.exe (UACMe 64)
+name: UAC Bypass Using IEInstal - Process
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.IntegrityLevel.keyword:(high OR system OR s-1-16-16384 OR s-1-16-12288)) AND process.parent.executable.keyword:*\ieinstal.exe AND process.executable.keyword:*\appdata\local\temp* AND process.executable.keyword:*consent.exe
+type: any
+priority: 3

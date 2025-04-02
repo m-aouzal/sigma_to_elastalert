@@ -1,0 +1,10 @@
+description: |
+  Attempting to disable scheduled scanning and other parts of Windows Defender ATP or set default actions to allow.
+name: Tamper Windows Defender - PSClassic
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.Data.keyword:*set-mppreference* AND ((winlog.event_data.Data.keyword:(*-dbaf $true* OR *-dbaf 1* OR *-dbm $true* OR *-dbm 1* OR *-dips $true* OR *-dips 1* OR *-disablearchivescanning $true* OR *-disablearchivescanning 1* OR *-disablebehaviormonitoring $true* OR *-disablebehaviormonitoring 1* OR *-disableblockatfirstseen $true* OR *-disableblockatfirstseen 1* OR *-disablecatchupfullscan $true* OR *-disablecatchupfullscan 1* OR *-disablecatchupquickscan $true* OR *-disablecatchupquickscan 1* OR *-disableintrusionpreventionsystem $true* OR *-disableintrusionpreventionsystem 1* OR *-disableioavprotection $true* OR *-disableioavprotection 1* OR *-disablerealtimemonitoring $true* OR *-disablerealtimemonitoring 1* OR *-disableremovabledrivescanning $true* OR *-disableremovabledrivescanning 1* OR *-disablescanningmappednetworkdrivesforfullscan $true* OR *-disablescanningmappednetworkdrivesforfullscan 1* OR *-disablescanningnetworkfiles $true* OR *-disablescanningnetworkfiles 1* OR *-disablescriptscanning $true* OR *-disablescriptscanning 1* OR *-mapsreporting $false* OR *-mapsreporting 0* OR *-drdsc $true* OR *-drdsc 1* OR *-drtm $true* OR *-drtm 1* OR *-dscrptsc $true* OR *-dscrptsc 1* OR *-dsmndf $true* OR *-dsmndf 1* OR *-dsnf $true* OR *-dsnf 1* OR *-dss $true* OR *-dss 1*)) OR (winlog.event_data.Data.keyword:(*highthreatdefaultaction allow* OR *htdefac allow* OR *lowthreatdefaultaction allow* OR *ltdefac allow* OR *moderatethreatdefaultaction allow* OR *mtdefac allow* OR *severethreatdefaultaction allow* OR *stdefac allow*)))
+type: any
+priority: 3

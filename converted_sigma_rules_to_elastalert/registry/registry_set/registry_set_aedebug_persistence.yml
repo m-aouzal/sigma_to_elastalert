@@ -1,0 +1,10 @@
+description: |
+  Detects when an attacker adds a new "Debugger" value to the "AeDebug" key in order to achieve persistence which will get invoked when an application crashes
+name: Add Debugger Entry To AeDebug For Persistence
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:*\software\microsoft\windows nt\currentversion\aedebug\debugger* AND winlog.event_data.Details.keyword:*.dll) AND (NOT winlog.event_data.Details.keyword:"c:\windows\system32\vsjitdebugger.exe" -p %ld -e %ld -j 0x%p)
+type: any
+priority: 2

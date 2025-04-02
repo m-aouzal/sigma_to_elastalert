@@ -1,0 +1,10 @@
+description: |
+  Detects a user log-off activity. Could be used for example to correlate information during forensic investigations
+name: User Logoff Event
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:(4634 OR 4647))
+type: any
+priority: 0

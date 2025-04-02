@@ -1,0 +1,10 @@
+description: |
+  Detects a suspicious child process spawning from Outlook where the image is located in a remote location (SMB/WebDav shares).
+name: Suspicious Remote Child Process From Outlook
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\outlook.exe AND process.executable.keyword:\*
+type: any
+priority: 3

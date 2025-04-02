@@ -1,0 +1,10 @@
+description: |
+  Detects PsExec default pipe creation where the image executed is located in a suspicious location. Which could indicate that the tool is being used in an attack
+name: PsExec Tool Execution From Suspicious Locations - PipeName
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.name.keyword:\psexesvc AND (process.executable.keyword:(*:\users\public* OR *:\windows\temp* OR *\appdata\local\temp* OR *\desktop* OR *\downloads*))
+type: any
+priority: 2

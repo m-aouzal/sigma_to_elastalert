@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious WMI event filter and command line event consumer based on WMI and Security Logs.
+name: WMI Persistence
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-WMI-Activity/Operational AND (((event.code.keyword:5861 AND (*activescripteventconsumer* OR *commandlineeventconsumer* OR *commandlinetemplate*)) OR event.code.keyword:5859) AND (NOT (winlog.event_data.Provider.keyword:scm event provider AND winlog.event_data.Query.keyword:select* from msft_scmeventlogevent AND user.name.keyword:s-1-5-32-544 AND winlog.event_data.PossibleCause.keyword:permanent)))
+type: any
+priority: 2

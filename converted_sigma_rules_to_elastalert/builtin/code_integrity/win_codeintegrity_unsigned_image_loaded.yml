@@ -1,0 +1,10 @@
+description: |
+  Detects loaded unsigned image on the system
+name: CodeIntegrity - Unsigned Image Loaded
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-CodeIntegrity/Operational AND event.code.keyword:3037
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Adversaries can carry out malicious operations using a virtual instance to avoid detection. This rule is built to detect the registration of the Virtualbox driver or start of a Virtualbox VM.
+name: Detect Virtualbox Driver Installation OR Starting Of VMs
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.command_line.keyword:(*vboxrt.dll,rtr3init* OR *vboxc.dll* OR *vboxdrv.sys*)) OR (process.command_line.keyword:(*startvm* OR *controlvm*))
+type: any
+priority: 1

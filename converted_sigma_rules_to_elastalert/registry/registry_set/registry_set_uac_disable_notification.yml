@@ -1,0 +1,13 @@
+description: |
+  Detects when an attacker tries to disable User Account Control (UAC) notification by tampering with the "UACDisableNotify" value.
+UAC is a critical security feature in Windows that prevents unauthorized changes to the operating system. It prompts the user for permission or an administrator password before allowing actions that could affect the system's operation or change settings that affect other users.
+When "UACDisableNotify" is set to 1, UAC prompts are suppressed.
+
+name: UAC Notification Disabled
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\microsoft\security center\uacdisablenotify* AND winlog.event_data.Details.keyword:dword (0x00000001)
+type: any
+priority: 2

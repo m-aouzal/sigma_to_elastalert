@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious execution of 'Msbuild.exe' by a uncommon parent process
+name: Suspicious Msbuild Execution By Uncommon Parent Process
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\msbuild.exe OR winlog.event_data.originalfilename.keyword:msbuild.exe) AND (NOT (process.parent.executable.keyword:(*\devenv.exe OR *\cmd.exe OR *\msbuild.exe OR *\python.exe OR *\explorer.exe OR *\nuget.exe)))
+type: any
+priority: 2

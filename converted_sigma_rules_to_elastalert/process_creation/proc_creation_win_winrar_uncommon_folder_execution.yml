@@ -1,0 +1,10 @@
+description: |
+  Detects a suspicious winrar execution in a folder which is not the default installation folder
+name: Winrar Execution in Non-Standard Folder
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\rar.exe OR *\winrar.exe)) OR winlog.event_data.description.keyword:command line rar) AND (NOT (process.executable.keyword:*\unrar.exe OR (process.executable.keyword:(*:\program files (x86)\winrar* OR *:\program files\winrar*)))) AND (NOT process.executable.keyword:*:\windows\temp*)
+type: any
+priority: 2

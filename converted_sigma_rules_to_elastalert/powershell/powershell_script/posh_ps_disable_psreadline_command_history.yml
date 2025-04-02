@@ -1,0 +1,10 @@
+description: |
+  Detects scripts or commands that disabled the Powershell command history by removing psreadline module
+name: Disable Powershell Command History
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*remove-module* AND powershell.file.script_block_text.keyword:*psreadline*
+type: any
+priority: 3

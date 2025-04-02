@@ -1,0 +1,10 @@
+description: |
+  Triggers on any Sysmon "FileExecutableDetected" event, which triggers every time a PE that is monitored by the config is created.
+name: Sysmon File Executable Creation Detected
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-Sysmon/Operational AND event.code.keyword:29
+type: any
+priority: 2

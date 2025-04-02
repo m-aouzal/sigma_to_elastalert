@@ -1,0 +1,10 @@
+description: |
+  Detects a threat actor creating a file named `wbemcomn.dll` in the `C:WindowsSystem32wbem` directory over the network for a WMI DLL Hijack scenario.
+name: T1047 Wmiprvse Wbemcomn DLL Hijack
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:5145 AND winlog.event_data.RelativeTargetName.keyword:*\wbem\wbemcomn.dll) AND (NOT user.name.keyword:*$))
+type: any
+priority: 3

@@ -1,0 +1,11 @@
+description: |
+  Detects network connections to Visual Studio Code tunnel domains initiated by a process on a system. Attackers can abuse that feature to establish a reverse shell or persistence on a machine.
+  
+name: Network Connection Initiated To Visual Studio Code Tunnels Domain
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: network.direction.keyword:true AND destination.domain.keyword:*.tunnels.api.visualstudio.com
+type: any
+priority: 2

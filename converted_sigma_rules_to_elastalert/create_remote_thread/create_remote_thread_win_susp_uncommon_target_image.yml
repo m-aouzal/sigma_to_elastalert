@@ -1,0 +1,10 @@
+description: |
+  Detects uncommon target processes for remote thread creation
+name: Remote Thread Creation In Uncommon Target Image
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.TargetImage.keyword:(*\calc.exe OR *\calculator.exe OR *\mspaint.exe OR *\notepad.exe OR *\ping.exe OR *\sethc.exe OR *\spoolsv.exe OR *\wordpad.exe OR *\write.exe)) AND (NOT process.executable.keyword:c:\windows\system32\csrss.exe) AND (NOT (winlog.event_data.StartFunction.keyword:etwpnotificationthread OR process.executable.keyword:*unknown process* OR (process.executable.keyword:c:\program files\vmware\vmware tools\vmtoolsd.exe AND winlog.event_data.StartFunction.keyword:getcommandlinew AND (winlog.event_data.TargetImage.keyword:(c:\windows\system32\notepad.exe OR c:\windows\system32\spoolsv.exe))) OR (process.executable.keyword:c:\program files\xerox\xeroxprintexperience\commonfiles\xeroxprintjobeventmanagerservice.exe AND winlog.event_data.StartFunction.keyword:loadlibraryw AND winlog.event_data.TargetImage.keyword:c:\windows\system32\spoolsv.exe)))
+type: any
+priority: 2

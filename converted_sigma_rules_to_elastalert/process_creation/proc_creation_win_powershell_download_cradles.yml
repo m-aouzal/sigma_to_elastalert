@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious ways to download files or content using PowerShell
+name: PowerShell Web Download
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:(*.downloadstring(* OR *.downloadfile(* OR *invoke-webrequest* OR *iwr*)
+type: any
+priority: 2

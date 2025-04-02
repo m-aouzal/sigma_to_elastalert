@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of files that indicator an interactive use of PowerShell in the SYSTEM user context
+name: Suspicious Interactive PowerShell as SYSTEM
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:(c:\windows\system32\config\systemprofile\appdata\roaming\microsoft\windows\powershell\psreadline\consolehost_history.txt OR c:\windows\system32\config\systemprofile\appdata\local\microsoft\windows\powershell\startupprofiledata-interactive)
+type: any
+priority: 3

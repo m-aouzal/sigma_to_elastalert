@@ -1,0 +1,14 @@
+description: |
+  Detects the execution of "wmic" with the "group" flag.
+Adversaries may attempt to find local system groups and permission settings.
+The knowledge of local system permission groups can help adversaries determine which groups exist and which users belong to a particular group.
+Adversaries may use this information to determine which users have elevated permissions, such as the users found within the local administrators group.
+
+name: Local Groups Reconnaissance Via Wmic.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\wmic.exe OR winlog.event_data.originalfilename.keyword:wmic.exe) AND process.command_line.keyword:* group*
+type: any
+priority: 1

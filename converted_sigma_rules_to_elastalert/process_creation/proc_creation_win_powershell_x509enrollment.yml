@@ -1,0 +1,10 @@
+description: |
+  Detect use of X509Enrollment
+name: Suspicious X509Enrollment - Process Creation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:(*x509enrollment.cbinaryconverter* OR *884e2002-217d-11da-b2a4-000e7bbb2b09*)
+type: any
+priority: 2

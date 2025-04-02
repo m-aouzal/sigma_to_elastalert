@@ -1,0 +1,10 @@
+description: |
+  Detects a tscon.exe start as LOCAL SYSTEM
+name: Suspicious TSCON Start as SYSTEM
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (user.name.keyword:(*authori* OR *autori*)) AND process.executable.keyword:*\tscon.exe
+type: any
+priority: 3

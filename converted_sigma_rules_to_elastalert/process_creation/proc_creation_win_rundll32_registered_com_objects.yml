@@ -1,0 +1,10 @@
+description: |
+  load malicious registered COM objects
+name: Rundll32 Registered COM Objects
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe) AND ((process.command_line.keyword:(*-sta* OR *-localserver*)) AND (process.command_line.keyword:*{* AND process.command_line.keyword:*}*))
+type: any
+priority: 3

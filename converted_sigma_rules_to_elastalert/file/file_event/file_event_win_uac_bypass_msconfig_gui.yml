@@ -1,0 +1,10 @@
+description: |
+  Detects the pattern of UAC Bypass using a msconfig GUI hack (UACMe 55)
+name: UAC Bypass Using MSConfig Token Modification - File
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:c:\users* AND file.path.keyword:*\appdata\local\temp\pkgmgr.exe
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects service installation in suspicious folder appdata
+name: Service Installation in Suspicious Folder
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:System AND ((winlog.provider_name.keyword:service control manager AND event.code.keyword:7045 AND (winlog.event_data.ImagePath.keyword:(*\appdata* OR *\\127.0.0.1* OR *\\localhost*))) AND (NOT (winlog.event_data.ServiceName.keyword:zoom sharing service AND winlog.event_data.ImagePath.keyword:*:\program files\common files\zoom\support\cptservice.exe*)))
+type: any
+priority: 2

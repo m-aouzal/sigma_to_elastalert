@@ -1,0 +1,10 @@
+description: |
+  Detects the mount of an ISO image on an endpoint
+name: ISO Image Mounted
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:4663 AND winlog.event_data.ObjectServer.keyword:security AND winlog.event_data.ObjectType.keyword:file AND winlog.event_data.ObjectName.keyword:\device\cdrom*) AND (NOT (winlog.event_data.ObjectName.keyword:(\device\cdrom0\autorun.ico OR \device\cdrom0\setup.exe OR \device\cdrom0\setup64.exe))))
+type: any
+priority: 2

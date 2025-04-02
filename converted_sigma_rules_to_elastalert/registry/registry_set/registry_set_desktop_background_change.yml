@@ -1,0 +1,12 @@
+description: |
+  Detects registry value settings that would replace the user's desktop background.
+This is a common technique used by malware to change the desktop background to a ransom note or other image.
+
+name: Potentially Suspicious Desktop Background Change Via Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:(*control panel\desktop* OR *currentversion\policies\activedesktop* OR *currentversion\policies\system*)) AND ((registry.path.keyword:*nochangingwallpaper AND winlog.event_data.Details.keyword:dword (0x00000001)) OR registry.path.keyword:*\wallpaper OR (registry.path.keyword:*\wallpaperstyle AND winlog.event_data.Details.keyword:2)) AND (NOT process.executable.keyword:*\svchost.exe)
+type: any
+priority: 2

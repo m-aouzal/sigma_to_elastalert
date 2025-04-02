@@ -1,0 +1,10 @@
+description: |
+  Detect malicious GPO modifications can be used to implement many other malicious behaviors.
+name: Modify Group Policy Settings - ScriptBlockLogging
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*\software\policies\microsoft\windows\system* AND (powershell.file.script_block_text.keyword:(*grouppolicyrefreshtimedc* OR *grouppolicyrefreshtimeoffsetdc* OR *grouppolicyrefreshtime* OR *grouppolicyrefreshtimeoffset* OR *enablesmartscreen* OR *shellsmartscreenlevel*))
+type: any
+priority: 2

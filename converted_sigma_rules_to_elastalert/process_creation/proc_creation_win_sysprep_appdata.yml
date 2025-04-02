@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious sysprep process start with AppData folder as target (as used by Trojan Syndicasec in Thrip report by Symantec)
+name: Sysprep on AppData Folder
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\sysprep.exe AND process.command_line.keyword:*\appdata*
+type: any
+priority: 2

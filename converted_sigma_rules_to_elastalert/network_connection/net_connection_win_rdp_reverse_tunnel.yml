@@ -1,0 +1,10 @@
+description: |
+  Detects svchost hosting RDP termsvcs communicating with the loopback address and on TCP port 3389
+name: RDP Over Reverse SSH Tunnel
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\svchost.exe AND network.direction.keyword:true AND source.port:3389) AND (destination.ip.keyword:127.0.0.0/8 OR destination.ip.keyword:::1/128)
+type: any
+priority: 3

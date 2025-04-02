@@ -1,0 +1,10 @@
+description: |
+  Detects potential arbitrary file download using a Microsoft Office application
+name: Potential Arbitrary File Download Using Office Application
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\excel.exe OR *\powerpnt.exe OR *\winword.exe)) OR (winlog.event_data.originalfilename.keyword:(excel.exe OR powerpnt.exe OR winword.exe))) AND (process.command_line.keyword:(*http://* OR *https://*))
+type: any
+priority: 3

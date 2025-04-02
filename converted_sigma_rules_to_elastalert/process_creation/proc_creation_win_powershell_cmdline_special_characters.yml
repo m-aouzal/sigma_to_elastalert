@@ -1,0 +1,10 @@
+description: |
+  Detects the PowerShell command lines with special characters
+name: Potential PowerShell Command Line Obfuscation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (((winlog.event_data.image.keyword:(*\powershell.exe OR *\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (winlog.event_data.commandline.keyword:/+.*+.*+.*+.*+.*+.*+.*+.*+.*+.*+.*+.*+.*+/ OR winlog.event_data.commandline.keyword:/{.*{.*{.*{.*{.*{.*{.*{.*{.*{/ OR winlog.event_data.commandline.keyword:/^.*^.*^.*^.*^/ OR winlog.event_data.commandline.keyword:/`.*`.*`.*`.*`/)) AND (NOT (process.parent.executable.keyword:c:\program files\amazon\ssm\ssm-document-worker.exe OR (process.command_line.keyword:(*new eventsource("microsoft.windows.sense.client.management"* OR *public static extern bool installelamcertificateinfo(safefilehandle handle);*))))
+type: any
+priority: 3

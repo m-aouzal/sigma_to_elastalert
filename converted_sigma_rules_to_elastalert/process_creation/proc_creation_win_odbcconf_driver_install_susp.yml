@@ -1,0 +1,10 @@
+description: |
+  Detects execution of "odbcconf" with the "INSTALLDRIVER" action where the driver doesn't contain a ".dll" extension. This is often used as a defense evasion method.
+name: Suspicious Driver/DLL Installation Via Odbcconf.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\odbcconf.exe OR winlog.event_data.originalfilename.keyword:odbcconf.exe) AND process.command_line.keyword:*installdriver*) AND (NOT process.command_line.keyword:*.dll*)
+type: any
+priority: 3

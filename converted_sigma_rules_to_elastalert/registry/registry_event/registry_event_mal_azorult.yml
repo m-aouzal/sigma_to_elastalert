@@ -1,0 +1,10 @@
+description: |
+  Detects the presence of a registry key created during Azorult execution
+name: Registry Entries For Azorult Malware
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (event.code.keyword:(12 OR 13)) AND registry.path.keyword:*system* AND registry.path.keyword:*\services\localnetservice
+type: any
+priority: 4

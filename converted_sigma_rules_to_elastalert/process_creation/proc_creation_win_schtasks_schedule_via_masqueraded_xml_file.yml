@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of a scheduled task using the "-XML" flag with a file without the '.xml' extension. This behavior could be indicative of potential defense evasion attempt during persistence
+name: Suspicious Scheduled Task Creation via Masqueraded XML File
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\schtasks.exe OR winlog.event_data.originalfilename.keyword:schtasks.exe) AND (process.command_line.keyword:(*/create* OR *-create*)) AND (process.command_line.keyword:(*/xml* OR *-xml*))) AND (NOT (process.command_line.keyword:*.xml* OR (winlog.event_data.IntegrityLevel.keyword:(system OR s-1-16-16384)) OR (process.parent.executable.keyword:*\rundll32.exe AND (process.parent.command_line.keyword:*:\windows\installer\msi* AND process.parent.command_line.keyword:*.tmp,zzzzinvokemanagedcustomactionoutofproc*)))) AND (NOT (process.parent.executable.keyword:(*:\programdata\oem\upgradetool\carecenter_*\bunzip\setup_msi.exe OR *:\program files\axis communications\axis camera station\setupactions.exe OR *:\program files\axis communications\axis device manager\admsetupactions.exe OR *:\program files (x86)\zemana\antimalware\antimalware.exe OR *:\program files\dell\supportassist\pcdrcui.exe)))
+type: any
+priority: 2

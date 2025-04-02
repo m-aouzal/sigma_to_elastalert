@@ -1,0 +1,10 @@
+description: |
+  Detects the use of TruffleSnout.exe an iterative AD discovery toolkit for offensive operators, situational awareness and targeted low noise enumeration.
+name: HackTool - TruffleSnout Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.originalfilename.keyword:trufflesnout.exe OR winlog.event_data.image.keyword:*\trufflesnout.exe
+type: any
+priority: 3

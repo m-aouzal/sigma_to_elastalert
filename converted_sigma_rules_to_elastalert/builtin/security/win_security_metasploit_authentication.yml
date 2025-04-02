@@ -1,0 +1,10 @@
+description: |
+  Alerts on Metasploit host's authentications on the domain.
+name: Metasploit SMB Authentication
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (((event.code.keyword:(4625 OR 4624)) AND winlog.event_data.LogonType.keyword:3 AND winlog.event_data.AuthenticationPackageName.keyword:ntlm AND source.domain.keyword:/^[a-za-z0-9]{16}$/) OR (event.code.keyword:4776 AND winlog.event_data.Workstation.keyword:/^[a-za-z0-9]{16}$/))
+type: any
+priority: 3

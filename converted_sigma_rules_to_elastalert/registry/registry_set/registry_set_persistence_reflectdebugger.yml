@@ -1,0 +1,10 @@
+description: |
+  Detects potential WerFault "ReflectDebugger" registry value abuse for persistence.
+name: Potential WerFault ReflectDebugger Registry Value Abuse
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.EventType.keyword:setvalue AND registry.path.keyword:*\microsoft\windows\windows error reporting\hangs\reflectdebugger
+type: any
+priority: 3

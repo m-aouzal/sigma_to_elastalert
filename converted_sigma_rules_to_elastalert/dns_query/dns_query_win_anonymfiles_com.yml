@@ -1,0 +1,10 @@
+description: |
+  Detects DNS queries for "anonfiles.com", which is an anonymous file upload platform often used for malicious purposes
+name: DNS Query for Anonfiles.com Domain - Sysmon
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: dns.question.name.keyword:*.anonfiles.com*
+type: any
+priority: 3

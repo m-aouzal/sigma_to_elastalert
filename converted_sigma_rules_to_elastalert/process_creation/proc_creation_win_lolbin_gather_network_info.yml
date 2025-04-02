@@ -1,0 +1,10 @@
+description: |
+  Detects execution of the built-in script located in "C:WindowsSystem32gatherNetworkInfo.vbs". Which can be used to gather information about the target machine
+name: Potential Reconnaissance Activity Via GatherNetworkInfo.VBS
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\cscript.exe OR *\wscript.exe)) OR (winlog.event_data.originalfilename.keyword:(cscript.exe OR wscript.exe))) AND process.command_line.keyword:*gathernetworkinfo.vbs*
+type: any
+priority: 2

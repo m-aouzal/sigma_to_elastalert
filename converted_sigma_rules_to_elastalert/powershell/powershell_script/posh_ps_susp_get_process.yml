@@ -1,0 +1,10 @@
+description: |
+  Get the processes that are running on the local computer.
+name: Suspicious Process Discovery With Get-Process
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*get-process*
+type: any
+priority: 1

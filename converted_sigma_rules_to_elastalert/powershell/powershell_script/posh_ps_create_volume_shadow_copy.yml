@@ -1,0 +1,10 @@
+description: |
+  Adversaries may attempt to access or create a copy of the Active Directory domain database in order to steal credential information
+name: Create Volume Shadow Copy with Powershell
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*win32_shadowcopy* AND powershell.file.script_block_text.keyword:*).create(* AND powershell.file.script_block_text.keyword:*clientaccessible*
+type: any
+priority: 3

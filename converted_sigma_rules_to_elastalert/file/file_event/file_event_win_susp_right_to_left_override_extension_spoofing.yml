@@ -1,0 +1,11 @@
+description: |
+  Detects suspicious filenames that contain a right-to-left override character and a potentially spoofed file extensions.
+  
+name: Potential File Extension Spoofing Using Right-to-Left Override
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\u202e* AND (file.path.keyword:(*fpd..* OR *nls..* OR *vsc..* OR *xcod.* OR *xslx.*))
+type: any
+priority: 3

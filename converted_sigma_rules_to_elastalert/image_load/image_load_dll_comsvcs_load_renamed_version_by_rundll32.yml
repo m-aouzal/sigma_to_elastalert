@@ -1,0 +1,10 @@
+description: |
+  Detects rundll32 loading a renamed comsvcs.dll to dump process memory
+name: Suspicious Renamed Comsvcs DLL Loaded By Rundll32
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\rundll32.exe AND (winlog.event_data.Hashes.keyword:(*imphash=eed93054cb555f3de70eaa9787f32ebb* OR *imphash=5e0dbdec1fce52daae251a110b4f309d* OR *imphash=eadbccbb324829acb5f2bbe87e5549a8* OR *imphash=407ca0f7b523319d758a40d7c0193699* OR *imphash=281d618f4e6271e527e6386ea6f748de*))) AND (NOT file.path.keyword:*\comsvcs.dll)
+type: any
+priority: 3

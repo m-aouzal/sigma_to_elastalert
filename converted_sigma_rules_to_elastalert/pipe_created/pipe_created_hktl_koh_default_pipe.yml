@@ -1,0 +1,10 @@
+description: |
+  Detects creation of default named pipes used by the Koh tool
+name: HackTool - Koh Default Named Pipe
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.name.keyword:(*\imposecost* OR *\imposingcost*)
+type: any
+priority: 4

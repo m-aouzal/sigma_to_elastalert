@@ -1,0 +1,10 @@
+description: |
+  Detects default RemCom service filename which indicates RemCom service installation and execution
+name: RemCom Service File Creation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\remcomsvc.exe
+type: any
+priority: 2

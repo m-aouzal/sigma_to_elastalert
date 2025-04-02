@@ -1,0 +1,10 @@
+description: |
+  Adversaries may use to interact with a remote network share using Server Message Block (SMB). The adversary may then perform actions as the logged-on user.
+name: Suspicious New-PSDrive to Admin Share
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*new-psdrive* AND powershell.file.script_block_text.keyword:*-psprovider* AND powershell.file.script_block_text.keyword:*filesystem* AND powershell.file.script_block_text.keyword:*-root* AND powershell.file.script_block_text.keyword:*\* AND powershell.file.script_block_text.keyword:*$*
+type: any
+priority: 2

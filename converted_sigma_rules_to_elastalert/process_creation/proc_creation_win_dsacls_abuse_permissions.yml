@@ -1,0 +1,10 @@
+description: |
+  Detects usage of Dsacls to grant over permissive permissions
+name: Potentially Over Permissive Permissions Granted Using Dsacls.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\dsacls.exe OR winlog.event_data.originalfilename.keyword:dsacls.exe) AND process.command_line.keyword:* /g* AND (process.command_line.keyword:(*gr* OR *ge* OR *gw* OR *ga* OR *wp* OR *wd*))
+type: any
+priority: 2

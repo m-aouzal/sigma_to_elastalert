@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of whoami, which is often used by attackers after exploitation / privilege escalation
+name: Whoami Utility Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.image.keyword:*\whoami.exe OR winlog.event_data.originalfilename.keyword:whoami.exe
+type: any
+priority: 1

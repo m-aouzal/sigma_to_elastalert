@@ -1,0 +1,10 @@
+description: |
+  Detects various indicators of Microsoft Connection Manager Profile Installer execution
+name: CMSTP Execution Process Access
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.CallTrace.keyword:*cmlua.dll*
+type: any
+priority: 3

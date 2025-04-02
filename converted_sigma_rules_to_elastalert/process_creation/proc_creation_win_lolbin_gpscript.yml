@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of the LOLBIN gpscript, which executes logon or startup scripts configured in Group Policy
+name: Gpscript Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\gpscript.exe OR winlog.event_data.originalfilename.keyword:gpscript.exe) AND (process.command_line.keyword:(* /logon* OR * /startup*))) AND (NOT process.parent.command_line.keyword:c:\windows\system32\svchost.exe -k netsvcs -p -s gpsvc)
+type: any
+priority: 2

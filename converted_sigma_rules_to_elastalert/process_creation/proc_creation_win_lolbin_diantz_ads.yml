@@ -1,0 +1,10 @@
+description: |
+  Compress target file into a cab file stored in the Alternate Data Stream (ADS) of the target file.
+name: Suspicious Diantz Alternate Data Stream Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.command_line.keyword:*diantz.exe* AND process.command_line.keyword:*.cab*) AND process.command_line.keyword:/:[^\]/
+type: any
+priority: 2

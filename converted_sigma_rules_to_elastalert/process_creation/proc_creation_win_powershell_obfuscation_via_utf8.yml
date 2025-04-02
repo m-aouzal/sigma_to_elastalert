@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious encoded character syntax often used for defense evasion
+name: Potential PowerShell Obfuscation Via WCHAR
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*(wchar)0x*
+type: any
+priority: 3

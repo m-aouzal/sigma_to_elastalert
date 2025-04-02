@@ -1,0 +1,10 @@
+description: |
+  Attempts to detect system changes made by Blue Mockingbird
+name: Blue Mockingbird - Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\currentcontrolset\services\wercplsupport\parameters\servicedll
+type: any
+priority: 3

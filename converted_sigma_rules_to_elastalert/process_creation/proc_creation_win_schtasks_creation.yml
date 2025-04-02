@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of scheduled tasks by user accounts via the "schtasks" utility.
+name: Scheduled Task Creation Via Schtasks.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\schtasks.exe AND process.command_line.keyword:* /create*) AND (NOT (user.name.keyword:(*authori* OR *autori*)))
+type: any
+priority: 1

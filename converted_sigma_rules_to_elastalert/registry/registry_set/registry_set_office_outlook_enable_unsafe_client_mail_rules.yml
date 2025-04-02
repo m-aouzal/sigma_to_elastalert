@@ -1,0 +1,10 @@
+description: |
+  Detects an attacker trying to enable the outlook security setting "EnableUnsafeClientMailRules" which allows outlook to run applications or execute macros
+name: Outlook EnableUnsafeClientMailRules Setting Enabled - Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\outlook\security\enableunsafeclientmailrules AND winlog.event_data.Details.keyword:dword (0x00000001)
+type: any
+priority: 3

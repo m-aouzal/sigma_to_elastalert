@@ -1,0 +1,12 @@
+description: |
+  This rule detects execution of a PowerShell code through the sqlps.exe utility, which is included in the standard set of utilities supplied with the MSSQL Server.
+Script blocks are not logged in this case, so this utility helps to bypass protection mechanisms based on the analysis of these logs.
+
+name: Detection of PowerShell Execution via Sqlps.exe
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\sqlps.exe OR ((winlog.event_data.image.keyword:*\sqlps.exe OR winlog.event_data.originalfilename.keyword:sqlps.exe) AND (NOT process.parent.executable.keyword:*\sqlagent.exe))
+type: any
+priority: 2

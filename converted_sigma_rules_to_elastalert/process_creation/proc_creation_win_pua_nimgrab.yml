@@ -1,0 +1,10 @@
+description: |
+  Detects the usage of nimgrab, a tool bundled with the Nim programming framework and used for downloading files.
+name: PUA - Nimgrab Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\nimgrab.exe OR (winlog.event_data.Hashes.keyword:(*md5=2dd44c3c29d667f5c0ef5f9d7c7ffb8b* OR *sha256=f266609e91985f0fe3e31c5e8faeeec4ffa5e0322d8b6f15fe69f4c5165b9559* OR *imphash=c07fddd21d123ea9b3a08eef44aaac45*))
+type: any
+priority: 3

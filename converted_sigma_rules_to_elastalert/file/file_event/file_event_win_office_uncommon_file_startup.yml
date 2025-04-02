@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of a file with an uncommon extension in an Office application startup folder
+name: Uncommon File Created In Office Startup Folder
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (((winlog.event_data.targetfilename.keyword:*\microsoft\word\startup* OR (winlog.event_data.targetfilename.keyword:*\office* AND winlog.event_data.targetfilename.keyword:*\program files* AND winlog.event_data.targetfilename.keyword:*\startup*)) AND (NOT (file.path.keyword:(*.docb OR *.docm OR *.docx OR *.dotm OR *.mdb OR *.mdw OR *.pdf OR *.wll OR *.wwl)))) OR ((winlog.event_data.targetfilename.keyword:*\microsoft\excel\xlstart* OR (winlog.event_data.targetfilename.keyword:*\office* AND winlog.event_data.targetfilename.keyword:*\program files* AND winlog.event_data.targetfilename.keyword:*\xlstart*)) AND (NOT (file.path.keyword:(*.xll OR *.xls OR *.xlsm OR *.xlsx OR *.xlt OR *.xltm OR *.xlw))))) AND (NOT ((process.executable.keyword:*:\program files\common files\microsoft shared\clicktorun* AND process.executable.keyword:*\officeclicktorun.exe) OR ((process.executable.keyword:(*:\program files\microsoft office* OR *:\program files (x86)\microsoft office*)) AND (process.executable.keyword:(*\winword.exe OR *\excel.exe)))))
+type: any
+priority: 3

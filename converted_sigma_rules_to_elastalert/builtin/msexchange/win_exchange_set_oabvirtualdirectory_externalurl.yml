@@ -1,0 +1,10 @@
+description: |
+  Rule to detect an adversary setting OabVirtualDirectory External URL property to a script in Exchange Management log
+name: Exchange Set OabVirtualDirectory ExternalUrl Property
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:MSExchange Management AND (*set-oabvirtualdirectory* AND *externalurl* AND *page_load* AND *script*)
+type: any
+priority: 3

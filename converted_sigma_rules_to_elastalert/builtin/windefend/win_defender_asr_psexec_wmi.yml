@@ -1,0 +1,10 @@
+description: |
+  Detects blocking of process creations originating from PSExec and WMI commands
+name: PSExec and WMI Process Creations Block
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-Windows Defender/Operational AND (event.code.keyword:1121 AND (process.executable.keyword:(*\wmiprvse.exe OR *\psexesvc.exe)))
+type: any
+priority: 3

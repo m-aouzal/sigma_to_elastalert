@@ -1,0 +1,10 @@
+description: |
+  Detects DLL sideloading of DLLs that are part of Microsoft Office from non standard location
+name: Microsoft Office DLL Sideload
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\outllib.dll AND (NOT (file.path.keyword:(c:\program files\microsoft office\office* OR c:\program files (x86)\microsoft office\office* OR c:\program files\microsoft office\root\office* OR c:\program files (x86)\microsoft office\root\office*)))
+type: any
+priority: 3

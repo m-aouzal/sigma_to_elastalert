@@ -1,0 +1,12 @@
+description: |
+  Detects execution of "tar.exe" in order to extract compressed file.
+Adversaries may abuse various utilities in order to decompress data to avoid detection.
+
+name: Compressed File Extraction Via Tar.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\tar.exe OR winlog.event_data.originalfilename.keyword:bsdtar) AND process.command_line.keyword:*-x*
+type: any
+priority: 1

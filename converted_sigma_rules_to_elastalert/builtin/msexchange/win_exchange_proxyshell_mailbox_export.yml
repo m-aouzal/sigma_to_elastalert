@@ -1,0 +1,10 @@
+description: |
+  Detects a successful export of an Exchange mailbox to untypical directory or with aspx name suffix which can be used to place a webshell or the needed role assignment for it
+name: Mailbox Export to Exchange Webserver
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:MSExchange Management AND (((*new-mailboxexportrequest* AND * -mailbox*) AND (*-filepath "\* OR *.aspx*)) OR (*new-managementroleassignment* AND * -role "mailbox import export"* AND * -user*))
+type: any
+priority: 4

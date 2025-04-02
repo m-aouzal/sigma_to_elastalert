@@ -1,0 +1,10 @@
+description: |
+  Detects findstring commands that include the keyword lsass, which indicates recon actviity for the LSASS process PID
+name: LSASS Process Reconnaissance Via Findstr.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (((winlog.event_data.image.keyword:(*\find.exe OR *\findstr.exe)) OR (winlog.event_data.originalfilename.keyword:(find.exe OR findstr.exe))) AND process.command_line.keyword:*lsass*) OR (process.command_line.keyword:(* -i "lsass* OR * /i "lsass* OR * –i "lsass* OR * —i "lsass* OR * ―i "lsass*) OR process.command_line.keyword:(* -i lsass.exe* OR * /i lsass.exe* OR * –i lsass.exe* OR * —i lsass.exe* OR * ―i lsass.exe*) OR process.command_line.keyword:(*findstr "lsass*) OR process.command_line.keyword:(*findstr lsass*) OR process.command_line.keyword:(*findstr.exe "lsass*) OR process.command_line.keyword:(*findstr.exe lsass*))
+type: any
+priority: 3

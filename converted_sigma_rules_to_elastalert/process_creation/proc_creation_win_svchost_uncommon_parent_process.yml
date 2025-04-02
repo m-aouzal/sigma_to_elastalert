@@ -1,0 +1,10 @@
+description: |
+  Detects an uncommon svchost parent process
+name: Uncommon Svchost Parent Process
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\svchost.exe AND (NOT ((process.parent.executable.keyword:(*\mrt.exe OR *\msmpeng.exe OR *\ngen.exe OR *\rpcnet.exe OR *\services.exe OR *\tiworker.exe)) OR (NOT _exists_:process.parent.executable) OR (process.parent.executable.keyword:(- OR ""))))
+type: any
+priority: 2

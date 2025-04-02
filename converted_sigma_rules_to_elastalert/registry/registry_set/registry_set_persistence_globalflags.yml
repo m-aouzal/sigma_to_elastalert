@@ -1,0 +1,10 @@
+description: |
+  Detects registry persistence technique using the GlobalFlags and SilentProcessExit keys
+name: Potential Persistence Via GlobalFlags
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:*\microsoft\windows nt\currentversion* AND registry.path.keyword:*\image file execution options* AND registry.path.keyword:*\globalflag*) OR ((registry.path.keyword:*\microsoft\windows nt\currentversion* AND registry.path.keyword:*\silentprocessexit*) AND (registry.path.keyword:(*\reportingmode* OR *\monitorprocess*)))
+type: any
+priority: 3

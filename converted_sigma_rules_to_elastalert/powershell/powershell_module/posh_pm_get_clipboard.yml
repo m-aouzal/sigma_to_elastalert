@@ -1,0 +1,10 @@
+description: |
+  A General detection for the Get-Clipboard commands in PowerShell logs. This could be an adversary capturing clipboard contents.
+name: PowerShell Get Clipboard
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*get-clipboard*
+type: any
+priority: 2

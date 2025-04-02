@@ -1,0 +1,10 @@
+description: |
+  Identifies use of various commands to query a systems time. This technique may be used before executing a scheduled task or to discover the time zone of a target system.
+name: Discovery of a System Time
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((process.executable.keyword:(*\net.exe OR *\net1.exe)) AND process.command_line.keyword:*time*) OR (process.executable.keyword:*\w32tm.exe AND process.command_line.keyword:*tz*)
+type: any
+priority: 1

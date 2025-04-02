@@ -1,0 +1,10 @@
+description: |
+  Detects when an attacker tries to add a new network provider in order to dump clear text credentials, similar to how the NPPSpy tool does it
+name: Potential Credential Dumping Attempt Using New NetworkProvider - CLI
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*\system\currentcontrolset\services* AND process.command_line.keyword:*\networkprovider*
+type: any
+priority: 3

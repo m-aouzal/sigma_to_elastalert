@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of the certutil with the "exportPFX" flag which allows the utility to export certificates.
+name: Certificate Exported Via Certutil.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\certutil.exe OR winlog.event_data.originalfilename.keyword:certutil.exe) AND process.command_line.keyword:(*-exportpfx* OR */exportpfx* OR *–exportpfx* OR *—exportpfx* OR *―exportpfx*)
+type: any
+priority: 2

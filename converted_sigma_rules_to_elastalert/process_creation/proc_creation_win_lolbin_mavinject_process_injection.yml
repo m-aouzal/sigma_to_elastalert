@@ -1,0 +1,10 @@
+description: |
+  Detects process injection using the signed Windows tool "Mavinject" via the "INJECTRUNNING" flag
+name: Mavinject Inject DLL Into Running Process
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:* /injectrunning* AND (NOT process.parent.executable.keyword:c:\windows\system32\appvclient.exe)
+type: any
+priority: 3

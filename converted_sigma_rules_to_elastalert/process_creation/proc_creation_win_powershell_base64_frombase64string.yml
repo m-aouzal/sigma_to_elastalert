@@ -1,0 +1,10 @@
+description: |
+  Detects usage of a base64 encoded "FromBase64String" cmdlet in a process command line
+name: PowerShell Base64 Encoded FromBase64String Cmdlet
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.commandline.keyword:(*Ojpmcm9tYmFzZTY0c3RyaW5n* OR *o6ZnJvbWJhc2U2NHN0cmluZ* OR *6OmZyb21iYXNlNjRzdHJpbm*) OR (winlog.event_data.commandline.keyword:(*oga6aeyacgbvag0aqgbhahmazqa2adqauwb0ahiaaqbuagca* OR *oaogbgahiabwbtaeiayqbzaguanga0afmadabyagkabgbna* OR *6adoargbyag8abqbcageacwbladyanabtahqacgbpag4azw*))
+type: any
+priority: 3

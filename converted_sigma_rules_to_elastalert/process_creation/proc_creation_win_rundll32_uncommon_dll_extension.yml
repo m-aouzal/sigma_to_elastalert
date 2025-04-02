@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of rundll32 with a command line that doesn't contain a common extension
+name: Rundll32 Execution With Uncommon DLL Extension
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe) AND (NOT ((NOT _exists_:process.command_line) OR process.command_line.keyword:"" OR ((winlog.event_data.commandline.keyword:(*.cpl* OR *.cpl,* OR *.cpl"* OR *.cpl'* OR *.dll* OR *.dll,* OR *.dll"* OR *.dll'* OR *.inf* OR *.inf,* OR *.inf"* OR *.inf'*)) OR (winlog.event_data.commandline.keyword:(*.cpl OR *.dll OR *.inf))) OR process.command_line.keyword:* -localserver* OR (process.parent.executable.keyword:*\msiexec.exe AND (process.command_line.keyword:*:\windows\installer* AND process.command_line.keyword:*.tmp* AND process.command_line.keyword:*zzzzinvokemanagedcustomactionoutofproc*)))) AND (NOT (process.parent.command_line.keyword:*:\users* AND process.parent.command_line.keyword:*\appdata\local\microsoft\edgeupdate\install\{* AND process.parent.command_line.keyword:*\edgemitmp_* AND process.parent.command_line.keyword:*.tmp\setup.exe* AND process.parent.command_line.keyword:*--install-archive=* AND process.parent.command_line.keyword:*--previous-version=* AND process.parent.command_line.keyword:*--msedgewebview --verbose-logging --do-not-launch-msedge --user-level*))
+type: any
+priority: 2

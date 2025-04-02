@@ -1,0 +1,10 @@
+description: |
+  Executes SCT script using scrobj.dll from a command in entered into a specially prepared INF file.
+name: InfDefaultInstall.exe .inf Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*infdefaultinstall.exe* AND process.command_line.keyword:*.inf*
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  A General detection for specific decompress commands in PowerShell logs. This could be an adversary decompressing files.
+name: PowerShell Decompress Commands
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*expand-archive*
+type: any
+priority: 0

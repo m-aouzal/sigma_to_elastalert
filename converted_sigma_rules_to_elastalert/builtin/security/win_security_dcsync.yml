@@ -1,0 +1,10 @@
+description: |
+  Detects Mimikatz DC sync security events
+name: Mimikatz DC Sync
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:4662 AND (winlog.event_data.Properties.keyword:(*replicating directory changes all* OR *1131f6ad-9c07-11d1-f79f-00c04fc2dcd2* OR *1131f6aa-9c07-11d1-f79f-00c04fc2dcd2* OR *9923a32a-3607-11d2-b9be-0000f87a36b2* OR *89e95b76-444d-4c62-991a-0facbeda640c*)) AND winlog.event_data.AccessMask.keyword:0x100) AND (NOT (user.domain.keyword:window manager OR (user.name.keyword:(nt aut* OR msol_*)) OR user.name.keyword:*$)))
+type: any
+priority: 3

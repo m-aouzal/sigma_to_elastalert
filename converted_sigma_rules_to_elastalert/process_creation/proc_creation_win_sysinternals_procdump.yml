@@ -1,0 +1,10 @@
+description: |
+  Detects usage of the SysInternals Procdump utility
+name: Procdump Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:(*\procdump.exe OR *\procdump64.exe)
+type: any
+priority: 2

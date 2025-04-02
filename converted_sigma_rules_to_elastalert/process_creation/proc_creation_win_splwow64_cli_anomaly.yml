@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious Splwow64.exe process without any command line parameters
+name: Suspicious Splwow64 Without Params
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\splwow64.exe AND process.command_line.keyword:*splwow64.exe
+type: any
+priority: 3

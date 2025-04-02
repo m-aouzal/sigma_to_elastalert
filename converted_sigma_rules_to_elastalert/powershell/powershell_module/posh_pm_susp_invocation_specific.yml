@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious PowerShell invocation command parameters
+name: Suspicious PowerShell Invocations - Specific - PowerShell Module
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.ContextInfo.keyword:*-nop* AND winlog.event_data.ContextInfo.keyword:* -w* AND winlog.event_data.ContextInfo.keyword:*hidden* AND winlog.event_data.ContextInfo.keyword:* -c* AND winlog.event_data.ContextInfo.keyword:*[convert]::frombase64string*) OR (winlog.event_data.ContextInfo.keyword:* -w* AND winlog.event_data.ContextInfo.keyword:*hidden* AND winlog.event_data.ContextInfo.keyword:*-noni* AND winlog.event_data.ContextInfo.keyword:*-nop* AND winlog.event_data.ContextInfo.keyword:* -c* AND winlog.event_data.ContextInfo.keyword:*iex* AND winlog.event_data.ContextInfo.keyword:*new-object*) OR (winlog.event_data.ContextInfo.keyword:* -w* AND winlog.event_data.ContextInfo.keyword:*hidden* AND winlog.event_data.ContextInfo.keyword:*-ep* AND winlog.event_data.ContextInfo.keyword:*bypass* AND winlog.event_data.ContextInfo.keyword:*-enc*) OR (winlog.event_data.ContextInfo.keyword:*powershell* AND winlog.event_data.ContextInfo.keyword:*reg* AND winlog.event_data.ContextInfo.keyword:*add* AND winlog.event_data.ContextInfo.keyword:*hkcu\software\microsoft\windows\currentversion\run*) OR (winlog.event_data.ContextInfo.keyword:*bypass* AND winlog.event_data.ContextInfo.keyword:*-noprofile* AND winlog.event_data.ContextInfo.keyword:*-windowstyle* AND winlog.event_data.ContextInfo.keyword:*hidden* AND winlog.event_data.ContextInfo.keyword:*new-object* AND winlog.event_data.ContextInfo.keyword:*system.net.webclient* AND winlog.event_data.ContextInfo.keyword:*.download*) OR (winlog.event_data.ContextInfo.keyword:*iex* AND winlog.event_data.ContextInfo.keyword:*new-object* AND winlog.event_data.ContextInfo.keyword:*net.webclient* AND winlog.event_data.ContextInfo.keyword:*.download*)) AND (NOT (winlog.event_data.ContextInfo.keyword:(*(new-object system.net.webclient).downloadstring('https://community.chocolatey.org/install.ps1* OR *write-chocolateywarning*)))
+type: any
+priority: 3

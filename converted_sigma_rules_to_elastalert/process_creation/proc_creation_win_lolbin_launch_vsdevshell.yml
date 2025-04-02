@@ -1,0 +1,10 @@
+description: |
+  Detects the use of the 'Launch-VsDevShell.ps1' Microsoft signed script to execute commands.
+name: Launch-VsDevShell.PS1 Proxy Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*launch-vsdevshell.ps1* AND (process.command_line.keyword:(*vswherepath* OR *vsinstallationpath*))
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Attackers may leverage fsutil to enumerated connected drives.
+name: Fsutil Drive Enumeration
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\fsutil.exe OR winlog.event_data.originalfilename.keyword:fsutil.exe) AND process.command_line.keyword:*drives*
+type: any
+priority: 1

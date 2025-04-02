@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious PowerShell invocation with a parameter substring
+name: Suspicious PowerShell Parameter Substring
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:(*\powershell.exe OR *\pwsh.exe)) AND (process.command_line.keyword:(* -windowstyle h* OR * -windowstyl h* OR * -windowsty h* OR * -windowst h* OR * -windows h* OR * -windo h* OR * -wind h* OR * -win h* OR * -wi h* OR * -win h* OR * -win hi* OR * -win hid* OR * -win hidd* OR * -win hidde* OR * -nopr* OR * -nopro* OR * -noprof* OR * -noprofi* OR * -noprofil* OR * -nonin* OR * -nonint* OR * -noninte* OR * -noninter* OR * -nonintera* OR * -noninterac* OR * -noninteract* OR * -noninteracti* OR * -noninteractiv* OR * -ec* OR * -encodedcomman* OR * -encodedcomma* OR * -encodedcomm* OR * -encodedcom* OR * -encodedco* OR * -encodedc* OR * -encoded* OR * -encode* OR * -encod* OR * -enco* OR * -en* OR * -executionpolic* OR * -executionpoli* OR * -executionpol* OR * -executionpo* OR * -executionp* OR * -execution bypass* OR * -executio bypass* OR * -executi bypass* OR * -execut bypass* OR * -execu bypass* OR * -exec bypass* OR * -exe bypass* OR * -ex bypass* OR * -ep bypass* OR * /windowstyle h* OR * /windowstyl h* OR * /windowsty h* OR * /windowst h* OR * /windows h* OR * /windo h* OR * /wind h* OR * /win h* OR * /wi h* OR * /win h* OR * /win hi* OR * /win hid* OR * /win hidd* OR * /win hidde* OR * /nopr* OR * /nopro* OR * /noprof* OR * /noprofi* OR * /noprofil* OR * /nonin* OR * /nonint* OR * /noninte* OR * /noninter* OR * /nonintera* OR * /noninterac* OR * /noninteract* OR * /noninteracti* OR * /noninteractiv* OR * /ec* OR * /encodedcomman* OR * /encodedcomma* OR * /encodedcomm* OR * /encodedcom* OR * /encodedco* OR * /encodedc* OR * /encoded* OR * /encode* OR * /encod* OR * /enco* OR * /en* OR * /executionpolic* OR * /executionpoli* OR * /executionpol* OR * /executionpo* OR * /executionp* OR * /execution bypass* OR * /executio bypass* OR * /executi bypass* OR * /execut bypass* OR * /execu bypass* OR * /exec bypass* OR * /exe bypass* OR * /ex bypass* OR * /ep bypass*))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects plugged/unplugged USB devices
+name: USB Device Plugged
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-DriverFrameworks-UserMode/Operational AND (event.code.keyword:(2003 OR 2100 OR 2102))
+type: any
+priority: 1

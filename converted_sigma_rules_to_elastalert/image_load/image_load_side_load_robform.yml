@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading of "roboform.dll", a DLL used by RoboForm Password Manager
+name: Potential RoboForm.DLL Sideloading
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (file.path.keyword:(*\roboform.dll OR *\roboform-x64.dll)) AND (NOT ((process.executable.keyword:( c:\program files (x86)\siber systems\ai roboform* OR  c:\program files\siber systems\ai roboform*)) AND (process.executable.keyword:(*\robotaskbaricon.exe OR *\robotaskbaricon-x64.exe))))
+type: any
+priority: 2

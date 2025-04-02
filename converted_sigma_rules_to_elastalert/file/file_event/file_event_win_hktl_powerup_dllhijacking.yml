@@ -1,0 +1,13 @@
+description: |
+  Powerup tool's Write Hijack DLL exploits DLL hijacking for privilege escalation.
+In it's default mode, it builds a self deleting .bat file which executes malicious command.
+The detection rule relies on creation of the malicious bat file (debug.bat by default).
+
+name: HackTool - Powerup Write Hijack DLL
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:(*\powershell.exe OR *\pwsh.exe)) AND file.path.keyword:*.bat
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects Commandlet names from ShellIntel exploitation scripts.
+name: Malicious ShellIntel PowerShell Commandlets
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:(*invoke-smbautobrute* OR *invoke-gpolinks* OR *invoke-potato*)
+type: any
+priority: 3

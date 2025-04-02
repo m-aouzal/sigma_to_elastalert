@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading of DLLs that are known to be abused from suspicious locations
+name: Abusable DLL Potential Sideloading From Suspicious Location
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (file.path.keyword:(*\coreclr.dll OR *\facesdk.dll OR *\hpcustpartui.dll OR *\libcef.dll OR *\zipdll.dll)) AND ((file.path.keyword:(*:\perflogs* OR *:\users\public* OR *\temporary internet* OR *\windows\temp*)) OR ((winlog.event_data.imageloaded.keyword:*:\users* AND winlog.event_data.imageloaded.keyword:*\favorites*) OR (winlog.event_data.imageloaded.keyword:*:\users* AND winlog.event_data.imageloaded.keyword:*\favourites*) OR (winlog.event_data.imageloaded.keyword:*:\users* AND winlog.event_data.imageloaded.keyword:*\contacts*) OR (winlog.event_data.imageloaded.keyword:*:\users* AND winlog.event_data.imageloaded.keyword:*\pictures*)))
+type: any
+priority: 3

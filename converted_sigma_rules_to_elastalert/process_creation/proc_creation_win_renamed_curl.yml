@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of a renamed "CURL.exe" binary based on the PE metadata fields
+name: Renamed CURL.EXE Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.originalfilename.keyword:curl.exe OR winlog.event_data.description.keyword:the curl executable) AND (NOT process.executable.keyword:*\curl*)
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects the addition of office test registry that allows a user to specify an arbitrary DLL that will be executed every time an Office application is started
+name: Office Application Startup - Office Test
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\software\microsoft\office test\special\perf*
+type: any
+priority: 2

@@ -1,0 +1,13 @@
+description: |
+  Detects the execution of a renamed AutoIt2.exe or AutoIt3.exe.
+AutoIt is a scripting language and automation tool for Windows systems. While primarily used for legitimate automation tasks, it can be misused in cyber attacks.
+Attackers can leverage AutoIt to create and distribute malware, including keyloggers, spyware, and botnets. A renamed AutoIt executable is particularly suspicious.
+
+name: Renamed AutoIt Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((process.command_line.keyword:(* /autoit3executescript* OR * /errorstdout*)) OR (winlog.event_data.Hashes.keyword:(*imphash=fdc554b3a8683918d731685855683ddf* OR *imphash=cd30a61b60b3d60cecdb034c8c83c290* OR *imphash=f8a00c72f2d667d2edbb234d0c0ae000*)) OR (process.pe.original_file_name.keyword:(autoit3.exe OR autoit2.exe OR autoit.exe))) AND (NOT (process.executable.keyword:(*\autoit.exe OR *\autoit2.exe OR *\autoit3_x64.exe OR *\autoit3.exe)))
+type: any
+priority: 3

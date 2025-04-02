@@ -1,0 +1,10 @@
+description: |
+  Detects the reporting of NTLMv1 being used between a client and server. NTLMv1 is insecure as the underlying encryption algorithms can be brute-forced by modern hardware.
+name: NTLMv1 Logon Between Client and Server
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:System AND (winlog.provider_name.keyword:lsasrv AND (event.code.keyword:(6038 OR 6039)))
+type: any
+priority: 2

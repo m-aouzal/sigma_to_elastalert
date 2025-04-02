@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious PowerShell invocation command parameters
+name: Suspicious PowerShell Invocations - Generic
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (powershell.file.script_block_text.keyword:(* -enc* OR * -encodedcommand* OR * -ec*)) AND (powershell.file.script_block_text.keyword:(* -w hidden* OR * -window hidden* OR * -windowstyle hidden* OR * -w 1*)) AND (powershell.file.script_block_text.keyword:(* -noni* OR * -noninteractive*))
+type: any
+priority: 3

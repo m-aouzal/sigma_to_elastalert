@@ -1,0 +1,10 @@
+description: |
+  Detects renamed Visual Studio Code tunnel execution. Attackers can abuse this functionality to establish a C2 channel
+name: Renamed Visual Studio Code Tunnel Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((((NOT _exists_:process.pe.original_file_name) AND process.command_line.keyword:*.exe tunnel) OR (process.command_line.keyword:*.exe tunnel* AND process.command_line.keyword:*--name* AND process.command_line.keyword:*--accept-server-license-terms*) OR (process.command_line.keyword:*tunnel* AND process.command_line.keyword:*service* AND process.command_line.keyword:*internal-run* AND process.command_line.keyword:*tunnel-service.log*)) AND (NOT (process.executable.keyword:(*\code-tunnel.exe OR *\code.exe)))) OR ((process.parent.command_line.keyword:* tunnel AND process.executable.keyword:*\cmd.exe AND (process.command_line.keyword:*/d /c* AND process.command_line.keyword:*\servers\stable-* AND process.command_line.keyword:*code-server.cmd*)) AND (NOT (process.parent.executable.keyword:(*\code-tunnel.exe OR *\code.exe))))
+type: any
+priority: 3

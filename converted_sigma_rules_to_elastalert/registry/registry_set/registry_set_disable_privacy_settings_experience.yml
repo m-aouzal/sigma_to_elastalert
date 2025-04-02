@@ -1,0 +1,10 @@
+description: |
+  Detects registry modifications that disable Privacy Settings Experience
+name: Disable Privacy Settings Experience in Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\software\policies\microsoft\windows\oobe\disableprivacyexperience AND winlog.event_data.Details.keyword:dword (0x00000000)
+type: any
+priority: 2

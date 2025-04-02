@@ -1,0 +1,10 @@
+description: |
+  Detects Obfuscated use of Clip.exe to execute PowerShell
+name: Invoke-Obfuscation CLIP+ Launcher - PowerShell Module
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:/cmd.{0,5}(?:/c|/r).+clip(?:.exe)?.{0,4}&&.+clipboard]::(s\"{d}.+-f.+"/
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects calls to "LoadAssemblyFromPath" or "LoadAssemblyFromNS" that are part of the "CL_LoadAssembly.ps1" script. This can be abused to load different assemblies and bypass App locker controls.
+name: Assembly Loading Via CL_LoadAssembly.ps1
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:(*loadassemblyfrompath* OR *loadassemblyfromns*)
+type: any
+priority: 2

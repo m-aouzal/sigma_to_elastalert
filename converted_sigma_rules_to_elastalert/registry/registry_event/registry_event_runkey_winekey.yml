@@ -1,0 +1,10 @@
+description: |
+  Detects potential malicious modification of run keys by winekey or team9 backdoor
+name: WINEKEY Registry Modification
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*software\microsoft\windows\currentversion\run\backup mgr
+type: any
+priority: 3

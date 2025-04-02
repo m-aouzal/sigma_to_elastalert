@@ -1,0 +1,10 @@
+description: |
+  Detects a process spawned by the terminal service server process (this could be an indicator for an exploitation of CVE-2019-0708)
+name: Terminal Service Process Spawn
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.parent.command_line.keyword:*\svchost.exe* AND process.parent.command_line.keyword:*termsvcs*) AND (NOT ((process.executable.keyword:(*\rdpclip.exe OR *:\windows\system32\csrss.exe OR *:\windows\system32\wininit.exe OR *:\windows\system32\winlogon.exe)) OR (NOT _exists_:process.executable)))
+type: any
+priority: 3

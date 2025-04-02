@@ -1,0 +1,10 @@
+description: |
+  Detects a remote thread creation of Ttdinject.exe used as proxy
+name: Remote Thread Creation Ttdinject.exe Proxy
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\ttdinject.exe
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Well-known DNS Exfiltration tools execution
+name: DNS Exfiltration and Tunneling Tools Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.image.keyword:(*\iodine.exe OR *\dnscat2*)
+type: any
+priority: 3

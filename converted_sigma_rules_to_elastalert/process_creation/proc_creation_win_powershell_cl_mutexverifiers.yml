@@ -1,0 +1,10 @@
+description: |
+  Detects the use of the Microsoft signed script "CL_mutexverifiers" to proxy the execution of additional PowerShell script commands
+name: Potential Script Proxy Execution Via CL_Mutexverifiers.ps1
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((process.parent.executable.keyword:(*\powershell.exe OR *\pwsh.exe)) AND process.executable.keyword:*\powershell.exe AND process.command_line.keyword:* -nologo -windowstyle minimized -file*) AND (process.command_line.keyword:(*\appdata\local\temp* OR *\windows\temp*))
+type: any
+priority: 2

@@ -1,0 +1,11 @@
+description: |
+  Detects the execution of Microsoft Quick Assist tool "QuickAssist.exe". This utility can be used by attackers to gain remote access.
+  
+name: QuickAssist Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\quickassist.exe
+type: any
+priority: 1

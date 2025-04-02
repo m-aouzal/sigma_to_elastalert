@@ -1,0 +1,10 @@
+description: |
+  The .SettingContent-ms file type was introduced in Windows 10 and allows a user to create "shortcuts" to various Windows 10 setting pages. These files are simply XML and contain paths to various Windows 10 settings binaries.
+name: Arbitrary Shell Command Execution Via Settingcontent-Ms
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*.settingcontent-ms* AND (NOT process.command_line.keyword:*immersivecontrolpanel*)
+type: any
+priority: 2

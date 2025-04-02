@@ -1,0 +1,10 @@
+description: |
+  Detects potential malicious and unauthorized usage of bcdedit.exe
+name: Potential Ransomware or Unauthorized MBR Tampering Via Bcdedit.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\bcdedit.exe OR winlog.event_data.originalfilename.keyword:bcdedit.exe) AND (process.command_line.keyword:(*delete* OR *deletevalue* OR *import* OR *safeboot* OR *network*))
+type: any
+priority: 2

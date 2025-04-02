@@ -1,0 +1,14 @@
+description: |
+  Detects the use of the WMI command-line (WMIC) utility to identify and display various system information,
+including OS, CPU, GPU, and disk drive names; memory capacity; display resolution; and baseboard, BIOS,
+and GPU driver products/versions.
+Some of these commands were used by Aurora Stealer in late 2022/early 2023.
+
+name: Uncommon System Information Discovery Via Wmic.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.description.keyword:wmi commandline utility OR winlog.event_data.originalfilename.keyword:wmic.exe OR winlog.event_data.image.keyword:*\wmic.exe) AND (process.command_line.keyword:(*logicaldisk get name,size,freespace* OR *os get caption,osarchitecture,version*))
+type: any
+priority: 2

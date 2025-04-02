@@ -1,0 +1,10 @@
+description: |
+  Detects the removal or uninstallation of an application via "Wmic.EXE".
+name: Application Removed Via Wmic.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\wmic.exe OR winlog.event_data.originalfilename.keyword:wmic.exe) AND (process.command_line.keyword:*call* AND process.command_line.keyword:*uninstall*)
+type: any
+priority: 2

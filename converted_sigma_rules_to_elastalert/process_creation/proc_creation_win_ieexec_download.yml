@@ -1,0 +1,10 @@
+description: |
+  Detects execution of the IEExec utility to download and execute files
+name: File Download And Execution Via IEExec.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\ieexec.exe OR winlog.event_data.originalfilename.keyword:ieexec.exe) AND (process.command_line.keyword:(*http://* OR *https://*))
+type: any
+priority: 3

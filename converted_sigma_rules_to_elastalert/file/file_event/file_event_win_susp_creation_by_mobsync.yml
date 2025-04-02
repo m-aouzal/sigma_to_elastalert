@@ -1,0 +1,10 @@
+description: |
+  This rule detects suspicious files created by Microsoft Sync Center (mobsync)
+name: Created Files by Microsoft Sync Center
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\mobsync.exe AND (file.path.keyword:(*.dll OR *.exe))
+type: any
+priority: 2

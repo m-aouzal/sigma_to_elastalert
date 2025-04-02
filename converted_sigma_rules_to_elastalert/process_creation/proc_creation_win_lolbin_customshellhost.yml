@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of CustomShellHost binary where the child isn't located in 'C:Windowsexplorer.exe'
+name: Suspicious CustomShellHost Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\customshellhost.exe AND (NOT process.executable.keyword:c:\windows\explorer.exe)
+type: any
+priority: 2

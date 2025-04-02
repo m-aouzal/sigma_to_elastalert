@@ -1,0 +1,10 @@
+description: |
+  Detects attempts to remove Windows Defender configuration using the 'MpPreference' cmdlet
+name: Tamper Windows Defender Remove-MpPreference - ScriptBlockLogging
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*remove-mppreference* AND (powershell.file.script_block_text.keyword:(*-controlledfolderaccessprotectedfolders* OR *-attacksurfacereductionrules_ids* OR *-attacksurfacereductionrules_actions* OR *-checkforsignaturesbeforerunningscan*))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects changes to the PSFactory COM InProcServer32 registry. This technique was used by RomCom to create persistence storing a malicious DLL.
+name: Potential PSFactoryBuffer COM Hijacking
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\clsid\{c90250f3-4d7d-4991-9b69-a5c5bc1c2ae6}\inprocserver32\(default) AND (NOT (winlog.event_data.Details.keyword:(%windir%\system32\actxprxy.dll OR c:\windows\system32\actxprxy.dll)))
+type: any
+priority: 3

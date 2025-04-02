@@ -1,0 +1,10 @@
+description: |
+  Detects execution of Sysinternals tools via an AppX package. Attackers could install the Sysinternals Suite to get access to tools such as psexec and procdump to avoid detection based on System paths
+name: Sysinternals Tools AppX Versions Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-AppModel-Runtime/Admin AND (event.code.keyword:201 AND (winlog.event_data.ImageName.keyword:(procdump.exe OR psloglist.exe OR psexec.exe OR livekd.exe OR adexplorer.exe)))
+type: any
+priority: 1

@@ -1,0 +1,10 @@
+description: |
+  Detects MsiExec loading a DLL and calling its DllUnregisterServer function
+name: DllUnregisterServer Function Call Via Msiexec.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\msiexec.exe OR winlog.event_data.originalfilename.keyword:\msiexec.exe) AND process.command_line.keyword:(* -z* OR * /z* OR * –z* OR * —z* OR * ―z*) AND process.command_line.keyword:*.dll*
+type: any
+priority: 2

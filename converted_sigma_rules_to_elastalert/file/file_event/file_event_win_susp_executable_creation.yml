@@ -1,0 +1,12 @@
+description: |
+  Detect creation of suspicious executable file names.
+Some strings look for suspicious file extensions, others look for filenames that exploit unquoted service paths.
+
+name: Suspicious Executable File Creation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:(*:\$recycle.bin.exe OR *:\documents and settings.exe OR *:\msocache.exe OR *:\perflogs.exe OR *:\recovery.exe OR *.bat.exe OR *.sys.exe)
+type: any
+priority: 3

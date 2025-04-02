@@ -1,0 +1,10 @@
+description: |
+  Detects potential commandline obfuscation using known escape characters
+name: Potential Commandline Obfuscation Using Escape Characters
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:(*h^t^t^p* OR *h"t"t"p*)
+type: any
+priority: 2

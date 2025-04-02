@@ -1,0 +1,10 @@
+description: |
+  Files with well-known filenames (sensitive files with credential data) copying
+name: Copying Sensitive Files with Credential Data
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\esentutl.exe OR winlog.event_data.originalfilename.keyword:\esentutl.exe) AND (process.command_line.keyword:(*vss*) OR process.command_line.keyword:(* -m* OR * /m* OR * –m* OR * —m* OR * ―m*) OR process.command_line.keyword:(* -y* OR * /y* OR * –y* OR * —y* OR * ―y*))) OR (process.command_line.keyword:(*\config\regback\sam* OR *\config\regback\security* OR *\config\regback\system* OR *\config\sam* OR *\config\security* OR *\config\system* OR *\repair\sam* OR *\repair\security* OR *\repair\system* OR *\windows\ntds\ntds.dit*))
+type: any
+priority: 3

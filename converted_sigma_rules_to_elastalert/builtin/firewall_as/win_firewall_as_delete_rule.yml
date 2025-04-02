@@ -1,0 +1,10 @@
+description: |
+  Detects when a single rules or all of the rules have been deleted from the Windows Defender Firewall
+name: A Rule Has Been Deleted From The Windows Firewall Exception List
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-Windows Firewall With Advanced Security/Firewall AND ((event.code.keyword:(2006 OR 2052)) AND (NOT ((winlog.event_data.ModifyingApplication.keyword:(c:\program files (x86)* OR c:\program files* OR c:\windows\winsxs*)) OR winlog.event_data.ModifyingApplication.keyword:c:\windows\system32\svchost.exe OR (NOT _exists_:winlog.event_data.ModifyingApplication) OR winlog.event_data.ModifyingApplication.keyword:"")) AND (NOT (winlog.event_data.ModifyingApplication.keyword:c:\programdata\microsoft\windows defender\platform* AND winlog.event_data.ModifyingApplication.keyword:*\msmpeng.exe)))
+type: any
+priority: 2

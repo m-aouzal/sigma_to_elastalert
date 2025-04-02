@@ -1,0 +1,10 @@
+description: |
+  Detects possible Kerberos Replay Attack on the domain controllers when "KRB_AP_ERR_REPEAT" Kerberos response is sent to the client
+name: Replay Attack Detected
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND event.code.keyword:4649
+type: any
+priority: 3

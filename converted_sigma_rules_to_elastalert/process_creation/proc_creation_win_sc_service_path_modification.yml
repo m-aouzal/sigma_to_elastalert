@@ -1,0 +1,10 @@
+description: |
+  Detects service path modification via the "sc" binary to a suspicious command or path
+name: Suspicious Service Path Modification
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\sc.exe AND (process.command_line.keyword:*config* AND process.command_line.keyword:*binpath*) AND (process.command_line.keyword:(*powershell* OR *cmd* OR *mshta* OR *wscript* OR *cscript* OR *rundll32* OR *svchost* OR *dllhost* OR *cmd.exe /c* OR *cmd.exe /k* OR *cmd.exe /r* OR *cmd /c* OR *cmd /k* OR *cmd /r* OR *c:\users\public* OR *\downloads* OR *\desktop* OR *\microsoft\windows\start menu\programs\startup* OR *c:\windows\temp* OR *\appdata\local\temp*))
+type: any
+priority: 3

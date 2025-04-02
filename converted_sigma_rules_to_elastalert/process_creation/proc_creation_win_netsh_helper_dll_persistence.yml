@@ -1,0 +1,11 @@
+description: |
+  Detects the execution of netsh with "add helper" flag in order to add a custom helper DLL. This technique can be abused to add a malicious helper DLL that can be used as a persistence proxy that gets called when netsh.exe is executed.
+  
+name: Potential Persistence Via Netsh Helper DLL
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.originalfilename.keyword:netsh.exe OR winlog.event_data.image.keyword:*\netsh.exe) AND (process.command_line.keyword:*add* AND process.command_line.keyword:*helper*)
+type: any
+priority: 2

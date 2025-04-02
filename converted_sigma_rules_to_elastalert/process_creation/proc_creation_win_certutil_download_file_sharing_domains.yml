@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of certutil with certain flags that allow the utility to download files from file-sharing websites.
+name: Suspicious File Downloaded From File-Sharing Website Via Certutil.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\certutil.exe OR winlog.event_data.originalfilename.keyword:certutil.exe) AND (process.command_line.keyword:(*urlcache* OR *verifyctl*)) AND (process.command_line.keyword:(*.githubusercontent.com* OR *anonfiles.com* OR *cdn.discordapp.com* OR *ddns.net* OR *dl.dropboxusercontent.com* OR *ghostbin.co* OR *glitch.me* OR *gofile.io* OR *hastebin.com* OR *mediafire.com* OR *mega.nz* OR *onrender.com* OR *pages.dev* OR *paste.ee* OR *pastebin.com* OR *pastebin.pl* OR *pastetext.net* OR *privatlab.com* OR *privatlab.net* OR *send.exploit.in* OR *sendspace.com* OR *storage.googleapis.com* OR *storjshare.io* OR *supabase.co* OR *temp.sh* OR *transfer.sh* OR *trycloudflare.com* OR *ufile.io* OR *w3spaces.com* OR *workers.dev*))
+type: any
+priority: 3

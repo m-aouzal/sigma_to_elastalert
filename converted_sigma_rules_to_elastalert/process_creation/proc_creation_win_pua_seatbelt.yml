@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of the PUA/Recon tool Seatbelt via PE information of command line parameters
+name: PUA - Seatbelt Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\seatbelt.exe OR winlog.event_data.originalfilename.keyword:seatbelt.exe OR winlog.event_data.description.keyword:seatbelt OR (winlog.event_data.commandline.keyword:(* dpapimasterkeys* OR * interestingprocesses* OR * interestingfiles* OR * certificatethumbprints* OR * chromiumbookmarks* OR * chromiumhistory* OR * chromiumpresence* OR * cloudcredentials* OR * credenum* OR * credguard* OR * firefoxhistory* OR * processcreationevents*))) OR ((process.command_line.keyword:(* -group=misc* OR * -group=remote* OR * -group=chromium* OR * -group=slack* OR * -group=system* OR * -group=user* OR * -group=all*)) AND process.command_line.keyword:* -outputfile=*)
+type: any
+priority: 3

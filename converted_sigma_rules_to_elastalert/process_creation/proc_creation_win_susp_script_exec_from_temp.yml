@@ -1,0 +1,10 @@
+description: |
+  Detects a suspicious script executions from temporary folder
+name: Suspicious Script Execution From Temp Folder
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((process.executable.keyword:(*\powershell.exe OR *\pwsh.exe OR *\mshta.exe OR *\wscript.exe OR *\cscript.exe)) AND (process.command_line.keyword:(*\windows\temp* OR *\temporary internet* OR *\appdata\local\temp* OR *\appdata\roaming\temp* OR *%temp%* OR *%tmp%* OR *%localappdata%\temp*))) AND (NOT (process.command_line.keyword:(* >* OR *out-file* OR *convertto-json* OR *-windowstyle hidden -verb runas* OR *\windows\system32\config\systemprofile\appdata\local\temp\amazon\ec2-windows*)))
+type: any
+priority: 3

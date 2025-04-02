@@ -1,0 +1,10 @@
+description: |
+  Detects potential abuse of ntdsutil to dump ntds.dit database to a suspicious location
+name: Dump Ntds.dit To Suspicious Location
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Application AND ((winlog.provider_name.keyword:esent AND event.code.keyword:325 AND winlog.event_data.Data.keyword:*ntds.dit*) AND (winlog.event_data.Data.keyword:(*:\ntds.dit* OR *\appdata* OR *\desktop* OR *\downloads* OR *\perflogs* OR *\temp* OR *\users\public*)))
+type: any
+priority: 2

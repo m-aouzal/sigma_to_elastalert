@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious child processes of SysAidServer (as seen in MERCURY threat actor intrusions)
+name: Suspicious SysAidServer Child
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.parent.executable.keyword:(*\java.exe OR *\javaw.exe)) AND process.parent.command_line.keyword:*sysaidserver*
+type: any
+priority: 2

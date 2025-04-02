@@ -1,0 +1,12 @@
+description: |
+  Detects execution and usage of the DSInternals PowerShell module. Which can be used to perform what might be considered as suspicious activity such as dumping DPAPI backup keys or manipulating NTDS.DIT files.
+The DSInternals PowerShell Module exposes several internal features of Active Directory and Azure Active Directory. These include FIDO2 and NGC key auditing, offline ntds.dit file manipulation, password auditing, DC recovery from IFM backups and password hash calculation.
+
+name: DSInternals Suspicious PowerShell Cmdlets
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:(*add-addbsidhistory* OR *add-adngckey* OR *add-adreplngckey* OR *convertfrom-admanagedpasswordblob* OR *convertfrom-gpprefpassword* OR *convertfrom-managedpasswordblob* OR *convertfrom-unattendxmlpassword* OR *convertfrom-unicodepassword* OR *convertto-aadhash* OR *convertto-gpprefpassword* OR *convertto-kerberoskey* OR *convertto-lmhash* OR *convertto-msopasswordhash* OR *convertto-nthash* OR *convertto-orgidhash* OR *convertto-unicodepassword* OR *disable-addbaccount* OR *enable-addbaccount* OR *get-addbaccount* OR *get-addbbackupkey* OR *get-addbdomaincontroller* OR *get-addbgroupmanagedserviceaccount* OR *get-addbkdsrootkey* OR *get-addbschemaattribute* OR *get-addbserviceaccount* OR *get-addefaultpasswordpolicy* OR *get-adkeycredential* OR *get-adpasswordpolicy* OR *get-adreplaccount* OR *get-adreplbackupkey* OR *get-adreplicationaccount* OR *get-adsiaccount* OR *get-azureaduserex* OR *get-bootkey* OR *get-keycredential* OR *get-lsabackupkey* OR *get-lsapolicy* OR *get-sampasswordpolicy* OR *get-syskey* OR *get-systemkey* OR *new-addbrestorefrommediascript* OR *new-adkeycredential* OR *new-adngckey* OR *new-nthashset* OR *remove-addbobject* OR *save-dpapiblob* OR *set-adaccountpasswordhash* OR *set-addbaccountpassword* OR *set-addbbootkey* OR *set-addbdomaincontroller* OR *set-addbprimarygroup* OR *set-addbsyskey* OR *set-azureaduserex* OR *set-lsapolicy* OR *set-samaccountpasswordhash* OR *set-winuserpasswordhash* OR *test-addbpasswordquality* OR *test-adpasswordquality* OR *test-adreplpasswordquality* OR *test-passwordquality* OR *unlock-addbaccount* OR *write-adngckey* OR *write-adreplngckey*)
+type: any
+priority: 3

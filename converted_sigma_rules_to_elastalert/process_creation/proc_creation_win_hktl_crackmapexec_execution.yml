@@ -1,0 +1,10 @@
+description: |
+  This rule detect common flag combinations used by CrackMapExec in order to detect its use even if the binary has been replaced.
+name: HackTool - CrackMapExec Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\crackmapexec.exe OR process.command_line.keyword:* -m pe_inject* OR (process.command_line.keyword:* --local-auth* AND process.command_line.keyword:* -u* AND process.command_line.keyword:* -x*) OR (process.command_line.keyword:* --local-auth* AND process.command_line.keyword:* -u* AND process.command_line.keyword:* -p* AND process.command_line.keyword:* -h 'nthash'*) OR (process.command_line.keyword:* mssql* AND process.command_line.keyword:* -u* AND process.command_line.keyword:* -p* AND process.command_line.keyword:* -m* AND process.command_line.keyword:* -d*) OR (process.command_line.keyword:* smb* AND process.command_line.keyword:* -u* AND process.command_line.keyword:* -h* AND process.command_line.keyword:* -m* AND process.command_line.keyword:* -o*) OR (process.command_line.keyword:* smb* AND process.command_line.keyword:* -u* AND process.command_line.keyword:* -p* AND process.command_line.keyword:* --local-auth*)) OR ((process.command_line.keyword:* --local-auth* AND process.command_line.keyword:* -u* AND process.command_line.keyword:* -p*) AND (process.command_line.keyword:* 10.* AND process.command_line.keyword:* 192.168.* AND process.command_line.keyword:*/24*))
+type: any
+priority: 3

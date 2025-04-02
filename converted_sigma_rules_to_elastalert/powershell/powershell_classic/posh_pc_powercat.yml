@@ -1,0 +1,10 @@
+description: |
+  Adversaries may use a non-application layer protocol for communication between host and C2 server or among infected hosts within a network
+name: Netcat The Powershell Version
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.Data.keyword:(*powercat* OR *powercat.ps1*)
+type: any
+priority: 2

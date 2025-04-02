@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of a schtasks that potentially executes a payload stored in the Windows Registry using PowerShell.
+name: Scheduled Task Executing Payload from Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\schtasks.exe OR winlog.event_data.originalfilename.keyword:schtasks.exe) AND process.command_line.keyword:*/create* AND (process.command_line.keyword:(*get-itemproperty* OR * gp*)) AND (process.command_line.keyword:(*hkcu:* OR *hklm:* OR *registry::* OR *hkey_*))) AND (NOT (process.command_line.keyword:(*frombase64string* OR *encodedcommand*)))
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects Pandemic Windows Implant
+name: Pandemic Registry Key
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\system\currentcontrolset\services\null\instance*
+type: any
+priority: 4

@@ -1,0 +1,10 @@
+description: |
+  Detects service creation from KrbRelayUp tool used for privilege escalation in Windows domain environments where LDAP signing is not enforced (the default settings)
+name: KrbRelayUp Service Installation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:System AND (event.code.keyword:7045 AND winlog.event_data.ServiceName.keyword:krbscm)
+type: any
+priority: 3

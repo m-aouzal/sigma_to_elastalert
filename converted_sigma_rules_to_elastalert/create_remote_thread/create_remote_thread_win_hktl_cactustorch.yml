@@ -1,0 +1,10 @@
+description: |
+  Detects remote thread creation from CACTUSTORCH as described in references.
+name: HackTool - CACTUSTORCH Remote Thread Creation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:(*\system32\cscript.exe OR *\system32\wscript.exe OR *\system32\mshta.exe OR *\winword.exe OR *\excel.exe)) AND winlog.event_data.TargetImage.keyword:*\syswow64* AND (NOT _exists_:winlog.event_data.StartModule)
+type: any
+priority: 3

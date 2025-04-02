@@ -1,0 +1,10 @@
+description: |
+  Detects the stopping of a Windows service via the "sc.exe" utility
+name: Stop Windows Service Via Sc.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.originalfilename.keyword:sc.exe OR winlog.event_data.image.keyword:*\sc.exe) AND process.command_line.keyword:* stop*
+type: any
+priority: 1

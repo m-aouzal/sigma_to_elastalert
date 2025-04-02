@@ -1,0 +1,10 @@
+description: |
+  Detects the use of the bcdedit command to tamper with the boot configuration data. This technique is often times used by malware or attackers as a destructive way before launching ransomware.
+name: Boot Configuration Tampering Via Bcdedit.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\bcdedit.exe OR winlog.event_data.originalfilename.keyword:bcdedit.exe) AND process.command_line.keyword:*set* AND ((winlog.event_data.commandline.keyword:*bootstatuspolicy* AND winlog.event_data.commandline.keyword:*ignoreallfailures*) OR (winlog.event_data.commandline.keyword:*recoveryenabled* AND winlog.event_data.commandline.keyword:*no*))
+type: any
+priority: 3

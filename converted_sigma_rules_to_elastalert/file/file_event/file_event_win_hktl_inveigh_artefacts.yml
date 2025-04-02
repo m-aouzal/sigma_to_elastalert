@@ -1,0 +1,10 @@
+description: |
+  Detects the presence and execution of Inveigh via dropped artefacts
+name: HackTool - Inveigh Execution Artefacts
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:(*\inveigh-log.txt OR *\inveigh-cleartext.txt OR *\inveigh-ntlmv1users.txt OR *\inveigh-ntlmv2users.txt OR *\inveigh-ntlmv1.txt OR *\inveigh-ntlmv2.txt OR *\inveigh-forminput.txt OR *\inveigh.dll OR *\inveigh.exe OR *\inveigh.ps1 OR *\inveigh-relay.ps1)
+type: any
+priority: 4

@@ -1,0 +1,10 @@
+description: |
+  Rule to detect the Hybrid Connection Manager service running on an endpoint.
+name: HybridConnectionManager Service Running
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-ServiceBus-Client AND ((event.code.keyword:(40300 OR 40301 OR 40302)) AND (*hybridconnection* OR *sb://* OR *servicebus.windows.net* OR *hybridconnectionmanage*))
+type: any
+priority: 3

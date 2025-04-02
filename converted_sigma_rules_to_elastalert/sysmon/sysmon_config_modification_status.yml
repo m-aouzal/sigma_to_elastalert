@@ -1,0 +1,10 @@
+description: |
+  Detects when an attacker tries to hide from Sysmon by disabling or stopping it
+name: Sysmon Configuration Modification
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.State.keyword:stopped OR *sysmon config state changed*) AND (NOT winlog.event_data.State.keyword:started)
+type: any
+priority: 3

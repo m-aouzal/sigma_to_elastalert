@@ -1,0 +1,10 @@
+description: |
+  Detects when an attacker calls the "ALTER SERVER AUDIT" or "DROP SERVER AUDIT" transaction in order to delete or disable audit logs on the server
+name: MSSQL Disable Audit Settings
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Application AND (winlog.provider_name.keyword:*mssql* AND event.code.keyword:33205 AND (winlog.event_data.Data.keyword:(*statement:alter server audit* OR *statement:drop server audit*)))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects SILENTTRINITY stager dll loading activity
+name: HackTool - SILENTTRINITY Stager DLL Load
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.pe.description.keyword:*st2stager*
+type: any
+priority: 3

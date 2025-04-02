@@ -1,0 +1,10 @@
+description: |
+  Detects Access to Domain Group Policies stored in SYSVOL
+name: Suspicious SYSVOL Domain Group Policy Access
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*\sysvol* AND process.command_line.keyword:*\policies*
+type: any
+priority: 2

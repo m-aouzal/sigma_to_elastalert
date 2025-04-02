@@ -1,0 +1,10 @@
+description: |
+  Detects RDP session hijacking by using MSTSC shadowing
+name: Potential MSTSC Shadowing Activity
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*noconsentprompt* AND process.command_line.keyword:*shadow:*
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects CSExec service installation and execution events
+name: CSExec Service Installation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:System AND ((winlog.provider_name.keyword:service control manager AND event.code.keyword:7045) AND (winlog.event_data.servicename.keyword:csexecsvc OR winlog.event_data.imagepath.keyword:*\csexecsvc.exe))
+type: any
+priority: 2

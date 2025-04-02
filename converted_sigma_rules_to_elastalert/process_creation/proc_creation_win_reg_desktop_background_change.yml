@@ -1,0 +1,12 @@
+description: |
+  Detects the execution of "reg.exe" to alter registry keys that would replace the user's desktop background.
+This is a common technique used by malware to change the desktop background to a ransom note or other image.
+
+name: Potentially Suspicious Desktop Background Change Using Reg.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND process.command_line.keyword:*add*) AND (process.command_line.keyword:(*control panel\desktop* OR *currentversion\policies\activedesktop* OR *currentversion\policies\system*)) AND ((process.command_line.keyword:*/v nochangingwallpaper* AND process.command_line.keyword:*/d 1*) OR (process.command_line.keyword:*/v wallpaper* AND process.command_line.keyword:*/t reg_sz*) OR (process.command_line.keyword:*/v wallpaperstyle* AND process.command_line.keyword:*/d 2*))
+type: any
+priority: 2

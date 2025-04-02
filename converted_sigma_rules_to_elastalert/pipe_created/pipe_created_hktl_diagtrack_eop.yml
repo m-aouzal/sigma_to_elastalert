@@ -1,0 +1,10 @@
+description: |
+  Detects creation of default named pipe used by the DiagTrackEoP POC, a tool that abuses "SeImpersonate" privilege.
+name: HackTool - DiagTrackEoP Default Named Pipe
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.name.keyword:*thisispipe*
+type: any
+priority: 4

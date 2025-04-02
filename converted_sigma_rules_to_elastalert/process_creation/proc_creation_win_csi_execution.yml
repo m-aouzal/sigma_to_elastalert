@@ -1,0 +1,10 @@
+description: |
+  Csi.exe is a signed binary from Microsoft that comes with Visual Studio and provides C# interactive capabilities. It can be used to run C# code from a file passed as a parameter in command line. Early version of this utility provided with Microsoft “Roslyn” Community Technology Preview was named 'rcsi.exe'
+name: Suspicious Csi.exe Usage
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\csi.exe OR *\rcsi.exe)) OR (winlog.event_data.originalfilename.keyword:(csi.exe OR rcsi.exe))) AND process.pe.company.keyword:microsoft corporation
+type: any
+priority: 2

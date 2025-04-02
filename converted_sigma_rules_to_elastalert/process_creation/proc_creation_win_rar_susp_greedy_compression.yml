@@ -1,0 +1,10 @@
+description: |
+  Detects RAR usage that creates an archive from a suspicious folder, either a system folder or one of the folders often used by attackers for staging purposes
+name: Suspicious Greedy Compression Using Rar.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\rar.exe OR winlog.event_data.description.keyword:command line rar) OR (process.command_line.keyword:(*.exe a* OR * a -m*))) AND ((process.command_line.keyword:* -hp* AND process.command_line.keyword:* -r*) AND (process.command_line.keyword:(* ?:\*.* OR * ?:\\*.* OR * ?:\$recycle.bin* OR * ?:\perflogs* OR * ?:\temp* OR * ?:\users\public* OR * ?:\windows* OR * %public%*)))
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of a renamed "Msdt.exe" binary
+name: Renamed Msdt.EXE Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.pe.original_file_name.keyword:msdt.exe AND (NOT process.executable.keyword:*\msdt.exe)
+type: any
+priority: 3

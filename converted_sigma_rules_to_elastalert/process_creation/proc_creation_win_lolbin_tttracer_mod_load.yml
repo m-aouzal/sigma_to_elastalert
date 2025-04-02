@@ -1,0 +1,10 @@
+description: |
+  Detects usage of Time Travel Debugging Utility. Adversaries can execute malicious processes and dump processes, such as lsass.exe, via tttracer.exe.
+name: Time Travel Debugging Utility Usage
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\tttracer.exe
+type: any
+priority: 3

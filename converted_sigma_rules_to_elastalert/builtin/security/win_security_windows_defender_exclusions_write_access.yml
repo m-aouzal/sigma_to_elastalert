@@ -1,0 +1,11 @@
+description: |
+  Detects write access requests to the Windows Defender exclusions registry keys. This could be an indication of an attacker trying to request a handle or access the object to write new exclusions in order to bypass security.
+  
+name: Windows Defender Exclusion Registry Key - Write Access Requested
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((winlog.event_data.AccessList.keyword:(*%%4417* OR *%%4418*)) AND (event.code.keyword:(4656 OR 4663)) AND winlog.event_data.ObjectName.keyword:*\microsoft\windows defender\exclusions*)
+type: any
+priority: 2

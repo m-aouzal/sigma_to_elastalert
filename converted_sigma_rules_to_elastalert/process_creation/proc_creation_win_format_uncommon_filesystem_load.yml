@@ -1,0 +1,11 @@
+description: |
+  Detects the execution of format.com with an uncommon filesystem selection that could indicate a defense evasion activity in which "format.com" is used to load malicious DLL files or other programs.
+  
+name: Uncommon FileSystem Load Attempt By Format.com
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\format.com AND process.command_line.keyword:*/fs:*) AND (NOT (process.command_line.keyword:(*/fs:exfat* OR */fs:fat* OR */fs:ntfs* OR */fs:refs* OR */fs:udf*)))
+type: any
+priority: 3

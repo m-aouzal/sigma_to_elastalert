@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious Plink tunnel port forwarding to a local port
+name: Suspicious Plink Port Forwarding
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.pe.description.keyword:command-line ssh, telnet, and rlogin client AND process.command_line.keyword:* -r*
+type: any
+priority: 3

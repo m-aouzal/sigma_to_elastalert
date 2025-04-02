@@ -1,0 +1,11 @@
+description: |
+  Detects the execution of ".xbap" (Browser Applications) files via PresentationHost.EXE from an uncommon location. These files can be abused to run malicious ".xbap" files any bypass AWL
+  
+name: XBAP Execution From Uncommon Locations Via PresentationHost.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\presentationhost.exe OR winlog.event_data.originalfilename.keyword:presentationhost.exe) AND process.command_line.keyword:*.xbap*) AND (NOT (process.command_line.keyword:(* c:\windows* OR * c:\program files*)))
+type: any
+priority: 2

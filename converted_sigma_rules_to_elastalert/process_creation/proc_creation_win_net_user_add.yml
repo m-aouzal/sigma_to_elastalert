@@ -1,0 +1,10 @@
+description: |
+  Identifies the creation of local users via the net.exe command.
+name: New User Created Via Net.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\net.exe OR *\net1.exe)) OR (winlog.event_data.originalfilename.keyword:(net.exe OR net1.exe))) AND (process.command_line.keyword:*user* AND process.command_line.keyword:*add*)
+type: any
+priority: 2

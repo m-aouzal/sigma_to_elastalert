@@ -1,0 +1,10 @@
+description: |
+  Adversaries may disable or modify system firewalls in order to bypass controls limiting network usage
+name: Disable Microsoft Defender Firewall via Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\services\sharedaccess\parameters\firewallpolicy* AND registry.path.keyword:*\enablefirewall AND winlog.event_data.Details.keyword:dword (0x00000000)
+type: any
+priority: 2

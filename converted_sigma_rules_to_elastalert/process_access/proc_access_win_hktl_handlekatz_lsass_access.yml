@@ -1,0 +1,10 @@
+description: |
+  Detects HandleKatz opening LSASS to duplicate its handle to later dump the memory without opening any new handles
+name: HackTool - HandleKatz Duplicating LSASS Handle
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.TargetImage.keyword:*\lsass.exe AND winlog.event_data.GrantedAccess.keyword:0x1440 AND winlog.event_data.CallTrace.keyword:c:\windows\system32\ntdll.dll+* AND winlog.event_data.CallTrace.keyword:*|unknown(* AND winlog.event_data.CallTrace.keyword:*)
+type: any
+priority: 3

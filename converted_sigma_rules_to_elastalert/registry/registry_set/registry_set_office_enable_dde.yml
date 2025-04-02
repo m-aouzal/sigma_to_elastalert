@@ -1,0 +1,10 @@
+description: |
+  Enable Dynamic Data Exchange protocol (DDE) in all supported editions of Microsoft Word or Excel.
+name: Enable Microsoft Dynamic Data Exchange
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:*\word\security\allowdde AND (winlog.event_data.Details.keyword:(dword (0x00000001) OR dword (0x00000002)))) OR ((registry.path.keyword:(*\excel\security\disableddeserverlaunch OR *\excel\security\disableddeserverlookup)) AND winlog.event_data.Details.keyword:dword (0x00000000))
+type: any
+priority: 2

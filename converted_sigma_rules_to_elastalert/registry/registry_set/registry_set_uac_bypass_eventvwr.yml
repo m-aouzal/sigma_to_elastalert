@@ -1,0 +1,10 @@
+description: |
+  Detects UAC bypass method using Windows event viewer
+name: UAC Bypass via Event Viewer
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\mscfile\shell\open\command
+type: any
+priority: 3

@@ -1,0 +1,12 @@
+description: |
+  Detects suspicious reconnaissance command line activity on Windows systems using Net.EXE
+Check if the user that executed the commands is suspicious (e.g. service accounts, LOCAL_SYSTEM)
+
+name: Suspicious Group And Account Reconnaissance Activity Using Net.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\net.exe OR *\net1.exe)) OR (winlog.event_data.originalfilename.keyword:(net.exe OR net1.exe))) AND ((((process.command_line.keyword:(* group* OR * localgroup*)) AND (process.command_line.keyword:(*domain admins* OR * administrator* OR * administrateur* OR *enterprise admins* OR *exchange trusted subsystem* OR *remote desktop users* OR *utilisateurs du bureau à distance* OR *usuarios de escritorio remoto* OR * /do*))) AND (NOT process.command_line.keyword:* /add*)) OR (process.command_line.keyword:* accounts* AND process.command_line.keyword:* /do*))
+type: any
+priority: 2

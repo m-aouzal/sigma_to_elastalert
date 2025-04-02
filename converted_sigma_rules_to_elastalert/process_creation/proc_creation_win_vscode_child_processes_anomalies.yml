@@ -1,0 +1,10 @@
+description: |
+  Detects uncommon or suspicious child processes spawning from a VsCode "code.exe" process. This could indicate an attempt of persistence via VsCode tasks or terminal profiles.
+name: Potentially Suspicious Child Process Of VsCode
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\code.exe AND ((process.executable.keyword:(*\calc.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\cscript.exe OR *\wscript.exe)) OR ((process.executable.keyword:(*\powershell.exe OR *\pwsh.exe OR *\cmd.exe)) AND (process.command_line.keyword:(*invoke-expressions* OR *iex* OR *invoke-command* OR *icm* OR *downloadstring* OR *rundll32* OR *regsvr32* OR *wscript* OR *cscript*))) OR (process.executable.keyword:(*:\users\public* OR *:\windows\temp* OR *:\temp*)))
+type: any
+priority: 2

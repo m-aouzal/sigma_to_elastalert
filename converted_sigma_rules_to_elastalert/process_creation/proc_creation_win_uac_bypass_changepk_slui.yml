@@ -1,0 +1,10 @@
+description: |
+  Detects an UAC bypass that uses changepk.exe and slui.exe (UACMe 61)
+name: UAC Bypass Using ChangePK and SLUI
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\changepk.exe AND process.parent.executable.keyword:*\slui.exe AND (winlog.event_data.IntegrityLevel.keyword:(high OR system OR s-1-16-16384 OR s-1-16-12288))
+type: any
+priority: 3

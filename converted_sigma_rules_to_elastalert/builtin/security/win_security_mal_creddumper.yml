@@ -1,0 +1,10 @@
+description: |
+  Detects well-known credential dumping tools execution via service execution events
+name: Credential Dumping Tools Service Execution - Security
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4697 AND (winlog.event_data.ServiceFileName.keyword:(*cachedump* OR *dumpsvc* OR *fgexec* OR *gsecdump* OR *mimidrv* OR *pwdump* OR *servpw*)))
+type: any
+priority: 3

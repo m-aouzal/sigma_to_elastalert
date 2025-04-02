@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of whoami.exe with suspicious parent processes.
+name: Whoami.EXE Execution Anomaly
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\whoami.exe OR winlog.event_data.originalfilename.keyword:whoami.exe) AND (NOT ((process.parent.executable.keyword:(*\cmd.exe OR *\powershell_ise.exe OR *\powershell.exe OR *\pwsh.exe)) OR (NOT _exists_:process.parent.executable) OR process.parent.executable.keyword:"")) AND (NOT process.parent.executable.keyword:*:\program files\microsoft monitoring agent\agent\monitoringhost.exe)
+type: any
+priority: 2

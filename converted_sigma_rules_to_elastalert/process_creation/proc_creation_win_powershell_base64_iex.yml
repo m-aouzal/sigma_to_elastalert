@@ -1,0 +1,10 @@
+description: |
+  Detects usage of a base64 encoded "IEX" cmdlet in a process command line
+name: PowerShell Base64 Encoded IEX Cmdlet
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.commandline.keyword:(*aWV4IChb* OR *lleCAoW* OR *pZXggKF*) OR winlog.event_data.commandline.keyword:(*aWV4IChb* OR *lleCAoW* OR *pZXggKF*) OR winlog.event_data.commandline.keyword:(*aWV4IChuZX* OR *lleCAobmV3* OR *pZXggKG5ld*) OR winlog.event_data.commandline.keyword:(*aWV4IChuZX* OR *lleCAobmV3* OR *pZXggKG5ld*) OR winlog.event_data.commandline.keyword:(*aWV4KF* OR *lleChb* OR *pZXgoW*) OR winlog.event_data.commandline.keyword:(*aWV4KF* OR *lleChb* OR *pZXgoW*) OR winlog.event_data.commandline.keyword:(*aWV4KG5ld* OR *lleChuZX* OR *pZXgobmV3*) OR winlog.event_data.commandline.keyword:(*aWV4KG5ld* OR *lleChuZX* OR *pZXgobmV3*) OR winlog.event_data.commandline.keyword:(*aWV4KCgn* OR *lleCgoJ* OR *pZXgoKC*) OR winlog.event_data.commandline.keyword:(*aWV4KCgn* OR *lleCgoJ* OR *pZXgoKC*)) OR (winlog.event_data.commandline.keyword:(*sqbfafgaiaaoafsa* OR *karqbyacaakabba* OR *jaeuawaagacgaww* OR *aqblahgaiaaoafsa* OR *kazqb4acaakabba* OR *paguaeaagacgaww* OR *aqblahgaiaaoae4azqb3a* OR *kazqb4acaakaboaguadw* OR *paguaeaagacgatgblahca* OR *sqbfafgaiaaoae4azqb3a* OR *karqbyacaakaboaguadw* OR *jaeuawaagacgatgblahca*))
+type: any
+priority: 3

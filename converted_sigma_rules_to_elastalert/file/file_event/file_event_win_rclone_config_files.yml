@@ -1,0 +1,10 @@
+description: |
+  Detects Rclone config files being created
+name: Rclone Config File Creation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*:\users* AND file.path.keyword:*\.config\rclone*
+type: any
+priority: 2

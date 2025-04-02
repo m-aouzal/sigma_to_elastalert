@@ -1,0 +1,10 @@
+description: |
+  Detects processes leveraging the "ms-msdt" handler or the "msdt.exe" binary to execute arbitrary commands as seen in the follina (CVE-2022-30190) vulnerability
+name: Potential Arbitrary Command Execution Using Msdt.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\msdt.exe OR winlog.event_data.originalfilename.keyword:msdt.exe) AND (process.command_line.keyword:*it_browseforfile=* OR (process.command_line.keyword:* pcwdiagnostic* AND process.command_line.keyword:(* -af* OR * /af* OR * –af* OR * —af* OR * ―af*)))
+type: any
+priority: 3

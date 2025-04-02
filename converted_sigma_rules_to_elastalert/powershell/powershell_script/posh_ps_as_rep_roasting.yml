@@ -1,0 +1,10 @@
+description: |
+  Detects AS-REP roasting is an attack that is often-overlooked. It is not very common as you have to explicitly set accounts that do not require pre-authentication.
+name: Get-ADUser Enumeration Using UserAccountControl Flags
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*get-aduser* AND powershell.file.script_block_text.keyword:*-filter* AND powershell.file.script_block_text.keyword:*useraccountcontrol* AND powershell.file.script_block_text.keyword:*-band* AND powershell.file.script_block_text.keyword:*4194304*
+type: any
+priority: 2

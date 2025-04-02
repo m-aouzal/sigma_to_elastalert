@@ -1,0 +1,10 @@
+description: |
+  Detects uncommon or suspicious child processes spawning from a WSL process. This could indicate an attempt to evade parent/child relationship detections or persistence attempts via cron using WSL
+name: WSL Child Process Anomaly
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.parent.executable.keyword:(*\wsl.exe OR *\wslhost.exe)) AND ((process.executable.keyword:(*\calc.exe OR *\cmd.exe OR *\cscript.exe OR *\mshta.exe OR *\powershell.exe OR *\pwsh.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\wscript.exe)) OR (process.executable.keyword:(*\appdata\local\temp* OR *c:\users\public* OR *c:\windows\temp* OR *c:\temp* OR *\downloads* OR *\desktop*)))
+type: any
+priority: 2

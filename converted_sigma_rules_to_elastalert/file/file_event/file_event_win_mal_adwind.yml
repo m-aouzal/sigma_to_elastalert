@@ -1,0 +1,10 @@
+description: |
+  Detects javaw.exe in AppData folder as used by Adwind / JRAT
+name: Adwind RAT / JRAT File Artifact
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.targetfilename.keyword:*\appdata\roaming\oracle\bin\java* AND winlog.event_data.targetfilename.keyword:*.exe*) OR (winlog.event_data.targetfilename.keyword:*\retrive* AND winlog.event_data.targetfilename.keyword:*.vbs*)
+type: any
+priority: 3

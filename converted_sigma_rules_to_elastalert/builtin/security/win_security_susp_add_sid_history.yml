@@ -1,0 +1,10 @@
+description: |
+  An attacker can use the SID history attribute to gain additional privileges.
+name: Addition of SID History to Active Directory Object
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:(4765 OR 4766)) OR (event.code.keyword:4738 AND (NOT (winlog.event_data.SidHistory.keyword:(- OR %%1793))) AND _exists_:winlog.event_data.SidHistory))
+type: any
+priority: 2

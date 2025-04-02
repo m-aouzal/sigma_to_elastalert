@@ -1,0 +1,10 @@
+description: |
+  Detects PowerShell script execution from Alternate Data Stream (ADS)
+name: Run PowerShell Script from ADS
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.parent.executable.keyword:(*\powershell.exe OR *\pwsh.exe)) AND (process.executable.keyword:(*\powershell.exe OR *\pwsh.exe)) AND (process.command_line.keyword:*get-content* AND process.command_line.keyword:*-stream*)
+type: any
+priority: 3

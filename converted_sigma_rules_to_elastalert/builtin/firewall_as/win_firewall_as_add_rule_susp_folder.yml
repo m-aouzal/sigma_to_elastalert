@@ -1,0 +1,10 @@
+description: |
+  Detects the addition of a new rule to the Windows Firewall exception list for an application located in a potentially suspicious location.
+name: New Firewall Rule Added In Windows Firewall Exception List For Potential Suspicious Application
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-Windows Firewall With Advanced Security/Firewall AND (((event.code.keyword:(2004 OR 2071 OR 2097)) AND (winlog.event_data.ApplicationPath.keyword:(*:\perflogs* OR *:\temp* OR *:\tmp* OR *:\users\public* OR *:\windows\tasks* OR *:\windows\temp* OR *\appdata\local\temp*))) AND (NOT winlog.event_data.Action.keyword:2))
+type: any
+priority: 3

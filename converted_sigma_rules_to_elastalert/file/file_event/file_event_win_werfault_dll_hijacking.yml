@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of a file named "WerFault.exe" or "wer.dll" in an uncommon folder, which could be a sign of WerFault DLL hijacking.
+name: Creation of WerFault.exe/Wer.dll in Unusual Folder
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (file.path.keyword:(*\werfault.exe OR *\wer.dll)) AND (NOT (file.path.keyword:(c:\windows\softwaredistribution* OR c:\windows\system32* OR c:\windows\syswow64* OR c:\windows\winsxs*)))
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects a Sysmon configuration change, which could be the result of a legitimate reconfiguration or someone trying manipulate the configuration
+name: Sysmon Configuration Change
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-Sysmon/Operational AND event.code.keyword:16
+type: any
+priority: 2

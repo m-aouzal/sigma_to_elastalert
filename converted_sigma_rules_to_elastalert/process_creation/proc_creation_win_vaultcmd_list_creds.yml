@@ -1,0 +1,10 @@
+description: |
+  List credentials currently stored in Windows Credential Manager via the native Windows utility vaultcmd.exe
+name: Windows Credential Manager Access via VaultCmd
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\vaultcmd.exe OR winlog.event_data.originalfilename.keyword:vaultcmd.exe) AND process.command_line.keyword:*/listcreds:*
+type: any
+priority: 2

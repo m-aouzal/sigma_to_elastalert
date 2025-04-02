@@ -1,0 +1,11 @@
+description: |
+  Detects changes to the Windows EventLog channel permission values. It focuses on changes to the Security Descriptor Definition Language (SDDL) string, as modifications to these values can restrict access to specific users or groups, potentially aiding in defense evasion by controlling who can view or modify a event log channel. Upon execution, the user shouldn't be able to access the event log channel via the event viewer or via utilities such as "Get-EventLog" or "wevtutil".
+  
+name: Windows Event Log Access Tampering Via Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((registry.path.keyword:*\system\currentcontrolset\services\eventlog* AND registry.path.keyword:*\customsd) OR ((registry.path.keyword:(*\policies\microsoft\windows\eventlog* OR *\microsoft\windows\currentversion\winevt\channels*)) AND registry.path.keyword:*\channelaccess)) AND (winlog.event_data.details.keyword:*d:(d;* OR (winlog.event_data.details.keyword:*d:(* AND winlog.event_data.details.keyword:*)(d;*))
+type: any
+priority: 3

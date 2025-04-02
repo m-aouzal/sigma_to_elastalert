@@ -1,0 +1,10 @@
+description: |
+  Extract data from cab file and hide it in an alternate data stream
+name: Suspicious Extrac32 Alternate Data Stream Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.command_line.keyword:*extrac32.exe* AND process.command_line.keyword:*.cab*) AND process.command_line.keyword:/:[^\]/
+type: any
+priority: 2

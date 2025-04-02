@@ -1,0 +1,10 @@
+description: |
+  Detects execution of LiveKD with the "-m" flag to potentially dump the kernel memory
+name: Kernel Memory Dump Via LiveKD
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\livekd.exe OR *\livekd64.exe)) OR winlog.event_data.originalfilename.keyword:livekd.exe) AND process.command_line.keyword:(* -m* OR * /m* OR * –m* OR * —m* OR * ―m*)
+type: any
+priority: 3

@@ -1,0 +1,10 @@
+description: |
+  Detects when an attacker adds a new "DLLPathOverride" value to the "Natural Language" key in order to achieve persistence which will get invoked by "SearchIndexer.exe" process
+name: Potential Persistence Via DLLPathOverride
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\system\currentcontrolset\control\contentindex\language* AND (registry.path.keyword:(*\stemmerdllpathoverride* OR *\wbdllpathoverride* OR *\stemmerclass* OR *\wbreakerclass*))
+type: any
+priority: 3

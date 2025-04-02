@@ -1,0 +1,10 @@
+description: |
+  Detects the use of Dumpert process dumper, which dumps the lsass.exe process memory
+name: HackTool - Dumpert Process Dumper Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.hashes.keyword:*md5=09d278f9de118ef09163c6140255c690* OR winlog.event_data.commandline.keyword:*dumpert.dll*
+type: any
+priority: 4

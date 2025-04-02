@@ -1,0 +1,10 @@
+description: |
+  Detects changes to the AppInstaller (winget) policy. Specifically the activation of the local manifest installation, which allows a user to install new packages via custom manifests.
+name: Enable Local Manifest Installation With Winget
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\appinstaller\enablelocalmanifestfiles AND winlog.event_data.Details.keyword:dword (0x00000001)
+type: any
+priority: 2

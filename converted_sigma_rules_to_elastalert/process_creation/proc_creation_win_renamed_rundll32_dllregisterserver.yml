@@ -1,0 +1,10 @@
+description: |
+  Detects when 'DllRegisterServer' is called in the commandline and the image is not rundll32. This could mean that the 'rundll32' utility has been renamed in order to avoid detection
+name: Potential Renamed Rundll32 Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*dllregisterserver* AND (NOT process.executable.keyword:*\rundll32.exe)
+type: any
+priority: 3

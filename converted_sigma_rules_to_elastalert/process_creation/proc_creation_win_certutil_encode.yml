@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of certutil with the "encode" flag to encode a file to base64. This can be abused by threat actors and attackers for data exfiltration
+name: File Encoded To Base64 Via Certutil.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\certutil.exe OR winlog.event_data.originalfilename.keyword:certutil.exe) AND process.command_line.keyword:(*-encode* OR */encode* OR *–encode* OR *—encode* OR *―encode*)
+type: any
+priority: 2

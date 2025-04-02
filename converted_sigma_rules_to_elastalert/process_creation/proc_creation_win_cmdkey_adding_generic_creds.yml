@@ -1,0 +1,12 @@
+description: |
+  Detects usage of "cmdkey.exe" to add generic credentials.
+As an example, this can be used before connecting to an RDP session via command line interface.
+
+name: New Generic Credentials Added Via Cmdkey.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\cmdkey.exe OR winlog.event_data.originalfilename.keyword:cmdkey.exe) AND process.command_line.keyword:(* -g* OR * /g* OR * –g* OR * —g* OR * ―g*) AND process.command_line.keyword:(* -u* OR * /u* OR * –u* OR * —u* OR * ―u*) AND process.command_line.keyword:(* -p* OR * /p* OR * –p* OR * —p* OR * ―p*)
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects a suspicious Microsoft desktopimgdownldr execution with parameters used to download files from the Internet
+name: Suspicious Desktopimgdownldr Command
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.command_line.keyword:* /lockscreenurl:* AND (NOT (process.command_line.keyword:(*.jpg* OR *.jpeg* OR *.png*)))) OR (process.command_line.keyword:*reg delete* AND process.command_line.keyword:*\personalizationcsp*)
+type: any
+priority: 3

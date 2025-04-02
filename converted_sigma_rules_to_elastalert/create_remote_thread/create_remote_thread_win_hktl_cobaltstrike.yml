@@ -1,0 +1,10 @@
+description: |
+  Detects a potential remote threat creation with certain characteristics which are typical for Cobalt Strike beacons
+name: HackTool - Potential CobaltStrike Process Injection
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.StartAddress.keyword:(*0b80 OR *0c7c OR *0c88)
+type: any
+priority: 3

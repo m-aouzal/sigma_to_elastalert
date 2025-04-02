@@ -1,0 +1,10 @@
+description: |
+  Detects the deletion of the Exchange PowerShell cmdlet History logs which may indicate an attempt to destroy forensic evidence
+name: Exchange PowerShell Cmdlet History Deleted
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:\logging\cmdletinfra\localpowershell\cmdlet* AND file.path.keyword:*_cmdlet_*
+type: any
+priority: 3

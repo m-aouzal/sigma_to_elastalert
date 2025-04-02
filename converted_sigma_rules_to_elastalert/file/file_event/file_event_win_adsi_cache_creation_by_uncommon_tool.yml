@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of an "Active Directory Schema Cache File" (.sch) file by an uncommon tool.
+name: ADSI-Cache File Creation By Uncommon Tool
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (file.path.keyword:*\local\microsoft\windows\schcache* AND file.path.keyword:*.sch) AND (NOT (((winlog.event_data.image.keyword:(*:\program files\cylance\desktop\cylancesvc.exe OR *:\windows\ccm\ccmexec.exe OR *:\windows\system32\dllhost.exe OR *:\windows\system32\dsac.exe OR *:\windows\system32\efsui.exe OR *:\windows\system32\mmc.exe OR *:\windows\system32\svchost.exe OR *:\windows\system32\wbem\wmiprvse.exe OR *:\windows\system32\windowspowershell\v1.0\powershell.exe)) OR (winlog.event_data.image.keyword:(*:\windows\ccmsetup\autoupgrade\ccmsetup* OR *:\program files\sentinelone\sentinel agent*))) OR ((process.executable.keyword:*:\program files* AND process.executable.keyword:*\microsoft office*) AND process.executable.keyword:*\outlook.exe))) AND (NOT (process.executable.keyword:(*\landesk\ldclient\ldapwhoami.exe OR *:\program files\citrix\receiver storefront\services\defaultdomainservices\citrix.deliveryservices.domainservices.servicehost.exe)))
+type: any
+priority: 2

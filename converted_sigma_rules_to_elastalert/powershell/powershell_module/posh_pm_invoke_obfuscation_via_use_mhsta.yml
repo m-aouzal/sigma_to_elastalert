@@ -1,0 +1,10 @@
+description: |
+  Detects Obfuscated Powershell via use MSHTA in Scripts
+name: Invoke-Obfuscation Via Use MSHTA - PowerShell Module
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*set* AND powershell.file.script_block_text.keyword:*&&* AND powershell.file.script_block_text.keyword:*mshta* AND powershell.file.script_block_text.keyword:*vbscript:createobject* AND powershell.file.script_block_text.keyword:*.run* AND powershell.file.script_block_text.keyword:*(window.close)*
+type: any
+priority: 3

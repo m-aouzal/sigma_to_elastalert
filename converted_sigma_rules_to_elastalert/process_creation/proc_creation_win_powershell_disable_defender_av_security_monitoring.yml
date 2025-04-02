@@ -1,0 +1,10 @@
+description: |
+  Detects attackers attempting to disable Windows Defender using Powershell
+name: Disable Windows Defender AV Security Monitoring
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (((winlog.event_data.image.keyword:(*\powershell.exe OR *\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (process.command_line.keyword:(*-disablebehaviormonitoring $true* OR *-disableruntimemonitoring $true*))) OR ((winlog.event_data.image.keyword:*\sc.exe OR winlog.event_data.originalfilename.keyword:sc.exe) AND ((process.command_line.keyword:*stop* AND process.command_line.keyword:*windefend*) OR (process.command_line.keyword:*delete* AND process.command_line.keyword:*windefend*) OR (process.command_line.keyword:*config* AND process.command_line.keyword:*windefend* AND process.command_line.keyword:*start=disabled*)))
+type: any
+priority: 3

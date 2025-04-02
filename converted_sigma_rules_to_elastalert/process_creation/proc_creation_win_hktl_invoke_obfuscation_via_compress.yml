@@ -1,0 +1,10 @@
+description: |
+  Detects Obfuscated Powershell via COMPRESS OBFUSCATION
+name: Invoke-Obfuscation COMPRESS OBFUSCATION
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.command_line.keyword:*new-object* AND process.command_line.keyword:*text.encoding]::ascii*) AND (process.command_line.keyword:(*system.io.compression.deflatestream* OR *system.io.streamreader* OR *readtoend(*))
+type: any
+priority: 2

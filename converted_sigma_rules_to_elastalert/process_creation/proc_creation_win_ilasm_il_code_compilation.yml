@@ -1,0 +1,10 @@
+description: |
+  Detects the use of "Ilasm.EXE" in order to compile C# intermediate (IL) code to EXE or DLL.
+name: C# IL Code Compilation Via Ilasm.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\ilasm.exe OR winlog.event_data.originalfilename.keyword:ilasm.exe) AND (process.command_line.keyword:(* /dll* OR * /exe*))
+type: any
+priority: 2

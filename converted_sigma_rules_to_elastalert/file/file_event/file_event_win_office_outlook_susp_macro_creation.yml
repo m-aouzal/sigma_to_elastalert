@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of a macro file for Outlook.
+name: Suspicious Outlook Macro Created
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\microsoft\outlook\vbaproject.otm AND (NOT process.executable.keyword:*\outlook.exe)
+type: any
+priority: 3

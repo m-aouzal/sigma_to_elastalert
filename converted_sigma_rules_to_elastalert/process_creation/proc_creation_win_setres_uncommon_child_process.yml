@@ -1,0 +1,13 @@
+description: |
+  Detects uncommon child process of Setres.EXE.
+Setres.EXE is a Windows server only process and tool that can be used to set the screen resolution.
+It can potentially be abused in order to launch any arbitrary file with a name containing the word "choice" from the current execution path.
+
+name: Uncommon Child Process Of Setres.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.parent.executable.keyword:*\setres.exe AND process.executable.keyword:*\choice*) AND (NOT (process.executable.keyword:(*c:\windows\system32\choice.exe OR *c:\windows\syswow64\choice.exe)))
+type: any
+priority: 3

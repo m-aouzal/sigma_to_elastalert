@@ -1,0 +1,10 @@
+description: |
+  Detects Octopus Scanner Malware.
+name: Octopus Scanner Malware
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:(*\appdata\local\microsoft\cache134.dat OR *\appdata\local\microsoft\explorersync.db)
+type: any
+priority: 3

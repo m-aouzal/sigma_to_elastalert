@@ -1,0 +1,10 @@
+description: |
+  Detects unusual processes accessing desktop.ini remotely over network share, which can be leveraged to alter how Explorer displays a folder's content (i.e. renaming files) without changing them on disk.
+name: Windows Network Access Suspicious desktop.ini Action
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:5145 AND winlog.event_data.ObjectType.keyword:file AND winlog.event_data.RelativeTargetName.keyword:*\desktop.ini AND (winlog.event_data.AccessList.keyword:(*writedata* OR *delete* OR *writedac* OR *appenddata* OR *addsubdirectory*)))
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects Windows shells and scripting applications that write files to suspicious folders
+name: Windows Shell/Scripting Application File Write to Suspicious Folder
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((process.executable.keyword:(*\bash.exe OR *\cmd.exe OR *\cscript.exe OR *\msbuild.exe OR *\powershell.exe OR *\pwsh.exe OR *\sh.exe OR *\wscript.exe)) AND (file.path.keyword:(c:\perflogs* OR c:\users\public*))) OR ((process.executable.keyword:(*\certutil.exe OR *\forfiles.exe OR *\mshta.exe OR *\schtasks.exe OR *\scriptrunner.exe OR *\wmic.exe)) AND (file.path.keyword:(*c:\perflogs* OR *c:\users\public* OR *c:\windows\temp*)))
+type: any
+priority: 3

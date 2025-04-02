@@ -1,0 +1,10 @@
+description: |
+  Detects command execution via ScreenConnect RMM
+name: Remote Access Tool - ScreenConnect Command Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Application AND (winlog.provider_name.keyword:screenconnect AND event.code.keyword:200 AND winlog.event_data.Data.keyword:*executed command of length*)
+type: any
+priority: 1

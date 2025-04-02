@@ -1,0 +1,10 @@
+description: |
+  Detect set DisallowRun to 1 to prevent user running specific computer program
+name: Add DisallowRun Execution to Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*software\microsoft\windows\currentversion\policies\explorer\disallowrun AND winlog.event_data.Details.keyword:dword (0x00000001)
+type: any
+priority: 2

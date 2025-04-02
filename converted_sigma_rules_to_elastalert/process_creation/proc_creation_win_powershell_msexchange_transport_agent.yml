@@ -1,0 +1,10 @@
+description: |
+  Detects the Installation of a Exchange Transport Agent
+name: MSExchange Transport Agent Installation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*install-transportagent*
+type: any
+priority: 2

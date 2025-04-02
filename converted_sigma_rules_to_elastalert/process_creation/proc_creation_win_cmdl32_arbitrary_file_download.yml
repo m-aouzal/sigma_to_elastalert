@@ -1,0 +1,13 @@
+description: |
+  Detects execution of Cmdl32 with the "/vpn" and "/lan" flags.
+Attackers can abuse this utility in order to download arbitrary files via a configuration file.
+Inspect the location and the content of the file passed as an argument in order to determine if it is suspicious.
+
+name: Potential Arbitrary File Download Via Cmdl32.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\cmdl32.exe OR winlog.event_data.originalfilename.keyword:cmdl32.exe) AND (process.command_line.keyword:*/vpn* AND process.command_line.keyword:*/lan*)
+type: any
+priority: 2

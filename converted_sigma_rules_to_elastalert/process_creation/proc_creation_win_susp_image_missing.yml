@@ -1,0 +1,10 @@
+description: |
+  Checks whether the image specified in a process creation event is not a full, absolute path (caused by process ghosting or other unorthodox methods to start a process)
+name: Execution Of Non-Existing File
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (NOT process.executable.keyword:**) AND (NOT ((NOT _exists_:process.executable) OR (process.executable.keyword:(- OR "")) OR ((winlog.event_data.image.keyword:(system OR registry OR memcompression OR vmmem)) OR (winlog.event_data.commandline.keyword:(registry OR memcompression OR vmmem)))))
+type: any
+priority: 3

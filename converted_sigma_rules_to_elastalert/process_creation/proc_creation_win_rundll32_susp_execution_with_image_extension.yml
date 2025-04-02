@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of Rundll32.exe with DLL files masquerading as image files
+name: Suspicious Rundll32 Execution With Image Extension
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe) AND (process.command_line.keyword:(*.bmp* OR *.cr2* OR *.eps* OR *.gif* OR *.ico* OR *.jpeg* OR *.jpg* OR *.nef* OR *.orf* OR *.png* OR *.raw* OR *.sr2* OR *.tif* OR *.tiff*))
+type: any
+priority: 3

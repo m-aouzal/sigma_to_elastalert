@@ -1,0 +1,11 @@
+description: |
+  Detects incoming connections to AnyDesk. This could indicate a potential remote attacker trying to connect to a listening instance of AnyDesk and use it as potential command and control channel.
+  
+name: Remote Access Tool - AnyDesk Incoming Connection
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:(*\anydesk.exe OR *\anydeskmsi.exe)) AND network.direction.keyword:false
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects an uncommon child process of "odbcconf.exe" binary which normally shouldn't have any child processes.
+name: Uncommon Child Process Spawned By Odbcconf.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\odbcconf.exe
+type: any
+priority: 2

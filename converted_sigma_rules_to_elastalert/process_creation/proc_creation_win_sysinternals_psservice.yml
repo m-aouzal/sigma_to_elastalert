@@ -1,0 +1,10 @@
+description: |
+  Detects usage of Sysinternals PsService which can be abused for service reconnaissance and tampering
+name: Sysinternals PsService Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.originalfilename.keyword:psservice.exe OR (winlog.event_data.image.keyword:(*\psservice.exe OR *\psservice64.exe))
+type: any
+priority: 2

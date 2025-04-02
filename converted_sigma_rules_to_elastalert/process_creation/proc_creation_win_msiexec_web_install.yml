@@ -1,0 +1,10 @@
+description: |
+  Detects suspicious msiexec process starts with web addresses as parameter
+name: MsiExec Web Install
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:* msiexec* AND process.command_line.keyword:*://*
+type: any
+priority: 2

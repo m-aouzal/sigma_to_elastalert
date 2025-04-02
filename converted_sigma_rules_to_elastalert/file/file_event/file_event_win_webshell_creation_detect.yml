@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of files with certain extensions on a static web site. This can be indicative of potential uploads of a web shell.
+name: Potential Webshell Creation On Static Website
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((file.path.keyword:*\inetpub\wwwroot* AND (file.path.keyword:(*.ashx* OR *.asp* OR *.ph* OR *.soap*))) OR ((file.path.keyword:(*\www* OR *\htdocs* OR *\html*)) AND file.path.keyword:*.ph*)) AND (NOT ((file.path.keyword:(*\appdata\local\temp* OR *\windows\temp*)) OR process.executable.keyword:system OR file.path.keyword:*\xampp*))
+type: any
+priority: 2

@@ -1,0 +1,12 @@
+description: |
+  Adversaries may use port monitors to run an attacker supplied DLL during system boot for persistence or privilege escalation.
+A port monitor can be set through the AddMonitor API call to set a DLL to be loaded at startup.
+
+name: Add Port Monitor Persistence in Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:*\control\print\monitors* AND winlog.event_data.Details.keyword:*.dll) AND (NOT ((process.executable.keyword:c:\windows\system32\spoolsv.exe AND registry.path.keyword:*\control\print\monitors\cutepdf writer monitor v4.0\driver* AND winlog.event_data.Details.keyword:cpwmon64_v40.dll AND (user.name.keyword:(*authori* OR *autori*))) OR registry.path.keyword:*\control\print\monitors\monvnc\driver* OR (registry.path.keyword:*control\print\environments* AND registry.path.keyword:*\drivers* AND registry.path.keyword:*\vnc printer*)))
+type: any
+priority: 2

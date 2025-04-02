@@ -1,0 +1,10 @@
+description: |
+  Detects static QMS 810 and mimikatz driver name used by Mimikatz as exploited in CVE-2021-1675 and CVE-2021-34527
+name: PrinterNightmare Mimikatz Driver Name
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:(*\control\print\environments\windows x64\drivers\version-3\qms 810* OR *\control\print\environments\windows x64\drivers\version-3\mimikatz*)) OR (registry.path.keyword:*legitprinter* AND registry.path.keyword:*\control\print\environments\windows*) OR ((registry.path.keyword:(*\control\print\environments* OR *\currentversion\print\printers*)) AND (registry.path.keyword:(*gentil kiwi* OR *mimikatz printer* OR *kiwi legit printer*)))
+type: any
+priority: 4

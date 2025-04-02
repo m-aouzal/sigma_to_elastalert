@@ -1,0 +1,10 @@
+description: |
+  Detects PowerShell script execution via input stream redirect
+name: Run PowerShell Script from Redirected Input Stream
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:(*\powershell.exe OR *\pwsh.exe)) AND process.command_line.keyword:/s-s*</
+type: any
+priority: 3

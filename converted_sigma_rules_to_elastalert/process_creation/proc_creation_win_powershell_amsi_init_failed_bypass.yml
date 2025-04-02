@@ -1,0 +1,10 @@
+description: |
+  Detects Request to "amsiInitFailed" that can be used to disable AMSI Scanning
+name: Potential AMSI Bypass Via .NET Reflection
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.commandline.keyword:*system.management.automation.amsiutils* AND winlog.event_data.commandline.keyword:*amsiinitfailed*) OR (winlog.event_data.commandline.keyword:*[ref].assembly.gettype* AND winlog.event_data.commandline.keyword:*setvalue($null,$true)* AND winlog.event_data.commandline.keyword:*nonpublic,static*)
+type: any
+priority: 3

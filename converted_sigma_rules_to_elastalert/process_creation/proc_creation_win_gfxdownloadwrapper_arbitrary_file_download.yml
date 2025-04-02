@@ -1,0 +1,10 @@
+description: |
+  Detects execution of GfxDownloadWrapper.exe with a URL as an argument to download file.
+name: Arbitrary File Download Via GfxDownloadWrapper.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\gfxdownloadwrapper.exe AND (process.command_line.keyword:(*http://* OR *https://*))) AND (NOT process.command_line.keyword:*https://gameplayapi.intel.com/*)
+type: any
+priority: 2

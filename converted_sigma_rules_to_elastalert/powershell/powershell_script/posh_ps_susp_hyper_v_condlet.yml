@@ -1,0 +1,10 @@
+description: |
+  Adversaries may carry out malicious operations using a virtual instance to avoid detection
+name: Suspicious Hyper-V Cmdlets
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:(*new-vm* OR *set-vmfirmware* OR *start-vm*)
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects specific patterns found after a successful ProxyLogon exploitation in relation to a Commandlet invocation of Set-OabVirtualDirectory
+name: ProxyLogon MSExchange OabVirtualDirectory
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:MSExchange Management AND ((*oabvirtualdirectory* AND * -externalurl*) AND (*eval(request* OR *http://f/<script* OR *"unsafe"};* OR *function page_load()*))
+type: any
+priority: 4

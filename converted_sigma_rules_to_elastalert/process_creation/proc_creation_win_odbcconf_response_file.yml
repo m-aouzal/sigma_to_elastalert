@@ -1,0 +1,10 @@
+description: |
+  Detects execution of "odbcconf" with the "-f" flag in order to load a response file which might contain a malicious action.
+name: Response File Execution Via Odbcconf.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\odbcconf.exe OR winlog.event_data.originalfilename.keyword:odbcconf.exe) AND process.command_line.keyword:(* -f* OR * /f* OR * –f* OR * —f* OR * ―f*) AND process.command_line.keyword:*.rsp*
+type: any
+priority: 2

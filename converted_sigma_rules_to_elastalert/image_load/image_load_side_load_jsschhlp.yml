@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading using JUSTSYSTEMS Japanese word processor
+name: Potential DLL Sideloading Via JsSchHlp
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\jsespr.dll AND (NOT file.path.keyword:c:\program files\common files\justsystem\jsschhlp*)
+type: any
+priority: 2

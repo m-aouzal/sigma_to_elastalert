@@ -1,0 +1,10 @@
+description: |
+  Detects writing data into NTFS alternate data streams from powershell. Needs Script Block Logging.
+name: NTFS Alternate Data Stream
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (powershell.file.script_block_text.keyword:(*set-content* OR *add-content*)) AND powershell.file.script_block_text.keyword:*-stream*
+type: any
+priority: 3

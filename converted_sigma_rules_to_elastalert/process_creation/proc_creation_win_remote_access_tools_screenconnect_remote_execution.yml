@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of a system command via the ScreenConnect RMM service.
+name: Remote Access Tool - ScreenConnect Remote Command Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\screenconnect.clientservice.exe AND (winlog.event_data.image.keyword:*\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe) AND process.command_line.keyword:*\temp\screenconnect*
+type: any
+priority: 1

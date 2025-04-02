@@ -1,0 +1,10 @@
+description: |
+  Unfixed method for UAC bypass from Windows 10. WSReset.exe file associated with the Windows Store. It will run a binary file contained in a low-privilege registry.
+name: UAC Bypass Via Wsreset
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\appx82a6gwre4fdg3bt635tn5ctqjf8msdd2\shell\open\command
+type: any
+priority: 3

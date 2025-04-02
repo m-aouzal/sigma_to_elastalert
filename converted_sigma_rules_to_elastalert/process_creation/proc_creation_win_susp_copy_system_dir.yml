@@ -1,0 +1,12 @@
+description: |
+  Detects a suspicious copy operation that tries to copy a program from system (System32, SysWOW64, WinSxS) directories to another on disk.
+Often used to move LOLBINs such as 'certutil' or 'desktopimgdownldr' to a different location with a different name in order to bypass detections based on locations.
+
+name: Suspicious Copy From or To System Directory
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((process.executable.keyword:*\cmd.exe AND process.command_line.keyword:*copy*) OR ((process.executable.keyword:(*\powershell.exe OR *\pwsh.exe)) AND (process.command_line.keyword:(*copy-item* OR * copy* OR *cpi* OR * cp*))) OR ((winlog.event_data.image.keyword:(*\robocopy.exe OR *\xcopy.exe)) OR (winlog.event_data.originalfilename.keyword:(robocopy.exe OR xcopy.exe)))) AND (process.command_line.keyword:(*\system32* OR *\syswow64* OR *\winsxs*))
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Remove SD (Security Descriptor) value in ScheduleTaskCacheTree registry hive to hide schedule task. This technique is used by Tarrask malware
+name: Removal Of SD Value to Hide Schedule Task - Registry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.event_data.EventType.keyword:deletekey AND (registry.path.keyword:*\software\microsoft\windows nt\currentversion\schedule\taskcache\tree* AND registry.path.keyword:*sd*)
+type: any
+priority: 2

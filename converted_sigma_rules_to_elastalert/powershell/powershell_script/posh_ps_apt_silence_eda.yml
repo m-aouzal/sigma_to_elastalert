@@ -1,0 +1,10 @@
+description: |
+  Detects Silence EmpireDNSAgent as described in the Group-IP report
+name: Silence.EDA Detection
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (powershell.file.script_block_text.keyword:*system.diagnostics.process* AND powershell.file.script_block_text.keyword:*stop-computer* AND powershell.file.script_block_text.keyword:*restart-computer* AND powershell.file.script_block_text.keyword:*exception in execution* AND powershell.file.script_block_text.keyword:*$cmdargs* AND powershell.file.script_block_text.keyword:*close-dnscat2tunnel*) AND (powershell.file.script_block_text.keyword:*set type=$lookuptype`nserver* AND powershell.file.script_block_text.keyword:*$command | nslookup 2>&1 | out-string* AND powershell.file.script_block_text.keyword:*new-randomdnsfield* AND powershell.file.script_block_text.keyword:*[convert]::tostring($synoptions, 16)* AND powershell.file.script_block_text.keyword:*$session.dead = $true* AND powershell.file.script_block_text.keyword:*$session["driver"] -eq*)
+type: any
+priority: 4

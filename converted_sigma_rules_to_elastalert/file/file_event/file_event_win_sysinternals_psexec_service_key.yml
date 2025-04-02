@@ -1,0 +1,10 @@
+description: |
+  Detects creation of the PSEXEC key file. Which is created anytime a PsExec command is executed. It gets written to the file system and will be recorded in the USN Journal on the target system
+name: PSEXEC Remote Execution File Artefact
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:c:\windows\psexec-* AND file.path.keyword:*.key
+type: any
+priority: 3

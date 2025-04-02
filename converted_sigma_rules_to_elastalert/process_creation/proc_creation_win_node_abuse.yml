@@ -1,0 +1,10 @@
+description: |
+  Detects the execution node.exe which is shipped with multiple software such as VMware, Adobe...etc. In order to execute arbitrary code. For example to establish reverse shell as seen in Log4j attacks...etc
+name: Potential Arbitrary Code Execution Via Node.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\node.exe AND (process.command_line.keyword:(* -e* OR * --eval*))) AND (process.command_line.keyword:*.exec(* AND process.command_line.keyword:*net.socket* AND process.command_line.keyword:*.connect* AND process.command_line.keyword:*child_process*)
+type: any
+priority: 3

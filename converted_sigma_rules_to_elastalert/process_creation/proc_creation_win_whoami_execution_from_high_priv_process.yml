@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of "whoami.exe" by privileged accounts that are often abused by threat actors
+name: Whoami.EXE Execution From Privileged Process
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.originalfilename.keyword:whoami.exe OR winlog.event_data.image.keyword:*\whoami.exe) AND (user.name.keyword:(*authori* OR *autori* OR *trustedinstaller*))
+type: any
+priority: 3

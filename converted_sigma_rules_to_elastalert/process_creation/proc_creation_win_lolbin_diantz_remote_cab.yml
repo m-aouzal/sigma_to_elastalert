@@ -1,0 +1,10 @@
+description: |
+  Download and compress a remote file and store it in a cab file on local machine.
+name: Suspicious Diantz Download and Compress Into a CAB File
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*diantz.exe* AND process.command_line.keyword:* \* AND process.command_line.keyword:*.cab*
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Detects possible NTLM coercion via certutil using the 'syncwithWU' flag
+name: Potential NTLM Coercion Via Certutil.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\certutil.exe OR winlog.event_data.originalfilename.keyword:certutil.exe) AND (process.command_line.keyword:* -syncwithwu* AND process.command_line.keyword:* \*)
+type: any
+priority: 3

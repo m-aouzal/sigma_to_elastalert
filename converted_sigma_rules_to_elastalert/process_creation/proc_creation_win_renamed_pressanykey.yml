@@ -1,0 +1,10 @@
+description: |
+  Detects renamed execution of "Microsoft.NodejsTools.PressAnyKey.exe", which can be abused as a LOLBIN to execute arbitrary binaries
+name: Visual Studio NodejsTools PressAnyKey Renamed Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.pe.original_file_name.keyword:microsoft.nodejstools.pressanykey.exe AND (NOT process.executable.keyword:*\microsoft.nodejstools.pressanykey.exe)
+type: any
+priority: 2

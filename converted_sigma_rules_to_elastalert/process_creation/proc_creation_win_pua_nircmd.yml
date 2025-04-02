@@ -1,0 +1,10 @@
+description: |
+  Detects the use of NirCmd tool for command execution, which could be the result of legitimate administrative activity
+name: PUA - NirCmd Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\nircmd.exe OR winlog.event_data.originalfilename.keyword:nircmd.exe) OR (process.command_line.keyword:(* execmd* OR *.exe script* OR *.exe shexec* OR * runinteractive*))) OR ((process.command_line.keyword:(* exec* OR * exec2*)) AND (process.command_line.keyword:(* show* OR * hide*)))
+type: any
+priority: 2

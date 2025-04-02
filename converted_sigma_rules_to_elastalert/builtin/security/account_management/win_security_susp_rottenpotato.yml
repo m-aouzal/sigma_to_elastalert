@@ -1,0 +1,10 @@
+description: |
+  Detects logon events that have characteristics of events generated during an attack with RottenPotato and the like
+name: RottenPotato Like Attack Pattern
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:3 AND winlog.event_data.TargetUserName.keyword:anonymous logon AND source.domain.keyword:- AND (source.ip.keyword:(127.0.0.1 OR ::1)))
+type: any
+priority: 3

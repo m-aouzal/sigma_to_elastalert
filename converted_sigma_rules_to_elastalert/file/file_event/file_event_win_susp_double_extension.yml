@@ -1,0 +1,10 @@
+description: |
+  Detects dropped files with double extensions, which is often used by malware as a method to abuse the fact that Windows hide default extensions by default.
+name: Suspicious Double Extension Files
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((file.path.keyword:(*.exe OR *.iso OR *.rar OR *.zip)) AND (file.path.keyword:(*.doc.* OR *.docx.* OR *.jpg.* OR *.pdf.* OR *.ppt.* OR *.pptx.* OR *.xls.* OR *.xlsx.*))) OR (file.path.keyword:(*.rar.exe OR *.zip.exe))
+type: any
+priority: 3

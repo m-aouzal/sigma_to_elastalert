@@ -1,0 +1,10 @@
+description: |
+  Detect indirect command execution via Program Compatibility Assistant pcwrun.exe
+name: Indirect Command Execution By Program Compatibility Wizard
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\pcwrun.exe
+type: any
+priority: 1

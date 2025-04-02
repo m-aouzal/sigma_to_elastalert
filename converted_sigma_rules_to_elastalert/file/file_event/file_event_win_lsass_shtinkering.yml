@@ -1,0 +1,10 @@
+description: |
+  Detects the presence of an LSASS dump file in the "CrashDumps" folder. This could be a sign of LSASS credential dumping. Techniques such as the LSASS Shtinkering have been seen abusing the Windows Error Reporting to dump said process.
+name: LSASS Process Dump Artefact In CrashDumps Folder
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:c:\windows\system32\config\systemprofile\appdata\local\crashdumps* AND file.path.keyword:*lsass.exe.* AND file.path.keyword:*.dmp
+type: any
+priority: 3

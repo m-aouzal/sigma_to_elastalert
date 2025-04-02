@@ -1,0 +1,10 @@
+description: |
+  Detects usage of the "ConvertTo-SecureString" cmdlet via the commandline. Which is fairly uncommon and could indicate potential suspicious activity
+name: ConvertTo-SecureString Cmdlet Usage Via CommandLine
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:(*\powershell.exe OR *\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND process.command_line.keyword:*convertto-securestring*
+type: any
+priority: 2

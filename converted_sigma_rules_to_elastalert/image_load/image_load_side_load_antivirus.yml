@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading of DLLs that are part of antivirus software suchas McAfee, Symantec...etc
+name: Potential Antivirus Software DLL Sideloading
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (file.path.keyword:*\log.dll AND (NOT ((file.path.keyword:(c:\program files\bitdefender antivirus free* OR c:\program files (x86)\bitdefender antivirus free*)) OR (process.executable.keyword:c:\program files\dell\saremediation\audit\telemetryutility.exe AND (file.path.keyword:(c:\program files\dell\saremediation\plugin\log.dll OR c:\program files\dell\saremediation\audit\log.dll))) OR file.path.keyword:c:\program files\canon\myprinter*))) OR (file.path.keyword:*\qrt.dll AND (NOT (file.path.keyword:(c:\program files\f-secure\anti-virus* OR c:\program files (x86)\f-secure\anti-virus*)))) OR ((file.path.keyword:(*\ashldres.dll OR *\lockdown.dll OR *\vsodscpl.dll)) AND (NOT (file.path.keyword:(c:\program files\mcafee* OR c:\program files (x86)\mcafee*)))) OR (file.path.keyword:*\vftrace.dll AND (NOT (file.path.keyword:(c:\program files\cyberark\endpoint privilege manager\agent\x32* OR c:\program files (x86)\cyberark\endpoint privilege manager\agent\x32*)))) OR (file.path.keyword:*\wsc.dll AND (NOT (file.path.keyword:(c:\program files\avast software\avast* OR c:\program files (x86)\avast software\avast*)))) OR (file.path.keyword:*\tmdbglog.dll AND (NOT (file.path.keyword:(c:\program files\trend micro\titanium* OR c:\program files (x86)\trend micro\titanium*)))) OR (file.path.keyword:*\dlpprem32.dll AND (NOT (file.path.keyword:(c:\program files\eset* OR c:\program files (x86)\eset*))))
+type: any
+priority: 2

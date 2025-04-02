@@ -1,0 +1,10 @@
+description: |
+  A General detection for sdclt spawning new processes. This could be an indicator of sdclt being used for bypass UAC techniques.
+name: Sdclt Child Processes
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\sdclt.exe
+type: any
+priority: 2

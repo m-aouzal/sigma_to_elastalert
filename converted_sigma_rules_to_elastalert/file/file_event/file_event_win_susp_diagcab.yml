@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of diagcab file, which could be caused by some legitimate installer or is a sign of exploitation (review the filename and its location)
+name: Creation of a Diagcab
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*.diagcab
+type: any
+priority: 2

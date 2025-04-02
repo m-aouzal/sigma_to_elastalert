@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading using ClassicExplorer32.dll from the Classic Shell software
+name: Potential DLL Sideloading Via ClassicExplorer32.dll
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\classicexplorer32.dll AND (NOT file.path.keyword:c:\program files\classic shell*)
+type: any
+priority: 2

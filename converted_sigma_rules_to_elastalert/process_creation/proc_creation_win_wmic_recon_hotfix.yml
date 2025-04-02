@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of wmic with the "qfe" flag in order to obtain information about installed hotfix updates on the system. This is often used by pentester and attacker enumeration scripts
+name: Windows Hotfix Updates Reconnaissance Via Wmic.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.originalfilename.keyword:wmic.exe OR winlog.event_data.image.keyword:*\wmic.exe) AND process.command_line.keyword:* qfe*
+type: any
+priority: 2

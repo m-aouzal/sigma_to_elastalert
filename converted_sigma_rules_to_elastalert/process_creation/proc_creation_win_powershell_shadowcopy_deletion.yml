@@ -1,0 +1,10 @@
+description: |
+  Detects deletion of Windows Volume Shadow Copies with PowerShell code and Get-WMIObject. This technique is used by numerous ransomware families such as Sodinokibi/REvil
+name: Deletion of Volume Shadow Copies via WMI with PowerShell
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.command_line.keyword:(*get-wmiobject* OR *gwmi* OR *get-ciminstance* OR *gcim*)) AND process.command_line.keyword:*win32_shadowcopy* AND (process.command_line.keyword:(*.delete()* OR *remove-wmiobject* OR *rwmi* OR *remove-ciminstance* OR *rcim*))
+type: any
+priority: 3

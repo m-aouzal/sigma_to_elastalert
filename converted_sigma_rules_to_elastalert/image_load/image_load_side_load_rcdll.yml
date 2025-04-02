@@ -1,0 +1,10 @@
+description: |
+  Detects potential DLL sideloading of rcdll.dll
+name: Potential Rcdll.DLL Sideloading
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\rcdll.dll AND (NOT (file.path.keyword:(c:\program files (x86)\microsoft visual studio* OR c:\program files (x86)\windows kits*)))
+type: any
+priority: 3

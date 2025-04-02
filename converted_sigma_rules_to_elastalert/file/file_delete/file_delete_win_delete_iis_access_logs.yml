@@ -1,0 +1,10 @@
+description: |
+  Detects the deletion of IIS WebServer access logs which may indicate an attempt to destroy forensic evidence
+name: IIS WebServer Access Logs Deleted
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*\inetpub\logs\logfiles* AND file.path.keyword:*.log
+type: any
+priority: 2

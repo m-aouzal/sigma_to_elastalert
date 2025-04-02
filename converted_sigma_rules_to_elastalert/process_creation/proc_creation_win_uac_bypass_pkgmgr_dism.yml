@@ -1,0 +1,10 @@
+description: |
+  Detects the pattern of UAC Bypass using pkgmgr.exe and dism.exe (UACMe 23)
+name: UAC Bypass Using PkgMgr and DISM
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\pkgmgr.exe AND process.executable.keyword:*\dism.exe AND (winlog.event_data.IntegrityLevel.keyword:(high OR system OR s-1-16-16384 OR s-1-16-12288))
+type: any
+priority: 3

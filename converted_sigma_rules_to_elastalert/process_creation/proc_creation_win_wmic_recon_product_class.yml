@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of WMIC in order to get a list of firewall and antivirus products
+name: Potential Product Class Reconnaissance Via Wmic.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\wmic.exe OR winlog.event_data.originalfilename.keyword:wmic.exe) AND (process.command_line.keyword:(*antivirusproduct* OR *firewallproduct*))
+type: any
+priority: 2

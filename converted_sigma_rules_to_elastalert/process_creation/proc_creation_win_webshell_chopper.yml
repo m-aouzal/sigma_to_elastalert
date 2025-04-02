@@ -1,0 +1,10 @@
+description: |
+  Detects patterns found in process executions cause by China Chopper like tiny (ASPX) webshells
+name: Chopper Webshell Process Pattern
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\w3wp.exe OR winlog.event_data.parentimage.keyword:*\w3wp.exe) AND (process.command_line.keyword:(*&ipconfig&echo* OR *&quser&echo* OR *&whoami&echo* OR *&c:&echo* OR *&cd&echo* OR *&dir&echo* OR *&echo [e]* OR *&echo [s]*))
+type: any
+priority: 3

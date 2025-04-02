@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of "wmic" with the "process" flag, which adversary might use to list processes running on the compromised host or list installed software hotfixes and patches.
+name: Process Reconnaissance Via Wmic.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\wmic.exe OR winlog.event_data.originalfilename.keyword:wmic.exe) AND process.command_line.keyword:*process*) AND (NOT (process.command_line.keyword:*call* AND process.command_line.keyword:*create*))
+type: any
+priority: 2

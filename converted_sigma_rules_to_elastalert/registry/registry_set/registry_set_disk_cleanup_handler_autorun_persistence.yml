@@ -1,0 +1,16 @@
+description: |
+  Detects when an attacker modifies values of the Disk Cleanup Handler in the registry to achieve persistence via autorun.
+The disk cleanup manager is part of the operating system.
+It displays the dialog box […] The user has the option of enabling or disabling individual handlers by selecting or clearing their check box in the disk cleanup manager's UI.
+Although Windows comes with a number of disk cleanup handlers, they aren't designed to handle files produced by other applications.
+Instead, the disk cleanup manager is designed to be flexible and extensible by enabling any developer to implement and register their own disk cleanup handler.
+Any developer can extend the available disk cleanup services by implementing and registering a disk cleanup handler.
+
+name: Persistence Via Disk Cleanup Handler - Autorun
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: registry.path.keyword:*\software\microsoft\windows\currentversion\explorer\volumecaches* AND ((registry.path.keyword:*\autorun* AND winlog.event_data.Details.keyword:dword (0x00000001)) OR ((registry.path.keyword:(*\cleanupstring* OR *\precleanupstring*)) AND (winlog.event_data.Details.keyword:(*cmd* OR *powershell* OR *rundll32* OR *mshta* OR *cscript* OR *wscript* OR *wsl* OR *\users\public* OR *\windows\temp* OR *\microsoft\windows\start menu\programs\startup*))))
+type: any
+priority: 2

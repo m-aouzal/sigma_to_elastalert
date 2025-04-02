@@ -1,0 +1,10 @@
+description: |
+  Detects nltest commands that can be used for information discovery
+name: Potential Recon Activity Via Nltest.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\nltest.exe OR winlog.event_data.originalfilename.keyword:nltestrk.exe) AND ((winlog.event_data.commandline.keyword:*server* AND winlog.event_data.commandline.keyword:*query*) OR (winlog.event_data.commandline.keyword:(*/user* OR *all_trusts* OR *dclist:* OR *dnsgetdc:* OR *domain_trusts* OR *dsgetdc:* OR *parentdomain* OR *trusted_domains*)))
+type: any
+priority: 2

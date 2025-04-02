@@ -1,0 +1,12 @@
+description: |
+  Adversaries may modify file time attributes to hide new or changes to existing files.
+Timestomping is a technique that modifies the timestamps of a file (the modify, access, create, and change times), often to mimic files that are in the same folder.
+
+name: Powershell Timestomp
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:(*.creationtime =* OR *.lastwritetime =* OR *.lastaccesstime =* OR *[io.file]::setcreationtime* OR *[io.file]::setlastaccesstime* OR *[io.file]::setlastwritetime*)
+type: any
+priority: 2

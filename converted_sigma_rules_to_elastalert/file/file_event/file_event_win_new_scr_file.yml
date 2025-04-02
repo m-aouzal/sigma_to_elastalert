@@ -1,0 +1,10 @@
+description: |
+  Detects the creation of screensaver files (.scr) outside of system folders. Attackers may execute an application as an ".SCR" file using "rundll32.exe desk.cpl,InstallScreenSaver" for example.
+name: SCR File Write Event
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: file.path.keyword:*.scr AND (NOT (file.path.keyword:(*:\$windows.~bt\newos* OR *:\windows\system32* OR *:\windows\syswow64* OR *:\windows\winsxs* OR *:\wudownloadcache*)))
+type: any
+priority: 2

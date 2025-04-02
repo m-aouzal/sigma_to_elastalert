@@ -1,0 +1,10 @@
+description: |
+  Detects when an application exports a certificate (and potentially the private key as well) from the local Windows certificate store.
+name: Certificate Exported From Local Certificate Store
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel.keyword:Microsoft-Windows-CertificateServicesClient-Lifecycle-System/Operational AND event.code.keyword:1007
+type: any
+priority: 2

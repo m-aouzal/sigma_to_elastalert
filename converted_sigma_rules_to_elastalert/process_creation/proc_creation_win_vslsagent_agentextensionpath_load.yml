@@ -1,0 +1,10 @@
+description: |
+  Detects Microsoft Visual Studio vsls-agent.exe lolbin execution with a suspicious library load using the --agentExtensionPath parameter
+name: Suspicious Vsls-Agent Command With AgentExtensionPath Load
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.executable.keyword:*\vsls-agent.exe AND process.command_line.keyword:*--agentextensionpath*) AND (NOT process.command_line.keyword:*microsoft.visualstudio.liveshare.agent.*)
+type: any
+priority: 2

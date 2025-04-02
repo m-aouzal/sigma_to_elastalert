@@ -1,0 +1,10 @@
+description: |
+  Detect usage of the "coregen.exe" (Microsoft CoreCLR Native Image Generator) binary to sideload arbitrary DLLs.
+name: Potential DLL Sideloading Using Coregen.exe
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\coregen.exe AND (NOT (file.path.keyword:(c:\program files (x86)\microsoft silverlight* OR c:\program files\microsoft silverlight* OR c:\windows\system32* OR c:\windows\syswow64*)))
+type: any
+priority: 2

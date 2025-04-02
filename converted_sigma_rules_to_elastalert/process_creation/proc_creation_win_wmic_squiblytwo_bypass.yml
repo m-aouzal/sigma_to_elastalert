@@ -1,0 +1,10 @@
+description: |
+  Detects potential SquiblyTwo attack technique with possible renamed WMIC via Imphash and OriginalFileName fields
+name: Potential SquiblyTwo Technique Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\wmic.exe OR winlog.event_data.originalfilename.keyword:wmic.exe OR (winlog.event_data.hashes.keyword:(*imphash=1b1a3f43bf37b5bfe60751f2ee2f326e* OR *imphash=37777a96245a3c74eb217308f3546f4c* OR *imphash=9d87c9d67ce724033c0b40cc4ca1b206*))) AND (process.command_line.keyword:*format:* AND process.command_line.keyword:*http*)
+type: any
+priority: 2

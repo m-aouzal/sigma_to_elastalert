@@ -1,0 +1,10 @@
+description: |
+  Detects the shell open key manipulation (exefile and ms-settings) used for persistence and the pattern of UAC Bypass using fodhelper.exe, computerdefaults.exe, slui.exe via registry keys (e.g. UACMe 33 or 62)
+name: Shell Open Registry Keys Manipulation
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.EventType.keyword:setvalue AND registry.path.keyword:*classes\ms-settings\shell\open\command\symboliclinkvalue AND winlog.event_data.Details.keyword:*\software\classes\{*) OR registry.path.keyword:*classes\ms-settings\shell\open\command\delegateexecute OR ((winlog.event_data.EventType.keyword:setvalue AND (registry.path.keyword:(*classes\ms-settings\shell\open\command\(default) OR *classes\exefile\shell\open\command\(default)))) AND (NOT winlog.event_data.Details.keyword:(empty)))
+type: any
+priority: 3

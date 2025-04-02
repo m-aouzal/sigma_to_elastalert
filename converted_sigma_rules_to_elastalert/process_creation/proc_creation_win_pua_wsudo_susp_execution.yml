@@ -1,0 +1,10 @@
+description: |
+  Detects usage of wsudo (Windows Sudo Utility). Which is a tool that let the user execute programs with different permissions (System, Trusted Installer, Administrator...etc)
+name: PUA - Wsudo Suspicious Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\wsudo.exe OR winlog.event_data.originalfilename.keyword:wsudo.exe OR winlog.event_data.description.keyword:windows sudo utility OR winlog.event_data.parentimage.keyword:*\wsudo-bridge.exe) OR (process.command_line.keyword:(*-u system* OR *-usystem* OR *-u trustedinstaller* OR *-utrustedinstaller* OR * --ti*))
+type: any
+priority: 3

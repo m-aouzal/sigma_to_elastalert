@@ -1,0 +1,10 @@
+description: |
+  Detects execution of the SharpLDAPmonitor. Which can monitor the creation, deletion and changes to LDAP objects.
+name: HackTool - SharpLDAPmonitor Execution
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\sharpldapmonitor.exe OR winlog.event_data.originalfilename.keyword:sharpldapmonitor.exe) OR (process.command_line.keyword:*/user:* AND process.command_line.keyword:*/pass:* AND process.command_line.keyword:*/dcip:*)
+type: any
+priority: 2

@@ -1,0 +1,14 @@
+description: |
+  Detects potential persistence behavior using the windows telemetry registry key.
+Windows telemetry makes use of the binary CompatTelRunner.exe to run a variety of commands and perform the actual telemetry collections.
+This binary was created to be easily extensible, and to that end, it relies on the registry to instruct on which commands to run.
+The problem is, it will run any arbitrary command without restriction of location or type.
+
+name: Potential Registry Persistence Attempt Via Windows Telemetry
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (registry.path.keyword:*\software\microsoft\windows nt\currentversion\appcompatflags\telemetrycontroller* AND registry.path.keyword:*\command AND (winlog.event_data.Details.keyword:(*.bat* OR *.bin* OR *.cmd* OR *.dat* OR *.dll* OR *.exe* OR *.hta* OR *.jar* OR *.js* OR *.msi* OR *.ps* OR *.sh* OR *.vb*))) AND (NOT (winlog.event_data.Details.keyword:(*\system32\compattelrunner.exe* OR *\system32\devicecensus.exe*)))
+type: any
+priority: 3

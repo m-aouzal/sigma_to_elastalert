@@ -1,0 +1,10 @@
+description: |
+  Detects the execution of "ldifde.exe" in order to export organizational Active Directory structure.
+name: Active Directory Structure Export Via Ldifde.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.image.keyword:*\ldifde.exe OR winlog.event_data.originalfilename.keyword:ldifde.exe) AND process.command_line.keyword:*-f*) AND (NOT process.command_line.keyword:* -i*)
+type: any
+priority: 2

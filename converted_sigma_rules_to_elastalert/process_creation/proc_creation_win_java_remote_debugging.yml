@@ -1,0 +1,10 @@
+description: |
+  Detects a JAVA process running with remote debugging allowing more than just localhost to connect
+name: Java Running with Remote Debugging
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (process.command_line.keyword:*transport=dt_socket,address=* AND (process.command_line.keyword:(*jre1.* OR *jdk1.*))) AND (NOT (process.command_line.keyword:(*address=127.0.0.1* OR *address=localhost*)))
+type: any
+priority: 2

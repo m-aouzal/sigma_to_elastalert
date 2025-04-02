@@ -1,0 +1,10 @@
+description: |
+  Detects the use of getsystem Meterpreter/Cobalt Strike command by detecting a specific service starting
+name: Potential Meterpreter/CobaltStrike Activity
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.parent.executable.keyword:*\services.exe AND (((process.command_line.keyword:*/c* AND process.command_line.keyword:*echo* AND process.command_line.keyword:*\pipe*) AND (process.command_line.keyword:(*cmd* OR *%comspec%*))) OR (process.command_line.keyword:*rundll32* AND process.command_line.keyword:*.dll,a* AND process.command_line.keyword:*/p:*)) AND (NOT process.command_line.keyword:*mpcmdrun*)
+type: any
+priority: 3

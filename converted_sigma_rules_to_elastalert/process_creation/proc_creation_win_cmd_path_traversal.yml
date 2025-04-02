@@ -1,0 +1,10 @@
+description: |
+  Detects potential path traversal attempt via cmd.exe. Could indicate possible command/argument confusion/hijacking
+name: Potential CommandLine Path Traversal Via Cmd.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.parentimage.keyword:*\cmd.exe OR winlog.event_data.image.keyword:*\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe) AND ((winlog.event_data.parentcommandline.keyword:(*/c* OR */k* OR */r*)) OR (winlog.event_data.commandline.keyword:(*/c* OR */k* OR */r*))) AND (winlog.event_data.parentcommandline.keyword:/../../ OR winlog.event_data.commandline.keyword:*/../../*)) AND (NOT process.command_line.keyword:*\tasktop\keycloak\bin\/../../jre\bin\java*)
+type: any
+priority: 3

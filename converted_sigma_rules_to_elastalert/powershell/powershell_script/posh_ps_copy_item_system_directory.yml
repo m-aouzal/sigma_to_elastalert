@@ -1,0 +1,10 @@
+description: |
+  Uses PowerShell to install/copy a file into a system directory such as "System32" or "SysWOW64"
+name: Powershell Install a DLL in System Directory
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:/(copy-item|cpi) .{2,128} -destination .{1,32}\windows\(system32|syswow64)/
+type: any
+priority: 3

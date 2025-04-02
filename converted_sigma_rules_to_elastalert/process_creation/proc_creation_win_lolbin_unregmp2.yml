@@ -1,0 +1,10 @@
+description: |
+  Detect usage of the "unregmp2.exe" binary as a proxy to launch a custom version of "wmpnscfg.exe"
+name: Lolbin Unregmp2.exe Use As Proxy
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: (winlog.event_data.image.keyword:*\unregmp2.exe OR winlog.event_data.originalfilename.keyword:unregmp2.exe) AND process.command_line.keyword:(* -hidewmp* OR * /hidewmp* OR * –hidewmp* OR * —hidewmp* OR * ―hidewmp*)
+type: any
+priority: 2

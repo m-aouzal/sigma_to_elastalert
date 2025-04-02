@@ -1,0 +1,10 @@
+description: |
+  Detects potential Amazon SSM agent hijack attempts as outlined in the Mitiga research report.
+name: Potential Amazon SSM Agent Hijacking
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\amazon-ssm-agent.exe AND (process.command_line.keyword:*-register* AND process.command_line.keyword:*-code* AND process.command_line.keyword:*-id* AND process.command_line.keyword:*-region*)
+type: any
+priority: 2

@@ -1,0 +1,10 @@
+description: |
+  Adversaries can interact with the DACLs using built-in Windows commands takeown which can grant adversaries higher permissions on specific files and folders
+name: Suspicious Recursive Takeown
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.executable.keyword:*\takeown.exe AND (process.command_line.keyword:*/f* AND process.command_line.keyword:*/r*)
+type: any
+priority: 2

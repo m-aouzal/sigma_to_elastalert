@@ -1,0 +1,10 @@
+description: |
+  Detects WMIC executions in which an event consumer gets created. This could be used to establish persistence
+name: New ActiveScriptEventConsumer Created Via Wmic.EXE
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: process.command_line.keyword:*activescripteventconsumer* AND process.command_line.keyword:* create*
+type: any
+priority: 3
