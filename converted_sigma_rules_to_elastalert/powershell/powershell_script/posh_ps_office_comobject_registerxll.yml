@@ -1,7 +1,7 @@
 description: |
   Adversaries may abuse Microsoft Office add-ins to obtain persistence on a compromised system.
-Office add-ins can be used to add functionality to Office programs
-
+  Office add-ins can be used to add functionality to Office programs
+  
 name: Code Executed Via Office Add-in XLL File
 index: "winlogbeat-*"
 filter:

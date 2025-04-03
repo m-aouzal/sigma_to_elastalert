@@ -1,7 +1,7 @@
 description: |
   Detects processes loading the non-existent DLL "ShellChromeAPI". One known example is the "DeviceEnroller" binary in combination with the "PhoneDeepLink" flag tries to load this DLL.
-Adversaries can drop their own renamed DLL and execute it via DeviceEnroller.exe using this parameter
-
+  Adversaries can drop their own renamed DLL and execute it via DeviceEnroller.exe using this parameter
+  
 name: DLL Sideloading Of ShellChromeAPI.DLL
 index: "winlogbeat-*"
 filter:

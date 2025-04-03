@@ -1,7 +1,7 @@
 description: |
   Detects installation of a potentially suspicious new shim with an uncommon extension using sdbinst.exe.
-Adversaries may establish persistence and/or elevate privileges by executing malicious content triggered by application shims
-
+  Adversaries may establish persistence and/or elevate privileges by executing malicious content triggered by application shims
+  
 name: Uncommon Extension Shim Database Installation Via Sdbinst.EXE
 index: "winlogbeat-*"
 filter:

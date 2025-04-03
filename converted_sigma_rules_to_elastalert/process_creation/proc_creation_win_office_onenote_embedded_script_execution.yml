@@ -1,7 +1,7 @@
 description: |
   Detects the execution of malicious OneNote documents that contain embedded scripts.
-When a user clicks on a OneNote attachment and then on the malicious link inside the ".one" file, it exports and executes the malicious embedded script from specific directories.
-
+  When a user clicks on a OneNote attachment and then on the malicious link inside the ".one" file, it exports and executes the malicious embedded script from specific directories.
+  
 name: OneNote.EXE Execution of Malicious Embedded Scripts
 index: "winlogbeat-*"
 filter:

@@ -1,7 +1,7 @@
 description: |
   Detects potentially suspicious execution of the Qemu utility in a Windows environment.
-Threat actors have leveraged this utility and this technique for achieving network access as reported by Kaspersky.
-
+  Threat actors have leveraged this utility and this technique for achieving network access as reported by Kaspersky.
+  
 name: Potentially Suspicious Usage Of Qemu
 index: "winlogbeat-*"
 filter:

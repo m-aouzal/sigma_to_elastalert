@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((powershell.file.script_block_text.keyword:*set-psreadlineoption* AND powershell.file.script_block_text.keyword:*–historysavestyle* AND powershell.file.script_block_text.keyword:*savenothing*) OR (powershell.file.script_block_text.keyword:*set-psreadlineoption* AND powershell.file.script_block_text.keyword:*-historysavestyle* AND powershell.file.script_block_text.keyword:*savenothing*)) OR ((powershell.file.script_block_text.keyword:(*del* OR *remove-item* OR *rm*)) AND powershell.file.script_block_text.keyword:*(get-psreadlineoption).historysavepath*)
+      query: ((winlog.event_data.Payload.keyword:*set-psreadlineoption* AND winlog.event_data.Payload.keyword:*–historysavestyle* AND winlog.event_data.Payload.keyword:*savenothing*) OR (winlog.event_data.Payload.keyword:*set-psreadlineoption* AND winlog.event_data.Payload.keyword:*-historysavestyle* AND winlog.event_data.Payload.keyword:*savenothing*)) OR ((winlog.event_data.Payload.keyword:(*del* OR *remove-item* OR *rm*)) AND winlog.event_data.Payload.keyword:*(get-psreadlineoption).historysavepath*)
 type: any
 priority: 2

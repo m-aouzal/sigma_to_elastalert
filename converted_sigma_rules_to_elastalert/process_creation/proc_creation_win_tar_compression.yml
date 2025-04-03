@@ -1,7 +1,7 @@
 description: |
   Detects execution of "tar.exe" in order to create a compressed file.
-Adversaries may abuse various utilities to compress or encrypt data before exfiltration.
-
+  Adversaries may abuse various utilities to compress or encrypt data before exfiltration.
+  
 name: Compressed File Creation Via Tar.EXE
 index: "winlogbeat-*"
 filter:

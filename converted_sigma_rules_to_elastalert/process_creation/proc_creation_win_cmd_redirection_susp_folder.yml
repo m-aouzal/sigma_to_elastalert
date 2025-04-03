@@ -1,7 +1,7 @@
 description: |
   Detects inline Windows shell commands redirecting output via the ">" symbol to a suspicious location.
-This technique is sometimes used by malicious actors in order to redirect the output of reconnaissance commands such as "hostname" and "dir" to files for future exfiltration.
-
+  This technique is sometimes used by malicious actors in order to redirect the output of reconnaissance commands such as "hostname" and "dir" to files for future exfiltration.
+  
 name: Potentially Suspicious CMD Shell Output Redirect
 index: "winlogbeat-*"
 filter:

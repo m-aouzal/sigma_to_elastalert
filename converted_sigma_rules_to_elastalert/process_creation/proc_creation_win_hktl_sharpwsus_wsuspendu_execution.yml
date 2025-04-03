@@ -1,7 +1,7 @@
 description: |
   Detects the execution of SharpWSUS or WSUSpendu, utilities that allow for lateral movement through WSUS.
-Windows Server Update Services (WSUS) is a critical component of Windows systems and is frequently configured in a way that allows an attacker to circumvent internal networking limitations.
-
+  Windows Server Update Services (WSUS) is a critical component of Windows systems and is frequently configured in a way that allows an attacker to circumvent internal networking limitations.
+  
 name: HackTool - SharpWSUS/WSUSpendu Execution
 index: "winlogbeat-*"
 filter:

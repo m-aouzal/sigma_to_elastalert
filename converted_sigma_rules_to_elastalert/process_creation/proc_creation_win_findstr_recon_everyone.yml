@@ -1,7 +1,7 @@
 description: |
   Detects usage of findstr with the "EVERYONE" or "BUILTIN" keywords.
-This was seen being used in combination with "icacls" and other utilities to spot misconfigured files or folders permissions.
-
+  This was seen being used in combination with "icacls" and other utilities to spot misconfigured files or folders permissions.
+  
 name: Permission Misconfiguration Reconnaissance Via Findstr.EXE
 index: "winlogbeat-*"
 filter:

@@ -1,7 +1,7 @@
 description: |
   A symbolic link is a type of file that contains a reference to another file.
-This is probably done to make sure that the ransomware is able to follow shortcuts on the machine in order to find the original file to encrypt
-
+  This is probably done to make sure that the ransomware is able to follow shortcuts on the machine in order to find the original file to encrypt
+  
 name: Fsutil Behavior Set SymlinkEvaluation
 index: "winlogbeat-*"
 filter:

@@ -1,7 +1,7 @@
 description: |
   Detects manual execution of the "Microsoft Compatibility Appraiser" task via schtasks.
-In order to trigger persistence stored in the "AppCompatFlagsTelemetryController" registry key.
-
+  In order to trigger persistence stored in the "AppCompatFlagsTelemetryController" registry key.
+  
 name: Potential Persistence Via Microsoft Compatibility Appraiser
 index: "winlogbeat-*"
 filter:

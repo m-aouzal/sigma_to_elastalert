@@ -1,9 +1,9 @@
 description: |
   Detects the creation of a binary file with the ".sed" extension. The ".sed" extension stand for Self Extraction Directive files.
-These files are used by the "iexpress.exe" utility in order to create self extracting packages.
-Attackers were seen abusing this utility and creating PE files with embedded ".sed" entries.
-Usually ".sed" files are simple ini files and not PE binaries.
-
+  These files are used by the "iexpress.exe" utility in order to create self extracting packages.
+  Attackers were seen abusing this utility and creating PE files with embedded ".sed" entries.
+  Usually ".sed" files are simple ini files and not PE binaries.
+  
 name: Potentially Suspicious Self Extraction Directive File Created
 index: "winlogbeat-*"
 filter:

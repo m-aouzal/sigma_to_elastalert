@@ -1,7 +1,7 @@
 description: |
   Detects potentially suspicious child processes of Wscript/Cscript. These include processes such as rundll32 with uncommon exports or PowerShell spawning rundll32 or regsvr32.
-Malware such as Pikabot and Qakbot were seen using similar techniques as well as many others.
-
+  Malware such as Pikabot and Qakbot were seen using similar techniques as well as many others.
+  
 name: Cscript/Wscript Potentially Suspicious Child Process
 index: "winlogbeat-*"
 filter:

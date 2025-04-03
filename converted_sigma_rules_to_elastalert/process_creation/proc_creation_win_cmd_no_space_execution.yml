@@ -1,7 +1,7 @@
 description: |
   Detects Windows command lines that miss a space before or after the /c flag when running a command using the cmd.exe.
-This could be a sign of obfuscation of a fat finger problem (typo by the developer).
-
+  This could be a sign of obfuscation of a fat finger problem (typo by the developer).
+  
 name: Cmd.EXE Missing Space Characters Execution Anomaly
 index: "winlogbeat-*"
 filter:

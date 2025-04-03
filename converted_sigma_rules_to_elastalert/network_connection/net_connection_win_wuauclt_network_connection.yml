@@ -1,7 +1,7 @@
 description: |
   Detects the use of the Windows Update Client binary (wuauclt.exe) to proxy execute code and making network connections.
-One could easily make the DLL spawn a new process and inject to it to proxy the network connection and bypass this rule.
-
+  One could easily make the DLL spawn a new process and inject to it to proxy the network connection and bypass this rule.
+  
 name: Potentially Suspicious Wuauclt Network Connection
 index: "winlogbeat-*"
 filter:

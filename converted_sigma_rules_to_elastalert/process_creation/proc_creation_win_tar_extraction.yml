@@ -1,7 +1,7 @@
 description: |
   Detects execution of "tar.exe" in order to extract compressed file.
-Adversaries may abuse various utilities in order to decompress data to avoid detection.
-
+  Adversaries may abuse various utilities in order to decompress data to avoid detection.
+  
 name: Compressed File Extraction Via Tar.EXE
 index: "winlogbeat-*"
 filter:

@@ -1,7 +1,7 @@
 description: |
   Detects usage of the "ms-appinstaller" protocol handler via command line to potentially download arbitrary files via AppInstaller.EXE
-The downloaded files are temporarly stored in ":Users%username%AppDataLocalPackagesMicrosoft.DesktopAppInstaller_8wekyb3d8bbweACINetCache<RANDOM-8-CHAR-DIRECTORY>"
-
+  The downloaded files are temporarly stored in ":Users%username%AppDataLocalPackagesMicrosoft.DesktopAppInstaller_8wekyb3d8bbweACINetCache<RANDOM-8-CHAR-DIRECTORY>"
+  
 name: Potential File Download Via MS-AppInstaller Protocol Handler
 index: "winlogbeat-*"
 filter:

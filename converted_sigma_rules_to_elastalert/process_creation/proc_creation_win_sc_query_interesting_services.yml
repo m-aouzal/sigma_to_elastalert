@@ -1,7 +1,7 @@
 description: |
   Detects the enumeration and query of interesting and in some cases sensitive services on the system via "sc.exe".
-Attackers often try to enumerate the services currently running on a system in order to find different attack vectors.
-
+  Attackers often try to enumerate the services currently running on a system in order to find different attack vectors.
+  
 name: Interesting Service Enumeration Via Sc.EXE
 index: "winlogbeat-*"
 filter:

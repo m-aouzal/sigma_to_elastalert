@@ -1,7 +1,7 @@
 description: |
   Detects the execution of a renamed ProcDump executable.
-This often done by attackers or malware in order to evade defensive mechanisms.
-
+  This often done by attackers or malware in order to evade defensive mechanisms.
+  
 name: Renamed ProcDump Execution
 index: "winlogbeat-*"
 filter:

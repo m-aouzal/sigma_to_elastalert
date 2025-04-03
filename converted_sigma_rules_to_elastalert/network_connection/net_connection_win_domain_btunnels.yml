@@ -1,7 +1,7 @@
 description: |
   Detects network connections to BTunnels domains initiated by a process on the system.
-Attackers can abuse that feature to establish a reverse shell or persistence on a machine.
-
+  Attackers can abuse that feature to establish a reverse shell or persistence on a machine.
+  
 name: Network Connection Initiated To BTunnels Domains
 index: "winlogbeat-*"
 filter:

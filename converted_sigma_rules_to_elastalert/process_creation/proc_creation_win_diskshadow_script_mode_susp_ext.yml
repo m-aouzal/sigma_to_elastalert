@@ -1,7 +1,7 @@
 description: |
   Detects execution of "Diskshadow.exe" in script mode to execute an script with a potentially uncommon extension.
-Initial baselining of the allowed extension list is required.
-
+  Initial baselining of the allowed extension list is required.
+  
 name: Diskshadow Script Mode - Uncommon Script Extension Execution
 index: "winlogbeat-*"
 filter:

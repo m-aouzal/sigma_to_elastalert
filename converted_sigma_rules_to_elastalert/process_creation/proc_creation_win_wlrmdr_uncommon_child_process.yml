@@ -1,7 +1,7 @@
 description: |
   Detects the execution of "Wlrmdr.exe" with the "-u" command line flag which allows anything passed to it to be an argument of the ShellExecute API, which would allow an attacker to execute arbitrary binaries.
-This detection also focuses on any uncommon child processes spawned from "Wlrmdr.exe" as a supplement for those that posses "ParentImage" telemetry.
-
+  This detection also focuses on any uncommon child processes spawned from "Wlrmdr.exe" as a supplement for those that posses "ParentImage" telemetry.
+  
 name: Wlrmdr.EXE Uncommon Argument Or Child Process
 index: "winlogbeat-*"
 filter:

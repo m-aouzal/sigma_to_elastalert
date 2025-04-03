@@ -1,8 +1,8 @@
 description: |
   An adversary might use WMI to discover information about the system, such as the volume name, size,
-free space, and other disk information. This can be done using the `wmic` command-line utility and has been
-observed being used by threat actors such as Volt Typhoon.
-
+  free space, and other disk information. This can be done using the `wmic` command-line utility and has been
+  observed being used by threat actors such as Volt Typhoon.
+  
 name: System Disk And Volume Reconnaissance Via Wmic.EXE
 index: "winlogbeat-*"
 filter:

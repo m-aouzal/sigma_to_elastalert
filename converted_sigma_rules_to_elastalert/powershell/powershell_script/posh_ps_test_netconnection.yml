@@ -1,7 +1,7 @@
 description: |
   Adversaries may communicate using a protocol and port paring that are typically not associated.
-For example, HTTPS over port 8088(Citation: Symantec Elfin Mar 2019) or port 587(Citation: Fortinet Agent Tesla April 2018) as opposed to the traditional port 443.
-
+  For example, HTTPS over port 8088(Citation: Symantec Elfin Mar 2019) or port 587(Citation: Fortinet Agent Tesla April 2018) as opposed to the traditional port 443.
+  
 name: Testing Usage of Uncommonly Used Port
 index: "winlogbeat-*"
 filter:

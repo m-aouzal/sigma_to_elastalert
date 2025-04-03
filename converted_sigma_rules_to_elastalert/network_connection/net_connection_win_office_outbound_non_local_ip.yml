@@ -1,8 +1,8 @@
 description: |
   Detects an office application (Word, Excel, PowerPoint)  that initiate a network connection to a non-private IP addresses.
-This rule aims to detect traffic similar to one seen exploited in CVE-2021-42292.
-This rule will require an initial baseline and tuning that is specific to your organization.
-
+  This rule aims to detect traffic similar to one seen exploited in CVE-2021-42292.
+  This rule will require an initial baseline and tuning that is specific to your organization.
+  
 name: Office Application Initiated Network Connection To Non-Local IP
 index: "winlogbeat-*"
 filter:

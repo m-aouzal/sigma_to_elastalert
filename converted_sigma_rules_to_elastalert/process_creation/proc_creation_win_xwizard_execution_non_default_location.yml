@@ -1,7 +1,7 @@
 description: |
   Detects the execution of Xwizard tool from a non-default directory.
-When executed from a non-default directory, this utility can be abused in order to side load a custom version of "xwizards.dll".
-
+  When executed from a non-default directory, this utility can be abused in order to side load a custom version of "xwizards.dll".
+  
 name: Xwizard.EXE Execution From Non-Default Location
 index: "winlogbeat-*"
 filter:

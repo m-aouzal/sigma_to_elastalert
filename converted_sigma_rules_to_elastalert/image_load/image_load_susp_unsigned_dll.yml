@@ -1,7 +1,7 @@
 description: |
   Detects windows utilities loading an unsigned or untrusted DLL.
-Adversaries often abuse those programs to proxy execution of malicious code.
-
+  Adversaries often abuse those programs to proxy execution of malicious code.
+  
 name: Unsigned DLL Loaded by Windows Utility
 index: "winlogbeat-*"
 filter:

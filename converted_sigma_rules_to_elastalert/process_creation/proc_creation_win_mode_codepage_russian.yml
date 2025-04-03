@@ -1,7 +1,7 @@
 description: |
   Detects a CodePage modification using the "mode.com" utility to Russian language.
-This behavior has been used by threat actors behind Dharma ransomware.
-
+  This behavior has been used by threat actors behind Dharma ransomware.
+  
 name: CodePage Modification Via MODE.COM To Russian Language
 index: "winlogbeat-*"
 filter:

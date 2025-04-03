@@ -1,7 +1,7 @@
 description: |
   Adversaries may attempt to take screen captures of the desktop to gather information over the course of an operation.
-Screen capturing functionality may be included as a feature of a remote access tool used in post-compromise operations
-
+  Screen capturing functionality may be included as a feature of a remote access tool used in post-compromise operations
+  
 name: Windows Screen Capture with CopyFromScreen
 index: "winlogbeat-*"
 filter:

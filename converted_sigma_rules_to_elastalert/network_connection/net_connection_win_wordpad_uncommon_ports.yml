@@ -1,7 +1,7 @@
 description: |
   Detects a network connection initiated by "wordpad.exe" over uncommon destination ports.
-This might indicate potential process injection activity from a beacon or similar mechanisms.
-
+  This might indicate potential process injection activity from a beacon or similar mechanisms.
+  
 name: Suspicious Wordpad Outbound Connections
 index: "winlogbeat-*"
 filter:

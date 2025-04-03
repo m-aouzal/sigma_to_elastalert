@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:/cmd.{0,5}(?:/c|/r).+powershell.+(?:${?input}?|noexit).+"/
+      query: winlog.event_data.Payload.keyword:/cmd.{0,5}(?:/c|/r).+powershell.+(?:${?input}?|noexit).+"/
 type: any
 priority: 3

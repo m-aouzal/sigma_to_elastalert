@@ -1,7 +1,7 @@
 description: |
   Detects suspicious call to the "ShellExec_RunDLL" exported function of SHELL32.DLL through the ordinal number to launch other commands.
-Adversary might only use the ordinal number in order to bypass existing detection that alert on usage of ShellExec_RunDLL on CommandLine.
-
+  Adversary might only use the ordinal number in order to bypass existing detection that alert on usage of ShellExec_RunDLL on CommandLine.
+  
 name: Suspicious ShellExec_RunDLL Call Via Ordinal
 index: "winlogbeat-*"
 filter:

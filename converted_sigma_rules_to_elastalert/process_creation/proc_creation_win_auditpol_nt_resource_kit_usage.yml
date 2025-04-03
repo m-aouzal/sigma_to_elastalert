@@ -1,7 +1,7 @@
 description: |
   Threat actors can use an older version of the auditpol binary available inside the NT resource kit to change audit policy configuration to impair detection capability.
-This can be carried out by selectively disabling/removing certain audit policies as well as restoring a custom policy owned by the threat actor.
-
+  This can be carried out by selectively disabling/removing certain audit policies as well as restoring a custom policy owned by the threat actor.
+  
 name: Audit Policy Tampering Via NT Resource Kit Auditpol
 index: "winlogbeat-*"
 filter:

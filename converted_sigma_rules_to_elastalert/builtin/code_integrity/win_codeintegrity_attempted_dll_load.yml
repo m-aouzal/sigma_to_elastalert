@@ -1,7 +1,7 @@
 description: |
   Detects attempted file load events that did not meet the signing level requirements. It often means the file's signature is revoked or a signature with the Lifetime Signing EKU has expired.
-This event is best correlated with EID 3089 to determine the error of the validation.
-
+  This event is best correlated with EID 3089 to determine the error of the validation.
+  
 name: CodeIntegrity - Unmet Signing Level Requirements By File Under Validation
 index: "winlogbeat-*"
 filter:

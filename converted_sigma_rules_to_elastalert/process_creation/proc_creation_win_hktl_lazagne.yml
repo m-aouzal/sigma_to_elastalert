@@ -1,7 +1,7 @@
 description: |
   Detects the execution of the LaZagne. A utility used to retrieve multiple types of passwords stored on a local computer.
-LaZagne has been leveraged multiple times by threat actors in order to dump credentials.
-
+  LaZagne has been leveraged multiple times by threat actors in order to dump credentials.
+  
 name: HackTool - LaZagne Execution
 index: "winlogbeat-*"
 filter:

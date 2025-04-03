@@ -1,7 +1,7 @@
 description: |
   Detects possible search for JWT tokens via CLI by looking for the string "eyJ0eX" or "eyJhbG".
-This string is used as an anchor to look for the start of the JWT token used by microsoft office and similar apps.
-
+  This string is used as an anchor to look for the start of the JWT token used by microsoft office and similar apps.
+  
 name: Potentially Suspicious JWT Token Search Via CLI
 index: "winlogbeat-*"
 filter:

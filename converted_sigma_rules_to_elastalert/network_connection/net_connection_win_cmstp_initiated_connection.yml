@@ -1,7 +1,7 @@
 description: |
   Detects a network connection initiated by Cmstp.EXE
-Its uncommon for "cmstp.exe" to initiate an outbound network connection. Investigate the source of such requests to determine if they are malicious.
-
+  Its uncommon for "cmstp.exe" to initiate an outbound network connection. Investigate the source of such requests to determine if they are malicious.
+  
 name: Outbound Network Connection Initiated By Cmstp.EXE
 index: "winlogbeat-*"
 filter:

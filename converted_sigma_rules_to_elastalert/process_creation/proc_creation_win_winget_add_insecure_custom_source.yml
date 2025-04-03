@@ -1,7 +1,7 @@
 description: |
   Detects usage of winget to add a new insecure (http) download source.
-Winget will not allow the addition of insecure sources, hence this could indicate potential suspicious activity (or typos)
-
+  Winget will not allow the addition of insecure sources, hence this could indicate potential suspicious activity (or typos)
+  
 name: Add Insecure Download Source To Winget
 index: "winlogbeat-*"
 filter:

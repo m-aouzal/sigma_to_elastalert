@@ -1,7 +1,7 @@
 description: |
   Detects PDQDeploy service installation on the target system.
-When a package is deployed via PDQDeploy it installs a remote service on the target machine with the name "PDQDeployRunner-X" where "X" is an integer starting from 1
-
+  When a package is deployed via PDQDeploy it installs a remote service on the target machine with the name "PDQDeployRunner-X" where "X" is an integer starting from 1
+  
 name: New PDQDeploy Service - Client Side
 index: "winlogbeat-*"
 filter:

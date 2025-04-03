@@ -1,7 +1,7 @@
 description: |
   Detects when an attacker registers a new IFilter for an extension. Microsoft Windows Search uses filters to extract the content of items for inclusion in a full-text index.
-You can extend Windows Search to index new or proprietary file types by writing filters to extract the content, and property handlers to extract the properties of files.
-
+  You can extend Windows Search to index new or proprietary file types by writing filters to extract the content, and property handlers to extract the properties of files.
+  
 name: Register New IFiltre For Persistence
 index: "winlogbeat-*"
 filter:

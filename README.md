@@ -1,4 +1,77 @@
 
+# Sigma to Elastalert Conversion
+
+This repository provides a script to convert Sigma rules to Elastalert-compatible rules.
+
+## Prerequisites
+
+- Python 3.6 or later
+- Git
+- A Unix-like shell (e.g., Bash)
+
+## Setup Instructions
+
+1. **Create a New Python Virtual Environment and Activate It**
+
+   ```bash
+   python3 -m venv myenv
+   source myenv/bin/activate
+   ```
+
+2. **Upgrade pip**
+
+   ```bash
+   pip install --upgrade pip
+   ```
+
+3. **Create a Directory for Elastalert Rules and Clone This Repository**
+
+   ```bash
+   git clone https://github.com/m-aouzal/sigma_to_elastalert.git
+   cd sigma_to_elastalert
+   ```
+
+4. **Clone the Sigma Repository**
+
+   This step downloads the official Sigma rules:
+   ```bash
+   git clone https://github.com/Neo23x0/sigma.git
+   ```
+
+5. **Install Sigma CLI**
+
+   Install the sigma CLI tool from PyPI:
+   ```bash
+   python3 -m pip install sigma-cli
+   ```
+
+6. **Install pySigma (for Compatibility Verification)**
+
+   ```bash
+   pip install pySigma
+   ```
+
+7. **Install the Elasticsearch Backend for pySigma**
+
+   ```bash
+   pip install pySigma-backend-elasticsearch
+   ```
+
+8. **Make the Conversion Script Executable and Run It**
+
+   ```bash
+   chmod +x convert.sh
+   ./convert.sh
+   ```
+
+> **Note:** You can change the input directory (where your Sigma rules are located) and the output directory (where converted Elastalert rules will be saved) by editing the `convert.sh` script.
+
+## Usage
+
+Once the conversion script has executed, check the output directory for Elastalert-compatible rule files. You can then integrate these rules into your Elastalert setup.
+
+## Repository
+
 This folder contains a pipeline that:
 
 1. **Converts Sigma rules** from the `sigma/rules/windows` folder into Elastalert-compatible YAML files.

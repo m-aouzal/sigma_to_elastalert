@@ -1,7 +1,7 @@
 description: |
   Detects a network connection initiated by the Add-In deployment cache updating utility "AddInutil.exe".
-This could indicate a potential command and control communication as this tool doesn't usually initiate network activity.
-
+  This could indicate a potential command and control communication as this tool doesn't usually initiate network activity.
+  
 name: Network Connection Initiated By AddinUtil.EXE
 index: "winlogbeat-*"
 filter:

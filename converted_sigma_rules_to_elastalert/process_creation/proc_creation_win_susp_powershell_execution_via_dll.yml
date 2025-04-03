@@ -1,7 +1,7 @@
 description: |
   Detects potential PowerShell execution from a DLL instead of the usual PowerShell process as seen used in PowerShdll.
-This detection assumes that PowerShell commands are passed via the CommandLine.
-
+  This detection assumes that PowerShell commands are passed via the CommandLine.
+  
 name: Potential PowerShell Execution Via DLL
 index: "winlogbeat-*"
 filter:

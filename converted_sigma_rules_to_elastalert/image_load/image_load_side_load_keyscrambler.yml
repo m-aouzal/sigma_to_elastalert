@@ -1,7 +1,7 @@
 description: |
   Detects potential DLL side loading of "KeyScramblerIE.dll" by "KeyScrambler.exe".
-Various threat actors and malware have been found side loading a masqueraded "KeyScramblerIE.dll" through "KeyScrambler.exe".
-
+  Various threat actors and malware have been found side loading a masqueraded "KeyScramblerIE.dll" through "KeyScrambler.exe".
+  
 name: Potential DLL Sideloading Of KeyScramblerIE.DLL Via KeyScrambler.EXE
 index: "winlogbeat-*"
 filter:

@@ -1,7 +1,7 @@
 description: |
   Detects the execution of FSharp Interpreters "FsiAnyCpu.exe" and "FSi.exe"
-Both can be used for AWL bypass and to execute F# code via scripts or inline.
-
+  Both can be used for AWL bypass and to execute F# code via scripts or inline.
+  
 name: Use of FSharp Interpreters
 index: "winlogbeat-*"
 filter:

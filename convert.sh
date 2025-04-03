@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ========== CONFIG ==========
-RULE_DIR="/home/ubuntu/Desktop/sigma/rules/windows/"
+RULE_DIR="./sigma/rules/windows/"
 OUTPUT_DIR="./converted_sigma_rules_to_elastalert"
 EXEMPTION_FILE="./non_keyword_fields"
 FAIL_LIST="./failed_conversion"
@@ -65,14 +65,8 @@ process_rule() {
         next
     }
     in_desc {
-        if($0 ~ /^[[:space:]]/ || $0 == "") {
-            print "  " $0
-            next
-        } else {
-            in_desc=0
-            print $0
-            next
-        }
+        if($0 ~ /^[a-zA-Z]+:/) { in_desc=0; print $0; next }
+        else { print "  " $0; next }
     }
     { print }
     ' "$temp_output" > "$temp_fixed_description"
@@ -214,5 +208,4 @@ else
 fi
 
 rm -f "$FAIL_LIST"
-
 

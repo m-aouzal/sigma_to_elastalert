@@ -1,7 +1,7 @@
 description: |
   Adversaries may manipulate accounts to maintain access to victim systems.
-Account manipulation may consist of any action that preserves adversary access to a compromised account, such as modifying credentials or permission groups
-
+  Account manipulation may consist of any action that preserves adversary access to a compromised account, such as modifying credentials or permission groups
+  
 name: Powershell LocalAccount Manipulation
 index: "winlogbeat-*"
 filter:

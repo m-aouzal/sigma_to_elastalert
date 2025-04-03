@@ -1,7 +1,7 @@
 description: |
   Adversaries may abuse features of Winlogon to execute DLLs and/or executables when a user logs in.
-Winlogon.exe is a Windows component responsible for actions at logon/logoff as well as the secure attention sequence (SAS) triggered by Ctrl-Alt-Delete.
-
+  Winlogon.exe is a Windows component responsible for actions at logon/logoff as well as the secure attention sequence (SAS) triggered by Ctrl-Alt-Delete.
+  
 name: Winlogon Notify Key Logon Persistence
 index: "winlogbeat-*"
 filter:

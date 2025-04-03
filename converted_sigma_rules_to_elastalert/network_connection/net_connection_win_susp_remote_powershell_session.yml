@@ -1,7 +1,7 @@
 description: |
   Detects a process that initiated a network connection over ports 5985 or 5986 from a non-network service account.
-This could potentially indicates a remote PowerShell connection.
-
+  This could potentially indicates a remote PowerShell connection.
+  
 name: Potential Remote PowerShell Session Initiated
 index: "winlogbeat-*"
 filter:

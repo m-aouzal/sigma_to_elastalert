@@ -1,7 +1,7 @@
 description: |
   Adversaries may employ various system checks to detect and avoid virtualization and analysis environments.
-This may include changing behaviors based on the results of checks for the presence of artifacts indicative of a virtual machine environment (VME) or sandbox
-
+  This may include changing behaviors based on the results of checks for the presence of artifacts indicative of a virtual machine environment (VME) or sandbox
+  
 name: Powershell Detect Virtualization Environment
 index: "winlogbeat-*"
 filter:

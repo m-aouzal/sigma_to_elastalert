@@ -1,7 +1,7 @@
 description: |
   This detection uses Windows security events to detect suspicious access attempts to the registry key of Azure AD Health monitoring agent.
-This detection requires an access control entry (ACE) on the system access control list (SACL) of the following securable object HKLMSOFTWAREMicrosoftMicrosoft OnlineReportingMonitoringAgent.
-
+  This detection requires an access control entry (ACE) on the system access control list (SACL) of the following securable object HKLMSOFTWAREMicrosoftMicrosoft OnlineReportingMonitoringAgent.
+  
 name: Azure AD Health Monitoring Agent Registry Keys Access
 index: "winlogbeat-*"
 filter:

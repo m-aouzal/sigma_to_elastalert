@@ -1,7 +1,7 @@
 description: |
   Detects a suspicious local successful logon event where the Logon Package is Kerberos, the remote address is set to localhost, and the target user SID is the built-in local Administrator account.
-This may indicate an attempt to leverage a Kerberos relay attack variant that can be used to elevate privilege locally from a domain joined limited user to local System privileges.
-
+  This may indicate an attempt to leverage a Kerberos relay attack variant that can be used to elevate privilege locally from a domain joined limited user to local System privileges.
+  
 name: Potential Privilege Escalation via Local Kerberos Relay over LDAP
 index: "winlogbeat-*"
 filter:

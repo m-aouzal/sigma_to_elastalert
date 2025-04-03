@@ -1,7 +1,7 @@
 description: |
   Detects process access requests to the LSASS process with specific call trace calls and access masks.
-This behaviour is expressed by many credential dumping tools such as Mimikatz, NanoDump, Invoke-Mimikatz, Procdump and even the Taskmgr dumping feature.
-
+  This behaviour is expressed by many credential dumping tools such as Mimikatz, NanoDump, Invoke-Mimikatz, Procdump and even the Taskmgr dumping feature.
+  
 name: Potential Credential Dumping Activity Via LSASS
 index: "winlogbeat-*"
 filter:

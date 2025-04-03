@@ -1,7 +1,7 @@
 description: |
   Detects the usage of "mstsc.exe" with the "/v" flag to initiate a connection to a remote server.
-Adversaries may use valid accounts to log into a computer using the Remote Desktop Protocol (RDP). The adversary may then perform actions as the logged-on user.
-
+  Adversaries may use valid accounts to log into a computer using the Remote Desktop Protocol (RDP). The adversary may then perform actions as the logged-on user.
+  
 name: New Remote Desktop Connection Initiated Via Mstsc.EXE
 index: "winlogbeat-*"
 filter:

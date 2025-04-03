@@ -1,7 +1,7 @@
 description: |
   Detects tampering of RDP Terminal Service/Server sensitive settings.
-Such as allowing unauthorized users access to a system via the 'fAllowUnsolicited' or enabling RDP via 'fDenyTSConnections', etc.
-
+  Such as allowing unauthorized users access to a system via the 'fAllowUnsolicited' or enabling RDP via 'fDenyTSConnections', etc.
+  
 name: RDP Sensitive Settings Changed to Zero
 index: "winlogbeat-*"
 filter:

@@ -1,7 +1,7 @@
 description: |
   Detects the execution of the MSXSL utility. This can be used to execute Extensible Stylesheet Language (XSL) files. These files are commonly used to describe the processing and rendering of data within XML files.
-Adversaries can abuse this functionality to execute arbitrary files while potentially bypassing application whitelisting defenses.
-
+  Adversaries can abuse this functionality to execute arbitrary files while potentially bypassing application whitelisting defenses.
+  
 name: Msxsl.EXE Execution
 index: "winlogbeat-*"
 filter:

@@ -1,7 +1,7 @@
 description: |
   Detects an executable, which is not an internet browser or known application, initiating network connections to legit popular websites, which were seen to be used as dead drop resolvers in previous attacks.
-In this context attackers leverage known websites such as "facebook", "youtube", etc. In order to pass through undetected.
-
+  In this context attackers leverage known websites such as "facebook", "youtube", etc. In order to pass through undetected.
+  
 name: New Connection Initiated To Potential Dead Drop Resolver Domain
 index: "winlogbeat-*"
 filter:

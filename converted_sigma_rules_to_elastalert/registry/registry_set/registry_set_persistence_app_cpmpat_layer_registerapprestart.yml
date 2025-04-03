@@ -1,8 +1,8 @@
 description: |
   Detects the setting of the REGISTERAPPRESTART compatibility layer on an application.
-This compatibility layer allows an application to register for restart using the "RegisterApplicationRestart" API.
-This can be potentially abused as a persistence mechanism.
-
+  This compatibility layer allows an application to register for restart using the "RegisterApplicationRestart" API.
+  This can be potentially abused as a persistence mechanism.
+  
 name: Potential Persistence Via AppCompat RegisterAppRestart Layer
 index: "winlogbeat-*"
 filter:

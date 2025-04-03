@@ -1,7 +1,7 @@
 description: |
   Detects file access requests to the the Windows Data Protection API Master keys by an uncommon application.
-This can be a sign of credential stealing. Example case would be usage of mimikatz "dpapi::masterkey" function
-
+  This can be a sign of credential stealing. Example case would be usage of mimikatz "dpapi::masterkey" function
+  
 name: Access To Windows DPAPI Master Keys By Uncommon Applications
 index: "winlogbeat-*"
 filter:

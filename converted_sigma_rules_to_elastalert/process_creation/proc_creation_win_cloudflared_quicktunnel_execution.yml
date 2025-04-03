@@ -1,8 +1,8 @@
 description: |
   Detects creation of an ad-hoc Cloudflare Quick Tunnel, which can be used to tunnel local services such as HTTP, RDP, SSH and SMB.
-The free TryCloudflare Quick Tunnel will generate a random subdomain on trycloudflare[.]com, following a call to api[.]trycloudflare[.]com.
-The tool has been observed in use by threat groups including Akira ransomware.
-
+  The free TryCloudflare Quick Tunnel will generate a random subdomain on trycloudflare[.]com, following a call to api[.]trycloudflare[.]com.
+  The tool has been observed in use by threat groups including Akira ransomware.
+  
 name: Cloudflared Quick Tunnel Execution
 index: "winlogbeat-*"
 filter:

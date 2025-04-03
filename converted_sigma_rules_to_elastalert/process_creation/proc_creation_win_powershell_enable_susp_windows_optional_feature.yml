@@ -1,7 +1,7 @@
 description: |
   Detects usage of the built-in PowerShell cmdlet "Enable-WindowsOptionalFeature" used as a Deployment Image Servicing and Management tool.
-Similar to DISM.exe, this cmdlet is used to enumerate, install, uninstall, configure, and update features and packages in Windows images
-
+  Similar to DISM.exe, this cmdlet is used to enumerate, install, uninstall, configure, and update features and packages in Windows images
+  
 name: Potential Suspicious Windows Feature Enabled - ProcCreation
 index: "winlogbeat-*"
 filter:

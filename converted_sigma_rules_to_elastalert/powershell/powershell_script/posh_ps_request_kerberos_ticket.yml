@@ -1,8 +1,8 @@
 description: |
   utilize native PowerShell Identity modules to query the domain to extract the Service Principal Names for a single computer.
-This behavior is typically used during a kerberos or silver ticket attack.
-A successful execution will output the SPNs for the endpoint in question.
-
+  This behavior is typically used during a kerberos or silver ticket attack.
+  A successful execution will output the SPNs for the endpoint in question.
+  
 name: Request A Single Ticket via PowerShell
 index: "winlogbeat-*"
 filter:

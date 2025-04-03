@@ -1,8 +1,8 @@
 description: |
   Detects a network connection that is initiated by the "notepad.exe" process.
-This might be a sign of process injection from a beacon process or something similar.
-Notepad rarely initiates a network communication except when printing documents for example.
-
+  This might be a sign of process injection from a beacon process or something similar.
+  Notepad rarely initiates a network communication except when printing documents for example.
+  
 name: Network Connection Initiated Via Notepad.EXE
 index: "winlogbeat-*"
 filter:

@@ -1,7 +1,7 @@
 description: |
   Detects the creation of files with scripting or executable extensions by Mysql daemon.
-Which could be an indicator of "User Defined Functions" abuse to download malware.
-
+  Which could be an indicator of "User Defined Functions" abuse to download malware.
+  
 name: Uncommon File Creation By Mysql Daemon Process
 index: "winlogbeat-*"
 filter:

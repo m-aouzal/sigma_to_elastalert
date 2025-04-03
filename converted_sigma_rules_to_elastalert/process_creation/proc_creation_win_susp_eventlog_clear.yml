@@ -1,7 +1,7 @@
 description: |
   Detects the clearing or configuration tampering of EventLog using utilities such as "wevtutil", "powershell" and "wmic".
-This technique were seen used by threat actors and ransomware strains in order to evade defenses.
-
+  This technique were seen used by threat actors and ransomware strains in order to evade defenses.
+  
 name: Suspicious Eventlog Clearing or Configuration Change Activity
 index: "winlogbeat-*"
 filter:

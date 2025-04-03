@@ -1,7 +1,7 @@
 description: |
   Detects remote thread creation in command shell applications, such as "Cmd.EXE" and "PowerShell.EXE".
-It is a common technique used by malware, such as IcedID, to inject malicious code and execute it within legitimate processes.
-
+  It is a common technique used by malware, such as IcedID, to inject malicious code and execute it within legitimate processes.
+  
 name: Remote Thread Created In Shell Application
 index: "winlogbeat-*"
 filter:

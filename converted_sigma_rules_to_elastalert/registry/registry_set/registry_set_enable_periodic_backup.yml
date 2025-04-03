@@ -1,7 +1,7 @@
 description: |
   Detects the enabling of the "EnablePeriodicBackup" registry value. Once enabled, The OS will backup System registry hives on restarts to the "C:WindowsSystem32configRegBack" folder. Windows creates a "RegIdleBackup" task to manage subsequent backups.
-Registry backup was a default behavior on Windows and was disabled as of "Windows 10, version 1803".
-
+  Registry backup was a default behavior on Windows and was disabled as of "Windows 10, version 1803".
+  
 name: Periodic Backup For System Registry Hives Enabled
 index: "winlogbeat-*"
 filter:

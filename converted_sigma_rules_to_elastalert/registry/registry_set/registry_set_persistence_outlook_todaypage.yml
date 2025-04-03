@@ -1,7 +1,7 @@
 description: |
   Detects potential persistence activity via outlook today page.
-An attacker can set a custom page to execute arbitrary code and link to it via the registry values "URL" and "UserDefinedUrl".
-
+  An attacker can set a custom page to execute arbitrary code and link to it via the registry values "URL" and "UserDefinedUrl".
+  
 name: Potential Persistence Via Outlook Today Page
 index: "winlogbeat-*"
 filter:

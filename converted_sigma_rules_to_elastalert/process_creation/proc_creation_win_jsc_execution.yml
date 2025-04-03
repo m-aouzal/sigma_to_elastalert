@@ -1,7 +1,7 @@
 description: |
   Detects the execution of the "jsc.exe" (JScript Compiler).
-Attacker might abuse this in order to compile JScript files on the fly and bypassing application whitelisting.
-
+  Attacker might abuse this in order to compile JScript files on the fly and bypassing application whitelisting.
+  
 name: JScript Compiler Execution
 index: "winlogbeat-*"
 filter:

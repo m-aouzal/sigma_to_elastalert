@@ -1,7 +1,7 @@
 description: |
   Detects the creation of recent element file that points to an .ISO, .IMG, .VHD or .VHDX file as often used in phishing attacks.
-This can be a false positive on server systems but on workstations users should rarely mount .iso or .img files.
-
+  This can be a false positive on server systems but on workstations users should rarely mount .iso or .img files.
+  
 name: ISO or Image Mount Indicator in Recent Files
 index: "winlogbeat-*"
 filter:

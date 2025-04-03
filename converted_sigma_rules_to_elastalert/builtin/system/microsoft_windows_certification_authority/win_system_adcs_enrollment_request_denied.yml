@@ -1,7 +1,7 @@
 description: |
   Detects denied requests by Active Directory Certificate Services.
-Example of these requests denial include issues with permissions on the certificate template or invalid signatures.
-
+  Example of these requests denial include issues with permissions on the certificate template or invalid signatures.
+  
 name: Active Directory Certificate Services Denied Certificate Enrollment Request
 index: "winlogbeat-*"
 filter:

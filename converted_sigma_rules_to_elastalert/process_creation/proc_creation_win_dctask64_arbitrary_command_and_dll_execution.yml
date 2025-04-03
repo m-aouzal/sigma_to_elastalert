@@ -1,7 +1,7 @@
 description: |
   Detects the execution of "dctask64.exe", a signed binary by ZOHO Corporation part of ManageEngine Endpoint Central.
-This binary can be abused for DLL injection, arbitrary command and process execution.
-
+  This binary can be abused for DLL injection, arbitrary command and process execution.
+  
 name: ManageEngine Endpoint Central Dctask64.EXE Potential Abuse
 index: "winlogbeat-*"
 filter:

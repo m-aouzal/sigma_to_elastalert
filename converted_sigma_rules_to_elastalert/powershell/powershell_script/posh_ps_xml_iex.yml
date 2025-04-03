@@ -1,8 +1,8 @@
 description: |
   Adversaries may abuse PowerShell commands and scripts for execution.
-PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system. (Citation: TechNet PowerShell)
-Adversaries can use PowerShell to perform a number of actions, including discovery of information and execution of code
-
+  PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system. (Citation: TechNet PowerShell)
+  Adversaries can use PowerShell to perform a number of actions, including discovery of information and execution of code
+  
 name: Powershell XML Execute Command
 index: "winlogbeat-*"
 filter:

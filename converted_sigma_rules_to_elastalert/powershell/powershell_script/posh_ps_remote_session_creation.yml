@@ -1,7 +1,7 @@
 description: |
   Adversaries may abuse PowerShell commands and scripts for execution.
-PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system
-
+  PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system
+  
 name: PowerShell Remote Session Creation
 index: "winlogbeat-*"
 filter:

@@ -1,7 +1,7 @@
 description: |
   Detects modifications to the "Hidden" and "ShowSuperHidden" explorer registry values in order to disable showing of hidden files and system files.
-This technique is abused by several malware families to hide their files from normal users.
-
+  This technique is abused by several malware families to hide their files from normal users.
+  
 name: Displaying Hidden Files Feature Disabled
 index: "winlogbeat-*"
 filter:

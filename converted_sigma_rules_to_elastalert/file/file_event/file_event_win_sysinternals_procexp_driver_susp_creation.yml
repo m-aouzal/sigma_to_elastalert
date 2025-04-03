@@ -1,7 +1,7 @@
 description: |
   Detects creation of the Process Explorer drivers by processes other than Process Explorer (procexp) itself.
-Hack tools or malware may use the Process Explorer driver to elevate privileges, drops it to disk for a few moments, runs a service using that driver and removes it afterwards.
-
+  Hack tools or malware may use the Process Explorer driver to elevate privileges, drops it to disk for a few moments, runs a service using that driver and removes it afterwards.
+  
 name: Process Explorer Driver Creation By Non-Sysinternals Binary
 index: "winlogbeat-*"
 filter:

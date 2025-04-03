@@ -1,7 +1,7 @@
 description: |
   Detects DNS query requests to "update.onelaunch.com". This domain is associated with the OneLaunch adware application.
-When the OneLaunch application is installed it will attempt to get updates from this domain.
-
+  When the OneLaunch application is installed it will attempt to get updates from this domain.
+  
 name: DNS Query Request To OneLaunch Update Service
 index: "winlogbeat-*"
 filter:

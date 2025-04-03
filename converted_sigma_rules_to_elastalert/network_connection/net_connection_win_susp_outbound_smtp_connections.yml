@@ -1,7 +1,7 @@
 description: |
   Adversaries may steal data by exfiltrating it over an un-encrypted network protocol other than that of the existing command and control channel.
-The data may also be sent to an alternate network location from the main command and control server.
-
+  The data may also be sent to an alternate network location from the main command and control server.
+  
 name: Suspicious Outbound SMTP Connections
 index: "winlogbeat-*"
 filter:

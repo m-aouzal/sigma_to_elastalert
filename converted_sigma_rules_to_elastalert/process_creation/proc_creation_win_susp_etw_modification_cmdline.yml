@@ -1,7 +1,7 @@
 description: |
   Detects changes to environment variables related to ETW logging via the CommandLine.
-This could indicate potential adversaries stopping ETW providers recording loaded .NET assemblies.
-
+  This could indicate potential adversaries stopping ETW providers recording loaded .NET assemblies.
+  
 name: ETW Logging Tamper In .NET Processes Via CommandLine
 index: "winlogbeat-*"
 filter:

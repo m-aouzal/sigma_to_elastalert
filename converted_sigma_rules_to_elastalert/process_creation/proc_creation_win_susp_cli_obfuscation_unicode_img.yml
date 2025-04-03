@@ -1,7 +1,7 @@
 description: |
   Detects potential commandline obfuscation using unicode characters.
-Adversaries may attempt to make an executable or file difficult to discover or analyze by encrypting, encoding, or otherwise obfuscating its contents on the system or in transit.
-
+  Adversaries may attempt to make an executable or file difficult to discover or analyze by encrypting, encoding, or otherwise obfuscating its contents on the system or in transit.
+  
 name: Potential CommandLine Obfuscation Using Unicode Characters From Suspicious Image
 index: "winlogbeat-*"
 filter:

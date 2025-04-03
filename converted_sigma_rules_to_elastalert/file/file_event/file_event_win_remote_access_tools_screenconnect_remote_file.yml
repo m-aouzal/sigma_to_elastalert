@@ -1,7 +1,7 @@
 description: |
   Detects the creation of files in a specific location by ScreenConnect RMM.
-ScreenConnect has feature to remotely execute binaries on a target machine. These binaries will be dropped to ":Users<username>DocumentsConnectWiseControlTemp" before execution.
-
+  ScreenConnect has feature to remotely execute binaries on a target machine. These binaries will be dropped to ":Users<username>DocumentsConnectWiseControlTemp" before execution.
+  
 name: Remote Access Tool - ScreenConnect Temporary File
 index: "winlogbeat-*"
 filter:

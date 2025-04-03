@@ -1,7 +1,7 @@
 description: |
   Detects the recovery of files from backups via "wbadmin.exe".
-Attackers can restore sensitive files such as NTDS.DIT or Registry Hives from backups in order to potentially extract credentials.
-
+  Attackers can restore sensitive files such as NTDS.DIT or Registry Hives from backups in order to potentially extract credentials.
+  
 name: File Recovery From Backup Via Wbadmin.EXE
 index: "winlogbeat-*"
 filter:

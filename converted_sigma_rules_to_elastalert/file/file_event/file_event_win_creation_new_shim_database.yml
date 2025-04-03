@@ -1,7 +1,7 @@
 description: |
   Adversaries may establish persistence and/or elevate privileges by executing malicious content triggered by application shims.
-The Microsoft Windows Application Compatibility Infrastructure/Framework (Application Shim) was created to allow for backward compatibility of software as the operating system codebase changes over time.
-
+  The Microsoft Windows Application Compatibility Infrastructure/Framework (Application Shim) was created to allow for backward compatibility of software as the operating system codebase changes over time.
+  
 name: New Custom Shim Database Created
 index: "winlogbeat-*"
 filter:

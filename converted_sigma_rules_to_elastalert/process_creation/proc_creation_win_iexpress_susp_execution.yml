@@ -1,7 +1,7 @@
 description: |
   Detects the use of iexpress.exe to create binaries via Self Extraction Directive (SED) files located in potentially suspicious locations.
-This behavior has been observed in-the-wild by different threat actors.
-
+  This behavior has been observed in-the-wild by different threat actors.
+  
 name: Self Extracting Package Creation Via Iexpress.EXE From Potentially Suspicious Location
 index: "winlogbeat-*"
 filter:

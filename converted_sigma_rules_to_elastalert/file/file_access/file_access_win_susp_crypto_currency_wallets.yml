@@ -1,7 +1,7 @@
 description: |
   Detects file access requests to crypto currency files by uncommon processes.
-Could indicate potential attempt of crypto currency wallet stealing.
-
+  Could indicate potential attempt of crypto currency wallet stealing.
+  
 name: Access To Crypto Currency Wallets By Uncommon Applications
 index: "winlogbeat-*"
 filter:

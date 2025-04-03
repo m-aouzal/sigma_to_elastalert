@@ -1,7 +1,7 @@
 description: |
   Detects applications trying to modify the registry in order to disable any write-protect property for storage devices.
-This could be a precursor to a ransomware attack and has been an observed technique used by cypherpunk group.
-
+  This could be a precursor to a ransomware attack and has been an observed technique used by cypherpunk group.
+  
 name: Write Protect For Storage Disabled
 index: "winlogbeat-*"
 filter:

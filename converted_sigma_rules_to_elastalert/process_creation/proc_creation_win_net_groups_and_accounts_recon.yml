@@ -1,7 +1,7 @@
 description: |
   Detects suspicious reconnaissance command line activity on Windows systems using Net.EXE
-Check if the user that executed the commands is suspicious (e.g. service accounts, LOCAL_SYSTEM)
-
+  Check if the user that executed the commands is suspicious (e.g. service accounts, LOCAL_SYSTEM)
+  
 name: Suspicious Group And Account Reconnaissance Activity Using Net.EXE
 index: "winlogbeat-*"
 filter:

@@ -1,7 +1,7 @@
 description: |
   Detects execution of commands via the run dialog box on Windows by checking values of the "RunMRU" registry key.
-This technique was seen being abused by threat actors to deceive users into pasting and executing malicious commands, often disguised as CAPTCHA verification steps.
-
+  This technique was seen being abused by threat actors to deceive users into pasting and executing malicious commands, often disguised as CAPTCHA verification steps.
+  
 name: Potentially Suspicious Command Executed Via Run Dialog Box - Registry
 index: "winlogbeat-*"
 filter:

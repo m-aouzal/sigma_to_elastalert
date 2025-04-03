@@ -1,7 +1,7 @@
 description: |
   Detects suspicious local connections via a named pipe to the AD FS configuration database (Windows Internal Database).
-Used to access information such as the AD FS configuration settings which contains sensitive information used to sign SAML tokens.
-
+  Used to access information such as the AD FS configuration settings which contains sensitive information used to sign SAML tokens.
+  
 name: ADFS Database Named Pipe Connection By Uncommon Tool
 index: "winlogbeat-*"
 filter:

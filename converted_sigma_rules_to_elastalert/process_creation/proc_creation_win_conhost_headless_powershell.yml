@@ -1,7 +1,7 @@
 description: |
   Detects the use of powershell commands from headless ConHost window.
-The "--headless" flag hides the windows from the user upon execution.
-
+  The "--headless" flag hides the windows from the user upon execution.
+  
 name: Powershell Executed From Headless ConHost Process
 index: "winlogbeat-*"
 filter:

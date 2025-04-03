@@ -1,7 +1,7 @@
 description: |
   Detects the execution of the SharpDPAPI tool based on CommandLine flags and PE metadata.
-SharpDPAPI is a C# port of some DPAPI functionality from the Mimikatz project.
-
+  SharpDPAPI is a C# port of some DPAPI functionality from the Mimikatz project.
+  
 name: HackTool - SharpDPAPI Execution
 index: "winlogbeat-*"
 filter:

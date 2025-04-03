@@ -1,7 +1,7 @@
 description: |
   Detects loading of essential DLLs used by PowerShell by non-PowerShell process.
-Detects behavior similar to meterpreter's "load powershell" extension.
-
+  Detects behavior similar to meterpreter's "load powershell" extension.
+  
 name: PowerShell Core DLL Loaded By Non PowerShell Process
 index: "winlogbeat-*"
 filter:

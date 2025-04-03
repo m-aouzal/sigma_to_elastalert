@@ -1,8 +1,8 @@
 description: |
   Detects the execution of a renamed AutoIt2.exe or AutoIt3.exe.
-AutoIt is a scripting language and automation tool for Windows systems. While primarily used for legitimate automation tasks, it can be misused in cyber attacks.
-Attackers can leverage AutoIt to create and distribute malware, including keyloggers, spyware, and botnets. A renamed AutoIt executable is particularly suspicious.
-
+  AutoIt is a scripting language and automation tool for Windows systems. While primarily used for legitimate automation tasks, it can be misused in cyber attacks.
+  Attackers can leverage AutoIt to create and distribute malware, including keyloggers, spyware, and botnets. A renamed AutoIt executable is particularly suspicious.
+  
 name: Renamed AutoIt Execution
 index: "winlogbeat-*"
 filter:

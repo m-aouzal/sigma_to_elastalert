@@ -1,7 +1,7 @@
 description: |
   Adversaries may use hidden windows to conceal malicious activity from the plain sight of users.
-In some cases, windows that would typically be displayed when an application carries out an operation can be hidden
-
+  In some cases, windows that would typically be displayed when an application carries out an operation can be hidden
+  
 name: Suspicious PowerShell WindowStyle Option
 index: "winlogbeat-*"
 filter:

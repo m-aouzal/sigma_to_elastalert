@@ -1,7 +1,7 @@
 description: |
   Detect built in PowerShell cmdlet Disable-WindowsOptionalFeature, Deployment Image Servicing and Management tool.
-Similar to DISM.exe, this cmdlet is used to enumerate, install, uninstall, configure, and update features and packages in Windows images
-
+  Similar to DISM.exe, this cmdlet is used to enumerate, install, uninstall, configure, and update features and packages in Windows images
+  
 name: Disable-WindowsOptionalFeature Command PowerShell
 index: "winlogbeat-*"
 filter:

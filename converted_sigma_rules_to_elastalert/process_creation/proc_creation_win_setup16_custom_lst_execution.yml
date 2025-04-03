@@ -1,8 +1,8 @@
 description: |
   Detects the execution of "Setup16.EXE" and old installation utility with a custom ".lst" file.
-These ".lst" file can contain references to external program that "Setup16.EXE" will execute.
-Attackers and adversaries might leverage this as a living of the land utility.
-
+  These ".lst" file can contain references to external program that "Setup16.EXE" will execute.
+  Attackers and adversaries might leverage this as a living of the land utility.
+  
 name: Setup16.EXE Execution With Custom .Lst File
 index: "winlogbeat-*"
 filter:

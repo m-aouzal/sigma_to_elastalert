@@ -1,7 +1,7 @@
 description: |
   Detect creation of suspicious executable file names.
-Some strings look for suspicious file extensions, others look for filenames that exploit unquoted service paths.
-
+  Some strings look for suspicious file extensions, others look for filenames that exploit unquoted service paths.
+  
 name: Suspicious Executable File Creation
 index: "winlogbeat-*"
 filter:

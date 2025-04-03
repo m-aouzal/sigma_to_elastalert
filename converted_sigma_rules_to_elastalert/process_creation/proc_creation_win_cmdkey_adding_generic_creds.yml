@@ -1,7 +1,7 @@
 description: |
   Detects usage of "cmdkey.exe" to add generic credentials.
-As an example, this can be used before connecting to an RDP session via command line interface.
-
+  As an example, this can be used before connecting to an RDP session via command line interface.
+  
 name: New Generic Credentials Added Via Cmdkey.EXE
 index: "winlogbeat-*"
 filter:

@@ -1,7 +1,7 @@
 description: |
   Detects a PDQDeploy service installation which indicates that PDQDeploy was installed on the machines.
-PDQDeploy can be abused by attackers to remotely install packages or execute commands on target machines
-
+  PDQDeploy can be abused by attackers to remotely install packages or execute commands on target machines
+  
 name: New PDQDeploy Service - Server Side
 index: "winlogbeat-*"
 filter:

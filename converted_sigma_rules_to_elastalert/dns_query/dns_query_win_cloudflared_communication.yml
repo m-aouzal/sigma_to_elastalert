@@ -1,7 +1,7 @@
 description: |
   Detects DNS requests to Cloudflared tunnels domains.
-Attackers can abuse that feature to establish a reverse shell or persistence on a machine.
-
+  Attackers can abuse that feature to establish a reverse shell or persistence on a machine.
+  
 name: Cloudflared Tunnels Related DNS Requests
 index: "winlogbeat-*"
 filter:

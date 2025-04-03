@@ -1,7 +1,7 @@
 description: |
   Adversaries may establish persistence by executing malicious content triggered by user inactivity.
-Screensavers are programs that execute after a configurable time of user inactivity and consist of Portable Executable (PE) files with a .scr file extension
-
+  Screensavers are programs that execute after a configurable time of user inactivity and consist of Portable Executable (PE) files with a .scr file extension
+  
 name: Suspicious Screensaver Binary File Creation
 index: "winlogbeat-*"
 filter:

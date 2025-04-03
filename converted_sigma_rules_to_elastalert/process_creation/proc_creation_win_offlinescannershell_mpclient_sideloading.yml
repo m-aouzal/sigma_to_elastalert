@@ -1,7 +1,7 @@
 description: |
   Detects execution of Windows Defender "OfflineScannerShell.exe" from its non standard directory.
-The "OfflineScannerShell.exe" binary is vulnerable to DLL side loading and will load any DLL named "mpclient.dll" from the current working directory.
-
+  The "OfflineScannerShell.exe" binary is vulnerable to DLL side loading and will load any DLL named "mpclient.dll" from the current working directory.
+  
 name: Potential Mpclient.DLL Sideloading Via OfflineScannerShell.EXE Execution
 index: "winlogbeat-*"
 filter:
