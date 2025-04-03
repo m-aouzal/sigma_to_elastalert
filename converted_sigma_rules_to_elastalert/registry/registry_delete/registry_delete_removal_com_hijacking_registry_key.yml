@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.EventType.keyword:deletekey AND registry.path.keyword:*\shell\open\command) AND (NOT (process.executable.keyword:c:\windows\system32\svchost.exe OR ((process.executable.keyword:(c:\program files\common files\microsoft shared\clicktorun* OR c:\program files\common files\microsoft shared\clicktorun\updates*)) AND process.executable.keyword:*\officeclicktorun.exe) OR process.executable.keyword:c:\program files (x86)\microsoft office\root\integration\integrator.exe OR (process.executable.keyword:*\dropbox.exe AND registry.path.keyword:*\dropbox.*) OR (process.executable.keyword:*\appdata\local\temp\wireshark_uninstaller.exe AND registry.path.keyword:*\wireshark-capture-file*) OR ((process.executable.keyword:(c:\program files\opera* OR c:\program files (x86)\opera*)) AND process.executable.keyword:*\installer.exe) OR (process.executable.keyword:*peazip* AND registry.path.keyword:*\peazip.*) OR (process.executable.keyword:*\everything.exe AND registry.path.keyword:*\everything.*) OR process.executable.keyword:c:\windows\installer\msi* OR (process.executable.keyword:c:\program files (x86)\java* AND process.executable.keyword:*\installer.exe AND registry.path.keyword:*\classes\wow6432node\clsid\{4299124f-f2c3-41b4-9c73-9236b2ad0e8f}*)))
 type: any
 priority: 2

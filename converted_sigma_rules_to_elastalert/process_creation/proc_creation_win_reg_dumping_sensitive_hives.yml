@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND (process.command_line.keyword:(* save* OR * export* OR * ˢave* OR * eˣport*)) AND (process.command_line.keyword:(*hklm* OR *hk˪m* OR *hkey_local_machine* OR *hkey_˪ocal_machine* OR *hkey_loca˪_machine* OR *hkey_˪oca˪_machine*)) AND (process.command_line.keyword:(*\system* OR *\sam* OR *\security* OR *\ˢystem* OR *\syˢtem* OR *\ˢyˢtem* OR *\ˢam* OR *\ˢecurity*))
 type: any
 priority: 3

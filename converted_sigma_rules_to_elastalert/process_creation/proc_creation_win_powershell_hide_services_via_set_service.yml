@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\pwsh.exe OR winlog.event_data.originalfilename.keyword:pwsh.dll) AND (process.command_line.keyword:*set-service* AND process.command_line.keyword:*dclcwpdtsd*) AND (process.command_line.keyword:(*-securitydescriptorsddl* OR *-sd*))
 type: any
 priority: 3

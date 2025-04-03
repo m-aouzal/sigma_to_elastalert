@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: registry.path.keyword:hklm\system\currentcontrolset\services\fax\objectname AND (NOT winlog.event_data.Details.keyword:*networkservice*)
 type: any
 priority: 3

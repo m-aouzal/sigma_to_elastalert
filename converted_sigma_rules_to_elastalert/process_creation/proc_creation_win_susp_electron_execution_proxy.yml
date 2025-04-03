@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((winlog.event_data.image.keyword:(*\chrome.exe OR *\code.exe OR *\discord.exe OR *\githubdesktop.exe OR *\keybase.exe OR *\msedge_proxy.exe OR *\msedge.exe OR *\msedgewebview2.exe OR *\msteams.exe OR *\slack.exe OR *\teams.exe)) OR (winlog.event_data.originalfilename.keyword:(chrome.exe OR code.exe OR discord.exe OR githubdesktop.exe OR keybase.exe OR msedge_proxy.exe OR msedge.exe OR msedgewebview2.exe OR msteams.exe OR slack.exe OR teams.exe))) AND (process.command_line.keyword:(*--browser-subprocess-path* OR *--gpu-launcher* OR *--renderer-cmd-prefix* OR *--utility-cmd-prefix*))
 type: any
 priority: 2

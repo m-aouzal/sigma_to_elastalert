@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.executable.keyword:*:\windows\system32\dialer.exe AND network.direction.keyword:true) AND (NOT (destination.ip.keyword:127.0.0.0/8 OR destination.ip.keyword:10.0.0.0/8 OR destination.ip.keyword:172.16.0.0/12 OR destination.ip.keyword:192.168.0.0/16 OR destination.ip.keyword:169.254.0.0/16 OR destination.ip.keyword:::1/128 OR destination.ip.keyword:fe80::/10 OR destination.ip.keyword:fc00::/7))
 type: any
 priority: 3

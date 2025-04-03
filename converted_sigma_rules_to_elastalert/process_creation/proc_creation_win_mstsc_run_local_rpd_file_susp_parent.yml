@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.parent.executable.keyword:(*\brave.exe OR *\ccleanerbrowser.exe OR *\chrome.exe OR *\chromium.exe OR *\firefox.exe OR *\iexplore.exe OR *\microsoftedge.exe OR *\msedge.exe OR *\opera.exe OR *\vivaldi.exe OR *\whale.exe OR *\outlook.exe)) AND (winlog.event_data.image.keyword:*\mstsc.exe OR winlog.event_data.originalfilename.keyword:mstsc.exe)
 type: any
 priority: 3

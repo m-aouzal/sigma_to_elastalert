@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.executable.keyword:*\runonce.exe AND process.parent.executable.keyword:*\rundll32.exe AND (process.parent.command_line.keyword:*setupapi.dll* AND process.parent.command_line.keyword:*installhinfsection*)
 type: any
 priority: 2

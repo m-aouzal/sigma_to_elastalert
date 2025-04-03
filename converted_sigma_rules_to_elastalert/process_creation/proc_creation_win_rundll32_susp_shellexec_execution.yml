@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.command_line.keyword:*shellexec_rundll* AND (process.command_line.keyword:(*\desktop* OR *\temp* OR *\users\public* OR *comspec* OR *iex* OR *invoke-* OR *msiexec* OR *odbcconf* OR *regsvr32*))
 type: any
 priority: 3

@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.TargetImage.keyword:*\lsass.exe AND (winlog.event_data.GrantedAccess.keyword:(*0x1038* OR *0x1438* OR *0x143a* OR *0x1fffff*)) AND (winlog.event_data.CallTrace.keyword:(*dbgcore.dll* OR *dbghelp.dll* OR *kernel32.dll* OR *kernelbase.dll* OR *ntdll.dll*))) AND (NOT (winlog.event_data.SourceUser.keyword:(*authori* OR *autori*))) AND (NOT (((winlog.event_data.CallTrace.keyword:*:\windows\temp\asgard2-agent* AND winlog.event_data.CallTrace.keyword:*\thor\thor64.exe+* AND winlog.event_data.CallTrace.keyword:*|unknown(*) AND winlog.event_data.GrantedAccess.keyword:0x103800) OR process.executable.keyword:*:\windows\sysmon64.exe))
 type: any
 priority: 2

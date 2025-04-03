@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\regsvr32.exe OR winlog.event_data.originalfilename.keyword:regsvr32.exe) AND (process.command_line.keyword:(*:\programdata* OR *:\temp* OR *:\users\public* OR *:\windows\temp* OR *\appdata\local\temp* OR *\appdata\roaming*))
 type: any
 priority: 2

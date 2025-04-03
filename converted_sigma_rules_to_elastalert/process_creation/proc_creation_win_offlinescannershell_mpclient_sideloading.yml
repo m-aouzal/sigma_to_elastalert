@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\offlinescannershell.exe OR winlog.event_data.originalfilename.keyword:offlinescannershell.exe) AND (NOT (process.working_directory.keyword:c:\program files\windows defender\offline\ OR process.working_directory.keyword:"" OR (NOT _exists_:process.working_directory)))
 type: any
 priority: 2

@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.executable.keyword:*\schtasks.exe AND (process.command_line.keyword:* /change* AND process.command_line.keyword:* /tn*)) AND (process.command_line.keyword:(*\appdata\local\temp* OR *\appdata\roaming* OR *\users\public* OR *\windows\temp* OR *\desktop* OR *\downloads* OR *\temporary internet* OR *c:\programdata* OR *c:\perflogs* OR *%programdata%* OR *%appdata%* OR *%comspec%* OR *%localappdata%*)) AND (process.command_line.keyword:(*regsvr32* OR *rundll32* OR *cmd /c* OR *cmd /k* OR *cmd /r* OR *cmd.exe /c* OR *cmd.exe /k* OR *cmd.exe /r* OR *powershell* OR *mshta* OR *wscript* OR *cscript* OR *certutil* OR *bitsadmin* OR *bash.exe* OR *bash* OR *scrcons* OR *wmic* OR *wmic.exe* OR *forfiles* OR *scriptrunner* OR *hh.exe* OR *hh*))
 type: any
 priority: 3

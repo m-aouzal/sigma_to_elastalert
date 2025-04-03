@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: file.path.keyword:*\ccleanerreactivator.dll AND (NOT ((process.executable.keyword:(c:\program files\ccleaner* OR c:\program files (x86)\ccleaner*)) AND process.executable.keyword:*\ccleanerreactivator.exe))
 type: any
 priority: 2

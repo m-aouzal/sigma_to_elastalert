@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.product.keyword:sqlite OR (winlog.event_data.image.keyword:(*\sqlite.exe OR *\sqlite3.exe))) AND (process.command_line.keyword:(*\user data* OR *\opera software* OR *\chromiumviewer*)) AND (process.command_line.keyword:(*login data* OR *cookies* OR *web data* OR *history* OR *bookmarks*))
 type: any
 priority: 3

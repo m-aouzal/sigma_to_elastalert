@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((winlog.event_data.image.keyword:(*\csi.exe OR *\rcsi.exe)) OR (winlog.event_data.originalfilename.keyword:(csi.exe OR rcsi.exe))) AND process.pe.company.keyword:microsoft corporation
 type: any
 priority: 2

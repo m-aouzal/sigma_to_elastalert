@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.executable.keyword:(*:\windows\system32\taskmgr.exe OR *:\windows\syswow64\taskmgr.exe)) AND (file.path.keyword:*\appdata\local\temp* AND file.path.keyword:*\lsass* AND file.path.keyword:*.dmp*)
 type: any
 priority: 3

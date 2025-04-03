@@ -6,5 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\installutil.exe OR winlog.event_data.originalfilename.keyword:installutil.exe) AND (process.command_line.keyword:(*ftp://* OR *http://* OR *https://*))
 type: any
 priority: 2

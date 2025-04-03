@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\regsvr32.exe OR winlog.event_data.originalfilename.keyword:regsvr32.exe) AND ((process.command_line.keyword:(*:\perflogs* OR *:\temp* OR *\windows\registration\crmlog* OR *\windows\system32\com\dmp* OR *\windows\system32\fxstmp* OR *\windows\system32\microsoft\crypto\rsa\machinekeys* OR *\windows\system32\spool\drivers\color* OR *\windows\system32\spool\printers* OR *\windows\system32\spool\servers* OR *\windows\system32\tasks_migrated* OR *\windows\system32\tasks\microsoft\windows\synccenter* OR *\windows\syswow64\com\dmp* OR *\windows\syswow64\fxstmp* OR *\windows\syswow64\tasks\microsoft\windows\pla\system* OR *\windows\syswow64\tasks\microsoft\windows\synccenter* OR *\windows\tasks* OR *\windows\tracing*)) OR ((process.command_line.keyword:(* "c:* OR * c:* OR * 'c:* OR *d:*)) AND (NOT (process.command_line.keyword:(*c:\program files (x86)* OR *c:\program files* OR *c:\programdata* OR *c:\users* OR * c:\windows* OR * "c:\windows* OR * 'c:\windows*))))) AND (NOT (process.command_line.keyword:"" OR (NOT _exists_:process.command_line)))
 type: any
 priority: 3

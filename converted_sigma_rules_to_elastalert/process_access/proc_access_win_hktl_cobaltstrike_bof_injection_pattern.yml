@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.event_data.CallTrace.keyword:/^c:\windows\system32\ntdll.dll+[a-z0-9]{4,6}|c:\windows\system32\kernelbase.dll+[a-z0-9]{4,6}|unknown([a-z0-9]{16})$/ AND (winlog.event_data.GrantedAccess.keyword:(0x1028 OR 0x1fffff))
 type: any
 priority: 3

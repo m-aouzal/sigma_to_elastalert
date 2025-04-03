@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: powershell.file.script_block_text.keyword:*get-acl* AND powershell.file.script_block_text.keyword:*registry::hklm\system\currentcontrolset\services*
 type: any
 priority: 2

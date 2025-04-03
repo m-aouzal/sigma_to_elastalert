@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (powershell.file.script_block_text.keyword:*copy-item* AND powershell.file.script_block_text.keyword:*-destination*) AND (powershell.file.script_block_text.keyword:(*\opera software\opera stable\login data* OR *\mozilla\firefox\profiles* OR *\microsoft\edge\user data\default* OR *\google\chrome\user data\default\login data* OR *\google\chrome\user data\default\login data for account*))
 type: any
 priority: 2

@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (registry.path.keyword:(*\software\wow6432node\microsoft\internet explorer* OR *\software\microsoft\internet explorer*)) AND (registry.path.keyword:(*\toolbar* OR *\extensions* OR *\explorer bars*)) AND (NOT (winlog.event_data.Details.keyword:(empty) OR (registry.path.keyword:(*\extensions\{2670000a-7350-4f3c-8081-5663ee0c6c49}* OR *\extensions\{31d09ba0-12f5-4cce-be8a-2923e76605da}* OR *\extensions\{789fe86f-6fc4-46a1-9849-ede0db0c95ca}* OR *\extensions\{a95fe080-8f5d-11d2-a20b-00aa003c157a}*)) OR (registry.path.keyword:(*\toolbar\shellbrowser\itbar7layout OR *\toolbar\showdiscussionbutton OR *\toolbar\locked))))
 type: any
 priority: 2

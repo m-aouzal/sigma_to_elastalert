@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.executable.keyword:*\colorcpl.exe AND (NOT (file.path.keyword:(*.icm OR *.gmmp OR *.cdmp OR *.camp)))
 type: any
 priority: 3

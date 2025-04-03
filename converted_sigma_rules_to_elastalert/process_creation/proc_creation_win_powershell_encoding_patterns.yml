@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((winlog.event_data.image.keyword:(*\powershell.exe OR *\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (((process.command_line.keyword:(*toint* OR *todecimal* OR *tobyte* OR *touint* OR *tosingle* OR *tosbyte*)) AND (process.command_line.keyword:(*tochar* OR *tostring* OR *string*))) OR ((process.command_line.keyword:*char* AND process.command_line.keyword:*join*) OR (process.command_line.keyword:*split* AND process.command_line.keyword:*join*)))
 type: any
 priority: 1

@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.parent.executable.keyword:c:\windows\syswow64\setup16.exe AND process.parent.command_line.keyword:* -m*) AND (NOT process.executable.keyword:c:\~mssetup.t*)
 type: any
 priority: 2

@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.command_line.keyword:*rundll32.exe* AND process.command_line.keyword:*execute* AND process.command_line.keyword:*regread* AND process.command_line.keyword:*window.close*
 type: any
 priority: 3

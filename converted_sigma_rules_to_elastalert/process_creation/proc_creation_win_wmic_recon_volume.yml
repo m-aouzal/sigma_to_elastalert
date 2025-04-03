@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\wmic.exe OR winlog.event_data.originalfilename.keyword:wmic.exe) AND (process.command_line.keyword:(*volume* OR *path win32_logicaldisk*))
 type: any
 priority: 2

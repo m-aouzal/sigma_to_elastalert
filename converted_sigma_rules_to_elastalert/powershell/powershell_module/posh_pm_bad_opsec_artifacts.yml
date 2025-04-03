@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.event_data.Payload.keyword:(*$doit* OR *harmj0y* OR *mattifestation* OR *_rastamouse* OR *tifkin_* OR *0xdeadbeef*)
 type: any
 priority: 4

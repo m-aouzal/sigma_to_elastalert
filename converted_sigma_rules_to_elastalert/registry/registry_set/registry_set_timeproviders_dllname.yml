@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (registry.path.keyword:*\services\w32time\timeproviders* AND registry.path.keyword:*\dllname) AND (NOT (winlog.event_data.Details.keyword:(%systemroot%\system32\vmictimeprovider.dll OR %systemroot%\system32\w32time.dll OR c:\windows\system32\w32time.dll)))
 type: any
 priority: 3

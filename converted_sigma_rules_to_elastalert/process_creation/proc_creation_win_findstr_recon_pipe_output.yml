@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.command_line.keyword:(*ipconfig*|*find* OR *net*|*find* OR *netstat*|*find* OR *ping*|*find* OR *systeminfo*|*find* OR *tasklist*|*find* OR *whoami*|*find*)
 type: any
 priority: 2

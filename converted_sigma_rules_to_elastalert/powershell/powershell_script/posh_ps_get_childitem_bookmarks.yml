@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: powershell.file.script_block_text.keyword:*get-childitem* AND powershell.file.script_block_text.keyword:* -recurse* AND powershell.file.script_block_text.keyword:* -path* AND powershell.file.script_block_text.keyword:* -filter bookmarks* AND powershell.file.script_block_text.keyword:* -erroraction silentlycontinue* AND powershell.file.script_block_text.keyword:* -force*
 type: any
 priority: 1

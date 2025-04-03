@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.originalfilename.keyword:plink OR (winlog.event_data.commandline.keyword:* -l forward* AND winlog.event_data.commandline.keyword:* -p* AND winlog.event_data.commandline.keyword:* -r*)) AND (NOT process.executable.keyword:*\plink.exe)
 type: any
 priority: 3

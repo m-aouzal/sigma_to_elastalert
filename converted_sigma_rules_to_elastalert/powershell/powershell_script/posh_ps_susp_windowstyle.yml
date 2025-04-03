@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (powershell.file.script_block_text.keyword:*powershell* AND powershell.file.script_block_text.keyword:*windowstyle* AND powershell.file.script_block_text.keyword:*hidden*) AND (NOT (powershell.file.script_block_text.keyword:*:\program files\amazon\workspacesconfig\scripts* AND powershell.file.script_block_text.keyword:*$psscriptroot\module\workspacescriptmodule\workspacescriptmodule*))
 type: any
 priority: 2

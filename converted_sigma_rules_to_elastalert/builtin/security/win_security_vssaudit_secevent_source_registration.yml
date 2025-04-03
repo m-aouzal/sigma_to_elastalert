@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.channel.keyword:Security AND (winlog.event_data.AuditSourceName.keyword:vssaudit AND (event.code.keyword:(4904 OR 4905)))
 type: any
 priority: 0

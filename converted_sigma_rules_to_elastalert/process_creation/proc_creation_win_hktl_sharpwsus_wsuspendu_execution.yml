@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.command_line.keyword:* -inject* AND (process.command_line.keyword:(* -payloadargs* OR * -payloadfile*))) OR ((process.command_line.keyword:(* approve* OR * create* OR * check* OR * delete*)) AND (process.command_line.keyword:(* /payload:* OR * /payload=* OR * /updateid:* OR * /updateid=*)))
 type: any
 priority: 3

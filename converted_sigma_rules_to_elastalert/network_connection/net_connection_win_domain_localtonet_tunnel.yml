@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (destination.domain.keyword:(*.localto.net OR *.localtonet.com)) AND network.direction.keyword:true
 type: any
 priority: 3

@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.command_line.keyword:*taskkill* AND process.command_line.keyword:*raccinesettings.exe*) OR (process.command_line.keyword:*reg.exe* AND process.command_line.keyword:*delete* AND process.command_line.keyword:*raccine tray*) OR (process.command_line.keyword:*schtasks* AND process.command_line.keyword:*/delete* AND process.command_line.keyword:*raccine rules updater*)
 type: any
 priority: 3

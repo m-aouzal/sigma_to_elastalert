@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: powershell.file.script_block_text.keyword:*mount-diskimage* AND powershell.file.script_block_text.keyword:*-imagepath* AND powershell.file.script_block_text.keyword:*get-volume* AND powershell.file.script_block_text.keyword:*.driveletter* AND powershell.file.script_block_text.keyword:*invoke-item* AND powershell.file.script_block_text.keyword:*):*
 type: any
 priority: 2

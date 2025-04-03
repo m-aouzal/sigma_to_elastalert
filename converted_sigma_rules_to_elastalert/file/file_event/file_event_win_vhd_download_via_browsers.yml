@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.executable.keyword:(*\brave.exe OR *\chrome.exe OR *\firefox.exe OR *\iexplore.exe OR *\maxthon.exe OR *\microsoftedge.exe OR *\msedge.exe OR *\msedgewebview2.exe OR *\opera.exe OR *\safari.exe OR *\seamonkey.exe OR *\vivaldi.exe OR *\whale.exe)) AND file.path.keyword:*.vhd*
 type: any
 priority: 2

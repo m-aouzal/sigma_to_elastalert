@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.parent.executable.keyword:(*\winrar.exe OR *\7zfm.exe OR *\peazip.exe)) AND (process.executable.keyword:(*\isoburn.exe OR *\poweriso.exe OR *\imgburn.exe))
 type: any
 priority: 3

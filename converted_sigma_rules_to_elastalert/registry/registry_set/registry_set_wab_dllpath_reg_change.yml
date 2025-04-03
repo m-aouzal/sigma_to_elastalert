@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: registry.path.keyword:*\software\microsoft\wab\dllpath AND (NOT winlog.event_data.Details.keyword:%commonprogramfiles%\system\wab32.dll)
 type: any
 priority: 3

@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((registry.path.keyword:(*\control\terminal server* OR *\windows nt\terminal services*)) AND registry.path.keyword:*\shadow AND (winlog.event_data.Details.keyword:(dword (0x00000001) OR dword (0x00000002) OR dword (0x00000003) OR dword (0x00000004)))) OR ((registry.path.keyword:(*\control\terminal server* OR *\windows nt\terminal services*)) AND (registry.path.keyword:(*\disableremotedesktopantialias OR *\disablesecuritysettings OR *\fallowunsolicited OR *\fallowunsolicitedfullcontrol)) AND winlog.event_data.Details.keyword:dword (0x00000001)) OR (registry.path.keyword:(*\control\terminal server\initialprogram* OR *\control\terminal server\winstations\rdp-tcp\initialprogram* OR *\services\termservice\parameters\servicedll* OR *\windows nt\terminal services\initialprogram*))
 type: any
 priority: 3

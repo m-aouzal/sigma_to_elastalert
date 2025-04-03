@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.description.keyword:paexec application OR winlog.event_data.originalfilename.keyword:paexec.exe OR winlog.event_data.product.keyword:*paexec* OR (winlog.event_data.hashes.keyword:(*imphash=11d40a7b7876288f919ab819cc2d9802* OR *imphash=6444f8a34e99b8f7d9647de66aabe516* OR *imphash=dfd6aa3f7b2b1035b76b718f1ddc689f* OR *imphash=1a6cca4d5460b1710a12dea39e4a592c*))) AND (NOT (winlog.event_data.image.keyword:(*\paexec.exe OR c:\windows\paexec-*)))
 type: any
 priority: 3

@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.executable.keyword:(*~1* OR *~2*)) AND (NOT (((winlog.event_data.parentimage.keyword:(c:\windows\system32\dism.exe OR c:\windows\system32\cleanmgr.exe)) OR (winlog.event_data.parentimage.keyword:(*\webex\webexhost.exe OR *\thor\thor64.exe)) OR winlog.event_data.product.keyword:installshield (r) OR winlog.event_data.description.keyword:installshield (r) setup engine OR winlog.event_data.company.keyword:installshield software corporation) OR ((winlog.event_data.image.keyword:*\appdata* AND winlog.event_data.image.keyword:*\temp*) OR (winlog.event_data.image.keyword:(*~1\unzip.exe OR *~1\7zg.exe)))))
 type: any
 priority: 2

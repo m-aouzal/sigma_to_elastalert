@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\systemsettingsadminflows.exe OR winlog.event_data.originalfilename.keyword:systemsettingsadminflows.exe) AND process.command_line.keyword:*turnondeveloperfeatures* AND (process.command_line.keyword:(*developerunlock* OR *enablesideloading*))
 type: any
 priority: 3

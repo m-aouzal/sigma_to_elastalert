@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.channel.keyword:System AND ((event.code.keyword:(1031 OR 1032 OR 1034)) AND winlog.provider_name.keyword:microsoft-windows-dhcp-server)
 type: any
 priority: 3

@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: file.path.keyword:c:\users* AND file.path.keyword:*\appdata\local\temp\api-ms-win-core-kernel32-legacy-l1.dll
 type: any
 priority: 3

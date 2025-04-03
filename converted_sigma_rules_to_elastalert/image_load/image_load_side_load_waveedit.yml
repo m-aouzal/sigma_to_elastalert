@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: file.path.keyword:*\waveedit.dll AND (NOT ((process.executable.keyword:(c:\program files (x86)\nero\nero apps\nero waveeditor\waveedit.exe OR c:\program files\nero\nero apps\nero waveeditor\waveedit.exe)) AND (file.path.keyword:(c:\program files (x86)\nero\nero apps\nero waveeditor* OR c:\program files\nero\nero apps\nero waveeditor*))))
 type: any
 priority: 3

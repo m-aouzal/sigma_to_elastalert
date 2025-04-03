@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: powershell.file.script_block_text.keyword:*start-neteventsession*
 type: any
 priority: 2

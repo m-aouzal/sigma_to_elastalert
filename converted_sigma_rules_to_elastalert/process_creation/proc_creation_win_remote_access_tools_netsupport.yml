@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.event_data.description.keyword:netsupport client configurator OR winlog.event_data.product.keyword:netsupport remote control OR winlog.event_data.company.keyword:netsupport ltd OR winlog.event_data.originalfilename.keyword:pcicfgui.exe
 type: any
 priority: 2

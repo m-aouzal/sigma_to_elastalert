@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: file.path.keyword:c:\program.exe
 type: any
 priority: 3

@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.channel.keyword:Security AND (((event.code.keyword:4624 AND user.id.keyword:s-1-0-0 AND winlog.event_data.LogonType.keyword:3 AND winlog.event_data.LogonProcessName.keyword:ntlmssp AND winlog.event_data.KeyLength.keyword:0) OR (event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:9 AND winlog.event_data.LogonProcessName.keyword:seclogo)) AND (NOT winlog.event_data.TargetUserName.keyword:anonymous logon))
 type: any
 priority: 2

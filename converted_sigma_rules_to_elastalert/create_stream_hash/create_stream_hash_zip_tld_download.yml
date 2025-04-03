@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.event_data.Contents.keyword:*.zip/* AND (file.path.keyword:(*.bat:zone* OR *.dat:zone* OR *.dll:zone* OR *.doc:zone* OR *.docm:zone* OR *.exe:zone* OR *.hta:zone* OR *.pptm:zone* OR *.ps1:zone* OR *.rar:zone* OR *.rtf:zone* OR *.sct:zone* OR *.vbe:zone* OR *.vbs:zone* OR *.ws:zone* OR *.wsf:zone* OR *.xll:zone* OR *.xls:zone* OR *.xlsm:zone* OR *.zip:zone*))
 type: any
 priority: 3

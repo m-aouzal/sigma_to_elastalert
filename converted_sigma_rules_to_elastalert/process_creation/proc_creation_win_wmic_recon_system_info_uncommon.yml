@@ -9,5 +9,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.description.keyword:wmi commandline utility OR winlog.event_data.originalfilename.keyword:wmic.exe OR winlog.event_data.image.keyword:*\wmic.exe) AND (process.command_line.keyword:(*logicaldisk get name,size,freespace* OR *os get caption,osarchitecture,version*))
 type: any
 priority: 2

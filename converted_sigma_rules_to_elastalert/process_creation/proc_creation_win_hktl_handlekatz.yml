@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.executable.keyword:*\loader.exe AND process.command_line.keyword:*--pid:*) OR (winlog.event_data.Hashes.keyword:(*imphash=38d9e015591bbfd4929e0d0f47fa0055* OR *imphash=0e2216679ca6e1094d63322e3412d650*)) OR ((process.command_line.keyword:*--pid:* AND process.command_line.keyword:*--outfile:*) AND (process.command_line.keyword:(*.dmp* OR *lsass* OR *.obf* OR *dump*)))
 type: any
 priority: 3

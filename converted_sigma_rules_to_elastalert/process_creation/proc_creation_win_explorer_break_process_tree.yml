@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.event_data.commandline.keyword:*/factory,{75dff2b7-6936-4c06-a8bb-676a7b00b24b}* OR (winlog.event_data.commandline.keyword:(*explorer.exe*) AND winlog.event_data.commandline.keyword:(* -root,* OR * /root,* OR * –root,* OR * —root,* OR * ―root,*))
 type: any
 priority: 2

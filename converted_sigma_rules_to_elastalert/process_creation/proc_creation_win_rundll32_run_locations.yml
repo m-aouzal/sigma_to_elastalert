@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:(*:\recycler* OR *:\systemvolumeinformation*)) OR (winlog.event_data.image.keyword:(c:\windows\tasks* OR c:\windows\debug* OR c:\windows\fonts* OR c:\windows\help* OR c:\windows\drivers* OR c:\windows\addins* OR c:\windows\cursors* OR c:\windows\system32\tasks*))
 type: any
 priority: 2

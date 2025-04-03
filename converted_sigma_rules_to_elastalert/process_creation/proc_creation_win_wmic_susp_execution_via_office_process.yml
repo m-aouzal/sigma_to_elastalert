@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.parent.executable.keyword:(*\winword.exe OR *\excel.exe OR *\powerpnt.exe OR *\mspub.exe OR *\visio.exe OR *\msaccess.exe OR *\eqnedt32.exe OR *\onenote.exe OR *\wordpad.exe OR *\wordview.exe)) AND (winlog.event_data.image.keyword:*\wbem\wmic.exe OR winlog.event_data.originalfilename.keyword:wmic.exe) AND ((process.command_line.keyword:*process* AND process.command_line.keyword:*create* AND process.command_line.keyword:*call*) AND (process.command_line.keyword:(*regsvr32* OR *rundll32* OR *msiexec* OR *mshta* OR *verclsid* OR *wscript* OR *cscript*)))
 type: any
 priority: 3

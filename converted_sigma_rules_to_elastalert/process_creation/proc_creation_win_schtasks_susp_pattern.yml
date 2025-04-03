@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.executable.keyword:*\schtasks.exe AND process.command_line.keyword:*/create*) AND (((process.command_line.keyword:(*/sc minute* OR */ru system*)) AND (process.command_line.keyword:(*cmd /c* OR *cmd /k* OR *cmd /r* OR *cmd.exe /c* OR *cmd.exe /k* OR *cmd.exe /r*))) OR (process.command_line.keyword:(* -decode* OR * -enc* OR * -w hidden* OR * bypass* OR * iex* OR *.downloaddata* OR *.downloadfile* OR *.downloadstring* OR */c start /min* OR *frombase64string* OR *mshta http* OR *mshta.exe http*)) OR ((process.command_line.keyword:(*:\programdata* OR *:\temp* OR *:\tmp* OR *:\users\public* OR *:\windows\temp* OR *\appdata* OR *%appdata%* OR *%temp%* OR *%tmp%*)) AND (process.command_line.keyword:(*cscript* OR *curl* OR *wscript*))))
 type: any
 priority: 3

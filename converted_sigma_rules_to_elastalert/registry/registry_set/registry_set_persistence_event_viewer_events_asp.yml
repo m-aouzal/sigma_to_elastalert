@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (registry.path.keyword:(*\microsoft\windows nt\currentversion\event viewer\microsoftredirectionprogram* OR *\microsoft\windows nt\currentversion\event viewer\microsoftredirectionurl*)) AND (NOT ((process.executable.keyword:*c:\windows\system32\svchost.exe AND registry.path.keyword:*\microsoft\windows nt\currentversion\event viewer\microsoftredirectionprogram AND winlog.event_data.Details.keyword:%%systemroot%%\pchealth\helpctr\binaries\helpctr.exe) OR (process.executable.keyword:*c:\windows\system32\svchost.exe AND registry.path.keyword:*\microsoft\windows nt\currentversion\event viewer\microsoftredirectionprogramcommandlineparameters AND winlog.event_data.Details.keyword:-url hcp://services/centers/support?topic=%%s) OR winlog.event_data.Details.keyword:http://go.microsoft.com/fwlink/events.asp OR winlog.event_data.Details.keyword:(empty)))
 type: any
 priority: 2

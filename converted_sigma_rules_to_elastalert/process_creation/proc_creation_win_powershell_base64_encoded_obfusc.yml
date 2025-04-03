@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.command_line.keyword:(*iaatagiaeabvahiaiaawahga* OR *aalqbiahgabwbyacaamab4a* OR *gac0aygb4ag8acgagadaaea* OR *ac4asqbuahyabwbraguakaapacaafaag* OR *auaekabgb2ag8aawblacgakqagahwai* OR *algbjag4adgbvagsazqaoackaiab8ac* OR *ahsamqb9ahsamab9aciaiaatagyai* OR *b7adeafqb7adaafqaiacaalqbmac* OR *aewaxah0aewawah0aigagac0azgag* OR *ahsamab9ahsamwb9aciaiaatagyai* OR *b7adaafqb7admafqaiacaalqbmac* OR *aewawah0aewazah0aigagac0azgag* OR *ahsamgb9ahsamab9aciaiaatagyai* OR *b7adiafqb7adaafqaiacaalqbmac* OR *aewayah0aewawah0aigagac0azgag* OR *ahsamqb9ahsamab9accaiaatagyai* OR *b7adeafqb7adaafqanacaalqbmac* OR *aewaxah0aewawah0ajwagac0azgag* OR *ahsamab9ahsamwb9accaiaatagyai* OR *b7adaafqb7admafqanacaalqbmac* OR *aewawah0aewazah0ajwagac0azgag* OR *ahsamgb9ahsamab9accaiaatagyai* OR *b7adiafqb7adaafqanacaalqbmac* OR *aewayah0aewawah0ajwagac0azgag*)
 type: any
 priority: 3

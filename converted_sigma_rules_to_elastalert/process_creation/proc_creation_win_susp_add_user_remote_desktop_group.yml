@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((winlog.event_data.commandline.keyword:*localgroup* AND winlog.event_data.commandline.keyword:* /add*) OR (winlog.event_data.commandline.keyword:*add-localgroupmember* AND winlog.event_data.commandline.keyword:* -group*)) AND (process.command_line.keyword:(*remote desktop users* OR *utilisateurs du bureau à distance* OR *usuarios de escritorio remoto*))
 type: any
 priority: 3

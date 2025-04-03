@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.parent.executable.keyword:(*\cmd.exe OR *\cscript.exe OR *\mshta.exe OR *\powershell.exe OR *\pwsh.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\wscript.exe)) AND (process.executable.keyword:(*\brave.exe OR *\chrome.exe OR *\msedge.exe OR *\opera.exe OR *\vivaldi.exe)) AND process.command_line.keyword:*--load-extension=*
 type: any
 priority: 3

@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (powershell.file.script_block_text.keyword:(*-securitydescriptorsddl* OR *-sd*)) AND ((powershell.file.script_block_text.keyword:*set-service* AND powershell.file.script_block_text.keyword:*d;;*) AND (powershell.file.script_block_text.keyword:(*;;;iu* OR *;;;su* OR *;;;ba* OR *;;;sy* OR *;;;wd*)))
 type: any
 priority: 3

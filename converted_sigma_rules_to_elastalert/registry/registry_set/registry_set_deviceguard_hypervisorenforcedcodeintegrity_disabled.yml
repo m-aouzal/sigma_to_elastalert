@@ -6,5 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (registry.path.keyword:(*\microsoft\windows\deviceguard\hypervisorenforcedcodeintegrity OR *\control\deviceguard\hypervisorenforcedcodeintegrity OR *\control\deviceguard\scenarios\hypervisorenforcedcodeintegrity\enabled)) AND winlog.event_data.Details.keyword:dword (0x00000000)
 type: any
 priority: 3

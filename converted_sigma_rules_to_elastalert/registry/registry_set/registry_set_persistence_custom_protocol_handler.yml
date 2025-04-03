@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (registry.path.keyword:hkcr* AND winlog.event_data.Details.keyword:url:*) AND (NOT (winlog.event_data.Details.keyword:url:ms-* OR (process.executable.keyword:(c:\program files (x86)* OR c:\program files* OR c:\windows\system32* OR c:\windows\syswow64*))))
 type: any
 priority: 2

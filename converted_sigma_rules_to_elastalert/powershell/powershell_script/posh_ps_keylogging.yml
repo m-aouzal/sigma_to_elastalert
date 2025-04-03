@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: powershell.file.script_block_text.keyword:*get-keystrokes* OR (powershell.file.script_block_text.keyword:*get-procaddress user32.dll getasynckeystate* AND powershell.file.script_block_text.keyword:*get-procaddress user32.dll getforegroundwindow*)
 type: any
 priority: 2

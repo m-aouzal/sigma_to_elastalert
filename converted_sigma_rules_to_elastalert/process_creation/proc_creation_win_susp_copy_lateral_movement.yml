@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.command_line.keyword:(*\*$* OR *\sysvol*)) AND (((winlog.event_data.image.keyword:(*\robocopy.exe OR *\xcopy.exe)) OR (winlog.event_data.originalfilename.keyword:(robocopy.exe OR xcopy.exe))) OR ((winlog.event_data.image.keyword:*\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe) AND process.command_line.keyword:*copy*) OR (((winlog.event_data.image.keyword:(*\powershell.exe* OR *\pwsh.exe*)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (process.command_line.keyword:(*copy-item* OR *copy* OR *cpi* OR * cp* OR *move* OR *move-item* OR * mi* OR * mv*))))
 type: any
 priority: 2

@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: file.path.keyword:(*\windowspowershell\modules*\.ps OR *\windowspowershell\modules*\.dll)
 type: any
 priority: 2

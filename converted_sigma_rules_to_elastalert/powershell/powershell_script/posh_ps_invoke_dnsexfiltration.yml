@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.event_data.scriptblocktext.keyword:*invoke-dnsexfiltrator* OR (winlog.event_data.scriptblocktext.keyword:* -i* AND winlog.event_data.scriptblocktext.keyword:* -d* AND winlog.event_data.scriptblocktext.keyword:* -p* AND winlog.event_data.scriptblocktext.keyword:* -doh* AND winlog.event_data.scriptblocktext.keyword:* -t*)
 type: any
 priority: 3

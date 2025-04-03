@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((registry.path.keyword:*\system* AND registry.path.keyword:*controlset* AND registry.path.keyword:*\services*) AND registry.path.keyword:*\parameters\servicedll) AND (NOT (winlog.event_data.Details.keyword:c:\windows\system32\spool\drivers\x64\3\printconfig.dll OR (process.executable.keyword:c:\windows\system32\lsass.exe AND registry.path.keyword:*\services\ntds\parameters\servicedll AND winlog.event_data.Details.keyword:%%systemroot%%\system32\ntdsa.dll) OR process.executable.keyword:c:\windows\system32\poqexec.exe)) AND (NOT (process.executable.keyword:*\regsvr32.exe AND winlog.event_data.Details.keyword:c:\windows\system32\stagent.dll))
 type: any
 priority: 2

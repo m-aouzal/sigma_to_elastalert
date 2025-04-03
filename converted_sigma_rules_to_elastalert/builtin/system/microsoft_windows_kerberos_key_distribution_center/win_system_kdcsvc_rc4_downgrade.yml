@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.channel.keyword:System AND (event.code.keyword:42 AND winlog.provider_name.keyword:kerberos-key-distribution-center AND winlog.event_data.Level.keyword:2)
 type: any
 priority: 3

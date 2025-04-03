@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (registry.path.keyword:*\software\classes* AND (registry.path.keyword:(*\folder\shellex\extshellfolderviews* OR *\folder\shellex\dragdrophandlers* OR *\folder\shellex\columnhandlers* OR *\filter* OR *\exefile\shell\open\command\(default)* OR *\directory\shellex\dragdrophandlers* OR *\directory\shellex\copyhookhandlers* OR *\clsid\{ac757296-3522-4e11-9862-c17be5a1767e}\instance* OR *\clsid\{abe3b9a4-257d-4b97-bd1a-294af496222e}\instance* OR *\clsid\{7ed96837-96f0-4812-b211-f13c24117ed3}\instance* OR *\clsid\{083863f1-70de-11d0-bd40-00a0c911ce86}\instance* OR *\classes\allfilesystemobjects\shellex\dragdrophandlers* OR *\.exe* OR *\.cmd* OR *\shellex\propertysheethandlers* OR *\shellex\contextmenuhandlers*))) AND (NOT (winlog.event_data.Details.keyword:(empty) OR winlog.event_data.Details.keyword:{807583e5-5146-11d5-a672-00b0d022e945} OR process.executable.keyword:c:\windows\system32\drvinst.exe OR (process.executable.keyword:c:\windows\system32\svchost.exe AND registry.path.keyword:*\lnkfile\shellex\contextmenuhandlers*)))
 type: any
 priority: 2

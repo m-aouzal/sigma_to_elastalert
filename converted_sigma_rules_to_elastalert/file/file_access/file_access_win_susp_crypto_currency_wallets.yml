@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((winlog.event_data.filename.keyword:(*\appdata\roaming\ethereum\keystore* OR *\appdata\roaming\ethereumclassic\keystore* OR *\appdata\roaming\monero\wallets*)) OR (winlog.event_data.filename.keyword:(*\appdata\roaming\bitcoin\wallet.dat OR *\appdata\roaming\bitcoinabc\wallet.dat OR *\appdata\roaming\bitcoinsv\wallet.dat OR *\appdata\roaming\dashcore\wallet.dat OR *\appdata\roaming\dogecoin\wallet.dat OR *\appdata\roaming\litecoin\wallet.dat OR *\appdata\roaming\ripple\wallet.dat OR *\appdata\roaming\zcash\wallet.dat))) AND (NOT (process.executable.keyword:system OR (process.executable.keyword:(c:\program files (x86)* OR c:\program files* OR c:\windows\system32* OR c:\windows\syswow64*)))) AND (NOT (process.executable.keyword:c:\programdata\microsoft\windows defender* AND (process.executable.keyword:(*\mpcopyaccelerator.exe OR *\msmpeng.exe))))
 type: any
 priority: 2

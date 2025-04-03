@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.command_line.keyword:* run run-cmd* AND (NOT (process.parent.executable.keyword:(*\cleanapi.exe OR *\kavremover.exe)))
 type: any
 priority: 3

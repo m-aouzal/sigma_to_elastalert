@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4697 AND ((winlog.event_data.ServiceFileName.keyword:*admin$* AND winlog.event_data.ServiceFileName.keyword:*.exe*) OR (winlog.event_data.ServiceFileName.keyword:*%comspec%* AND winlog.event_data.ServiceFileName.keyword:*start* AND winlog.event_data.ServiceFileName.keyword:*powershell*) OR winlog.event_data.ServiceFileName.keyword:*powershell -nop -w hidden -encodedcommand* OR winlog.event_data.ServiceFileName.keyword:(*aWV4IChuZXctb2JqZWN0IG5ldC53ZWJjbGllbnQpLmRvd25sb2Fkc3RyaW5nKCdodHRwOi8vMTI3LjAuMC4xO* OR *lleCAobmV3LW9iamVjdCBuZXQud2ViY2xpZW50KS5kb3dubG9hZHN0cmluZygnaHR0cDovLzEyNy4wLjAuMT* OR *pZXggKG5ldy1vYmplY3QgbmV0LndlYmNsaWVudCkuZG93bmxvYWRzdHJpbmcoJ2h0dHA6Ly8xMjcuMC4wLjE6*)))
 type: any
 priority: 3

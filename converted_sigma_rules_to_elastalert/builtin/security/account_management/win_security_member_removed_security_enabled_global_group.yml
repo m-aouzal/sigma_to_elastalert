@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.channel.keyword:Security AND (event.code.keyword:(633 OR 4729))
 type: any
 priority: 1

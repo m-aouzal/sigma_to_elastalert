@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.executable.keyword:*\schtasks.exe AND (process.command_line.keyword:* /create* AND process.command_line.keyword:* /sc once* AND process.command_line.keyword:*\temp*)
 type: any
 priority: 3

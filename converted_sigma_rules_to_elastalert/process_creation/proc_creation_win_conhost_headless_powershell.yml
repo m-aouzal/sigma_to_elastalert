@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\conhost.exe OR winlog.event_data.originalfilename.keyword:conhost.exe) AND (process.command_line.keyword:*--headless* AND process.command_line.keyword:*powershell*)
 type: any
 priority: 2

@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.channel.keyword:System AND (winlog.provider_name.keyword:microsoft-windows-certificationauthority AND event.code.keyword:53)
 type: any
 priority: 1

@@ -9,5 +9,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\wmic.exe OR winlog.event_data.originalfilename.keyword:wmic.exe) AND process.command_line.keyword:* group*
 type: any
 priority: 1

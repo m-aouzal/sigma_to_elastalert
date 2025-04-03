@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((winlog.event_data.image.keyword:(*\find.exe OR *\findstr.exe)) OR (winlog.event_data.originalfilename.keyword:(find.exe OR findstr.exe))) AND (process.command_line.keyword:(*.lnk OR *.lnk" OR *.lnk'))
 type: any
 priority: 2

@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: registry.path.keyword:*inprocserver32\(default) AND winlog.event_data.Details.keyword:c:\windows\system32\scrobj.dll
 type: any
 priority: 2

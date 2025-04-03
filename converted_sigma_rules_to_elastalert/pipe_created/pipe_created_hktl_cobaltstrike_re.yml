@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.event_data.pipename.keyword:/\mojo.5688.8052.(?:183894939787088877|35780273329370473)[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\wkssvc_?[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\ntsvcs[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\dsernamepipe[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\searchtextharvester[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\mypipe-(?:f|h)[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\windows.update.manager[0-9a-f]{2,3}/ OR winlog.event_data.pipename.keyword:/\ntsvcs_[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\scerpc_?[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\pgmessagepipe[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\msftewds[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\f4c3[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\fullduplex_[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\msrpc_[0-9a-f]{4}/ OR winlog.event_data.pipename.keyword:/\win\msrpc_[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\f53f[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\rpc_[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\spoolss_[0-9a-f]{2}/ OR winlog.event_data.pipename.keyword:/\winsock2\catalogchangelistener-[0-9a-f]{3}-0,/
 type: any
 priority: 4

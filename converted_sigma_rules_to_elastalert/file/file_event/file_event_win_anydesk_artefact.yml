@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: file.path.keyword:(*\appdata\roaming\anydesk\user.conf* OR *\appdata\roaming\anydesk\system.conf*)
 type: any
 priority: 2

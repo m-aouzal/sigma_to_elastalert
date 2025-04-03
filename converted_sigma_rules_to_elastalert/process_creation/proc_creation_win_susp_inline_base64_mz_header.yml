@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.command_line.keyword:(*tvqqaamaaaaeaaaa* OR *tvpqaaiaaaaeaa8a* OR *tvqaaaeaaaaeabaa* OR *tvoaaaaaaaaaaaaa* OR *tvptaqeaaaaeaaaa*)
 type: any
 priority: 3

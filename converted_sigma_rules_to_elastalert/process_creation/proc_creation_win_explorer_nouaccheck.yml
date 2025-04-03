@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.executable.keyword:*\explorer.exe AND process.command_line.keyword:*/nouaccheck*) AND (NOT (winlog.event_data.parentcommandline.keyword:c:\windows\system32\svchost.exe -k netsvcs -p -s schedule OR winlog.event_data.parentimage.keyword:c:\windows\system32\svchost.exe))
 type: any
 priority: 3

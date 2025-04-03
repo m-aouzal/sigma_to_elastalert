@@ -9,5 +9,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.channel.keyword:Security AND (((event.code.keyword:(4656 OR 4663)) AND winlog.event_data.ObjectType.keyword:key AND winlog.event_data.ObjectName.keyword:\registry\machine\software\microsoft\adhealthagent) AND (NOT (process.executable.keyword:(*microsoft.identity.health.adfs.diagnosticsagent.exe* OR *microsoft.identity.health.adfs.insightsservice.exe* OR *microsoft.identity.health.adfs.monitoringagent.startup.exe* OR *microsoft.identity.health.adfs.pshsurrogate.exe* OR *microsoft.identity.health.common.clients.resourcemonitor.exe*))))
 type: any
 priority: 2

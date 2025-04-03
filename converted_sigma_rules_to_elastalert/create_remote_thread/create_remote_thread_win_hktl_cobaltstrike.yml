@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.event_data.StartAddress.keyword:(*0b80 OR *0c7c OR *0c88)
 type: any
 priority: 3

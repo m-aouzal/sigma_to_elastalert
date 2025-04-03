@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.command_line.keyword:*taskkill* AND process.command_line.keyword:* /f* AND process.command_line.keyword:* /im* AND process.command_line.keyword:*ccsvchst.exe*
 type: any
 priority: 3

@@ -9,5 +9,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: file.path.keyword:*.sed
 type: any
 priority: 2

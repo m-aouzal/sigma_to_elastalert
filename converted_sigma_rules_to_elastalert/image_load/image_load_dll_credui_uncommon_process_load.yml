@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((winlog.event_data.imageloaded.keyword:(*\credui.dll OR *\wincredui.dll)) OR (winlog.event_data.originalfilename.keyword:(credui.dll OR wincredui.dll))) AND (NOT ((process.executable.keyword:(c:\program files (x86)* OR c:\program files* OR c:\windows\system32* OR c:\windows\syswow64*)) OR (process.executable.keyword:(c:\windows\explorer.exe OR c:\windows\immersivecontrolpanel\systemsettings.exe OR c:\windows\regedit.exe)))) AND (NOT (process.executable.keyword:*\opera_autoupdate.exe OR (process.executable.keyword:(*\procexp64.exe OR *\procexp.exe)) OR (process.executable.keyword:c:\users* AND process.executable.keyword:*\appdata\local\microsoft\teams* AND process.executable.keyword:*\teams.exe) OR (process.executable.keyword:c:\users* AND process.executable.keyword:*\appdata\local\microsoft\onedrive*)))
 type: any
 priority: 2

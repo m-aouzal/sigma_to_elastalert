@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (powershell.file.script_block_text.keyword:(*new-scheduledtaskaction* OR *new-scheduledtasktrigger* OR *new-scheduledtaskprincipal* OR *new-scheduledtasksettingsset* OR *new-scheduledtask* OR *register-scheduledtask*)) OR (powershell.file.script_block_text.keyword:*invoke-cimmethod* AND powershell.file.script_block_text.keyword:*-classname* AND powershell.file.script_block_text.keyword:*ps_scheduledtask* AND powershell.file.script_block_text.keyword:*-namespace* AND powershell.file.script_block_text.keyword:*root\microsoft\windows\taskscheduler*)
 type: any
 priority: 2

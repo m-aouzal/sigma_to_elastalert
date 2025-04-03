@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (file.path.keyword:(*\secur32.dll OR *\tdh.dll)) AND (NOT (file.path.keyword:(*c:\$windows.~bt* OR *c:\$winreagent* OR *c:\windows\softwaredistribution* OR *c:\windows\system32* OR *c:\windows\syswow64* OR *c:\windows\winsxs* OR *c:\windows\uus*)))
 type: any
 priority: 2

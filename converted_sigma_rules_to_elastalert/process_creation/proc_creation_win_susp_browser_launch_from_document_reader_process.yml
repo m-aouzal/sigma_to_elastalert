@@ -6,5 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.parent.executable.keyword:(*acrobat reader* OR *microsoft office* OR *pdf reader*)) AND (process.executable.keyword:(*\brave.exe OR *\chrome.exe OR *\firefox.exe OR *\msedge.exe OR *\opera.exe OR *\maxthon.exe OR *\seamonkey.exe OR *\vivaldi.exe OR *)) AND process.command_line.keyword:*http*
 type: any
 priority: 2

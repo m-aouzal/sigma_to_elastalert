@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.executable.keyword:teamviewer_desktop.exe AND process.parent.executable.keyword:teamviewer_service.exe AND process.command_line.keyword:*teamviewer_desktop.exe --ipcport 5939 --module 1
 type: any
 priority: 1

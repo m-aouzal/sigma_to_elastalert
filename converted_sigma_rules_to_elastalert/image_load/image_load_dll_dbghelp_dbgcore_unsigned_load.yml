@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (file.path.keyword:(*\dbghelp.dll OR *\dbgcore.dll)) AND file.code_signature.signed.keyword:false
 type: any
 priority: 3

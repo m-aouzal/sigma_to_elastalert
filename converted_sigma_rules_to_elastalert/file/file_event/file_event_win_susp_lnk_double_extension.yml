@@ -6,5 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (file.path.keyword:*.lnk AND (file.path.keyword:(*.doc.* OR *.docx.* OR *.jpg.* OR *.pdf.* OR *.ppt.* OR *.pptx.* OR *.xls.* OR *.xlsx.*))) AND (NOT file.path.keyword:*\appdata\roaming\microsoft\windows\recent*) AND (NOT (((process.executable.keyword:(*\excel.exe OR *\powerpnt.exe OR *\winword.exe)) AND file.path.keyword:*\appdata\roaming\microsoft\office\recent*) OR (process.executable.keyword:*\excel.exe AND file.path.keyword:*\appdata\roaming\microsoft\excel*) OR (process.executable.keyword:*\powerpnt.exe AND file.path.keyword:*\appdata\roaming\microsoft\powerpoint*) OR (process.executable.keyword:*\winword.exe AND file.path.keyword:*\appdata\roaming\microsoft\word*)))
 type: any
 priority: 2

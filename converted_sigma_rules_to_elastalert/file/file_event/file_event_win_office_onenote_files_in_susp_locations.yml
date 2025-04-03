@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((file.path.keyword:(*\appdata\local\temp* OR *\users\public* OR *\windows\temp* OR *:\temp*)) AND (file.path.keyword:(*.one OR *.onepkg))) AND (NOT (process.executable.keyword:*:\program files\microsoft office* AND process.executable.keyword:*\onenote.exe))
 type: any
 priority: 2

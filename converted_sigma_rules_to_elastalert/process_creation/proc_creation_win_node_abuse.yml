@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.executable.keyword:*\node.exe AND (process.command_line.keyword:(* -e* OR * --eval*))) AND (process.command_line.keyword:*.exec(* AND process.command_line.keyword:*net.socket* AND process.command_line.keyword:*.connect* AND process.command_line.keyword:*child_process*)
 type: any
 priority: 3

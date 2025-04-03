@@ -10,5 +10,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: powershell.file.script_block_text.keyword:*$env:cor_enable_profiling* AND powershell.file.script_block_text.keyword:*$env:cor_profiler* AND powershell.file.script_block_text.keyword:*$env:cor_profiler_path*
 type: any
 priority: 2

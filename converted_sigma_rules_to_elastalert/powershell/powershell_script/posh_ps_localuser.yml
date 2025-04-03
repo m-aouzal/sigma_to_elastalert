@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: powershell.file.script_block_text.keyword:(*disable-localuser* OR *enable-localuser* OR *get-localuser* OR *set-localuser* OR *new-localuser* OR *rename-localuser* OR *remove-localuser*)
 type: any
 priority: 2

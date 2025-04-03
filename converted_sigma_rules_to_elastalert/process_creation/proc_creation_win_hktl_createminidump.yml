@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.event_data.image.keyword:*\createminidump.exe OR winlog.event_data.hashes.keyword:*imphash=4a07f944a83e8a7c2525efa35dd30e2f*
 type: any
 priority: 3

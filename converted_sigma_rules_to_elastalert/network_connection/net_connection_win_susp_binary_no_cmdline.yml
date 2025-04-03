@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (network.direction.keyword:true AND (process.executable.keyword:(*\regsvr32.exe OR *\rundll32.exe OR *\dllhost.exe)) AND (winlog.event_data.CommandLine.keyword:(*\regsvr32.exe OR *\rundll32.exe OR *\dllhost.exe))) AND (NOT (winlog.event_data.CommandLine.keyword:"" OR (NOT _exists_:winlog.event_data.CommandLine)))
 type: any
 priority: 3

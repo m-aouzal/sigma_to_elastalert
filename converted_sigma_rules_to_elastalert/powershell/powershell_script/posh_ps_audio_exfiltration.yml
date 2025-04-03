@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (powershell.file.script_block_text.keyword:*[system.math]::* AND powershell.file.script_block_text.keyword:*[io.filemode]::* AND powershell.file.script_block_text.keyword:*binarywriter*) AND (powershell.file.script_block_text.keyword:*0x52* AND powershell.file.script_block_text.keyword:*0x49* AND powershell.file.script_block_text.keyword:*0x46* AND powershell.file.script_block_text.keyword:*0x57* AND powershell.file.script_block_text.keyword:*0x41* AND powershell.file.script_block_text.keyword:*0x56* AND powershell.file.script_block_text.keyword:*0x45* AND powershell.file.script_block_text.keyword:*0xac*)
 type: any
 priority: 2

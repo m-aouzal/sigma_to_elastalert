@@ -6,5 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.command_line.keyword:(* --buildcache* OR * --bhdump* OR * --certdump* OR * --dnsdump*)) AND (process.command_line.keyword:(* -c* OR * --cachefilename* OR * -o* OR * --outputdirectory*))
 type: any
 priority: 3

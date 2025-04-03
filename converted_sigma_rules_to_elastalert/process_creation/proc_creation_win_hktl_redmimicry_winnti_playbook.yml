@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.executable.keyword:(*\rundll32.exe OR *\cmd.exe)) AND (process.command_line.keyword:(*gthread-3.6.dll* OR *\windows\temp\tmp.bat* OR *sigcmm-2.4.dll*))
 type: any
 priority: 3

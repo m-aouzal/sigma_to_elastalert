@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((destination.port:(25 OR 587 OR 465 OR 2525)) AND network.direction.keyword:true) AND (NOT ((process.executable.keyword:(*\thunderbird.exe OR *\outlook.exe)) OR process.executable.keyword:c:\program files\microsoft\exchange server* OR (process.executable.keyword:c:\program files\windowsapps\microsoft.windowscommunicationsapps_* AND process.executable.keyword:*\hxtsr.exe)))
 type: any
 priority: 2

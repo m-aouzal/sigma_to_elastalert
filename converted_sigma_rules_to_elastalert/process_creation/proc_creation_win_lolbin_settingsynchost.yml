@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (NOT (process.executable.keyword:(c:\windows\system32* OR c:\windows\syswow64*))) AND (process.parent.command_line.keyword:*cmd.exe /c* AND process.parent.command_line.keyword:*roamdiag.cmd* AND process.parent.command_line.keyword:*-outputpath*)
 type: any
 priority: 3

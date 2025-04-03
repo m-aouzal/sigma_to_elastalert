@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.executable.keyword:*\mshta.exe AND (process.command_line.keyword:(*vbscript* OR *.jpg* OR *.png* OR *.lnk* OR *.xls* OR *.doc* OR *.zip* OR *.dll*))
 type: any
 priority: 3

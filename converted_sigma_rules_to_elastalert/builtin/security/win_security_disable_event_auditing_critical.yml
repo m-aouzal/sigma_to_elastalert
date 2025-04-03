@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:4719 AND (winlog.event_data.SubcategoryGuid.keyword:({0cce9210-69ae-11d9-bed3-505054503030} OR {0cce9211-69ae-11d9-bed3-505054503030} OR {0cce9212-69ae-11d9-bed3-505054503030} OR {0cce9215-69ae-11d9-bed3-505054503030} OR {0cce921b-69ae-11d9-bed3-505054503030} OR {0cce922b-69ae-11d9-bed3-505054503030} OR {0cce922f-69ae-11d9-bed3-505054503030} OR {0cce9230-69ae-11d9-bed3-505054503030} OR {0cce9235-69ae-11d9-bed3-505054503030} OR {0cce9236-69ae-11d9-bed3-505054503030} OR {0cce9237-69ae-11d9-bed3-505054503030} OR {0cce923f-69ae-11d9-bed3-505054503030} OR {0cce9240-69ae-11d9-bed3-505054503030} OR {0cce9242-69ae-11d9-bed3-505054503030})) AND (winlog.event_data.AuditPolicyChanges.keyword:(*%%8448* OR *%%8450*))) OR (event.code.keyword:4719 AND winlog.event_data.SubcategoryGuid.keyword:{0cce9217-69ae-11d9-bed3-505054503030} AND winlog.event_data.AuditPolicyChanges.keyword:*%%8448*))
 type: any
 priority: 3

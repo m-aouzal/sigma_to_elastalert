@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((process.command_line.keyword:(*-m 1m* OR *-m 2m* OR *-m 3m*)) AND (process.command_line.keyword:*restrict=off* AND process.command_line.keyword:*-netdev* AND process.command_line.keyword:*connect=* AND process.command_line.keyword:*-nographic*)) AND (NOT (process.command_line.keyword:(* -cdrom* OR * type=virt* OR * -blockdev*)))
 type: any
 priority: 2

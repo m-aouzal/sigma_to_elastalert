@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (((winlog.event_data.pipename.keyword:(\dsernamepipe* OR \f4c3* OR \f53f* OR \fullduplex_* OR \mojo.5688.8052.183894939787088877* OR \mojo.5688.8052.35780273329370473* OR \msftewds* OR \msrpc_* OR \mypipe-f* OR \mypipe-h* OR \ntsvcs* OR \pgmessagepipe* OR \rpc_* OR \scerpc* OR \searchtextharvester* OR \spoolss* OR \win_svc* OR \win\msrpc_* OR \windows.update.manager* OR \wkssvc*)) OR (winlog.event_data.pipename.keyword:(\demoagent_11 OR \demoagent_22))) OR (file.name.keyword:\winsock2\catalogchangelistener-* AND file.name.keyword:*-0,)) AND (NOT (file.name.keyword:(\wkssvc OR \spoolss OR \scerpc OR \ntsvcs OR \searchtextharvester OR \pgmessagepipe OR \msftewds))) AND (NOT ((process.executable.keyword:(*:\program files\websense* OR *:\program files (x86)\websense*)) AND (file.name.keyword:(\dsernamepiper* OR \dsernamepipew*))))
 type: any
 priority: 3

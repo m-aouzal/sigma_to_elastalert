@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: registry.path.keyword:*\microsoft\windows\currentversion\explorer\mycomputer* AND registry.path.keyword:*(default)
 type: any
 priority: 3

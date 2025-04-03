@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: winlog.event_data.image.keyword:*\processhacker_* OR winlog.event_data.image.keyword:*\processhacker.exe OR (winlog.event_data.originalfilename.keyword:(processhacker.exe OR process hacker)) OR winlog.event_data.description.keyword:process hacker OR winlog.event_data.product.keyword:process hacker OR (winlog.event_data.hashes.keyword:(*md5=68f9b52895f4d34e74112f3129b3b00d* OR *md5=b365af317ae730a67c936f21432b9c71* OR *sha1=a0bdfac3ce1880b32ff9b696458327ce352e3b1d* OR *sha1=c5e2018bf7c0f314fed4fd7fe7e69fa2e648359e* OR *sha256=d4a0fe56316a2c45b9ba9ac1005363309a3edc7acf9e4df64d326a0ff273e80f* OR *sha256=bd2c2cf0631d881ed382817afcce2b093f4e412ffb170a719e2762f250abfea4* OR *imphash=3695333c60dedecdcaff1590409aa462* OR *imphash=04de0ad9c37eb7bd52043d2ecac958df*))
 type: any
 priority: 2

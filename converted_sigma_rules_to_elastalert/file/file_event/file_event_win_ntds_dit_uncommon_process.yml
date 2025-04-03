@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: file.path.keyword:*\ntds.dit AND ((process.executable.keyword:(*\cmd.exe OR *\cscript.exe OR *\mshta.exe OR *\powershell.exe OR *\pwsh.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\wscript.exe OR *\wsl.exe OR *\wt.exe)) OR (process.executable.keyword:(*\appdata* OR *\temp* OR *\public* OR *\perflogs*)))
 type: any
 priority: 3

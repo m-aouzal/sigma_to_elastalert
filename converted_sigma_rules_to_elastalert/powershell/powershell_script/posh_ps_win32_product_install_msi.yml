@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: powershell.file.script_block_text.keyword:*invoke-cimmethod* AND powershell.file.script_block_text.keyword:*-classname* AND powershell.file.script_block_text.keyword:*win32_product* AND powershell.file.script_block_text.keyword:*-methodname* AND powershell.file.script_block_text.keyword:*.msi*
 type: any
 priority: 2

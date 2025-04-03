@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (powershell.file.script_block_text.keyword:*dumpcreds* AND powershell.file.script_block_text.keyword:*dumpcerts*) OR powershell.file.script_block_text.keyword:*sekurlsa::logonpasswords* OR (powershell.file.script_block_text.keyword:*crypto::certificates* AND powershell.file.script_block_text.keyword:*cert_system_store_local_machine*)
 type: any
 priority: 3

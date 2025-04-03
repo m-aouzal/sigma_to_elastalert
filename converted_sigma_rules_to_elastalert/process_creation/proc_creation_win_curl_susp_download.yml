@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\curl.exe OR winlog.event_data.product.keyword:the curl executable) AND ((process.command_line.keyword:(*%appdata%* OR *%public%* OR *%temp%* OR *%tmp%* OR *\appdata* OR *\desktop* OR *\temp* OR *\users\public* OR *c:\perflogs* OR *c:\programdata* OR *c:\windows\temp*)) OR (process.command_line.keyword:(*.dll OR *.gif OR *.jpeg OR *.jpg OR *.png OR *.temp OR *.tmp OR *.txt OR *.vbe OR *.vbs))) AND (NOT (process.parent.executable.keyword:c:\program files\git\usr\bin\sh.exe AND process.executable.keyword:c:\program files\git\mingw64\bin\curl.exe AND (process.command_line.keyword:*--silent --show-error --output* AND process.command_line.keyword:*gfw-httpget-* AND process.command_line.keyword:*appdata*)))
 type: any
 priority: 3

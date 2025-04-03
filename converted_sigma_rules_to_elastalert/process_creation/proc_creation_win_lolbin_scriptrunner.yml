@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\scriptrunner.exe OR winlog.event_data.originalfilename.keyword:scriptrunner.exe) AND process.command_line.keyword:* -appvscript*
 type: any
 priority: 2

@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.parent.executable.keyword:*\setres.exe AND process.executable.keyword:*\choice*) AND (NOT (process.executable.keyword:(*c:\windows\system32\choice.exe OR *c:\windows\syswow64\choice.exe)))
 type: any
 priority: 3

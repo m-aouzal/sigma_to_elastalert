@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((process.executable.keyword:(*\cmd.exe OR *\cscript.exe OR *\powershell.exe OR *\pwsh.exe OR *\wscript.exe)) AND (process.pe.original_file_name.keyword:(cmd.exe OR cscript.exe OR powershell.exe OR pwsh.dll OR wscript.exe))) AND (process.command_line.keyword:(*ˣ* OR *˪* OR *ˢ* OR *∕* OR *⁄* OR *―* OR *—* OR * * OR *¯* OR *®* OR *¶*))
 type: any
 priority: 3

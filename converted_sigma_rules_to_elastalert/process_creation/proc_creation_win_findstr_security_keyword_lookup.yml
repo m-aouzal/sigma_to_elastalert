@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((winlog.event_data.image.keyword:(*\find.exe OR *\findstr.exe)) OR (winlog.event_data.originalfilename.keyword:(find.exe OR findstr.exe))) AND (process.command_line.keyword:(* avira OR * avira" OR * cb OR * cb" OR * cylance OR * cylance" OR * defender OR * defender" OR * kaspersky OR * kaspersky" OR * kes OR * kes" OR * mc OR * mc" OR * sec OR * sec" OR * sentinel OR * sentinel" OR * symantec OR * symantec" OR * virus OR * virus"))
 type: any
 priority: 2

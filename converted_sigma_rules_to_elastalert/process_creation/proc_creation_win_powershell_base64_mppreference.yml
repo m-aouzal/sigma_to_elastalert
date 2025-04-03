@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.commandline.keyword:(*YWRkLW1wcHJlZmVyZW5jZS* OR *FkZC1tcHByZWZlcmVuY2Ug* OR *hZGQtbXBwcmVmZXJlbmNlI*) OR winlog.event_data.commandline.keyword:(*c2V0LW1wcHJlZmVyZW5jZS* OR *NldC1tcHByZWZlcmVuY2Ug* OR *zZXQtbXBwcmVmZXJlbmNlI*) OR winlog.event_data.commandline.keyword:(*YWRkLW1wcHJlZmVyZW5jZS* OR *FkZC1tcHByZWZlcmVuY2Ug* OR *hZGQtbXBwcmVmZXJlbmNlI*) OR winlog.event_data.commandline.keyword:(*c2V0LW1wcHJlZmVyZW5jZS* OR *NldC1tcHByZWZlcmVuY2Ug* OR *zZXQtbXBwcmVmZXJlbmNlI*)) OR (winlog.event_data.commandline.keyword:(*qqbkagqalqbnahaauabyaguazgblahiazqbuagmazqaga* OR *eazabkac0atqbwafaacgblagyazqbyaguabgbjaguaia* OR *bagqazaatae0acabqahiazqbmaguacgblag4aywblacaa* OR *uwblahqalqbnahaauabyaguazgblahiazqbuagmazqaga* OR *mazqb0ac0atqbwafaacgblagyazqbyaguabgbjaguaia* OR *taguadaatae0acabqahiazqbmaguacgblag4aywblacaa* OR *yqbkagqalqbtahaacabyaguazgblahiazqbuagmazqaga* OR *eazabkac0abqbwahaacgblagyazqbyaguabgbjaguaia* OR *hagqazaatag0acabwahiazqbmaguacgblag4aywblacaa* OR *cwblahqalqbtahaacabyaguazgblahiazqbuagmazqaga* OR *mazqb0ac0abqbwahaacgblagyazqbyaguabgbjaguaia* OR *zaguadaatag0acabwahiazqbmaguacgblag4aywblacaa*))
 type: any
 priority: 3

@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (powershell.file.script_block_text.keyword:*get-aduser* AND powershell.file.script_block_text.keyword:* -filter **) AND (powershell.file.script_block_text.keyword:(* >* OR * | select* OR *out-file* OR *set-content* OR *add-content*))
 type: any
 priority: 2

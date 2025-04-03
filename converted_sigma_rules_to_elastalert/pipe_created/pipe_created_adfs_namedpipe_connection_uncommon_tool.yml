@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: file.name.keyword:\microsoft##wid\tsql\query AND (NOT (process.executable.keyword:(*:\windows\system32\mmc.exe OR *:\windows\system32\svchost.exe OR *:\windows\system32\wsmprovhost.exe OR *:\windows\syswow64\mmc.exe OR *:\windows\syswow64\wsmprovhost.exe OR *:\windows\wid\binn\sqlwriter.exe OR *\azureadconnect.exe OR *\microsoft.identity.health.adfs.pshsurrogate.exe OR *\microsoft.identityserver.servicehost.exe OR *\microsoft.tri.sensor.exe OR *\sqlservr.exe OR *\tssdis.exe)))
 type: any
 priority: 2

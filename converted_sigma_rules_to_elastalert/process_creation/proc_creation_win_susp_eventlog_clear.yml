@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: ((process.executable.keyword:*\wevtutil.exe AND (process.command_line.keyword:(*clear-log* OR * cl* OR *set-log* OR * sl* OR *lfn:*))) OR ((process.executable.keyword:(*\powershell.exe OR *\pwsh.exe)) AND (process.command_line.keyword:(*clear-eventlog* OR *remove-eventlog* OR *limit-eventlog* OR *clear-winevent*))) OR ((process.executable.keyword:(*\powershell.exe OR *\pwsh.exe OR *\wmic.exe)) AND process.command_line.keyword:*cleareventlog*)) AND (NOT ((process.parent.executable.keyword:(c:\windows\syswow64\msiexec.exe OR c:\windows\system32\msiexec.exe)) AND process.command_line.keyword:* sl*))
 type: any
 priority: 3

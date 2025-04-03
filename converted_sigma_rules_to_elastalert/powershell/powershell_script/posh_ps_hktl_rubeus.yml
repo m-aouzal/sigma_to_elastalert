@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: powershell.file.script_block_text.keyword:(*asreproast* OR *dump /service:krbtgt* OR *dump /luid:0x* OR *kerberoast* OR *createnetonly /program:* OR *ptt /ticket:* OR */impersonateuser:* OR *renew /ticket:* OR *asktgt /user:* OR *harvest /interval:* OR *s4u /user:* OR *s4u /ticket:* OR *hash /password:* OR *golden /aes256:* OR *silver /user:*)
 type: any
 priority: 3

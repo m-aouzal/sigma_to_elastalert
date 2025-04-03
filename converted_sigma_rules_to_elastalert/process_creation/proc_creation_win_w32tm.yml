@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\w32tm.exe OR winlog.event_data.originalfilename.keyword:w32time.dll) AND (process.command_line.keyword:*/stripchart* AND process.command_line.keyword:*/computer:* AND process.command_line.keyword:*/period:* AND process.command_line.keyword:*/dataonly* AND process.command_line.keyword:*/samples:*)
 type: any
 priority: 3

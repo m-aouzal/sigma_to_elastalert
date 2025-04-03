@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.parent.executable.keyword:*\explorer.exe AND process.executable.keyword:*\notepad.exe AND (process.command_line.keyword:(*password*.txt OR *password*.csv OR *password*.doc OR *password*.xls))
 type: any
 priority: 1

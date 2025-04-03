@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\mshta.exe OR winlog.event_data.originalfilename.keyword:mshta.exe) AND (process.command_line.keyword:(*http://* OR *https://* OR *ftp://*))
 type: any
 priority: 3

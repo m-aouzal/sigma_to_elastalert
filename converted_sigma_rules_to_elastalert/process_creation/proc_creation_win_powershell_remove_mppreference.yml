@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.command_line.keyword:*remove-mppreference* AND (process.command_line.keyword:(*-controlledfolderaccessprotectedfolders* OR *-attacksurfacereductionrules_ids* OR *-attacksurfacereductionrules_actions* OR *-checkforsignaturesbeforerunningscan*))
 type: any
 priority: 3

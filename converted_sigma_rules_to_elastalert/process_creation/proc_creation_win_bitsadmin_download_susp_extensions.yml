@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\bitsadmin.exe OR winlog.event_data.originalfilename.keyword:bitsadmin.exe) AND (process.command_line.keyword:(* /transfer* OR * /create* OR * /addfile*)) AND (process.command_line.keyword:(*.7z* OR *.asax* OR *.ashx* OR *.asmx* OR *.asp* OR *.aspx* OR *.bat* OR *.cfm* OR *.cgi* OR *.chm* OR *.cmd* OR *.dll* OR *.gif* OR *.jpeg* OR *.jpg* OR *.jsp* OR *.jspx* OR *.log* OR *.png* OR *.ps1* OR *.psm1* OR *.rar* OR *.scf* OR *.sct* OR *.txt* OR *.vbe* OR *.vbs* OR *.war* OR *.wsf* OR *.wsh* OR *.xll* OR *.zip*))
 type: any
 priority: 3

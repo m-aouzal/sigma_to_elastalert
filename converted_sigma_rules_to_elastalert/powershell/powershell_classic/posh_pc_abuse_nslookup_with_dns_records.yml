@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.Data.keyword:*powershell* AND winlog.event_data.Data.keyword:*nslookup* AND winlog.event_data.Data.keyword:*[1]*) AND (winlog.event_data.Data.keyword:(*-q=txt http* OR *-querytype=txt http* OR *-type=txt http*))
 type: any
 priority: 2

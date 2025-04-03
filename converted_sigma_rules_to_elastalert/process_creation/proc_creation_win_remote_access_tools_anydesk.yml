@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:(*\anydesk.exe OR *\anydeskmsi.exe)) OR winlog.event_data.description.keyword:anydesk OR winlog.event_data.product.keyword:anydesk OR winlog.event_data.company.keyword:anydesk software gmbh
 type: any
 priority: 2

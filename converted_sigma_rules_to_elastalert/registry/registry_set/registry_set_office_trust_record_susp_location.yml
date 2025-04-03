@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: registry.path.keyword:*\security\trusted documents\trustrecords* AND (registry.path.keyword:(*/appdata/local/microsoft/windows/inetcache/* OR */appdata/local/temp/* OR */perflogs/* OR *c:/users/public/* OR *file:///d:/* OR *file:///e:/*))
 type: any
 priority: 3

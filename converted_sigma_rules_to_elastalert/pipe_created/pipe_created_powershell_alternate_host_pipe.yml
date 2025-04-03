@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: file.name.keyword:\pshost* AND (NOT ((process.executable.keyword:(*:\program files\powershell\7-preview\pwsh.exe* OR *:\program files\powershell\7\pwsh.exe* OR *:\windows\system32\dsac.exe* OR *:\windows\system32\inetsrv\w3wp.exe* OR *:\windows\system32\sdiagnhost.exe* OR *:\windows\system32\servermanager.exe* OR *:\windows\system32\wbem\wmiprvse.exe* OR *:\windows\system32\windowspowershell\v1.0\powershell_ise.exe* OR *:\windows\system32\windowspowershell\v1.0\powershell.exe* OR *:\windows\system32\wsmprovhost.exe* OR *:\windows\syswow64\windowspowershell\v1.0\powershell_ise.exe* OR *:\windows\syswow64\windowspowershell\v1.0\powershell.exe*)) OR (NOT _exists_:process.executable))) AND (NOT (((process.executable.keyword:(c:\program files (x86)* OR c:\program files*)) AND process.executable.keyword:*\microsoft sql server* AND process.executable.keyword:*\tools\binn\sqlps.exe) OR (process.executable.keyword:c:\program files\azureconnectedmachineagent\gcarcservice* AND process.executable.keyword:*\gc\gc_worker.exe) OR process.executable.keyword:c:\program files\citrix* OR process.executable.keyword:c:\program files\microsoft\exchange server*))
 type: any
 priority: 2

@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\mpcmdrun.exe OR winlog.event_data.originalfilename.keyword:mpcmdrun.exe) AND (process.command_line.keyword:* -removedefinitions* AND process.command_line.keyword:* -all*)
 type: any
 priority: 3

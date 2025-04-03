@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (winlog.event_data.image.keyword:*\adplus.exe OR winlog.event_data.originalfilename.keyword:adplus.exe) AND (process.command_line.keyword:(* -hang* OR * -pn* OR * -pmn* OR * -p* OR * -po* OR * -c* OR * -sc*))
 type: any
 priority: 3

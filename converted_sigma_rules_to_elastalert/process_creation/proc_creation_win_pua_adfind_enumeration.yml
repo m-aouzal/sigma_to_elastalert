@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.command_line.keyword:(*lockoutduration* OR *lockoutthreshold* OR *lockoutobservationwindow* OR *maxpwdage* OR *minpwdage* OR *minpwdlength* OR *pwdhistorylength* OR *pwdproperties*)) OR process.command_line.keyword:*-sc admincountdmp* OR process.command_line.keyword:*-sc exchaddresses*
 type: any
 priority: 3

@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.executable.keyword:*\reg.exe AND process.command_line.keyword:*add*) AND (process.command_line.keyword:(*\software\microsoft\windows\currentversion\run* OR *\software\microsoft\windows nt\currentversion\winlogon\userinit* OR *\software\microsoft\windows nt\currentversion\winlogon\shell* OR *\software\microsoft\windows nt\currentversion\windows* OR *\software\microsoft\windows\currentversion\explorer\user shell folders* OR *\system\currentcontrolset\control\safeboot\alternateshell*))
 type: any
 priority: 2

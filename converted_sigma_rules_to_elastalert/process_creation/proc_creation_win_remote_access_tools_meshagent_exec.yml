@@ -7,5 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: process.parent.executable.keyword:*\meshagent.exe AND (process.executable.keyword:(*\cmd.exe OR *\powershell.exe OR *\pwsh.exe))
 type: any
 priority: 2

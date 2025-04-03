@@ -8,5 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: file.path.keyword:*\appdata\local\temp\logmeininc\gotoassist remote support expert*
 type: any
 priority: 2

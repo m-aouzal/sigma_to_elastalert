@@ -5,5 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
+      query: (process.pe.original_file_name.keyword:(mavinject32.exe OR mavinject64.exe)) AND (NOT (process.executable.keyword:(*\mavinject32.exe OR *\mavinject64.exe)))
 type: any
 priority: 3
