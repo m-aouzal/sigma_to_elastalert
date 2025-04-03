@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\ntds.dit AND ((process.parent.executable.keyword:(*\cscript.exe OR *\httpd.exe OR *\nginx.exe OR *\php-cgi.exe OR *\powershell.exe OR *\pwsh.exe OR *\w3wp.exe OR *\wscript.exe)) OR (process.parent.executable.keyword:(*\apache* OR *\tomcat* OR *\appdata* OR *\temp* OR *\public* OR *\perflogs*)))
 type: any
 priority: 3

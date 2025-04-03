@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\selectmyparent.exe OR (winlog.event_data.commandline.keyword:(*ppid-spoof* OR *ppid_spoof* OR *spoof-ppid* OR *spoof_ppid* OR *ppidspoof* OR *spoofppid* OR *spoofedppid* OR * -spawnto*)) OR (winlog.event_data.originalfilename.keyword:(*ppid-spoof* OR *ppid_spoof* OR *spoof-ppid* OR *spoof_ppid* OR *ppidspoof* OR *spoofppid* OR *spoofedppid*)) OR winlog.event_data.description.keyword:selectmyparent OR (winlog.event_data.hashes.keyword:(*imphash=04d974875bd225f00902b4cad9af3fbc* OR *imphash=a782af154c9e743ddf3f3eb2b8f3d16e* OR *imphash=89059503d7fbf470e68f7e63313da3ad* OR *imphash=ca28337632625c8281ab8a130b3d6bad*))
 type: any
 priority: 3

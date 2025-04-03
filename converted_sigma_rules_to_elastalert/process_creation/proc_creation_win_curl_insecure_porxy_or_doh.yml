@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\curl.exe OR winlog.event_data.originalfilename.keyword:curl.exe) AND (process.command_line.keyword:(*--doh-insecure* OR *--proxy-insecure*))
 type: any
 priority: 2

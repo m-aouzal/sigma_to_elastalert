@@ -8,6 +8,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.payload.keyword:*get-adprincipalgroupmembership* OR winlog.event_data.contextinfo.keyword:*get-adprincipalgroupmembership*) OR ((winlog.event_data.payload.keyword:*get-aduser* AND winlog.event_data.payload.keyword:*-f* AND winlog.event_data.payload.keyword:*-pr* AND winlog.event_data.payload.keyword:*doesnotrequirepreauth*) OR (winlog.event_data.contextinfo.keyword:*get-aduser* AND winlog.event_data.contextinfo.keyword:*-f* AND winlog.event_data.contextinfo.keyword:*-pr* AND winlog.event_data.contextinfo.keyword:*doesnotrequirepreauth*))
 type: any
 priority: 1

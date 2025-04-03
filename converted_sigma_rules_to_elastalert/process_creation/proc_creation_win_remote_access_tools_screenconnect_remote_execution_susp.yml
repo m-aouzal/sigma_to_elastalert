@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.parent.command_line.keyword:*:\windows\temp\screenconnect* AND process.parent.command_line.keyword:*run.cmd*) AND (process.executable.keyword:(*\bitsadmin.exe OR *\cmd.exe OR *\curl.exe OR *\dllhost.exe OR *\net.exe OR *\nltest.exe OR *\powershell.exe OR *\pwsh.exe OR *\rundll32.exe OR *\wevtutil.exe))
 type: any
 priority: 2

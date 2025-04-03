@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\dism.exe AND file.path.keyword:*\dismcore.dll) AND (NOT file.path.keyword:c:\windows\system32\dism\dismcore.dll)
 type: any
 priority: 3

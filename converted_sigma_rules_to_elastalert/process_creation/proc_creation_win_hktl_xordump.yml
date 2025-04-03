@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\xordump.exe OR (winlog.event_data.commandline.keyword:(* -process lsass.exe* OR * -m comsvcs* OR * -m dbghelp* OR * -m dbgcore*))
 type: any
 priority: 3

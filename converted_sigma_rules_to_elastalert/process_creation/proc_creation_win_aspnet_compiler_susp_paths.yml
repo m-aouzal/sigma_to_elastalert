@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*c:\windows\microsoft.net\framework* OR *c:\windows\microsoft.net\framework64*)) AND process.executable.keyword:*\aspnet_compiler.exe AND (process.command_line.keyword:(*\users\public* OR *\appdata\local\temp* OR *\appdata\local\roaming* OR *:\temp* OR *:\windows\temp* OR *:\windows\system32\tasks* OR *:\windows\tasks*))
 type: any
 priority: 3

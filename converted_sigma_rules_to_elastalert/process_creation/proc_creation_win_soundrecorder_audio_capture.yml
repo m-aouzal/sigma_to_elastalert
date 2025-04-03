@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\soundrecorder.exe AND process.command_line.keyword:*/file*
 type: any
 priority: 2

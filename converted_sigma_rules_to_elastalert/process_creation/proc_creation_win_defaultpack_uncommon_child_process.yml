@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\defaultpack.exe
 type: any
 priority: 2

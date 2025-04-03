@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\clsid\{fdb00e52-a214-4aa1-8fba-4357bb0072ec}\inprocserver32\(default) AND (NOT winlog.event_data.Details.keyword:%windir%\system32\amsi.dll)
 type: any
 priority: 3

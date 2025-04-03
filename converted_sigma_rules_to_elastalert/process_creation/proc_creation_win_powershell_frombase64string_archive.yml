@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*frombase64string* AND process.command_line.keyword:*memorystream* AND process.command_line.keyword:*h4si*
 type: any
 priority: 2

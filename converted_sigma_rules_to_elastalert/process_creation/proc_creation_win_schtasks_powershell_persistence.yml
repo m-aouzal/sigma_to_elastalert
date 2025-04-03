@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:c:\windows\system32\svchost.exe AND (process.parent.command_line.keyword:*-k netsvcs* AND process.parent.command_line.keyword:*-s schedule*) AND (process.command_line.keyword:(* -windowstyle hidden OR * -w hidden OR * -ep bypass OR * -noni))
 type: any
 priority: 3

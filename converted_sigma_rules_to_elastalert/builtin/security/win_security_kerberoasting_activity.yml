@@ -8,6 +8,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND ((event.code.keyword:4769 AND winlog.event_data.Status.keyword:0x0 AND winlog.event_data.TicketEncryptionType.keyword:0x17) AND (NOT ((service.name.keyword:(*krbtgt OR *$)) AND winlog.event_data.TargetUserName.keyword:*$@*)))
 type: any
 priority: 2

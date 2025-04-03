@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:*\procmon* AND file.path.keyword:*.sys) AND (NOT (process.executable.keyword:(*\procmon.exe OR *\procmon64.exe)))
 type: any
 priority: 2

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (user.name.keyword:(*authori* OR *autori*)) AND process.executable.keyword:*\taskmgr.exe
 type: any
 priority: 3

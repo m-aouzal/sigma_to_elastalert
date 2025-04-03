@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (network.direction.keyword:true AND (process.executable.keyword:(*\excel.exe OR *\outlook.exe OR *\powerpnt.exe OR *\winword.exe OR *\wordview.exe))) AND (NOT ((destination.port:(53 OR 80 OR 139 OR 443 OR 445)) OR (process.executable.keyword:*:\program files\microsoft office* AND process.executable.keyword:*\outlook.exe AND (destination.port:(143 OR 465 OR 587 OR 993 OR 995)))))
 type: any
 priority: 2

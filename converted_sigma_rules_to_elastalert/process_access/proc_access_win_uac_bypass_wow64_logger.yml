@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*:\windows\syswow64* AND winlog.event_data.GrantedAccess.keyword:0x1fffff AND winlog.event_data.CallTrace.keyword:unknown(0000000000000000)|unknown(0000000000000000)|*
 type: any
 priority: 3

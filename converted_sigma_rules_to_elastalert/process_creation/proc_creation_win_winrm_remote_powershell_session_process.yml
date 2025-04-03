@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\wsmprovhost.exe OR winlog.event_data.parentimage.keyword:*\wsmprovhost.exe
 type: any
 priority: 2

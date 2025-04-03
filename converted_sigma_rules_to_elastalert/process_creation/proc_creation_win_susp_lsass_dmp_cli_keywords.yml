@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.commandline.keyword:(*lsass.dmp* OR *lsass.zip* OR *lsass.rar* OR *andrew.dmp* OR *coredump.dmp* OR *notlsass.zip* OR *lsass_2* OR *lsassdump* OR *lsassdmp*)) OR (winlog.event_data.commandline.keyword:*lsass* AND winlog.event_data.commandline.keyword:*.dmp*) OR (winlog.event_data.commandline.keyword:*sqldmpr* AND winlog.event_data.commandline.keyword:*.mdmp*) OR (winlog.event_data.commandline.keyword:*nanodump* AND winlog.event_data.commandline.keyword:*.dmp*)
 type: any
 priority: 3

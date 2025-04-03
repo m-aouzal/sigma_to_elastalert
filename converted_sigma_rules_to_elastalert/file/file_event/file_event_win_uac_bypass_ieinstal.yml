@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:c:\program files\internet explorer\ieinstal.exe AND file.path.keyword:c:\users* AND file.path.keyword:*\appdata\local\temp* AND file.path.keyword:*consent.exe
 type: any
 priority: 3

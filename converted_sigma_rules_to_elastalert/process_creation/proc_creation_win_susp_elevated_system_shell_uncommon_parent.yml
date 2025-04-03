@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (((winlog.event_data.image.keyword:(*\powershell.exe OR *\pwsh.exe OR *\cmd.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll OR cmd.exe))) AND ((user.name.keyword:(*authori* OR *autori*)) AND winlog.event_data.LogonId.keyword:0x3e7)) AND (NOT ((process.parent.executable.keyword:(*:\program files (x86)* OR *:\program files* OR *:\programdata* OR *:\windows\system32* OR *:\windows\syswow64* OR *:\windows\temp* OR *:\windows\winsxs*)) OR (NOT _exists_:process.parent.executable) OR process.parent.executable.keyword:"")) AND (NOT ((process.parent.executable.keyword:*:\manageengine\admanager plus\pgsql\bin\postgres.exe AND process.executable.keyword:*\cmd.exe) OR (process.command_line.keyword:*:\windows\system32\cmd.exe /c "* AND process.working_directory.keyword:*:\windows\temp\asgard2-agent*) OR (process.parent.executable.keyword:*:\ibm\spectrumprotect\webserver\scripts* AND process.command_line.keyword:*:\ibm\spectrumprotect\webserver\scripts*)))
 type: any
 priority: 2

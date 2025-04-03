@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\mfdetours.dll AND (NOT (file.path.keyword:*:\program files (x86)\windows kits\10\bin* AND file.code_signature.status.keyword:valid))
 type: any
 priority: 3

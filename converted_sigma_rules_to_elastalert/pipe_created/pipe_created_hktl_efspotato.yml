@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (file.name.keyword:(*\pipe* OR *\pipe\srvsvc*)) AND (NOT (file.name.keyword:(*\ctxshare* OR \pipe*)))
 type: any
 priority: 3

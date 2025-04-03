@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\ccleanerdu.dll AND (NOT ((process.executable.keyword:(c:\program files\ccleaner* OR c:\program files (x86)\ccleaner*)) AND (process.executable.keyword:(*\ccleaner.exe OR *\ccleaner64.exe))))
 type: any
 priority: 2

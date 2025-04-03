@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\software\microsoft\windows nt\currentversion\appcompatflags\custom* AND (registry.path.keyword:(*\csrss.exe OR *\dllhost.exe OR *\explorer.exe OR *\runtimebroker.exe OR *\services.exe OR *\sihost.exe OR *\svchost.exe OR *\taskhostw.exe OR *\winlogon.exe OR *\wmiprvse.exe))
 type: any
 priority: 3

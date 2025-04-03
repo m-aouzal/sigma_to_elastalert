@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*ttdinject.exe OR winlog.event_data.originalfilename.keyword:ttdinject.exe
 type: any
 priority: 2

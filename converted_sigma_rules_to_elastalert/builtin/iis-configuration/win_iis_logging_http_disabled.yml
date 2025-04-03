@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: event.code.keyword:29 AND winlog.event_data.Configuration.keyword:/system.webserver/httplogging/@dontlog AND winlog.event_data.NewValue.keyword:true
 type: any
 priority: 3

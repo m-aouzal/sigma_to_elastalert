@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\logman.exe OR winlog.event_data.originalfilename.keyword:logman.exe) AND (process.command_line.keyword:(*stop* OR *delete*)) AND (process.command_line.keyword:(*circular kernel context logger* OR *eventlog-* OR *sysmon trace* OR *sysmondnsetwsession*))
 type: any
 priority: 3

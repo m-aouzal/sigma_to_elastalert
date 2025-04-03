@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\outlook.exe AND file.path.keyword:*\outlvba.dll
 type: any
 priority: 2

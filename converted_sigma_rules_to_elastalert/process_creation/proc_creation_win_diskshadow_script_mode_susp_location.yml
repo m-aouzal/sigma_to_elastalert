@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:diskshadow.exe OR winlog.event_data.image.keyword:*\diskshadow.exe) AND process.command_line.keyword:(*-s* OR */s* OR *–s* OR *—s* OR *―s*) AND (process.command_line.keyword:(*:\temp* OR *:\windows\temp* OR *\appdata\local* OR *\appdata\roaming* OR *\programdata* OR *\users\public*))
 type: any
 priority: 2

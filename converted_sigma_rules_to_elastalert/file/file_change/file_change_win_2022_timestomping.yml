@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.PreviousCreationUtcTime.keyword:2022* AND (NOT winlog.event_data.CreationUtcTime.keyword:2022*)) OR (winlog.event_data.PreviousCreationUtcTime.keyword:202* AND (NOT winlog.event_data.CreationUtcTime.keyword:202*))) AND (NOT (((winlog.event_data.image.keyword:(c:\windows\system32\provtool.exe OR c:\windows\system32\usocoreworker.exe OR c:\windows\immersivecontrolpanel\systemsettings.exe)) OR winlog.event_data.targetfilename.keyword:c:\programdata\usoprivate\updatestore* OR (winlog.event_data.targetfilename.keyword:(*.tmp OR *.temp))) OR (process.executable.keyword:c:\windows* AND process.executable.keyword:*\tiworker.exe AND file.path.keyword:*.cab)))
 type: any
 priority: 3

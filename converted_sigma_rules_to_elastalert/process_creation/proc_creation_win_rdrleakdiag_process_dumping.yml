@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\rdrleakdiag.exe OR winlog.event_data.originalfilename.keyword:rdrleakdiag.exe) AND (process.command_line.keyword:(*-memdmp* OR */memdmp* OR *–memdmp* OR *—memdmp* OR *―memdmp*) OR process.command_line.keyword:(*fullmemdmp*)) AND (process.command_line.keyword:(* -o* OR * /o* OR * –o* OR * —o* OR * ―o*) OR process.command_line.keyword:(* -p* OR * /p* OR * –p* OR * —p* OR * ―p*))
 type: any
 priority: 3

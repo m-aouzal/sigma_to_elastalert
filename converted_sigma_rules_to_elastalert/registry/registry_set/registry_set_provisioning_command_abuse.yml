@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\software\microsoft\provisioning\commands*
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:*\vmtoolsd.exe AND ((winlog.event_data.image.keyword:(*\cmd.exe OR *\cscript.exe OR *\mshta.exe OR *\powershell.exe OR *\pwsh.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\wscript.exe)) OR (winlog.event_data.originalfilename.keyword:(cmd.exe OR cscript.exe OR mshta.exe OR powershell.exe OR pwsh.dll OR regsvr32.exe OR rundll32.exe OR wscript.exe)))) AND (NOT ((process.executable.keyword:*\cmd.exe AND (process.command_line.keyword:(*\vmware\vmware tools\poweron-vm-default.bat* OR *\vmware\vmware tools\poweroff-vm-default.bat* OR *\vmware\vmware tools\resume-vm-default.bat* OR *\vmware\vmware tools\suspend-vm-default.bat*))) OR (process.executable.keyword:*\cmd.exe AND process.command_line.keyword:"") OR (process.executable.keyword:*\cmd.exe AND (NOT _exists_:process.command_line))))
 type: any
 priority: 3

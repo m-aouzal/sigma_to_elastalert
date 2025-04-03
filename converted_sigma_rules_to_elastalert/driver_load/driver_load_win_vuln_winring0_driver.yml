@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.hashes.keyword:*imphash=d41fa95d4642dc981f10de36f4dc8cd7* OR (winlog.event_data.imageloaded.keyword:(*\winring0x64.sys OR *\winring0.sys OR *\winring0.dll OR *\winring0x64.dll OR *\winring00x64.sys))
 type: any
 priority: 3

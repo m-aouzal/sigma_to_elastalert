@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.originalfilename.keyword:(wscript.exe OR cscript.exe)) OR (winlog.event_data.image.keyword:(*\wscript.exe OR *\cscript.exe))) AND (process.command_line.keyword:(*.csv* OR *.dat* OR *.doc* OR *.gif* OR *.jpeg* OR *.jpg* OR *.png* OR *.ppt* OR *.txt* OR *.xls* OR *.xml*))
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\powershell.exe OR *\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (process.command_line.keyword:(*import-module* OR *ipmo*)) AND process.command_line.keyword:*microsoft.activedirectory.management.dll*
 type: any
 priority: 2

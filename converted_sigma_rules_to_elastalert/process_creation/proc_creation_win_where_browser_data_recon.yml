@@ -8,6 +8,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\where.exe OR winlog.event_data.originalfilename.keyword:where.exe) AND (process.command_line.keyword:(*places.sqlite* OR *cookies.sqlite* OR *formhistory.sqlite* OR *logins.json* OR *key4.db* OR *key3.db* OR *sessionstore.jsonlz4* OR *history* OR *bookmarks* OR *cookies* OR *login data*))
 type: any
 priority: 1

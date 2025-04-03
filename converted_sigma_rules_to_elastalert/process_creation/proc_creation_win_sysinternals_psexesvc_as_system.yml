@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:c:\windows\psexesvc.exe AND (user.name.keyword:(*authori* OR *autori*))
 type: any
 priority: 3

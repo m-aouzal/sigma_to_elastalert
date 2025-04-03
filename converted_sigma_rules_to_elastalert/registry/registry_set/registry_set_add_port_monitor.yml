@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\control\print\monitors* AND winlog.event_data.Details.keyword:*.dll) AND (NOT ((process.executable.keyword:c:\windows\system32\spoolsv.exe AND registry.path.keyword:*\control\print\monitors\cutepdf writer monitor v4.0\driver* AND winlog.event_data.Details.keyword:cpwmon64_v40.dll AND (user.name.keyword:(*authori* OR *autori*))) OR registry.path.keyword:*\control\print\monitors\monvnc\driver* OR (registry.path.keyword:*control\print\environments* AND registry.path.keyword:*\drivers* AND registry.path.keyword:*\vnc printer*)))
 type: any
 priority: 2

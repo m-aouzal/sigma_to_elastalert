@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\dsquery.exe OR winlog.event_data.originalfilename.keyword:dsquery.exe) AND process.command_line.keyword:*trusteddomain*
 type: any
 priority: 2

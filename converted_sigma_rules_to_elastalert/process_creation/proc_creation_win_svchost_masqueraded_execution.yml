@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\svchost.exe AND (NOT ((process.executable.keyword:(c:\windows\system32\svchost.exe OR c:\windows\syswow64\svchost.exe)) OR process.pe.original_file_name.keyword:svchost.exe))
 type: any
 priority: 3

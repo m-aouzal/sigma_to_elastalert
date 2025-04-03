@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.targetobject.keyword:*\system\currentcontrolset\services* OR (winlog.event_data.targetobject.keyword:*\system\controlset* AND winlog.event_data.targetobject.keyword:*\services*)) AND ((winlog.event_data.details.keyword:*admin$* AND winlog.event_data.details.keyword:*.exe*) OR (winlog.event_data.details.keyword:*%comspec%* AND winlog.event_data.details.keyword:*start* AND winlog.event_data.details.keyword:*powershell*))
 type: any
 priority: 3

@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:*\cmd.exe AND process.command_line.keyword:*copy*) OR ((process.executable.keyword:(*\powershell.exe OR *\pwsh.exe)) AND (process.command_line.keyword:(*copy-item* OR * copy* OR *cpi* OR * cp*))) OR ((winlog.event_data.image.keyword:(*\robocopy.exe OR *\xcopy.exe)) OR (winlog.event_data.originalfilename.keyword:(robocopy.exe OR xcopy.exe)))) AND ((process.command_line.keyword:(*\system32* OR *\syswow64* OR *\winsxs*)) AND (process.command_line.keyword:(*\bitsadmin.exe* OR *\calc.exe* OR *\certutil.exe* OR *\cmdl32.exe* OR *\cscript.exe* OR *\mshta.exe* OR *\rundll32.exe* OR *\wscript.exe*)))
 type: any
 priority: 3

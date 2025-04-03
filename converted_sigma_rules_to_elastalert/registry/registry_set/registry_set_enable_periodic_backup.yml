@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\control\session manager\configuration manager\enableperiodicbackup AND winlog.event_data.Details.keyword:dword (0x00000001)
 type: any
 priority: 2

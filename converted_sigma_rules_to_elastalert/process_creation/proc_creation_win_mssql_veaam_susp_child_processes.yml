@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:*\sqlservr.exe AND process.parent.command_line.keyword:*veeamsql*) AND (((process.executable.keyword:(*\cmd.exe OR *\powershell.exe OR *\pwsh.exe OR *\wsl.exe OR *\wt.exe)) AND (process.command_line.keyword:(*-ex* OR *bypass* OR *cscript* OR *downloadstring* OR *http://* OR *https://* OR *mshta* OR *regsvr32* OR *rundll32* OR *wscript* OR *copy*))) OR (process.executable.keyword:(*\net.exe OR *\net1.exe OR *\netstat.exe OR *\nltest.exe OR *\ping.exe OR *\tasklist.exe OR *\whoami.exe)))
 type: any
 priority: 4

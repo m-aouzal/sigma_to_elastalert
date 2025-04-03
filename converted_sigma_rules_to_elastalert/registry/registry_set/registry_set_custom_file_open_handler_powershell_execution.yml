@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*shell\open\command* AND (winlog.event_data.Details.keyword:*powershell* AND winlog.event_data.Details.keyword:*-command*)
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*security\trusted locations\location* AND registry.path.keyword:*\path) AND (NOT ((process.executable.keyword:*:\program files\common files\microsoft shared\clicktorun* AND process.executable.keyword:*\officeclicktorun.exe) OR (process.executable.keyword:(*:\program files\microsoft office* OR *:\program files (x86)\microsoft office*)))) AND (NOT (winlog.event_data.Details.keyword:(*%appdata%\microsoft\templates* OR *%%appdata%%\microsoft\templates* OR *%appdata%\microsoft\word\startup* OR *%%appdata%%\microsoft\word\startup* OR *:\program files (x86)\microsoft office\root\templates* OR *:\program files\microsoft office (x86)\templates* OR *:\program files\microsoft office\root\templates* OR *:\program files\microsoft office\templates*)))
 type: any
 priority: 3

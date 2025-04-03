@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\vmwaretoolboxcmd.exe OR winlog.event_data.originalfilename.keyword:toolbox-cmd.exe) AND (process.command_line.keyword:* script* AND process.command_line.keyword:* set*)
 type: any
 priority: 2

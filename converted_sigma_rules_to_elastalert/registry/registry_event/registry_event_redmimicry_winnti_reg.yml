@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*hklm\software\microsoft\htmlhelp\data*
 type: any
 priority: 3

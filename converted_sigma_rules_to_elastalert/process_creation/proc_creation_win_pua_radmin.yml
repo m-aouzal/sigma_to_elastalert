@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.description.keyword:radmin viewer OR winlog.event_data.product.keyword:radmin viewer OR winlog.event_data.originalfilename.keyword:radmin.exe
 type: any
 priority: 2

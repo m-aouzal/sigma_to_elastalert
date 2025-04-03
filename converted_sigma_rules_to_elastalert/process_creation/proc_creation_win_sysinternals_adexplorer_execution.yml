@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\adexplorer.exe OR winlog.event_data.originalfilename.keyword:adexp) AND process.command_line.keyword:*snapshot*
 type: any
 priority: 2

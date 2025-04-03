@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\at.exe AND process.command_line.keyword:*interactive*
 type: any
 priority: 3

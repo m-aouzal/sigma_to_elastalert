@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\safetykatz.exe OR winlog.event_data.originalfilename.keyword:safetykatz.exe OR winlog.event_data.description.keyword:safetykatz
 type: any
 priority: 4

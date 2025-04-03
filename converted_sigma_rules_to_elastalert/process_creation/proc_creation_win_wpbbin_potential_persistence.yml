@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:c:\windows\system32\wpbbin.exe
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*powershell* AND process.command_line.keyword:*.downloadfile* AND process.command_line.keyword:*system.net.webclient*
 type: any
 priority: 3

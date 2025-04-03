@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\taskmgr.exe AND (NOT (process.executable.keyword:(*:\windows\system32\mmc.exe OR *:\windows\system32\resmon.exe OR *:\windows\system32\taskmgr.exe)))
 type: any
 priority: 1

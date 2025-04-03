@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*\excel.exe OR *\msaccess.exe OR *\mspub.exe OR *\powerpnt.exe OR *\visio.exe OR *\winword.exe)) AND (file.path.keyword:(*.bat OR *.cmd OR *.com OR *.dll OR *.exe OR *.hta OR *.ocx OR *.proj OR *.ps1 OR *.scf OR *.scr OR *.sys OR *.vbe OR *.vbs OR *.wsf OR *.wsh))) AND (NOT (file.path.keyword:*\appdata\local\assembly\tmp* AND file.path.keyword:*.dll)) AND (NOT (((file.path.keyword:*c:\users* AND file.path.keyword:*\appdata\local\microsoft\office* AND file.path.keyword:*\webservicecache\allusers*) AND file.path.keyword:*.com) OR (process.executable.keyword:*\winword.exe AND file.path.keyword:*\appdata\local\temp\webexdelta* AND (file.path.keyword:(*.dll OR *.exe)))))
 type: any
 priority: 3

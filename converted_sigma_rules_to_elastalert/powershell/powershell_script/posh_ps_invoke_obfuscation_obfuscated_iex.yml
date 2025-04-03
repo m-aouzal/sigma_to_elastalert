@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.scriptblocktext.keyword:/$pshome[s*d{1,3}s*]s*+s*$pshome[/ OR winlog.event_data.scriptblocktext.keyword:/$shellid[s*d{1,3}s*]s*+s*$shellid[/ OR winlog.event_data.scriptblocktext.keyword:/$env:public[s*d{1,3}s*]s*+s*$env:public[/ OR winlog.event_data.scriptblocktext.keyword:/$env:comspec[(s*d{1,3}s*,){2}/ OR winlog.event_data.scriptblocktext.keyword:/*mdr*ws*).name/ OR winlog.event_data.scriptblocktext.keyword:/$verbosepreference.tostring(/
 type: any
 priority: 3

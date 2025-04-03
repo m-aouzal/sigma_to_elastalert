@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\sepremovaltoolnative_x64.exe OR (process.executable.keyword:*\catclean.exe AND process.command_line.keyword:*--uninstall*) OR (process.executable.keyword:*\netinstaller.exe AND process.command_line.keyword:*-r*) OR (process.executable.keyword:*\wfpunins.exe AND (process.command_line.keyword:*/uninstall* AND process.command_line.keyword:*/enterprise*))
 type: any
 priority: 3

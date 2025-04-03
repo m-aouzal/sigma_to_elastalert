@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft-Windows-CodeIntegrity/Operational AND ((event.code.keyword:(3082 OR 3083)) AND (NOT (winlog.event_data.FileNameBuffer.keyword:(system32\drivers\vsock.sys OR system32\drivers\vmci.sys))))
 type: any
 priority: 3

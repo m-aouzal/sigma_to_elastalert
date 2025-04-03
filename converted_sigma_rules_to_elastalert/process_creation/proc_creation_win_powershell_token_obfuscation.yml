@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.commandline.keyword:/w+`(w+|-|.)`[w+|s]/ OR winlog.event_data.commandline.keyword:/"({d})+"s*-f/ OR winlog.event_data.commandline.keyword:/(?i)${`?e`?n`?v`?:`?p`?a`?t`?h`?}/) AND (NOT process.command_line.keyword:*${env:path}*)
 type: any
 priority: 3

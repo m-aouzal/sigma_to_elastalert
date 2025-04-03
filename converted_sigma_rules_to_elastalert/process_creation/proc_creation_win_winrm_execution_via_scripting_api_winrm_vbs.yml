@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\cscript.exe OR winlog.event_data.originalfilename.keyword:cscript.exe) AND (process.command_line.keyword:*winrm* AND process.command_line.keyword:*invoke create wmicimv2/win32_* AND process.command_line.keyword:*-r:http*)
 type: any
 priority: 2

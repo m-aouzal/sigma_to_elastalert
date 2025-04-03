@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*disable-windowsoptionalfeature* AND powershell.file.script_block_text.keyword:*-online* AND powershell.file.script_block_text.keyword:*-featurename*) AND (powershell.file.script_block_text.keyword:(*windows-defender-gui* OR *windows-defender-features* OR *windows-defender* OR *windows-defender-applicationguard*))
 type: any
 priority: 3

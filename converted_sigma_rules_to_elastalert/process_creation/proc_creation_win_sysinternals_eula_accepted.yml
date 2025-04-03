@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(* -accepteula* OR * /accepteula* OR * –accepteula* OR * —accepteula* OR * ―accepteula*)
 type: any
 priority: 1

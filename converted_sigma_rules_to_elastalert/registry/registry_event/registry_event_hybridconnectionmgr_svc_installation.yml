@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\services\hybridconnectionmanager* OR (winlog.event_data.EventType.keyword:setvalue AND winlog.event_data.Details.keyword:*microsoft.hybridconnectionmanager.listener.exe*)
 type: any
 priority: 3

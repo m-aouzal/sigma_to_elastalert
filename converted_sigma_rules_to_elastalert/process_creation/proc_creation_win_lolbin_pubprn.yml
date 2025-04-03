@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*\pubprn.vbs* AND process.command_line.keyword:*script:*
 type: any
 priority: 2

@@ -11,6 +11,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.EventType.keyword:createkey AND registry.path.keyword:*\software\microsoft\windows\currentversion\explorer\volumecaches*) AND (NOT (registry.path.keyword:(*\active setup temp folders OR *\branchcache OR *\content indexer cleaner OR *\d3d shader cache OR *\delivery optimization files OR *\device driver packages OR *\diagnostic data viewer database files OR *\downloaded program files OR *\downloadsfolder OR *\feedback hub archive log files OR *\internet cache files OR *\language pack OR *\microsoft office temp files OR *\offline pages files OR *\old chkdsk files OR *\previous installations OR *\recycle bin OR *\retaildemo offline content OR *\setup log files OR *\system error memory dump files OR *\system error minidump files OR *\temporary files OR *\temporary setup files OR *\temporary sync files OR *\thumbnail cache OR *\update cleanup OR *\upgrade discarded files OR *\user file versions OR *\windows defender OR *\windows error reporting files OR *\windows esd installation files OR *\windows upgrade log files)))
 type: any
 priority: 2

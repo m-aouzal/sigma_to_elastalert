@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND (event.code.keyword:4697 AND (winlog.event_data.ServiceFileName.keyword:*mshta* AND winlog.event_data.ServiceFileName.keyword:*vbscript:createobject* AND winlog.event_data.ServiceFileName.keyword:*.run* AND winlog.event_data.ServiceFileName.keyword:*window.close*))
 type: any
 priority: 3

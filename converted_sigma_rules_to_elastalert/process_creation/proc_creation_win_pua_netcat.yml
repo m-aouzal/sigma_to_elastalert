@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\nc.exe OR *\ncat.exe OR *\netcat.exe)) OR (process.command_line.keyword:(* -lvp* OR * -lvnp* OR * -l -v -p* OR * -lv -p* OR * -l --proxy-type http* OR * -vnl --exec* OR * -vnl -e* OR * --lua-exec* OR * --sh-exec*))
 type: any
 priority: 3

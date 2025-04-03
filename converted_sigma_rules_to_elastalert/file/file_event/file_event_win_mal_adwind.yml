@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.targetfilename.keyword:*\appdata\roaming\oracle\bin\java* AND winlog.event_data.targetfilename.keyword:*.exe*) OR (winlog.event_data.targetfilename.keyword:*\retrive* AND winlog.event_data.targetfilename.keyword:*.vbs*)
 type: any
 priority: 3

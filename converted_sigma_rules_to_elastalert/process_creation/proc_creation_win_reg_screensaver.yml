@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\reg.exe AND (process.command_line.keyword:(*hkey_current_user\control panel\desktop* OR *hkcu\control panel\desktop*))) AND ((process.command_line.keyword:*/v screensaveactive* AND process.command_line.keyword:*/t reg_sz* AND process.command_line.keyword:*/d 1* AND process.command_line.keyword:*/f*) OR (process.command_line.keyword:*/v screensavetimeout* AND process.command_line.keyword:*/t reg_sz* AND process.command_line.keyword:*/d* AND process.command_line.keyword:*/f*) OR (process.command_line.keyword:*/v screensaverissecure* AND process.command_line.keyword:*/t reg_sz* AND process.command_line.keyword:*/d 0* AND process.command_line.keyword:*/f*) OR (process.command_line.keyword:*/v scrnsave.exe* AND process.command_line.keyword:*/t reg_sz* AND process.command_line.keyword:*/d* AND process.command_line.keyword:*.scr* AND process.command_line.keyword:*/f*))
 type: any
 priority: 2

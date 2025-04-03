@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft-Windows-Windows Firewall With Advanced Security/Firewall AND (event.code.keyword:(2032 OR 2060))
 type: any
 priority: 1

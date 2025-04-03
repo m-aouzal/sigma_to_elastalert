@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\microsoft.nodejstools.pressanykey.exe
 type: any
 priority: 2

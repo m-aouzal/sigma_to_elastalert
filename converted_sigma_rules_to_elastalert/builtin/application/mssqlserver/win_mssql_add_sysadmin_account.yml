@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Application AND (winlog.provider_name.keyword:*mssql* AND event.code.keyword:33205 AND (winlog.event_data.Data.keyword:*object_name:sysadmin* AND winlog.event_data.Data.keyword:*statement:alter server role [sysadmin] add member*))
 type: any
 priority: 3

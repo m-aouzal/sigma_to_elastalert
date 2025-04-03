@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.name.keyword:*thisispipe*
 type: any
 priority: 4

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.ParentUser.keyword:(*authori* OR *autori*)) AND (winlog.event_data.ParentUser.keyword:(*\network service OR *\local service)) AND (user.name.keyword:(*authori* OR *autori*)) AND (user.name.keyword:(*\system OR *\système OR *\система)) AND (winlog.event_data.IntegrityLevel.keyword:(system OR s-1-16-16384))) AND (NOT (process.executable.keyword:*\rundll32.exe AND process.command_line.keyword:*davsetcookie*))
 type: any
 priority: 3

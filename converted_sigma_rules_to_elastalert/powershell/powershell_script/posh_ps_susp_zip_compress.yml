@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:(*compress-archive -path*-destinationpath $env:temp* OR *compress-archive -path*-destinationpath*\appdata\local\temp* OR *compress-archive -path*-destinationpath*:\windows\temp*)
 type: any
 priority: 2

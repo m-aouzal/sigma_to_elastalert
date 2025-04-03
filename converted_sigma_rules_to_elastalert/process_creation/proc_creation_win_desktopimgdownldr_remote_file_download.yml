@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\desktopimgdownldr.exe AND process.parent.executable.keyword:*\desktopimgdownldr.exe AND process.command_line.keyword:*/lockscreenurl:http*
 type: any
 priority: 2

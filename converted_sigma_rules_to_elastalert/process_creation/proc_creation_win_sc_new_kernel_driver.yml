@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\sc.exe AND (process.command_line.keyword:(*create* OR *config*)) AND (process.command_line.keyword:*binpath* AND process.command_line.keyword:*type* AND process.command_line.keyword:*kernel*)
 type: any
 priority: 2

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\wmiprvse.exe AND file.path.keyword:*\wbem\wbemcomn.dll
 type: any
 priority: 3

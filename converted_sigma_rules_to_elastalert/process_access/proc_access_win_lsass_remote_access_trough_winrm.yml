@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.TargetImage.keyword:*\lsass.exe AND process.executable.keyword:*:\windows\system32\wsmprovhost.exe) AND (NOT winlog.event_data.GrantedAccess.keyword:0x80000000)
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (file.name.keyword:*\msse-* AND file.name.keyword:*-server*) OR file.name.keyword:\postex_* OR file.name.keyword:\status_* OR file.name.keyword:\msagent_* OR file.name.keyword:\mojo_* OR file.name.keyword:\interprocess_* OR file.name.keyword:\samr_* OR file.name.keyword:\netlogon_* OR file.name.keyword:\srvsvc_* OR file.name.keyword:\lsarpc_* OR file.name.keyword:\wkssvc_*
 type: any
 priority: 4

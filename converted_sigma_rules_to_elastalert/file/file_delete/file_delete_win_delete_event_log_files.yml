@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:c:\windows\system32\winevt\logs* AND file.path.keyword:*.evtx
 type: any
 priority: 2

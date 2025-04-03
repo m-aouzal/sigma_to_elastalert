@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\microsoft\internet explorer\main\disablefirstruncustomize AND (winlog.event_data.Details.keyword:(dword (0x00000001) OR dword (0x00000002)))) AND (NOT (process.executable.keyword:(c:\windows\explorer.exe OR c:\windows\system32\ie4uinit.exe)))
 type: any
 priority: 2

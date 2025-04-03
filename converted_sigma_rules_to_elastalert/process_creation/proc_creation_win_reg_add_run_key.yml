@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*reg* AND process.command_line.keyword:* add* AND process.command_line.keyword:*software\microsoft\windows\currentversion\run*
 type: any
 priority: 2

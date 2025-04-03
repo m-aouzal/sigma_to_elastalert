@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\replace.exe AND process.command_line.keyword:(*-a* OR */a* OR *–a* OR *—a* OR *―a*)
 type: any
 priority: 2

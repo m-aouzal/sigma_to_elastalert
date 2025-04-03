@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft-Windows-TerminalServices-LocalSessionManager/Operational AND (event.code.keyword:21 AND winlog.event_data.Address.keyword:*16777216*)
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND (event.code.keyword:4697 AND (winlog.event_data.ServiceFileName.keyword:(*pcap* OR *npcap* OR *npf* OR *nm3* OR *ndiscap* OR *nmnt* OR *windivert* OR *usbpcap* OR *pktmon*)))
 type: any
 priority: 2

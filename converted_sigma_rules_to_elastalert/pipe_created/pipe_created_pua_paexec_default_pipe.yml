@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.name.keyword:\paexec*
 type: any
 priority: 2

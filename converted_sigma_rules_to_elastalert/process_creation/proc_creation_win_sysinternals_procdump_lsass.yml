@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(* -ma* OR * /ma* OR * –ma* OR * —ma* OR * ―ma*) AND process.command_line.keyword:* ls*
 type: any
 priority: 3

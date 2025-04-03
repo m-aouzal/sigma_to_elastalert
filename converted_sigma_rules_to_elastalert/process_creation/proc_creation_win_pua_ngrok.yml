@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(* tcp 139* OR * tcp 445* OR * tcp 3389* OR * tcp 5985* OR * tcp 5986*)) OR (process.command_line.keyword:* start* AND process.command_line.keyword:*--all* AND process.command_line.keyword:*--config* AND process.command_line.keyword:*.yml*) OR (process.executable.keyword:*ngrok.exe AND (process.command_line.keyword:(* tcp* OR * http* OR * authtoken*))) OR (process.command_line.keyword:(*.exe authtoken* OR *.exe start --all*))
 type: any
 priority: 3

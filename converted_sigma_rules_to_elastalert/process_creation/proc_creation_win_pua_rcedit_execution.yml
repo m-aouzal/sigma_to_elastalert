@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\rcedit-x64.exe OR *\rcedit-x86.exe)) OR winlog.event_data.description.keyword:edit resources of exe OR winlog.event_data.product.keyword:rcedit) AND process.command_line.keyword:*--set-* AND (process.command_line.keyword:(*originalfilename* OR *companyname* OR *filedescription* OR *productname* OR *productversion* OR *legalcopyright*))
 type: any
 priority: 2

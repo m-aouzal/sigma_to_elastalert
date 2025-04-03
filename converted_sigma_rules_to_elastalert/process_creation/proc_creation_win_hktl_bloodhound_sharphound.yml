@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.product.keyword:*sharphound* OR winlog.event_data.description.keyword:*sharphound* OR (winlog.event_data.company.keyword:(*specterops* OR *evil corp*)) OR (winlog.event_data.image.keyword:(*\bloodhound.exe* OR *\sharphound.exe*))) OR (process.command_line.keyword:(* -collectionmethod all* OR * --collectionmethods session* OR * --loop --loopduration* OR * --portscantimeout* OR *.exe -c all -d* OR *invoke-bloodhound* OR *get-bloodhounddata*)) OR (process.command_line.keyword:* -jsonfolder* AND process.command_line.keyword:* -zipfilename*) OR (process.command_line.keyword:* dconly* AND process.command_line.keyword:* --nosavecache*)
 type: any
 priority: 3

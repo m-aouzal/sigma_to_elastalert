@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.CallTrace.keyword:*editionupgrademanagerobj.dll*
 type: any
 priority: 2

@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(hklm\system\currentcontrolset\services\naldrv\imagepath OR hklm\system\currentcontrolset\services\procexp152\imagepath)) AND (NOT ((process.executable.keyword:(*\procexp64.exe OR *\procexp.exe OR *\procmon64.exe OR *\procmon.exe OR *\handle.exe OR *\handle64.exe)) AND winlog.event_data.Details.keyword:*\windows\system32\drivers\procexp152.sys*))
 type: any
 priority: 2

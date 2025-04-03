@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:/cmd.{0,5}(?:/c|/r).+powershell.+(?:${?input}?|noexit).+"/
 type: any
 priority: 3

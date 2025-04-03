@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: dns.question.name.keyword:(*.v2.argotunnel.com OR *protocol-v2.argotunnel.com OR *trycloudflare.com OR *update.argotunnel.com)
 type: any
 priority: 2

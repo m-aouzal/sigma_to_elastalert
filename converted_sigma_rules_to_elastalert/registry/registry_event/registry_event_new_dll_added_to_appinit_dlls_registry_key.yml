@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.targetobject.keyword:(*\software\microsoft\windows nt\currentversion\windows\appinit_dlls OR *\software\wow6432node\microsoft\windows nt\currentversion\windows\appinit_dlls)) OR (winlog.event_data.newname.keyword:(*\software\microsoft\windows nt\currentversion\windows\appinit_dlls OR *\software\wow6432node\microsoft\windows nt\currentversion\windows\appinit_dlls))) AND (NOT winlog.event_data.Details.keyword:(empty))
 type: any
 priority: 2

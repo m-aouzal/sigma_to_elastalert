@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\mpcmdrun.exe OR *\nissrv.exe)) AND (NOT (process.executable.keyword:(c:\program files (x86)\windows defender* OR c:\program files\microsoft security client* OR c:\program files\windows defender* OR c:\programdata\microsoft\windows defender\platform* OR c:\windows\winsxs*)))
 type: any
 priority: 3

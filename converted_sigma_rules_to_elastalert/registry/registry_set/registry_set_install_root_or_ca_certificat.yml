@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*\software\microsoft\systemcertificates\root\certificates* OR *\software\policies\microsoft\systemcertificates\root\certificates* OR *\software\microsoft\enterprisecertificates\root\certificates* OR *\software\microsoft\systemcertificates\ca\certificates* OR *\software\policies\microsoft\systemcertificates\ca\certificates* OR *\software\microsoft\enterprisecertificates\ca\certificates* OR *\software\microsoft\systemcertificates\authroot\certificates* OR *\software\policies\microsoft\systemcertificates\authroot\certificates* OR *\software\microsoft\enterprisecertificates\authroot\certificates*)) AND registry.path.keyword:*\blob AND winlog.event_data.Details.keyword:binary data
 type: any
 priority: 2

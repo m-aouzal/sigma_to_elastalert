@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.parent.executable.keyword:*\manageengine\servicedesk* AND process.parent.executable.keyword:*\java.exe*) AND (process.executable.keyword:(*\appvlp.exe OR *\bash.exe OR *\bitsadmin.exe OR *\calc.exe OR *\certutil.exe OR *\cscript.exe OR *\curl.exe OR *\forfiles.exe OR *\mftrace.exe OR *\mshta.exe OR *\net.exe OR *\net1.exe OR *\notepad.exe OR *\powershell.exe OR *\pwsh.exe OR *\query.exe OR *\reg.exe OR *\schtasks.exe OR *\scrcons.exe OR *\sh.exe OR *\systeminfo.exe OR *\whoami.exe OR *\wmic.exe OR *\wscript.exe))) AND (NOT ((process.executable.keyword:(*\net.exe OR *\net1.exe)) AND process.command_line.keyword:* stop*))
 type: any
 priority: 3

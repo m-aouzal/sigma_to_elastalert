@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\sc.exe OR winlog.event_data.originalfilename.keyword:sc.exe) AND process.command_line.keyword:*query* AND process.command_line.keyword:*termservice*
 type: any
 priority: 1

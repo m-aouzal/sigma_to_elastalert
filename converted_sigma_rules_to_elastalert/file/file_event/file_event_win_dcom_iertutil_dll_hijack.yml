@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:system AND file.path.keyword:*\internet explorer\iertutil.dll
 type: any
 priority: 4

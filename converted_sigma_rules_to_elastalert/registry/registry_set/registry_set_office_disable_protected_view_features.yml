@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\software\microsoft\office* AND registry.path.keyword:*\security\protectedview*) AND ((winlog.event_data.Details.keyword:dword (0x00000001) AND (registry.path.keyword:(*\disableattachementsinpv OR *\disableinternetfilesinpv OR *\disableintranetcheck OR *\disableunsafelocationsinpv))) OR (winlog.event_data.Details.keyword:dword (0x00000000) AND (registry.path.keyword:(*\enabledatabasefileprotectedview OR *\enableforeigntextfileprotectedview))))
 type: any
 priority: 3

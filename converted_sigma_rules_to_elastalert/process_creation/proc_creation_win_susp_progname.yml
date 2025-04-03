@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\cve-202* OR *\cve202*)) OR (winlog.event_data.image.keyword:(*\poc.exe OR *\artifact.exe OR *\artifact64.exe OR *\artifact_protected.exe OR *\artifact32.exe OR *\artifact32big.exe OR *obfuscated.exe OR *obfusc.exe OR *\meterpreter))) OR (process.command_line.keyword:(*inject.ps1* OR *invoke-cve* OR *pupy.ps1* OR *payload.ps1* OR *beacon.ps1* OR *powerview.ps1* OR *bypass.ps1* OR *obfuscated.ps1* OR *obfusc.ps1* OR *obfus.ps1* OR *obfs.ps1* OR *evil.ps1* OR *minidogz.ps1* OR *_enc.ps1* OR *\shell.ps1* OR *\rshell.ps1* OR *revshell.ps1* OR *\av.ps1* OR *\av_test.ps1* OR *adrecon.ps1* OR *mimikatz.ps1* OR *\powerup_* OR *powerup.ps1* OR *\temp\a.ps1* OR *\temp\p.ps1* OR *\temp\1.ps1* OR *hound.ps1* OR *encode.ps1* OR *powercat.ps1*))
 type: any
 priority: 3

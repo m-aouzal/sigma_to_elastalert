@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\agentexecutor.exe OR winlog.event_data.originalfilename.keyword:agentexecutor.exe) AND (process.command_line.keyword:(* -powershell* OR * -remediationscript*))) AND (NOT ((process.command_line.keyword:(*c:\windows\system32\windowspowershell\v1.0* OR *c:\windows\syswow64\windowspowershell\v1.0*)) OR process.parent.executable.keyword:*\microsoft.management.services.intunewindowsagent.exe))
 type: any
 priority: 3

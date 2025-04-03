@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\microsoft\protect\credhist AND (NOT ((process.executable.keyword:(c:\program files* OR c:\program files (x86)* OR c:\windows\system32* OR c:\windows\syswow64*)) OR process.executable.keyword:c:\windows\explorer.exe))
 type: any
 priority: 2

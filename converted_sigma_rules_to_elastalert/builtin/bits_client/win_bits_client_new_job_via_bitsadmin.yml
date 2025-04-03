@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft-Windows-Bits-Client/Operational AND (event.code.keyword:3 AND winlog.event_data.processPath.keyword:*\bitsadmin.exe)
 type: any
 priority: 1

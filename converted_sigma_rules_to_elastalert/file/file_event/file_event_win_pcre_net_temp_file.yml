@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\appdata\local\temp\ba9ea7344a4a5f591d6e5dc32a13494b*
 type: any
 priority: 3

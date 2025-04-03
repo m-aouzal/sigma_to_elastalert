@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe) AND ((process.command_line.keyword:(*>?%appdata%* OR *>?%temp%* OR *>?%tmp%* OR *>?%userprofile%* OR *>?c:\programdata* OR *>?c:\temp* OR *>?c:\users\public* OR *>?c:\windows\temp*)) OR ((process.command_line.keyword:(* >* OR *">* OR *'>*)) AND (process.command_line.keyword:*c:\users* AND process.command_line.keyword:*\appdata\local*)))
 type: any
 priority: 2

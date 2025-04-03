@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.description.keyword:web browser password viewer OR winlog.event_data.image.keyword:*\webbrowserpassview.exe
 type: any
 priority: 2

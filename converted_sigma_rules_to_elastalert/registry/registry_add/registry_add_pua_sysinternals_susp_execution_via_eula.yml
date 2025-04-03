@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.EventType.keyword:createkey AND (registry.path.keyword:(*\active directory explorer* OR *\handle* OR *\livekd* OR *\process explorer* OR *\procdump* OR *\psexec* OR *\psloglist* OR *\pspasswd* OR *\sdelete* OR *\sysinternals*)) AND registry.path.keyword:*\eulaaccepted
 type: any
 priority: 2

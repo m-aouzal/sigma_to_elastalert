@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:c:\windows\livekd.dmp
 type: any
 priority: 3

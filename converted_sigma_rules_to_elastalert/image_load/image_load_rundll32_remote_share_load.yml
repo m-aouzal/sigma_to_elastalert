@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\rundll32.exe AND file.path.keyword:\*
 type: any
 priority: 2

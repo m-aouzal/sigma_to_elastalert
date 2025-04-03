@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\cdb.exe OR winlog.event_data.originalfilename.keyword:cdb.exe) AND (process.command_line.keyword:(* -c* OR * -cf*))
 type: any
 priority: 2

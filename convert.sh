@@ -83,7 +83,7 @@ process_rule() {
     # STEP 2.5: Replace index "*" with "winlogbeat-*"
     sed -i -E "s/(index:[[:space:]]*)['\"]?[*]['\"]?/\1\"winlogbeat-*\"/" "$temp_fixed_description"
 
-    # STEP 3: Awk pass to append .keyword under lines "query:" or "query_string:"
+    # STEP 3: Awk pass to append .keyword under lines "query:" "
     temp_final=$(mktemp)
     awk -v exFile="$EXEMPTION_FILE" '
 ###############################################################################
@@ -147,28 +147,13 @@ function process_query(q) {
 # Main logic: Process lines starting with query: or query_string:
 ###############################################################################
 {
-    match($0, /^[[:space:]]*(query|query_string):[[:space:]]*/)
+    match($0, /^[[:space:]]*(query):[[:space:]]*/)
     if (RSTART == 1) {
         prefix = substr($0, RSTART, RLENGTH)
         query = substr($0, RSTART + RLENGTH)
 
-        # Remove leading/trailing quotes if present
-        if (query ~ /^".*"$/) {
-            quoted = 1
-            query = substr(query, 2, length(query) - 2)
-        } else {
-            quoted = 0
-        }
-
         # Process the query
         processed_query = process_query(query)
-
-        # Reconstruct the line
-        if (quoted) {
-            print prefix "\"" processed_query "\""
-        } else {
-            print prefix processed_query
-        }
     } else {
         print $0
     }

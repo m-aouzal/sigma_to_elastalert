@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:(*.docm OR *.dotm OR *.xlsm OR *.xltm OR *.potm OR *.pptm)
 type: any
 priority: 1

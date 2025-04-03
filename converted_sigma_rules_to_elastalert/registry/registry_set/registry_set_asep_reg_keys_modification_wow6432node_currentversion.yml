@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\software\wow6432node\microsoft\windows nt\currentversion* AND (registry.path.keyword:(*\windows\appinit_dlls* OR *\image file execution options* OR *\drivers32*)) AND (NOT (winlog.event_data.Details.keyword:((empty) OR \registry\machine\software\microsoft\windows nt\currentversion\image file execution options)))
 type: any
 priority: 2

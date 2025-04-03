@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*copy procdump* OR *move procdump*)) OR ((process.command_line.keyword:*copy* AND process.command_line.keyword:*.dmp*) AND (process.command_line.keyword:(*2.dmp* OR *lsass* OR *out.dmp*))) OR (process.command_line.keyword:(*copy lsass.exe_* OR *move lsass.exe_*))
 type: any
 priority: 3

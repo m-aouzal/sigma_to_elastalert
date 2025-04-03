@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\wlrmdr.exe OR (((winlog.event_data.image.keyword:*\wlrmdr.exe OR winlog.event_data.originalfilename.keyword:wlrmndr.exe) AND (process.command_line.keyword:(*-s* OR */s* OR *–s* OR *—s* OR *―s*) AND process.command_line.keyword:(*-f* OR */f* OR *–f* OR *—f* OR *―f*) AND process.command_line.keyword:(*-t* OR */t* OR *–t* OR *—t* OR *―t*) AND process.command_line.keyword:(*-m* OR */m* OR *–m* OR *—m* OR *―m*) AND process.command_line.keyword:(*-a* OR */a* OR *–a* OR *—a* OR *―a*) AND process.command_line.keyword:(*-u* OR */u* OR *–u* OR *—u* OR *―u*))) AND (NOT (process.parent.executable.keyword:c:\windows\system32\winlogon.exe OR (process.parent.executable.keyword:("" OR -)) OR (NOT _exists_:process.parent.executable))))
 type: any
 priority: 2

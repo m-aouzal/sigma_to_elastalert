@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*system\currentcontrolset\services\vss* AND process.executable.keyword:*esentutl.exe) AND (NOT registry.path.keyword:*system\currentcontrolset\services\vss\start*)
 type: any
 priority: 3

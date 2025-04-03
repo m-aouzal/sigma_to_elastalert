@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*\powershell.exe OR *\pwsh.exe)) AND file.path.keyword:*.ps1) AND (NOT (file.path.keyword:*__psscriptpolicytest_* OR (file.path.keyword:c:\users* AND file.path.keyword:*\appdata\local\temp*) OR file.path.keyword:c:\windows\temp*))
 type: any
 priority: 1

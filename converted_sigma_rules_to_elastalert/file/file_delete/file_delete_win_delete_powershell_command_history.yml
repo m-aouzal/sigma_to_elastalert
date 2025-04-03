@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\psreadline\consolehost_history.txt
 type: any
 priority: 2

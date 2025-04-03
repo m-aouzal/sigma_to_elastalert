@@ -9,6 +9,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*currentversion\winlogon* AND (powershell.file.script_block_text.keyword:(*set-itemproperty* OR *new-item*))
 type: any
 priority: 2

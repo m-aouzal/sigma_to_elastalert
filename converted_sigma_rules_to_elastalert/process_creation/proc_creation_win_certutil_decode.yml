@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\certutil.exe OR winlog.event_data.originalfilename.keyword:certutil.exe) AND (process.command_line.keyword:(*-decode* OR */decode* OR *–decode* OR *—decode* OR *―decode*) OR process.command_line.keyword:(*-decodehex* OR */decodehex* OR *–decodehex* OR *—decodehex* OR *―decodehex*))
 type: any
 priority: 2

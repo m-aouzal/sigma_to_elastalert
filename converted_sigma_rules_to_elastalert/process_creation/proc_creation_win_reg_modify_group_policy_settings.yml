@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND process.command_line.keyword:*\software\policies\microsoft\windows\system* AND (process.command_line.keyword:(*grouppolicyrefreshtimedc* OR *grouppolicyrefreshtimeoffsetdc* OR *grouppolicyrefreshtime* OR *grouppolicyrefreshtimeoffset* OR *enablesmartscreen* OR *shellsmartscreenlevel*))
 type: any
 priority: 2

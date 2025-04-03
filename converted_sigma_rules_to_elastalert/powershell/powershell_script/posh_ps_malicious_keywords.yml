@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:(*adjusttokenprivileges* OR *image_nt_optional_hdr64_magic* OR *metasploit* OR *microsoft.win32.unsafenativemethods* OR *mimikatz* OR *minidumpwritedump* OR *page_execute_read* OR *readprocessmemory.invoke* OR *se_privilege_enabled* OR *security_delegation* OR *token_adjust_privileges* OR *token_all_access* OR *token_assign_primary* OR *token_duplicate* OR *token_elevation* OR *token_impersonate* OR *token_information_class* OR *token_privileges* OR *token_query*)
 type: any
 priority: 2

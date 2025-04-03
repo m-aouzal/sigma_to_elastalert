@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\client32.exe OR winlog.event_data.product.keyword:*netsupport remote control* OR winlog.event_data.originalfilename.keyword:*client32.exe* OR winlog.event_data.hashes.keyword:*imphash=a9d50692e95b79723f3e76fcf70d023e*) AND (NOT (process.executable.keyword:(c:\program files* OR c:\program files (x86)*)))
 type: any
 priority: 2

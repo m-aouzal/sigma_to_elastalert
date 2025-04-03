@@ -56,7 +56,30 @@ This repository provides a script to convert Sigma rules to Elastalert-compatibl
    ```bash
    pip install pySigma-backend-elasticsearch
    ```
+**Note:** This script utilizes GNU Parallel to run file conversions concurrently, which significantly speeds up processing when dealing with many files. Please ensure that GNU Parallel is installed on your system before running the conversion command. On Debian or Ubuntu systems, you can install it using: 
 
+```bash
+sudo apt-get install parallel
+```
+
+**Sequential Execution Alternative:**  
+This script is optimized for speed using GNU Parallel to convert files concurrently. However, if you prefer not to install GNU Parallel or want to run the conversion sequentially, you can modify the command to process files one by one. Instead of running:  
+
+```bash
+find "$RULE_DIR" -type f -name "*.yml" | parallel -j "$JOBS" process_rule {}
+```
+
+you can use a simple loop, such as:  
+
+```bash
+for file in $(find "$RULE_DIR" -type f -name "*.yml"); do
+    process_rule "$file"
+done
+```
+
+This loop will run the conversion function on each file sequentially. Keep in mind that processing files one at a time may take longer if you have many files to convert.
+
+For other platforms or additional installation details, please refer to [GNU Parallel's official documentation](https://www.gnu.org/software/parallel/).
 8. **Make the Conversion Script Executable and Run It**
 
    ```bash

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND (process.command_line.keyword:(*\appdatalow\software\microsoft* OR *\policies\microsoft\windows\oobe* OR *\policies\microsoft\windows nt\currentversion\winlogon* OR *\software\microsoft\windows nt\currentversion\winlogon* OR *\currentcontrolset\control\securityproviders\wdigest* OR *\microsoft\windows defender*))
 type: any
 priority: 3

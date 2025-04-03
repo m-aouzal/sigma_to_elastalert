@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*verb:sync* AND process.command_line.keyword:*-source:runcommand* AND process.command_line.keyword:*-dest:runcommand*) AND process.executable.keyword:*\msdeploy.exe
 type: any
 priority: 2

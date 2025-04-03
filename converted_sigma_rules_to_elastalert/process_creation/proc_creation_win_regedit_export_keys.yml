@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\regedit.exe OR winlog.event_data.originalfilename.keyword:regedit.exe) AND process.command_line.keyword:(* -e* OR * /e* OR * –e* OR * —e* OR * ―e*)) AND (NOT ((process.command_line.keyword:(*hklm* OR *hkey_local_machine*)) AND (process.command_line.keyword:(*\system OR *\sam OR *\security))))
 type: any
 priority: 1

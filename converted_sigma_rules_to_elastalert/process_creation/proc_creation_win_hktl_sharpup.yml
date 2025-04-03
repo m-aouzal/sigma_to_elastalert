@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\sharpup.exe OR winlog.event_data.description.keyword:sharpup OR (winlog.event_data.commandline.keyword:(*hijackablepaths* OR *unquotedservicepath* OR *processdllhijack* OR *modifiableservicebinaries* OR *modifiablescheduledtask* OR *domaingpppassword* OR *cachedgpppassword*))
 type: any
 priority: 4

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND ((event.code.keyword:4674 AND winlog.event_data.ObjectType.keyword:sc_manager object AND winlog.event_data.ObjectName.keyword:servicesactive AND winlog.event_data.PrivilegeList.keyword:setakeownershipprivilege) AND (NOT (winlog.logon.id.keyword:0x3e4 AND process.executable.keyword:*:\windows\system32\services.exe)))
 type: any
 priority: 2

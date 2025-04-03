@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*\keyboard layout\preload* OR *\keyboard layout\substitutes*)) AND (winlog.event_data.Details.keyword:(*00000429* OR *00050429* OR *0000042a*))
 type: any
 priority: 2

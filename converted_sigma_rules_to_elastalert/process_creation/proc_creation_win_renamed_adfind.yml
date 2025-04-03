@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.command_line.keyword:(*domainlist* OR *trustdmp* OR *dcmodes* OR *adinfo* OR * dclist* OR *computer_pwdnotreqd* OR *objectcategory=* OR *-subnets -f* OR *name="domain admins"* OR *-sc u:* OR *domainncs* OR *dompol* OR * oudmp* OR *subnetdmp* OR *gpodmp* OR *fspdmp* OR *users_noexpire* OR *computers_active* OR *computers_pwdnotreqd*)) OR (winlog.event_data.Hashes.keyword:(*imphash=bca5675746d13a1f246e2da3c2217492* OR *imphash=53e117a96057eaf19c41380d0e87f1c2*)) OR process.pe.original_file_name.keyword:adfind.exe) AND (NOT process.executable.keyword:*\adfind.exe)
 type: any
 priority: 3

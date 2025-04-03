@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\addinutil.exe OR winlog.event_data.originalfilename.keyword:addinutil.exe) AND (process.command_line.keyword:(*-addinroot:* OR *-pipelineroot:*))) AND (NOT (process.command_line.keyword:(*-addinroot:"c:\program files (x86)\common files\microsoft shared\vsta* OR *-addinroot:c:\program files (x86)\common files\microsoft shared\vsta* OR *-pipelineroot:"c:\program files (x86)\common files\microsoft shared\vsta* OR *-pipelineroot:c:\program files (x86)\common files\microsoft shared\vsta*)))
 type: any
 priority: 2

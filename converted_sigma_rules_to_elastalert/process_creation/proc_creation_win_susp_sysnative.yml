@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.commandline.keyword:*:\windows\sysnative* OR winlog.event_data.image.keyword:*:\windows\sysnative*
 type: any
 priority: 2

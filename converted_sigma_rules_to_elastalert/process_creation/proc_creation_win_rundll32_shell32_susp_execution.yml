@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe) AND ((process.command_line.keyword:*shell32.dll* AND process.command_line.keyword:*control_rundll*) AND (process.command_line.keyword:(*%appdata%* OR *%localappdata%* OR *%temp%* OR *%tmp%* OR *\appdata* OR *\temp* OR *\users\public*)))
 type: any
 priority: 3

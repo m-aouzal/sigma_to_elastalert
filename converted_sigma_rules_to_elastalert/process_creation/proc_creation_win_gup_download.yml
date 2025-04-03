@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\gup.exe OR winlog.event_data.originalfilename.keyword:gup.exe) AND (process.command_line.keyword:* -unzipto* AND process.command_line.keyword:*http*)) AND (NOT process.parent.executable.keyword:*\notepad++.exe)
 type: any
 priority: 3

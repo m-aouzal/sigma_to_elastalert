@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*\control\lsa\security packages OR *\control\lsa\osconfig\security packages)) AND (NOT (process.executable.keyword:(c:\windows\system32\msiexec.exe OR c:\windows\syswow64\msiexec.exe)))
 type: any
 priority: 3

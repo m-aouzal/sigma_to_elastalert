@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*move-item* AND powershell.file.script_block_text.keyword:*cert:\localmachine\root*) OR (powershell.file.script_block_text.keyword:*import-certificate* AND powershell.file.script_block_text.keyword:*cert:\localmachine\root*)
 type: any
 priority: 2

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.parent.executable.keyword:(*\wscript.exe OR *\cscript.exe)) AND (process.executable.keyword:(*\powershell.exe OR *\pwsh.exe))) AND (NOT process.working_directory.keyword:*\health service state*)
 type: any
 priority: 2

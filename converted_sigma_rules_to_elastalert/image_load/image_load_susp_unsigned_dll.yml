@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\installutil.exe OR *\regasm.exe OR *\regsvcs.exe OR *\regsvr32.exe OR *\rundll32.exe)) AND (NOT (file.code_signature.signed.keyword:true OR (file.code_signature.status.keyword:(errorchaining OR errorcode_endpoint OR errorexpired OR trusted)) OR (NOT _exists_:file.code_signature.signed) OR (file.code_signature.signed.keyword:("" OR -)) OR (NOT _exists_:file.code_signature.status) OR (file.code_signature.status.keyword:("" OR -))))
 type: any
 priority: 2

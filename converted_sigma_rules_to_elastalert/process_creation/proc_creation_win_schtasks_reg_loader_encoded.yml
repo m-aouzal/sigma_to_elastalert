@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\schtasks.exe OR winlog.event_data.originalfilename.keyword:schtasks.exe) AND process.command_line.keyword:*/create* AND (process.command_line.keyword:(*frombase64string* OR *encodedcommand*)) AND (process.command_line.keyword:(*get-itemproperty* OR * gp*)) AND (process.command_line.keyword:(*hkcu:* OR *hklm:* OR *registry::* OR *hkey_*))
 type: any
 priority: 3

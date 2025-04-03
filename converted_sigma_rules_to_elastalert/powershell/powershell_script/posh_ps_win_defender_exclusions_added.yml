@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:(* -exclusionpath* OR * -exclusionextension* OR * -exclusionprocess* OR * -exclusionipaddress*)) AND (powershell.file.script_block_text.keyword:(*add-mppreference* OR *set-mppreference*))
 type: any
 priority: 2

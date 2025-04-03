@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((registry.path.keyword:(*\shellids\microsoft.powershell\executionpolicy OR *\policies\microsoft\windows\powershell\executionpolicy)) AND (winlog.event_data.Details.keyword:(*bypass* OR *unrestricted*))) AND (NOT (process.executable.keyword:(*:\windows\system32* OR *:\windows\syswow64*)))
 type: any
 priority: 2

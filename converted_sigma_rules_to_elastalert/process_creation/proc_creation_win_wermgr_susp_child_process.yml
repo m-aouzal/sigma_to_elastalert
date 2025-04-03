@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:*\wermgr.exe AND (process.executable.keyword:(*\cmd.exe OR *\cscript.exe OR *\ipconfig.exe OR *\mshta.exe OR *\net.exe OR *\net1.exe OR *\netstat.exe OR *\nslookup.exe OR *\powershell_ise.exe OR *\powershell.exe OR *\pwsh.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\systeminfo.exe OR *\whoami.exe OR *\wscript.exe))) AND (NOT (process.executable.keyword:*\rundll32.exe AND (process.command_line.keyword:*c:\windows\system32\werconcpl.dll* AND process.command_line.keyword:*launchercapp*) AND (process.command_line.keyword:(*-queuereporting* OR *-responsepester*))))
 type: any
 priority: 3

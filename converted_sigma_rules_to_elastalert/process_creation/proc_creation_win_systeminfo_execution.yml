@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\systeminfo.exe OR winlog.event_data.originalfilename.keyword:sysinfo.exe
 type: any
 priority: 1

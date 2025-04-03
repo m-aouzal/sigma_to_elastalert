@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.TargetImage.keyword:(*\calc.exe OR *\calculator.exe OR *\mspaint.exe OR *\notepad.exe OR *\ping.exe OR *\wordpad.exe OR *\write.exe)) AND winlog.event_data.GrantedAccess.keyword:0x1fffff
 type: any
 priority: 1

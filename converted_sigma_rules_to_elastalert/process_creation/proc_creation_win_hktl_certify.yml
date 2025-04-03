@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\certify.exe OR winlog.event_data.originalfilename.keyword:certify.exe OR winlog.event_data.description.keyword:*certify*) OR ((process.command_line.keyword:(*.exe cas* OR *.exe find* OR *.exe pkiobjects* OR *.exe request* OR *.exe download*)) AND (process.command_line.keyword:(* /vulnerable* OR * /template:* OR * /altname:* OR * /domain:* OR * /path:* OR * /ca:*)))
 type: any
 priority: 3

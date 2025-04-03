@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\excel.exe OR *\mspub.exe OR *\outlook.exe OR *\onenote.exe OR *\onenoteim.exe OR *\powerpnt.exe OR *\winword.exe)) AND (file.path.keyword:(*\system.management.automation.dll* OR *\system.management.automation.ni.dll*))
 type: any
 priority: 2

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\netsh.exe OR winlog.event_data.originalfilename.keyword:netsh.exe) AND ((process.command_line.keyword:*interface* AND process.command_line.keyword:*portproxy* AND process.command_line.keyword:*add* AND process.command_line.keyword:*v4tov4*) OR (process.command_line.keyword:*i* AND process.command_line.keyword:*p* AND process.command_line.keyword:*a* AND process.command_line.keyword:*v*) OR (process.command_line.keyword:*connectp* AND process.command_line.keyword:*listena* AND process.command_line.keyword:*c=*))
 type: any
 priority: 2

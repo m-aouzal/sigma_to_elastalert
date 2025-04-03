@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft-Windows-Windows Defender/Operational AND (event.code.keyword:5007 AND winlog.event_data.NewValue.keyword:*\microsoft\windows defender\exclusions*)
 type: any
 priority: 2

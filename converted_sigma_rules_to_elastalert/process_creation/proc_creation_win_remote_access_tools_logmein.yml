@@ -8,6 +8,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.description.keyword:lmiguardiansvc OR winlog.event_data.product.keyword:lmiguardiansvc OR winlog.event_data.company.keyword:logmein, inc.
 type: any
 priority: 2

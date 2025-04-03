@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\netsh.exe OR winlog.event_data.originalfilename.keyword:netsh.exe) AND ((winlog.event_data.commandline.keyword:*firewall* AND winlog.event_data.commandline.keyword:*add* AND winlog.event_data.commandline.keyword:*allowedprogram*) OR (winlog.event_data.commandline.keyword:*advfirewall* AND winlog.event_data.commandline.keyword:*firewall* AND winlog.event_data.commandline.keyword:*add* AND winlog.event_data.commandline.keyword:*rule* AND winlog.event_data.commandline.keyword:*action=allow* AND winlog.event_data.commandline.keyword:*program=*)) AND (process.command_line.keyword:(*:\$recycle.bin* OR *:\recycler.bin* OR *:\recyclers.bin* OR *:\systemvolumeinformation* OR *:\temp* OR *:\users\default* OR *:\users\desktop* OR *:\users\public* OR *:\windows\addins* OR *:\windows\cursors* OR *:\windows\debug* OR *:\windows\drivers* OR *:\windows\fonts* OR *:\windows\help* OR *:\windows\system32\tasks* OR *:\windows\tasks* OR *:\windows\temp* OR *\downloads* OR *\local settings\temporary internet files* OR *\temporary internet files\content.outlook* OR *%public%* OR *%temp%* OR *%tmp%*))
 type: any
 priority: 3

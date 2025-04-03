@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*\cscript.exe OR *\mshta.exe OR *\wscript.exe)) OR (process.command_line.keyword:(* -ep bypass* OR * -executionpolicy bypass* OR * -w hidden* OR */e:javascript* OR */e:jscript* OR */e:vbscript*)) OR (process.pe.original_file_name.keyword:(cscript.exe OR mshta.exe OR wscript.exe))) AND ((process.command_line.keyword:(*:\perflogs* OR *:\users\public* OR *\appdata\local\temp* OR *\appdata\roaming\temp* OR *\temporary internet* OR *\windows\temp*)) OR ((winlog.event_data.commandline.keyword:*:\users* AND winlog.event_data.commandline.keyword:*\favorites*) OR (winlog.event_data.commandline.keyword:*:\users* AND winlog.event_data.commandline.keyword:*\favourites*) OR (winlog.event_data.commandline.keyword:*:\users* AND winlog.event_data.commandline.keyword:*\contacts*)))
 type: any
 priority: 3

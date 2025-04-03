@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\cmd.exe OR *\cscript.exe OR *\mshta.exe OR *\powershell.exe OR *\pwsh.exe OR *\wscript.exe)) AND file.path.keyword:*\appdata\local\packages\microsoft.windowsterminal_8wekyb3d8bbwe\localstate\settings.json
 type: any
 priority: 2

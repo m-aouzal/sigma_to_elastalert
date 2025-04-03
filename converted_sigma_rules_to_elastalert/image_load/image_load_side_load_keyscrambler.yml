@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*\keyscrambler.exe OR *\keyscramblerlogon.exe)) AND file.path.keyword:*\keyscramblerie.dll) AND (NOT (((process.executable.keyword:(*c:\program files (x86)\keyscrambler* OR *c:\program files\keyscrambler*)) AND (file.path.keyword:(*c:\program files (x86)\keyscrambler* OR *c:\program files\keyscrambler*))) OR (winlog.event_data.Signature.keyword:qfx software corporation AND file.code_signature.status.keyword:valid)))
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\vsdiagnostics.exe OR winlog.event_data.originalfilename.keyword:vsdiagnostics.exe) AND process.command_line.keyword:*start* AND (process.command_line.keyword:(* /launch:* OR * -launch:*))
 type: any
 priority: 2

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*win32_nteventlogfile* AND (powershell.file.script_block_text.keyword:(*.backupeventlog(* OR *.changesecuritypermissions(* OR *.changesecuritypermissionsex(* OR *.cleareventlog(* OR *.delete(* OR *.deleteex(* OR *.rename(* OR *.takeownership(* OR *.takeownershipex(*))
 type: any
 priority: 2

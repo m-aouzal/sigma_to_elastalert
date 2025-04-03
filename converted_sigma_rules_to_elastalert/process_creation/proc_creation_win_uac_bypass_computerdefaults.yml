@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.IntegrityLevel.keyword:(high OR system OR s-1-16-16384 OR s-1-16-12288)) AND process.executable.keyword:c:\windows\system32\computerdefaults.exe) AND (NOT (process.parent.executable.keyword:(*:\windows\system32* OR *:\program files*)))
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\nsudo.exe OR *\nsudolc.exe OR *\nsudolg.exe)) OR (winlog.event_data.originalfilename.keyword:(nsudo.exe OR nsudolc.exe OR nsudolg.exe))) AND (process.command_line.keyword:(*-u:s* OR *-u:t* OR *-u:e* OR *-p:e* OR *-m:s* OR *-m:h* OR *-u=s* OR *-u=t* OR *-u=e* OR *-p=e* OR *-m=s* OR *-m=h* OR *-showwindowmode:hide*))
 type: any
 priority: 3

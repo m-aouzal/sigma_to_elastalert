@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.Hash.keyword:*imphash=* AND (NOT winlog.event_data.Hash.keyword:*imphash=00000000000000000000000000000000*)
 type: any
 priority: 2

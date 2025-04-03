@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*ipconfig /all* OR *netsh interface show interface* OR *arp -a* OR *nbtstat -n* OR *net config* OR *route print*)
 type: any
 priority: 1

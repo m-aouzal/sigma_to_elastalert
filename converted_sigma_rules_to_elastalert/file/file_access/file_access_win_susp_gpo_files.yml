@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:* AND (file.path.keyword:*\sysvol* AND file.path.keyword:*\policies*) AND (file.path.keyword:(*audit.csv OR *files.xml OR *gpttmpl.inf OR *groups.xml OR *registry.pol OR *registry.xml OR *scheduledtasks.xml OR *scripts.ini OR *services.xml))) AND (NOT ((process.executable.keyword:(c:\program files (x86)* OR c:\program files* OR c:\windows\system32* OR c:\windows\syswow64*)) OR process.executable.keyword:c:\windows\explorer.exe))
 type: any
 priority: 2

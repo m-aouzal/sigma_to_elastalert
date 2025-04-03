@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.command_line.keyword:(*cmd.exe/c* OR *\cmd/c* OR *"cmd/c* OR *cmd.exe/k* OR *\cmd/k* OR *"cmd/k* OR *cmd.exe/r* OR *\cmd/r* OR *"cmd/r*)) OR (process.command_line.keyword:(*/cwhoami* OR */cpowershell* OR */cschtasks* OR */cbitsadmin* OR */ccertutil* OR */kwhoami* OR */kpowershell* OR */kschtasks* OR */kbitsadmin* OR */kcertutil*)) OR (process.command_line.keyword:(*cmd.exe /c* OR *cmd /c* OR *cmd.exe /k* OR *cmd /k* OR *cmd.exe /r* OR *cmd /r*))) AND (NOT ((process.command_line.keyword:(*cmd.exe /c* OR *cmd /c* OR *cmd.exe /k* OR *cmd /k* OR *cmd.exe /r* OR *cmd /r*)) OR (winlog.event_data.commandline.keyword:(*appdata\local\programs\microsoft vs code\resources\app\node_modules* OR *cmd.exe/c . OR cmd.exe /c))))
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\gup.exe AND file.path.keyword:*\libcurl.dll) AND (NOT process.executable.keyword:*\notepad++\updater\gup.exe)
 type: any
 priority: 2

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.EventType.keyword:deletekey AND (registry.path.keyword:*\software\microsoft\windows nt\currentversion\schedule\taskcache\tree* AND registry.path.keyword:*sd*)
 type: any
 priority: 2

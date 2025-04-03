@@ -8,6 +8,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\mofcomp.exe OR winlog.event_data.originalfilename.keyword:mofcomp.exe) AND ((winlog.event_data.parentimage.keyword:(*\cmd.exe OR *\powershell.exe OR *\pwsh.exe OR *\wsl.exe OR *\wscript.exe OR *\cscript.exe)) OR (winlog.event_data.commandline.keyword:(*\appdata\local\temp* OR *\users\public* OR *\windows\temp* OR *%temp%* OR *%tmp%* OR *%appdata%*)))) AND (NOT (process.parent.executable.keyword:c:\windows\system32\wbem\wmiprvse.exe AND process.command_line.keyword:*c:\windows\temp* AND process.command_line.keyword:*.mof)) AND (NOT (process.command_line.keyword:*c:\windows\temp* AND process.command_line.keyword:*.mof))
 type: any
 priority: 3

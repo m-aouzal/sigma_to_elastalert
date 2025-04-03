@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*:\users\public* AND (file.path.keyword:(*.bat OR *.dll OR *.exe OR *.hta OR *.js OR *.ps1 OR *.vbe OR *.vbs))
 type: any
 priority: 3

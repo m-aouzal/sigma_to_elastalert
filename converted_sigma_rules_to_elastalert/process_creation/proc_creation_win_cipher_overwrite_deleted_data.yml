@@ -8,6 +8,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:cipher.exe OR winlog.event_data.image.keyword:*\cipher.exe) AND process.command_line.keyword:* /w:*
 type: any
 priority: 2

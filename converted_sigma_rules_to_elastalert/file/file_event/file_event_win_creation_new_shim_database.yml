@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:(*:\windows\apppatch\custom* OR *:\windows\apppatch\customsdb*)
 type: any
 priority: 2

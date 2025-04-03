@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\runscripthelper.exe AND process.command_line.keyword:*surfacecheck*
 type: any
 priority: 2

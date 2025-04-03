@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\krbrelayup.exe OR winlog.event_data.originalfilename.keyword:krbrelayup.exe) OR (process.command_line.keyword:* relay* AND process.command_line.keyword:* -domain* AND process.command_line.keyword:* -computername*) OR (process.command_line.keyword:* krbscm* AND process.command_line.keyword:* -sc*) OR (process.command_line.keyword:* spawn* AND process.command_line.keyword:* -d* AND process.command_line.keyword:* -cn* AND process.command_line.keyword:* -cp*)
 type: any
 priority: 3

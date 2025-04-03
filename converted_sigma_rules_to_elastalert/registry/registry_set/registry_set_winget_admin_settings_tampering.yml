@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\winget.exe AND registry.path.keyword:\registry\a* AND registry.path.keyword:*\localstate\admin_settings
 type: any
 priority: 1

@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\jsc.exe OR winlog.event_data.originalfilename.keyword:jsc.exe
 type: any
 priority: 1

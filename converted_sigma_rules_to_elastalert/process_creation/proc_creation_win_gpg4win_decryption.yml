@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\gpg.exe OR *\gpg2.exe)) OR winlog.event_data.description.keyword:gnupg’s openpgp tool) AND (process.command_line.keyword:* -d* AND process.command_line.keyword:*passphrase*)
 type: any
 priority: 2

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\system\currentcontrolset\services* AND registry.path.keyword:*\networkprovider*) AND (NOT ((registry.path.keyword:(*\system\currentcontrolset\services\webclient\networkprovider* OR *\system\currentcontrolset\services\lanmanworkstation\networkprovider* OR *\system\currentcontrolset\services\rdpnp\networkprovider*)) OR process.executable.keyword:c:\windows\system32\poqexec.exe))
 type: any
 priority: 2

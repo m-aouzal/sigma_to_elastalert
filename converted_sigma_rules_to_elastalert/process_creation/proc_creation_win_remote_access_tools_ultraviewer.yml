@@ -8,6 +8,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.product.keyword:ultraviewer OR winlog.event_data.company.keyword:ducfabulous co,ltd OR winlog.event_data.originalfilename.keyword:ultraviewer_desktop.exe
 type: any
 priority: 2

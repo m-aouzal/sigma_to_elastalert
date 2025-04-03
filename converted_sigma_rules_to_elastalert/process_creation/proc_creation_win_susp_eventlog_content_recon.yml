@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.command_line.keyword:(*microsoft-windows-powershell* OR *microsoft-windows-security-auditing* OR *microsoft-windows-terminalservices-localsessionmanager* OR *microsoft-windows-terminalservices-remoteconnectionmanager* OR *microsoft-windows-windows defender* OR *powershellcore* OR *security* OR *windows powershell*)) OR (process.command_line.keyword:(*-instanceid 462?* OR *.eventid -eq 462?* OR *eventcode=?462?* OR *eventidentifier=?462?* OR *system[eventid=462?]* OR *-instanceid 4778* OR *.eventid -eq 4778* OR *system[eventid=4778]* OR *eventcode=?4778?* OR *eventidentifier=?4778?* OR *-instanceid 25* OR *.eventid -eq 25* OR *system[eventid=25]* OR *eventcode=?25?* OR *eventidentifier=?25?*))) AND ((process.command_line.keyword:*select* AND process.command_line.keyword:*win32_ntlogevent*) OR ((winlog.event_data.image.keyword:*\wevtutil.exe OR winlog.event_data.originalfilename.keyword:wevtutil.exe) AND (process.command_line.keyword:(* qe* OR * query-events*))) OR ((winlog.event_data.image.keyword:*\wmic.exe OR winlog.event_data.originalfilename.keyword:wmic.exe) AND process.command_line.keyword:* ntevent*) OR (process.command_line.keyword:(*get-winevent* OR *get-eventlog*)))
 type: any
 priority: 2

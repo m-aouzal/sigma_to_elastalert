@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.Payload.keyword:*modulecontents=function get-vmremotefxphysicalvideoadapter {*
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\lsass.exe AND file.code_signature.signed.keyword:false
 type: any
 priority: 2

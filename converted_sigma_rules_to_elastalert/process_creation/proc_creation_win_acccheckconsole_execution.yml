@@ -8,6 +8,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\acccheckconsole.exe OR winlog.event_data.originalfilename.keyword:acccheckconsole.exe) AND (process.command_line.keyword:(* -hwnd* OR * -process* OR * -window*))
 type: any
 priority: 2

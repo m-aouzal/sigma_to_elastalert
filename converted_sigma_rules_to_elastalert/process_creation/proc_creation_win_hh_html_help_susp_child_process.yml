@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\hh.exe AND (process.executable.keyword:(*\certreq.exe OR *\certutil.exe OR *\cmd.exe OR *\cscript.exe OR *\installutil.exe OR *\msbuild.exe OR *\mshta.exe OR *\msiexec.exe OR *\powershell.exe OR *\pwsh.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\schtasks.exe OR *\wmic.exe OR *\wscript.exe))
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\ntdsutil.exe OR winlog.event_data.originalfilename.keyword:ntdsutil.exe) AND ((winlog.event_data.commandline.keyword:*snapshot* AND winlog.event_data.commandline.keyword:*mount*) OR (winlog.event_data.commandline.keyword:*ac* AND winlog.event_data.commandline.keyword:* i* AND winlog.event_data.commandline.keyword:* ntds*))
 type: any
 priority: 2

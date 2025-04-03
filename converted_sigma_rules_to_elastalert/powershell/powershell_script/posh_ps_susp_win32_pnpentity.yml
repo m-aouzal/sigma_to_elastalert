@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*win32_pnpentity*
 type: any
 priority: 1

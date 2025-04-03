@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\htran.exe OR *\lcx.exe)) OR (process.command_line.keyword:(*.exe -tran* OR *.exe -slave*))
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\powershell.exe OR *\pwsh.exe)) AND (process.command_line.keyword:(*-f c:\users\public* OR *-f "c:\users\public* OR *-f %public%* OR *-fi c:\users\public* OR *-fi "c:\users\public* OR *-fi %public%* OR *-fil c:\users\public* OR *-fil "c:\users\public* OR *-fil %public%* OR *-file c:\users\public* OR *-file "c:\users\public* OR *-file %public%*))
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:hh.exe OR winlog.event_data.image.keyword:*\hh.exe) AND (process.command_line.keyword:(*http://* OR *https://* OR *\*))
 type: any
 priority: 3

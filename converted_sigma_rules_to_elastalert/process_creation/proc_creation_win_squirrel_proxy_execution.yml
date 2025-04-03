@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*\squirrel.exe OR *\update.exe)) AND (process.command_line.keyword:(*--processstart* OR *--processstartandwait* OR *--createshortcut*))) AND (NOT ((process.command_line.keyword:*:\users* AND process.command_line.keyword:*\appdata\local\discord\update.exe* AND process.command_line.keyword:* --processstart* AND process.command_line.keyword:*discord.exe*) OR ((process.command_line.keyword:*:\users* AND process.command_line.keyword:*\appdata\local\githubdesktop\update.exe* AND process.command_line.keyword:*githubdesktop.exe*) AND (process.command_line.keyword:(*--createshortcut* OR *--processstartandwait*))) OR ((process.command_line.keyword:*:\users* AND process.command_line.keyword:*\appdata\local\microsoft\teams\update.exe* AND process.command_line.keyword:*teams.exe*) AND (process.command_line.keyword:(*--processstart* OR *--createshortcut*))) OR ((process.command_line.keyword:*:\users* AND process.command_line.keyword:*\appdata\local\yammerdesktop\update.exe* AND process.command_line.keyword:*yammer.exe*) AND (process.command_line.keyword:(*--processstart* OR *--createshortcut*)))))
 type: any
 priority: 2

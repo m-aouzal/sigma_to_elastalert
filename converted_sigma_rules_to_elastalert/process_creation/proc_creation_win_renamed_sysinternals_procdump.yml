@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.pe.original_file_name.keyword:procdump OR ((process.command_line.keyword:(* -ma* OR * /ma* OR * –ma* OR * —ma* OR * ―ma*) OR process.command_line.keyword:(* -mp* OR * /mp* OR * –mp* OR * —mp* OR * ―mp*)) AND process.command_line.keyword:(* -accepteula* OR * /accepteula* OR * –accepteula* OR * —accepteula* OR * ―accepteula*))) AND (NOT (process.executable.keyword:(*\procdump.exe OR *\procdump64.exe)))
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.Contents.keyword:/http[s]?://[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/ AND (file.path.keyword:(*.ps1:zone* OR *.bat:zone* OR *.exe:zone* OR *.vbe:zone* OR *.vbs:zone* OR *.dll:zone* OR *.one:zone* OR *.cmd:zone* OR *.hta:zone* OR *.xll:zone* OR *.lnk:zone*))
 type: any
 priority: 3

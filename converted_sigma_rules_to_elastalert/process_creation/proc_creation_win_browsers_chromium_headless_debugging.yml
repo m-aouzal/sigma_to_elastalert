@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*--remote-debugging-* AND process.command_line.keyword:*--user-data-dir* AND process.command_line.keyword:*--headless*
 type: any
 priority: 3

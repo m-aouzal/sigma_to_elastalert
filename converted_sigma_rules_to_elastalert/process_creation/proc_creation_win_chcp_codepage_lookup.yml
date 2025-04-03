@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\cmd.exe AND (process.parent.command_line.keyword:(* -c* OR * /c* OR * –c* OR * —c* OR * ―c*) OR process.parent.command_line.keyword:(* -r* OR * /r* OR * –r* OR * —r* OR * ―r*) OR process.parent.command_line.keyword:(* -k* OR * /k* OR * –k* OR * —k* OR * ―k*)) AND process.executable.keyword:*\chcp.com AND (process.command_line.keyword:(*chcp OR *chcp  OR *chcp  ))
 type: any
 priority: 2

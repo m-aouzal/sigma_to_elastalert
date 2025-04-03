@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:* tunnel* AND process.command_line.keyword:*cleanup*) AND (process.command_line.keyword:(*-config* OR *-connector-id*))
 type: any
 priority: 2

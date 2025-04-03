@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:System AND (winlog.provider_name.keyword:service control manager AND event.code.keyword:7045 AND (winlog.event_data.ImagePath.keyword:*set* AND winlog.event_data.ImagePath.keyword:*&&*) AND (winlog.event_data.ImagePath.keyword:(*environment* OR *invoke* OR *input*)))
 type: any
 priority: 3

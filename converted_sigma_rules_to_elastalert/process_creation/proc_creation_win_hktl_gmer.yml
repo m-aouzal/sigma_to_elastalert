@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\gmer.exe OR (winlog.event_data.Hashes.keyword:(*md5=e9dc058440d321aa17d0600b3ca0ab04* OR *sha1=539c228b6b332f5aa523e5ce358c16647d8bbe57* OR *sha256=e8a3e804a96c716a3e9b69195db6ffb0d33e2433af871e4d4e1eab3097237173*))
 type: any
 priority: 3

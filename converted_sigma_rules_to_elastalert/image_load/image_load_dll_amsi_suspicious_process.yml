@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\amsi.dll AND (process.executable.keyword:(*\extexport.exe OR *\odbcconf.exe OR *\regsvr32.exe OR *\rundll32.exe))
 type: any
 priority: 2

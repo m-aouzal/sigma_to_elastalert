@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\ruby.exe OR winlog.event_data.originalfilename.keyword:ruby.exe) AND process.command_line.keyword:* -e*
 type: any
 priority: 2

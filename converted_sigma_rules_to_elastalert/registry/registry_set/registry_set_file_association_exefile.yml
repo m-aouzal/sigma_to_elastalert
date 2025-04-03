@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*classes\.* AND winlog.event_data.Details.keyword:exefile
 type: any
 priority: 3

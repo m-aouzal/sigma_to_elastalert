@@ -8,6 +8,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\services\lanmanserver\parameters\maxmpxct
 type: any
 priority: 1

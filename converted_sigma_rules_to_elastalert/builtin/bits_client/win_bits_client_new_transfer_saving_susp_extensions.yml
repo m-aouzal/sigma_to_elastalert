@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft-Windows-Bits-Client/Operational AND ((event.code.keyword:16403 AND (winlog.event_data.LocalName.keyword:(*.bat OR *.dll OR *.exe OR *.hta OR *.ps1 OR *.psd1 OR *.sh OR *.vbe OR *.vbs))) AND (NOT (winlog.event_data.LocalName.keyword:*\appdata* AND winlog.event_data.RemoteName.keyword:*.com*)))
 type: any
 priority: 2

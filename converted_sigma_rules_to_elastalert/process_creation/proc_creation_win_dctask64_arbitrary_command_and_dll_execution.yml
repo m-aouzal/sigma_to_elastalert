@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\dctask64.exe OR (winlog.event_data.hashes.keyword:(*imphash=6834b1b94e49701d77ccb3c0895e1afd* OR *imphash=1bb6f93b129f398c7c4a76bb97450bba* OR *imphash=faa2ac19875fade461c8d89dcf2710a3* OR *imphash=f1039ced4b91572ab7847d26032e6bbf*))) AND (process.command_line.keyword:(* executecmd64* OR * invokeexe* OR * injectdll*))
 type: any
 priority: 3

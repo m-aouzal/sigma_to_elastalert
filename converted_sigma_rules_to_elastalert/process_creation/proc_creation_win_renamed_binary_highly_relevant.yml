@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.description.keyword:execute processes remotely OR winlog.event_data.product.keyword:sysinternals psexec OR (winlog.event_data.description.keyword:(windows powershell* OR pwsh*)) OR (winlog.event_data.originalfilename.keyword:(certutil.exe OR cmstp.exe OR cscript.exe OR ie4uinit.exe OR mshta.exe OR msiexec.exe OR msxsl.exe OR powershell_ise.exe OR powershell.exe OR psexec.c OR psexec.exe OR psexesvc.exe OR pwsh.dll OR reg.exe OR regsvr32.exe OR rundll32.exe OR wermgr OR wmic.exe OR wscript.exe))) AND (NOT (process.executable.keyword:(*\certutil.exe OR *\cmstp.exe OR *\cscript.exe OR *\ie4uinit.exe OR *\mshta.exe OR *\msiexec.exe OR *\msxsl.exe OR *\powershell_ise.exe OR *\powershell.exe OR *\psexec.exe OR *\psexec64.exe OR *\psexesvc.exe OR *\pwsh.exe OR *\reg.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\wermgr.exe OR *\wmic.exe OR *\wscript.exe)))
 type: any
 priority: 3

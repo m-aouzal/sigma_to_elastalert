@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\wget.exe OR winlog.event_data.originalfilename.keyword:wget.exe) AND process.command_line.keyword:/://[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/ AND process.command_line.keyword:*http* AND (winlog.event_data.commandline.keyword:/s-os/ OR winlog.event_data.commandline.keyword:*--output-document*) AND ((winlog.event_data.commandline.keyword:(*:\perflogs* OR *:\temp* OR *:\users\public* OR *:\windows\help* OR *:\windows\temp* OR *\temporary internet*)) OR (winlog.event_data.commandline.keyword:*:\users* AND winlog.event_data.commandline.keyword:*\favorites*) OR (winlog.event_data.commandline.keyword:*:\users* AND winlog.event_data.commandline.keyword:*\favourites*) OR (winlog.event_data.commandline.keyword:*:\users* AND winlog.event_data.commandline.keyword:*\contacts*) OR (winlog.event_data.commandline.keyword:*:\users* AND winlog.event_data.commandline.keyword:*\pictures*))
 type: any
 priority: 3

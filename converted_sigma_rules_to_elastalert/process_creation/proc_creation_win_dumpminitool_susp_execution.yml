@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\dumpminitool.exe OR *\dumpminitool.x86.exe OR *\dumpminitool.arm64.exe)) OR (winlog.event_data.originalfilename.keyword:(dumpminitool.exe OR dumpminitool.x86.exe OR dumpminitool.arm64.exe))) AND ((NOT (process.executable.keyword:(*\microsoft visual studio* OR *\extensions*))) OR process.command_line.keyword:*.txt* OR ((process.command_line.keyword:(* full* OR * mini* OR * withheap*)) AND (NOT process.command_line.keyword:*--dumptype*)))
 type: any
 priority: 3

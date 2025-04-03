@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*svchost.exe AND process.executable.keyword:*\svchost.exe) AND (NOT ((winlog.event_data.parentimage.keyword:(*\rpcnet.exe OR *\rpcnetp.exe)) OR (NOT _exists_:winlog.event_data.commandline)))
 type: any
 priority: 3

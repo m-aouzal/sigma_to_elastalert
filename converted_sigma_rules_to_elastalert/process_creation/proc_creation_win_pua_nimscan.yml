@@ -8,6 +8,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\nimscan.exe OR (winlog.event_data.hashes.keyword:(*imphash=41bb1c7571b3a724eb83a1d2b96dbb8c* OR *imphash=b1b6adacb172795480179efd18a29549* OR *imphash=0d1f896dc7642ad8384f9042f30279c2*))
 type: any
 priority: 2

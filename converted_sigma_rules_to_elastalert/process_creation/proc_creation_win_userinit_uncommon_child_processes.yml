@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\userinit.exe AND (NOT process.executable.keyword:*:\windows\explorer.exe) AND (NOT ((process.command_line.keyword:(*netlogon.bat* OR *usrlogon.cmd*)) OR process.command_line.keyword:powershell.exe OR (process.executable.keyword:(*:\windows\system32\proquota.exe OR *:\windows\syswow64\proquota.exe)) OR (process.executable.keyword:(*:\program files (x86)\citrix\hdx\bin\cmstart.exe OR *:\program files (x86)\citrix\hdx\bin\icast.exe OR *:\program files (x86)\citrix\system32\icast.exe OR *:\program files\citrix\hdx\bin\cmstart.exe OR *:\program files\citrix\hdx\bin\icast.exe OR *:\program files\citrix\system32\icast.exe)) OR (NOT _exists_:process.executable)))
 type: any
 priority: 3

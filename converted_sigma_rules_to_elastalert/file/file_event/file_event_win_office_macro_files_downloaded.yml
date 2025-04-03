@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\runtimebroker.exe OR *\outlook.exe OR *\thunderbird.exe OR *\brave.exe OR *\chrome.exe OR *\firefox.exe OR *\iexplore.exe OR *\maxthon.exe OR *\microsoftedge.exe OR *\msedge.exe OR *\msedgewebview2.exe OR *\opera.exe OR *\safari.exe OR *\seamonkey.exe OR *\vivaldi.exe OR *\whale.exe)) AND ((winlog.event_data.targetfilename.keyword:(*.docm OR *.dotm OR *.xlsm OR *.xltm OR *.potm OR *.pptm)) OR (winlog.event_data.targetfilename.keyword:(*.docm:zone* OR *.dotm:zone* OR *.xlsm:zone* OR *.xltm:zone* OR *.potm:zone* OR *.pptm:zone*)))
 type: any
 priority: 2

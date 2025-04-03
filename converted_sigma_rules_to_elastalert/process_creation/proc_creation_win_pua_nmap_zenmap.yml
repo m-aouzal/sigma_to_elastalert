@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:(*\nmap.exe OR *\zennmap.exe)) OR (winlog.event_data.originalfilename.keyword:(nmap.exe OR zennmap.exe))
 type: any
 priority: 2

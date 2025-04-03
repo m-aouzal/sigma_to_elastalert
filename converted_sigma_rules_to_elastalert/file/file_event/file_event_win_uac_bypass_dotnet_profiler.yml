@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:c:\users* AND file.path.keyword:*\appdata\local\temp\pe386.dll
 type: any
 priority: 3

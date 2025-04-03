@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*windowsaudiodevice-powershell-cmdlet* OR *toggle-audiodevice* OR *get-audiodevice* OR *set-audiodevice* OR *write-audiodevice*)
 type: any
 priority: 2

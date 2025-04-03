@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\imewdbld.exe OR winlog.event_data.originalfilename.keyword:imewdbld.exe) AND (process.command_line.keyword:(*http://* OR *https://*))
 type: any
 priority: 3

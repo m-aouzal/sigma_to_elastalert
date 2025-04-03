@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*copy* AND process.command_line.keyword:*/y* AND process.command_line.keyword:*c:\windows\system32\cmd.exe c:\windows\system32\sethc.exe*
 type: any
 priority: 4

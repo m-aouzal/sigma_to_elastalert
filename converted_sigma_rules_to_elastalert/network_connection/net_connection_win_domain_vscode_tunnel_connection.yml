@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: network.direction.keyword:true AND destination.domain.keyword:*.tunnels.api.visualstudio.com
 type: any
 priority: 2

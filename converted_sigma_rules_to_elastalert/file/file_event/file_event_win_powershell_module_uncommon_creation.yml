@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:(*\windowspowershell\modules* OR *\powershell\7\modules*)) AND (NOT (process.executable.keyword:(*:\program files\powershell\7-preview\pwsh.exe OR *:\program files\powershell\7\pwsh.exe OR *:\windows\system32\poqexec.exe OR *:\windows\system32\windowspowershell\v1.0\powershell_ise.exe OR *:\windows\system32\windowspowershell\v1.0\powershell.exe OR *:\windows\syswow64\poqexec.exe OR *:\windows\syswow64\windowspowershell\v1.0\powershell_ise.exe OR *:\windows\syswow64\windowspowershell\v1.0\powershell.exe)))
 type: any
 priority: 2

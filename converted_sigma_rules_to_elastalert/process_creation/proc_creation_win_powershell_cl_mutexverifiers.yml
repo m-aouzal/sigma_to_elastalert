@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.parent.executable.keyword:(*\powershell.exe OR *\pwsh.exe)) AND process.executable.keyword:*\powershell.exe AND process.command_line.keyword:* -nologo -windowstyle minimized -file*) AND (process.command_line.keyword:(*\appdata\local\temp* OR *\windows\temp*))
 type: any
 priority: 2

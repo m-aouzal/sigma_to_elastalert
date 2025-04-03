@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\csvde.exe OR winlog.event_data.originalfilename.keyword:csvde.exe) AND process.command_line.keyword:* -f*) AND (NOT process.command_line.keyword:* -i*)
 type: any
 priority: 2

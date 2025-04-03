@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.ContextInfo.keyword:*compress-archive -path*-destinationpath $env:temp* AND winlog.event_data.ContextInfo.keyword:*compress-archive -path*-destinationpath*\appdata\local\temp* AND winlog.event_data.ContextInfo.keyword:*compress-archive -path*-destinationpath*:\windows\temp*
 type: any
 priority: 2

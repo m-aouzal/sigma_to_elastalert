@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\diskshadow.exe AND (process.executable.keyword:(*\certutil.exe OR *\cscript.exe OR *\mshta.exe OR *\powershell.exe OR *\pwsh.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\wscript.exe))
 type: any
 priority: 2

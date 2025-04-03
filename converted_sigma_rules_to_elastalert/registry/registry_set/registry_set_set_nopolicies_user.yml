@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*software\microsoft\windows\currentversion\policies\explorer\nologoff OR *software\microsoft\windows\currentversion\policies\explorer\nodesktop OR *software\microsoft\windows\currentversion\policies\explorer\norun OR *software\microsoft\windows\currentversion\policies\explorer\nofind OR *software\microsoft\windows\currentversion\policies\explorer\nocontrolpanel OR *software\microsoft\windows\currentversion\policies\explorer\nofilemenu OR *software\microsoft\windows\currentversion\policies\explorer\noclose OR *software\microsoft\windows\currentversion\policies\explorer\nosettaskbar OR *software\microsoft\windows\currentversion\policies\explorer\nopropertiesmydocuments OR *software\microsoft\windows\currentversion\policies\explorer\notraycontextmenu)) AND winlog.event_data.Details.keyword:dword (0x00000001)
 type: any
 priority: 2

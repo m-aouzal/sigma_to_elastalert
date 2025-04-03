@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\certoc.exe OR winlog.event_data.originalfilename.keyword:certoc.exe) AND process.command_line.keyword:/://[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/ AND process.command_line.keyword:*-getcacaps*
 type: any
 priority: 3

@@ -8,6 +8,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.description.keyword:screenconnect service OR winlog.event_data.product.keyword:screenconnect OR winlog.event_data.company.keyword:screenconnect software
 type: any
 priority: 2

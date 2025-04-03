@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\appverifui.dll AND (NOT ((process.executable.keyword:(c:\windows\syswow64\appverif.exe OR c:\windows\system32\appverif.exe)) AND (file.path.keyword:(c:\windows\system32* OR c:\windows\syswow64* OR c:\windows\winsxs*))))
 type: any
 priority: 3

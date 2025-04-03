@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:c:\windows\system32\spool\drivers\color* AND (file.path.keyword:(*.dll OR *.exe OR *.sys))
 type: any
 priority: 2

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\shell\sentinelonescan\command* AND (NOT (((winlog.event_data.Details.keyword:(c:\program files\sentinelone\sentinel agent* OR c:\program files (x86)\sentinelone\sentinel agent*)) AND winlog.event_data.Details.keyword:*\sentinelscanfromcontextmenu.exe*) OR (process.executable.keyword:(*c:\program files\sentinelone\ OR *c:\program files (x86)\sentinelone\))))
 type: any
 priority: 2

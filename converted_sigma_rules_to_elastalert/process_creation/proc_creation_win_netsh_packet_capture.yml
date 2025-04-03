@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\netsh.exe OR winlog.event_data.originalfilename.keyword:netsh.exe) AND (process.command_line.keyword:*trace* AND process.command_line.keyword:*start*)
 type: any
 priority: 2

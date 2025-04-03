@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*software\microsoft\office* AND registry.path.keyword:*\excel\options AND winlog.event_data.Details.keyword:/r* AND winlog.event_data.Details.keyword:*.xll
 type: any
 priority: 3

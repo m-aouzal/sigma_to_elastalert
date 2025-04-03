@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*install-windowsfeature windowspowershellwebaccess* OR powershell.file.script_block_text.keyword:*install-pswawebapplication* OR (powershell.file.script_block_text.keyword:*add-pswaauthorizationrule* AND powershell.file.script_block_text.keyword:*-username* AND powershell.file.script_block_text.keyword:*-computername*)
 type: any
 priority: 3

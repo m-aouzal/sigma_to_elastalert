@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*dumpcreds* OR *mimikatz*)) OR (process.command_line.keyword:(*::aadcookie* OR *::detours* OR *::memssp* OR *::mflt* OR *::ncroutemon* OR *::ngcsign* OR *::printnightmare* OR *::skeleton* OR *::preshutdown* OR *::mstsc* OR *::multirdp*)) OR (process.command_line.keyword:(*rpc::* OR *token::* OR *crypto::* OR *dpapi::* OR *sekurlsa::* OR *kerberos::* OR *lsadump::* OR *privilege::* OR *process::* OR *vault::*))
 type: any
 priority: 3

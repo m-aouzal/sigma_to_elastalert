@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*\thor.exe OR *\thor64.exe)) AND (file.path.keyword:(*\thor.exe OR *\thor64.exe))) AND (NOT (file.code_signature.signed.keyword:true AND file.code_signature.status.keyword:valid AND winlog.event_data.Signature.keyword:nextron systems gmbh))
 type: any
 priority: 3

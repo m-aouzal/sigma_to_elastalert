@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*virtualalloc* AND powershell.file.script_block_text.keyword:*openprocess* AND powershell.file.script_block_text.keyword:*writeprocessmemory* AND powershell.file.script_block_text.keyword:*createremotethread*) OR (powershell.file.script_block_text.keyword:*openprocesstoken* AND powershell.file.script_block_text.keyword:*lookupprivilegevalue* AND powershell.file.script_block_text.keyword:*adjusttokenprivileges*) OR (powershell.file.script_block_text.keyword:*openprocesstoken* AND powershell.file.script_block_text.keyword:*duplicatetokenex* AND powershell.file.script_block_text.keyword:*closehandle*) OR (powershell.file.script_block_text.keyword:*writeprocessmemory* AND powershell.file.script_block_text.keyword:*virtualalloc* AND powershell.file.script_block_text.keyword:*readprocessmemory* AND powershell.file.script_block_text.keyword:*virtualfree*)
 type: any
 priority: 3

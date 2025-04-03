@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\regini.exe OR winlog.event_data.originalfilename.keyword:regini.exe) AND (NOT process.command_line.keyword:/:[^ \]/)
 type: any
 priority: 1

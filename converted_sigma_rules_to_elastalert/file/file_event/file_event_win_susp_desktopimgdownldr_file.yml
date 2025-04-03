@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\svchost.exe AND file.path.keyword:*\personalization\lockscreenimage*) AND (NOT file.path.keyword:*c:\windows*) AND (NOT (file.path.keyword:(*.jpg* OR *.jpeg* OR *.png*)))
 type: any
 priority: 3

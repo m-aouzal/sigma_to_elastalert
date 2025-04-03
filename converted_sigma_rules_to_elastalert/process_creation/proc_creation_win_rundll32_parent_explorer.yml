@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:*\explorer.exe AND (winlog.event_data.image.keyword:*\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe)) AND (NOT (winlog.event_data.commandline.keyword:(* c:\windows\system32* OR * -localserver 22d8c27b-47a1-48d1-ad08-7da7abd79617)))
 type: any
 priority: 2

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\msexchangemailboxreplication.exe AND (file.path.keyword:(*.aspx OR *.asp))
 type: any
 priority: 3

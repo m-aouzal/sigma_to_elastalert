@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\curl.exe OR *\wget.exe)) OR (winlog.event_data.commandline.keyword:(*invoke-webrequest* OR *iwr* OR *curl* OR *wget* OR *start-bitstransfer* OR *.downloadfile(* OR *.downloadstring(*))) AND (process.command_line.keyword:(*https://attachment.outlook.live.net/owa/* OR *https://onenoteonlinesync.onenote.com/onenoteonlinesync/*))
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND ((event.code.keyword:(4656 OR 4663)) AND winlog.event_data.ObjectName.keyword:*\wceaux.dll)
 type: any
 priority: 4

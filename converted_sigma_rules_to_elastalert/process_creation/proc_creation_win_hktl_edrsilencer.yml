@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\edrsilencer.exe OR winlog.event_data.originalfilename.keyword:edrsilencer.exe OR winlog.event_data.description.keyword:*edrsilencer*
 type: any
 priority: 3

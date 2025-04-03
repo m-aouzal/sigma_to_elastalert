@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*set-executionpolicy* AND (powershell.file.script_block_text.keyword:(*unrestricted* OR *bypass*))) AND (NOT (powershell.file.script_block_text.keyword:(*(new-object system.net.webclient).downloadstring('https://community.chocolatey.org/install.ps1')* OR *(new-object system.net.webclient).downloadstring('https://chocolatey.org/install.ps1')*)))
 type: any
 priority: 2

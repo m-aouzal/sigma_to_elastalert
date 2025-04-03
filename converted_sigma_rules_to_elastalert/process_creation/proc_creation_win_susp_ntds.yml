@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (((winlog.event_data.image.keyword:(*\ntdsdump.exe OR *\ntdsdumpex.exe)) OR (winlog.event_data.commandline.keyword:*ntds.dit* AND winlog.event_data.commandline.keyword:*system.hiv*) OR winlog.event_data.commandline.keyword:*ntdsgrab.ps1*) OR (process.command_line.keyword:*ac i ntds* AND process.command_line.keyword:*create full*) OR (process.command_line.keyword:*/c copy* AND process.command_line.keyword:*\windows\ntds\ntds.dit*) OR (process.command_line.keyword:*activate instance ntds* AND process.command_line.keyword:*create full*) OR (process.command_line.keyword:*powershell* AND process.command_line.keyword:*ntds.dit*)) OR (process.command_line.keyword:*ntds.dit* AND ((winlog.event_data.parentimage.keyword:(*\apache* OR *\tomcat* OR *\appdata* OR *\temp* OR *\public* OR *\perflogs*)) OR (winlog.event_data.image.keyword:(*\apache* OR *\tomcat* OR *\appdata* OR *\temp* OR *\public* OR *\perflogs*))))
 type: any
 priority: 3

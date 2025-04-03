@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(* -c* OR * /c* OR * –c* OR * —c* OR * ―c*) AND (process.command_line.keyword:*curl* AND process.command_line.keyword:*http* AND process.command_line.keyword:*-o* AND process.command_line.keyword:*&*)
 type: any
 priority: 3

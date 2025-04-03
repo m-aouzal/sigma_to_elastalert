@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(* --cpu-priority=* OR *--donate-level=0* OR * -o pool.* OR * --nicehash* OR * --algo=rx/0* OR *stratum+tcp://* OR *stratum+udp://* OR *ls1kb25hdgutbgv2zww9* OR *0tzg9uyxrllwxldmvsp* OR *tlwrvbmf0zs1szxzlbd* OR *c3ryyxr1bst0y3a6ly* OR *n0cmf0dw0rdgnwoi8v* OR *zdhjhdhvtk3rjcdovl* OR *c3ryyxr1bst1zha6ly* OR *n0cmf0dw0rdwrwoi8v* OR *zdhjhdhvtk3vkcdovl*)) AND (NOT (process.command_line.keyword:(* pool.c* OR * pool.o* OR *gcc -*)))
 type: any
 priority: 3

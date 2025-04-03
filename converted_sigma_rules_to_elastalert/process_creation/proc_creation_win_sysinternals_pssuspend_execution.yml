@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.originalfilename.keyword:pssuspend.exe OR (winlog.event_data.image.keyword:(*\pssuspend.exe OR *\pssuspend64.exe))
 type: any
 priority: 2

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:(*\software\microsoft\windows nt\currentversion\image file execution options\sethc.exe\debugger OR *\software\microsoft\windows nt\currentversion\image file execution options\utilman.exe\debugger OR *\software\microsoft\windows nt\currentversion\image file execution options\osk.exe\debugger OR *\software\microsoft\windows nt\currentversion\image file execution options\magnify.exe\debugger OR *\software\microsoft\windows nt\currentversion\image file execution options\narrator.exe\debugger OR *\software\microsoft\windows nt\currentversion\image file execution options\displayswitch.exe\debugger OR *\software\microsoft\windows nt\currentversion\image file execution options\atbroker.exe\debugger OR *\software\microsoft\windows nt\currentversion\image file execution options\helppane.exe\debugger)
 type: any
 priority: 4

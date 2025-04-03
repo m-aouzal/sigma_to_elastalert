@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft-Windows-Windows Defender/Operational AND ((event.code.keyword:1121 AND winlog.event_data.Path.keyword:*\lsass.exe) AND (NOT ((process.executable.keyword:c:\windows\temp\asgard2-agent* AND (process.executable.keyword:(*\thor64.exe OR *\thor.exe))) OR (process.executable.keyword:(c:\windows\system32\atiesrxx.exe OR c:\windows\system32\compattelrunner.exe OR c:\windows\system32\msiexec.exe OR c:\windows\system32\nvwmi64.exe OR c:\windows\system32\svchost.exe OR c:\windows\system32\taskmgr.exe OR c:\windows\system32\wbem\wmiprvse.exe OR c:\windows\syswow64\msiexec.exe)) OR (process.executable.keyword:(c:\windows\system32\driverstore* OR c:\windows\installer* OR c:\program files* OR c:\program files (x86)*)))))
 type: any
 priority: 3

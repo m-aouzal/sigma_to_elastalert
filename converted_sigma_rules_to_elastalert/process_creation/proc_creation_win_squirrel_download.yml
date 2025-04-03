@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\squirrel.exe OR *\update.exe)) AND (process.command_line.keyword:(* --download* OR * --update* OR * --updaterollback=*)) AND process.command_line.keyword:*http*
 type: any
 priority: 2

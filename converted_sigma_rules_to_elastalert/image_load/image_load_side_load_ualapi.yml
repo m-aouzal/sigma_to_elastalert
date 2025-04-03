@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\fxssvc.exe AND file.path.keyword:*ualapi.dll) AND (NOT file.path.keyword:c:\windows\winsxs*)
 type: any
 priority: 3

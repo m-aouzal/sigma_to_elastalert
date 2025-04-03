@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:(*.kirbi OR *mimilsa.log)
 type: any
 priority: 4

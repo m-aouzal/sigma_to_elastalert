@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\windows\start menu\programs\startup* AND (file.path.keyword:(*.vbs OR *.vbe OR *.bat OR *.ps1 OR *.hta OR *.dll OR *.jar OR *.msi OR *.scr OR *.cmd))
 type: any
 priority: 3

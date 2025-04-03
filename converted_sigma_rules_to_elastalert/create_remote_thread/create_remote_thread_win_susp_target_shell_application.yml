@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.TargetImage.keyword:(*\cmd.exe OR *\powershell.exe OR *\pwsh.exe)
 type: any
 priority: 2

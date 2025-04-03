@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.product.keyword:*autohotkey* OR winlog.event_data.description.keyword:*autohotkey* OR (winlog.event_data.originalfilename.keyword:(autohotkey.exe OR autohotkey.rc))) AND (NOT ((winlog.event_data.image.keyword:(*\autohotkey.exe OR *\autohotkey32.exe OR *\autohotkey32_uia.exe OR *\autohotkey64.exe OR *\autohotkey64_uia.exe OR *\autohotkeya32.exe OR *\autohotkeya32_uia.exe OR *\autohotkeyu32.exe OR *\autohotkeyu32_uia.exe OR *\autohotkeyu64.exe OR *\autohotkeyu64_uia.exe)) OR winlog.event_data.image.keyword:*\autohotkey*))
 type: any
 priority: 2

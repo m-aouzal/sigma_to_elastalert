@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*set-mailbox* AND powershell.file.script_block_text.keyword:* -delivertomailboxandforward* AND powershell.file.script_block_text.keyword:* -forwardingsmtpaddress*
 type: any
 priority: 2

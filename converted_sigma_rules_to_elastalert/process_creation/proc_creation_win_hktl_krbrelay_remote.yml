@@ -6,6 +6,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\remotekrbrelay.exe OR winlog.event_data.originalfilename.keyword:remotekrbrelay.exe) OR (process.command_line.keyword:* -clsid* AND process.command_line.keyword:* -target* AND process.command_line.keyword:* -victim*) OR (process.command_line.keyword:*-rbcd* AND (process.command_line.keyword:(*-cn* OR *--computername*))) OR (process.command_line.keyword:*-chp* AND (process.command_line.keyword:*-chppass* AND process.command_line.keyword:*-chpuser*)) OR (process.command_line.keyword:*-addgroupmember* AND process.command_line.keyword:*-group* AND process.command_line.keyword:*-groupuser*) OR ((process.command_line.keyword:*-smb* AND process.command_line.keyword:*--smbkeyword*) AND (process.command_line.keyword:(*interactive* OR *secrets* OR *service-add*)))
 type: any
 priority: 3

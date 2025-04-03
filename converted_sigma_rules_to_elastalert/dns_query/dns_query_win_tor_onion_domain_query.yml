@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: dns.question.name.keyword:*.onion*
 type: any
 priority: 3

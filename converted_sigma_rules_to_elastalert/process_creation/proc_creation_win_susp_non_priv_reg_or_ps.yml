@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.commandline.keyword:*reg* AND winlog.event_data.commandline.keyword:*add*) OR (winlog.event_data.commandline.keyword:(*powershell* OR *set-itemproperty* OR * sp* OR *new-itemproperty*))) AND ((winlog.event_data.IntegrityLevel.keyword:(medium OR s-1-16-8192)) AND (process.command_line.keyword:*controlset* AND process.command_line.keyword:*services*) AND (process.command_line.keyword:(*imagepath* OR *failurecommand* OR *servicedll*)))
 type: any
 priority: 3

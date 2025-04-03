@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((NOT _exists_:process.pe.original_file_name) AND process.command_line.keyword:*.exe tunnel) OR (process.command_line.keyword:*.exe tunnel* AND process.command_line.keyword:*--name* AND process.command_line.keyword:*--accept-server-license-terms*) OR (process.parent.command_line.keyword:* tunnel AND process.executable.keyword:*\cmd.exe AND (process.command_line.keyword:*/d /c* AND process.command_line.keyword:*\servers\stable-* AND process.command_line.keyword:*code-server.cmd*))
 type: any
 priority: 2

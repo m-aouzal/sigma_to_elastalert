@@ -8,6 +8,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\tasklist.exe OR winlog.event_data.originalfilename.keyword:tasklist.exe) AND process.command_line.keyword:(*-m* OR */m* OR *–m* OR *—m* OR *―m*) AND process.command_line.keyword:*rdpcorets.dll*
 type: any
 priority: 2

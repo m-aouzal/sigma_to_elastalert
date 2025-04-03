@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\crassus.exe OR winlog.event_data.originalfilename.keyword:crassus.exe OR winlog.event_data.description.keyword:*crassus*
 type: any
 priority: 3

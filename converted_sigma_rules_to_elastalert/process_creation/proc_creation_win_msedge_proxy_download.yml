@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\msedge_proxy.exe OR winlog.event_data.originalfilename.keyword:msedge_proxy.exe) AND (process.command_line.keyword:(*http://* OR *https://*))
 type: any
 priority: 2

@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\onenote.exe AND (process.executable.keyword:(*\cmd.exe OR *\cscript.exe OR *\mshta.exe OR *\powershell.exe OR *\pwsh.exe OR *\wscript.exe)) AND (process.command_line.keyword:(*\exported* OR *\onenoteofflinecache_files*))
 type: any
 priority: 3

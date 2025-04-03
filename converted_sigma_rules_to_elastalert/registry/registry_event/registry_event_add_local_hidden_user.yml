@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\sam\sam\domains\account\users\names* AND registry.path.keyword:*$ AND process.executable.keyword:*\lsass.exe
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Application AND (event.code.keyword:1511 AND winlog.provider_name.keyword:microsoft-windows-user profiles service)
 type: any
 priority: 1

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\systeminformer.exe OR winlog.event_data.originalfilename.keyword:systeminformer.exe OR winlog.event_data.description.keyword:system informer OR winlog.event_data.product.keyword:system informer OR (winlog.event_data.hashes.keyword:(*md5=19426363a37c03c3ed6fedf57b6696ec* OR *sha1=8b12c6da8fac0d5e8ab999c31e5ea04af32d53dc* OR *sha256=8ee9d84de50803545937a63c686822388a3338497cddb660d5d69cf68b68f287* OR *imphash=b68908adaeb5d662f87f2528af318f12*))
 type: any
 priority: 2

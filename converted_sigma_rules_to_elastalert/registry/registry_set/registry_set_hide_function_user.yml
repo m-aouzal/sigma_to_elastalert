@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((registry.path.keyword:(*software\microsoft\windows\currentversion\policies\explorer\hideclock OR *software\microsoft\windows\currentversion\policies\explorer\hidescahealth OR *software\microsoft\windows\currentversion\policies\explorer\hidescanetwork OR *software\microsoft\windows\currentversion\policies\explorer\hidescapower OR *software\microsoft\windows\currentversion\policies\explorer\hidescavolume)) AND winlog.event_data.Details.keyword:dword (0x00000001)) OR ((registry.path.keyword:(*software\microsoft\windows\currentversion\explorer\advanced\showinfotip OR *software\microsoft\windows\currentversion\explorer\advanced\showcompcolor)) AND winlog.event_data.Details.keyword:dword (0x00000000))
 type: any
 priority: 2

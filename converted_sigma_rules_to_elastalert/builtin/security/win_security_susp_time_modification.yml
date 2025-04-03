@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND (event.code.keyword:4616 AND (NOT ((process.executable.keyword:(c:\program files\vmware\vmware tools\vmtoolsd.exe OR c:\windows\system32\vboxservice.exe OR c:\windows\system32\oobe\msoobe.exe)) OR (process.executable.keyword:c:\windows\system32\svchost.exe AND user.id.keyword:s-1-5-19))))
 type: any
 priority: 1

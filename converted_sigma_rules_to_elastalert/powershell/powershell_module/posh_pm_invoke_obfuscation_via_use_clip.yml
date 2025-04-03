@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.Payload.keyword:/(?i)echo.*clip.*&&.*(clipboard|i`?n`?v`?o`?k`?e`?)/
 type: any
 priority: 3

@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\dtrace.exe AND process.command_line.keyword:*lkd(0)*) OR (process.command_line.keyword:*syscall:::return* AND process.command_line.keyword:*lkd(*)
 type: any
 priority: 3

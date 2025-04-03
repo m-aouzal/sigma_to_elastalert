@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\outlook.exe AND file.path.keyword:*\microsoft\outlook\vbaproject.otm
 type: any
 priority: 2

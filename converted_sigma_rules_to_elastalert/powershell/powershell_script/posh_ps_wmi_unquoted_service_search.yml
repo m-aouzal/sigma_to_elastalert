@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:(*get-wmiobject* OR *gwmi*)) AND (powershell.file.script_block_text.keyword:* win32_service* AND powershell.file.script_block_text.keyword:*name* AND powershell.file.script_block_text.keyword:*displayname* AND powershell.file.script_block_text.keyword:*pathname* AND powershell.file.script_block_text.keyword:*startmode*)
 type: any
 priority: 2

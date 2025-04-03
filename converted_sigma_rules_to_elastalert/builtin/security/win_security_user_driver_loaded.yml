@@ -10,6 +10,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND ((event.code.keyword:4673 AND winlog.event_data.PrivilegeList.keyword:seloaddriverprivilege AND winlog.event_data.Service.keyword:-) AND (NOT ((process.executable.keyword:(c:\windows\system32\dism.exe OR c:\windows\system32\rundll32.exe OR c:\windows\system32\fltmc.exe OR c:\windows\helppane.exe OR c:\windows\system32\mmc.exe OR c:\windows\system32\svchost.exe OR c:\windows\system32\wimserv.exe OR c:\windows\system32\runtimebroker.exe OR c:\windows\system32\systemsettingsbroker.exe OR c:\windows\explorer.exe)) OR (process.executable.keyword:(*\procexp64.exe OR *\procexp.exe OR *\procmon64.exe OR *\procmon.exe OR *\google\chrome\application\chrome.exe OR *\appdata\local\microsoft\teams\current\teams.exe)) OR process.executable.keyword:c:\program files\windowsapps\microsoft*)))
 type: any
 priority: 2

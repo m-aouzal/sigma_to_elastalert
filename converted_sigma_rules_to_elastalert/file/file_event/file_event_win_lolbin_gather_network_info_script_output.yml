@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:c:\windows\system32\config* AND (file.path.keyword:(*\hotfixinfo.txt OR *\netiostate.txt OR *\sysportslog.txt OR *\vmswitchlog.evtx))
 type: any
 priority: 2

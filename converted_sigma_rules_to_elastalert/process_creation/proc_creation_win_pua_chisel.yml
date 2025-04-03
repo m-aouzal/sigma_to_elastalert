@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\chisel.exe OR ((process.command_line.keyword:(*exe client* OR *exe server*)) AND (process.command_line.keyword:(*-socks5* OR *-reverse* OR * r:* OR *:127.0.0.1:* OR *-tls-skip-verify* OR *:socks*)))
 type: any
 priority: 3

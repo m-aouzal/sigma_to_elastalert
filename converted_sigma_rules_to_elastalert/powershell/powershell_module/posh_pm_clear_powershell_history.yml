@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.Payload.keyword:*set-psreadlineoption* AND winlog.event_data.Payload.keyword:*–historysavestyle* AND winlog.event_data.Payload.keyword:*savenothing*) OR (winlog.event_data.Payload.keyword:*set-psreadlineoption* AND winlog.event_data.Payload.keyword:*-historysavestyle* AND winlog.event_data.Payload.keyword:*savenothing*)) OR ((winlog.event_data.Payload.keyword:(*del* OR *remove-item* OR *rm*)) AND winlog.event_data.Payload.keyword:*(get-psreadlineoption).historysavepath*)
 type: any
 priority: 2

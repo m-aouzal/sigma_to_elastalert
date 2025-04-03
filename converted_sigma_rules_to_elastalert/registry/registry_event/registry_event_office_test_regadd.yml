@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\software\microsoft\office test\special\perf*
 type: any
 priority: 2

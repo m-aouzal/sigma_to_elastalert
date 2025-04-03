@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.ContextInfo.keyword:(* -enc* OR * -encodedcommand* OR * -ec*)) AND (winlog.event_data.ContextInfo.keyword:(* -w hidden* OR * -window hidden* OR * -windowstyle hidden* OR * -w 1*)) AND (winlog.event_data.ContextInfo.keyword:(* -noni* OR * -noninteractive*))
 type: any
 priority: 3

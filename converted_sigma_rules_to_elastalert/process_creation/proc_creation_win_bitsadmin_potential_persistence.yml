@@ -9,6 +9,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\bitsadmin.exe OR winlog.event_data.originalfilename.keyword:bitsadmin.exe) AND ((process.command_line.keyword:*/setnotifycmdline* AND (process.command_line.keyword:(*%comspec%* OR *cmd.exe* OR *regsvr32.exe*))) OR (process.command_line.keyword:*/addfile* AND (process.command_line.keyword:(*http:* OR *https:* OR *ftp:* OR *ftps:*))))
 type: any
 priority: 2

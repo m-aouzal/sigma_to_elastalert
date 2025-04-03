@@ -7,6 +7,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\explorer.exe AND (winlog.event_data.image.keyword:*\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe) AND ((process.command_line.keyword:*oledb32.dll* AND process.command_line.keyword:*,opendslfile* AND process.command_line.keyword:*\users*\downloads*) AND process.command_line.keyword:*.udl)
 type: any
 priority: 2

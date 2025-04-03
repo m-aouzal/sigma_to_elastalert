@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*iex* OR *invoke-expression* OR *invoke-command* OR *icm*)) AND (process.command_line.keyword:(*cat* OR *get-content* OR *type*)) AND process.command_line.keyword:* -raw*
 type: any
 priority: 2

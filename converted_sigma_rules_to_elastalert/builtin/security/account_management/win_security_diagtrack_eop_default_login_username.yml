@@ -5,6 +5,5 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND (event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:9 AND winlog.event_data.TargetOutboundUserName.keyword:thisisnotvaliduser)
 type: any
 priority: 4
