@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*::gettypefromclsid(* AND powershell.file.script_block_text.keyword:*.shellexecute(*
+      query: powershell.file.script_block_text.keyword:*\:\:gettypefromclsid\(* AND powershell.file.script_block_text.keyword:*.shellexecute\(*
 type: any
 priority: 2

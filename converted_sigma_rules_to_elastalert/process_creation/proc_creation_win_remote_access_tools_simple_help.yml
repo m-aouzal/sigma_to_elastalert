@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\jwrapper-remote access* OR *\jwrapper-remote support*)) AND process.executable.keyword:*\simpleservice.exe
+      query: (process.executable.keyword:(*\\jwrapper\-remote\ access\\* OR *\\jwrapper\-remote\ support\\*)) AND process.executable.keyword:*\\simpleservice.exe
 type: any
 priority: 2

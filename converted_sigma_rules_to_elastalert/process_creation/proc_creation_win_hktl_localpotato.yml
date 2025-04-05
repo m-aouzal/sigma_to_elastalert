@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\localpotato.exe OR (process.command_line.keyword:*.exe -i c:* AND process.command_line.keyword:*-o windows*) OR (winlog.event_data.Hashes.keyword:(*imphash=e1742ee971d6549e8d4d81115f88f1fc* OR *imphash=dd82066efba94d7556ef582f247c8bb5*))
+      query: process.executable.keyword:*\\localpotato.exe OR (process.command_line.keyword:*.exe\ \-i\ c\:\\* AND process.command_line.keyword:*\-o\ windows\\*) OR (winlog.event_data.Hashes.keyword:(*imphash\=e1742ee971d6549e8d4d81115f88f1fc* OR *imphash\=dd82066efba94d7556ef582f247c8bb5*))
 type: any
 priority: 3

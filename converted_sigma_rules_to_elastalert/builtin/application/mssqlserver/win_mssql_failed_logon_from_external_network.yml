@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Application AND ((winlog.provider_name.keyword:*mssql* AND event.code.keyword:18456) AND (NOT (winlog.event_data.Data.keyword:(*client: 10.* OR *client: 172.16.* OR *client: 172.17.* OR *client: 172.18.* OR *client: 172.19.* OR *client: 172.20.* OR *client: 172.21.* OR *client: 172.22.* OR *client: 172.23.* OR *client: 172.24.* OR *client: 172.25.* OR *client: 172.26.* OR *client: 172.27.* OR *client: 172.28.* OR *client: 172.29.* OR *client: 172.30.* OR *client: 172.31.* OR *client: 192.168.* OR *client: 127.* OR *client: 169.254.*))))
+      query: winlog.channel.keyword:Application AND ((winlog.provider_name.keyword:*mssql* AND event.code.keyword:18456) AND (NOT (winlog.event_data.Data.keyword:(*client\:\ 10.* OR *client\:\ 172.16.* OR *client\:\ 172.17.* OR *client\:\ 172.18.* OR *client\:\ 172.19.* OR *client\:\ 172.20.* OR *client\:\ 172.21.* OR *client\:\ 172.22.* OR *client\:\ 172.23.* OR *client\:\ 172.24.* OR *client\:\ 172.25.* OR *client\:\ 172.26.* OR *client\:\ 172.27.* OR *client\:\ 172.28.* OR *client\:\ 172.29.* OR *client\:\ 172.30.* OR *client\:\ 172.31.* OR *client\:\ 192.168.* OR *client\:\ 127.* OR *client\:\ 169.254.*))))
 type: any
 priority: 2

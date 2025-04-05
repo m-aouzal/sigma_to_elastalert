@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\system\currentcontrolset\control\wmi\autologger* AND ((registry.path.keyword:(*\eventlog-* OR *\defender*)) AND (registry.path.keyword:(*\enable OR *\start)) AND winlog.event_data.Details.keyword:dword (0x00000000))) AND (NOT process.executable.keyword:c:\windows\system32\wevtutil.exe)
+      query: (registry.path.keyword:*\\system\\currentcontrolset\\control\\wmi\\autologger\\* AND ((registry.path.keyword:(*\\eventlog\-* OR *\\defender*)) AND (registry.path.keyword:(*\\enable OR *\\start)) AND winlog.event_data.Details.keyword:dword\ \(0x00000000\))) AND (NOT process.executable.keyword:c\:\\windows\\system32\\wevtutil.exe)
 type: any
 priority: 3

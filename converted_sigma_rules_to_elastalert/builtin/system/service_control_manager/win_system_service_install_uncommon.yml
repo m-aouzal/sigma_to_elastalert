@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:System AND ((winlog.provider_name.keyword:service control manager AND event.code.keyword:7045) AND ((winlog.event_data.ImagePath.keyword:(*\\.\pipe* OR *\users\public* OR *\windows\temp*)) OR (winlog.event_data.ImagePath.keyword:* -e* AND (winlog.event_data.ImagePath.keyword:(* aqblahga* OR * awv4i* OR * iab* OR * jab* OR * paa* OR * sqbfafga* OR * suvyi*)))) AND (NOT winlog.event_data.ImagePath.keyword:c:\programdata\microsoft\windows defender\definition updates*) AND (NOT winlog.event_data.ImagePath.keyword:c:\windows\temp\thor10-remote\thor64.exe*))
+      query: winlog.channel.keyword:System AND ((winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045) AND ((winlog.event_data.ImagePath.keyword:(*\\\\.\\pipe* OR *\\users\\public\\* OR *\\windows\\temp\\*)) OR (winlog.event_data.ImagePath.keyword:*\ \-e* AND (winlog.event_data.ImagePath.keyword:(*\ aqblahga* OR *\ awv4i* OR *\ iab* OR *\ jab* OR *\ paa* OR *\ sqbfafga* OR *\ suvyi*)))) AND (NOT winlog.event_data.ImagePath.keyword:c\:\\programdata\\microsoft\\windows\ defender\\definition\ updates\\*) AND (NOT winlog.event_data.ImagePath.keyword:c\:\\windows\\temp\\thor10\-remote\\thor64.exe*))
 type: any
 priority: 2

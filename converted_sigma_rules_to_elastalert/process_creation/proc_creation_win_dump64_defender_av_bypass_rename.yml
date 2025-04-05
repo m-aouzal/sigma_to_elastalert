@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword::\program files* AND process.executable.keyword:*\microsoft visual studio* AND process.executable.keyword:*\dump64.exe) AND (winlog.event_data.originalfilename.keyword:procdump OR (winlog.event_data.commandline.keyword:(* -ma* OR * -mp*)))
+      query: (process.executable.keyword:\:\\program\ files* AND process.executable.keyword:*\\microsoft\ visual\ studio\\* AND process.executable.keyword:*\\dump64.exe) AND (winlog.event_data.originalfilename.keyword:procdump OR (winlog.event_data.commandline.keyword:(*\ \-ma\ * OR *\ \-mp\ *)))
 type: any
 priority: 3

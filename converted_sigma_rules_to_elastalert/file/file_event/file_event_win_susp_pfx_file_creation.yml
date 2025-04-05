@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*.pfx AND (NOT (file.path.keyword:*\templates\windows\windows_temporarykey.pfx* AND file.path.keyword:*\cmake*))
+      query: file.path.keyword:*.pfx AND (NOT (file.path.keyword:*\\templates\\windows\\windows_temporarykey.pfx* AND file.path.keyword:*\\cmake\\*))
 type: any
 priority: 2

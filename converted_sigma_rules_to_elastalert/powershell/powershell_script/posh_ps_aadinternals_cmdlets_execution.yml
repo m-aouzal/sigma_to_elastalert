@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:(*add-aadint* OR *convertto-aadint* OR *disable-aadint* OR *enable-aadint* OR *export-aadint* OR *find-aadint* OR *get-aadint* OR *grant-aadint* OR *initialize-aadint* OR *install-aadint* OR *invoke-aadint* OR *join-aadint* OR *new-aadint* OR *open-aadint* OR *read-aadint* OR *register-aadint* OR *remove-aadint* OR *reset-aadint* OR *resolve-aadint* OR *restore-aadint* OR *save-aadint* OR *search-aadint* OR *send-aadint* OR *set-aadint* OR *start-aadint* OR *unprotect-aadint* OR *update-aadint*)
+      query: powershell.file.script_block_text.keyword:(*add\-aadint* OR *convertto\-aadint* OR *disable\-aadint* OR *enable\-aadint* OR *export\-aadint* OR *find\-aadint* OR *get\-aadint* OR *grant\-aadint* OR *initialize\-aadint* OR *install\-aadint* OR *invoke\-aadint* OR *join\-aadint* OR *new\-aadint* OR *open\-aadint* OR *read\-aadint* OR *register\-aadint* OR *remove\-aadint* OR *reset\-aadint* OR *resolve\-aadint* OR *restore\-aadint* OR *save\-aadint* OR *search\-aadint* OR *send\-aadint* OR *set\-aadint* OR *start\-aadint* OR *unprotect\-aadint* OR *update\-aadint*)
 type: any
 priority: 3

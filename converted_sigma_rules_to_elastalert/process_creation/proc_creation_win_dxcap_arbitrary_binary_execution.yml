@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\dxcap.exe OR winlog.event_data.originalfilename.keyword:dxcap.exe) AND process.command_line.keyword:* -c*
+      query: (winlog.event_data.image.keyword:*\\dxcap.exe OR winlog.event_data.originalfilename.keyword:dxcap.exe) AND process.command_line.keyword:*\ \-c\ *
 type: any
 priority: 2

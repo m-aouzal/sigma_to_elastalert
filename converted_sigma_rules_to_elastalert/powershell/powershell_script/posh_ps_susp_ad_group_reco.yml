@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*get-adprincipalgroupmembership* OR (powershell.file.script_block_text.keyword:*get-aduser* AND powershell.file.script_block_text.keyword:*-f* AND powershell.file.script_block_text.keyword:*-pr* AND powershell.file.script_block_text.keyword:*doesnotrequirepreauth*)
+      query: powershell.file.script_block_text.keyword:*get\-adprincipalgroupmembership* OR (powershell.file.script_block_text.keyword:*get\-aduser* AND powershell.file.script_block_text.keyword:*\-f\ * AND powershell.file.script_block_text.keyword:*\-pr\ * AND powershell.file.script_block_text.keyword:*doesnotrequirepreauth*)
 type: any
 priority: 1

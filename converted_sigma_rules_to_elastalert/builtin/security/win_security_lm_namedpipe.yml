@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND ((event.code.keyword:5145 AND winlog.event_data.ShareName.keyword:\\*\ipc$) AND (NOT (winlog.event_data.RelativeTargetName.keyword:(atsvc OR samr OR lsarpc OR lsass OR winreg OR netlogon OR srvsvc OR protected_storage OR wkssvc OR browser OR netdfs OR svcctl OR spoolss OR ntsvcs OR lsm_api_service OR hydralspipe OR termsrv_api_service OR msftewds OR sql\query OR eventlog))))
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:5145 AND winlog.event_data.ShareName.keyword:\\\\\*\\ipc$) AND (NOT (winlog.event_data.RelativeTargetName.keyword:(atsvc OR samr OR lsarpc OR lsass OR winreg OR netlogon OR srvsvc OR protected_storage OR wkssvc OR browser OR netdfs OR svcctl OR spoolss OR ntsvcs OR lsm_api_service OR hydralspipe OR termsrv_api_service OR msftewds OR sql\\query OR eventlog))))
 type: any
 priority: 3

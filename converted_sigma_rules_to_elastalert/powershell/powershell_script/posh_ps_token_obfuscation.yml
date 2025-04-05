@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.scriptblocktext.keyword:/w+`(w+|-|.)`[w+|s]/ OR winlog.event_data.scriptblocktext.keyword:/"({d}){2,}"s*-f/ OR winlog.event_data.scriptblocktext.keyword:/(?i)${`?e`?n`?v`?:`?p`?a`?t`?h`?}/) AND (NOT (powershell.file.script_block_text.keyword:*${env:path}* OR (powershell.file.script_block_text.keyword:(*it will return true or false instead* OR *the function also prevents `get-itemproperty` from failing*)) OR (winlog.event_data.Path.keyword:c:\program files\microsoft\exchange server* AND winlog.event_data.Path.keyword:*\bin\servicecontrol.ps1 AND powershell.file.script_block_text.keyword:*`r`n*)))
+      query: (winlog.event_data.scriptblocktext.keyword:/\w+`(\w+|-|.)`[\w+|\s]/ OR winlog.event_data.scriptblocktext.keyword:/"(\{\d\}){2,}"\s*-f/ OR winlog.event_data.scriptblocktext.keyword:/(?i)\$\{`?e`?n`?v`?:`?p`?a`?t`?h`?\}/) AND (NOT (powershell.file.script_block_text.keyword:*$\{env\:path\}* OR (powershell.file.script_block_text.keyword:(*it\ will\ return\ true\ or\ false\ instead* OR *the\ function\ also\ prevents\ `get\-itemproperty`\ from\ failing*)) OR (winlog.event_data.Path.keyword:c\:\\program\ files\\microsoft\\exchange\ server\\* AND winlog.event_data.Path.keyword:*\\bin\\servicecontrol.ps1 AND powershell.file.script_block_text.keyword:*`r`n*)))
 type: any
 priority: 3

@@ -1,10 +1,10 @@
 description: |
-  Detects the deletion of AMSI provider registry key entries in HKLMSoftwareMicrosoftAMSI. This technique could be used by an attacker in order to disable AMSI inspection.
+  Detects the deletion of AMSI provider registry key entries in HKLM\Software\Microsoft\AMSI. This technique could be used by an attacker in order to disable AMSI inspection.
 name: Removal Of AMSI Provider Registry Keys
 index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.EventType.keyword:deletekey AND (registry.path.keyword:(*{2781761e-28e0-4109-99fe-b9d127c57afe} OR *{a7c452ef-8e9f-42eb-9f2b-245613ca0dc9}))
+      query: winlog.event_data.EventType.keyword:deletekey AND (registry.path.keyword:(*\{2781761e\-28e0\-4109\-99fe\-b9d127c57afe\} OR *\{a7c452ef\-8e9f\-42eb\-9f2b\-245613ca0dc9\}))
 type: any
 priority: 3

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\pktmon.exe OR winlog.event_data.originalfilename.keyword:pktmon.exe
+      query: winlog.event_data.image.keyword:*\\pktmon.exe OR winlog.event_data.originalfilename.keyword:pktmon.exe
 type: any
 priority: 2

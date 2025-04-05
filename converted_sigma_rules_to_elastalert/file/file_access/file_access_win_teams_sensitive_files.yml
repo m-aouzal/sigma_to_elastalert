@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:(*\microsoft\teams\cookies* OR *\microsoft\teams\local storage\leveldb*)) AND (NOT process.executable.keyword:*\microsoft\teams\current\teams.exe)
+      query: (file.path.keyword:(*\\microsoft\\teams\\cookies* OR *\\microsoft\\teams\\local\ storage\\leveldb*)) AND (NOT process.executable.keyword:*\\microsoft\\teams\\current\\teams.exe)
 type: any
 priority: 2

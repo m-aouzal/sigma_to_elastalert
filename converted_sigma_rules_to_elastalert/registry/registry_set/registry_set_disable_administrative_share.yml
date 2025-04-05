@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\services\lanmanserver\parameters* AND (registry.path.keyword:(*\autosharewks OR *\autoshareserver)) AND winlog.event_data.Details.keyword:dword (0x00000000)
+      query: registry.path.keyword:*\\services\\lanmanserver\\parameters\\* AND (registry.path.keyword:(*\\autosharewks OR *\\autoshareserver)) AND winlog.event_data.Details.keyword:dword\ \(0x00000000\)
 type: any
 priority: 2

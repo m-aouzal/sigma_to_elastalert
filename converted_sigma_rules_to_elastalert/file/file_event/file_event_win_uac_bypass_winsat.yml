@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:c:\users* AND (file.path.keyword:(*\appdata\local\temp\system32\winsat.exe OR *\appdata\local\temp\system32\winmm.dll))
+      query: file.path.keyword:c\:\\users\\* AND (file.path.keyword:(*\\appdata\\local\\temp\\system32\\winsat.exe OR *\\appdata\\local\\temp\\system32\\winmm.dll))
 type: any
 priority: 3

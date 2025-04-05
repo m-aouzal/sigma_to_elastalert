@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\netsh.exe OR winlog.event_data.originalfilename.keyword:netsh.exe) AND ((process.command_line.keyword:*firewall* AND process.command_line.keyword:*set* AND process.command_line.keyword:*opmode* AND process.command_line.keyword:*disable*) OR (process.command_line.keyword:*advfirewall* AND process.command_line.keyword:*set* AND process.command_line.keyword:*state* AND process.command_line.keyword:*off*))
+      query: (winlog.event_data.image.keyword:*\\netsh.exe OR winlog.event_data.originalfilename.keyword:netsh.exe) AND ((process.command_line.keyword:*firewall* AND process.command_line.keyword:*set* AND process.command_line.keyword:*opmode* AND process.command_line.keyword:*disable*) OR (process.command_line.keyword:*advfirewall* AND process.command_line.keyword:*set* AND process.command_line.keyword:*state* AND process.command_line.keyword:*off*))
 type: any
 priority: 2

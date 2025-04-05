@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\wbadmin.exe OR winlog.event_data.originalfilename.keyword:wbadmin.exe) AND ((process.command_line.keyword:* recovery* AND process.command_line.keyword:*recoverytarget* AND process.command_line.keyword:*itemtype:file*) AND (process.command_line.keyword:(*\config\sam* OR *\config\security* OR *\config\system* OR *\windows\ntds\ntds.dit*)))
+      query: (winlog.event_data.image.keyword:*\\wbadmin.exe OR winlog.event_data.originalfilename.keyword:wbadmin.exe) AND ((process.command_line.keyword:*\ recovery* AND process.command_line.keyword:*recoverytarget* AND process.command_line.keyword:*itemtype\:file*) AND (process.command_line.keyword:(*\\config\\sam* OR *\\config\\security* OR *\\config\\system* OR *\\windows\\ntds\\ntds.dit*)))
 type: any
 priority: 3

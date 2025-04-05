@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.destination.keyword:*new-object* AND winlog.event_data.destination.keyword:*net.webclient* AND winlog.event_data.destination.keyword:*.downloadstring*) OR (winlog.event_data.destination.keyword:*new-object* AND winlog.event_data.destination.keyword:*net.webclient* AND winlog.event_data.destination.keyword:*.downloadfile*) OR (winlog.event_data.destination.keyword:(* iex(* OR * -nop* OR * -noprofile* OR * -decode* OR * -enc* OR *wscript.shell* OR *system.security.cryptography.frombase64transform*))
+      query: (winlog.event_data.destination.keyword:*new\-object* AND winlog.event_data.destination.keyword:*net.webclient* AND winlog.event_data.destination.keyword:*.downloadstring*) OR (winlog.event_data.destination.keyword:*new\-object* AND winlog.event_data.destination.keyword:*net.webclient* AND winlog.event_data.destination.keyword:*.downloadfile*) OR (winlog.event_data.destination.keyword:(*\ iex\(* OR *\ \-nop\ * OR *\ \-noprofile\ * OR *\ \-decode\ * OR *\ \-enc\ * OR *wscript.shell* OR *system.security.cryptography.frombase64transform*))
 type: any
 priority: 3

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\edputil.dll AND (NOT (file.path.keyword:(c:\windows\system32* OR c:\windows\syswow64* OR c\windows\winsxs*)))
+      query: file.path.keyword:*\\edputil.dll AND (NOT (file.path.keyword:(c\:\\windows\\system32\\* OR c\:\\windows\\syswow64\\* OR c\\windows\\winsxs\\*)))
 type: any
 priority: 3

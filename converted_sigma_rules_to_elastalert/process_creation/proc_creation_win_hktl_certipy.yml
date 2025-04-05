@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\certipy.exe OR winlog.event_data.originalfilename.keyword:certipy.exe OR winlog.event_data.description.keyword:*certipy*) OR ((process.command_line.keyword:(* account* OR * auth* OR * cert* OR * find* OR * forge* OR * ptt* OR * relay* OR * req* OR * shadow* OR * template*)) AND (process.command_line.keyword:(* -bloodhound* OR * -ca-pfx* OR * -dc-ip* OR * -kirbi* OR * -old-bloodhound* OR * -pfx* OR * -target* OR * -template* OR * -username* OR * -vulnerable* OR *auth -pfx* OR *shadow auto* OR *shadow list*)))
+      query: (winlog.event_data.image.keyword:*\\certipy.exe OR winlog.event_data.originalfilename.keyword:certipy.exe OR winlog.event_data.description.keyword:*certipy*) OR ((process.command_line.keyword:(*\ account\ * OR *\ auth\ * OR *\ cert\ * OR *\ find\ * OR *\ forge\ * OR *\ ptt\ * OR *\ relay\ * OR *\ req\ * OR *\ shadow\ * OR *\ template\ *)) AND (process.command_line.keyword:(*\ \-bloodhound* OR *\ \-ca\-pfx\ * OR *\ \-dc\-ip\ * OR *\ \-kirbi* OR *\ \-old\-bloodhound* OR *\ \-pfx\ * OR *\ \-target* OR *\ \-template* OR *\ \-username\ * OR *\ \-vulnerable* OR *auth\ \-pfx* OR *shadow\ auto* OR *shadow\ list*)))
 type: any
 priority: 3

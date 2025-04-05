@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\werfault.exe OR winlog.event_data.originalfilename.keyword:werfault.exe) AND ((winlog.event_data.ParentUser.keyword:(*authori* OR *autori*)) AND (user.name.keyword:(*authori* OR *autori*)) AND (process.command_line.keyword:* -u -p* AND process.command_line.keyword:* -ip* AND process.command_line.keyword:* -s*))) AND (NOT process.parent.executable.keyword:c:\windows\system32\lsass.exe)
+      query: ((winlog.event_data.image.keyword:*\\werfault.exe OR winlog.event_data.originalfilename.keyword:werfault.exe) AND ((winlog.event_data.ParentUser.keyword:(*authori* OR *autori*)) AND (user.name.keyword:(*authori* OR *autori*)) AND (process.command_line.keyword:*\ \-u\ \-p\ * AND process.command_line.keyword:*\ \-ip\ * AND process.command_line.keyword:*\ \-s\ *))) AND (NOT process.parent.executable.keyword:c\:\\windows\\system32\\lsass.exe)
 type: any
 priority: 3

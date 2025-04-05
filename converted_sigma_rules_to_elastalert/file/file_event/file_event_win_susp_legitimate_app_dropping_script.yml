@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\eqnedt32.exe OR *\wordpad.exe OR *\wordview.exe OR *\certutil.exe OR *\certoc.exe OR *\certreq.exe OR *\desktopimgdownldr.exe OR *\esentutl.exe OR *\mshta.exe OR *\acrord32.exe OR *\rdrcef.exe OR *\hh.exe OR *\finger.exe)) AND (file.path.keyword:(*.ps1 OR *.bat OR *.vbs OR *.scf OR *.wsf OR *.wsh))
+      query: (process.executable.keyword:(*\\eqnedt32.exe OR *\\wordpad.exe OR *\\wordview.exe OR *\\certutil.exe OR *\\certoc.exe OR *\\certreq.exe OR *\\desktopimgdownldr.exe OR *\\esentutl.exe OR *\\mshta.exe OR *\\acrord32.exe OR *\\rdrcef.exe OR *\\hh.exe OR *\\finger.exe)) AND (file.path.keyword:(*.ps1 OR *.bat OR *.vbs OR *.scf OR *.wsf OR *.wsh))
 type: any
 priority: 3

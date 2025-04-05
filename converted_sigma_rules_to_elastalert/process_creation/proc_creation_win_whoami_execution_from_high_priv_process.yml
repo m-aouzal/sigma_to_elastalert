@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:whoami.exe OR winlog.event_data.image.keyword:*\whoami.exe) AND (user.name.keyword:(*authori* OR *autori* OR *trustedinstaller*))
+      query: (winlog.event_data.originalfilename.keyword:whoami.exe OR winlog.event_data.image.keyword:*\\whoami.exe) AND (user.name.keyword:(*authori* OR *autori* OR *trustedinstaller*))
 type: any
 priority: 3

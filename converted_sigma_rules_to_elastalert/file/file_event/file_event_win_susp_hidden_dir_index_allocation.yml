@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*::$index_allocation*
+      query: file.path.keyword:*\:\:$index_allocation*
 type: any
 priority: 2

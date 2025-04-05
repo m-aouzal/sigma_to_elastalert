@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND (process.command_line.keyword:* delete* AND process.command_line.keyword:*\system\currentcontrolset\control\safeboot*)
+      query: (winlog.event_data.image.keyword:*reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND (process.command_line.keyword:*\ delete\ * AND process.command_line.keyword:*\\system\\currentcontrolset\\control\\safeboot*)
 type: any
 priority: 3

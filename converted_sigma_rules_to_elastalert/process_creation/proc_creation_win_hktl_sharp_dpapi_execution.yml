@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\sharpdpapi.exe OR winlog.event_data.originalfilename.keyword:sharpdpapi.exe) OR ((process.command_line.keyword:(* backupkey* OR * blob* OR * certificates* OR * credentials* OR * keepass* OR * masterkeys* OR * rdg* OR * vaults*)) AND ((process.command_line.keyword:* {* AND process.command_line.keyword:*}:*) OR (process.command_line.keyword:(* /file:* OR * /machine* OR * /mkfile:* OR * /password:* OR * /pvk:* OR * /server:* OR * /target:* OR * /unprotect*))))
+      query: (winlog.event_data.image.keyword:*\\sharpdpapi.exe OR winlog.event_data.originalfilename.keyword:sharpdpapi.exe) OR ((process.command_line.keyword:(*\ backupkey\ * OR *\ blob\ * OR *\ certificates\ * OR *\ credentials\ * OR *\ keepass\ * OR *\ masterkeys\ * OR *\ rdg\ * OR *\ vaults\ *)) AND ((process.command_line.keyword:*\ \{* AND process.command_line.keyword:*\}\:*) OR (process.command_line.keyword:(*\ \/file\:* OR *\ \/machine* OR *\ \/mkfile\:* OR *\ \/password\:* OR *\ \/pvk\:* OR *\ \/server\:* OR *\ \/target\:* OR *\ \/unprotect*))))
 type: any
 priority: 3

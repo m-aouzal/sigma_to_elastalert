@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.name.keyword:*\coerced*
+      query: file.name.keyword:*\\coerced\\*
 type: any
 priority: 3

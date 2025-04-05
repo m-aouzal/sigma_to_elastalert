@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\disablehypervisorenforcedpagingtranslation AND winlog.event_data.Details.keyword:dword (0x00000001)
+      query: registry.path.keyword:*\\disablehypervisorenforcedpagingtranslation AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)
 type: any
 priority: 3

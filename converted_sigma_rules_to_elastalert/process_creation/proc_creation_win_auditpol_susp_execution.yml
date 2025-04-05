@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\auditpol.exe OR winlog.event_data.originalfilename.keyword:auditpol.exe) AND (process.command_line.keyword:(*disable* OR *clear* OR *remove* OR *restore*))
+      query: (winlog.event_data.image.keyword:*\\auditpol.exe OR winlog.event_data.originalfilename.keyword:auditpol.exe) AND (process.command_line.keyword:(*disable* OR *clear* OR *remove* OR *restore*))
 type: any
 priority: 3

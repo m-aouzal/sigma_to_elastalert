@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (event.code.keyword:29 AND winlog.event_data.Configuration.keyword:*/system.webserver/modules/add*) AND (NOT ((winlog.event_data.NewValue.keyword:(anonymousauthenticationmodule OR customerrormodule OR defaultdocumentmodule OR directorylistingmodule OR filecachemodule OR httpcachemodule OR httploggingmodule OR protocolsupportmodule OR requestfilteringmodule OR staticcompressionmodule OR staticfilemodule OR tokencachemodule OR uricachemodule)) OR winlog.event_data.NewValue.keyword:""))
+      query: (event.code.keyword:29 AND winlog.event_data.Configuration.keyword:*\/system.webserver\/modules\/add*) AND (NOT ((winlog.event_data.NewValue.keyword:(anonymousauthenticationmodule OR customerrormodule OR defaultdocumentmodule OR directorylistingmodule OR filecachemodule OR httpcachemodule OR httploggingmodule OR protocolsupportmodule OR requestfilteringmodule OR staticcompressionmodule OR staticfilemodule OR tokencachemodule OR uricachemodule)) OR winlog.event_data.NewValue.keyword:""))
 type: any
 priority: 2

@@ -9,6 +9,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND (process.command_line.keyword:*microsoft\windows\windowsai* AND process.command_line.keyword:*disableaidataanalysis*) AND ((process.command_line.keyword:(*add* OR *0*)) OR process.command_line.keyword:*delete*)
+      query: (winlog.event_data.image.keyword:*\\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND (process.command_line.keyword:*microsoft\\windows\\windowsai* AND process.command_line.keyword:*disableaidataanalysis*) AND ((process.command_line.keyword:(*add* OR *0*)) OR process.command_line.keyword:*delete*)
 type: any
 priority: 2

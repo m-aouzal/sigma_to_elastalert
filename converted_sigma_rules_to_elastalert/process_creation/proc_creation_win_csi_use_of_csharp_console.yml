@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\csi.exe AND (process.parent.executable.keyword:(*\powershell.exe OR *\pwsh.exe OR *\powershell_ise.exe)) AND process.pe.original_file_name.keyword:csi.exe
+      query: process.executable.keyword:*\\csi.exe AND (process.parent.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe OR *\\powershell_ise.exe)) AND process.pe.original_file_name.keyword:csi.exe
 type: any
 priority: 3

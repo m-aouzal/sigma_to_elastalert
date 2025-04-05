@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.parent.executable.keyword:(*\wmiprvse.exe OR *\svchost.exe OR *\dllhost.exe)) AND (process.executable.keyword:(*\wab.exe OR *\wabmig.exe))) OR (process.parent.executable.keyword:(*\wab.exe OR *\wabmig.exe))
+      query: ((process.parent.executable.keyword:(*\\wmiprvse.exe OR *\\svchost.exe OR *\\dllhost.exe)) AND (process.executable.keyword:(*\\wab.exe OR *\\wabmig.exe))) OR (process.parent.executable.keyword:(*\\wab.exe OR *\\wabmig.exe))
 type: any
 priority: 3

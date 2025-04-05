@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\microsoft\windows\currentversion\policies\system\promptonsecuredesktop* AND winlog.event_data.Details.keyword:dword (0x00000000)
+      query: registry.path.keyword:*\\microsoft\\windows\\currentversion\\policies\\system\\promptonsecuredesktop* AND winlog.event_data.Details.keyword:dword\ \(0x00000000\)
 type: any
 priority: 2

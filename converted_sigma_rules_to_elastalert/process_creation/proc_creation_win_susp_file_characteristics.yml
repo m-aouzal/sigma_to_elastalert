@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.pe.description.keyword:? AND process.pe.file_version.keyword:?) OR (process.pe.description.keyword:? AND process.pe.product.keyword:?) OR (process.pe.description.keyword:? AND process.pe.company.keyword:?)) AND process.executable.keyword:*\downloads*
+      query: ((process.pe.description.keyword:\? AND process.pe.file_version.keyword:\?) OR (process.pe.description.keyword:\? AND process.pe.product.keyword:\?) OR (process.pe.description.keyword:\? AND process.pe.company.keyword:\?)) AND process.executable.keyword:*\\downloads\\*
 type: any
 priority: 2

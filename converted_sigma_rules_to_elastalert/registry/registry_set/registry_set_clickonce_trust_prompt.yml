@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\software\microsoft\.netframework\security\trustmanager\promptinglevel* AND (registry.path.keyword:(*\internet OR *\localintranet OR *\mycomputer OR *\trustedsites OR *\untrustedsites)) AND winlog.event_data.Details.keyword:enabled
+      query: registry.path.keyword:*\\software\\microsoft\\.netframework\\security\\trustmanager\\promptinglevel\\* AND (registry.path.keyword:(*\\internet OR *\\localintranet OR *\\mycomputer OR *\\trustedsites OR *\\untrustedsites)) AND winlog.event_data.Details.keyword:enabled
 type: any
 priority: 2

@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\bin\screenconnect.*
+      query: file.path.keyword:*\\bin\\screenconnect.*
 type: any
 priority: 2

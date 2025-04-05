@@ -1,10 +1,10 @@
 description: |
-  Detects the volume shadow copy service initialization and processing via esentutl. Registry keys such as HKLM\System\CurrentControlSet\Services\VSS\Diag\VolSnap\Volume are captured.
+  Detects the volume shadow copy service initialization and processing via esentutl. Registry keys such as HKLM\\System\\CurrentControlSet\\Services\\VSS\\Diag\\VolSnap\\Volume are captured.
 name: Esentutl Volume Shadow Copy Service Keys
 index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*system\currentcontrolset\services\vss* AND process.executable.keyword:*esentutl.exe) AND (NOT registry.path.keyword:*system\currentcontrolset\services\vss\start*)
+      query: (registry.path.keyword:*system\\currentcontrolset\\services\\vss* AND process.executable.keyword:*esentutl.exe) AND (NOT registry.path.keyword:*system\\currentcontrolset\\services\\vss\\start*)
 type: any
 priority: 3

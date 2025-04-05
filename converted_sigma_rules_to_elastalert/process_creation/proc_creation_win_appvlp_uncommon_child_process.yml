@@ -9,6 +9,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\appvlp.exe AND (NOT (process.executable.keyword:(*:\windows\syswow64\rundll32.exe OR *:\windows\system32\rundll32.exe))) AND (NOT ((process.executable.keyword:*:\program files\microsoft office* AND process.executable.keyword:*\msoasb.exe) OR ((process.executable.keyword:*:\program files\microsoft office* AND process.executable.keyword:*\skypesrv*) AND process.executable.keyword:*\skypeserver.exe) OR (process.executable.keyword:*:\program files\microsoft office* AND process.executable.keyword:*\msouc.exe)))
+      query: process.parent.executable.keyword:*\\appvlp.exe AND (NOT (process.executable.keyword:(*\:\\windows\\syswow64\\rundll32.exe OR *\:\\windows\\system32\\rundll32.exe))) AND (NOT ((process.executable.keyword:*\:\\program\ files\\microsoft\ office* AND process.executable.keyword:*\\msoasb.exe) OR ((process.executable.keyword:*\:\\program\ files\\microsoft\ office* AND process.executable.keyword:*\\skypesrv\\*) AND process.executable.keyword:*\\skypeserver.exe) OR (process.executable.keyword:*\:\\program\ files\\microsoft\ office* AND process.executable.keyword:*\\msouc.exe)))
 type: any
 priority: 2

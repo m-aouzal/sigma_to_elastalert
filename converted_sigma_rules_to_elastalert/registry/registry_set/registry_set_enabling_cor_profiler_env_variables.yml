@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*\cor_enable_profiling OR *\cor_profiler OR *\coreclr_enable_profiling)) OR registry.path.keyword:*\coreclr_profiler_path*
+      query: (registry.path.keyword:(*\\cor_enable_profiling OR *\\cor_profiler OR *\\coreclr_enable_profiling)) OR registry.path.keyword:*\\coreclr_profiler_path*
 type: any
 priority: 2

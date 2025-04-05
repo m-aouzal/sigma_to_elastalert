@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.Data.keyword:(*engineversion=2.* OR *engineversion=4.* OR *engineversion=5.*)) AND winlog.event_data.Data.keyword:*hostversion=3.*
+      query: (winlog.event_data.Data.keyword:(*engineversion\=2.* OR *engineversion\=4.* OR *engineversion\=5.*)) AND winlog.event_data.Data.keyword:*hostversion\=3.*
 type: any
 priority: 3

@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*\calc.exe* OR (process.executable.keyword:*\calc.exe AND (NOT (process.executable.keyword:(*:\windows\system32* OR *:\windows\syswow64* OR *:\windows\winsxs*))))
+      query: process.command_line.keyword:*\\calc.exe\ * OR (process.executable.keyword:*\\calc.exe AND (NOT (process.executable.keyword:(*\:\\windows\\system32\\* OR *\:\\windows\\syswow64\\* OR *\:\\windows\\winsxs\\*))))
 type: any
 priority: 3

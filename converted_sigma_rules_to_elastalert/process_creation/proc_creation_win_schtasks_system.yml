@@ -1,10 +1,10 @@
 description: |
-  Detects the creation or update of a scheduled task to run with "NT AUTHORITYSYSTEM" privileges
+  Detects the creation or update of a scheduled task to run with "NT AUTHORITY\SYSTEM" privileges
 name: Schtasks Creation Or Modification With SYSTEM Privileges
 index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:*\schtasks.exe AND (process.command_line.keyword:(* /change* OR * /create*))) AND process.command_line.keyword:*/ru* AND (process.command_line.keyword:(*nt aut* OR * system*))) AND (NOT ((process.executable.keyword:*\schtasks.exe AND (process.command_line.keyword:*/tn tvinstallrestore* AND process.command_line.keyword:*\teamviewer_.exe*)) OR (process.command_line.keyword:*subscription heartbeat* AND process.command_line.keyword:*\heartbeatconfig.xml* AND process.command_line.keyword:*\microsoft shared\office*) OR (process.command_line.keyword:(*/create /f /ru system /sc weekly /tn avirasystemspeedupverify /tr* OR *:\program files (x86)\avira\system speedup\setup\avira_speedup_setup.exe* OR */verify /verysilent /nostart /nodotnet /norestart" /rl highest*))))
+      query: ((process.executable.keyword:*\\schtasks.exe AND (process.command_line.keyword:(*\ \/change\ * OR *\ \/create\ *))) AND process.command_line.keyword:*\/ru\ * AND (process.command_line.keyword:(*nt\ aut* OR *\ system\ *))) AND (NOT ((process.executable.keyword:*\\schtasks.exe AND (process.command_line.keyword:*\/tn\ tvinstallrestore* AND process.command_line.keyword:*\\teamviewer_.exe*)) OR (process.command_line.keyword:*subscription\ heartbeat* AND process.command_line.keyword:*\\heartbeatconfig.xml* AND process.command_line.keyword:*\\microsoft\ shared\\office*) OR (process.command_line.keyword:(*\/create\ \/f\ \/ru\ system\ \/sc\ weekly\ \/tn\ avirasystemspeedupverify\ \/tr\ * OR *\:\\program\ files\ \(x86\)\\avira\\system\ speedup\\setup\\avira_speedup_setup.exe* OR *\/verify\ \/verysilent\ \/nostart\ \/nodotnet\ \/norestart\"\ \/rl\ highest*))))
 type: any
 priority: 3

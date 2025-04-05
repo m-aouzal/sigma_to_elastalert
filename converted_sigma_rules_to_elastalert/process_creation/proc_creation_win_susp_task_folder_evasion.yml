@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*echo* OR *copy* OR *type* OR *file createnew*)) AND (process.command_line.keyword:(* c:\windows\system32\tasks* OR * c:\windows\syswow64\tasks*))
+      query: (process.command_line.keyword:(*echo\ * OR *copy\ * OR *type\ * OR *file\ createnew*)) AND (process.command_line.keyword:(*\ c\:\\windows\\system32\\tasks\\* OR *\ c\:\\windows\\syswow64\\tasks\\*))
 type: any
 priority: 3

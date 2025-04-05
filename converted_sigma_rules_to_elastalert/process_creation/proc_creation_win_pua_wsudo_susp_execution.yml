@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\wsudo.exe OR winlog.event_data.originalfilename.keyword:wsudo.exe OR winlog.event_data.description.keyword:windows sudo utility OR winlog.event_data.parentimage.keyword:*\wsudo-bridge.exe) OR (process.command_line.keyword:(*-u system* OR *-usystem* OR *-u trustedinstaller* OR *-utrustedinstaller* OR * --ti*))
+      query: (winlog.event_data.image.keyword:*\\wsudo.exe OR winlog.event_data.originalfilename.keyword:wsudo.exe OR winlog.event_data.description.keyword:windows\ sudo\ utility OR winlog.event_data.parentimage.keyword:*\\wsudo\-bridge.exe) OR (process.command_line.keyword:(*\-u\ system* OR *\-usystem* OR *\-u\ trustedinstaller* OR *\-utrustedinstaller* OR *\ \-\-ti\ *))
 type: any
 priority: 3

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\dbghelp.dll AND (NOT (file.path.keyword:(c:\program files (x86)* OR c:\program files* OR c:\windows\softwaredistribution* OR c:\windows\system32* OR c:\windows\systemtemp* OR c:\windows\syswow64* OR c:\windows\winsxs*))) AND (NOT ((file.path.keyword:(*\anaconda3\lib\site-packages\vtrace\platforms\windll\amd64\dbghelp.dll OR *\anaconda3\lib\site-packages\vtrace\platforms\windll\i386\dbghelp.dll)) OR (file.path.keyword:(*\epic games\launcher\engine\binaries\thirdparty\dbghelp\dbghelp.dll OR *\epic games\magiclegends\x86\dbghelp.dll))))
+      query: file.path.keyword:*\\dbghelp.dll AND (NOT (file.path.keyword:(c\:\\program\ files\ \(x86\)\\* OR c\:\\program\ files\\* OR c\:\\windows\\softwaredistribution\\* OR c\:\\windows\\system32\\* OR c\:\\windows\\systemtemp\\* OR c\:\\windows\\syswow64\\* OR c\:\\windows\\winsxs\\*))) AND (NOT ((file.path.keyword:(*\\anaconda3\\lib\\site\-packages\\vtrace\\platforms\\windll\\amd64\\dbghelp.dll OR *\\anaconda3\\lib\\site\-packages\\vtrace\\platforms\\windll\\i386\\dbghelp.dll)) OR (file.path.keyword:(*\\epic\ games\\launcher\\engine\\binaries\\thirdparty\\dbghelp\\dbghelp.dll OR *\\epic\ games\\magiclegends\\x86\\dbghelp.dll))))
 type: any
 priority: 2

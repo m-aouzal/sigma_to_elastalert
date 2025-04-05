@@ -9,6 +9,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\software\microsoft\windows nt\currentversion\appcompatflags\telemetrycontroller* AND registry.path.keyword:*\command AND (winlog.event_data.Details.keyword:(*.bat* OR *.bin* OR *.cmd* OR *.dat* OR *.dll* OR *.exe* OR *.hta* OR *.jar* OR *.js* OR *.msi* OR *.ps* OR *.sh* OR *.vb*))) AND (NOT (winlog.event_data.Details.keyword:(*\system32\compattelrunner.exe* OR *\system32\devicecensus.exe*)))
+      query: (registry.path.keyword:*\\software\\microsoft\\windows\ nt\\currentversion\\appcompatflags\\telemetrycontroller\\* AND registry.path.keyword:*\\command AND (winlog.event_data.Details.keyword:(*.bat* OR *.bin* OR *.cmd* OR *.dat* OR *.dll* OR *.exe* OR *.hta* OR *.jar* OR *.js* OR *.msi* OR *.ps* OR *.sh* OR *.vb*))) AND (NOT (winlog.event_data.Details.keyword:(*\\system32\\compattelrunner.exe* OR *\\system32\\devicecensus.exe*)))
 type: any
 priority: 3

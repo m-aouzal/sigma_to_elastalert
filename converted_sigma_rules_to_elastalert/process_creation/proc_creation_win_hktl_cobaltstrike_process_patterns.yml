@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*cmd.exe /c whoami AND process.parent.executable.keyword:c:\temp*) OR ((process.parent.executable.keyword:(*\runonce.exe OR *\dllhost.exe)) AND (process.command_line.keyword:*cmd.exe /c echo* AND process.command_line.keyword:*> \\.\pipe*)) OR ((process.parent.command_line.keyword:*cmd.exe /c echo* AND process.parent.command_line.keyword:* > \\.\pipe*) AND process.command_line.keyword:*conhost.exe 0xffffffff -forcev1) OR (process.parent.command_line.keyword:*/c whoami AND process.command_line.keyword:*conhost.exe 0xffffffff -forcev1)
+      query: (process.command_line.keyword:*cmd.exe\ \/c\ whoami AND process.parent.executable.keyword:c\:\\temp\\*) OR ((process.parent.executable.keyword:(*\\runonce.exe OR *\\dllhost.exe)) AND (process.command_line.keyword:*cmd.exe\ \/c\ echo* AND process.command_line.keyword:*\>\ \\\\.\\pipe*)) OR ((process.parent.command_line.keyword:*cmd.exe\ \/c\ echo* AND process.parent.command_line.keyword:*\ \>\ \\\\.\\pipe*) AND process.command_line.keyword:*conhost.exe\ 0xffffffff\ \-forcev1) OR (process.parent.command_line.keyword:*\/c\ whoami AND process.command_line.keyword:*conhost.exe\ 0xffffffff\ \-forcev1)
 type: any
 priority: 3

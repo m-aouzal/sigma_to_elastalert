@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND (event.code.keyword:4624 AND process.executable.keyword:*\wmiprvse.exe)
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4624 AND process.executable.keyword:*\\wmiprvse.exe)
 type: any
 priority: 1

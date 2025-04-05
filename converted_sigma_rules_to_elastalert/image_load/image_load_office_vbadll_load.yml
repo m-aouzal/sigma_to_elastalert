@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\excel.exe OR *\mspub.exe OR *\onenote.exe OR *\onenoteim.exe OR *\outlook.exe OR *\powerpnt.exe OR *\winword.exe)) AND (file.path.keyword:(*\vbe7.dll OR *\vbeui.dll OR *\vbe7intl.dll))
+      query: (process.executable.keyword:(*\\excel.exe OR *\\mspub.exe OR *\\onenote.exe OR *\\onenoteim.exe OR *\\outlook.exe OR *\\powerpnt.exe OR *\\winword.exe)) AND (file.path.keyword:(*\\vbe7.dll OR *\\vbeui.dll OR *\\vbe7intl.dll))
 type: any
 priority: 3

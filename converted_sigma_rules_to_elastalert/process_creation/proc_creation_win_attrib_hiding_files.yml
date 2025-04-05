@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\attrib.exe OR winlog.event_data.originalfilename.keyword:attrib.exe) AND process.command_line.keyword:* +h*) AND (NOT process.command_line.keyword:*\desktop.ini*) AND (NOT (process.parent.executable.keyword:*\cmd.exe AND process.command_line.keyword:+r +h +s +a \*.cui AND process.parent.command_line.keyword:c:\windows\system32\*.bat))
+      query: ((winlog.event_data.image.keyword:*\\attrib.exe OR winlog.event_data.originalfilename.keyword:attrib.exe) AND process.command_line.keyword:*\ \+h\ *) AND (NOT process.command_line.keyword:*\\desktop.ini\ *) AND (NOT (process.parent.executable.keyword:*\\cmd.exe AND process.command_line.keyword:\+r\ \+h\ \+s\ \+a\ \\\*.cui AND process.parent.command_line.keyword:c\:\\windows\\system32\\\*.bat))
 type: any
 priority: 2

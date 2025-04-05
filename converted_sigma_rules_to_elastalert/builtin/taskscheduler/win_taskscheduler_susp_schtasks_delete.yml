@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft-Windows-TaskScheduler/Operational AND ((event.code.keyword:141 AND (winlog.event_data.TaskName.keyword:(*\windows\systemrestore\sr* OR *\windows\windows defender* OR *\windows\bitlocker* OR *\windows\windowsbackup* OR *\windows\windowsupdate* OR *\windows\updateorchestrator* OR *\windows\exploitguard*))) AND (NOT (winlog.event_data.UserName.keyword:(*authori* OR *autori*))))
+      query: winlog.channel.keyword:Microsoft\-Windows\-TaskScheduler\/Operational AND ((event.code.keyword:141 AND (winlog.event_data.TaskName.keyword:(*\\windows\\systemrestore\\sr* OR *\\windows\\windows\ defender\\* OR *\\windows\\bitlocker* OR *\\windows\\windowsbackup\\* OR *\\windows\\windowsupdate\\* OR *\\windows\\updateorchestrator\\* OR *\\windows\\exploitguard*))) AND (NOT (winlog.event_data.UserName.keyword:(*authori* OR *autori*))))
 type: any
 priority: 3

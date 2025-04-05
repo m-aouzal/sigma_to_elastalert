@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\pdqdeployrunner-* AND ((winlog.event_data.image.keyword:(*\bash.exe OR *\certutil.exe OR *\cmd.exe OR *\csc.exe OR *\cscript.exe OR *\dllhost.exe OR *\mshta.exe OR *\msiexec.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\scriptrunner.exe OR *\wmic.exe OR *\wscript.exe OR *\wsl.exe)) OR (winlog.event_data.image.keyword:(*:\programdata* OR *:\users\public* OR *:\windows\temp* OR *\appdata\local\temp*)) OR (winlog.event_data.commandline.keyword:(* -decode* OR * -enc* OR * -encodedcommand* OR * -w hidden* OR *downloadstring* OR *frombase64string* OR *http* OR *iex* OR *invoke-*)))
+      query: process.parent.executable.keyword:*\\pdqdeployrunner\-* AND ((winlog.event_data.image.keyword:(*\\bash.exe OR *\\certutil.exe OR *\\cmd.exe OR *\\csc.exe OR *\\cscript.exe OR *\\dllhost.exe OR *\\mshta.exe OR *\\msiexec.exe OR *\\regsvr32.exe OR *\\rundll32.exe OR *\\scriptrunner.exe OR *\\wmic.exe OR *\\wscript.exe OR *\\wsl.exe)) OR (winlog.event_data.image.keyword:(*\:\\programdata\\* OR *\:\\users\\public\\* OR *\:\\windows\\temp\\* OR *\\appdata\\local\\temp*)) OR (winlog.event_data.commandline.keyword:(*\ \-decode\ * OR *\ \-enc\ * OR *\ \-encodedcommand\ * OR *\ \-w\ hidden* OR *downloadstring* OR *frombase64string* OR *http* OR *iex\ * OR *invoke\-*)))
 type: any
 priority: 2

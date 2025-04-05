@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\fsutil.exe OR winlog.event_data.originalfilename.keyword:fsutil.exe) AND (process.command_line.keyword:*behavior* AND process.command_line.keyword:*set* AND process.command_line.keyword:*symlinkevaluation*)
+      query: (winlog.event_data.image.keyword:*\\fsutil.exe OR winlog.event_data.originalfilename.keyword:fsutil.exe) AND (process.command_line.keyword:*behavior\ * AND process.command_line.keyword:*set\ * AND process.command_line.keyword:*symlinkevaluation*)
 type: any
 priority: 2

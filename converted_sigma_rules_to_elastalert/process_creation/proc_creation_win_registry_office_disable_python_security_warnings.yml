@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*\microsoft\office* AND process.command_line.keyword:*\excel\security* AND process.command_line.keyword:*pythonfunctionwarnings*) AND process.command_line.keyword:* 0*
+      query: (process.command_line.keyword:*\\microsoft\\office\\* AND process.command_line.keyword:*\\excel\\security* AND process.command_line.keyword:*pythonfunctionwarnings*) AND process.command_line.keyword:*\ 0*
 type: any
 priority: 3

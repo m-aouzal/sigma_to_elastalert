@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.targetfilename.keyword:(*\temp\sam OR *\sam.sav OR *\intel\sam OR *\sam.hive OR *\perflogs\sam OR *\programdata\sam OR *\users\public\sam OR *\appdata\local\sam OR *\appdata\roaming\sam OR *_shadowsteal.zip OR *\documents\sam.export OR *:\sam)) OR (winlog.event_data.targetfilename.keyword:(*\hive_sam_* OR *\sam.save* OR *\sam.export* OR *\~reg_sam.save* OR *\sam_backup* OR *\sam.bck* OR *\sam.backup*))
+      query: (winlog.event_data.targetfilename.keyword:(*\\temp\\sam OR *\\sam.sav OR *\\intel\\sam OR *\\sam.hive OR *\\perflogs\\sam OR *\\programdata\\sam OR *\\users\\public\\sam OR *\\appdata\\local\\sam OR *\\appdata\\roaming\\sam OR *_shadowsteal.zip OR *\\documents\\sam.export OR *\:\\sam)) OR (winlog.event_data.targetfilename.keyword:(*\\hive_sam_* OR *\\sam.save* OR *\\sam.export* OR *\\\~reg_sam.save* OR *\\sam_backup* OR *\\sam.bck* OR *\\sam.backup*))
 type: any
 priority: 3

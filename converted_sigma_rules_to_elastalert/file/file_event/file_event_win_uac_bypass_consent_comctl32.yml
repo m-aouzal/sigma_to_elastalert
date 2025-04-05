@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:c:\windows\system32\consent.exe.@* AND file.path.keyword:*\comctl32.dll
+      query: file.path.keyword:c\:\\windows\\system32\\consent.exe.@* AND file.path.keyword:*\\comctl32.dll
 type: any
 priority: 3

@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\u202e* AND (file.path.keyword:(*fpd..* OR *nls..* OR *vsc..* OR *xcod.* OR *xslx.*))
+      query: file.path.keyword:*\\u202e* AND (file.path.keyword:(*fpd..* OR *nls..* OR *vsc..* OR *xcod.* OR *xslx.*))
 type: any
 priority: 3

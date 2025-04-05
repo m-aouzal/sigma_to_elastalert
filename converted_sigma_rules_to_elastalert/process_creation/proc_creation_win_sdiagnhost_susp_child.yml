@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:*\sdiagnhost.exe AND (process.executable.keyword:(*\powershell.exe OR *\pwsh.exe OR *\cmd.exe OR *\mshta.exe OR *\cscript.exe OR *\wscript.exe OR *\taskkill.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\calc.exe))) AND (NOT ((process.executable.keyword:*\cmd.exe AND process.command_line.keyword:*bits*) OR (process.executable.keyword:*\powershell.exe AND (process.command_line.keyword:(*-noprofile - OR *-noprofile)))))
+      query: (process.parent.executable.keyword:*\\sdiagnhost.exe AND (process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe OR *\\cmd.exe OR *\\mshta.exe OR *\\cscript.exe OR *\\wscript.exe OR *\\taskkill.exe OR *\\regsvr32.exe OR *\\rundll32.exe OR *\\calc.exe))) AND (NOT ((process.executable.keyword:*\\cmd.exe AND process.command_line.keyword:*bits*) OR (process.executable.keyword:*\\powershell.exe AND (process.command_line.keyword:(*\-noprofile\ \- OR *\-noprofile)))))
 type: any
 priority: 3

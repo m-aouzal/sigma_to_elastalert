@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\advanced_port_scanner* OR winlog.event_data.originalfilename.keyword:*advanced_port_scanner* OR winlog.event_data.description.keyword:*advanced port scanner*) OR (process.command_line.keyword:*/portable* AND process.command_line.keyword:*/lng*)
+      query: (winlog.event_data.image.keyword:*\\advanced_port_scanner* OR winlog.event_data.originalfilename.keyword:*advanced_port_scanner* OR winlog.event_data.description.keyword:*advanced\ port\ scanner*) OR (process.command_line.keyword:*\/portable* AND process.command_line.keyword:*\/lng*)
 type: any
 priority: 2

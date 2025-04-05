@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*^^* OR *^|^* OR *,;,* OR *;;;;* OR *;; ;;* OR *(,(,* OR *%comspec:~* OR * c^m^d* OR *^c^m^d* OR * c^md* OR * cm^d* OR *^cm^d* OR * s^et* OR * s^e^t* OR * se^t*)
+      query: process.command_line.keyword:(*\^\^* OR *\^\|\^* OR *,;,* OR *;;;;* OR *;;\ ;;* OR *\(,\(,* OR *%comspec\:\~* OR *\ c\^m\^d* OR *\^c\^m\^d* OR *\ c\^md* OR *\ cm\^d* OR *\^cm\^d* OR *\ s\^et\ * OR *\ s\^e\^t\ * OR *\ se\^t\ *)
 type: any
 priority: 2

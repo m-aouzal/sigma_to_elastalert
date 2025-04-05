@@ -1,13 +1,13 @@
 description: |
   Adversaries may execute their own malicious payloads by hijacking the Registry entries used by services.
   Adversaries may use flaws in the permissions for registry to redirect from the originally specified executable to one that they control, in order to launch their own code at Service start.
-  Windows stores local service configuration information in the Registry under HKLMSYSTEMCurrentControlSetServices
+  Windows stores local service configuration information in the Registry under HKLM\SYSTEM\CurrentControlSet\Services
   
 name: Service Registry Permissions Weakness Check
 index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*get-acl* AND powershell.file.script_block_text.keyword:*registry::hklm\system\currentcontrolset\services*
+      query: powershell.file.script_block_text.keyword:*get\-acl* AND powershell.file.script_block_text.keyword:*registry\:\:hklm\\system\\currentcontrolset\\services\\*
 type: any
 priority: 2

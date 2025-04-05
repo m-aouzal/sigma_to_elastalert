@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND (event.code.keyword:5145 AND winlog.event_data.ShareName.keyword:\\*\ipc$ AND winlog.event_data.RelativeTargetName.keyword:atsvc AND winlog.event_data.AccessList.keyword:*writedata*)
+      query: winlog.channel.keyword:Security AND (event.code.keyword:5145 AND winlog.event_data.ShareName.keyword:\\\\\*\\ipc$ AND winlog.event_data.RelativeTargetName.keyword:atsvc AND winlog.event_data.AccessList.keyword:*writedata*)
 type: any
 priority: 2

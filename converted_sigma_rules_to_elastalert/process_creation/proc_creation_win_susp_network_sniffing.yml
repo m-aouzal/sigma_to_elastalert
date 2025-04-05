@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\tshark.exe AND process.command_line.keyword:*-i*) OR process.executable.keyword:*\windump.exe
+      query: (process.executable.keyword:*\\tshark.exe AND process.command_line.keyword:*\-i*) OR process.executable.keyword:*\\windump.exe
 type: any
 priority: 2

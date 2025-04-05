@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*add-content $profile* AND (powershell.file.script_block_text.keyword:(*-value "iex* OR *-value "invoke-expression* OR *-value "invoke-webrequest* OR *-value "start-process* OR *-value 'iex* OR *-value 'invoke-expression* OR *-value 'invoke-webrequest* OR *-value 'start-process*))
+      query: powershell.file.script_block_text.keyword:*add\-content\ $profile* AND (powershell.file.script_block_text.keyword:(*\-value\ \"iex\ * OR *\-value\ \"invoke\-expression* OR *\-value\ \"invoke\-webrequest* OR *\-value\ \"start\-process* OR *\-value\ 'iex\ * OR *\-value\ 'invoke\-expression* OR *\-value\ 'invoke\-webrequest* OR *\-value\ 'start\-process*))
 type: any
 priority: 2

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*import-certificate* AND process.command_line.keyword:* -filepath* AND process.command_line.keyword:*cert:\localmachine\root*) AND (process.command_line.keyword:(*\appdata\local\temp* OR *:\windows\temp* OR *\desktop* OR *\downloads* OR *\perflogs* OR *:\users\public*))
+      query: (process.command_line.keyword:*import\-certificate* AND process.command_line.keyword:*\ \-filepath\ * AND process.command_line.keyword:*cert\:\\localmachine\\root*) AND (process.command_line.keyword:(*\\appdata\\local\\temp\\* OR *\:\\windows\\temp\\* OR *\\desktop\\* OR *\\downloads\\* OR *\\perflogs\\* OR *\:\\users\\public\\*))
 type: any
 priority: 3

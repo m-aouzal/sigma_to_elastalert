@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:(*get-process | ?* OR *get-process | where* OR *gps | ?* OR *gps | where*)) AND (powershell.file.script_block_text.keyword:(*company -like* OR *description -like* OR *name -like* OR *path -like* OR *product -like*)) AND (powershell.file.script_block_text.keyword:(**avira** OR **carbonblack** OR **cylance** OR **defender** OR **kaspersky** OR **malware** OR **sentinel** OR **symantec** OR **virus**))
+      query: (powershell.file.script_block_text.keyword:(*get\-process\ \|\ \?* OR *get\-process\ \|\ where* OR *gps\ \|\ \?* OR *gps\ \|\ where*)) AND (powershell.file.script_block_text.keyword:(*company\ \-like* OR *description\ \-like* OR *name\ \-like* OR *path\ \-like* OR *product\ \-like*)) AND (powershell.file.script_block_text.keyword:(*\*avira\** OR *\*carbonblack\** OR *\*cylance\** OR *\*defender\** OR *\*kaspersky\** OR *\*malware\** OR *\*sentinel\** OR *\*symantec\** OR *\*virus\**))
 type: any
 priority: 2

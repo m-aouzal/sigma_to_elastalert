@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.description.keyword:goto opener OR winlog.event_data.product.keyword:goto opener OR winlog.event_data.company.keyword:logmein, inc.
+      query: winlog.event_data.description.keyword:goto\ opener OR winlog.event_data.product.keyword:goto\ opener OR winlog.event_data.company.keyword:logmein,\ inc.
 type: any
 priority: 2

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\pchunter64.exe OR *\pchunter32.exe)) OR (winlog.event_data.originalfilename.keyword:pchunter.exe OR winlog.event_data.description.keyword:epoolsoft windows information view tools) OR (winlog.event_data.Hashes.keyword:(*sha1=5f1cbc3d99558307bc1250d084fa968521482025* OR *md5=987b65cd9b9f4e9a1afd8f8b48cf64a7* OR *sha256=2b214bddaab130c274de6204af6dba5aeec7433da99aa950022fa306421a6d32* OR *imphash=444d210cea1ff8112f256a4997eed7ff* OR *sha1=3fb89787cb97d902780da080545584d97fb1c2eb* OR *md5=228dd0c2e6287547e26ffbd973a40f14* OR *sha256=55f041bf4e78e9bfa6d4ee68be40e496ce3a1353e1ca4306598589e19802522c* OR *imphash=0479f44df47cfa2ef1ccc4416a538663*))
+      query: (process.executable.keyword:(*\\pchunter64.exe OR *\\pchunter32.exe)) OR (winlog.event_data.originalfilename.keyword:pchunter.exe OR winlog.event_data.description.keyword:epoolsoft\ windows\ information\ view\ tools) OR (winlog.event_data.Hashes.keyword:(*sha1\=5f1cbc3d99558307bc1250d084fa968521482025* OR *md5\=987b65cd9b9f4e9a1afd8f8b48cf64a7* OR *sha256\=2b214bddaab130c274de6204af6dba5aeec7433da99aa950022fa306421a6d32* OR *imphash\=444d210cea1ff8112f256a4997eed7ff* OR *sha1\=3fb89787cb97d902780da080545584d97fb1c2eb* OR *md5\=228dd0c2e6287547e26ffbd973a40f14* OR *sha256\=55f041bf4e78e9bfa6d4ee68be40e496ce3a1353e1ca4306598589e19802522c* OR *imphash\=0479f44df47cfa2ef1ccc4416a538663*))
 type: any
 priority: 3

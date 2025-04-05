@@ -9,6 +9,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe) AND process.command_line.keyword:*rmdir* AND (process.command_line.keyword:(*/s* OR */q*))
+      query: (winlog.event_data.image.keyword:*\\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe) AND process.command_line.keyword:*rmdir* AND (process.command_line.keyword:(*\/s* OR *\/q*))
 type: any
 priority: 1

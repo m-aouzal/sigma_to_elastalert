@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*.evtx AND (NOT (file.path.keyword:c:\windows\system32\winevt\logs* OR (file.path.keyword:c:\programdata\microsoft\windows\containers\baseimages* AND file.path.keyword:*\windows\system32\winevt\logs\)))
+      query: file.path.keyword:*.evtx AND (NOT (file.path.keyword:c\:\\windows\\system32\\winevt\\logs\\* OR (file.path.keyword:c\:\\programdata\\microsoft\\windows\\containers\\baseimages\\* AND file.path.keyword:*\\windows\\system32\\winevt\\logs\\)))
 type: any
 priority: 2

@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\shellchromeapi.dll
+      query: file.path.keyword:*\\shellchromeapi.dll
 type: any
 priority: 3

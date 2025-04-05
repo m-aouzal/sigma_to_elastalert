@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.imageloaded.keyword:*\rstrtmgr.dll OR winlog.event_data.originalfilename.keyword:rstrtmgr.dll) AND (NOT ((process.executable.keyword:(*:\$windows.~bt* OR *:\$winreagent* OR *:\program files (x86)* OR *:\program files* OR *:\programdata* OR *:\windows\explorer.exe* OR *:\windows\softwaredistribution* OR *:\windows\sysnative* OR *:\windows\system32* OR *:\windows\syswow64* OR *:\windows\winsxs* OR *:\wudownloadcache*)) OR ((process.executable.keyword:*:\users* AND process.executable.keyword:*\appdata\local\temp\is-* AND process.executable.keyword:*.tmp*) AND process.executable.keyword:*.tmp) OR process.executable.keyword:*:\windows\temp*))
+      query: (winlog.event_data.imageloaded.keyword:*\\rstrtmgr.dll OR winlog.event_data.originalfilename.keyword:rstrtmgr.dll) AND (NOT ((process.executable.keyword:(*\:\\$windows.\~bt\\* OR *\:\\$winreagent\\* OR *\:\\program\ files\ \(x86\)\\* OR *\:\\program\ files\\* OR *\:\\programdata\\* OR *\:\\windows\\explorer.exe* OR *\:\\windows\\softwaredistribution\\* OR *\:\\windows\\sysnative\\* OR *\:\\windows\\system32\\* OR *\:\\windows\\syswow64\\* OR *\:\\windows\\winsxs\\* OR *\:\\wudownloadcache\\*)) OR ((process.executable.keyword:*\:\\users\\* AND process.executable.keyword:*\\appdata\\local\\temp\\is\-* AND process.executable.keyword:*.tmp\\*) AND process.executable.keyword:*.tmp) OR process.executable.keyword:*\:\\windows\\temp\\*))
 type: any
 priority: 1

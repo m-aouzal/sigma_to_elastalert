@@ -1,12 +1,12 @@
 description: |
   This detection uses Windows security events to detect suspicious access attempts to the registry key of Azure AD Health monitoring agent.
-  This detection requires an access control entry (ACE) on the system access control list (SACL) of the following securable object HKLMSOFTWAREMicrosoftMicrosoft OnlineReportingMonitoringAgent.
+  This detection requires an access control entry (ACE) on the system access control list (SACL) of the following securable object HKLM\SOFTWARE\Microsoft\Microsoft Online\Reporting\MonitoringAgent.
   
 name: Azure AD Health Monitoring Agent Registry Keys Access
 index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND (((event.code.keyword:(4656 OR 4663)) AND winlog.event_data.ObjectType.keyword:key AND winlog.event_data.ObjectName.keyword:\registry\machine\software\microsoft\microsoft online\reporting\monitoringagent) AND (NOT (process.executable.keyword:(*microsoft.identity.health.adfs.diagnosticsagent.exe* OR *microsoft.identity.health.adfs.insightsservice.exe* OR *microsoft.identity.health.adfs.monitoringagent.startup.exe* OR *microsoft.identity.health.adfs.pshsurrogate.exe* OR *microsoft.identity.health.common.clients.resourcemonitor.exe*))))
+      query: winlog.channel.keyword:Security AND (((event.code.keyword:(4656 OR 4663)) AND winlog.event_data.ObjectType.keyword:key AND winlog.event_data.ObjectName.keyword:\\registry\\machine\\software\\microsoft\\microsoft\ online\\reporting\\monitoringagent) AND (NOT (process.executable.keyword:(*microsoft.identity.health.adfs.diagnosticsagent.exe* OR *microsoft.identity.health.adfs.insightsservice.exe* OR *microsoft.identity.health.adfs.monitoringagent.startup.exe* OR *microsoft.identity.health.adfs.pshsurrogate.exe* OR *microsoft.identity.health.common.clients.resourcemonitor.exe*))))
 type: any
 priority: 2

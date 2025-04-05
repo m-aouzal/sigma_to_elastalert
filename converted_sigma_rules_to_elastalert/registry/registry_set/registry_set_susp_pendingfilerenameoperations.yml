@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.EventType.keyword:setvalue AND registry.path.keyword:*\currentcontrolset\control\session manager\pendingfilerenameoperations*) AND ((process.executable.keyword:(*\appdata\local\temp* OR *\users\public*)) OR (process.executable.keyword:(*\reg.exe OR *\regedit.exe)))
+      query: (winlog.event_data.EventType.keyword:setvalue AND registry.path.keyword:*\\currentcontrolset\\control\\session\ manager\\pendingfilerenameoperations*) AND ((process.executable.keyword:(*\\appdata\\local\\temp\\* OR *\\users\\public\\*)) OR (process.executable.keyword:(*\\reg.exe OR *\\regedit.exe)))
 type: any
 priority: 2

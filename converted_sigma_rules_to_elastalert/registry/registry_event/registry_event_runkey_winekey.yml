@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*software\microsoft\windows\currentversion\run\backup mgr
+      query: registry.path.keyword:*software\\microsoft\\windows\\currentversion\\run\\backup\ mgr
 type: any
 priority: 3

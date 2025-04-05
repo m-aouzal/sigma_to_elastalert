@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\downloads* OR *\temporary internet files\content.outlook* OR *\local settings\temporary internet files*)) AND registry.path.keyword:*\software\microsoft\windows\currentversion\run*
+      query: (process.executable.keyword:(*\\downloads\\* OR *\\temporary\ internet\ files\\content.outlook\\* OR *\\local\ settings\\temporary\ internet\ files\\*)) AND registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\run\\*
 type: any
 priority: 3

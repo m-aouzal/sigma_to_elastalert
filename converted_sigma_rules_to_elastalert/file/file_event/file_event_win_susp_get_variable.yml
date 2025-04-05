@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*local\microsoft\windowsapps\get-variable.exe
+      query: file.path.keyword:*local\\microsoft\\windowsapps\\get\-variable.exe
 type: any
 priority: 3

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND (event.code.keyword:4697 AND (((winlog.event_data.ServiceFileName.keyword:*/c* AND winlog.event_data.ServiceFileName.keyword:*echo* AND winlog.event_data.ServiceFileName.keyword:*\pipe*) AND (winlog.event_data.ServiceFileName.keyword:(*cmd* OR *%comspec%*))) OR (winlog.event_data.ServiceFileName.keyword:*rundll32* AND winlog.event_data.ServiceFileName.keyword:*.dll,a* AND winlog.event_data.ServiceFileName.keyword:*/p:*) OR winlog.event_data.ServiceFileName.keyword:\\127.0.0.1\admin$*))
+      query: winlog.channel.keyword:Security AND (event.code.keyword:4697 AND (((winlog.event_data.ServiceFileName.keyword:*\/c* AND winlog.event_data.ServiceFileName.keyword:*echo* AND winlog.event_data.ServiceFileName.keyword:*\\pipe\\*) AND (winlog.event_data.ServiceFileName.keyword:(*cmd* OR *%comspec%*))) OR (winlog.event_data.ServiceFileName.keyword:*rundll32* AND winlog.event_data.ServiceFileName.keyword:*.dll,a* AND winlog.event_data.ServiceFileName.keyword:*\/p\:*) OR winlog.event_data.ServiceFileName.keyword:\\\\127.0.0.1\\admin$\\*))
 type: any
 priority: 3

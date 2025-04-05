@@ -1,7 +1,7 @@
 description: |
   This detection uses Windows security events to detect suspicious access attempts to the registry key values and sub-keys of Azure AD Health service agents (e.g AD FS).
   Information from AD Health service agents can be used to potentially abuse some of the features provided by those services in the cloud (e.g. Federation).
-  This detection requires an access control entry (ACE) on the system access control list (SACL) of the following securable object: HKLM:SOFTWAREMicrosoftADHealthAgent.
+  This detection requires an access control entry (ACE) on the system access control list (SACL) of the following securable object: HKLM:\SOFTWARE\Microsoft\ADHealthAgent.
   Make sure you set the SACL to propagate to its sub-keys.
   
 name: Azure AD Health Service Agents Registry Keys Access
@@ -9,6 +9,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND (((event.code.keyword:(4656 OR 4663)) AND winlog.event_data.ObjectType.keyword:key AND winlog.event_data.ObjectName.keyword:\registry\machine\software\microsoft\adhealthagent) AND (NOT (process.executable.keyword:(*microsoft.identity.health.adfs.diagnosticsagent.exe* OR *microsoft.identity.health.adfs.insightsservice.exe* OR *microsoft.identity.health.adfs.monitoringagent.startup.exe* OR *microsoft.identity.health.adfs.pshsurrogate.exe* OR *microsoft.identity.health.common.clients.resourcemonitor.exe*))))
+      query: winlog.channel.keyword:Security AND (((event.code.keyword:(4656 OR 4663)) AND winlog.event_data.ObjectType.keyword:key AND winlog.event_data.ObjectName.keyword:\\registry\\machine\\software\\microsoft\\adhealthagent) AND (NOT (process.executable.keyword:(*microsoft.identity.health.adfs.diagnosticsagent.exe* OR *microsoft.identity.health.adfs.insightsservice.exe* OR *microsoft.identity.health.adfs.monitoringagent.startup.exe* OR *microsoft.identity.health.adfs.pshsurrogate.exe* OR *microsoft.identity.health.common.clients.resourcemonitor.exe*))))
 type: any
 priority: 2

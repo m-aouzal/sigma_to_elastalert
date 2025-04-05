@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.product.keyword:*accesschk OR winlog.event_data.description.keyword:*reports effective permissions* OR (winlog.event_data.image.keyword:(*\accesschk.exe OR *\accesschk64.exe)) OR winlog.event_data.originalfilename.keyword:accesschk.exe) AND (process.command_line.keyword:(*uwcqv* OR *kwsu* OR *qwsu* OR *uwdqs*))
+      query: (winlog.event_data.product.keyword:*accesschk OR winlog.event_data.description.keyword:*reports\ effective\ permissions* OR (winlog.event_data.image.keyword:(*\\accesschk.exe OR *\\accesschk64.exe)) OR winlog.event_data.originalfilename.keyword:accesschk.exe) AND (process.command_line.keyword:(*uwcqv\ * OR *kwsu\ * OR *qwsu\ * OR *uwdqs\ *))
 type: any
 priority: 2

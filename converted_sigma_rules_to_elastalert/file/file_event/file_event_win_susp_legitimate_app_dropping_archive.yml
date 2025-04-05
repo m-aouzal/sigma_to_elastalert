@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\winword.exe OR *\excel.exe OR *\powerpnt.exe OR *\msaccess.exe OR *\mspub.exe OR *\eqnedt32.exe OR *\visio.exe OR *\wordpad.exe OR *\wordview.exe OR *\certutil.exe OR *\certoc.exe OR *\certreq.exe OR *\desktopimgdownldr.exe OR *\esentutl.exe OR *\finger.exe OR *\notepad.exe OR *\acrord32.exe OR *\rdrcef.exe OR *\mshta.exe OR *\hh.exe)) AND (file.path.keyword:(*.zip OR *.rar OR *.7z OR *.diagcab OR *.appx))
+      query: (process.executable.keyword:(*\\winword.exe OR *\\excel.exe OR *\\powerpnt.exe OR *\\msaccess.exe OR *\\mspub.exe OR *\\eqnedt32.exe OR *\\visio.exe OR *\\wordpad.exe OR *\\wordview.exe OR *\\certutil.exe OR *\\certoc.exe OR *\\certreq.exe OR *\\desktopimgdownldr.exe OR *\\esentutl.exe OR *\\finger.exe OR *\\notepad.exe OR *\\acrord32.exe OR *\\rdrcef.exe OR *\\mshta.exe OR *\\hh.exe)) AND (file.path.keyword:(*.zip OR *.rar OR *.7z OR *.diagcab OR *.appx))
 type: any
 priority: 3

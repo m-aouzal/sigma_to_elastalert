@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*win32_trustee* AND powershell.file.script_block_text.keyword:*win32_ace* AND powershell.file.script_block_text.keyword:*.accessmask* AND powershell.file.script_block_text.keyword:*.acetype* AND powershell.file.script_block_text.keyword:*.setsecuritydescriptor*) AND (powershell.file.script_block_text.keyword:(*\lsa\jd* OR *\lsa\skew1* OR *\lsa\data* OR *\lsa\gbg*))
+      query: (powershell.file.script_block_text.keyword:*win32_trustee* AND powershell.file.script_block_text.keyword:*win32_ace* AND powershell.file.script_block_text.keyword:*.accessmask* AND powershell.file.script_block_text.keyword:*.acetype* AND powershell.file.script_block_text.keyword:*.setsecuritydescriptor*) AND (powershell.file.script_block_text.keyword:(*\\lsa\\jd* OR *\\lsa\\skew1* OR *\\lsa\\data* OR *\\lsa\\gbg*))
 type: any
 priority: 3

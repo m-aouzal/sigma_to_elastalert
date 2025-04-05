@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.targetfilename.keyword:/\windows\__1d{9}.d{1,7}$/ OR winlog.event_data.targetfilename.keyword:/c:\__1d{9}.d{1,7}$/ OR winlog.event_data.targetfilename.keyword:/d:\__1d{9}.d{1,7}$/
+      query: winlog.event_data.targetfilename.keyword:/\\windows\\__1\d{9}\.\d{1,7}$/ OR winlog.event_data.targetfilename.keyword:/c:\\__1\d{9}\.\d{1,7}$/ OR winlog.event_data.targetfilename.keyword:/d:\\__1\d{9}\.\d{1,7}$/
 type: any
 priority: 4

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*\rundll32.exe OR *\rundll32.exe" OR *\rundll32)) AND (NOT (process.parent.executable.keyword:(*\appdata\local* OR *\microsoft\edge*)))
+      query: (process.command_line.keyword:(*\\rundll32.exe OR *\\rundll32.exe\" OR *\\rundll32)) AND (NOT (process.parent.executable.keyword:(*\\appdata\\local\\* OR *\\microsoft\\edge\\*)))
 type: any
 priority: 3

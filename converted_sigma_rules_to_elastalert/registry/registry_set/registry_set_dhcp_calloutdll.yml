@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:(*\services\dhcpserver\parameters\calloutdlls OR *\services\dhcpserver\parameters\calloutenabled)
+      query: registry.path.keyword:(*\\services\\dhcpserver\\parameters\\calloutdlls OR *\\services\\dhcpserver\\parameters\\calloutenabled)
 type: any
 priority: 3

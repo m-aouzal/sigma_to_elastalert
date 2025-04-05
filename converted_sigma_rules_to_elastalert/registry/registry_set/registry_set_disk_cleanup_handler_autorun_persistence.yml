@@ -11,6 +11,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\software\microsoft\windows\currentversion\explorer\volumecaches* AND ((registry.path.keyword:*\autorun* AND winlog.event_data.Details.keyword:dword (0x00000001)) OR ((registry.path.keyword:(*\cleanupstring* OR *\precleanupstring*)) AND (winlog.event_data.Details.keyword:(*cmd* OR *powershell* OR *rundll32* OR *mshta* OR *cscript* OR *wscript* OR *wsl* OR *\users\public* OR *\windows\temp* OR *\microsoft\windows\start menu\programs\startup*))))
+      query: registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\explorer\\volumecaches\\* AND ((registry.path.keyword:*\\autorun* AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)) OR ((registry.path.keyword:(*\\cleanupstring* OR *\\precleanupstring*)) AND (winlog.event_data.Details.keyword:(*cmd* OR *powershell* OR *rundll32* OR *mshta* OR *cscript* OR *wscript* OR *wsl* OR *\\users\\public\\* OR *\\windows\\temp\\* OR *\\microsoft\\windows\\start\ menu\\programs\\startup\\*))))
 type: any
 priority: 2

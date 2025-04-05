@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:cmd.exe OR winlog.event_data.image.keyword:*\cmd.exe) AND ((process.command_line.keyword:(cmd* OR cmd.exe* OR c:\windows\system32\cmd.exe*)) AND (process.command_line.keyword:(*psinject* OR *spawnas* OR *make_token* OR *remote-exec* OR *rev2self* OR *dcsync* OR *logonpasswords* OR *execute-assembly* OR *getsystem*)))
+      query: (winlog.event_data.originalfilename.keyword:cmd.exe OR winlog.event_data.image.keyword:*\\cmd.exe) AND ((process.command_line.keyword:(cmd\ * OR cmd.exe* OR c\:\\windows\\system32\\cmd.exe*)) AND (process.command_line.keyword:(*psinject* OR *spawnas* OR *make_token* OR *remote\-exec* OR *rev2self* OR *dcsync* OR *logonpasswords* OR *execute\-assembly* OR *getsystem*)))
 type: any
 priority: 3

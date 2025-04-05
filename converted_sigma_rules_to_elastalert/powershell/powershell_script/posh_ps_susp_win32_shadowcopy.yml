@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*get-wmiobject* AND powershell.file.script_block_text.keyword:*win32_shadowcopy* AND powershell.file.script_block_text.keyword:*.delete()*
+      query: powershell.file.script_block_text.keyword:*get\-wmiobject* AND powershell.file.script_block_text.keyword:*win32_shadowcopy* AND powershell.file.script_block_text.keyword:*.delete\(\)*
 type: any
 priority: 3

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.Data.keyword:(*powercat* OR *powercat.ps1*)
+      query: winlog.event_data.Data.keyword:(*powercat\ * OR *powercat.ps1*)
 type: any
 priority: 2

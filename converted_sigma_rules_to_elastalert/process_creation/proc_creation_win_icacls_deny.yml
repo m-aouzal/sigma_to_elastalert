@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:icacls.exe OR winlog.event_data.image.keyword:*\icacls.exe) AND (process.command_line.keyword:*/deny* AND process.command_line.keyword:*s-1-1-0:*)
+      query: (winlog.event_data.originalfilename.keyword:icacls.exe OR winlog.event_data.image.keyword:*\\icacls.exe) AND (process.command_line.keyword:*\/deny* AND process.command_line.keyword:*s\-1\-1\-0\:*)
 type: any
 priority: 2

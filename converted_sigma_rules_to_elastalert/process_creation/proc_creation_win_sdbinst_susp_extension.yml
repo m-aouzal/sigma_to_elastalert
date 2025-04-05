@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\sdbinst.exe OR winlog.event_data.originalfilename.keyword:sdbinst.exe) AND (NOT (process.command_line.keyword:*.sdb* OR ((winlog.event_data.commandline.keyword:(* -c OR * -f OR * -mm OR * -t)) OR winlog.event_data.commandline.keyword:* -m -bg*) OR (NOT _exists_:process.command_line) OR process.command_line.keyword:""))
+      query: (winlog.event_data.image.keyword:*\\sdbinst.exe OR winlog.event_data.originalfilename.keyword:sdbinst.exe) AND (NOT (process.command_line.keyword:*.sdb* OR ((winlog.event_data.commandline.keyword:(*\ \-c OR *\ \-f OR *\ \-mm OR *\ \-t)) OR winlog.event_data.commandline.keyword:*\ \-m\ \-bg*) OR (NOT _exists_:process.command_line) OR process.command_line.keyword:""))
 type: any
 priority: 2

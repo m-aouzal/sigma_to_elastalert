@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\brave.exe OR *\chrome.exe OR *\msedge.exe OR *\opera.exe OR *\vivaldi.exe)) AND (process.command_line.keyword:*--headless* AND process.command_line.keyword:*dump-dom* AND process.command_line.keyword:*http*)
+      query: (process.executable.keyword:(*\\brave.exe OR *\\chrome.exe OR *\\msedge.exe OR *\\opera.exe OR *\\vivaldi.exe)) AND (process.command_line.keyword:*\-\-headless* AND process.command_line.keyword:*dump\-dom* AND process.command_line.keyword:*http*)
 type: any
 priority: 3

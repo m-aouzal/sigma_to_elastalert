@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*txt:* AND ((process.command_line.keyword:*type* AND process.command_line.keyword:* >*) OR (process.command_line.keyword:*makecab* AND process.command_line.keyword:*.cab*) OR (process.command_line.keyword:*reg* AND process.command_line.keyword:* export*) OR (process.command_line.keyword:*regedit* AND process.command_line.keyword:* /e*) OR (process.command_line.keyword:*esentutl* AND process.command_line.keyword:* /y* AND process.command_line.keyword:* /d* AND process.command_line.keyword:* /o*))
+      query: process.command_line.keyword:*txt\:* AND ((process.command_line.keyword:*type\ * AND process.command_line.keyword:*\ \>\ *) OR (process.command_line.keyword:*makecab\ * AND process.command_line.keyword:*.cab*) OR (process.command_line.keyword:*reg\ * AND process.command_line.keyword:*\ export\ *) OR (process.command_line.keyword:*regedit\ * AND process.command_line.keyword:*\ \/e\ *) OR (process.command_line.keyword:*esentutl\ * AND process.command_line.keyword:*\ \/y\ * AND process.command_line.keyword:*\ \/d\ * AND process.command_line.keyword:*\ \/o\ *))
 type: any
 priority: 2

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.product.keyword:*mouse lock* OR winlog.event_data.company.keyword:*misc314* OR winlog.event_data.commandline.keyword:*mouse lock_*
+      query: winlog.event_data.product.keyword:*mouse\ lock* OR winlog.event_data.company.keyword:*misc314* OR winlog.event_data.commandline.keyword:*mouse\ lock_*
 type: any
 priority: 2

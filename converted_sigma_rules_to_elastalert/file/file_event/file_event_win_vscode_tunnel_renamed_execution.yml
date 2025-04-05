@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\code_tunnel.json AND (NOT (process.executable.keyword:(*\code-tunnel.exe OR *\code.exe)))
+      query: file.path.keyword:*\\code_tunnel.json AND (NOT (process.executable.keyword:(*\\code\-tunnel.exe OR *\\code.exe)))
 type: any
 priority: 3

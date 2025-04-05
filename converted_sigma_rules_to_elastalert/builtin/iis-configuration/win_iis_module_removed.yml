@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: event.code.keyword:29 AND winlog.event_data.Configuration.keyword:*/system.webserver/modules/remove*
+      query: event.code.keyword:29 AND winlog.event_data.Configuration.keyword:*\/system.webserver\/modules\/remove*
 type: any
 priority: 1

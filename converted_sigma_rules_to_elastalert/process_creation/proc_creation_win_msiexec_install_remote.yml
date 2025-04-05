@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\msiexec.exe OR winlog.event_data.originalfilename.keyword:msiexec.exe) AND (process.command_line.keyword:(*-i* OR */i* OR *–i* OR *—i* OR *―i*) OR process.command_line.keyword:(*-package* OR */package* OR *–package* OR *—package* OR *―package*) OR process.command_line.keyword:(*-a* OR */a* OR *–a* OR *—a* OR *―a*) OR process.command_line.keyword:(*-j* OR */j* OR *–j* OR *—j* OR *―j*)) AND process.command_line.keyword:(*-q* OR */q* OR *–q* OR *—q* OR *―q*) AND (process.command_line.keyword:(*http* OR *\*))
+      query: (winlog.event_data.image.keyword:*\\msiexec.exe OR winlog.event_data.originalfilename.keyword:msiexec.exe) AND (process.command_line.keyword:(*\-i* OR *\/i* OR *–i* OR *—i* OR *―i*) OR process.command_line.keyword:(*\-package* OR *\/package* OR *–package* OR *—package* OR *―package*) OR process.command_line.keyword:(*\-a* OR *\/a* OR *–a* OR *—a* OR *―a*) OR process.command_line.keyword:(*\-j* OR *\/j* OR *–j* OR *—j* OR *―j*)) AND process.command_line.keyword:(*\-q* OR *\/q* OR *–q* OR *—q* OR *―q*) AND (process.command_line.keyword:(*http* OR *\\\\*))
 type: any
 priority: 2

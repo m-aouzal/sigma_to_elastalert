@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:c:\windows\system32\drivers\livekdd.sys AND (process.executable.keyword:(*\livekd.exe OR *\livek64.exe))
+      query: file.path.keyword:c\:\\windows\\system32\\drivers\\livekdd.sys AND (process.executable.keyword:(*\\livekd.exe OR *\\livek64.exe))
 type: any
 priority: 2

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\inveigh.exe OR (winlog.event_data.originalfilename.keyword:(\inveigh.exe OR \inveigh.dll)) OR winlog.event_data.description.keyword:inveigh OR (winlog.event_data.commandline.keyword:(* -spooferip* OR * -replytoips* OR * -replytodomains* OR * -replytomacs* OR * -snifferip*))
+      query: winlog.event_data.image.keyword:*\\inveigh.exe OR (winlog.event_data.originalfilename.keyword:(\\inveigh.exe OR \\inveigh.dll)) OR winlog.event_data.description.keyword:inveigh OR (winlog.event_data.commandline.keyword:(*\ \-spooferip* OR *\ \-replytoips\ * OR *\ \-replytodomains\ * OR *\ \-replytomacs\ * OR *\ \-snifferip*))
 type: any
 priority: 4

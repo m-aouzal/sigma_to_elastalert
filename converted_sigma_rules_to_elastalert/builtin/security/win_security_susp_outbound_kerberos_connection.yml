@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND ((event.code.keyword:5156 AND destination.port:88) AND (NOT ((process.executable.keyword:(\device\harddiskvolume* OR c:*)) AND process.executable.keyword:*\windows\system32\lsass.exe)) AND (NOT (((process.executable.keyword:(\device\harddiskvolume* OR c:*)) AND (process.executable.keyword:(*\program files (x86)\google\chrome\application\chrome.exe OR *\program files\google\chrome\application\chrome.exe))) OR ((process.executable.keyword:(\device\harddiskvolume* OR c:*)) AND (process.executable.keyword:(*\program files (x86)\mozilla firefox\firefox.exe OR *\program files\mozilla firefox\firefox.exe))) OR process.executable.keyword:*\tomcat\bin\tomcat8.exe)))
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:5156 AND destination.port:88) AND (NOT ((process.executable.keyword:(\\device\\harddiskvolume* OR c\:*)) AND process.executable.keyword:*\\windows\\system32\\lsass.exe)) AND (NOT (((process.executable.keyword:(\\device\\harddiskvolume* OR c\:*)) AND (process.executable.keyword:(*\\program\ files\ \(x86\)\\google\\chrome\\application\\chrome.exe OR *\\program\ files\\google\\chrome\\application\\chrome.exe))) OR ((process.executable.keyword:(\\device\\harddiskvolume* OR c\:*)) AND (process.executable.keyword:(*\\program\ files\ \(x86\)\\mozilla\ firefox\\firefox.exe OR *\\program\ files\\mozilla\ firefox\\firefox.exe))) OR process.executable.keyword:*\\tomcat\\bin\\tomcat8.exe)))
 type: any
 priority: 2

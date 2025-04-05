@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((registry.path.keyword:*\system\currentcontrolset\services\eventlog* AND registry.path.keyword:*\customsd) OR ((registry.path.keyword:(*\policies\microsoft\windows\eventlog* OR *\microsoft\windows\currentversion\winevt\channels*)) AND registry.path.keyword:*\channelaccess)) AND (winlog.event_data.details.keyword:*d:(d;* OR (winlog.event_data.details.keyword:*d:(* AND winlog.event_data.details.keyword:*)(d;*))
+      query: ((registry.path.keyword:*\\system\\currentcontrolset\\services\\eventlog\\* AND registry.path.keyword:*\\customsd) OR ((registry.path.keyword:(*\\policies\\microsoft\\windows\\eventlog\\* OR *\\microsoft\\windows\\currentversion\\winevt\\channels*)) AND registry.path.keyword:*\\channelaccess)) AND (winlog.event_data.details.keyword:*d\:\(d;* OR (winlog.event_data.details.keyword:*d\:\(* AND winlog.event_data.details.keyword:*\)\(d;*))
 type: any
 priority: 3

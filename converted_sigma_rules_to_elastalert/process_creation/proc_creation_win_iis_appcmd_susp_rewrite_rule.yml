@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\appcmd.exe OR winlog.event_data.originalfilename.keyword:appcmd.exe) AND (process.command_line.keyword:*set* AND process.command_line.keyword:*config* AND process.command_line.keyword:*section:system.webserver/rewrite/globalrules* AND process.command_line.keyword:*commit:*)
+      query: (winlog.event_data.image.keyword:*\\appcmd.exe OR winlog.event_data.originalfilename.keyword:appcmd.exe) AND (process.command_line.keyword:*set* AND process.command_line.keyword:*config* AND process.command_line.keyword:*section\:system.webserver\/rewrite\/globalrules* AND process.command_line.keyword:*commit\:*)
 type: any
 priority: 2

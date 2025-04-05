@@ -1,11 +1,11 @@
 description: |
-  Detects a potentially suspicious execution of a parent process located in the "UsersPublic" folder executing a child process containing references to shell or scripting binaries and commandlines.
+  Detects a potentially suspicious execution of a parent process located in the "\Users\Public" folder executing a child process containing references to shell or scripting binaries and commandlines.
   
 name: Potentially Suspicious Execution From Parent Process In Public Folder
 index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*:\users\public* AND ((winlog.event_data.image.keyword:(*\bitsadmin.exe OR *\certutil.exe OR *\cmd.exe OR *\cscript.exe OR *\mshta.exe OR *\powershell.exe OR *\pwsh.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\wscript.exe)) OR (winlog.event_data.commandline.keyword:(*bitsadmin* OR *certutil* OR *cscript* OR *mshta* OR *powershell* OR *regsvr32* OR *rundll32* OR *wscript*)))
+      query: process.parent.executable.keyword:*\:\\users\\public\\* AND ((winlog.event_data.image.keyword:(*\\bitsadmin.exe OR *\\certutil.exe OR *\\cmd.exe OR *\\cscript.exe OR *\\mshta.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\regsvr32.exe OR *\\rundll32.exe OR *\\wscript.exe)) OR (winlog.event_data.commandline.keyword:(*bitsadmin* OR *certutil* OR *cscript* OR *mshta* OR *powershell* OR *regsvr32* OR *rundll32* OR *wscript*)))
 type: any
 priority: 3

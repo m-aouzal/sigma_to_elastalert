@@ -1,12 +1,12 @@
 description: |
   Detects manual execution of the "Microsoft Compatibility Appraiser" task via schtasks.
-  In order to trigger persistence stored in the "AppCompatFlagsTelemetryController" registry key.
+  In order to trigger persistence stored in the "\AppCompatFlags\TelemetryController" registry key.
   
 name: Potential Persistence Via Microsoft Compatibility Appraiser
 index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\schtasks.exe OR winlog.event_data.originalfilename.keyword:schtasks.exe) AND (process.command_line.keyword:*run* AND process.command_line.keyword:*\application experience\microsoft compatibility appraiser*)
+      query: (winlog.event_data.image.keyword:*\\schtasks.exe OR winlog.event_data.originalfilename.keyword:schtasks.exe) AND (process.command_line.keyword:*run\ * AND process.command_line.keyword:*\\application\ experience\\microsoft\ compatibility\ appraiser*)
 type: any
 priority: 2

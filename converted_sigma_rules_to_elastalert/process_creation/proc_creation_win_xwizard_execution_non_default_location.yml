@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\xwizard.exe OR winlog.event_data.originalfilename.keyword:xwizard.exe) AND (NOT (process.executable.keyword:(c:\windows\system32* OR c:\windows\syswow64* OR c:\windows\winsxs*)))
+      query: (winlog.event_data.image.keyword:*\\xwizard.exe OR winlog.event_data.originalfilename.keyword:xwizard.exe) AND (NOT (process.executable.keyword:(c\:\\windows\\system32\\* OR c\:\\windows\\syswow64\\* OR c\:\\windows\\winsxs\\*)))
 type: any
 priority: 3

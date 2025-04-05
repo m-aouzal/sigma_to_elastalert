@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:System AND (winlog.provider_name.keyword:microsoft-windows-ntfs AND event.code.keyword:98 AND winlog.event_data.DeviceName.keyword:*harddiskvolumeshadowcopy*)
+      query: winlog.channel.keyword:System AND (winlog.provider_name.keyword:microsoft\-windows\-ntfs AND event.code.keyword:98 AND winlog.event_data.DeviceName.keyword:*harddiskvolumeshadowcopy*)
 type: any
 priority: 1

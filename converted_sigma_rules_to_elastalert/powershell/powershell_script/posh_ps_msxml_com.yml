@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*new-object* AND powershell.file.script_block_text.keyword:*-comobject* AND powershell.file.script_block_text.keyword:*msxml2.* AND powershell.file.script_block_text.keyword:*xmlhttp*
+      query: powershell.file.script_block_text.keyword:*new\-object* AND powershell.file.script_block_text.keyword:*\-comobject* AND powershell.file.script_block_text.keyword:*msxml2.* AND powershell.file.script_block_text.keyword:*xmlhttp*
 type: any
 priority: 2

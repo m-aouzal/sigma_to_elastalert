@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\userinit.exe AND (NOT (process.command_line.keyword:*\netlogon* OR (winlog.event_data.image.keyword:*\explorer.exe OR winlog.event_data.originalfilename.keyword:explorer.exe)))
+      query: process.parent.executable.keyword:*\\userinit.exe AND (NOT (process.command_line.keyword:*\\netlogon\\* OR (winlog.event_data.image.keyword:*\\explorer.exe OR winlog.event_data.originalfilename.keyword:explorer.exe)))
 type: any
 priority: 2

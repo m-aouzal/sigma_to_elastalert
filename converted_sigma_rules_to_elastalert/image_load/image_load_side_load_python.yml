@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:(*\python39.dll OR *\python310.dll OR *\python311.dll OR *\python312.dll)) AND (NOT (((winlog.event_data.imageloaded.keyword:(c:\program files\python3* OR c:\program files (x86)\python3*)) OR winlog.event_data.imageloaded.keyword:*\appdata\local\programs\python\python3*) OR (file.pe.product.keyword:python AND file.code_signature.signed.keyword:true AND file.pe.description.keyword:python AND file.pe.company.keyword:python software foundation))) AND (NOT (file.path.keyword:c:\program files\microsoft visual studio* OR (file.path.keyword:(*\cpython\externals* OR *\cpython\pcbuild*))))
+      query: (file.path.keyword:(*\\python39.dll OR *\\python310.dll OR *\\python311.dll OR *\\python312.dll)) AND (NOT (((winlog.event_data.imageloaded.keyword:(c\:\\program\ files\\python3* OR c\:\\program\ files\ \(x86\)\\python3*)) OR winlog.event_data.imageloaded.keyword:*\\appdata\\local\\programs\\python\\python3*) OR (file.pe.product.keyword:python AND file.code_signature.signed.keyword:true AND file.pe.description.keyword:python AND file.pe.company.keyword:python\ software\ foundation))) AND (NOT (file.path.keyword:c\:\\program\ files\\microsoft\ visual\ studio\\* OR (file.path.keyword:(*\\cpython\\externals\\* OR *\\cpython\\pcbuild\\*))))
 type: any
 priority: 2

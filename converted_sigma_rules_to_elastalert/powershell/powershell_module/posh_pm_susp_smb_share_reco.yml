@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.payload.keyword:*get-smbshare* OR winlog.event_data.contextinfo.keyword:*get-smbshare*
+      query: winlog.event_data.payload.keyword:*get\-smbshare* OR winlog.event_data.contextinfo.keyword:*get\-smbshare*
 type: any
 priority: 1

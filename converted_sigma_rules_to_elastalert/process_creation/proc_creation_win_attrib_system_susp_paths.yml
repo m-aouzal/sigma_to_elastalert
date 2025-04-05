@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\attrib.exe OR winlog.event_data.originalfilename.keyword:attrib.exe) AND process.command_line.keyword:* +s* AND (process.command_line.keyword:(* %* OR *\users\public* OR *\appdata\local* OR *\programdata* OR *\downloads* OR *\windows\temp*)) AND (process.command_line.keyword:(*.bat* OR *.dll* OR *.exe* OR *.hta* OR *.ps1* OR *.vbe* OR *.vbs*))) AND (NOT (process.command_line.keyword:*\windows\temp* AND process.command_line.keyword:*.exe*))
+      query: ((winlog.event_data.image.keyword:*\\attrib.exe OR winlog.event_data.originalfilename.keyword:attrib.exe) AND process.command_line.keyword:*\ \+s* AND (process.command_line.keyword:(*\ %* OR *\\users\\public\\* OR *\\appdata\\local\\* OR *\\programdata\\* OR *\\downloads\\* OR *\\windows\\temp\\*)) AND (process.command_line.keyword:(*.bat* OR *.dll* OR *.exe* OR *.hta* OR *.ps1* OR *.vbe* OR *.vbs*))) AND (NOT (process.command_line.keyword:*\\windows\\temp\\* AND process.command_line.keyword:*.exe*))
 type: any
 priority: 3

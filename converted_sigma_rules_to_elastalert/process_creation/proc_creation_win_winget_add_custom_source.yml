@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\winget.exe OR winlog.event_data.originalfilename.keyword:winget.exe) AND (process.command_line.keyword:*source* AND process.command_line.keyword:*add*)
+      query: (winlog.event_data.image.keyword:*\\winget.exe OR winlog.event_data.originalfilename.keyword:winget.exe) AND (process.command_line.keyword:*source\ * AND process.command_line.keyword:*add\ *)
 type: any
 priority: 2

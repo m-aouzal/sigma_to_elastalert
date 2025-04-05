@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\wuauclt.exe OR winlog.event_data.originalfilename.keyword:wuauclt.exe) AND (process.command_line.keyword:(*wuauclt OR *wuauclt.exe))
+      query: (winlog.event_data.image.keyword:*\\wuauclt.exe OR winlog.event_data.originalfilename.keyword:wuauclt.exe) AND (process.command_line.keyword:(*wuauclt OR *wuauclt.exe))
 type: any
 priority: 3

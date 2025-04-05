@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*\system\currentcontrolset\control* AND process.command_line.keyword:*write protection* AND process.command_line.keyword:*0* AND process.command_line.keyword:*storage*
+      query: process.command_line.keyword:*\\system\\currentcontrolset\\control* AND process.command_line.keyword:*write\ protection* AND process.command_line.keyword:*0* AND process.command_line.keyword:*storage*
 type: any
 priority: 2

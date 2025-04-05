@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\addinutil.exe AND (NOT (process.executable.keyword:(*:\windows\system32\conhost.exe OR *:\windows\system32\werfault.exe OR *:\windows\syswow64\werfault.exe)))
+      query: process.parent.executable.keyword:*\\addinutil.exe AND (NOT (process.executable.keyword:(*\:\\windows\\system32\\conhost.exe OR *\:\\windows\\system32\\werfault.exe OR *\:\\windows\\syswow64\\werfault.exe)))
 type: any
 priority: 2

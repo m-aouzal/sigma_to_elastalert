@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*software\microsoft\windows\currentversion\explorer\user shell folders* AND registry.path.keyword:*startup
+      query: registry.path.keyword:*software\\microsoft\\windows\\currentversion\\explorer\\user\ shell\ folders* AND registry.path.keyword:*startup
 type: any
 priority: 3

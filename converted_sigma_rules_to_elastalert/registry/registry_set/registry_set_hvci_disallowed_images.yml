@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\control\ci* AND registry.path.keyword:*\hvcidisallowedimages*
+      query: registry.path.keyword:*\\control\\ci\\* AND registry.path.keyword:*\\hvcidisallowedimages*
 type: any
 priority: 3

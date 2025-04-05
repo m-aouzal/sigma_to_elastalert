@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*new-object* AND powershell.file.script_block_text.keyword:*text.encoding]::ascii*) AND (powershell.file.script_block_text.keyword:(*system.io.compression.deflatestream* OR *system.io.streamreader*)) AND powershell.file.script_block_text.keyword:*readtoend
+      query: (powershell.file.script_block_text.keyword:*new\-object* AND powershell.file.script_block_text.keyword:*text.encoding\]\:\:ascii*) AND (powershell.file.script_block_text.keyword:(*system.io.compression.deflatestream* OR *system.io.streamreader*)) AND powershell.file.script_block_text.keyword:*readtoend
 type: any
 priority: 2

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\mstsc.exe OR winlog.event_data.originalfilename.keyword:mstsc.exe) AND (process.command_line.keyword:(*.rdp OR *.rdp")) AND (process.command_line.keyword:(*:\users\public* OR *:\windows\system32\spool\drivers\color* OR *:\windows\system32\tasks_migrated* OR *:\windows\tasks* OR *:\windows\temp* OR *:\windows\tracing* OR *\appdata\local\temp* OR *\downloads*))
+      query: (winlog.event_data.image.keyword:*\\mstsc.exe OR winlog.event_data.originalfilename.keyword:mstsc.exe) AND (process.command_line.keyword:(*.rdp OR *.rdp\")) AND (process.command_line.keyword:(*\:\\users\\public\\* OR *\:\\windows\\system32\\spool\\drivers\\color* OR *\:\\windows\\system32\\tasks_migrated\ * OR *\:\\windows\\tasks\\* OR *\:\\windows\\temp\\* OR *\:\\windows\\tracing\\* OR *\\appdata\\local\\temp\\* OR *\\downloads\\*))
 type: any
 priority: 3

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:System AND ((winlog.provider_name.keyword:service control manager AND event.code.keyword:7023) AND ((winlog.event_data.param1:(* antivirus* OR * firewall* OR *application guard* OR *bitlocker drive encryption service* OR *encrypting file system* OR *microsoft defender* OR *threat protection* OR *windows event log*)) OR (winlog.event_data.binary.keyword:(*770069006e0064006500660065006e006400* OR *4500760065006e0074004c006f006700* OR *6d0070007300730076006300* OR *530065006e0073006500* OR *450046005300* OR *420044004500530056004300*))))
+      query: winlog.channel.keyword:System AND ((winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7023) AND ((winlog.event_data.param1:(*\ antivirus* OR *\ firewall* OR *application\ guard* OR *bitlocker\ drive\ encryption\ service* OR *encrypting\ file\ system* OR *microsoft\ defender* OR *threat\ protection* OR *windows\ event\ log*)) OR (winlog.event_data.binary.keyword:(*770069006e0064006500660065006e006400* OR *4500760065006e0074004c006f006700* OR *6d0070007300730076006300* OR *530065006e0073006500* OR *450046005300* OR *420044004500530056004300*))))
 type: any
 priority: 3

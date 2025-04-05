@@ -1,10 +1,10 @@
 description: |
-  Detects the creation of a schtask that executes a file from C:Users<USER>AppDataLocal
+  Detects the creation of a schtask that executes a file from C:\Users\<USER>\AppData\Local
 name: Suspicious Schtasks Execution AppData Folder
 index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\schtasks.exe AND (process.command_line.keyword:*/create* AND process.command_line.keyword:*/ru* AND process.command_line.keyword:*/tr* AND process.command_line.keyword:*c:\users* AND process.command_line.keyword:*\appdata\local*) AND (process.command_line.keyword:(*nt aut* OR * system*))) AND (NOT ((process.parent.executable.keyword:*\appdata\local\temp* AND process.parent.executable.keyword:*teamviewer_.exe*) AND process.executable.keyword:*\schtasks.exe AND process.command_line.keyword:*/tn tvinstallrestore*))
+      query: (process.executable.keyword:*\\schtasks.exe AND (process.command_line.keyword:*\/create* AND process.command_line.keyword:*\/ru* AND process.command_line.keyword:*\/tr* AND process.command_line.keyword:*c\:\\users\\* AND process.command_line.keyword:*\\appdata\\local\\*) AND (process.command_line.keyword:(*nt\ aut* OR *\ system\ *))) AND (NOT ((process.parent.executable.keyword:*\\appdata\\local\\temp\\* AND process.parent.executable.keyword:*teamviewer_.exe*) AND process.executable.keyword:*\\schtasks.exe AND process.command_line.keyword:*\/tn\ tvinstallrestore*))
 type: any
 priority: 3

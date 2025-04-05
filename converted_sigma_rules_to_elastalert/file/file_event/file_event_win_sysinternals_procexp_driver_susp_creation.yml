@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:*\procexp* AND file.path.keyword:*.sys) AND (NOT (process.executable.keyword:(*\procexp.exe OR *\procexp64.exe)))
+      query: (file.path.keyword:*\\procexp* AND file.path.keyword:*.sys) AND (NOT (process.executable.keyword:(*\\procexp.exe OR *\\procexp64.exe)))
 type: any
 priority: 3

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*gzipstream* AND process.command_line.keyword:*::decompress*
+      query: process.command_line.keyword:*gzipstream* AND process.command_line.keyword:*\:\:decompress*
 type: any
 priority: 2

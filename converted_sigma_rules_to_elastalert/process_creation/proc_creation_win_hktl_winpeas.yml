@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:winpeas.exe OR (winlog.event_data.image.keyword:(*\winpeasany_ofs.exe OR *\winpeasany.exe OR *\winpeasx64_ofs.exe OR *\winpeasx64.exe OR *\winpeasx86_ofs.exe OR *\winpeasx86.exe))) OR (process.command_line.keyword:(* applicationsinfo* OR * browserinfo* OR * eventsinfo* OR * fileanalysis* OR * filesinfo* OR * processinfo* OR * servicesinfo* OR * windowscreds*)) OR process.command_line.keyword:*https://github.com/carlospolop/peass-ng/releases/latest/download/* OR (winlog.event_data.parentcommandline.keyword:* -linpeas OR winlog.event_data.commandline.keyword:* -linpeas)
+      query: (winlog.event_data.originalfilename.keyword:winpeas.exe OR (winlog.event_data.image.keyword:(*\\winpeasany_ofs.exe OR *\\winpeasany.exe OR *\\winpeasx64_ofs.exe OR *\\winpeasx64.exe OR *\\winpeasx86_ofs.exe OR *\\winpeasx86.exe))) OR (process.command_line.keyword:(*\ applicationsinfo* OR *\ browserinfo* OR *\ eventsinfo* OR *\ fileanalysis* OR *\ filesinfo* OR *\ processinfo* OR *\ servicesinfo* OR *\ windowscreds*)) OR process.command_line.keyword:*https\:\/\/github.com\/carlospolop\/peass\-ng\/releases\/latest\/download\/* OR (winlog.event_data.parentcommandline.keyword:*\ \-linpeas OR winlog.event_data.commandline.keyword:*\ \-linpeas)
 type: any
 priority: 3

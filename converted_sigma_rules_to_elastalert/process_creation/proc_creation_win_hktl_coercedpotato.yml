@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\coercedpotato.exe OR process.command_line.keyword:* --exploitid* OR (winlog.event_data.Hashes.keyword:(*imphash=a75d7669db6b2e107a44c4057ff7f7d6* OR *imphash=f91624350e2c678c5dcbe5e1f24e22c9* OR *imphash=14c81850a079a87e83d50ca41c709a15*))
+      query: process.executable.keyword:*\\coercedpotato.exe OR process.command_line.keyword:*\ \-\-exploitid\ * OR (winlog.event_data.Hashes.keyword:(*imphash\=a75d7669db6b2e107a44c4057ff7f7d6* OR *imphash\=f91624350e2c678c5dcbe5e1f24e22c9* OR *imphash\=14c81850a079a87e83d50ca41c709a15*))
 type: any
 priority: 3

@@ -10,6 +10,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\link.exe AND process.command_line.keyword:*link /*) AND (NOT ((process.parent.executable.keyword:(c:\program files\microsoft visual studio* OR c:\program files (x86)\microsoft visual studio*)) AND (process.parent.executable.keyword:(*\vc\bin* OR *\vc\tools*))))
+      query: (process.executable.keyword:*\\link.exe AND process.command_line.keyword:*link\ \/*) AND (NOT ((process.parent.executable.keyword:(c\:\\program\ files\\microsoft\ visual\ studio\\* OR c\:\\program\ files\ \(x86\)\\microsoft\ visual\ studio\\*)) AND (process.parent.executable.keyword:(*\\vc\\bin\\* OR *\\vc\\tools\\*))))
 type: any
 priority: 2

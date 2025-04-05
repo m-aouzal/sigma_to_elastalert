@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\tracker.exe OR winlog.event_data.description.keyword:tracker) AND (process.command_line.keyword:(* /d* OR * /c*))) AND (NOT (process.command_line.keyword:* /errorreport:prompt* OR (process.parent.executable.keyword:(*\msbuild\current\bin\msbuild.exe OR *\msbuild\current\bin\amd64\msbuild.exe))))
+      query: ((winlog.event_data.image.keyword:*\\tracker.exe OR winlog.event_data.description.keyword:tracker) AND (process.command_line.keyword:(*\ \/d\ * OR *\ \/c\ *))) AND (NOT (process.command_line.keyword:*\ \/errorreport\:prompt\ * OR (process.parent.executable.keyword:(*\\msbuild\\current\\bin\\msbuild.exe OR *\\msbuild\\current\\bin\\amd64\\msbuild.exe))))
 type: any
 priority: 2

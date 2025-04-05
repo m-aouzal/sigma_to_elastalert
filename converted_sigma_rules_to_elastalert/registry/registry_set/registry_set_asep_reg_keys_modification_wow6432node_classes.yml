@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\software\wow6432node\classes* AND (registry.path.keyword:(*\folder\shellex\extshellfolderviews* OR *\folder\shellex\dragdrophandlers* OR *\folder\shellex\columnhandlers* OR *\directory\shellex\dragdrophandlers* OR *\directory\shellex\copyhookhandlers* OR *\clsid\{ac757296-3522-4e11-9862-c17be5a1767e}\instance* OR *\clsid\{abe3b9a4-257d-4b97-bd1a-294af496222e}\instance* OR *\clsid\{7ed96837-96f0-4812-b211-f13c24117ed3}\instance* OR *\clsid\{083863f1-70de-11d0-bd40-00a0c911ce86}\instance* OR *\allfilesystemobjects\shellex\dragdrophandlers* OR *\shellex\propertysheethandlers* OR *\shellex\contextmenuhandlers*)) AND (NOT winlog.event_data.Details.keyword:(empty))
+      query: registry.path.keyword:*\\software\\wow6432node\\classes* AND (registry.path.keyword:(*\\folder\\shellex\\extshellfolderviews* OR *\\folder\\shellex\\dragdrophandlers* OR *\\folder\\shellex\\columnhandlers* OR *\\directory\\shellex\\dragdrophandlers* OR *\\directory\\shellex\\copyhookhandlers* OR *\\clsid\\\{ac757296\-3522\-4e11\-9862\-c17be5a1767e\}\\instance* OR *\\clsid\\\{abe3b9a4\-257d\-4b97\-bd1a\-294af496222e\}\\instance* OR *\\clsid\\\{7ed96837\-96f0\-4812\-b211\-f13c24117ed3\}\\instance* OR *\\clsid\\\{083863f1\-70de\-11d0\-bd40\-00a0c911ce86\}\\instance* OR *\\allfilesystemobjects\\shellex\\dragdrophandlers* OR *\\shellex\\propertysheethandlers* OR *\\shellex\\contextmenuhandlers*)) AND (NOT winlog.event_data.Details.keyword:\(empty\))
 type: any
 priority: 2

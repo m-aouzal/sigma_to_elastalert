@@ -10,6 +10,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND ((event.code.keyword:4768 AND winlog.event_data.TargetUserName.keyword:*$ AND winlog.event_data.CertThumbprint.keyword:*) AND (NOT (source.ip.keyword:::1 OR winlog.event_data.CertThumbprint.keyword:"")))
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:4768 AND winlog.event_data.TargetUserName.keyword:*$ AND winlog.event_data.CertThumbprint.keyword:*) AND (NOT (source.ip.keyword:\:\:1 OR winlog.event_data.CertThumbprint.keyword:"")))
 type: any
 priority: 3

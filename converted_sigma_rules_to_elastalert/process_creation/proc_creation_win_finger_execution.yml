@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.originalfilename.keyword:finger.exe OR winlog.event_data.image.keyword:*\finger.exe
+      query: winlog.event_data.originalfilename.keyword:finger.exe OR winlog.event_data.image.keyword:*\\finger.exe
 type: any
 priority: 3

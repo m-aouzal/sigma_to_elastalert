@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:/[a-za-z]:\/ AND process.working_directory.keyword:*\\wsl.localhost*
+      query: process.executable.keyword:/[a-za-z]:\\/ AND process.working_directory.keyword:*\\\\wsl.localhost*
 type: any
 priority: 2

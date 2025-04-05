@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((file.path.keyword:*\appdata\local\temp* AND file.path.keyword:*.zip*) AND file.path.keyword:*.iso) OR (file.path.keyword:*\appdata\local\microsoft\windows\inetcache\content.outlook* AND file.path.keyword:*.iso)
+      query: ((file.path.keyword:*\\appdata\\local\\temp\\* AND file.path.keyword:*.zip\\*) AND file.path.keyword:*.iso) OR (file.path.keyword:*\\appdata\\local\\microsoft\\windows\\inetcache\\content.outlook\\* AND file.path.keyword:*.iso)
 type: any
 priority: 3

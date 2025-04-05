@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\powercfg.exe OR winlog.event_data.originalfilename.keyword:powercfg.exe) AND ((winlog.event_data.commandline.keyword:*/setacvalueindex* AND winlog.event_data.commandline.keyword:*scheme_current* AND winlog.event_data.commandline.keyword:*sub_video* AND winlog.event_data.commandline.keyword:*videoconlock*) OR (winlog.event_data.commandline.keyword:*-change* AND winlog.event_data.commandline.keyword:*-standby-timeout-*))
+      query: (winlog.event_data.image.keyword:*\\powercfg.exe OR winlog.event_data.originalfilename.keyword:powercfg.exe) AND ((winlog.event_data.commandline.keyword:*\/setacvalueindex\ * AND winlog.event_data.commandline.keyword:*scheme_current* AND winlog.event_data.commandline.keyword:*sub_video* AND winlog.event_data.commandline.keyword:*videoconlock*) OR (winlog.event_data.commandline.keyword:*\-change\ * AND winlog.event_data.commandline.keyword:*\-standby\-timeout\-*))
 type: any
 priority: 2

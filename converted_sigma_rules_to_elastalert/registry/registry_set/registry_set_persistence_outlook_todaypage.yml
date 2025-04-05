@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*software\microsoft\office* AND registry.path.keyword:*\outlook\today*) AND ((registry.path.keyword:*\stamp AND winlog.event_data.Details.keyword:dword (0x00000001)) OR (registry.path.keyword:(*\url OR *\userdefinedurl))) AND (NOT ((process.executable.keyword:(c:\program files\common files\microsoft shared\clicktorun* OR c:\program files\common files\microsoft shared\clicktorun\updates*)) AND process.executable.keyword:*\officeclicktorun.exe))
+      query: (registry.path.keyword:*software\\microsoft\\office\\* AND registry.path.keyword:*\\outlook\\today\\*) AND ((registry.path.keyword:*\\stamp AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)) OR (registry.path.keyword:(*\\url OR *\\userdefinedurl))) AND (NOT ((process.executable.keyword:(c\:\\program\ files\\common\ files\\microsoft\ shared\\clicktorun\\* OR c\:\\program\ files\\common\ files\\microsoft\ shared\\clicktorun\\updates\\*)) AND process.executable.keyword:*\\officeclicktorun.exe))
 type: any
 priority: 3

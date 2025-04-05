@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:(*get-wmiobject* OR *gwmi*)) AND (powershell.file.script_block_text.keyword:(*msacpi_thermalzonetemperature* OR *win32_computersystem*))
+      query: (powershell.file.script_block_text.keyword:(*get\-wmiobject* OR *gwmi*)) AND (powershell.file.script_block_text.keyword:(*msacpi_thermalzonetemperature* OR *win32_computersystem*))
 type: any
 priority: 2

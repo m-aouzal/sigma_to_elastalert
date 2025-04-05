@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\wab.exe OR *\wabmig.exe)) AND (NOT (process.executable.keyword:(c:\windows\winsxs* OR c:\program files\windows mail* OR c:\program files (x86)\windows mail*)))
+      query: (process.executable.keyword:(*\\wab.exe OR *\\wabmig.exe)) AND (NOT (process.executable.keyword:(c\:\\windows\\winsxs\\* OR c\:\\program\ files\\windows\ mail\\* OR c\:\\program\ files\ \(x86\)\\windows\ mail\\*)))
 type: any
 priority: 3

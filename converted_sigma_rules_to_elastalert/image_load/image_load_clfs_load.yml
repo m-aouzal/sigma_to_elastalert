@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\clfs.sys AND ((process.executable.keyword:(*:\perflogs* OR *:\users\public* OR *\temporary internet* OR *\windows\temp*)) OR ((winlog.event_data.image.keyword:*:\users* AND winlog.event_data.image.keyword:*\favorites*) OR (winlog.event_data.image.keyword:*:\users* AND winlog.event_data.image.keyword:*\favourites*) OR (winlog.event_data.image.keyword:*:\users* AND winlog.event_data.image.keyword:*\contacts*) OR (winlog.event_data.image.keyword:*:\users* AND winlog.event_data.image.keyword:*\pictures*)))
+      query: file.path.keyword:*\\clfs.sys AND ((process.executable.keyword:(*\:\\perflogs\\* OR *\:\\users\\public\\* OR *\\temporary\ internet* OR *\\windows\\temp\\*)) OR ((winlog.event_data.image.keyword:*\:\\users\\* AND winlog.event_data.image.keyword:*\\favorites\\*) OR (winlog.event_data.image.keyword:*\:\\users\\* AND winlog.event_data.image.keyword:*\\favourites\\*) OR (winlog.event_data.image.keyword:*\:\\users\\* AND winlog.event_data.image.keyword:*\\contacts\\*) OR (winlog.event_data.image.keyword:*\:\\users\\* AND winlog.event_data.image.keyword:*\\pictures\\*)))
 type: any
 priority: 2

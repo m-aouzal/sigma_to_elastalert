@@ -1,12 +1,12 @@
 description: |
   Detects setting a custom URL for OneDriveStandaloneUpdater.exe to download a file from the Internet without executing any
-  anomalous executables with suspicious arguments. The downloaded file will be in C:UsersredactedAppDataLocalMicrosoftOneDriveStandaloneUpdaterreSignInSettingsConfig.json
+  anomalous executables with suspicious arguments. The downloaded file will be in C:\Users\redacted\AppData\Local\Microsoft\OneDrive\StandaloneUpdaterreSignInSettingsConfig.json
   
 name: Lolbas OneDriveStandaloneUpdater.exe Proxy Download
 index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\software\microsoft\onedrive\updateofficeconfig\updateringsettingurlfromoc*
+      query: registry.path.keyword:*\\software\\microsoft\\onedrive\\updateofficeconfig\\updateringsettingurlfromoc*
 type: any
 priority: 3

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\software\policies\microsoft\windows\system\scripts* AND (registry.path.keyword:(*\startup* OR *\shutdown* OR *\logon* OR *\logoff*)) AND (NOT winlog.event_data.Details.keyword:(empty))
+      query: registry.path.keyword:*\\software\\policies\\microsoft\\windows\\system\\scripts* AND (registry.path.keyword:(*\\startup* OR *\\shutdown* OR *\\logon* OR *\\logoff*)) AND (NOT winlog.event_data.Details.keyword:\(empty\))
 type: any
 priority: 2

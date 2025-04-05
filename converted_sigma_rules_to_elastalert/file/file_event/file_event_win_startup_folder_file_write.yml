@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\microsoft\windows\start menu\programs\startup* AND (NOT (winlog.event_data.image.keyword:c:\windows\system32\wuauclt.exe OR winlog.event_data.targetfilename.keyword:c:\$windows.~bt\newos*))
+      query: file.path.keyword:*\\microsoft\\windows\\start\ menu\\programs\\startup* AND (NOT (winlog.event_data.image.keyword:c\:\\windows\\system32\\wuauclt.exe OR winlog.event_data.targetfilename.keyword:c\:\\$windows.\~bt\\newos\\*))
 type: any
 priority: 2

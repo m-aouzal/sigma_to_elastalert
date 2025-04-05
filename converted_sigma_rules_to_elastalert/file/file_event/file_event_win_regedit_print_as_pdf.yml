@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\regedit.exe AND file.path.keyword:*.pdf
+      query: process.executable.keyword:*\\regedit.exe AND file.path.keyword:*.pdf
 type: any
 priority: 3

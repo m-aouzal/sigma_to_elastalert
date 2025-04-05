@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\secedit.exe OR winlog.event_data.originalfilename.keyword:secedit) AND ((process.command_line.keyword:*/export* AND process.command_line.keyword:*/cfg*) OR (process.command_line.keyword:*/configure* AND process.command_line.keyword:*/db*))
+      query: (winlog.event_data.image.keyword:*\\secedit.exe OR winlog.event_data.originalfilename.keyword:secedit) AND ((process.command_line.keyword:*\/export* AND process.command_line.keyword:*\/cfg*) OR (process.command_line.keyword:*\/configure* AND process.command_line.keyword:*\/db*))
 type: any
 priority: 2

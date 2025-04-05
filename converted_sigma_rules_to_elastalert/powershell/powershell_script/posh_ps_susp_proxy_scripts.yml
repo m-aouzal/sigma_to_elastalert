@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*[system.net.httpwebrequest]* AND powershell.file.script_block_text.keyword:*system.net.sockets.tcplistener* AND powershell.file.script_block_text.keyword:*accepttcpclient*
+      query: powershell.file.script_block_text.keyword:*\[system.net.httpwebrequest\]* AND powershell.file.script_block_text.keyword:*system.net.sockets.tcplistener* AND powershell.file.script_block_text.keyword:*accepttcpclient*
 type: any
 priority: 2

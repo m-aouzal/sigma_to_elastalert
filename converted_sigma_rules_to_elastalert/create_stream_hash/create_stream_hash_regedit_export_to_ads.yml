@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\regedit.exe
+      query: process.executable.keyword:*\\regedit.exe
 type: any
 priority: 3

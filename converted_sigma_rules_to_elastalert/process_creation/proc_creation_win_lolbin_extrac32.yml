@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.commandline.keyword:*extrac32.exe* OR winlog.event_data.image.keyword:*\extrac32.exe OR winlog.event_data.originalfilename.keyword:extrac32.exe) AND process.command_line.keyword:*.cab* AND (process.command_line.keyword:(*/c* OR */y* OR * \*))
+      query: (winlog.event_data.commandline.keyword:*extrac32.exe* OR winlog.event_data.image.keyword:*\\extrac32.exe OR winlog.event_data.originalfilename.keyword:extrac32.exe) AND process.command_line.keyword:*.cab* AND (process.command_line.keyword:(*\/c* OR *\/y* OR *\ \\\\*))
 type: any
 priority: 2

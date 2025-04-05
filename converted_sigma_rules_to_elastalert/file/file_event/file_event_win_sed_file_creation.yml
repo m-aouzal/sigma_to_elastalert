@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:(*:\programdata* OR *:\temp* OR *:\windows\system32\tasks* OR *:\windows\tasks* OR *:\windows\temp* OR *\appdata\local\temp*)) AND file.path.keyword:*.sed
+      query: (file.path.keyword:(*\:\\programdata\\* OR *\:\\temp\\* OR *\:\\windows\\system32\\tasks\\* OR *\:\\windows\\tasks\\* OR *\:\\windows\\temp\\* OR *\\appdata\\local\\temp\\*)) AND file.path.keyword:*.sed
 type: any
 priority: 2

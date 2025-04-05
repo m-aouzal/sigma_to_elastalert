@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*petitpotam* OR *rottenpotato* OR *hotpotato* OR *juicypotato* OR *\just_dce_* OR *juicy potato* OR *\temp\rot.exe* OR *\potato.exe* OR *\spoolsample.exe* OR *\responder.exe* OR *\smbrelayx* OR *\ntlmrelayx* OR *\localpotato*)) OR (process.command_line.keyword:(*invoke-tater* OR * smbrelay* OR * ntlmrelay* OR *cme smb* OR * /ntlm:ntlmhash* OR *invoke-petitpotam* OR *.exe -t* -p*)) OR (process.command_line.keyword:*.exe -c "{* AND process.command_line.keyword:*}" -z)) AND (NOT (process.executable.keyword:(*hotpotatoes6* OR *hotpotatoes7* OR *hotpotatoes*)))
+      query: ((process.executable.keyword:(*petitpotam* OR *rottenpotato* OR *hotpotato* OR *juicypotato* OR *\\just_dce_* OR *juicy\ potato* OR *\\temp\\rot.exe* OR *\\potato.exe* OR *\\spoolsample.exe* OR *\\responder.exe* OR *\\smbrelayx* OR *\\ntlmrelayx* OR *\\localpotato*)) OR (process.command_line.keyword:(*invoke\-tater* OR *\ smbrelay* OR *\ ntlmrelay* OR *cme\ smb\ * OR *\ \/ntlm\:ntlmhash\ * OR *invoke\-petitpotam* OR *.exe\ \-t\ *\ \-p\ *)) OR (process.command_line.keyword:*.exe\ \-c\ \"\{* AND process.command_line.keyword:*\}\"\ \-z)) AND (NOT (process.executable.keyword:(*hotpotatoes6* OR *hotpotatoes7* OR *hotpotatoes\ *)))
 type: any
 priority: 4

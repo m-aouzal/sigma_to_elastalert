@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.pe.original_file_name.keyword:whoami.exe AND (NOT process.executable.keyword:*\whoami.exe)
+      query: process.pe.original_file_name.keyword:whoami.exe AND (NOT process.executable.keyword:*\\whoami.exe)
 type: any
 priority: 4

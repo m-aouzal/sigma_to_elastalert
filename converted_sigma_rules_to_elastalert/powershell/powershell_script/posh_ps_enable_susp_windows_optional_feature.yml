@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*enable-windowsoptionalfeature* AND powershell.file.script_block_text.keyword:*-online* AND powershell.file.script_block_text.keyword:*-featurename*) AND (powershell.file.script_block_text.keyword:(*telnetserver* OR *internet-explorer-optional-amd64* OR *tftp* OR *smb1protocol* OR *client-projfs* OR *microsoft-windows-subsystem-linux*))
+      query: (powershell.file.script_block_text.keyword:*enable\-windowsoptionalfeature* AND powershell.file.script_block_text.keyword:*\-online* AND powershell.file.script_block_text.keyword:*\-featurename*) AND (powershell.file.script_block_text.keyword:(*telnetserver* OR *internet\-explorer\-optional\-amd64* OR *tftp* OR *smb1protocol* OR *client\-projfs* OR *microsoft\-windows\-subsystem\-linux*))
 type: any
 priority: 2

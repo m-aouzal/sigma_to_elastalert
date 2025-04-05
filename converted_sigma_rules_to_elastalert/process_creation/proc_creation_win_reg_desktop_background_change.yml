@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND process.command_line.keyword:*add*) AND (process.command_line.keyword:(*control panel\desktop* OR *currentversion\policies\activedesktop* OR *currentversion\policies\system*)) AND ((process.command_line.keyword:*/v nochangingwallpaper* AND process.command_line.keyword:*/d 1*) OR (process.command_line.keyword:*/v wallpaper* AND process.command_line.keyword:*/t reg_sz*) OR (process.command_line.keyword:*/v wallpaperstyle* AND process.command_line.keyword:*/d 2*))
+      query: ((winlog.event_data.image.keyword:*\\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND process.command_line.keyword:*add*) AND (process.command_line.keyword:(*control\ panel\\desktop* OR *currentversion\\policies\\activedesktop* OR *currentversion\\policies\\system*)) AND ((process.command_line.keyword:*\/v\ nochangingwallpaper* AND process.command_line.keyword:*\/d\ 1*) OR (process.command_line.keyword:*\/v\ wallpaper* AND process.command_line.keyword:*\/t\ reg_sz*) OR (process.command_line.keyword:*\/v\ wallpaperstyle* AND process.command_line.keyword:*\/d\ 2*))
 type: any
 priority: 2

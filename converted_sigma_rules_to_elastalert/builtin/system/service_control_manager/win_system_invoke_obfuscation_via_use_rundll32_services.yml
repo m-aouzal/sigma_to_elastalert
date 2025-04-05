@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:System AND (winlog.provider_name.keyword:service control manager AND event.code.keyword:7045 AND (winlog.event_data.ImagePath.keyword:*&&* AND winlog.event_data.ImagePath.keyword:*rundll32* AND winlog.event_data.ImagePath.keyword:*shell32.dll* AND winlog.event_data.ImagePath.keyword:*shellexec_rundll*) AND (winlog.event_data.ImagePath.keyword:(*value* OR *invoke* OR *comspec* OR *iex*)))
+      query: winlog.channel.keyword:System AND (winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045 AND (winlog.event_data.ImagePath.keyword:*\&\&* AND winlog.event_data.ImagePath.keyword:*rundll32* AND winlog.event_data.ImagePath.keyword:*shell32.dll* AND winlog.event_data.ImagePath.keyword:*shellexec_rundll*) AND (winlog.event_data.ImagePath.keyword:(*value* OR *invoke* OR *comspec* OR *iex*)))
 type: any
 priority: 3

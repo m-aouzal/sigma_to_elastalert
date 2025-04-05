@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\libvlc.dll AND (NOT (file.path.keyword:(c:\program files (x86)\videolan\vlc* OR c:\program files\videolan\vlc*)))
+      query: file.path.keyword:*\\libvlc.dll AND (NOT (file.path.keyword:(c\:\\program\ files\ \(x86\)\\videolan\\vlc\\* OR c\:\\program\ files\\videolan\\vlc\\*)))
 type: any
 priority: 2

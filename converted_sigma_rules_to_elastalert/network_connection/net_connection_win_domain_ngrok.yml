@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: network.direction.keyword:true AND (destination.domain.keyword:(*.ngrok-free.app OR *.ngrok-free.dev OR *.ngrok.app OR *.ngrok.dev OR *.ngrok.io))
+      query: network.direction.keyword:true AND (destination.domain.keyword:(*.ngrok\-free.app OR *.ngrok\-free.dev OR *.ngrok.app OR *.ngrok.dev OR *.ngrok.io))
 type: any
 priority: 3

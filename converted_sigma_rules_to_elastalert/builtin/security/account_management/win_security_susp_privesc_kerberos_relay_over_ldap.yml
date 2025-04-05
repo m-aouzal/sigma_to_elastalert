@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND ((event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:3 AND winlog.event_data.AuthenticationPackageName.keyword:kerberos AND source.ip.keyword:127.0.0.1 AND winlog.event_data.TargetUserSid.keyword:s-1-5-21-* AND winlog.event_data.TargetUserSid.keyword:*-500) AND (NOT source.port:0))
+      query: winlog.channel.keyword:Security AND ((event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:3 AND winlog.event_data.AuthenticationPackageName.keyword:kerberos AND source.ip.keyword:127.0.0.1 AND winlog.event_data.TargetUserSid.keyword:s\-1\-5\-21\-* AND winlog.event_data.TargetUserSid.keyword:*\-500) AND (NOT source.port:0))
 type: any
 priority: 3

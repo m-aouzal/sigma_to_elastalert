@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: dns.question.name.keyword:update.onelaunch.com AND process.executable.keyword:*\onelaunch.exe
+      query: dns.question.name.keyword:update.onelaunch.com AND process.executable.keyword:*\\onelaunch.exe
 type: any
 priority: 1

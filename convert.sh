@@ -38,8 +38,6 @@ process_rule() {
             }
           ' "$rule"
         ) 2> "$temp_err" \
-    | sed -E 's/\\[[:space:]]*\*/\*/g' \
-    | sed -E 's/\\(.)/\1/g' \
     > "$temp_output"
 
     if [ $? -ne 0 ]; then

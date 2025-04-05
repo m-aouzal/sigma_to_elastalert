@@ -10,6 +10,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*start-process* AND (powershell.file.script_block_text.keyword:(*.cmd* OR *.bat*))
+      query: powershell.file.script_block_text.keyword:*start\-process* AND (powershell.file.script_block_text.keyword:(*.cmd* OR *.bat*))
 type: any
 priority: 2

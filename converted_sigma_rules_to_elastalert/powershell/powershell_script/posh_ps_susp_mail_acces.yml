@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:(*get-inbox.ps1* OR *microsoft.office.interop.outlook* OR *microsoft.office.interop.outlook.oldefaultfolders* OR *-comobject outlook.application*)
+      query: powershell.file.script_block_text.keyword:(*get\-inbox.ps1* OR *microsoft.office.interop.outlook* OR *microsoft.office.interop.outlook.oldefaultfolders* OR *\-comobject\ outlook.application*)
 type: any
 priority: 2

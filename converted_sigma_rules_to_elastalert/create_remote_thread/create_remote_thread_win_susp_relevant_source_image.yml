@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:(*\bash.exe OR *\cscript.exe OR *\cvtres.exe OR *\defrag.exe OR *\dialer.exe OR *\dnx.exe OR *\esentutl.exe OR *\excel.exe OR *\expand.exe OR *\find.exe OR *\findstr.exe OR *\forfiles.exe OR *\gpupdate.exe OR *\hh.exe OR *\installutil.exe OR *\lync.exe OR *\makecab.exe OR *\mdnsresponder.exe OR *\monitoringhost.exe OR *\msbuild.exe OR *\mshta.exe OR *\mspaint.exe OR *\outlook.exe OR *\ping.exe OR *\provtool.exe OR *\python.exe OR *\regsvr32.exe OR *\robocopy.exe OR *\runonce.exe OR *\sapcimc.exe OR *\smartscreen.exe OR *\spoolsv.exe OR *\tstheme.exe OR *\userinit.exe OR *\vssadmin.exe OR *\vssvc.exe OR *\w3wp.exe OR *\winscp.exe OR *\winword.exe OR *\wmic.exe OR *\wscript.exe)
+      query: process.executable.keyword:(*\\bash.exe OR *\\cscript.exe OR *\\cvtres.exe OR *\\defrag.exe OR *\\dialer.exe OR *\\dnx.exe OR *\\esentutl.exe OR *\\excel.exe OR *\\expand.exe OR *\\find.exe OR *\\findstr.exe OR *\\forfiles.exe OR *\\gpupdate.exe OR *\\hh.exe OR *\\installutil.exe OR *\\lync.exe OR *\\makecab.exe OR *\\mdnsresponder.exe OR *\\monitoringhost.exe OR *\\msbuild.exe OR *\\mshta.exe OR *\\mspaint.exe OR *\\outlook.exe OR *\\ping.exe OR *\\provtool.exe OR *\\python.exe OR *\\regsvr32.exe OR *\\robocopy.exe OR *\\runonce.exe OR *\\sapcimc.exe OR *\\smartscreen.exe OR *\\spoolsv.exe OR *\\tstheme.exe OR *\\userinit.exe OR *\\vssadmin.exe OR *\\vssvc.exe OR *\\w3wp.exe OR *\\winscp.exe OR *\\winword.exe OR *\\wmic.exe OR *\\wscript.exe)
 type: any
 priority: 3

@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\wusa.exe AND ((process.parent.executable.keyword:(*:\perflogs* OR *:\users\public* OR *:\windows\temp* OR *\appdata\local\temp* OR *\temporary internet*)) OR ((winlog.event_data.parentimage.keyword:*:\users* AND winlog.event_data.parentimage.keyword:*\favorites*) OR (winlog.event_data.parentimage.keyword:*:\users* AND winlog.event_data.parentimage.keyword:*\favourites*) OR (winlog.event_data.parentimage.keyword:*:\users* AND winlog.event_data.parentimage.keyword:*\contacts*) OR (winlog.event_data.parentimage.keyword:*:\users* AND winlog.event_data.parentimage.keyword:*\pictures*))) AND (NOT process.command_line.keyword:*.msu*)
+      query: process.executable.keyword:*\\wusa.exe AND ((process.parent.executable.keyword:(*\:\\perflogs\\* OR *\:\\users\\public\\* OR *\:\\windows\\temp\\* OR *\\appdata\\local\\temp\\* OR *\\temporary\ internet*)) OR ((winlog.event_data.parentimage.keyword:*\:\\users\\* AND winlog.event_data.parentimage.keyword:*\\favorites\\*) OR (winlog.event_data.parentimage.keyword:*\:\\users\\* AND winlog.event_data.parentimage.keyword:*\\favourites\\*) OR (winlog.event_data.parentimage.keyword:*\:\\users\\* AND winlog.event_data.parentimage.keyword:*\\contacts\\*) OR (winlog.event_data.parentimage.keyword:*\:\\users\\* AND winlog.event_data.parentimage.keyword:*\\pictures\\*))) AND (NOT process.command_line.keyword:*.msu*)
 type: any
 priority: 3

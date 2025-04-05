@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\services* AND registry.path.keyword:*\instances\sysmon instance\altitude
+      query: registry.path.keyword:*\\services\\* AND registry.path.keyword:*\\instances\\sysmon\ instance\\altitude
 type: any
 priority: 3

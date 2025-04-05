@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:*\sqlservr.exe AND (process.executable.keyword:(*\bash.exe OR *\bitsadmin.exe OR *\cmd.exe OR *\netstat.exe OR *\nltest.exe OR *\ping.exe OR *\powershell.exe OR *\pwsh.exe OR *\regsvr32.exe OR *\rundll32.exe OR *\sh.exe OR *\systeminfo.exe OR *\tasklist.exe OR *\wsl.exe))) AND (NOT (process.parent.executable.keyword:c:\program files\microsoft sql server* AND process.parent.executable.keyword:*datev_dbengine\mssql\binn\sqlservr.exe AND process.executable.keyword:c:\windows\system32\cmd.exe AND process.command_line.keyword:"c:\windows\system32\cmd.exe"*))
+      query: (process.parent.executable.keyword:*\\sqlservr.exe AND (process.executable.keyword:(*\\bash.exe OR *\\bitsadmin.exe OR *\\cmd.exe OR *\\netstat.exe OR *\\nltest.exe OR *\\ping.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\regsvr32.exe OR *\\rundll32.exe OR *\\sh.exe OR *\\systeminfo.exe OR *\\tasklist.exe OR *\\wsl.exe))) AND (NOT (process.parent.executable.keyword:c\:\\program\ files\\microsoft\ sql\ server\\* AND process.parent.executable.keyword:*datev_dbengine\\mssql\\binn\\sqlservr.exe AND process.executable.keyword:c\:\\windows\\system32\\cmd.exe AND process.command_line.keyword:\"c\:\\windows\\system32\\cmd.exe\"\ *))
 type: any
 priority: 3

@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\certmgr.exe OR winlog.event_data.originalfilename.keyword:certmgt.exe) AND (process.command_line.keyword:*/add* AND process.command_line.keyword:*root*)
+      query: (winlog.event_data.image.keyword:*\\certmgr.exe OR winlog.event_data.originalfilename.keyword:certmgt.exe) AND (process.command_line.keyword:*\/add* AND process.command_line.keyword:*root*)
 type: any
 priority: 2

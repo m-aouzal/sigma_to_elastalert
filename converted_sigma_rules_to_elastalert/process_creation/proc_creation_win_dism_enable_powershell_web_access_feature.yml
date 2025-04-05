@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\dism.exe OR winlog.event_data.originalfilename.keyword:dism.exe) AND (process.command_line.keyword:*windowspowershellwebaccess* AND process.command_line.keyword:*/online* AND process.command_line.keyword:*/enable-feature*)
+      query: (winlog.event_data.image.keyword:*\\dism.exe OR winlog.event_data.originalfilename.keyword:dism.exe) AND (process.command_line.keyword:*windowspowershellwebaccess* AND process.command_line.keyword:*\/online* AND process.command_line.keyword:*\/enable\-feature*)
 type: any
 priority: 3

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\software\microsoft\office* AND registry.path.keyword:*\outlook\security*
+      query: registry.path.keyword:*\\software\\microsoft\\office\\* AND registry.path.keyword:*\\outlook\\security\\*
 type: any
 priority: 2

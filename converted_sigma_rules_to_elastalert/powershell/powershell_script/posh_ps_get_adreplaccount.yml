@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*get-adreplaccount* AND powershell.file.script_block_text.keyword:*-all* AND powershell.file.script_block_text.keyword:*-server*
+      query: powershell.file.script_block_text.keyword:*get\-adreplaccount* AND powershell.file.script_block_text.keyword:*\-all\ * AND powershell.file.script_block_text.keyword:*\-server\ *
 type: any
 priority: 2

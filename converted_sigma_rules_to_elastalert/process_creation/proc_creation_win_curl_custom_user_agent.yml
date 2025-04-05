@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\curl.exe OR winlog.event_data.originalfilename.keyword:curl.exe) AND (process.command_line.keyword:/s-hs/ AND process.command_line.keyword:*user-agent:*)
+      query: (winlog.event_data.image.keyword:*\\curl.exe OR winlog.event_data.originalfilename.keyword:curl.exe) AND (process.command_line.keyword:/\s-h\s/ AND process.command_line.keyword:*user\-agent\:*)
 type: any
 priority: 2

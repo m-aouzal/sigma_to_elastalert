@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*software\microsoft\windows nt\currentversion\accessibility\ats* OR *software\microsoft\windows nt\currentversion\accessibility\configuration*)) AND (NOT ((process.executable.keyword:c:\windows\system32\atbroker.exe AND registry.path.keyword:*\microsoft\windows nt\currentversion\accessibility\configuration* AND winlog.event_data.Details.keyword:(empty)) OR (process.executable.keyword:c:\windows\installer\msi* AND registry.path.keyword:*software\microsoft\windows nt\currentversion\accessibility\ats*)))
+      query: (registry.path.keyword:(*software\\microsoft\\windows\ nt\\currentversion\\accessibility\\ats* OR *software\\microsoft\\windows\ nt\\currentversion\\accessibility\\configuration*)) AND (NOT ((process.executable.keyword:c\:\\windows\\system32\\atbroker.exe AND registry.path.keyword:*\\microsoft\\windows\ nt\\currentversion\\accessibility\\configuration* AND winlog.event_data.Details.keyword:\(empty\)) OR (process.executable.keyword:c\:\\windows\\installer\\msi* AND registry.path.keyword:*software\\microsoft\\windows\ nt\\currentversion\\accessibility\\ats*)))
 type: any
 priority: 2

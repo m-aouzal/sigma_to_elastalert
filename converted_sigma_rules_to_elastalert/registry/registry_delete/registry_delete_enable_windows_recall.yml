@@ -8,6 +8,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.event_data.EventType.keyword:deletevalue AND registry.path.keyword:*\microsoft\windows\windowsai\disableaidataanalysis
+      query: winlog.event_data.EventType.keyword:deletevalue AND registry.path.keyword:*\\microsoft\\windows\\windowsai\\disableaidataanalysis
 type: any
 priority: 2

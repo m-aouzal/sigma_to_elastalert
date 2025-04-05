@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.commandline.keyword:*findstr* OR winlog.event_data.image.keyword:*findstr.exe OR winlog.event_data.originalfilename.keyword:findstr.exe) AND (process.command_line.keyword:(* -v* OR * /v* OR * –v* OR * —v* OR * ―v*) AND process.command_line.keyword:(* -l* OR * /l* OR * –l* OR * —l* OR * ―l*) AND process.command_line.keyword:*\*)
+      query: (winlog.event_data.commandline.keyword:*findstr* OR winlog.event_data.image.keyword:*findstr.exe OR winlog.event_data.originalfilename.keyword:findstr.exe) AND (process.command_line.keyword:(*\ \-v\ * OR *\ \/v\ * OR *\ –v\ * OR *\ —v\ * OR *\ ―v\ *) AND process.command_line.keyword:(*\ \-l\ * OR *\ \/l\ * OR *\ –l\ * OR *\ —l\ * OR *\ ―l\ *) AND process.command_line.keyword:*\\\\*)
 type: any
 priority: 2

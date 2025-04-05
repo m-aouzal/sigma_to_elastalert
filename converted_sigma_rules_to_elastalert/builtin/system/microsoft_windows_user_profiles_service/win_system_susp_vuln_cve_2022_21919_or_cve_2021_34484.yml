@@ -1,10 +1,10 @@
 description: |
-  During exploitation of this vulnerability, two logs (Provider_Name:Microsoft-Windows-User Profiles Service) with EventID 1511 and 1515 (maybe lot of false positives with this event) are created. Moreover, it appears the directory UsersTEMP is created may be created during the exploitation. Viewed on 2008 Server
+  During exploitation of this vulnerability, two logs (Provider_Name:Microsoft-Windows-User Profiles Service) with EventID 1511 and 1515 (maybe lot of false positives with this event) are created. Moreover, it appears the directory \Users\TEMP is created may be created during the exploitation. Viewed on 2008 Server
 name: Suspicious Usage of CVE_2021_34484 or CVE 2022_21919
 index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Application AND (event.code.keyword:1511 AND winlog.provider_name.keyword:microsoft-windows-user profiles service)
+      query: winlog.channel.keyword:Application AND (event.code.keyword:1511 AND winlog.provider_name.keyword:microsoft\-windows\-user\ profiles\ service)
 type: any
 priority: 1

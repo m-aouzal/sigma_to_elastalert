@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:openconsole.exe OR winlog.event_data.image.keyword:*\openconsole.exe) AND (NOT process.executable.keyword:c:\program files\windowsapps\microsoft.windowsterminal*)
+      query: (winlog.event_data.originalfilename.keyword:openconsole.exe OR winlog.event_data.image.keyword:*\\openconsole.exe) AND (NOT process.executable.keyword:c\:\\program\ files\\windowsapps\\microsoft.windowsterminal*)
 type: any
 priority: 2

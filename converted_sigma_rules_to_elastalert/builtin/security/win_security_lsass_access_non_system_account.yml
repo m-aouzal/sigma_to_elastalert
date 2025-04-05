@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND (((event.code.keyword:(4663 OR 4656)) AND (winlog.event_data.AccessMask.keyword:(0x100000 OR 0x1010 OR 0x1400 OR 0x1410 OR 0x1418 OR 0x1438 OR 0x143a OR 0x1f0fff OR 0x1f1fff OR 0x1f2fff OR 0x1f3fff OR 0x40 OR 143a OR 1f0fff OR 1f1fff OR 1f2fff OR 1f3fff)) AND winlog.event_data.ObjectType.keyword:process AND winlog.event_data.ObjectName.keyword:*\lsass.exe) AND (NOT (user.name.keyword:*$ OR (process.executable.keyword:(*:\program files* OR *:\program files (x86)*)) OR (process.executable.keyword:c:\windows\system32\wbem\wmiprvse.exe AND winlog.event_data.AccessMask.keyword:0x1410))) AND (NOT process.executable.keyword:*\steamlibrary\steamapps*))
+      query: winlog.channel.keyword:Security AND (((event.code.keyword:(4663 OR 4656)) AND (winlog.event_data.AccessMask.keyword:(0x100000 OR 0x1010 OR 0x1400 OR 0x1410 OR 0x1418 OR 0x1438 OR 0x143a OR 0x1f0fff OR 0x1f1fff OR 0x1f2fff OR 0x1f3fff OR 0x40 OR 143a OR 1f0fff OR 1f1fff OR 1f2fff OR 1f3fff)) AND winlog.event_data.ObjectType.keyword:process AND winlog.event_data.ObjectName.keyword:*\\lsass.exe) AND (NOT (user.name.keyword:*$ OR (process.executable.keyword:(*\:\\program\ files\\* OR *\:\\program\ files\ \(x86\)\\*)) OR (process.executable.keyword:c\:\\windows\\system32\\wbem\\wmiprvse.exe AND winlog.event_data.AccessMask.keyword:0x1410))) AND (NOT process.executable.keyword:*\\steamlibrary\\steamapps\\*))
 type: any
 priority: 2

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*~1* OR *~2*)) AND (NOT ((winlog.event_data.parentimage.keyword:(c:\windows\system32\dism.exe OR c:\windows\system32\cleanmgr.exe OR c:\program files\gpsoftware\directory opus\dopus.exe)) OR (winlog.event_data.parentimage.keyword:(*\webex\webexhost.exe OR *\thor\thor64.exe OR *\veam.backup.shell.exe OR *\winget.exe OR *\everything\everything.exe)) OR winlog.event_data.parentimage.keyword:*\appdata\local\temp\winget* OR (winlog.event_data.commandline.keyword:(*\appdata\local\webex\webex64\meetings\wbxreport.exe* OR *c:\program files\git\post-install.bat* OR *c:\program files\git\cmd\scalar.exe*))))
+      query: (process.command_line.keyword:(*\~1\\* OR *\~2\\*)) AND (NOT ((winlog.event_data.parentimage.keyword:(c\:\\windows\\system32\\dism.exe OR c\:\\windows\\system32\\cleanmgr.exe OR c\:\\program\ files\\gpsoftware\\directory\ opus\\dopus.exe)) OR (winlog.event_data.parentimage.keyword:(*\\webex\\webexhost.exe OR *\\thor\\thor64.exe OR *\\veam.backup.shell.exe OR *\\winget.exe OR *\\everything\\everything.exe)) OR winlog.event_data.parentimage.keyword:*\\appdata\\local\\temp\\winget\\* OR (winlog.event_data.commandline.keyword:(*\\appdata\\local\\webex\\webex64\\meetings\\wbxreport.exe* OR *c\:\\program\ files\\git\\post\-install.bat* OR *c\:\\program\ files\\git\\cmd\\scalar.exe*))))
 type: any
 priority: 2
