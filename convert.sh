@@ -11,7 +11,6 @@ mkdir -p "$OUTPUT_DIR"
 > "$FAIL_LIST"  # Empty the fail list file at start
 
 # ========== FUNCTION: process_rule ==========
-
 process_rule() {
     rule="$1"
     echo "Processing rule: $rule"
@@ -28,16 +27,7 @@ process_rule() {
         -t elastalert \
         -p ecs_windows \
         --disable-pipeline-check \
-        <(
-          sed -E '
-            /^[[:space:]]*detection:/,/^[^[:space:]]/ {
-                /^[[:space:]]*condition:/ b keep
-                s/^([[:space:]]*[^:]+:[[:space:]]*)(.*)$/\1\L\2\E/g;
-                s/^([[:space:]]*-[[:space:]]*)(.*)$/\1\L\2\E/g;
-                :keep
-            }
-          ' "$rule"
-        ) 2> "$temp_err" \
+        "$rule" 2> "$temp_err" \
     > "$temp_output"
 
     if [ $? -ne 0 ]; then
@@ -81,101 +71,123 @@ process_rule() {
     # STEP 2.5: Replace index "*" with "winlogbeat-*"
     sed -i -E "s/(index:[[:space:]]*)['\"]?[*]['\"]?/\1\"winlogbeat-*\"/" "$temp_fixed_description"
 
-    # STEP 3: Awk pass to append .keyword and pipe to sed for lowercasing
+    # STEP 3: Awk pass to append .keyword and lowercase winlog.channel.keyword value
     temp_final=$(mktemp)
     awk -v exFile="$EXEMPTION_FILE" '
-###############################################################################
-# Read the exemption list from exFile into an array "exempt".
-###############################################################################
-BEGIN {
-    while ((getline line < exFile) > 0) {
-        gsub(/^[[:space:]]+|[[:space:]]+$/, "", line)
-        if (length(line) > 0) {
-            exempt[line] = 1
+    ###############################################################################
+    # Read the exemption list from exFile into an array "exempt".
+    ###############################################################################
+    BEGIN {
+        while ((getline line < exFile) > 0) {
+            gsub(/^[[:space:]]+|[[:space:]]+$/, "", line)
+            if (length(line) > 0) {
+                exempt[line] = 1
+            }
         }
     }
-}
 
-###############################################################################
-# Helper: ends_with_keyword(f)
-# Returns true if the field f ends with ".keyword".
-###############################################################################
-function ends_with_keyword(f) {
-    n = length(f)
-    return (n >= 8 && substr(f, n-7) == ".keyword")
-}
+    ###############################################################################
+    # Helper: ends_with_keyword(f)
+    # Returns true if the field f ends with ".keyword".
+    ###############################################################################
+    function ends_with_keyword(f) {
+        n = length(f)
+        return (n >= 8 && substr(f, n-7) == ".keyword")
+    }
 
-###############################################################################
-# Helper: valid_ecs_field(f)
-# Returns true if the field matches the requested ECS pattern
-###############################################################################
-function valid_ecs_field(f) {
-    return (f ~ /^[a-zA-Z_]+(\.[a-zA-Z0-9_]+)+$/)
-}
+    ###############################################################################
+    # Helper: valid_ecs_field(f)
+    # Returns true if the field matches the requested ECS pattern
+    ###############################################################################
+    function valid_ecs_field(f) {
+        return (f ~ /^[a-zA-Z_]+(\.[a-zA-Z0-9_]+)+$/)
+    }
 
-###############################################################################
-# Process the query string by finding ECS fields and appending .keyword
-###############################################################################
-function process_query(q) {
-    result = ""
-    while (length(q) > 0) {
-        # Match an ECS field followed by a colon (e.g., winlog.channel:)
-        if (match(q, /([a-zA-Z_]+\.[a-zA-Z_]+(\.[a-zA-Z0-9_]+)*):/)) {
-            field = substr(q, RSTART, RLENGTH - 1)  # Exclude the colon
-            rest = substr(q, RSTART + RLENGTH)
-            before = substr(q, 1, RSTART - 1)
+    ###############################################################################
+    # Process the query string: append .keyword and lowercase winlog.channel.keyword value
+    ###############################################################################
+    function process_query(q) {
+        result = ""
+        while (length(q) > 0) {
+            # Match an ECS field followed by a colon (e.g., winlog.channel:)
+            if (match(q, /([a-zA-Z_]+\.[a-zA-Z_]+(\.[a-zA-Z0-9_]+)*):/)) {
+                field = substr(q, RSTART, RLENGTH - 1)  # Exclude the colon
+                rest = substr(q, RSTART + RLENGTH)
+                before = substr(q, 1, RSTART - 1)
 
-            # Append .keyword if conditions are met
-            if (!(field in exempt) && !ends_with_keyword(field) && valid_ecs_field(field)) {
-                field = field ".keyword"
+                # Append .keyword if conditions are met
+                if (!(field in exempt) && !ends_with_keyword(field) && valid_ecs_field(field)) {
+                    field = field ".keyword"
+                }
+
+                # Extract the value up to an unescaped space or end
+                value = ""
+                i = 1
+                while (i <= length(rest)) {
+                    char = substr(rest, i, 1)
+                    if (char == "\\" && i < length(rest) && substr(rest, i+1, 1) == " ") {
+                        value = value "\\ "
+                        i += 2
+                    } else if (char == " " || char == "\t") {
+                        break
+                    } else {
+                        value = value char
+                        i++
+                    }
+                }
+                after = substr(rest, i)
+
+                # Lowercase the value if the field is winlog.channel.keyword
+                if (field == "winlog.channel.keyword") {
+                    value = tolower(value)
+                }
+
+                result = result before field ":" value
+                q = after
+            } else {
+                # No more fields, append the rest
+                result = result q
+                break
+            }
+        }
+        return result
+    }
+
+    ###############################################################################
+    # Main logic: Process lines starting with query: or query_string:
+    ###############################################################################
+    {
+        match($0, /^[[:space:]]*(query|query_string):[[:space:]]*/)
+        if (RSTART == 1) {
+            prefix = substr($0, RSTART, RLENGTH)
+            query = substr($0, RSTART + RLENGTH)
+
+            # Remove leading/trailing quotes if present
+            if (query ~ /^".*"$/) {
+                quoted = 1
+                query = substr(query, 2, length(query) - 2)
+            } else {
+                quoted = 0
             }
 
-            result = result before field ":"
-            q = rest
+            # Process the query
+            processed_query = process_query(query)
+
+            # Reconstruct the line
+            if (quoted) {
+                print prefix "\"" processed_query "\""
+            } else {
+                print prefix processed_query
+            }
         } else {
-            # No more fields, append the rest
-            result = result q
-            break
+            print $0
         }
     }
-    return result
-}
-
-###############################################################################
-# Main logic: Process lines starting with query: or query_string:
-###############################################################################
-{
-    match($0, /^[[:space:]]*(query|query_string):[[:space:]]*/)
-    if (RSTART == 1) {
-        prefix = substr($0, RSTART, RLENGTH)
-        query = substr($0, RSTART + RLENGTH)
-
-        # Remove leading/trailing quotes if present
-        if (query ~ /^".*"$/) {
-            quoted = 1
-            query = substr(query, 2, length(query) - 2)
-        } else {
-            quoted = 0
-        }
-
-        # Process the query
-        processed_query = process_query(query)
-
-        # Reconstruct the line
-        if (quoted) {
-            print prefix "\"" processed_query "\""
-        } else {
-            print prefix processed_query
-        }
-    } else {
-        print $0
-    }
-}
-' "$temp_fixed_description" | sed -E 's/(winlog\.channel\.keyword:)((\\[ ]|[^ ])+)( .*|$)/\1\L\2\E\3/g' > "$temp_final"
+    ' "$temp_fixed_description" > "$temp_final"
 
     if [ $? -ne 0 ]; then
-        echo "Error in AWK or sed post-processing for $rule"
-        echo "$rule: Post-processing failed" >> "$FAIL_LIST"
+        echo "Error in AWK post-processing for $rule"
+        echo "$rule: AWK post-processing failed" >> "$FAIL_LIST"
         rm -f "$temp_fixed_description" "$temp_final"
         return
     fi
@@ -185,7 +197,6 @@ function process_query(q) {
 }
 
 # ========== Export and Parallel ==========
-
 export -f process_rule
 export RULE_DIR
 export OUTPUT_DIR
