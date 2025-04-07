@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:msexchange\ managementt
+      query: winlog.channel.keyword:msexchange\ management AND (((*new\-mailboxexportrequest* AND *\ \-mailbox\ *) AND (*\-filepath\ \"\\\\* OR *.aspx*)) OR (*new\-managementroleassignment* AND *\ \-role\ \"mailbox\ import\ export\"* AND *\ \-user\ *))
 type: any
 priority: 4

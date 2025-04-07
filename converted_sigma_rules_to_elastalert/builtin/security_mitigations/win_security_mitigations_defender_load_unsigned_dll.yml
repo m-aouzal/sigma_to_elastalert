@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: (winlog.channel.keyword:(microsoft\-windows\-security\-mitigations\/kernel\ modee
+      query: (winlog.channel.keyword:(microsoft\-windows\-security\-mitigations\/kernel\ mode OR Microsoft\-Windows\-Security\-Mitigations\/User\ Mode)) AND ((event.code.keyword:(11 OR 12)) AND (winlog.event_data.ProcessPath.keyword:(*\\mpcmdrun.exe OR *\\nissrv.exe)))
 type: any
 priority: 3

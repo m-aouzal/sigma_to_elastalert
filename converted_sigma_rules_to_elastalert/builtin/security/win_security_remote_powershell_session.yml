@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:securityy
+      query: winlog.channel.keyword:security AND (event.code.keyword:5156 AND (destination.port:(5985 OR 5986)) AND winlog.event_data.LayerRTID.keyword:44)
 type: any
 priority: 3

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-ntlm\/operationall
+      query: winlog.channel.keyword:microsoft\-windows\-ntlm\/operational AND (event.code.keyword:8001 AND winlog.event_data.TargetName.keyword:termsrv*)
 type: any
 priority: 2

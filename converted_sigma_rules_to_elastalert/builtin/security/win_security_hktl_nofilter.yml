@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:securityy
+      query: winlog.channel.keyword:security AND ((event.code.keyword:5447 AND winlog.event_data.FilterName.keyword:*ronpolicy*) OR (event.code.keyword:5449 AND winlog.event_data.ProviderContextName.keyword:*ronpolicy*))
 type: any
 priority: 3

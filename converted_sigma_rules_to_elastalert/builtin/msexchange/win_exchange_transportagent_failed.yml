@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:msexchange\ managementt
+      query: winlog.channel.keyword:msexchange\ management AND (event.code.keyword:6 AND winlog.event_data.Data.keyword:*install\-transportagent*)
 type: any
 priority: 3

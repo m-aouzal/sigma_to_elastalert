@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-windows\ defender\/operationall
+      query: winlog.channel.keyword:microsoft\-windows\-windows\ defender\/operational AND ((event.code.keyword:(3002 OR 3007)) AND (NOT (winlog.event_data.Feature_Name.keyword:%%886 AND (winlog.event_data.Reason.keyword:(%%892 OR %%858)))))
 type: any
 priority: 2

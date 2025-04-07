@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-dns\ client\ events\/operationall
+      query: winlog.channel.keyword:microsoft\-windows\-dns\ client\ events\/operational AND (event.code.keyword:3008 AND (dns.question.name.keyword:(*api.put.io* OR *upload.put.io*)))
 type: any
 priority: 2

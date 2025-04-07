@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-capi2\/operationall
+      query: winlog.channel.keyword:microsoft\-windows\-capi2\/operational AND event.code.keyword:70
 type: any
 priority: 2

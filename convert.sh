@@ -27,7 +27,16 @@ process_rule() {
         -t elastalert \
         -p ecs_windows \
         --disable-pipeline-check \
-        "$rule" 2> "$temp_err" \
+        <(
+          sed -E '
+            /^[[:space:]]*detection:/,/^[^[:space:]]/ {
+                /^[[:space:]]*condition:/ b keep
+                s/^([[:space:]]*[^:]+:[[:space:]]*)(.*)$/\1\L\2\E/g;
+                s/^([[:space:]]*-[[:space:]]*)(.*)$/\1\L\2\E/g;
+                :keep
+            }
+          ' "$rule"
+        ) 2> "$temp_err" \
     > "$temp_output"
 
     if [ $? -ne 0 ]; then

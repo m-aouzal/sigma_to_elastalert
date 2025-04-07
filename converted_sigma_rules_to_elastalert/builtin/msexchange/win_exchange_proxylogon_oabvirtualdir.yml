@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:msexchange\ managementt
+      query: winlog.channel.keyword:msexchange\ management AND ((*oabvirtualdirectory* AND *\ \-externalurl\ *) AND (*eval\(request* OR *http\:\/\/f\/\<script* OR *\"unsafe\"\};* OR *function\ page_load\(\)*))
 type: any
 priority: 4

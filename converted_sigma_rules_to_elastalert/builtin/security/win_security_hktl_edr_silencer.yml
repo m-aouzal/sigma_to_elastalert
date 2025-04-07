@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:securityy
+      query: winlog.channel.keyword:security AND ((event.code.keyword:(5441 OR 5447)) AND winlog.event_data.FilterName.keyword:*custom\ outbound\ filter*)
 type: any
 priority: 3

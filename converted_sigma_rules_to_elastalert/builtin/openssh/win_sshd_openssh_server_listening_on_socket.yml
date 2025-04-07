@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:openssh\/operationall
+      query: winlog.channel.keyword:openssh\/operational AND (event.code.keyword:4 AND winlog.event_data.process.keyword:sshd AND winlog.event_data.payload.keyword:server\ listening\ on\ *)
 type: any
 priority: 2

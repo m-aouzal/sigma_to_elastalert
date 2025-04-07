@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:securityy
+      query: winlog.channel.keyword:security AND ((event.code.keyword:4732 AND (winlog.event_data.targetusername.keyword:administr* OR winlog.event_data.targetsid.keyword:s\-1\-5\-32\-544)) AND (NOT user.name.keyword:*$))
 type: any
 priority: 2
