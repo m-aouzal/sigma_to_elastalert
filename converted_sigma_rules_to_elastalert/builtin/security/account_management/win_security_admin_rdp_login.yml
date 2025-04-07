@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND (event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:10 AND winlog.event_data.AuthenticationPackageName.keyword:negotiate AND winlog.event_data.TargetUserName.keyword:admin*)
+      query: winlog.channel.keyword:securityy
 type: any
 priority: 1

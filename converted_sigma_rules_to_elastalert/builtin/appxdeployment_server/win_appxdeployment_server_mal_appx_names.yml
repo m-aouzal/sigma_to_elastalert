@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft\-Windows\-AppXDeploymentServer\/Operational AND ((event.code.keyword:(400 OR 401)) AND winlog.event_data.PackageFullName.keyword:*3669e262\-ec02\-4e9d\-bcb4\-3d008b4afac9*)
+      query: winlog.channel.keyword:microsoft\-windows\-appxdeploymentserver\/operationall
 type: any
 priority: 2

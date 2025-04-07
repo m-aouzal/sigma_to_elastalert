@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND ((event.code.keyword:4657 AND (winlog.event_data.ObjectName.keyword:(*winevt\\publishers\\\{5770385f\-c22a\-43e0\-bf4c\-06f5698ffbd9\}* OR *winevt\\channels\\microsoft\-windows\-sysmon\/operational*)) AND winlog.event_data.ObjectValueName.keyword:enabled AND winlog.event_data.NewValue.keyword:0) OR (event.code.keyword:4663 AND (winlog.event_data.ObjectName.keyword:(*winevt\\publishers\\\{5770385f\-c22a\-43e0\-bf4c\-06f5698ffbd9\}* OR *winevt\\channels\\microsoft\-windows\-sysmon\/operational*)) AND winlog.event_data.AccessMask.keyword:65536))
+      query: winlog.channel.keyword:securityy
 type: any
 priority: 3

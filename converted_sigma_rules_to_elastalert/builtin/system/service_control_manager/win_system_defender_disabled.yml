@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:System AND (event.code.keyword:7036 AND winlog.provider_name.keyword:service\ control\ manager AND (winlog.event_data.param1:(windows\ defender\ antivirus\ service OR service\ antivirus\ microsoft\ defender)) AND (winlog.event_data.param2:(stopped OR arrêté)))
+      query: winlog.channel.keyword:systemm
 type: any
 priority: 2

@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft\-Windows\-Windows\ Firewall\ With\ Advanced\ Security\/Firewall AND ((event.code.keyword:(2004 OR 2071 OR 2097)) AND winlog.event_data.Action.keyword:3 AND winlog.event_data.ModifyingApplication.keyword:*\:\\windows\\system32\\wbem\\wmiprvse.exe)
+      query: winlog.channel.keyword:microsoft\-windows\-windows\ firewall\ with\ advanced\ security\/firewalll
 type: any
 priority: 2

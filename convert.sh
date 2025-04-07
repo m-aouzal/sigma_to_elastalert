@@ -81,7 +81,7 @@ process_rule() {
     # STEP 2.5: Replace index "*" with "winlogbeat-*"
     sed -i -E "s/(index:[[:space:]]*)['\"]?[*]['\"]?/\1\"winlogbeat-*\"/" "$temp_fixed_description"
 
-    # STEP 3: Awk pass to append .keyword under lines "query:" or "query_string:"
+    # STEP 3: Awk pass to append .keyword and pipe to sed for lowercasing
     temp_final=$(mktemp)
     awk -v exFile="$EXEMPTION_FILE" '
 ###############################################################################
@@ -107,10 +107,10 @@ function ends_with_keyword(f) {
 
 ###############################################################################
 # Helper: valid_ecs_field(f)
-# Returns true if the field matches an ECS-like pattern: word.word...
+# Returns true if the field matches the requested ECS pattern
 ###############################################################################
 function valid_ecs_field(f) {
-    return (f ~ /^[a-zA-Z_]+(\.[a-zA-Z0-9_]+)+$/) 
+    return (f ~ /^[a-zA-Z_]+(\.[a-zA-Z0-9_]+)+$/)
 }
 
 ###############################################################################
@@ -120,7 +120,7 @@ function process_query(q) {
     result = ""
     while (length(q) > 0) {
         # Match an ECS field followed by a colon (e.g., winlog.channel:)
-        if (match(q, /([a-zA-Z_]+\.[a-zA-Z_]+(\.[a-zA-Z_]+)*):/)) {
+        if (match(q, /([a-zA-Z_]+\.[a-zA-Z_]+(\.[a-zA-Z0-9_]+)*):/)) {
             field = substr(q, RSTART, RLENGTH - 1)  # Exclude the colon
             rest = substr(q, RSTART + RLENGTH)
             before = substr(q, 1, RSTART - 1)
@@ -171,10 +171,11 @@ function process_query(q) {
         print $0
     }
 }
-' "$temp_fixed_description" > "$temp_final"
+' "$temp_fixed_description" | sed -E 's/(winlog\.channel\.keyword:)((\\[ ]|[^ ])+)( .*|$)/\1\L\2\E\3/g' > "$temp_final"
+
     if [ $? -ne 0 ]; then
-        echo "Error in AWK .keyword post-processing for $rule"
-        echo "$rule: AWK .keyword step failed" >> "$FAIL_LIST"
+        echo "Error in AWK or sed post-processing for $rule"
+        echo "$rule: Post-processing failed" >> "$FAIL_LIST"
         rm -f "$temp_fixed_description" "$temp_final"
         return
     fi
@@ -206,4 +207,3 @@ else
 fi
 
 rm -f "$FAIL_LIST"
-

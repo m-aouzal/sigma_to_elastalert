@@ -1,5 +1,6 @@
-description: Detects the deletion of a process's executable by itself. This is usually not possible without workarounds and may be used by malware to hide its traces.
-
+description: |
+  Detects the deletion of a process's executable by itself. This is usually not possible without workarounds and may be used by malware to hide its traces.
+  
 name: Process Deletion of Its Own Executable
 index: "winlogbeat-*"
 filter:

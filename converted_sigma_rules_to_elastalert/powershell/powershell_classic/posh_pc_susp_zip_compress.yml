@@ -7,6 +7,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Windows\ PowerShell AND (winlog.event_data.Data.keyword:(*compress\-archive\ \-path*\-destinationpath\ $env\:temp* OR *compress\-archive\ \-path*\-destinationpath*\\appdata\\local\\temp\\* OR *compress\-archive\ \-path*\-destinationpath*\:\\windows\\temp\\*))
+      query: winlog.channel.keyword:windows\ powershelll
 type: any
 priority: 2

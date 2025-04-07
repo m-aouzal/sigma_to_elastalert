@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft\-Windows\-CodeIntegrity\/Operational AND event.code.keyword:3104
+      query: winlog.channel.keyword:microsoft\-windows\-codeintegrity\/operationall
 type: any
 priority: 3

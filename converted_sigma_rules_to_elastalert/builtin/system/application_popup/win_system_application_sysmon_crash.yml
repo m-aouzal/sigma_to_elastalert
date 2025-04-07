@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:System AND (winlog.provider_name.keyword:application\ popup AND event.code.keyword:26 AND (winlog.event_data.Caption.keyword:(sysmon64.exe\ \-\ application\ error OR sysmon.exe\ \-\ application\ error)))
+      query: winlog.channel.keyword:systemm
 type: any
 priority: 3

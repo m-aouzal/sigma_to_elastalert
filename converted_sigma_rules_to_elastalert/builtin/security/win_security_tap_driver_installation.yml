@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND (event.code.keyword:4697 AND winlog.event_data.ServiceFileName.keyword:*tap0901*)
+      query: winlog.channel.keyword:securityy
 type: any
 priority: 1

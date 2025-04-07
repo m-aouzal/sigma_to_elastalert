@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND ((event.code.keyword:4769 AND winlog.event_data.TicketOptions.keyword:0x40810000 AND winlog.event_data.TicketEncryptionType.keyword:0x17) AND (NOT service.name.keyword:*$))
+      query: winlog.channel.keyword:securityy
 type: any
 priority: 2

@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft\-Windows\-LSA\/Operational AND ((event.code.keyword:300 AND winlog.event_data.TargetUserSid.keyword:s\-1\-5\-21\-* AND (winlog.event_data.SidList.keyword:(*s\-1\-5\-32\-544* OR *\-500\}* OR *\-518\}* OR *\-519\}*))) AND (NOT (winlog.event_data.TargetUserSid.keyword:(*\-500 OR *\-518 OR *\-519))))
+      query: winlog.channel.keyword:microsoft\-windows\-lsa\/operationall
 type: any
 priority: 2

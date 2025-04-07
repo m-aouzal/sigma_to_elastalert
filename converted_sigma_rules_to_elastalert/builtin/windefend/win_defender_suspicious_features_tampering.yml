@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Microsoft\-Windows\-Windows\ Defender\/Operational AND (event.code.keyword:5007 AND (winlog.event_data.NewValue.keyword:(*\\windows\ defender\\disableantispyware\ * OR *\\windows\ defender\\scan\\disableremovabledrivescanning\ * OR *\\windows\ defender\\scan\\disablescanningmappednetworkdrivesforfullscan\ * OR *\\windows\ defender\\spynet\\disableblockatfirstseen\ * OR *\\real\-time\ protection\\spynetreporting\ *)))
+      query: winlog.channel.keyword:microsoft\-windows\-windows\ defender\/operationall
 type: any
 priority: 3

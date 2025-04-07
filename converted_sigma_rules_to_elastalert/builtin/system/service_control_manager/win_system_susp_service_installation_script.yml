@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:System AND ((winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045) AND (winlog.event_data.ImagePath.keyword:(*\ \-c\ * OR *\ \/c\ * OR *\ –c\ * OR *\ —c\ * OR *\ ―c\ *) OR winlog.event_data.ImagePath.keyword:(*\ \-r\ * OR *\ \/r\ * OR *\ –r\ * OR *\ —r\ * OR *\ ―r\ *) OR winlog.event_data.ImagePath.keyword:(*\ \-k\ * OR *\ \/k\ * OR *\ –k\ * OR *\ —k\ * OR *\ ―k\ *)) AND (winlog.event_data.ImagePath.keyword:(*cscript* OR *mshta* OR *powershell* OR *pwsh* OR *regsvr32* OR *rundll32* OR *wscript*)))
+      query: winlog.channel.keyword:systemm
 type: any
 priority: 3

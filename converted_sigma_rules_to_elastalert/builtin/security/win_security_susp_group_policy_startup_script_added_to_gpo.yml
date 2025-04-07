@@ -6,6 +6,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:Security AND ((event.code.keyword:(5136 OR 5145)) AND ((((winlog.event_data.AttributeLDAPDisplayName.keyword:(gpcmachineextensionnames OR gpcuserextensionnames)) AND winlog.event_data.AttributeValue.keyword:*42b5faae\-6536\-11d2\-ae5a\-0000f87571e3*) AND (winlog.event_data.AttributeValue.keyword:(*40b6664f\-4972\-11d1\-a7ca\-0000f87571e3* OR *40b66650\-4972\-11d1\-a7ca\-0000f87571e3*))) OR (winlog.event_data.ShareName.keyword:*\\sysvol AND (winlog.event_data.RelativeTargetName.keyword:(*\\scripts.ini OR *\\psscripts.ini)) AND winlog.event_data.AccessList.keyword:*%%4417*)))
+      query: winlog.channel.keyword:securityy
 type: any
 priority: 2

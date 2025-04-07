@@ -5,6 +5,6 @@ index: "winlogbeat-*"
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:System AND (event.code.keyword:104 AND winlog.provider_name.keyword:microsoft\-windows\-eventlog AND (winlog.channel.keyword:(microsoft\-windows\-powershell\/operational OR microsoft\-windows\-sysmon\/operational OR powershellcore\/operational OR security OR system OR windows\ powershell)))
+      query: winlog.channel.keyword:systemm
 type: any
 priority: 3
