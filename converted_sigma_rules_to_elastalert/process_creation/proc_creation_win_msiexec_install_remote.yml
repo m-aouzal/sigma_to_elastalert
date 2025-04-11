@@ -1,10 +1,21 @@
 description: |
   Detects usage of Msiexec.exe to install packages hosted remotely quietly
 name: Suspicious Msiexec Quiet Install From Remote Location
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\msiexec.exe OR winlog.event_data.originalfilename.keyword:msiexec.exe) AND (process.command_line.keyword:(*\-i* OR *\/i* OR *–i* OR *—i* OR *―i*) OR process.command_line.keyword:(*\-package* OR *\/package* OR *–package* OR *—package* OR *―package*) OR process.command_line.keyword:(*\-a* OR *\/a* OR *–a* OR *—a* OR *―a*) OR process.command_line.keyword:(*\-j* OR *\/j* OR *–j* OR *—j* OR *―j*)) AND process.command_line.keyword:(*\-q* OR *\/q* OR *–q* OR *—q* OR *―q*) AND (process.command_line.keyword:(*http* OR *\\\\*))
+      query: (winlog.event_data.image.keyword:*\\msiexec.exe OR winlog.event_data.originalfilename.keyword:msiexec.exe)
+        AND (process.command_line.keyword:(*\-i* OR *\/i* OR *–i* OR *—i* OR *―i*)
+        OR process.command_line.keyword:(*\-package* OR *\/package* OR *–package*
+        OR *—package* OR *―package*) OR process.command_line.keyword:(*\-a* OR *\/a*
+        OR *–a* OR *—a* OR *―a*) OR process.command_line.keyword:(*\-j* OR *\/j* OR
+        *–j* OR *—j* OR *―j*)) AND process.command_line.keyword:(*\-q* OR *\/q* OR
+        *–q* OR *—q* OR *―q*) AND (process.command_line.keyword:(*http* OR *\\\\*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218.007
+risk: medium

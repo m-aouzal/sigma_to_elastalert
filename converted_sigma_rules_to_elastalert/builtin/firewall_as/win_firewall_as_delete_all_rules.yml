@@ -1,10 +1,20 @@
 description: |
   Detects when a all the rules have been deleted from the Windows Defender Firewall configuration
 name: All Rules Have Been Deleted From The Windows Firewall Configuration
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-windows\ firewall\ with\ advanced\ security\/firewall AND ((event.code.keyword:(2033 OR 2059)) AND (NOT winlog.event_data.ModifyingApplication.keyword:*\:\\windows\\system32\\svchost.exe) AND (NOT (winlog.event_data.ModifyingApplication.keyword:*\:\\programdata\\microsoft\\windows\ defender\\platform\\* AND winlog.event_data.ModifyingApplication.keyword:*\\msmpeng.exe*)))
+      query: winlog.channel.keyword:microsoft\-windows\-windows\ firewall\ with\ advanced\
+        security\/firewall AND ((event.code.keyword:(2033 OR 2059)) AND (NOT 
+        winlog.event_data.ModifyingApplication.keyword:*\:\\windows\\system32\\svchost.exe)
+        AND (NOT 
+        (winlog.event_data.ModifyingApplication.keyword:*\:\\programdata\\microsoft\\windows\
+        defender\\platform\\* AND winlog.event_data.ModifyingApplication.keyword:*\\msmpeng.exe*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.004
+risk: high

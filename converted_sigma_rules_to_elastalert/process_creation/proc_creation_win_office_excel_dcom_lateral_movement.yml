@@ -1,11 +1,18 @@
 description: |
   Detects suspicious child processes of Excel which could be an indicator of lateral movement leveraging the "ActivateMicrosoftApp" Excel DCOM object.
-  
+
 name: Potential Excel.EXE DCOM Lateral Movement Via ActivateMicrosoftApp
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\\excel.exe AND ((winlog.event_data.originalfilename.keyword:(foxprow.exe OR schdplus.exe OR winproj.exe)) OR (winlog.event_data.image.keyword:(*\\foxprow.exe OR *\\schdplus.exe OR *\\winproj.exe)))
+      query: process.parent.executable.keyword:*\\excel.exe AND ((winlog.event_data.originalfilename.keyword:(foxprow.exe
+        OR schdplus.exe OR winproj.exe)) OR (winlog.event_data.image.keyword:(*\\foxprow.exe
+        OR *\\schdplus.exe OR *\\winproj.exe)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- lateral-movement
+mitre_attack_technique:
+- t1021.003
+risk: high

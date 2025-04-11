@@ -1,12 +1,17 @@
 description: |
   Detects when an attacker modifies the "REG_MULTI_SZ" value named "Extensions" to include a custom DLL to achieve persistence via lsass.
   The "Extensions" list contains filenames of DLLs being automatically loaded by lsass.exe. Each DLL has its InitializeLsaExtension() method called after loading.
-  
+
 name: Potential Persistence Via LSA Extensions
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\system\\currentcontrolset\\control\\lsaextensionconfig\\lsasrv\\extensions*
+      query: 
+        registry.path.keyword:*\\system\\currentcontrolset\\control\\lsaextensionconfig\\lsasrv\\extensions*
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique: []
+risk: high

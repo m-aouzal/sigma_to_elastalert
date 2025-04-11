@@ -1,10 +1,18 @@
 description: |
   Detects the execution of some potentially unwanted tools such as PsExec, Procdump, etc. (part of the Sysinternals suite) via the creation of the "accepteula" registry key.
 name: PUA - Sysinternals Tools Execution - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.EventType.keyword:createkey AND (registry.path.keyword:(*\\active\ directory\ explorer* OR *\\handle* OR *\\livekd* OR *\\process\ explorer* OR *\\procdump* OR *\\psexec* OR *\\psloglist* OR *\\pspasswd* OR *\\sdelete* OR *\\sysinternals*)) AND registry.path.keyword:*\\eulaaccepted
+      query: winlog.event_data.EventType.keyword:createkey AND (registry.path.keyword:(*\\active\
+        directory\ explorer* OR *\\handle* OR *\\livekd* OR *\\process\ explorer*
+        OR *\\procdump* OR *\\psexec* OR *\\psloglist* OR *\\pspasswd* OR *\\sdelete*
+        OR *\\sysinternals*)) AND registry.path.keyword:*\\eulaaccepted
 type: any
 priority: 2
+mitre_attack_tactic:
+- resource-development
+mitre_attack_technique:
+- t1588.002
+risk: medium

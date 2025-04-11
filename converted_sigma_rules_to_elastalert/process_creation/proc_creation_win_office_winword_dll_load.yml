@@ -1,10 +1,16 @@
 description: |
   Detects potential DLL sideloading using the Microsoft Office winword process via the '/l' flag.
 name: Potential Arbitrary DLL Load Using Winword
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\winword.exe OR winlog.event_data.originalfilename.keyword:winword.exe) AND (process.command_line.keyword:*\/l\ * AND process.command_line.keyword:*.dll*)
+      query: (winlog.event_data.image.keyword:*\\winword.exe OR winlog.event_data.originalfilename.keyword:winword.exe)
+        AND (process.command_line.keyword:*\/l\ * AND process.command_line.keyword:*.dll*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1202
+risk: medium

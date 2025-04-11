@@ -1,10 +1,16 @@
 description: |
   Detects attempts to bypass User Account Control (UAC) by hijacking the Microsoft Management Console (MMC) Windows Firewall snap-in
 name: UAC Bypass via Windows Firewall Snap-In Hijack
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:*\\mmc.exe AND process.parent.command_line.keyword:*wf.msc*) AND (NOT process.executable.keyword:*\\werfault.exe)
+      query: (process.parent.executable.keyword:*\\mmc.exe AND process.parent.command_line.keyword:*wf.msc*)
+        AND (NOT process.executable.keyword:*\\werfault.exe)
 type: any
 priority: 2
+mitre_attack_tactic:
+- privilege-escalation
+mitre_attack_technique:
+- t1548
+risk: medium

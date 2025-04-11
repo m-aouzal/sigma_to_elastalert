@@ -1,10 +1,19 @@
 description: |
   Hides the file extension through modification of the registry
 name: Registry Modification to Hidden File Extension
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\explorer\\advanced\\hidefileext AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)) OR (registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\explorer\\advanced\\hidden AND winlog.event_data.Details.keyword:dword\ \(0x00000002\))
+      query: 
+        (registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\explorer\\advanced\\hidefileext
+        AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)) OR 
+        (registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\explorer\\advanced\\hidden
+        AND winlog.event_data.Details.keyword:dword\ \(0x00000002\))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1137
+risk: medium

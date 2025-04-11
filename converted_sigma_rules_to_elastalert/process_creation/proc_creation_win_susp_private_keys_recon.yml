@@ -1,10 +1,21 @@
 description: |
   Adversaries may search for private key certificate files on compromised systems for insecurely stored credential
 name: Private Keys Reconnaissance Via CommandLine Tools
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*.key* OR *.pgp* OR *.gpg* OR *.ppk* OR *.p12* OR *.pem* OR *.pfx* OR *.cer* OR *.p7b* OR *.asc*)) AND (((winlog.event_data.image.keyword:*\\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe) AND process.command_line.keyword:*dir\ *) OR (((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND process.command_line.keyword:*get\-childitem\ *) OR (winlog.event_data.image.keyword:*\\findstr.exe OR winlog.event_data.originalfilename.keyword:findstr.exe))
+      query: (process.command_line.keyword:(*.key* OR *.pgp* OR *.gpg* OR *.ppk* OR
+        *.p12* OR *.pem* OR *.pfx* OR *.cer* OR *.p7b* OR *.asc*)) AND (((winlog.event_data.image.keyword:*\\cmd.exe
+        OR winlog.event_data.originalfilename.keyword:cmd.exe) AND process.command_line.keyword:*dir\
+        *) OR (((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe))
+        OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll)))
+        AND process.command_line.keyword:*get\-childitem\ *) OR (winlog.event_data.image.keyword:*\\findstr.exe
+        OR winlog.event_data.originalfilename.keyword:findstr.exe))
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1552.004
+risk: medium

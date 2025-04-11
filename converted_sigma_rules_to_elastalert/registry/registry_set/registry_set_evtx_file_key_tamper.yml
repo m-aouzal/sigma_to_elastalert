@@ -1,10 +1,16 @@
 description: |
   Detects tampering with EventLog service "file" key. In order to change the default location of an Evtx file. This technique is used to tamper with log collection and alerting
 name: Potential EventLog File Location Tampering
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\\system\\currentcontrolset\\services\\eventlog\\* AND registry.path.keyword:*\\file) AND (NOT winlog.event_data.Details.keyword:*\\system32\\winevt\\logs\\*)
+      query: (registry.path.keyword:*\\system\\currentcontrolset\\services\\eventlog\\*
+        AND registry.path.keyword:*\\file) AND (NOT winlog.event_data.Details.keyword:*\\system32\\winevt\\logs\\*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.002
+risk: high

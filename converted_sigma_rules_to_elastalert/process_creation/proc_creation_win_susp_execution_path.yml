@@ -1,10 +1,25 @@
 description: |
   Detects a potentially suspicious execution from an uncommon folder.
 name: Process Execution From A Potentially Suspicious Folder
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\:\\perflogs\\* OR *\:\\users\\all\ users\\* OR *\:\\users\\default\\* OR *\:\\users\\networkservice\\* OR *\:\\windows\\addins\\* OR *\:\\windows\\debug\\* OR *\:\\windows\\fonts\\* OR *\:\\windows\\help\\* OR *\:\\windows\\ime\\* OR *\:\\windows\\media\\* OR *\:\\windows\\repair\\* OR *\:\\windows\\security\\* OR *\:\\windows\\system32\\tasks\\* OR *\:\\windows\\tasks\\* OR *$recycle.bin* OR *\\config\\systemprofile\\* OR *\\intel\\logs\\* OR *\\rsa\\machinekeys\\*)) AND (NOT (process.executable.keyword:c\:\\users\\public\\ibm\\clientsolutions\\start_programs\\* OR (process.executable.keyword:c\:\\windows\\syswow64\\config\\systemprofile\\citrix\\updaterbinaries\\* AND process.executable.keyword:*\\citrixreceiverupdater.exe)))
+      query: (process.executable.keyword:(*\:\\perflogs\\* OR *\:\\users\\all\ users\\*
+        OR *\:\\users\\default\\* OR *\:\\users\\networkservice\\* OR *\:\\windows\\addins\\*
+        OR *\:\\windows\\debug\\* OR *\:\\windows\\fonts\\* OR *\:\\windows\\help\\*
+        OR *\:\\windows\\ime\\* OR *\:\\windows\\media\\* OR *\:\\windows\\repair\\*
+        OR *\:\\windows\\security\\* OR *\:\\windows\\system32\\tasks\\* OR *\:\\windows\\tasks\\*
+        OR *$recycle.bin* OR *\\config\\systemprofile\\* OR *\\intel\\logs\\* OR *\\rsa\\machinekeys\\*))
+        AND (NOT 
+        (process.executable.keyword:c\:\\users\\public\\ibm\\clientsolutions\\start_programs\\*
+        OR 
+        (process.executable.keyword:c\:\\windows\\syswow64\\config\\systemprofile\\citrix\\updaterbinaries\\*
+        AND process.executable.keyword:*\\citrixreceiverupdater.exe)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036
+risk: high

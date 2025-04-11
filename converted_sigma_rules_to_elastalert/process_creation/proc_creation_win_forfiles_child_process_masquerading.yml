@@ -1,11 +1,20 @@
 description: |
   Detects the execution of "forfiles" from a non-default location, in order to potentially spawn a custom "cmd.exe" from the current working directory.
-  
+
 name: Forfiles.EXE Child Process Masquerading
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((process.parent.command_line.keyword:(*.exe OR *.exe\")) AND process.executable.keyword:*\\cmd.exe AND process.command_line.keyword:\/c\ echo\ \"*) AND (NOT ((process.parent.executable.keyword:(*\:\\windows\\system32\\* OR *\:\\windows\\syswow64\\*)) AND process.parent.executable.keyword:*\\forfiles.exe AND (process.executable.keyword:(*\:\\windows\\system32\\* OR *\:\\windows\\syswow64\\*)) AND process.executable.keyword:*\\cmd.exe))
+      query: ((process.parent.command_line.keyword:(*.exe OR *.exe\")) AND process.executable.keyword:*\\cmd.exe
+        AND process.command_line.keyword:\/c\ echo\ \"*) AND (NOT ((process.parent.executable.keyword:(*\:\\windows\\system32\\*
+        OR *\:\\windows\\syswow64\\*)) AND process.parent.executable.keyword:*\\forfiles.exe
+        AND (process.executable.keyword:(*\:\\windows\\system32\\* OR *\:\\windows\\syswow64\\*))
+        AND process.executable.keyword:*\\cmd.exe))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036
+risk: high

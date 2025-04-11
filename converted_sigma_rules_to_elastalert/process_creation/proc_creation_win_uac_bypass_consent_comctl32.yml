@@ -1,10 +1,18 @@
 description: |
   Detects the pattern of UAC Bypass using consent.exe and comctl32.dll (UACMe 22)
 name: UAC Bypass Using Consent and Comctl32 - Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\\consent.exe AND process.executable.keyword:*\\werfault.exe AND (winlog.event_data.IntegrityLevel.keyword:(high OR system OR s\-1\-16\-16384 OR s\-1\-16\-12288))
+      query: process.parent.executable.keyword:*\\consent.exe AND process.executable.keyword:*\\werfault.exe
+        AND (winlog.event_data.IntegrityLevel.keyword:(high OR system OR s\-1\-16\-16384
+        OR s\-1\-16\-12288))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1548.002
+risk: high

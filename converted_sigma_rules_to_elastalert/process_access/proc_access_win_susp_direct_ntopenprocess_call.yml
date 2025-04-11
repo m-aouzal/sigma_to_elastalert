@@ -1,10 +1,38 @@
 description: |
   Detects potential calls to NtOpenProcess directly from NTDLL.
 name: Potential Direct Syscall of NtOpenProcess
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.CallTrace.keyword:unknown* AND (NOT ((winlog.event_data.TargetImage.keyword:*vcredist_x64.exe AND process.executable.keyword:*vcredist_x64.exe) OR ((process.executable.keyword:(*\:\\program\ files\ \(x86\)\\* OR *\:\\program\ files\\* OR *\:\\windows\\system32\\* OR *\:\\windows\\syswow64\\* OR *\:\\windows\\winsxs\\*)) AND (winlog.event_data.TargetImage.keyword:(*\:\\program\ files\ \(x86\)\\* OR *\:\\program\ files\\* OR *\:\\windows\\system32\\* OR *\:\\windows\\syswow64\\* OR *\:\\windows\\winsxs\\*))) OR winlog.provider_name.keyword:microsoft\-windows\-kernel\-audit\-api\-calls)) AND (NOT ((winlog.event_data.TargetImage.keyword:*\:\\windows\\system32\\systeminfo.exe AND process.executable.keyword:*setup64.exe) OR (process.executable.keyword:*\:\\windows\\explorer.exe AND winlog.event_data.TargetImage.keyword:*\:\\program\ files\\cylance\\desktop\\cylanceui.exe) OR (process.executable.keyword:*amazonssmagentsetup.exe AND winlog.event_data.TargetImage.keyword:*amazonssmagentsetup.exe) OR (process.executable.keyword:*\\appdata\\local\\programs\\microsoft\ vs\ code\\code.exe AND winlog.event_data.TargetImage.keyword:*\\appdata\\local\\programs\\microsoft\ vs\ code\\code.exe) OR (winlog.event_data.TargetImage.keyword:*\\appdata\\local\\microsoft\\teams\\current\\teams.exe AND process.executable.keyword:*\\appdata\\local\\microsoft\\teams\\current\\teams.exe) OR (winlog.event_data.TargetImage.keyword:*\\appdata\\local\\discord\\* AND winlog.event_data.TargetImage.keyword:*\\discord.exe) OR (process.executable.keyword:*\\appdata\\local\\yammerdesktop\\app\-* AND process.executable.keyword:*\\yammer.exe AND winlog.event_data.TargetImage.keyword:*\\appdata\\local\\yammerdesktop\\app\-* AND winlog.event_data.TargetImage.keyword:*\\yammer.exe AND winlog.event_data.GrantedAccess.keyword:0x1000) OR winlog.event_data.TargetImage.keyword:*\\evernote\\evernote.exe OR (process.executable.keyword:*\:\\program\ files\\adobe\\acrobat\ dc\\acrobat\\* AND process.executable.keyword:*\\acrocef.exe AND winlog.event_data.TargetImage.keyword:*\:\\program\ files\\adobe\\acrobat\ dc\\acrobat\\* AND winlog.event_data.TargetImage.keyword:*\\acrocef.exe)))
+      query: winlog.event_data.CallTrace.keyword:unknown* AND (NOT ((winlog.event_data.TargetImage.keyword:*vcredist_x64.exe
+        AND process.executable.keyword:*vcredist_x64.exe) OR ((process.executable.keyword:(*\:\\program\
+        files\ \(x86\)\\* OR *\:\\program\ files\\* OR *\:\\windows\\system32\\* OR
+        *\:\\windows\\syswow64\\* OR *\:\\windows\\winsxs\\*)) AND (winlog.event_data.TargetImage.keyword:(*\:\\program\
+        files\ \(x86\)\\* OR *\:\\program\ files\\* OR *\:\\windows\\system32\\* OR
+        *\:\\windows\\syswow64\\* OR *\:\\windows\\winsxs\\*))) OR winlog.provider_name.keyword:microsoft\-windows\-kernel\-audit\-api\-calls))
+        AND (NOT ((winlog.event_data.TargetImage.keyword:*\:\\windows\\system32\\systeminfo.exe
+        AND process.executable.keyword:*setup64.exe) OR (process.executable.keyword:*\:\\windows\\explorer.exe
+        AND winlog.event_data.TargetImage.keyword:*\:\\program\ files\\cylance\\desktop\\cylanceui.exe)
+        OR (process.executable.keyword:*amazonssmagentsetup.exe AND winlog.event_data.TargetImage.keyword:*amazonssmagentsetup.exe)
+        OR (process.executable.keyword:*\\appdata\\local\\programs\\microsoft\ vs\
+        code\\code.exe AND winlog.event_data.TargetImage.keyword:*\\appdata\\local\\programs\\microsoft\
+        vs\ code\\code.exe) OR 
+        (winlog.event_data.TargetImage.keyword:*\\appdata\\local\\microsoft\\teams\\current\\teams.exe
+        AND 
+        process.executable.keyword:*\\appdata\\local\\microsoft\\teams\\current\\teams.exe)
+        OR (winlog.event_data.TargetImage.keyword:*\\appdata\\local\\discord\\* AND
+        winlog.event_data.TargetImage.keyword:*\\discord.exe) OR (process.executable.keyword:*\\appdata\\local\\yammerdesktop\\app\-*
+        AND process.executable.keyword:*\\yammer.exe AND winlog.event_data.TargetImage.keyword:*\\appdata\\local\\yammerdesktop\\app\-*
+        AND winlog.event_data.TargetImage.keyword:*\\yammer.exe AND winlog.event_data.GrantedAccess.keyword:0x1000)
+        OR winlog.event_data.TargetImage.keyword:*\\evernote\\evernote.exe OR (process.executable.keyword:*\:\\program\
+        files\\adobe\\acrobat\ dc\\acrobat\\* AND process.executable.keyword:*\\acrocef.exe
+        AND winlog.event_data.TargetImage.keyword:*\:\\program\ files\\adobe\\acrobat\
+        dc\\acrobat\\* AND winlog.event_data.TargetImage.keyword:*\\acrocef.exe)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1106
+risk: medium

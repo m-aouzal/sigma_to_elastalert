@@ -1,10 +1,15 @@
 description: |
   Detects an installation of a device that is forbidden by the system policy
 name: Device Installation Blocked
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.channel.keyword:security AND event.code.keyword:6423
 type: any
 priority: 2
+mitre_attack_tactic:
+- initial-access
+mitre_attack_technique:
+- t1200
+risk: medium

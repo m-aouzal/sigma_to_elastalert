@@ -1,10 +1,21 @@
 description: |
   Detects execution of the SharpImpersonation tool. Which can be used to manipulate tokens on a Windows computers remotely (PsExec/WmiExec) or interactively
 name: HackTool - SharpImpersonation Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\sharpimpersonation.exe OR winlog.event_data.originalfilename.keyword:sharpimpersonation.exe) OR ((winlog.event_data.commandline.keyword:*\ user\:* AND winlog.event_data.commandline.keyword:*\ binary\:*) OR (winlog.event_data.commandline.keyword:*\ user\:* AND winlog.event_data.commandline.keyword:*\ shellcode\:*) OR (winlog.event_data.commandline.keyword:(*\ technique\:createprocessasuserw* OR *\ technique\:impersonateloggedonuser*)))
+      query: (winlog.event_data.image.keyword:*\\sharpimpersonation.exe OR winlog.event_data.originalfilename.keyword:sharpimpersonation.exe)
+        OR ((winlog.event_data.commandline.keyword:*\ user\:* AND winlog.event_data.commandline.keyword:*\
+        binary\:*) OR (winlog.event_data.commandline.keyword:*\ user\:* AND winlog.event_data.commandline.keyword:*\
+        shellcode\:*) OR (winlog.event_data.commandline.keyword:(*\ technique\:createprocessasuserw*
+        OR *\ technique\:impersonateloggedonuser*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- privilege-escalation
+- defense-evasion
+mitre_attack_technique:
+- t1134.001
+- t1134.003
+risk: high

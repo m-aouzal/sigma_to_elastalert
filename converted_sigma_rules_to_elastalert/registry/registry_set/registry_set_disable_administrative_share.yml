@@ -1,10 +1,16 @@
 description: |
   Administrative shares are hidden network shares created by Microsoft Windows NT operating systems that grant system administrators remote access to every disk volume on a network-connected system
 name: Disable Administrative Share Creation at Startup
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\services\\lanmanserver\\parameters\\* AND (registry.path.keyword:(*\\autosharewks OR *\\autoshareserver)) AND winlog.event_data.Details.keyword:dword\ \(0x00000000\)
+      query: registry.path.keyword:*\\services\\lanmanserver\\parameters\\* AND (registry.path.keyword:(*\\autosharewks
+        OR *\\autoshareserver)) AND winlog.event_data.Details.keyword:dword\ \(0x00000000\)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1070.005
+risk: medium

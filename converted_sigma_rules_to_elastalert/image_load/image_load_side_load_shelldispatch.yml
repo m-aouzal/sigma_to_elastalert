@@ -1,10 +1,18 @@
 description: |
   Detects potential DLL sideloading of "ShellDispatch.dll"
 name: Potential ShellDispatch.DLL Sideloading
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\\shelldispatch.dll AND (NOT ((winlog.event_data.imageloaded.keyword:*\:\\users\\* AND winlog.event_data.imageloaded.keyword:*\\appdata\\local\\temp\\*) OR winlog.event_data.imageloaded.keyword:*\:\\windows\\temp\\*))
+      query: file.path.keyword:*\\shelldispatch.dll AND (NOT ((winlog.event_data.imageloaded.keyword:*\:\\users\\*
+        AND winlog.event_data.imageloaded.keyword:*\\appdata\\local\\temp\\*) OR winlog.event_data.imageloaded.keyword:*\:\\windows\\temp\\*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: medium

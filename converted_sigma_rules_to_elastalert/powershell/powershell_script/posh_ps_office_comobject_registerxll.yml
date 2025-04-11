@@ -1,12 +1,18 @@
 description: |
   Adversaries may abuse Microsoft Office add-ins to obtain persistence on a compromised system.
   Office add-ins can be used to add functionality to Office programs
-  
+
 name: Code Executed Via Office Add-in XLL File
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*new\-object\ * AND powershell.file.script_block_text.keyword:*\-comobject\ * AND powershell.file.script_block_text.keyword:*.application* AND powershell.file.script_block_text.keyword:*.registerxll*
+      query: powershell.file.script_block_text.keyword:*new\-object\ * AND powershell.file.script_block_text.keyword:*\-comobject\
+        * AND powershell.file.script_block_text.keyword:*.application* AND powershell.file.script_block_text.keyword:*.registerxll*
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1137.006
+risk: high

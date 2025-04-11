@@ -1,10 +1,16 @@
 description: |
   Detects the use of the Dinject PowerShell cradle based on the specific flags
 name: HackTool - DInjector PowerShell Cradle Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*\ \/am51* AND process.command_line.keyword:*\ \/password*
+      query: process.command_line.keyword:*\ \/am51* AND process.command_line.keyword:*\
+        \/password*
 type: any
 priority: 4
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1055
+risk: critical

@@ -2,12 +2,17 @@ description: |
   Adversaries may look for folders and drives shared on remote systems as a means of identifying sources of information to gather as a precursor for Collection and
   to identify potential systems of interest for Lateral Movement.
   Networks often contain shared network drives and folders that enable users to access file directories on various systems across a network.
-  
+
 name: Suspicious Get Information for SMB Share - PowerShell Module
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.payload.keyword:*get\-smbshare* OR winlog.event_data.contextinfo.keyword:*get\-smbshare*
 type: any
 priority: 1
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1069.001
+risk: low

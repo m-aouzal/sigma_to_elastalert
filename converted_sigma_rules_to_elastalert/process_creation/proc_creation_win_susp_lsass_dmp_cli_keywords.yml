@@ -1,11 +1,21 @@
 description: |
   Detects the presence of the keywords "lsass" and ".dmp" in the commandline, which could indicate a potential attempt to dump or create a dump of the lsass process.
-  
+
 name: LSASS Dump Keyword In CommandLine
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.commandline.keyword:(*lsass.dmp* OR *lsass.zip* OR *lsass.rar* OR *andrew.dmp* OR *coredump.dmp* OR *notlsass.zip* OR *lsass_2* OR *lsassdump* OR *lsassdmp*)) OR (winlog.event_data.commandline.keyword:*lsass* AND winlog.event_data.commandline.keyword:*.dmp*) OR (winlog.event_data.commandline.keyword:*sqldmpr* AND winlog.event_data.commandline.keyword:*.mdmp*) OR (winlog.event_data.commandline.keyword:*nanodump* AND winlog.event_data.commandline.keyword:*.dmp*)
+      query: (winlog.event_data.commandline.keyword:(*lsass.dmp* OR *lsass.zip* OR
+        *lsass.rar* OR *andrew.dmp* OR *coredump.dmp* OR *notlsass.zip* OR *lsass_2*
+        OR *lsassdump* OR *lsassdmp*)) OR (winlog.event_data.commandline.keyword:*lsass*
+        AND winlog.event_data.commandline.keyword:*.dmp*) OR (winlog.event_data.commandline.keyword:*sqldmpr*
+        AND winlog.event_data.commandline.keyword:*.mdmp*) OR (winlog.event_data.commandline.keyword:*nanodump*
+        AND winlog.event_data.commandline.keyword:*.dmp*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.001
+risk: high

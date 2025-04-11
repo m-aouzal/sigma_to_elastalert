@@ -2,12 +2,18 @@ description: |
   Detect VBoxDrvInst.exe run with parameters allowing processing INF file.
   This allows to create values in the registry and install drivers.
   For example one could use this technique to obtain persistence via modifying one of Run or RunOnce registry keys
-  
+
 name: Suspicious VBoxDrvInst.exe Parameters
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\vboxdrvinst.exe AND (process.command_line.keyword:*driver* AND process.command_line.keyword:*executeinf*)
+      query: process.executable.keyword:*\\vboxdrvinst.exe AND (process.command_line.keyword:*driver*
+        AND process.command_line.keyword:*executeinf*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1112
+risk: medium

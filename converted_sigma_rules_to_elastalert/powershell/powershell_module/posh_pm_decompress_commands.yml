@@ -1,10 +1,15 @@
 description: |
   A General detection for specific decompress commands in PowerShell logs. This could be an adversary decompressing files.
 name: PowerShell Decompress Commands
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.Payload.keyword:*expand\-archive*
 type: any
 priority: 0
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1140
+risk: informational

@@ -1,10 +1,17 @@
 description: |
   Detects the execution of a renamed "ftp.exe" binary based on the PE metadata fields
 name: Renamed FTP.EXE Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.pe.original_file_name.keyword:ftp.exe AND (NOT process.executable.keyword:*\\ftp.exe)
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+- defense-evasion
+mitre_attack_technique:
+- t1059
+- t1202
+risk: medium

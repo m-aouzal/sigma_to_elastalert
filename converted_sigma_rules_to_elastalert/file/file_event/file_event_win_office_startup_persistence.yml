@@ -1,10 +1,22 @@
 description: |
   Detects creation of Microsoft Office files inside of one of the default startup folders in order to achieve persistence.
 name: Potential Persistence Via Microsoft Office Startup Folder
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (((winlog.event_data.targetfilename.keyword:*\\microsoft\\word\\startup* OR (winlog.event_data.targetfilename.keyword:*\\office* AND winlog.event_data.targetfilename.keyword:*\\program\ files* AND winlog.event_data.targetfilename.keyword:*\\startup*)) AND (file.path.keyword:(*.doc OR *.docm OR *.docx OR *.dot OR *.dotm OR *.rtf))) OR ((winlog.event_data.targetfilename.keyword:*\\microsoft\\excel\\xlstart* OR (winlog.event_data.targetfilename.keyword:*\\office* AND winlog.event_data.targetfilename.keyword:*\\program\ files* AND winlog.event_data.targetfilename.keyword:*\\xlstart*)) AND (file.path.keyword:(*.xls OR *.xlsm OR *.xlsx OR *.xlt OR *.xltm)))) AND (NOT (process.executable.keyword:(*\\winword.exe OR *\\excel.exe)))
+      query: (((winlog.event_data.targetfilename.keyword:*\\microsoft\\word\\startup*
+        OR (winlog.event_data.targetfilename.keyword:*\\office* AND winlog.event_data.targetfilename.keyword:*\\program\
+        files* AND winlog.event_data.targetfilename.keyword:*\\startup*)) AND (file.path.keyword:(*.doc
+        OR *.docm OR *.docx OR *.dot OR *.dotm OR *.rtf))) OR ((winlog.event_data.targetfilename.keyword:*\\microsoft\\excel\\xlstart*
+        OR (winlog.event_data.targetfilename.keyword:*\\office* AND winlog.event_data.targetfilename.keyword:*\\program\
+        files* AND winlog.event_data.targetfilename.keyword:*\\xlstart*)) AND (file.path.keyword:(*.xls
+        OR *.xlsm OR *.xlsx OR *.xlt OR *.xltm)))) AND (NOT (process.executable.keyword:(*\\winword.exe
+        OR *\\excel.exe)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1137
+risk: high

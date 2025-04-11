@@ -1,10 +1,17 @@
 description: |
   Detects PowerShell scripts that have capabilities to read files, loop through them and resolve DNS host entries.
 name: PowerShell Script With File Hostname Resolving Capabilities
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*get\-content\ * AND powershell.file.script_block_text.keyword:*foreach* AND powershell.file.script_block_text.keyword:*\[system.net.dns\]\:\:gethostentry* AND powershell.file.script_block_text.keyword:*out\-file*
+      query: powershell.file.script_block_text.keyword:*get\-content\ * AND powershell.file.script_block_text.keyword:*foreach*
+        AND powershell.file.script_block_text.keyword:*\[system.net.dns\]\:\:gethostentry*
+        AND powershell.file.script_block_text.keyword:*out\-file*
 type: any
 priority: 2
+mitre_attack_tactic:
+- exfiltration
+mitre_attack_technique:
+- t1020
+risk: medium

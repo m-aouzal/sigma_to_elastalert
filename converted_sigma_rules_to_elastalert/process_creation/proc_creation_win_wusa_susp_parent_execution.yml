@@ -1,12 +1,22 @@
 description: |
   Detects execution of the "wusa.exe" (Windows Update Standalone Installer) utility by a parent process that is located in a suspicious location.
   Attackers could instantiate an instance of "wusa.exe" in order to bypass User Account Control (UAC). They can duplicate the access token from "wusa.exe" to gain elevated privileges.
-  
+
 name: Wusa.EXE Executed By Parent Process Located In Suspicious Location
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\wusa.exe AND ((process.parent.executable.keyword:(*\:\\perflogs\\* OR *\:\\users\\public\\* OR *\:\\windows\\temp\\* OR *\\appdata\\local\\temp\\* OR *\\temporary\ internet*)) OR ((winlog.event_data.parentimage.keyword:*\:\\users\\* AND winlog.event_data.parentimage.keyword:*\\favorites\\*) OR (winlog.event_data.parentimage.keyword:*\:\\users\\* AND winlog.event_data.parentimage.keyword:*\\favourites\\*) OR (winlog.event_data.parentimage.keyword:*\:\\users\\* AND winlog.event_data.parentimage.keyword:*\\contacts\\*) OR (winlog.event_data.parentimage.keyword:*\:\\users\\* AND winlog.event_data.parentimage.keyword:*\\pictures\\*))) AND (NOT process.command_line.keyword:*.msu*)
+      query: process.executable.keyword:*\\wusa.exe AND ((process.parent.executable.keyword:(*\:\\perflogs\\*
+        OR *\:\\users\\public\\* OR *\:\\windows\\temp\\* OR *\\appdata\\local\\temp\\*
+        OR *\\temporary\ internet*)) OR ((winlog.event_data.parentimage.keyword:*\:\\users\\*
+        AND winlog.event_data.parentimage.keyword:*\\favorites\\*) OR (winlog.event_data.parentimage.keyword:*\:\\users\\*
+        AND winlog.event_data.parentimage.keyword:*\\favourites\\*) OR (winlog.event_data.parentimage.keyword:*\:\\users\\*
+        AND winlog.event_data.parentimage.keyword:*\\contacts\\*) OR (winlog.event_data.parentimage.keyword:*\:\\users\\*
+        AND winlog.event_data.parentimage.keyword:*\\pictures\\*))) AND (NOT process.command_line.keyword:*.msu*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: high

@@ -1,11 +1,20 @@
 description: |
   Detects uncommon network connections to the Active Directory Web Services (ADWS) from processes not typically associated with ADWS management.
-  
+
 name: Uncommon Connection to Active Directory Web Services
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (network.direction.keyword:true AND destination.port:9389) AND (NOT (process.executable.keyword:c\:\\windows\\system32\\dsac.exe OR process.executable.keyword:c\:\\program\ files\\microsoft\ monitoring\ agent\\ OR (process.executable.keyword:(c\:\\program\ files\\powershell\\7\\pwsh.exe* OR c\:\\program\ files\\powershell\\7\-preview\\pwsh.ex* OR c\:\\windows\\system32\\windowspowershell\\* OR c\:\\windows\\syswow64\\windowspowershell\\*))))
+      query: (network.direction.keyword:true AND destination.port:9389) AND (NOT (process.executable.keyword:c\:\\windows\\system32\\dsac.exe
+        OR process.executable.keyword:c\:\\program\ files\\microsoft\ monitoring\
+        agent\\ OR (process.executable.keyword:(c\:\\program\ files\\powershell\\7\\pwsh.exe*
+        OR c\:\\program\ files\\powershell\\7\-preview\\pwsh.ex* OR c\:\\windows\\system32\\windowspowershell\\*
+        OR c\:\\windows\\syswow64\\windowspowershell\\*))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1087
+risk: medium

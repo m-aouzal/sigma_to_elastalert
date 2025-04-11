@@ -1,10 +1,15 @@
 description: |
   Detects loaded unsigned image on the system
 name: CodeIntegrity - Unsigned Image Loaded
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-codeintegrity\/operational AND event.code.keyword:3037
+      query: winlog.channel.keyword:microsoft\-windows\-codeintegrity\/operational
+        AND event.code.keyword:3037
 type: any
 priority: 3
+mitre_attack_tactic:
+- privilege-escalation
+mitre_attack_technique: []
+risk: high

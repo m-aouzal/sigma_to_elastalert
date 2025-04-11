@@ -1,10 +1,24 @@
 description: |
   Detects the modification of an existing service in order to execute an arbitrary payload when the service is started or killed as a potential method for persistence.
 name: Potential Persistence Attempt Via Existing Service Tampering
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.commandline.keyword:*sc\ * AND winlog.event_data.commandline.keyword:*config\ * AND winlog.event_data.commandline.keyword:*binpath\=*) OR (winlog.event_data.commandline.keyword:*sc\ * AND winlog.event_data.commandline.keyword:*failure* AND winlog.event_data.commandline.keyword:*command\=*)) OR (((winlog.event_data.commandline.keyword:*reg\ * AND winlog.event_data.commandline.keyword:*add\ * AND winlog.event_data.commandline.keyword:*failurecommand*) OR (winlog.event_data.commandline.keyword:*reg\ * AND winlog.event_data.commandline.keyword:*add\ * AND winlog.event_data.commandline.keyword:*imagepath*)) AND (process.command_line.keyword:(*.sh* OR *.exe* OR *.dll* OR *.bin$* OR *.bat* OR *.cmd* OR *.js* OR *.msh$* OR *.reg$* OR *.scr* OR *.ps* OR *.vb* OR *.jar* OR *.pl*)))
+      query: ((winlog.event_data.commandline.keyword:*sc\ * AND winlog.event_data.commandline.keyword:*config\
+        * AND winlog.event_data.commandline.keyword:*binpath\=*) OR (winlog.event_data.commandline.keyword:*sc\
+        * AND winlog.event_data.commandline.keyword:*failure* AND winlog.event_data.commandline.keyword:*command\=*))
+        OR (((winlog.event_data.commandline.keyword:*reg\ * AND winlog.event_data.commandline.keyword:*add\
+        * AND winlog.event_data.commandline.keyword:*failurecommand*) OR (winlog.event_data.commandline.keyword:*reg\
+        * AND winlog.event_data.commandline.keyword:*add\ * AND winlog.event_data.commandline.keyword:*imagepath*))
+        AND (process.command_line.keyword:(*.sh* OR *.exe* OR *.dll* OR *.bin$* OR
+        *.bat* OR *.cmd* OR *.js* OR *.msh$* OR *.reg$* OR *.scr* OR *.ps* OR *.vb*
+        OR *.jar* OR *.pl*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1543.003
+- t1574.011
+risk: medium

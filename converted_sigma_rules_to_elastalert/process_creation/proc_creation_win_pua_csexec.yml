@@ -1,10 +1,17 @@
 description: |
   Detects the use of the lesser known remote execution tool named CsExec a PsExec alternative
 name: PUA - CsExec Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:*\\csexec.exe OR process.pe.description.keyword:csexec
 type: any
 priority: 3
+mitre_attack_tactic:
+- resource-development
+- execution
+mitre_attack_technique:
+- t1587.001
+- t1569.002
+risk: high

@@ -2,12 +2,19 @@ description: |
   Adversaries may abuse PowerShell commands and scripts for execution.
   PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system. (Citation: TechNet PowerShell)
   Adversaries can use PowerShell to perform a number of actions, including discovery of information and execution of code
-  
+
 name: Powershell XML Execute Command
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*new\-object* AND powershell.file.script_block_text.keyword:*system.xml.xmldocument* AND powershell.file.script_block_text.keyword:*.load*) AND (powershell.file.script_block_text.keyword:(*iex\ * OR *invoke\-expression\ * OR *invoke\-command\ * OR *icm\ \-*))
+      query: (powershell.file.script_block_text.keyword:*new\-object* AND powershell.file.script_block_text.keyword:*system.xml.xmldocument*
+        AND powershell.file.script_block_text.keyword:*.load*) AND (powershell.file.script_block_text.keyword:(*iex\
+        * OR *invoke\-expression\ * OR *invoke\-command\ * OR *icm\ \-*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: medium

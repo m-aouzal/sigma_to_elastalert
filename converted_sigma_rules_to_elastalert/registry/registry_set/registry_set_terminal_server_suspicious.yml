@@ -1,12 +1,19 @@
 description: |
   Detects tampering of RDP Terminal Service/Server sensitive settings.
   Such as allowing unauthorized users access to a system via the 'fAllowUnsolicited' or enabling RDP via 'fDenyTSConnections', etc.
-  
+
 name: RDP Sensitive Settings Changed to Zero
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*\\fdenytsconnections OR *\\fsinglesessionperuser OR *\\userauthentication)) AND winlog.event_data.Details.keyword:dword\ \(0x00000000\)
+      query: (registry.path.keyword:(*\\fdenytsconnections OR *\\fsinglesessionperuser
+        OR *\\userauthentication)) AND winlog.event_data.Details.keyword:dword\ \(0x00000000\)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- persistence
+mitre_attack_technique:
+- t1112
+risk: medium

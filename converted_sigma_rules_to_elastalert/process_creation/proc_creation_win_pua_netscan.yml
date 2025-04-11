@@ -1,12 +1,19 @@
 description: |
   Detects usage of SoftPerfect's "netscan.exe". An application for scanning networks.
   It is actively used in-the-wild by threat actors to inspect and understand the network architecture of a victim.
-  
+
 name: PUA - SoftPerfect Netscan Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\\netscan.exe OR winlog.event_data.product.keyword:network\ scanner OR winlog.event_data.description.keyword:application\ for\ scanning\ networks
+      query: winlog.event_data.image.keyword:*\\netscan.exe OR winlog.event_data.product.keyword:network\
+        scanner OR winlog.event_data.description.keyword:application\ for\ scanning\
+        networks
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1046
+risk: medium

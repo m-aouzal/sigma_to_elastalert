@@ -1,10 +1,22 @@
 description: |
   Detects the creation of user-specific or system-wide environment variables via the registry. Which contains suspicious commands and strings
 name: Suspicious Environment Variable Has Been Registered
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\environment\\* AND ((winlog.event_data.details.keyword:(powershell OR pwsh)) OR (winlog.event_data.details.keyword:(*\\appdata\\local\\temp\\* OR *c\:\\users\\public\\* OR *tvqqaamaaaaeaaaa* OR *tvpqaaiaaaaeaa8a* OR *tvqaaaeaaaaeabaa* OR *tvoaaaaaaaaaaaaa* OR *tvptaqeaaaaeaaaa* OR *sw52b2tll* OR *ludm9rzs* OR *jbnzva2ut* OR *sqbuahyabwbragualq* OR *kabgb2ag8aawblac0a* OR *jag4adgbvagsazqata*)) OR (winlog.event_data.details.keyword:(suvy* OR sqbfaf* OR sqbuah* OR cwbha* OR awv4* OR aqbla* OR r2v0* OR dmfy* OR dgbha* OR dxnpbm* OR h4sia* OR y21k* OR cabhah* OR qzpc* OR yzpc*)))
+      query: registry.path.keyword:*\\environment\\* AND ((winlog.event_data.details.keyword:(powershell
+        OR pwsh)) OR (winlog.event_data.details.keyword:(*\\appdata\\local\\temp\\*
+        OR *c\:\\users\\public\\* OR *tvqqaamaaaaeaaaa* OR *tvpqaaiaaaaeaa8a* OR *tvqaaaeaaaaeabaa*
+        OR *tvoaaaaaaaaaaaaa* OR *tvptaqeaaaaeaaaa* OR *sw52b2tll* OR *ludm9rzs* OR
+        *jbnzva2ut* OR *sqbuahyabwbragualq* OR *kabgb2ag8aawblac0a* OR *jag4adgbvagsazqata*))
+        OR (winlog.event_data.details.keyword:(suvy* OR sqbfaf* OR sqbuah* OR cwbha*
+        OR awv4* OR aqbla* OR r2v0* OR dmfy* OR dgbha* OR dxnpbm* OR h4sia* OR y21k*
+        OR cabhah* OR qzpc* OR yzpc*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- persistence
+mitre_attack_technique: []
+risk: high

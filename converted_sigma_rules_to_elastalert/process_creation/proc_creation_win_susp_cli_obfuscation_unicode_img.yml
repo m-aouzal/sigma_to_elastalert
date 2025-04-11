@@ -1,12 +1,20 @@
 description: |
   Detects potential commandline obfuscation using unicode characters.
   Adversaries may attempt to make an executable or file difficult to discover or analyze by encrypting, encoding, or otherwise obfuscating its contents on the system or in transit.
-  
+
 name: Potential CommandLine Obfuscation Using Unicode Characters From Suspicious Image
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*\\cmd.exe OR *\\cscript.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\wscript.exe)) AND (process.pe.original_file_name.keyword:(cmd.exe OR cscript.exe OR powershell.exe OR pwsh.dll OR wscript.exe))) AND (process.command_line.keyword:(*ˣ* OR *˪* OR *ˢ* OR *∕* OR *⁄* OR *―* OR *—* OR * * OR *¯* OR *®* OR *¶*))
+      query: ((process.executable.keyword:(*\\cmd.exe OR *\\cscript.exe OR *\\powershell.exe
+        OR *\\pwsh.exe OR *\\wscript.exe)) AND (process.pe.original_file_name.keyword:(cmd.exe
+        OR cscript.exe OR powershell.exe OR pwsh.dll OR wscript.exe))) AND (process.command_line.keyword:(*ˣ*
+        OR *˪* OR *ˢ* OR *∕* OR *⁄* OR *―* OR *—* OR * * OR *¯* OR *®* OR *¶*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1027
+risk: high

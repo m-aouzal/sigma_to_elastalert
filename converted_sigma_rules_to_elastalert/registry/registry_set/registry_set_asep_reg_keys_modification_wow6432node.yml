@@ -1,10 +1,51 @@
 description: |
   Detects modification of autostart extensibility point (ASEP) in registry.
 name: Wow6432Node CurrentVersion Autorun Keys Modification
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\\software\\wow6432node\\microsoft\\windows\\currentversion* AND (registry.path.keyword:(*\\shellserviceobjectdelayload* OR *\\run\\* OR *\\runonce\\* OR *\\runonceex\\* OR *\\runservices\\* OR *\\runservicesonce\\* OR *\\explorer\\shellserviceobjects* OR *\\explorer\\shelliconoverlayidentifiers* OR *\\explorer\\shellexecutehooks* OR *\\explorer\\sharedtaskscheduler* OR *\\explorer\\browser\ helper\ objects*))) AND (NOT (winlog.event_data.Details.keyword:\(empty\) OR (process.executable.keyword:*c\:\\program\ files\ \(x86\)\\microsoft\\edgeupdate\\install\\\{* AND process.executable.keyword:*\\setup.exe*) OR (process.executable.keyword:c\:\\program\ files\\common\ files\\microsoft\ shared\\clicktorun\\officeclicktorun.exe AND registry.path.keyword:*\\office\\clicktorun\\registry\\machine\\software\\wow6432node\\*) OR ((process.executable.keyword:(c\:\\program\ files\\microsoft\ office\\root\\integration\\integrator.exe OR c\:\\program\ files\ \(x86\)\\microsoft\ office\\root\\integration\\integrator.exe)) AND registry.path.keyword:*\\explorer\\browser\ helper\ objects\\\{31d09ba0\-12f5\-4cce\-be8a\-2923e76605da\}\\*) OR (winlog.event_data.details.keyword:*\-a251\-47b7\-93e1\-cdd82e34af8b\} OR winlog.event_data.details.keyword:grpconv\ \-o OR (winlog.event_data.details.keyword:*c\:\\program\ files* AND winlog.event_data.details.keyword:*\\dropbox\\client\\dropbox.exe* AND winlog.event_data.details.keyword:*\ \/systemstartup*)) OR registry.path.keyword:*\\explorer\\browser\ helper\ objects\\\{92ef2ead\-a7ce\-4424\-b0db\-499cf856608e\}\\noexplorer OR (process.executable.keyword:*\\windowsdesktop\-runtime\-* AND (registry.path.keyword:(*\\wow6432node\\microsoft\\windows\\currentversion\\runonce\\\{e2d1ae32\-dd1d\-4ad7\-a298\-10e42e7840fc\} OR *\\wow6432node\\microsoft\\windows\\currentversion\\runonce\\\{7037b699\-7382\-448c\-89a7\-4765961d2537\})) AND winlog.event_data.Details.keyword:\"c\:\\programdata\\package\ cache\\* AND winlog.event_data.Details.keyword:*.exe\"\ \/burn.runonce) OR ((process.executable.keyword:(c\:\\program\ files\\common\ files\\microsoft\ shared\\clicktorun\\* OR c\:\\program\ files\\common\ files\\microsoft\ shared\\clicktorun\\updates\\*)) AND process.executable.keyword:*\\officeclicktorun.exe) OR winlog.event_data.Details.keyword:\"c\:\\programdata\\package\ cache\\\{d21a4f20\-968a\-4b0c\-bf04\-a38da5f06e41\}\\windowsdesktop\-runtime\-* OR (process.executable.keyword:*\\vc_redist.x64.exe AND winlog.event_data.Details.keyword:*\}\\vc_redist.x64.exe\"\ \/burn.runonce) OR ((process.executable.keyword:(c\:\\programdata\\package\ cache* OR c\:\\windows\\temp\\*)) AND (process.executable.keyword:(*\\winsdksetup.exe* OR *\\windowsdesktop\-runtime\-* OR *\\aspnetcoresharedframeworkbundle\-*)) AND winlog.event_data.Details.keyword:*\ \/burn.runonce) OR (process.executable.keyword:c\:\\windows\\installer\\msi* AND registry.path.keyword:*\\explorer\\browser\ helper\ objects*) OR (process.executable.keyword:c\:\\windows\\system32\\msiexec.exe AND registry.path.keyword:*\\software\\wow6432node\\microsoft\\windows\\currentversion\\run\\*)))
+      query: 
+        (registry.path.keyword:*\\software\\wow6432node\\microsoft\\windows\\currentversion*
+        AND (registry.path.keyword:(*\\shellserviceobjectdelayload* OR *\\run\\* OR
+        *\\runonce\\* OR *\\runonceex\\* OR *\\runservices\\* OR *\\runservicesonce\\*
+        OR *\\explorer\\shellserviceobjects* OR *\\explorer\\shelliconoverlayidentifiers*
+        OR *\\explorer\\shellexecutehooks* OR *\\explorer\\sharedtaskscheduler* OR
+        *\\explorer\\browser\ helper\ objects*))) AND (NOT (winlog.event_data.Details.keyword:\(empty\)
+        OR (process.executable.keyword:*c\:\\program\ files\ \(x86\)\\microsoft\\edgeupdate\\install\\\{*
+        AND process.executable.keyword:*\\setup.exe*) OR (process.executable.keyword:c\:\\program\
+        files\\common\ files\\microsoft\ shared\\clicktorun\\officeclicktorun.exe
+        AND 
+        registry.path.keyword:*\\office\\clicktorun\\registry\\machine\\software\\wow6432node\\*)
+        OR ((process.executable.keyword:(c\:\\program\ files\\microsoft\ office\\root\\integration\\integrator.exe
+        OR c\:\\program\ files\ \(x86\)\\microsoft\ office\\root\\integration\\integrator.exe))
+        AND registry.path.keyword:*\\explorer\\browser\ helper\ objects\\\{31d09ba0\-12f5\-4cce\-be8a\-2923e76605da\}\\*)
+        OR (winlog.event_data.details.keyword:*\-a251\-47b7\-93e1\-cdd82e34af8b\}
+        OR winlog.event_data.details.keyword:grpconv\ \-o OR (winlog.event_data.details.keyword:*c\:\\program\
+        files* AND winlog.event_data.details.keyword:*\\dropbox\\client\\dropbox.exe*
+        AND winlog.event_data.details.keyword:*\ \/systemstartup*)) OR registry.path.keyword:*\\explorer\\browser\
+        helper\ objects\\\{92ef2ead\-a7ce\-4424\-b0db\-499cf856608e\}\\noexplorer
+        OR (process.executable.keyword:*\\windowsdesktop\-runtime\-* AND 
+        (registry.path.keyword:(*\\wow6432node\\microsoft\\windows\\currentversion\\runonce\\\{e2d1ae32\-dd1d\-4ad7\-a298\-10e42e7840fc\}
+        OR 
+        *\\wow6432node\\microsoft\\windows\\currentversion\\runonce\\\{7037b699\-7382\-448c\-89a7\-4765961d2537\}))
+        AND winlog.event_data.Details.keyword:\"c\:\\programdata\\package\ cache\\*
+        AND winlog.event_data.Details.keyword:*.exe\"\ \/burn.runonce) OR ((process.executable.keyword:(c\:\\program\
+        files\\common\ files\\microsoft\ shared\\clicktorun\\* OR c\:\\program\ files\\common\
+        files\\microsoft\ shared\\clicktorun\\updates\\*)) AND process.executable.keyword:*\\officeclicktorun.exe)
+        OR winlog.event_data.Details.keyword:\"c\:\\programdata\\package\ cache\\\{d21a4f20\-968a\-4b0c\-bf04\-a38da5f06e41\}\\windowsdesktop\-runtime\-*
+        OR (process.executable.keyword:*\\vc_redist.x64.exe AND winlog.event_data.Details.keyword:*\}\\vc_redist.x64.exe\"\
+        \/burn.runonce) OR ((process.executable.keyword:(c\:\\programdata\\package\
+        cache* OR c\:\\windows\\temp\\*)) AND (process.executable.keyword:(*\\winsdksetup.exe*
+        OR *\\windowsdesktop\-runtime\-* OR *\\aspnetcoresharedframeworkbundle\-*))
+        AND winlog.event_data.Details.keyword:*\ \/burn.runonce) OR (process.executable.keyword:c\:\\windows\\installer\\msi*
+        AND registry.path.keyword:*\\explorer\\browser\ helper\ objects*) OR (process.executable.keyword:c\:\\windows\\system32\\msiexec.exe
+        AND 
+        registry.path.keyword:*\\software\\wow6432node\\microsoft\\windows\\currentversion\\run\\*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1547.001
+risk: medium

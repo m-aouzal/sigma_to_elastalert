@@ -1,10 +1,17 @@
 description: |
   Detects non-system users failing to get a handle of the SCM database.
 name: SCM Database Handle Failure
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND ((event.code.keyword:4656 AND winlog.event_data.ObjectType.keyword:sc_manager\ object AND winlog.event_data.ObjectName.keyword:servicesactive AND winlog.event_data.AccessMask.keyword:0xf003f) AND (NOT winlog.logon.id.keyword:0x3e4))
+      query: winlog.channel.keyword:security AND ((event.code.keyword:4656 AND winlog.event_data.ObjectType.keyword:sc_manager\
+        object AND winlog.event_data.ObjectName.keyword:servicesactive AND winlog.event_data.AccessMask.keyword:0xf003f)
+        AND (NOT winlog.logon.id.keyword:0x3e4))
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1010
+risk: medium

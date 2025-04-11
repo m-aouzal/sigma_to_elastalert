@@ -1,10 +1,15 @@
 description: |
   Detects loading of diagcab packages from a remote path, as seen in DogWalk vulnerability
 name: Loading Diagcab Package From Remote Path
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-diagnosis\-scripted\/operational AND (event.code.keyword:101 AND winlog.event_data.PackagePath.keyword:*\\\\*)
+      query: winlog.channel.keyword:microsoft\-windows\-diagnosis\-scripted\/operational
+        AND (event.code.keyword:101 AND winlog.event_data.PackagePath.keyword:*\\\\*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: high

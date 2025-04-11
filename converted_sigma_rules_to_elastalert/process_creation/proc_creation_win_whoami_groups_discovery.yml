@@ -1,10 +1,16 @@
 description: |
   Detects the execution of whoami.exe with the /group command line flag to show group membership for the current user, account type, security identifiers (SID), and attributes.
 name: Group Membership Reconnaissance Via Whoami.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\whoami.exe OR winlog.event_data.originalfilename.keyword:whoami.exe) AND (process.command_line.keyword:(*\ \/groups* OR *\ \-groups*))
+      query: (winlog.event_data.image.keyword:*\\whoami.exe OR winlog.event_data.originalfilename.keyword:whoami.exe)
+        AND (process.command_line.keyword:(*\ \/groups* OR *\ \-groups*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1033
+risk: medium

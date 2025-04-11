@@ -1,10 +1,17 @@
 description: |
   Detects changes to the PowerShell execution policy in order to bypass signing requirements for script execution
 name: Potential PowerShell Execution Policy Tampering
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((registry.path.keyword:(*\\shellids\\microsoft.powershell\\executionpolicy OR *\\policies\\microsoft\\windows\\powershell\\executionpolicy)) AND (winlog.event_data.Details.keyword:(*bypass* OR *unrestricted*))) AND (NOT (process.executable.keyword:(*\:\\windows\\system32\\* OR *\:\\windows\\syswow64\\*)))
+      query: ((registry.path.keyword:(*\\shellids\\microsoft.powershell\\executionpolicy
+        OR *\\policies\\microsoft\\windows\\powershell\\executionpolicy)) AND (winlog.event_data.Details.keyword:(*bypass*
+        OR *unrestricted*))) AND (NOT (process.executable.keyword:(*\:\\windows\\system32\\*
+        OR *\:\\windows\\syswow64\\*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

@@ -1,10 +1,15 @@
 description: |
   Detects the load of EvtMuteHook.dll, a key component of SharpEvtHook, a tool that tampers with the Windows event logs
 name: HackTool - SharpEvtMute DLL Load
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.Hashes.keyword:*imphash\=330768a4f172e10acb6287b87289d83b*
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.002
+risk: high

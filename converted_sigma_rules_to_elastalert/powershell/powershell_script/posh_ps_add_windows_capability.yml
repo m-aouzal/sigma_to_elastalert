@@ -1,10 +1,15 @@
 description: |
   Detects usage of the "Add-WindowsCapability" cmdlet to add Windows capabilities. Notable capabilities could be "OpenSSH" and others.
 name: Add Windows Capability Via PowerShell Script
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*add\-windowscapability\ * AND powershell.file.script_block_text.keyword:*\-name\ openssh.*
+      query: powershell.file.script_block_text.keyword:*add\-windowscapability\ *
+        AND powershell.file.script_block_text.keyword:*\-name\ openssh.*
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: medium

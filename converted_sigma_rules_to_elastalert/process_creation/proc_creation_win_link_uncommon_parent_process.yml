@@ -4,12 +4,20 @@ description: |
   Multiple utilities often found in the same folder (editbin.exe, dumpbin.exe, lib.exe, etc) have a hardcode call to the "LINK.EXE" binary without checking its validity.
   This would allow an attacker to sideload any binary with the name "link.exe" if one of the aforementioned tools get executed from a different location.
   By filtering the known locations of such utilities we can spot uncommon parent process of LINK.EXE that might be suspicious or malicious.
-  
+
 name: Uncommon Link.EXE Parent Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\link.exe AND process.command_line.keyword:*link\ \/*) AND (NOT ((process.parent.executable.keyword:(c\:\\program\ files\\microsoft\ visual\ studio\\* OR c\:\\program\ files\ \(x86\)\\microsoft\ visual\ studio\\*)) AND (process.parent.executable.keyword:(*\\vc\\bin\\* OR *\\vc\\tools\\*))))
+      query: (process.executable.keyword:*\\link.exe AND process.command_line.keyword:*link\
+        \/*) AND (NOT ((process.parent.executable.keyword:(c\:\\program\ files\\microsoft\
+        visual\ studio\\* OR c\:\\program\ files\ \(x86\)\\microsoft\ visual\ studio\\*))
+        AND (process.parent.executable.keyword:(*\\vc\\bin\\* OR *\\vc\\tools\\*))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218
+risk: medium

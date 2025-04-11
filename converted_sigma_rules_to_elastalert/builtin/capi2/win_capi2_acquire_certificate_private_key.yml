@@ -1,10 +1,15 @@
 description: |
   Detects when an application acquires a certificate private key
 name: Certificate Private Key Acquired
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.channel.keyword:microsoft\-windows\-capi2\/operational AND event.code.keyword:70
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1649
+risk: medium

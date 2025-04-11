@@ -1,10 +1,18 @@
 description: |
   Detects an appx package added the pipeline of the "to be processed" packages which is located in suspicious locations
 name: Suspicious AppX Package Locations
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-appxdeploymentserver\/operational AND (event.code.keyword:854 AND (winlog.event_data.Path.keyword:(*c\:\\users\\public\\* OR *\/users\/public\/* OR *c\:\\perflogs\\* OR *c\:\/perflogs\/* OR *\\desktop\\* OR *\/desktop\/* OR *\\downloads\\* OR *\/downloads\/* OR *c\:\\windows\\temp\\* OR *c\:\/windows\/temp\/* OR *\\appddata\\local\\temp\\* OR *\/appddata\/local\/temp\/*)))
+      query: winlog.channel.keyword:microsoft\-windows\-appxdeploymentserver\/operational
+        AND (event.code.keyword:854 AND (winlog.event_data.Path.keyword:(*c\:\\users\\public\\*
+        OR *\/users\/public\/* OR *c\:\\perflogs\\* OR *c\:\/perflogs\/* OR *\\desktop\\*
+        OR *\/desktop\/* OR *\\downloads\\* OR *\/downloads\/* OR *c\:\\windows\\temp\\*
+        OR *c\:\/windows\/temp\/* OR *\\appddata\\local\\temp\\* OR *\/appddata\/local\/temp\/*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: high

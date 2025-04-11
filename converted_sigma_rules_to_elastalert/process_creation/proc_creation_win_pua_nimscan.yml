@@ -2,12 +2,18 @@ description: |
   Detects usage of NimScan, a portscanner utility.
   In early 2025, adversaries were observed using this utility to scan for open ports on remote hosts in a compromised environment.
   This rule identifies the execution of NimScan based on the process image name and specific hash values associated with different versions of the tool.
-  
+
 name: PUA - NimScan Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\\nimscan.exe OR (winlog.event_data.hashes.keyword:(*imphash\=41bb1c7571b3a724eb83a1d2b96dbb8c* OR *imphash\=b1b6adacb172795480179efd18a29549* OR *imphash\=0d1f896dc7642ad8384f9042f30279c2*))
+      query: winlog.event_data.image.keyword:*\\nimscan.exe OR (winlog.event_data.hashes.keyword:(*imphash\=41bb1c7571b3a724eb83a1d2b96dbb8c*
+        OR *imphash\=b1b6adacb172795480179efd18a29549* OR *imphash\=0d1f896dc7642ad8384f9042f30279c2*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1046
+risk: medium

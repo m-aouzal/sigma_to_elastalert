@@ -1,10 +1,16 @@
 description: |
   Shadow Copies deletion using operating systems utilities via PowerShell
 name: Delete Volume Shadow Copies Via WMI With PowerShell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.Data.keyword:*get\-wmiobject* AND winlog.event_data.Data.keyword:*win32_shadowcopy*) AND (winlog.event_data.Data.keyword:(*delete\(\)* OR *remove\-wmiobject*))
+      query: (winlog.event_data.Data.keyword:*get\-wmiobject* AND winlog.event_data.Data.keyword:*win32_shadowcopy*)
+        AND (winlog.event_data.Data.keyword:(*delete\(\)* OR *remove\-wmiobject*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- impact
+mitre_attack_technique:
+- t1490
+risk: high

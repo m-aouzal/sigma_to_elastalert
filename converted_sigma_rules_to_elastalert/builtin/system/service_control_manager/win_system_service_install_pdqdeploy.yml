@@ -1,12 +1,19 @@
 description: |
   Detects a PDQDeploy service installation which indicates that PDQDeploy was installed on the machines.
   PDQDeploy can be abused by attackers to remotely install packages or execute commands on target machines
-  
+
 name: New PDQDeploy Service - Server Side
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND ((winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045) AND (winlog.event_data.imagepath.keyword:*pdqdeployservice.exe* OR (winlog.event_data.servicename.keyword:(pdqdeploy OR pdq\ deploy))))
+      query: winlog.channel.keyword:system AND ((winlog.provider_name.keyword:service\
+        control\ manager AND event.code.keyword:7045) AND (winlog.event_data.imagepath.keyword:*pdqdeployservice.exe*
+        OR (winlog.event_data.servicename.keyword:(pdqdeploy OR pdq\ deploy))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- privilege-escalation
+mitre_attack_technique:
+- t1543.003
+risk: medium

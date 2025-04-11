@@ -1,10 +1,45 @@
 description: |
   Detects modification of autostart extensibility point (ASEP) in registry.
 name: CurrentVersion NT Autorun Keys Modification
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\software\\microsoft\\windows\ nt\\currentversion* AND (registry.path.keyword:(*\\winlogon\\vmapplet* OR *\\winlogon\\userinit* OR *\\winlogon\\taskman* OR *\\winlogon\\shell* OR *\\winlogon\\gpextensions* OR *\\winlogon\\appsetup* OR *\\winlogon\\alternateshells\\availableshells* OR *\\windows\\iconservicelib* OR *\\windows\\appinit_dlls* OR *\\image\ file\ execution\ options* OR *\\font\ drivers* OR *\\drivers32* OR *\\windows\\run* OR *\\windows\\load*)) AND (NOT (winlog.event_data.Details.keyword:\(empty\) OR (registry.path.keyword:*\\image\ file\ execution\ options\\* AND (registry.path.keyword:(*\\disableexceptionchainvalidation OR *\\mitigationoptions))) OR (process.executable.keyword:c\:\\program\ files\ \(x86\)\\microsoft\\temp\\* AND process.executable.keyword:*\\microsoftedgeupdate.exe) OR ((winlog.event_data.targetobject.keyword:(*\\clicktorunstore\\hklm\\software\\microsoft\\windows\ nt\\currentversion\\* OR *\\clicktorun\\registry\\machine\\software\\microsoft\\windows\ nt\\currentversion\\*)) OR (winlog.event_data.image.keyword:(c\:\\program\ files\\microsoft\ office\\root\\integration\\integrator.exe OR c\:\\program\ files\ \(x86\)\\microsoft\ office\\root\\integration\\integrator.exe))) OR ((process.executable.keyword:(c\:\\program\ files\\common\ files\\microsoft\ shared\\clicktorun\\* OR c\:\\program\ files\\common\ files\\microsoft\ shared\\clicktorun\\updates\\*)) AND process.executable.keyword:*\\officeclicktorun.exe) OR (process.executable.keyword:c\:\\windows\\system32\\svchost.exe AND (registry.path.keyword:(*\\winlogon\\gpextensions\\\{827d319e\-6eac\-11d2\-a4ea\-00c04f79f83a\}\\previouspolicyareas* OR *\\winlogon\\gpextensions\\\{827d319e\-6eac\-11d2\-a4ea\-00c04f79f83a\}\\maxnogpolistchangesinterval*)) AND (winlog.event_data.Details.keyword:(dword\ \(0x00000009\) OR dword\ \(0x000003c0\)))) OR (process.executable.keyword:c\:\\windows\\microsoft.net\\framework* AND process.executable.keyword:*\\ngen.exe) OR (process.executable.keyword:*\\appdata\\local\\microsoft\\onedrive\\standaloneupdater\\onedrivesetup.exe AND registry.path.keyword:*\\microsoft\\windows\\currentversion\\runonce\\delete\ cached\ update\ binary AND winlog.event_data.Details.keyword:c\:\\windows\\system32\\cmd.exe\ \/q\ \/c\ del\ \/q\ \"c\:\\users\\* AND winlog.event_data.Details.keyword:*\\appdata\\local\\microsoft\\onedrive\\update\\onedrivesetup.exe\")))
+      query: registry.path.keyword:*\\software\\microsoft\\windows\ nt\\currentversion*
+        AND (registry.path.keyword:(*\\winlogon\\vmapplet* OR *\\winlogon\\userinit*
+        OR *\\winlogon\\taskman* OR *\\winlogon\\shell* OR *\\winlogon\\gpextensions*
+        OR *\\winlogon\\appsetup* OR *\\winlogon\\alternateshells\\availableshells*
+        OR *\\windows\\iconservicelib* OR *\\windows\\appinit_dlls* OR *\\image\ file\
+        execution\ options* OR *\\font\ drivers* OR *\\drivers32* OR *\\windows\\run*
+        OR *\\windows\\load*)) AND (NOT (winlog.event_data.Details.keyword:\(empty\)
+        OR (registry.path.keyword:*\\image\ file\ execution\ options\\* AND (registry.path.keyword:(*\\disableexceptionchainvalidation
+        OR *\\mitigationoptions))) OR (process.executable.keyword:c\:\\program\ files\
+        \(x86\)\\microsoft\\temp\\* AND process.executable.keyword:*\\microsoftedgeupdate.exe)
+        OR 
+        ((winlog.event_data.targetobject.keyword:(*\\clicktorunstore\\hklm\\software\\microsoft\\windows\
+        nt\\currentversion\\* OR *\\clicktorun\\registry\\machine\\software\\microsoft\\windows\
+        nt\\currentversion\\*)) OR (winlog.event_data.image.keyword:(c\:\\program\
+        files\\microsoft\ office\\root\\integration\\integrator.exe OR c\:\\program\
+        files\ \(x86\)\\microsoft\ office\\root\\integration\\integrator.exe))) OR
+        ((process.executable.keyword:(c\:\\program\ files\\common\ files\\microsoft\
+        shared\\clicktorun\\* OR c\:\\program\ files\\common\ files\\microsoft\ shared\\clicktorun\\updates\\*))
+        AND process.executable.keyword:*\\officeclicktorun.exe) OR (process.executable.keyword:c\:\\windows\\system32\\svchost.exe
+        AND 
+        (registry.path.keyword:(*\\winlogon\\gpextensions\\\{827d319e\-6eac\-11d2\-a4ea\-00c04f79f83a\}\\previouspolicyareas*
+        OR 
+        *\\winlogon\\gpextensions\\\{827d319e\-6eac\-11d2\-a4ea\-00c04f79f83a\}\\maxnogpolistchangesinterval*))
+        AND (winlog.event_data.Details.keyword:(dword\ \(0x00000009\) OR dword\ \(0x000003c0\))))
+        OR (process.executable.keyword:c\:\\windows\\microsoft.net\\framework* AND
+        process.executable.keyword:*\\ngen.exe) OR 
+        (process.executable.keyword:*\\appdata\\local\\microsoft\\onedrive\\standaloneupdater\\onedrivesetup.exe
+        AND registry.path.keyword:*\\microsoft\\windows\\currentversion\\runonce\\delete\
+        cached\ update\ binary AND winlog.event_data.Details.keyword:c\:\\windows\\system32\\cmd.exe\
+        \/q\ \/c\ del\ \/q\ \"c\:\\users\\* AND 
+        winlog.event_data.Details.keyword:*\\appdata\\local\\microsoft\\onedrive\\update\\onedrivesetup.exe\")))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1547.001
+risk: medium

@@ -1,10 +1,16 @@
 description: |
   Detects usage of the "Add-AppxPackage" or it's alias "Add-AppPackage" to install unsigned AppX packages
 name: Unsigned AppX Installation Attempt Using Add-AppxPackage - PsScript
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:(*add\-apppackage\ * OR *add\-appxpackage\ *)) AND powershell.file.script_block_text.keyword:*\ \-allowunsigned*
+      query: (powershell.file.script_block_text.keyword:(*add\-apppackage\ * OR *add\-appxpackage\
+        *)) AND powershell.file.script_block_text.keyword:*\ \-allowunsigned*
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

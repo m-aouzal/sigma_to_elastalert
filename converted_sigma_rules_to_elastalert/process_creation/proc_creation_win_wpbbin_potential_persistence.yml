@@ -1,10 +1,16 @@
 description: |
   Detects execution of the binary "wpbbin" which is used as part of the UEFI based persistence method described in the reference section
 name: UEFI Persistence Via Wpbbin - ProcessCreation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:c\:\\windows\\system32\\wpbbin.exe
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+- defense-evasion
+mitre_attack_technique:
+- t1542.001
+risk: high

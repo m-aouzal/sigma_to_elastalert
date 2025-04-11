@@ -1,10 +1,18 @@
 description: |
   Detects files written by the different tools that exploit HiveNightmare
 name: HackTool - Typical HiveNightmare SAM File Export
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.targetfilename.keyword:(*\\hive_sam_* OR *\\sam\-2021\-* OR *\\sam\-2022\-* OR *\\sam\-2023\-* OR *\\sam\-haxx* OR *\\sam.save*)) OR winlog.event_data.targetfilename.keyword:c\:\\windows\\temp\\sam
+      query: (winlog.event_data.targetfilename.keyword:(*\\hive_sam_* OR *\\sam\-2021\-*
+        OR *\\sam\-2022\-* OR *\\sam\-2023\-* OR *\\sam\-haxx* OR *\\sam.save*)) OR
+        winlog.event_data.targetfilename.keyword:c\:\\windows\\temp\\sam
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1552.001
+- cve.2021-36934
+risk: high

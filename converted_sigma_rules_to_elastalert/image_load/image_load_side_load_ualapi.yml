@@ -1,10 +1,18 @@
 description: |
   The Fax service attempts to load ualapi.dll, which is non-existent. An attacker can then (side)load their own malicious DLL using this service.
 name: Fax Service DLL Search Order Hijack
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\fxssvc.exe AND file.path.keyword:*ualapi.dll) AND (NOT file.path.keyword:c\:\\windows\\winsxs\\*)
+      query: (process.executable.keyword:*\\fxssvc.exe AND file.path.keyword:*ualapi.dll)
+        AND (NOT file.path.keyword:c\:\\windows\\winsxs\\*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+- defense-evasion
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: high

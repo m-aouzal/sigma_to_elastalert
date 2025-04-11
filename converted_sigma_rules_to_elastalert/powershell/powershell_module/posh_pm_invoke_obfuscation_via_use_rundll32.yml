@@ -1,10 +1,20 @@
 description: |
   Detects Obfuscated Powershell via use Rundll32 in Scripts
 name: Invoke-Obfuscation Via Use Rundll32 - PowerShell Module
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.Payload.keyword:*\&\&* AND winlog.event_data.Payload.keyword:*rundll32* AND winlog.event_data.Payload.keyword:*shell32.dll* AND winlog.event_data.Payload.keyword:*shellexec_rundll*) AND (winlog.event_data.Payload.keyword:(*value* OR *invoke* OR *comspec* OR *iex*))
+      query: (winlog.event_data.Payload.keyword:*\&\&* AND winlog.event_data.Payload.keyword:*rundll32*
+        AND winlog.event_data.Payload.keyword:*shell32.dll* AND winlog.event_data.Payload.keyword:*shellexec_rundll*)
+        AND (winlog.event_data.Payload.keyword:(*value* OR *invoke* OR *comspec* OR
+        *iex*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1027
+- t1059.001
+risk: high

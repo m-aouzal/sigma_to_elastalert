@@ -1,10 +1,16 @@
 description: |
   Detects WMI command line event consumers
 name: WMI Persistence - Command Line Event Consumer
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:c\:\\windows\\system32\\wbem\\wmiprvse.exe AND file.path.keyword:*\\wbemcons.dll
+      query: process.executable.keyword:c\:\\windows\\system32\\wbem\\wmiprvse.exe
+        AND file.path.keyword:*\\wbemcons.dll
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1546.003
+risk: high

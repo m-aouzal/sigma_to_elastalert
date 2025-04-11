@@ -1,10 +1,16 @@
 description: |
   Detects potential installation or installation attempts of known malicious appx packages
 name: Potential Malicious AppX Package Installation Attempts
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-appxdeploymentserver\/operational AND ((event.code.keyword:(400 OR 401)) AND winlog.event_data.PackageFullName.keyword:*3669e262\-ec02\-4e9d\-bcb4\-3d008b4afac9*)
+      query: winlog.channel.keyword:microsoft\-windows\-appxdeploymentserver\/operational
+        AND ((event.code.keyword:(400 OR 401)) AND 
+        winlog.event_data.PackageFullName.keyword:*3669e262\-ec02\-4e9d\-bcb4\-3d008b4afac9*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

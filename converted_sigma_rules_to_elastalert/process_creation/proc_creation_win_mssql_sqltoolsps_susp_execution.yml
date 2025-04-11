@@ -1,12 +1,20 @@
 description: |
   This rule detects execution of a PowerShell code through the sqltoolsps.exe utility, which is included in the standard set of utilities supplied with the Microsoft SQL Server Management studio.
   Script blocks are not logged in this case, so this utility helps to bypass protection mechanisms based on the analysis of these logs.
-  
+
 name: SQL Client Tools PowerShell Session Detection
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\sqltoolsps.exe OR winlog.event_data.parentimage.keyword:*\\sqltoolsps.exe OR winlog.event_data.originalfilename.keyword:\\sqltoolsps.exe) AND (NOT process.parent.executable.keyword:*\\smss.exe)
+      query: (winlog.event_data.image.keyword:*\\sqltoolsps.exe OR winlog.event_data.parentimage.keyword:*\\sqltoolsps.exe
+        OR winlog.event_data.originalfilename.keyword:\\sqltoolsps.exe) AND (NOT process.parent.executable.keyword:*\\smss.exe)
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+- defense-evasion
+mitre_attack_technique:
+- t1059.001
+- t1127
+risk: medium

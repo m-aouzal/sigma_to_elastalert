@@ -1,10 +1,19 @@
 description: |
   Detects a suspicious printer driver installation with an empty Manufacturer value
 name: Suspicious Printer Driver Empty Manufacturer
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((registry.path.keyword:*\\control\\print\\environments\\windows\ x64\\drivers* AND registry.path.keyword:*\\manufacturer*) AND winlog.event_data.Details.keyword:\(empty\)) AND (NOT (registry.path.keyword:*\\cutepdf\ writer\ v4.0\\* OR (registry.path.keyword:(*\\vnc\ printer\ \(ps\)\\* OR *\\vnc\ printer\ \(ud\)\\*)) OR registry.path.keyword:*\\version\-3\\pdf24\\*))
+      query: ((registry.path.keyword:*\\control\\print\\environments\\windows\ x64\\drivers*
+        AND registry.path.keyword:*\\manufacturer*) AND winlog.event_data.Details.keyword:\(empty\))
+        AND (NOT (registry.path.keyword:*\\cutepdf\ writer\ v4.0\\* OR (registry.path.keyword:(*\\vnc\
+        printer\ \(ps\)\\* OR *\\vnc\ printer\ \(ud\)\\*)) OR registry.path.keyword:*\\version\-3\\pdf24\\*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- privilege-escalation
+mitre_attack_technique:
+- t1574
+- cve.2021-1675
+risk: high

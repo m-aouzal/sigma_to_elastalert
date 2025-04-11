@@ -1,10 +1,16 @@
 description: |
   Detects the execution of "lodctr.exe" to rebuild the performance counter registry values. This can be abused by attackers by providing a malicious config file to overwrite performance counter configuration to confuse and evade monitoring and security solutions.
 name: Rebuild Performance Counter Values Via Lodctr.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\lodctr.exe AND process.pe.original_file_name.keyword:lodctr.exe) AND process.command_line.keyword:(*\ \-r* OR *\ \/r* OR *\ –r* OR *\ —r* OR *\ ―r*)
+      query: (process.executable.keyword:*\\lodctr.exe AND process.pe.original_file_name.keyword:lodctr.exe)
+        AND process.command_line.keyword:(*\ \-r* OR *\ \/r* OR *\ –r* OR *\ —r* OR
+        *\ ―r*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: medium

@@ -3,12 +3,19 @@ description: |
   Windows Recall can be enabled by deleting the existing "DisableAIDataAnalysis" value, or setting it to 0.
   Adversaries may enable Windows Recall as part of post-exploitation discovery and collection activities.
   This rule assumes that Recall is already explicitly disabled on the host, and subsequently enabled by the adversary.
-  
+
 name: Windows Recall Feature Enabled Via Reg.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND (process.command_line.keyword:*microsoft\\windows\\windowsai* AND process.command_line.keyword:*disableaidataanalysis*) AND ((process.command_line.keyword:(*add* OR *0*)) OR process.command_line.keyword:*delete*)
+      query: (winlog.event_data.image.keyword:*\\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe)
+        AND (process.command_line.keyword:*microsoft\\windows\\windowsai* AND process.command_line.keyword:*disableaidataanalysis*)
+        AND ((process.command_line.keyword:(*add* OR *0*)) OR process.command_line.keyword:*delete*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- collection
+mitre_attack_technique:
+- t1113
+risk: medium

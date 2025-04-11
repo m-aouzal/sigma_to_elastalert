@@ -1,10 +1,20 @@
 description: |
   Detects the execution of the hacktool SharPersist - used to deploy various different kinds of persistence mechanisms
 name: HackTool - SharPersist Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\sharpersist.exe OR winlog.event_data.product.keyword:sharpersist) OR (process.command_line.keyword:(*\ \-t\ schtask\ \-c\ * OR *\ \-t\ startupfolder\ \-c\ *)) OR (process.command_line.keyword:*\ \-t\ reg\ \-c\ * AND process.command_line.keyword:*\ \-m\ add*) OR (process.command_line.keyword:*\ \-t\ service\ \-c\ * AND process.command_line.keyword:*\ \-m\ add*) OR (process.command_line.keyword:*\ \-t\ schtask\ \-c\ * AND process.command_line.keyword:*\ \-m\ add*)
+      query: (winlog.event_data.image.keyword:*\\sharpersist.exe OR winlog.event_data.product.keyword:sharpersist)
+        OR (process.command_line.keyword:(*\ \-t\ schtask\ \-c\ * OR *\ \-t\ startupfolder\
+        \-c\ *)) OR (process.command_line.keyword:*\ \-t\ reg\ \-c\ * AND process.command_line.keyword:*\
+        \-m\ add*) OR (process.command_line.keyword:*\ \-t\ service\ \-c\ * AND process.command_line.keyword:*\
+        \-m\ add*) OR (process.command_line.keyword:*\ \-t\ schtask\ \-c\ * AND process.command_line.keyword:*\
+        \-m\ add*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1053
+risk: high

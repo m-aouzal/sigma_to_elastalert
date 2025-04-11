@@ -1,10 +1,20 @@
 description: |
   Detects a suspicious process spawning from an Outlook process.
 name: Suspicious Outlook Child Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\\outlook.exe AND (process.executable.keyword:(*\\appvlp.exe OR *\\bash.exe OR *\\cmd.exe OR *\\cscript.exe OR *\\forfiles.exe OR *\\hh.exe OR *\\mftrace.exe OR *\\msbuild.exe OR *\\msdt.exe OR *\\mshta.exe OR *\\msiexec.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\regsvr32.exe OR *\\schtasks.exe OR *\\scrcons.exe OR *\\scriptrunner.exe OR *\\sh.exe OR *\\svchost.exe OR *\\wmic.exe OR *\\wscript.exe))
+      query: process.parent.executable.keyword:*\\outlook.exe AND (process.executable.keyword:(*\\appvlp.exe
+        OR *\\bash.exe OR *\\cmd.exe OR *\\cscript.exe OR *\\forfiles.exe OR *\\hh.exe
+        OR *\\mftrace.exe OR *\\msbuild.exe OR *\\msdt.exe OR *\\mshta.exe OR *\\msiexec.exe
+        OR *\\powershell.exe OR *\\pwsh.exe OR *\\regsvr32.exe OR *\\schtasks.exe
+        OR *\\scrcons.exe OR *\\scriptrunner.exe OR *\\sh.exe OR *\\svchost.exe OR
+        *\\wmic.exe OR *\\wscript.exe))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1204.002
+risk: high

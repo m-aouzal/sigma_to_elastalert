@@ -1,10 +1,17 @@
 description: |
   Detects wceaux.dll access while WCE pass-the-hash remote command execution on source host
 name: WCE wceaux.dll Access
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND ((event.code.keyword:(4656 OR 4663)) AND winlog.event_data.ObjectName.keyword:*\\wceaux.dll)
+      query: winlog.channel.keyword:security AND ((event.code.keyword:(4656 OR 4663))
+        AND winlog.event_data.ObjectName.keyword:*\\wceaux.dll)
 type: any
 priority: 4
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003
+- s0005
+risk: critical

@@ -1,12 +1,18 @@
 description: |
   Detects changes to the "NoLMHash" registry value in order to allow Windows to store LM Hashes.
   By setting this registry value to "0" (DWORD), Windows will be allowed to store a LAN manager hash of your password in Active Directory and local SAM databases.
-  
+
 name: Enable LM Hash Storage
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*system\\currentcontrolset\\control\\lsa\\nolmhash AND winlog.event_data.Details.keyword:dword\ \(0x00000000\)
+      query: registry.path.keyword:*system\\currentcontrolset\\control\\lsa\\nolmhash
+        AND winlog.event_data.Details.keyword:dword\ \(0x00000000\)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1112
+risk: high

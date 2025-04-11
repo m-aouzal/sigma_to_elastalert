@@ -1,10 +1,17 @@
 description: |
   Detects creation of the Process Monitor driver by processes other than Process Monitor (procmon) itself.
 name: Process Monitor Driver Creation By Non-Sysinternals Binary
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:*\\procmon* AND file.path.keyword:*.sys) AND (NOT (process.executable.keyword:(*\\procmon.exe OR *\\procmon64.exe)))
+      query: (file.path.keyword:*\\procmon* AND file.path.keyword:*.sys) AND (NOT
+        (process.executable.keyword:(*\\procmon.exe OR *\\procmon64.exe)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1068
+risk: medium

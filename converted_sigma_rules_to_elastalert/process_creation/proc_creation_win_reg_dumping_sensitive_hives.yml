@@ -1,10 +1,23 @@
 description: |
   Detects the usage of "reg.exe" in order to dump sensitive registry hives. This includes SAM, SYSTEM and SECURITY hives.
 name: Dumping of Sensitive Hives Via Reg.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND (process.command_line.keyword:(*\ save\ * OR *\ export\ * OR *\ ˢave\ * OR *\ eˣport\ *)) AND (process.command_line.keyword:(*hklm* OR *hk˪m* OR *hkey_local_machine* OR *hkey_˪ocal_machine* OR *hkey_loca˪_machine* OR *hkey_˪oca˪_machine*)) AND (process.command_line.keyword:(*\\system* OR *\\sam* OR *\\security* OR *\\ˢystem* OR *\\syˢtem* OR *\\ˢyˢtem* OR *\\ˢam* OR *\\ˢecurity*))
+      query: (winlog.event_data.image.keyword:*\\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe)
+        AND (process.command_line.keyword:(*\ save\ * OR *\ export\ * OR *\ ˢave\
+        * OR *\ eˣport\ *)) AND (process.command_line.keyword:(*hklm* OR *hk˪m* OR
+        *hkey_local_machine* OR *hkey_˪ocal_machine* OR *hkey_loca˪_machine* OR *hkey_˪oca˪_machine*))
+        AND (process.command_line.keyword:(*\\system* OR *\\sam* OR *\\security* OR
+        *\\ˢystem* OR *\\syˢtem* OR *\\ˢyˢtem* OR *\\ˢam* OR *\\ˢecurity*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.002
+- t1003.004
+- t1003.005
+- car.2013-07-001
+risk: high

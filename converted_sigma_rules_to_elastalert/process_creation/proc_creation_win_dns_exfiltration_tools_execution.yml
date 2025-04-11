@@ -1,10 +1,18 @@
 description: |
   Well-known DNS Exfiltration tools execution
 name: DNS Exfiltration and Tunneling Tools Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.image.keyword:(*\\iodine.exe OR *\\dnscat2*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- exfiltration
+- command-and-control
+mitre_attack_technique:
+- t1048.001
+- t1071.004
+- t1132.001
+risk: high

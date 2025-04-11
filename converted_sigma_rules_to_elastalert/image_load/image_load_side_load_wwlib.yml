@@ -1,10 +1,20 @@
 description: |
   Detects potential DLL sideloading of "wwlib.dll"
 name: Potential WWlib.DLL Sideloading
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\\wwlib.dll AND (NOT ((process.executable.keyword:(c\:\\program\ files\ \(x86\)\\microsoft\ office\\* OR c\:\\program\ files\\microsoft\ office\\*)) AND process.executable.keyword:*\\winword.exe AND (file.path.keyword:(c\:\\program\ files\ \(x86\)\\microsoft\ office\\* OR c\:\\program\ files\\microsoft\ office\\*))))
+      query: file.path.keyword:*\\wwlib.dll AND (NOT ((process.executable.keyword:(c\:\\program\
+        files\ \(x86\)\\microsoft\ office\\* OR c\:\\program\ files\\microsoft\ office\\*))
+        AND process.executable.keyword:*\\winword.exe AND (file.path.keyword:(c\:\\program\
+        files\ \(x86\)\\microsoft\ office\\* OR c\:\\program\ files\\microsoft\ office\\*))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: medium

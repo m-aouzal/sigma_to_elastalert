@@ -1,12 +1,21 @@
 description: |
   Detects potential PowerShell execution from a DLL instead of the usual PowerShell process as seen used in PowerShdll.
   This detection assumes that PowerShell commands are passed via the CommandLine.
-  
+
 name: Potential PowerShell Execution Via DLL
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\installutil.exe OR *\\regasm.exe OR *\\regsvcs.exe OR *\\regsvr32.exe OR *\\rundll32.exe)) OR (winlog.event_data.originalfilename.keyword:(installutil.exe OR regasm.exe OR regsvcs.exe OR regsvr32.exe OR rundll32.exe))) AND (process.command_line.keyword:(*default.getstring* OR *downloadstring* OR *frombase64string* OR *icm\ * OR *iex\ * OR *invoke\-command* OR *invoke\-expression*))
+      query: ((winlog.event_data.image.keyword:(*\\installutil.exe OR *\\regasm.exe
+        OR *\\regsvcs.exe OR *\\regsvr32.exe OR *\\rundll32.exe)) OR (winlog.event_data.originalfilename.keyword:(installutil.exe
+        OR regasm.exe OR regsvcs.exe OR regsvr32.exe OR rundll32.exe))) AND (process.command_line.keyword:(*default.getstring*
+        OR *downloadstring* OR *frombase64string* OR *icm\ * OR *iex\ * OR *invoke\-command*
+        OR *invoke\-expression*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218.011
+risk: high

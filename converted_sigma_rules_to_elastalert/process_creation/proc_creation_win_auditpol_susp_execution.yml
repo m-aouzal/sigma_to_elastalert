@@ -1,12 +1,18 @@
 description: |
   Threat actors can use auditpol binary to change audit policy configuration to impair detection capability.
   This can be carried out by selectively disabling/removing certain audit policies as well as restoring a custom policy owned by the threat actor.
-  
+
 name: Audit Policy Tampering Via Auditpol
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\auditpol.exe OR winlog.event_data.originalfilename.keyword:auditpol.exe) AND (process.command_line.keyword:(*disable* OR *clear* OR *remove* OR *restore*))
+      query: (winlog.event_data.image.keyword:*\\auditpol.exe OR winlog.event_data.originalfilename.keyword:auditpol.exe)
+        AND (process.command_line.keyword:(*disable* OR *clear* OR *remove* OR *restore*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.002
+risk: high

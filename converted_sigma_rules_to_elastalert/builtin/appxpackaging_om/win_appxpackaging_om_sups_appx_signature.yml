@@ -1,10 +1,19 @@
 description: |
   Detects execution of AppX packages with known suspicious or malicious signature
 name: Suspicious Digital Signature Of AppX Package
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-appxpackaging\/operational AND (event.code.keyword:157 AND winlog.event_data.subjectName.keyword:cn\=foresee\ consulting\ inc.,\ o\=foresee\ consulting\ inc.,\ l\=north\ york,\ s\=ontario,\ c\=ca,\ serialnumber\=1004913\-1,\ oid.1.3.6.1.4.1.311.60.2.1.3\=ca,\ oid.2.5.4.15\=private\ organization)
+      query: winlog.channel.keyword:microsoft\-windows\-appxpackaging\/operational
+        AND (event.code.keyword:157 AND winlog.event_data.subjectName.keyword:cn\=foresee\
+        consulting\ inc.,\ o\=foresee\ consulting\ inc.,\ l\=north\ york,\ s\=ontario,\
+        c\=ca,\ serialnumber\=1004913\-1,\ oid.1.3.6.1.4.1.311.60.2.1.3\=ca,\ oid.2.5.4.15\=private\
+        organization)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique: []
+risk: medium

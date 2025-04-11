@@ -1,10 +1,22 @@
 description: |
   Detects KrbRelayUp used to perform a universal no-fix local privilege escalation in Windows domain environments where LDAP signing is not enforced
 name: HackTool - KrbRelayUp Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\krbrelayup.exe OR winlog.event_data.originalfilename.keyword:krbrelayup.exe) OR (process.command_line.keyword:*\ relay\ * AND process.command_line.keyword:*\ \-domain\ * AND process.command_line.keyword:*\ \-computername\ *) OR (process.command_line.keyword:*\ krbscm\ * AND process.command_line.keyword:*\ \-sc\ *) OR (process.command_line.keyword:*\ spawn\ * AND process.command_line.keyword:*\ \-d\ * AND process.command_line.keyword:*\ \-cn\ * AND process.command_line.keyword:*\ \-cp\ *)
+      query: (winlog.event_data.image.keyword:*\\krbrelayup.exe OR winlog.event_data.originalfilename.keyword:krbrelayup.exe)
+        OR (process.command_line.keyword:*\ relay\ * AND process.command_line.keyword:*\
+        \-domain\ * AND process.command_line.keyword:*\ \-computername\ *) OR (process.command_line.keyword:*\
+        krbscm\ * AND process.command_line.keyword:*\ \-sc\ *) OR (process.command_line.keyword:*\
+        spawn\ * AND process.command_line.keyword:*\ \-d\ * AND process.command_line.keyword:*\
+        \-cn\ * AND process.command_line.keyword:*\ \-cp\ *)
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+- lateral-movement
+mitre_attack_technique:
+- t1558.003
+- t1550.003
+risk: high

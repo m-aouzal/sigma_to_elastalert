@@ -1,10 +1,16 @@
 description: |
   Detects NetSupport Manager service installation on the target system.
 name: NetSupport Manager Service Install
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND ((winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045) AND (winlog.event_data.imagepath.keyword:*\\netsupport\ manager\\client32.exe* OR winlog.event_data.servicename.keyword:client32))
+      query: winlog.channel.keyword:system AND ((winlog.provider_name.keyword:service\
+        control\ manager AND event.code.keyword:7045) AND (winlog.event_data.imagepath.keyword:*\\netsupport\
+        manager\\client32.exe* OR winlog.event_data.servicename.keyword:client32))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique: []
+risk: medium

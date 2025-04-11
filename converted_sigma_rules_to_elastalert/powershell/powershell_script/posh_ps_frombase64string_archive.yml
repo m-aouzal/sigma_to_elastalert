@@ -1,10 +1,16 @@
 description: |
   Detects attempts of decoding a base64 Gzip archive in a PowerShell script. This technique is often used as a method to load malicious content into memory afterward.
 name: Suspicious FromBase64String Usage On Gzip Archive - Ps Script
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*frombase64string* AND powershell.file.script_block_text.keyword:*memorystream* AND powershell.file.script_block_text.keyword:*h4si*
+      query: powershell.file.script_block_text.keyword:*frombase64string* AND powershell.file.script_block_text.keyword:*memorystream*
+        AND powershell.file.script_block_text.keyword:*h4si*
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1132.001
+risk: medium

@@ -1,10 +1,15 @@
 description: |
   Detects Azure Hybrid Connection Manager services querying the Azure service bus service
 name: DNS HybridConnectionManager Service Bus
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: dns.question.name.keyword:*servicebus.windows.net* AND process.executable.keyword:*hybridconnectionmanager*
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1554
+risk: high

@@ -1,10 +1,18 @@
 description: |
   Detects when a user disables the Windows Firewall via a Profile to help evade defense.
 name: Windows Firewall Profile Disabled
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*set\-netfirewallprofile\ * AND powershell.file.script_block_text.keyword:*\ \-enabled\ * AND powershell.file.script_block_text.keyword:*\ false*) AND (powershell.file.script_block_text.keyword:(*\ \-all\ * OR *public* OR *domain* OR *private*))
+      query: (powershell.file.script_block_text.keyword:*set\-netfirewallprofile\
+        * AND powershell.file.script_block_text.keyword:*\ \-enabled\ * AND powershell.file.script_block_text.keyword:*\
+        false*) AND (powershell.file.script_block_text.keyword:(*\ \-all\ * OR *public*
+        OR *domain* OR *private*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.004
+risk: medium

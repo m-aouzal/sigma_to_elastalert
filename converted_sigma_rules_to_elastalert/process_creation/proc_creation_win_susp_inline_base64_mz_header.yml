@@ -1,10 +1,15 @@
 description: |
   Detects encoded base64 MZ header in the commandline
 name: Base64 MZ Header In CommandLine
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*tvqqaamaaaaeaaaa* OR *tvpqaaiaaaaeaa8a* OR *tvqaaaeaaaaeabaa* OR *tvoaaaaaaaaaaaaa* OR *tvptaqeaaaaeaaaa*)
+      query: process.command_line.keyword:(*tvqqaamaaaaeaaaa* OR *tvpqaaiaaaaeaa8a*
+        OR *tvqaaaeaaaaeabaa* OR *tvoaaaaaaaaaaaaa* OR *tvptaqeaaaaeaaaa*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: high

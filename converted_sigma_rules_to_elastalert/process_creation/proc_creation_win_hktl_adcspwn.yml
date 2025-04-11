@@ -1,10 +1,16 @@
 description: |
   Detects command line parameters used by ADCSPwn, a tool to escalate privileges in an active directory network by coercing authenticate from machine accounts and relaying to the certificate service
 name: HackTool - ADCSPwn Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*\ \-\-adcs\ * AND process.command_line.keyword:*\ \-\-port\ *
+      query: process.command_line.keyword:*\ \-\-adcs\ * AND process.command_line.keyword:*\
+        \-\-port\ *
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1557.001
+risk: high

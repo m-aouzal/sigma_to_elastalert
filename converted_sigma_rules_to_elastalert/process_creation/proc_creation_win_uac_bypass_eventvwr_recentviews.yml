@@ -1,10 +1,16 @@
 description: |
   Detects the pattern of UAC Bypass using Event Viewer RecentViews
 name: UAC Bypass Using Event Viewer RecentViews
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*\\event\ viewer\\recentviews* OR *\\eventv\~1\\recentviews*)) AND process.command_line.keyword:*\>*
+      query: (process.command_line.keyword:(*\\event\ viewer\\recentviews* OR *\\eventv\~1\\recentviews*))
+        AND process.command_line.keyword:*\>*
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique: []
+risk: high

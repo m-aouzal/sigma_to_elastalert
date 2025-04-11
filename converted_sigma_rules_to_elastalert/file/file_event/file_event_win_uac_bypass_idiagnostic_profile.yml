@@ -1,10 +1,18 @@
 description: |
   Detects the creation of a file by "dllhost.exe" in System32 directory part of "IDiagnosticProfileUAC" UAC bypass technique
 name: UAC Bypass Using IDiagnostic Profile - File
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\dllhost.exe AND file.path.keyword:c\:\\windows\\system32\\* AND file.path.keyword:*.dll
+      query: process.executable.keyword:*\\dllhost.exe AND file.path.keyword:c\:\\windows\\system32\\*
+        AND file.path.keyword:*.dll
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1548.002
+risk: high

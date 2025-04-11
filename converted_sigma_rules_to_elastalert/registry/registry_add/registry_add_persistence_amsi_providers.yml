@@ -1,10 +1,16 @@
 description: |
   Detects when an attacker registers a new AMSI provider in order to achieve persistence
 name: Potential Persistence Via New AMSI Providers - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.EventType.keyword:createkey AND (registry.path.keyword:(*\\software\\microsoft\\amsi\\providers\\* OR *\\software\\wow6432node\\microsoft\\amsi\\providers\\*))) AND (NOT (process.executable.keyword:(c\:\\windows\\system32\\* OR c\:\\program\ files\\* OR c\:\\program\ files\ \(x86\)\\*)))
+      query: (winlog.event_data.EventType.keyword:createkey AND (registry.path.keyword:(*\\software\\microsoft\\amsi\\providers\\*
+        OR *\\software\\wow6432node\\microsoft\\amsi\\providers\\*))) AND (NOT (process.executable.keyword:(c\:\\windows\\system32\\*
+        OR c\:\\program\ files\\* OR c\:\\program\ files\ \(x86\)\\*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique: []
+risk: high

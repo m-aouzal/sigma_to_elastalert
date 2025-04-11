@@ -1,10 +1,15 @@
 description: |
   Detects DNS queries to "ufile.io", which was seen abused by malware and threat actors as a method for data exfiltration
 name: DNS Query To Ufile.io
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: dns.question.name.keyword:*ufile.io*
 type: any
 priority: 1
+mitre_attack_tactic:
+- exfiltration
+mitre_attack_technique:
+- t1567.002
+risk: low

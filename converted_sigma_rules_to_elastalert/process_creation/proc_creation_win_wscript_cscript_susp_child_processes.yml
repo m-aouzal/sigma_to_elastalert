@@ -1,12 +1,22 @@
 description: |
   Detects potentially suspicious child processes of Wscript/Cscript. These include processes such as rundll32 with uncommon exports or PowerShell spawning rundll32 or regsvr32.
   Malware such as Pikabot and Qakbot were seen using similar techniques as well as many others.
-  
+
 name: Cscript/Wscript Potentially Suspicious Child Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:(*\\wscript.exe OR *\\cscript.exe)) AND (process.executable.keyword:*\\rundll32.exe OR ((process.executable.keyword:(*\\cmd.exe OR *\\powershell.exe OR *\\pwsh.exe)) AND ((process.command_line.keyword:*mshta* AND process.command_line.keyword:*http*) OR (process.command_line.keyword:(*rundll32* OR *regsvr32* OR *msiexec*))))) AND (NOT (process.executable.keyword:*\\rundll32.exe AND (process.command_line.keyword:(*updateperusersystemparameters* OR *printuientry* OR *clearmytracksbyprocess*))))
+      query: (process.parent.executable.keyword:(*\\wscript.exe OR *\\cscript.exe))
+        AND (process.executable.keyword:*\\rundll32.exe OR ((process.executable.keyword:(*\\cmd.exe
+        OR *\\powershell.exe OR *\\pwsh.exe)) AND ((process.command_line.keyword:*mshta*
+        AND process.command_line.keyword:*http*) OR (process.command_line.keyword:(*rundll32*
+        OR *regsvr32* OR *msiexec*))))) AND (NOT (process.executable.keyword:*\\rundll32.exe
+        AND (process.command_line.keyword:(*updateperusersystemparameters* OR *printuientry*
+        OR *clearmytracksbyprocess*))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: medium

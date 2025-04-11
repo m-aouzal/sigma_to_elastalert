@@ -1,10 +1,16 @@
 description: |
   Detects an access to authentication tokens and accounts of Microsoft Teams desktop application.
 name: Suspicious Teams Application Related ObjectAcess Event
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND ((event.code.keyword:4663 AND (winlog.event_data.ObjectName.keyword:(*\\microsoft\\teams\\cookies* OR *\\microsoft\\teams\\local\ storage\\leveldb*))) AND (NOT process.executable.keyword:*\\microsoft\\teams\\current\\teams.exe*))
+      query: winlog.channel.keyword:security AND ((event.code.keyword:4663 AND (winlog.event_data.ObjectName.keyword:(*\\microsoft\\teams\\cookies*
+        OR *\\microsoft\\teams\\local\ storage\\leveldb*))) AND (NOT process.executable.keyword:*\\microsoft\\teams\\current\\teams.exe*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1528
+risk: high

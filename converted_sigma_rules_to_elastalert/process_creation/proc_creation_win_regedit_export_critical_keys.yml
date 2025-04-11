@@ -1,10 +1,18 @@
 description: |
   Detects the export of a crital Registry key to a file.
 name: Exports Critical Registry Keys To a File
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\regedit.exe OR winlog.event_data.originalfilename.keyword:regedit.exe) AND process.command_line.keyword:(*\ \-e\ * OR *\ \/e\ * OR *\ –e\ * OR *\ —e\ * OR *\ ―e\ *) AND (process.command_line.keyword:(*hklm* OR *hkey_local_machine*)) AND (process.command_line.keyword:(*\\system OR *\\sam OR *\\security))
+      query: (winlog.event_data.image.keyword:*\\regedit.exe OR winlog.event_data.originalfilename.keyword:regedit.exe)
+        AND process.command_line.keyword:(*\ \-e\ * OR *\ \/e\ * OR *\ –e\ * OR *\
+        —e\ * OR *\ ―e\ *) AND (process.command_line.keyword:(*hklm* OR *hkey_local_machine*))
+        AND (process.command_line.keyword:(*\\system OR *\\sam OR *\\security))
 type: any
 priority: 3
+mitre_attack_tactic:
+- exfiltration
+mitre_attack_technique:
+- t1012
+risk: high

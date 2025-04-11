@@ -1,10 +1,15 @@
 description: |
   Detects modification addition to the 'TypedPaths' key in the user or admin registry via the commandline. Which might indicate persistence attempt
 name: Persistence Via TypedPaths - CommandLine
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*\\software\\microsoft\\windows\\currentversion\\explorer\\typedpaths*
+      query: 
+        process.command_line.keyword:*\\software\\microsoft\\windows\\currentversion\\explorer\\typedpaths*
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique: []
+risk: medium

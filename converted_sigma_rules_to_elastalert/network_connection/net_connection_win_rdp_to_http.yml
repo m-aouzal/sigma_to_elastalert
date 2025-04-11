@@ -1,10 +1,19 @@
 description: |
   Detects svchost hosting RDP termsvcs communicating to target systems on TCP port 80 or 443
 name: RDP to HTTP or HTTPS Target Ports
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\svchost.exe AND network.direction.keyword:true AND source.port:3389 AND (destination.port:(80 OR 443))
+      query: process.executable.keyword:*\\svchost.exe AND network.direction.keyword:true
+        AND source.port:3389 AND (destination.port:(80 OR 443))
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+- lateral-movement
+mitre_attack_technique:
+- t1572
+- t1021.001
+- car.2013-07-002
+risk: high

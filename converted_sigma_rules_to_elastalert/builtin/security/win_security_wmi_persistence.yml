@@ -1,10 +1,17 @@
 description: |
   Detects suspicious WMI event filter and command line event consumer based on WMI and Security Logs.
 name: WMI Persistence - Security
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:4662 AND winlog.event_data.ObjectType.keyword:wmi\ namespace AND winlog.event_data.ObjectName.keyword:*subscription*)
+      query: winlog.channel.keyword:security AND (event.code.keyword:4662 AND winlog.event_data.ObjectType.keyword:wmi\
+        namespace AND winlog.event_data.ObjectName.keyword:*subscription*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1546.003
+risk: medium

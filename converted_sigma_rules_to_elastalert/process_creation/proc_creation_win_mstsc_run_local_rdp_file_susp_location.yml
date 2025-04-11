@@ -1,10 +1,19 @@
 description: |
   Detects potential RDP connection via Mstsc using a local ".rdp" file located in suspicious locations.
 name: Suspicious Mstsc.EXE Execution With Local RDP File
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\mstsc.exe OR winlog.event_data.originalfilename.keyword:mstsc.exe) AND (process.command_line.keyword:(*.rdp OR *.rdp\")) AND (process.command_line.keyword:(*\:\\users\\public\\* OR *\:\\windows\\system32\\spool\\drivers\\color* OR *\:\\windows\\system32\\tasks_migrated\ * OR *\:\\windows\\tasks\\* OR *\:\\windows\\temp\\* OR *\:\\windows\\tracing\\* OR *\\appdata\\local\\temp\\* OR *\\downloads\\*))
+      query: (winlog.event_data.image.keyword:*\\mstsc.exe OR winlog.event_data.originalfilename.keyword:mstsc.exe)
+        AND (process.command_line.keyword:(*.rdp OR *.rdp\")) AND (process.command_line.keyword:(*\:\\users\\public\\*
+        OR *\:\\windows\\system32\\spool\\drivers\\color* OR *\:\\windows\\system32\\tasks_migrated\
+        * OR *\:\\windows\\tasks\\* OR *\:\\windows\\temp\\* OR *\:\\windows\\tracing\\*
+        OR *\\appdata\\local\\temp\\* OR *\\downloads\\*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1219
+risk: high

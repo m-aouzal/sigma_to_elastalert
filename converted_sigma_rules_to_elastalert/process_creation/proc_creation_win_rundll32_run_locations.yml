@@ -1,10 +1,19 @@
 description: |
   Detects suspicious process run from unusual locations
 name: Suspicious Process Start Locations
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:(*\:\\recycler\\* OR *\:\\systemvolumeinformation\\*)) OR (winlog.event_data.image.keyword:(c\:\\windows\\tasks\\* OR c\:\\windows\\debug\\* OR c\:\\windows\\fonts\\* OR c\:\\windows\\help\\* OR c\:\\windows\\drivers\\* OR c\:\\windows\\addins\\* OR c\:\\windows\\cursors\\* OR c\:\\windows\\system32\\tasks\\*))
+      query: (winlog.event_data.image.keyword:(*\:\\recycler\\* OR *\:\\systemvolumeinformation\\*))
+        OR (winlog.event_data.image.keyword:(c\:\\windows\\tasks\\* OR c\:\\windows\\debug\\*
+        OR c\:\\windows\\fonts\\* OR c\:\\windows\\help\\* OR c\:\\windows\\drivers\\*
+        OR c\:\\windows\\addins\\* OR c\:\\windows\\cursors\\* OR c\:\\windows\\system32\\tasks\\*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036
+- car.2013-05-002
+risk: medium

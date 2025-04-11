@@ -1,10 +1,19 @@
 description: |
   Detects an appx package added the pipeline of the "to be processed" packages which is located in uncommon locations
 name: Uncommon AppX Package Locations
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-appxdeploymentserver\/operational AND (event.code.keyword:854 AND (NOT ((winlog.event_data.Path.keyword:(*c\:\\program\ files\\windowsapps\\* OR *c\:\\program\ files\ \(x86\)\\* OR *c\:\\windows\\systemapps\\* OR *c\:\\windows\\printdialog\\* OR *c\:\\windows\\immersivecontrolpanel\\* OR *x\-windowsupdate\:\/\/* OR *file\:\/\/\/c\:\/program%20files*)) OR (winlog.event_data.Path.keyword:(*https\:\/\/statics.teams.cdn.live.net\/* OR *https\:\/\/statics.teams.cdn.office.net\/* OR *microsoft.com* OR *https\:\/\/installer.teams.static.microsoft\/*)))))
+      query: winlog.channel.keyword:microsoft\-windows\-appxdeploymentserver\/operational
+        AND (event.code.keyword:854 AND (NOT ((winlog.event_data.Path.keyword:(*c\:\\program\
+        files\\windowsapps\\* OR *c\:\\program\ files\ \(x86\)\\* OR *c\:\\windows\\systemapps\\*
+        OR *c\:\\windows\\printdialog\\* OR *c\:\\windows\\immersivecontrolpanel\\*
+        OR *x\-windowsupdate\:\/\/* OR *file\:\/\/\/c\:\/program%20files*)) OR (winlog.event_data.Path.keyword:(*https\:\/\/statics.teams.cdn.live.net\/*
+        OR *https\:\/\/statics.teams.cdn.office.net\/* OR *microsoft.com* OR *https\:\/\/installer.teams.static.microsoft\/*)))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

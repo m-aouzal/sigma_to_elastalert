@@ -1,10 +1,16 @@
 description: |
   Detects events that appear when a user click on a link file with a powershell command in it
 name: Hidden Powershell in Link File Pattern
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:c\:\\windows\\explorer.exe AND process.executable.keyword:c\:\\windows\\system32\\cmd.exe AND (process.command_line.keyword:*powershell* AND process.command_line.keyword:*.lnk*)
+      query: process.parent.executable.keyword:c\:\\windows\\explorer.exe AND process.executable.keyword:c\:\\windows\\system32\\cmd.exe
+        AND (process.command_line.keyword:*powershell* AND process.command_line.keyword:*.lnk*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: medium

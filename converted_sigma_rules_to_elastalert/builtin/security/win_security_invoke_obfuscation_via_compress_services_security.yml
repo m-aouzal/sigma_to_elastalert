@@ -1,10 +1,21 @@
 description: |
   Detects Obfuscated Powershell via COMPRESS OBFUSCATION
 name: Invoke-Obfuscation COMPRESS OBFUSCATION - Security
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:4697 AND (winlog.event_data.ServiceFileName.keyword:*new\-object* AND winlog.event_data.ServiceFileName.keyword:*text.encoding\]\:\:ascii* AND winlog.event_data.ServiceFileName.keyword:*readtoend*) AND (winlog.event_data.ServiceFileName.keyword:(*system.io.compression.deflatestream* OR *system.io.streamreader*)))
+      query: winlog.channel.keyword:security AND (event.code.keyword:4697 AND (winlog.event_data.ServiceFileName.keyword:*new\-object*
+        AND winlog.event_data.ServiceFileName.keyword:*text.encoding\]\:\:ascii* AND
+        winlog.event_data.ServiceFileName.keyword:*readtoend*) AND 
+        (winlog.event_data.ServiceFileName.keyword:(*system.io.compression.deflatestream*
+        OR *system.io.streamreader*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1027
+- t1059.001
+risk: medium

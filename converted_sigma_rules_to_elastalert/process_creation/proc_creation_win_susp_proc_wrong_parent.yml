@@ -1,10 +1,22 @@
 description: |
   Detect suspicious parent processes of well-known Windows processes
 name: Windows Processes Suspicious Parent Directory
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\svchost.exe OR *\\taskhost.exe OR *\\lsm.exe OR *\\lsass.exe OR *\\services.exe OR *\\lsaiso.exe OR *\\csrss.exe OR *\\wininit.exe OR *\\winlogon.exe)) AND (NOT (((winlog.event_data.parentimage.keyword:(*\\savservice.exe OR *\\ngen.exe)) OR (winlog.event_data.parentimage.keyword:(*\\system32\\* OR *\\syswow64\\*))) OR ((process.parent.executable.keyword:(*\\windows\ defender\\* OR *\\microsoft\ security\ client\\*)) AND process.parent.executable.keyword:*\\msmpeng.exe) OR ((NOT _exists_:winlog.event_data.parentimage) OR winlog.event_data.parentimage.keyword:\-)))
+      query: (process.executable.keyword:(*\\svchost.exe OR *\\taskhost.exe OR *\\lsm.exe
+        OR *\\lsass.exe OR *\\services.exe OR *\\lsaiso.exe OR *\\csrss.exe OR *\\wininit.exe
+        OR *\\winlogon.exe)) AND (NOT (((winlog.event_data.parentimage.keyword:(*\\savservice.exe
+        OR *\\ngen.exe)) OR (winlog.event_data.parentimage.keyword:(*\\system32\\*
+        OR *\\syswow64\\*))) OR ((process.parent.executable.keyword:(*\\windows\ defender\\*
+        OR *\\microsoft\ security\ client\\*)) AND process.parent.executable.keyword:*\\msmpeng.exe)
+        OR ((NOT _exists_:winlog.event_data.parentimage) OR winlog.event_data.parentimage.keyword:\-)))
 type: any
 priority: 1
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036.003
+- t1036.005
+risk: low

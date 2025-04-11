@@ -1,10 +1,16 @@
 description: |
   Detect potential persistence via the creation of an excel add-in (XLL) file to make it run automatically when Excel is started.
 name: Potential Persistence Via Excel Add-in - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*software\\microsoft\\office\\* AND registry.path.keyword:*\\excel\\options AND winlog.event_data.Details.keyword:\/r\ * AND winlog.event_data.Details.keyword:*.xll
+      query: registry.path.keyword:*software\\microsoft\\office\\* AND registry.path.keyword:*\\excel\\options
+        AND winlog.event_data.Details.keyword:\/r\ * AND winlog.event_data.Details.keyword:*.xll
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1137.006
+risk: high

@@ -2,12 +2,19 @@ description: |
   Detects when the 'AllowMultipleTSSessions' value is enabled.
   Which allows for multiple Remote Desktop connection sessions to be opened at once.
   This is often used by attacker as a way to connect to an RDP session without disconnecting the other users
-  
+
 name: Winlogon AllowMultipleTSSessions Enable
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\microsoft\\windows\ nt\\currentversion\\winlogon\\allowmultipletssessions AND winlog.event_data.Details.keyword:*dword\ \(0x00000001\)
+      query: registry.path.keyword:*\\microsoft\\windows\ nt\\currentversion\\winlogon\\allowmultipletssessions
+        AND winlog.event_data.Details.keyword:*dword\ \(0x00000001\)
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+- defense-evasion
+mitre_attack_technique:
+- t1112
+risk: medium

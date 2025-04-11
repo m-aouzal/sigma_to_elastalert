@@ -1,10 +1,14 @@
 description: |
   Detects change the the "AutodialDLL" key which could be used as a persistence method to load custom DLL via the "ws2_32" library
 name: Potential Persistence Via AutodialDLL
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: registry.path.keyword:*\\services\\winsock2\\parameters\\autodialdll*
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique: []
+risk: high

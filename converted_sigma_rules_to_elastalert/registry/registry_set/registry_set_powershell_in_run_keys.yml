@@ -1,10 +1,21 @@
 description: |
   Detects potential PowerShell commands or code within registry run keys
 name: Suspicious Powershell In Registry Run Keys
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\run* AND (winlog.event_data.Details.keyword:(*powershell* OR *pwsh\ * OR *frombase64string* OR *.downloadfile\(* OR *.downloadstring\(* OR *\ \-w\ hidden\ * OR *\ \-w\ 1\ * OR *\-windowstyle\ hidden* OR *\-window\ hidden* OR *\ \-nop\ * OR *\ \-encodedcommand\ * OR *\-executionpolicy\ bypass* OR *invoke\-expression* OR *iex\ \(* OR *invoke\-command* OR *icm\ \-* OR *invoke\-webrequest* OR *iwr\ * OR *\ \-noni\ * OR *\ \-noninteractive\ *))
+      query: registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\run*
+        AND (winlog.event_data.Details.keyword:(*powershell* OR *pwsh\ * OR *frombase64string*
+        OR *.downloadfile\(* OR *.downloadstring\(* OR *\ \-w\ hidden\ * OR *\ \-w\
+        1\ * OR *\-windowstyle\ hidden* OR *\-window\ hidden* OR *\ \-nop\ * OR *\
+        \-encodedcommand\ * OR *\-executionpolicy\ bypass* OR *invoke\-expression*
+        OR *iex\ \(* OR *invoke\-command* OR *icm\ \-* OR *invoke\-webrequest* OR
+        *iwr\ * OR *\ \-noni\ * OR *\ \-noninteractive\ *))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1547.001
+risk: medium

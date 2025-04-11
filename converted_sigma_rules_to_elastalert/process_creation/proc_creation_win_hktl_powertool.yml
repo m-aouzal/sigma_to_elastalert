@@ -1,10 +1,16 @@
 description: |
   Detects the execution of the tool PowerTool which has the ability to kill a process, delete its process file, unload drivers, and delete the driver files
 name: HackTool - PowerTool Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:(*\\powertool.exe OR *\\powertool64.exe)) OR winlog.event_data.originalfilename.keyword:powertool.exe
+      query: (winlog.event_data.image.keyword:(*\\powertool.exe OR *\\powertool64.exe))
+        OR winlog.event_data.originalfilename.keyword:powertool.exe
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high

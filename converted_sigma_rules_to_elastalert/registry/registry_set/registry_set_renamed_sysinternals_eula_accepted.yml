@@ -1,10 +1,22 @@
 description: |
   Detects non-sysinternals tools setting the "accepteula" key which normally is set on sysinternals tool execution
 name: Usage of Renamed Sysinternals Tools - RegistrySet
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((registry.path.keyword:(*\\psexec* OR *\\procdump* OR *\\handle* OR *\\livekd* OR *\\process\ explorer* OR *\\psloglist* OR *\\pspasswd* OR *\\active\ directory\ explorer*)) AND registry.path.keyword:*\\eulaaccepted) AND (NOT (process.executable.keyword:(*\\psexec.exe OR *\\psexec64.exe OR *\\procdump.exe OR *\\procdump64.exe OR *\\handle.exe OR *\\handle64.exe OR *\\livekd.exe OR *\\livekd64.exe OR *\\procexp.exe OR *\\procexp64.exe OR *\\psloglist.exe OR *\\psloglist64.exe OR *\\pspasswd.exe OR *\\pspasswd64.exe OR *\\adexplorer.exe OR *\\adexplorer64.exe))) AND _exists_:process.executable
+      query: ((registry.path.keyword:(*\\psexec* OR *\\procdump* OR *\\handle* OR
+        *\\livekd* OR *\\process\ explorer* OR *\\psloglist* OR *\\pspasswd* OR *\\active\
+        directory\ explorer*)) AND registry.path.keyword:*\\eulaaccepted) AND (NOT
+        (process.executable.keyword:(*\\psexec.exe OR *\\psexec64.exe OR *\\procdump.exe
+        OR *\\procdump64.exe OR *\\handle.exe OR *\\handle64.exe OR *\\livekd.exe
+        OR *\\livekd64.exe OR *\\procexp.exe OR *\\procexp64.exe OR *\\psloglist.exe
+        OR *\\psloglist64.exe OR *\\pspasswd.exe OR *\\pspasswd64.exe OR *\\adexplorer.exe
+        OR *\\adexplorer64.exe))) AND _exists_:process.executable
 type: any
 priority: 3
+mitre_attack_tactic:
+- resource-development
+mitre_attack_technique:
+- t1588.002
+risk: high

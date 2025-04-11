@@ -1,10 +1,18 @@
 description: |
   Detects Base64 encoded Shellcode
 name: PowerShell ShellCode
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: powershell.file.script_block_text.keyword:(*oicaaaayinlm* OR *oijaaaayinlm*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+- execution
+mitre_attack_technique:
+- t1055
+- t1059.001
+risk: high

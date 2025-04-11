@@ -1,12 +1,23 @@
 description: |
   Detects execution of "findstr" to search for common names of security tools. Attackers often pipe the results of recon commands such as "tasklist" or "whoami" to "findstr" in order to filter out the results.
   This detection focuses on the keywords that the attacker might use as a filter.
-  
+
 name: Security Tools Keyword Lookup Via Findstr.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\find.exe OR *\\findstr.exe)) OR (winlog.event_data.originalfilename.keyword:(find.exe OR findstr.exe))) AND (process.command_line.keyword:(*\ avira OR *\ avira\" OR *\ cb OR *\ cb\" OR *\ cylance OR *\ cylance\" OR *\ defender OR *\ defender\" OR *\ kaspersky OR *\ kaspersky\" OR *\ kes OR *\ kes\" OR *\ mc OR *\ mc\" OR *\ sec OR *\ sec\" OR *\ sentinel OR *\ sentinel\" OR *\ symantec OR *\ symantec\" OR *\ virus OR *\ virus\"))
+      query: ((winlog.event_data.image.keyword:(*\\find.exe OR *\\findstr.exe)) OR
+        (winlog.event_data.originalfilename.keyword:(find.exe OR findstr.exe))) AND
+        (process.command_line.keyword:(*\ avira OR *\ avira\" OR *\ cb OR *\ cb\"
+        OR *\ cylance OR *\ cylance\" OR *\ defender OR *\ defender\" OR *\ kaspersky
+        OR *\ kaspersky\" OR *\ kes OR *\ kes\" OR *\ mc OR *\ mc\" OR *\ sec OR *\
+        sec\" OR *\ sentinel OR *\ sentinel\" OR *\ symantec OR *\ symantec\" OR *\
+        virus OR *\ virus\"))
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1518.001
+risk: medium

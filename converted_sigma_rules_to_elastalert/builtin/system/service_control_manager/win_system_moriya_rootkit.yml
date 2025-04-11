@@ -1,10 +1,17 @@
 description: |
   Detects the use of Moriya rootkit as described in the securelist's Operation TunnelSnake report
 name: Moriya Rootkit - System
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045 AND winlog.event_data.ServiceName.keyword:zznetsvc)
+      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\
+        control\ manager AND event.code.keyword:7045 AND winlog.event_data.ServiceName.keyword:zznetsvc)
 type: any
 priority: 4
+mitre_attack_tactic:
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1543.003
+risk: critical

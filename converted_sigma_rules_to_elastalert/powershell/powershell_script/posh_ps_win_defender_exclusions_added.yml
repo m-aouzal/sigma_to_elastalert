@@ -1,10 +1,20 @@
 description: |
   Detects modifications to the Windows Defender configuration settings using PowerShell to add exclusions
 name: Windows Defender Exclusions Added - PowerShell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:(*\ \-exclusionpath\ * OR *\ \-exclusionextension\ * OR *\ \-exclusionprocess\ * OR *\ \-exclusionipaddress\ *)) AND (powershell.file.script_block_text.keyword:(*add\-mppreference\ * OR *set\-mppreference\ *))
+      query: (powershell.file.script_block_text.keyword:(*\ \-exclusionpath\ * OR
+        *\ \-exclusionextension\ * OR *\ \-exclusionprocess\ * OR *\ \-exclusionipaddress\
+        *)) AND (powershell.file.script_block_text.keyword:(*add\-mppreference\ *
+        OR *set\-mppreference\ *))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1562
+- t1059
+risk: medium

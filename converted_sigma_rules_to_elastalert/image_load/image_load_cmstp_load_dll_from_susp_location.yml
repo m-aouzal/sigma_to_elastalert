@@ -1,10 +1,17 @@
 description: |
   Detects cmstp loading "dll" or "ocx" files from suspicious locations
 name: DLL Loaded From Suspicious Location Via Cmspt.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\cmstp.exe AND (file.path.keyword:(*\\perflogs\\* OR *\\programdata\\* OR *\\users\\* OR *\\windows\\temp\\* OR *c\:\\temp\\*)) AND (file.path.keyword:(*.dll OR *.ocx))
+      query: process.executable.keyword:*\\cmstp.exe AND (file.path.keyword:(*\\perflogs\\*
+        OR *\\programdata\\* OR *\\users\\* OR *\\windows\\temp\\* OR *c\:\\temp\\*))
+        AND (file.path.keyword:(*.dll OR *.ocx))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218.003
+risk: high

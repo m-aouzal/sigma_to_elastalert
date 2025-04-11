@@ -1,10 +1,21 @@
 description: |
   The CrachMapExec pentesting framework implements a PowerShell obfuscation with some static strings detected by this rule.
 name: HackTool - CrackMapExec PowerShell Obfuscation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (process.command_line.keyword:(*join*split* OR *\(\ $shellid\[1\]\+$shellid\[13\]\+'x'\)* OR *\(\ $pshome\[*\]\+$pshome\[*\]\+* OR *\(\ $env\:public\[13\]\+$env\:public\[5\]\+'x'\)* OR *\(\ $env\:comspec\[4,*,25\]\-join''\)* OR *\[1,3\]\+'x'\-join''\)*))
+      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe))
+        OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll)))
+        AND (process.command_line.keyword:(*join*split* OR *\(\ $shellid\[1\]\+$shellid\[13\]\+'x'\)*
+        OR *\(\ $pshome\[*\]\+$pshome\[*\]\+* OR *\(\ $env\:public\[13\]\+$env\:public\[5\]\+'x'\)*
+        OR *\(\ $env\:comspec\[4,*,25\]\-join''\)* OR *\[1,3\]\+'x'\-join''\)*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+- defense-evasion
+mitre_attack_technique:
+- t1059.001
+- t1027.005
+risk: high

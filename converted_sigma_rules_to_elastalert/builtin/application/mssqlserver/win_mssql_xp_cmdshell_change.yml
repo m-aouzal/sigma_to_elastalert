@@ -1,11 +1,16 @@
 description: |
   Detects when the MSSQL "xp_cmdshell" stored procedure setting is changed.
-  
+
 name: MSSQL XPCmdshell Option Change
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:application AND (winlog.provider_name.keyword:*mssql* AND event.code.keyword:15457 AND winlog.event_data.Data.keyword:*xp_cmdshell*)
+      query: winlog.channel.keyword:application AND (winlog.provider_name.keyword:*mssql*
+        AND event.code.keyword:15457 AND winlog.event_data.Data.keyword:*xp_cmdshell*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: high

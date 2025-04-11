@@ -1,10 +1,20 @@
 description: |
   Detects file renames where the target filename uses an uncommon double extension. Could indicate potential ransomware activity renaming files and adding a custom extension to the encrypted files, such as ".jpg.crypted", ".docx.locky", etc.
 name: Suspicious Appended Extension
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.SourceFilename.keyword:(*.doc OR *.docx OR *.jpeg OR *.jpg OR *.lnk OR *.pdf OR *.png OR *.pst OR *.rtf OR *.xls OR *.xlsx)) AND (file.path.keyword:(*.doc.* OR *.docx.* OR *.jpeg.* OR *.jpg.* OR *.lnk.* OR *.pdf.* OR *.png.* OR *.pst.* OR *.rtf.* OR *.xls.* OR *.xlsx.*))) AND (NOT (file.path.keyword:(*.backup OR *.bak OR *.old OR *.orig OR *.temp OR *.tmp))) AND (NOT (file.path.keyword:*\:\\programdata\\anaconda3\\* AND file.path.keyword:*.c\~))
+      query: ((winlog.event_data.SourceFilename.keyword:(*.doc OR *.docx OR *.jpeg
+        OR *.jpg OR *.lnk OR *.pdf OR *.png OR *.pst OR *.rtf OR *.xls OR *.xlsx))
+        AND (file.path.keyword:(*.doc.* OR *.docx.* OR *.jpeg.* OR *.jpg.* OR *.lnk.*
+        OR *.pdf.* OR *.png.* OR *.pst.* OR *.rtf.* OR *.xls.* OR *.xlsx.*))) AND
+        (NOT (file.path.keyword:(*.backup OR *.bak OR *.old OR *.orig OR *.temp OR
+        *.tmp))) AND (NOT (file.path.keyword:*\:\\programdata\\anaconda3\\* AND file.path.keyword:*.c\~))
 type: any
 priority: 2
+mitre_attack_tactic:
+- impact
+mitre_attack_technique:
+- t1486
+risk: medium

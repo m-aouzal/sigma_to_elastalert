@@ -1,10 +1,25 @@
 description: |
   Detects a rundll32 that communicates with public IP addresses
 name: Rundll32 Internet Connection
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\rundll32.exe AND network.direction.keyword:true) AND (NOT ((destination.ip.keyword:127.0.0.0\/8 OR destination.ip.keyword:10.0.0.0\/8 OR destination.ip.keyword:172.16.0.0\/12 OR destination.ip.keyword:192.168.0.0\/16 OR destination.ip.keyword:169.254.0.0\/16 OR destination.ip.keyword:\:\:1\/128 OR destination.ip.keyword:fe80\:\:\/10 OR destination.ip.keyword:fc00\:\:\/7) OR (destination.ip.keyword:20.0.0.0\/8 OR destination.ip.keyword:51.103.0.0\/16 OR destination.ip.keyword:51.104.0.0\/16 OR destination.ip.keyword:51.105.0.0\/16) OR winlog.event_data.CommandLine.keyword:*\\system32\\pcasvc.dll,pcapatchsdbtask OR source.domain.keyword:*.internal.cloudapp.net OR (process.parent.executable.keyword:c\:\\windows\\system32\\svchost.exe AND destination.port:443)))
+      query: (process.executable.keyword:*\\rundll32.exe AND network.direction.keyword:true)
+        AND (NOT ((destination.ip.keyword:127.0.0.0\/8 OR destination.ip.keyword:10.0.0.0\/8
+        OR destination.ip.keyword:172.16.0.0\/12 OR destination.ip.keyword:192.168.0.0\/16
+        OR destination.ip.keyword:169.254.0.0\/16 OR destination.ip.keyword:\:\:1\/128
+        OR destination.ip.keyword:fe80\:\:\/10 OR destination.ip.keyword:fc00\:\:\/7)
+        OR (destination.ip.keyword:20.0.0.0\/8 OR destination.ip.keyword:51.103.0.0\/16
+        OR destination.ip.keyword:51.104.0.0\/16 OR destination.ip.keyword:51.105.0.0\/16)
+        OR winlog.event_data.CommandLine.keyword:*\\system32\\pcasvc.dll,pcapatchsdbtask
+        OR source.domain.keyword:*.internal.cloudapp.net OR (process.parent.executable.keyword:c\:\\windows\\system32\\svchost.exe
+        AND destination.port:443)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1218.011
+risk: medium

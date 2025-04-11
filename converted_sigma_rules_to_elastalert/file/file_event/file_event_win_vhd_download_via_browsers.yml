@@ -1,12 +1,20 @@
 description: |
   Detects creation of ".vhd"/".vhdx" files by browser processes.
   Malware can use mountable Virtual Hard Disk ".vhd" files to encapsulate payloads and evade security controls.
-  
+
 name: VHD Image Download Via Browser
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\brave.exe OR *\\chrome.exe OR *\\firefox.exe OR *\\iexplore.exe OR *\\maxthon.exe OR *\\microsoftedge.exe OR *\\msedge.exe OR *\\msedgewebview2.exe OR *\\opera.exe OR *\\safari.exe OR *\\seamonkey.exe OR *\\vivaldi.exe OR *\\whale.exe)) AND file.path.keyword:*.vhd*
+      query: (process.executable.keyword:(*\\brave.exe OR *\\chrome.exe OR *\\firefox.exe
+        OR *\\iexplore.exe OR *\\maxthon.exe OR *\\microsoftedge.exe OR *\\msedge.exe
+        OR *\\msedgewebview2.exe OR *\\opera.exe OR *\\safari.exe OR *\\seamonkey.exe
+        OR *\\vivaldi.exe OR *\\whale.exe)) AND file.path.keyword:*.vhd*
 type: any
 priority: 2
+mitre_attack_tactic:
+- resource-development
+mitre_attack_technique:
+- t1587.001
+risk: medium

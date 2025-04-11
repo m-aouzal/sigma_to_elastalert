@@ -2,12 +2,31 @@ description: |
   Adversaries may acquire credentials from web browsers by reading files specific to the target browser.
   Web browsers commonly save credentials such as website usernames and passwords so that they do not need to be entered manually in the future.
   Web browsers typically store the credentials in an encrypted format within a credential store.
-  
+
 name: Potential Browser Data Stealing
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.commandline.keyword:(*copy\-item* OR *copy\ * OR *cpi\ * OR *\ cp\ * OR *move\ * OR *move\-item* OR *\ mi\ * OR *\ mv\ *)) OR (winlog.event_data.image.keyword:(*\\xcopy.exe OR *\\robocopy.exe)) OR (winlog.event_data.originalfilename.keyword:(xcopy.exe OR robocopy.exe))) AND (process.command_line.keyword:(*\\amigo\\user\ data* OR *\\bravesoftware\\brave\-browser\\user\ data* OR *\\centbrowser\\user\ data* OR *\\chromium\\user\ data* OR *\\coccoc\\browser\\user\ data* OR *\\comodo\\dragon\\user\ data* OR *\\elements\ browser\\user\ data* OR *\\epic\ privacy\ browser\\user\ data* OR *\\google\\chrome\ beta\\user\ data* OR *\\google\\chrome\ sxs\\user\ data* OR *\\google\\chrome\\user\ data\\* OR *\\kometa\\user\ data* OR *\\maxthon5\\users* OR *\\microsoft\\edge\\user\ data* OR *\\mozilla\\firefox\\profiles* OR *\\nichrome\\user\ data* OR *\\opera\ software\\opera\ gx\ stable\\* OR *\\opera\ software\\opera\ neon\\user\ data* OR *\\opera\ software\\opera\ stable\\* OR *\\orbitum\\user\ data* OR *\\qip\ surf\\user\ data* OR *\\sputnik\\user\ data* OR *\\torch\\user\ data* OR *\\ucozmedia\\uran\\user\ data* OR *\\vivaldi\\user\ data*))
+      query: ((winlog.event_data.commandline.keyword:(*copy\-item* OR *copy\ * OR
+        *cpi\ * OR *\ cp\ * OR *move\ * OR *move\-item* OR *\ mi\ * OR *\ mv\ *))
+        OR (winlog.event_data.image.keyword:(*\\xcopy.exe OR *\\robocopy.exe)) OR
+        (winlog.event_data.originalfilename.keyword:(xcopy.exe OR robocopy.exe)))
+        AND (process.command_line.keyword:(*\\amigo\\user\ data* OR *\\bravesoftware\\brave\-browser\\user\
+        data* OR *\\centbrowser\\user\ data* OR *\\chromium\\user\ data* OR *\\coccoc\\browser\\user\
+        data* OR *\\comodo\\dragon\\user\ data* OR *\\elements\ browser\\user\ data*
+        OR *\\epic\ privacy\ browser\\user\ data* OR *\\google\\chrome\ beta\\user\
+        data* OR *\\google\\chrome\ sxs\\user\ data* OR *\\google\\chrome\\user\ data\\*
+        OR *\\kometa\\user\ data* OR *\\maxthon5\\users* OR *\\microsoft\\edge\\user\
+        data* OR *\\mozilla\\firefox\\profiles* OR *\\nichrome\\user\ data* OR *\\opera\
+        software\\opera\ gx\ stable\\* OR *\\opera\ software\\opera\ neon\\user\ data*
+        OR *\\opera\ software\\opera\ stable\\* OR *\\orbitum\\user\ data* OR *\\qip\
+        surf\\user\ data* OR *\\sputnik\\user\ data* OR *\\torch\\user\ data* OR *\\ucozmedia\\uran\\user\
+        data* OR *\\vivaldi\\user\ data*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1555.003
+risk: medium

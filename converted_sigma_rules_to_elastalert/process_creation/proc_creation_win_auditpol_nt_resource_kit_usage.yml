@@ -1,12 +1,19 @@
 description: |
   Threat actors can use an older version of the auditpol binary available inside the NT resource kit to change audit policy configuration to impair detection capability.
   This can be carried out by selectively disabling/removing certain audit policies as well as restoring a custom policy owned by the threat actor.
-  
+
 name: Audit Policy Tampering Via NT Resource Kit Auditpol
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*\/logon\:none* OR *\/system\:none* OR *\/sam\:none* OR *\/privilege\:none* OR *\/object\:none* OR *\/process\:none* OR *\/policy\:none*)
+      query: process.command_line.keyword:(*\/logon\:none* OR *\/system\:none* OR
+        *\/sam\:none* OR *\/privilege\:none* OR *\/object\:none* OR *\/process\:none*
+        OR *\/policy\:none*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.002
+risk: high

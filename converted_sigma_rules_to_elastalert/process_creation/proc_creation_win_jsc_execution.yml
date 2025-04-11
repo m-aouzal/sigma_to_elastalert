@@ -1,12 +1,17 @@
 description: |
   Detects the execution of the "jsc.exe" (JScript Compiler).
   Attacker might abuse this in order to compile JScript files on the fly and bypassing application whitelisting.
-  
+
 name: JScript Compiler Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.image.keyword:*\\jsc.exe OR winlog.event_data.originalfilename.keyword:jsc.exe
 type: any
 priority: 1
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1127
+risk: low

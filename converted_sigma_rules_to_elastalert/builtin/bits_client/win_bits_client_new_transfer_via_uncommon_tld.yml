@@ -1,10 +1,19 @@
 description: |
   Detects a suspicious download using the BITS client from a FQDN that is unusual. Adversaries may abuse BITS jobs to persistently execute or clean up after malicious payloads.
 name: BITS Transfer Job With Uncommon Or Suspicious Remote TLD
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-bits\-client\/operational AND (event.code.keyword:16403 AND (NOT (winlog.event_data.RemoteName.keyword:(*.azureedge.net\/* OR *.com\/* OR *.sfx.ms\/* OR *download.mozilla.org\/* OR *cdn.onenote.net\/* OR *cdn.office.net\/*))))
+      query: winlog.channel.keyword:microsoft\-windows\-bits\-client\/operational
+        AND (event.code.keyword:16403 AND (NOT (winlog.event_data.RemoteName.keyword:(*.azureedge.net\/*
+        OR *.com\/* OR *.sfx.ms\/* OR *download.mozilla.org\/* OR *cdn.onenote.net\/*
+        OR *cdn.office.net\/*))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- persistence
+mitre_attack_technique:
+- t1197
+risk: medium

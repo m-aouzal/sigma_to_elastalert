@@ -4,12 +4,18 @@ description: |
   These profiliers are designed to monitor, troubleshoot, and debug managed code executed by the .NET CLR.
   (Citation: Microsoft Profiling Mar 2017)
   (Citation: Microsoft COR_PROFILER Feb 2013)
-  
+
 name: Registry-Free Process Scope COR_PROFILER
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*$env\:cor_enable_profiling* AND powershell.file.script_block_text.keyword:*$env\:cor_profiler* AND powershell.file.script_block_text.keyword:*$env\:cor_profiler_path*
+      query: powershell.file.script_block_text.keyword:*$env\:cor_enable_profiling*
+        AND powershell.file.script_block_text.keyword:*$env\:cor_profiler* AND powershell.file.script_block_text.keyword:*$env\:cor_profiler_path*
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1574.012
+risk: medium

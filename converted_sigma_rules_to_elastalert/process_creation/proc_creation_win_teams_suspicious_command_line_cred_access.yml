@@ -1,12 +1,18 @@
 description: |
   Detects a commandline containing references to the Microsoft Teams database or cookies files from a process other than Teams.
   The database might contain authentication tokens and other sensitive information about the logged in accounts.
-  
+
 name: Potentially Suspicious Command Targeting Teams Sensitive Files
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*\\microsoft\\teams\\cookies* OR *\\microsoft\\teams\\local\ storage\\leveldb*)) AND (NOT process.executable.keyword:*\\microsoft\\teams\\current\\teams.exe)
+      query: (process.command_line.keyword:(*\\microsoft\\teams\\cookies* OR *\\microsoft\\teams\\local\
+        storage\\leveldb*)) AND (NOT process.executable.keyword:*\\microsoft\\teams\\current\\teams.exe)
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1528
+risk: medium

@@ -1,10 +1,18 @@
 description: |
   Detects calls to cmdlets that are used to export certificates from the local certificate store. Threat actors were seen abusing this to steal private keys from compromised machines.
 name: Certificate Exported Via PowerShell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*export\-pfxcertificate\ * OR *export\-certificate\ *)
+      query: process.command_line.keyword:(*export\-pfxcertificate\ * OR *export\-certificate\
+        *)
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+- execution
+mitre_attack_technique:
+- t1552.004
+- t1059.001
+risk: medium

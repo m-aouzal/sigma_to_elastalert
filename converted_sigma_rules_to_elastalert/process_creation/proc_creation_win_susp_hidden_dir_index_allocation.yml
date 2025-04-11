@@ -1,11 +1,16 @@
 description: |
   Detects command line containing reference to the "::$index_allocation" stream, which can be used as a technique to prevent access to folders or files from tooling such as "explorer.exe" or "powershell.exe"
-  
+
 name: Potential Hidden Directory Creation Via NTFS INDEX_ALLOCATION Stream - CLI
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.command_line.keyword:*\:\:$index_allocation*
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1564.004
+risk: medium

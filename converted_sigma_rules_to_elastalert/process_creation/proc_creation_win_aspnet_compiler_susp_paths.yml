@@ -1,10 +1,19 @@
 description: |
   Detects execution of "aspnet_compiler.exe" with potentially suspicious paths for compilation.
 name: Potentially Suspicious ASP.NET Compilation Via AspNetCompiler
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*c\:\\windows\\microsoft.net\\framework\\* OR *c\:\\windows\\microsoft.net\\framework64\\*)) AND process.executable.keyword:*\\aspnet_compiler.exe AND (process.command_line.keyword:(*\\users\\public\\* OR *\\appdata\\local\\temp\\* OR *\\appdata\\local\\roaming\\* OR *\:\\temp\\* OR *\:\\windows\\temp\\* OR *\:\\windows\\system32\\tasks\\* OR *\:\\windows\\tasks\\*))
+      query: (process.executable.keyword:(*c\:\\windows\\microsoft.net\\framework\\*
+        OR *c\:\\windows\\microsoft.net\\framework64\\*)) AND process.executable.keyword:*\\aspnet_compiler.exe
+        AND (process.command_line.keyword:(*\\users\\public\\* OR *\\appdata\\local\\temp\\*
+        OR *\\appdata\\local\\roaming\\* OR *\:\\temp\\* OR *\:\\windows\\temp\\*
+        OR *\:\\windows\\system32\\tasks\\* OR *\:\\windows\\tasks\\*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1127
+risk: high

@@ -1,10 +1,18 @@
 description: |
   Adversaries may attempt to get a listing of other systems by IP address, hostname, or other logical identifier on a network that may be used for Lateral Movement from the current system
 name: Suspicious Scan Loop Network
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*for\ * OR *foreach\ *)) AND (process.command_line.keyword:(*nslookup* OR *ping*))
+      query: (process.command_line.keyword:(*for\ * OR *foreach\ *)) AND (process.command_line.keyword:(*nslookup*
+        OR *ping*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+- discovery
+mitre_attack_technique:
+- t1059
+- t1018
+risk: medium

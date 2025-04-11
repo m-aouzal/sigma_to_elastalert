@@ -1,10 +1,19 @@
 description: |
   Detects LOLBINs executing from an abnormal or uncommon drive such as a mounted ISO.
 name: LOLBIN Execution From Abnormal Drive
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\calc.exe OR *\\certutil.exe OR *\\cmstp.exe OR *\\cscript.exe OR *\\installutil.exe OR *\\mshta.exe OR *\\regsvr32.exe OR *\\rundll32.exe OR *\\wscript.exe)) OR (winlog.event_data.originalfilename.keyword:(calc.exe OR certutil.exe OR cmstp.exe OR cscript.exe OR installutil.exe OR mshta.exe OR regsvr32.exe OR rundll32.exe OR wscript.exe))) AND (NOT (process.working_directory.keyword:*c\:\\* OR process.working_directory.keyword:"" OR (NOT _exists_:process.working_directory)))
+      query: ((winlog.event_data.image.keyword:(*\\calc.exe OR *\\certutil.exe OR
+        *\\cmstp.exe OR *\\cscript.exe OR *\\installutil.exe OR *\\mshta.exe OR *\\regsvr32.exe
+        OR *\\rundll32.exe OR *\\wscript.exe)) OR (winlog.event_data.originalfilename.keyword:(calc.exe
+        OR certutil.exe OR cmstp.exe OR cscript.exe OR installutil.exe OR mshta.exe
+        OR regsvr32.exe OR rundll32.exe OR wscript.exe))) AND (NOT (process.working_directory.keyword:*c\:\\*
+        OR process.working_directory.keyword:"" OR (NOT _exists_:process.working_directory)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

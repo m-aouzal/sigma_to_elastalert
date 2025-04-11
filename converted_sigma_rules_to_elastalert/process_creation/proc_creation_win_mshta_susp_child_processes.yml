@@ -1,10 +1,23 @@
 description: |
   Detects a suspicious process spawning from an "mshta.exe" process, which could be indicative of a malicious HTA script execution
 name: Suspicious MSHTA Child Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\\mshta.exe AND ((winlog.event_data.image.keyword:(*\\cmd.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\wscript.exe OR *\\cscript.exe OR *\\sh.exe OR *\\bash.exe OR *\\reg.exe OR *\\regsvr32.exe OR *\\bitsadmin.exe)) OR (winlog.event_data.originalfilename.keyword:(cmd.exe OR powershell.exe OR pwsh.dll OR wscript.exe OR cscript.exe OR bash.exe OR reg.exe OR regsvr32.exe OR bitsadmin.exe)))
+      query: process.parent.executable.keyword:*\\mshta.exe AND ((winlog.event_data.image.keyword:(*\\cmd.exe
+        OR *\\powershell.exe OR *\\pwsh.exe OR *\\wscript.exe OR *\\cscript.exe OR
+        *\\sh.exe OR *\\bash.exe OR *\\reg.exe OR *\\regsvr32.exe OR *\\bitsadmin.exe))
+        OR (winlog.event_data.originalfilename.keyword:(cmd.exe OR powershell.exe
+        OR pwsh.dll OR wscript.exe OR cscript.exe OR bash.exe OR reg.exe OR regsvr32.exe
+        OR bitsadmin.exe)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218.005
+- car.2013-02-003
+- car.2013-03-001
+- car.2014-04-003
+risk: high

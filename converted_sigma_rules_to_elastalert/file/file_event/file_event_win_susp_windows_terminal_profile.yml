@@ -1,10 +1,17 @@
 description: |
   Detects the creation or modification of the Windows Terminal Profile settings file "settings.json" by an uncommon process.
 name: Windows Terminal Profile Settings Modification By Uncommon Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\cmd.exe OR *\\cscript.exe OR *\\mshta.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\wscript.exe)) AND file.path.keyword:*\\appdata\\local\\packages\\microsoft.windowsterminal_8wekyb3d8bbwe\\localstate\\settings.json
+      query: (process.executable.keyword:(*\\cmd.exe OR *\\cscript.exe OR *\\mshta.exe
+        OR *\\powershell.exe OR *\\pwsh.exe OR *\\wscript.exe)) AND 
+        file.path.keyword:*\\appdata\\local\\packages\\microsoft.windowsterminal_8wekyb3d8bbwe\\localstate\\settings.json
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1547.015
+risk: medium

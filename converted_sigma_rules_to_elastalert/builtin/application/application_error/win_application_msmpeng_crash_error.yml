@@ -1,10 +1,18 @@
 description: |
   This rule detects a suspicious crash of the Microsoft Malware Protection Engine
 name: Microsoft Malware Protection Engine Crash
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:application AND (winlog.provider_name.keyword:application\ error AND event.code.keyword:1000 AND (winlog.event_data.Data.keyword:*msmpeng.exe* AND winlog.event_data.Data.keyword:*mpengine.dll*))
+      query: winlog.channel.keyword:application AND (winlog.provider_name.keyword:application\
+        error AND event.code.keyword:1000 AND (winlog.event_data.Data.keyword:*msmpeng.exe*
+        AND winlog.event_data.Data.keyword:*mpengine.dll*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1211
+- t1562.001
+risk: high

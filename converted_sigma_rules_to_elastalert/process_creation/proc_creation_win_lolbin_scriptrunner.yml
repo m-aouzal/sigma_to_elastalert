@@ -1,10 +1,17 @@
 description: |
   The "ScriptRunner.exe" binary can be abused to proxy execution through it and bypass possible whitelisting
 name: Use of Scriptrunner.exe
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\scriptrunner.exe OR winlog.event_data.originalfilename.keyword:scriptrunner.exe) AND process.command_line.keyword:*\ \-appvscript\ *
+      query: (winlog.event_data.image.keyword:*\\scriptrunner.exe OR winlog.event_data.originalfilename.keyword:scriptrunner.exe)
+        AND process.command_line.keyword:*\ \-appvscript\ *
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1218
+risk: medium

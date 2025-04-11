@@ -1,10 +1,17 @@
 description: |
   Detects suspicious UltraVNC command line flag combination that indicate a auto reconnect upon execution, e.g. startup (as seen being used by Gamaredon threat group)
 name: Suspicious UltraVNC Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*\-autoreconnect\ * AND process.command_line.keyword:*\-connect\ * AND process.command_line.keyword:*\-id\:*
+      query: process.command_line.keyword:*\-autoreconnect\ * AND process.command_line.keyword:*\-connect\
+        * AND process.command_line.keyword:*\-id\:*
 type: any
 priority: 3
+mitre_attack_tactic:
+- lateral-movement
+mitre_attack_technique:
+- g0047
+- t1021.005
+risk: high

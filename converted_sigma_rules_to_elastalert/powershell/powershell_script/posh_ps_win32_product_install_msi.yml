@@ -1,10 +1,17 @@
 description: |
   Detects the execution of an MSI file using PowerShell and the WMI Win32_Product class
 name: PowerShell WMI Win32_Product Install MSI
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*invoke\-cimmethod\ * AND powershell.file.script_block_text.keyword:*\-classname\ * AND powershell.file.script_block_text.keyword:*win32_product\ * AND powershell.file.script_block_text.keyword:*\-methodname\ * AND powershell.file.script_block_text.keyword:*.msi*
+      query: powershell.file.script_block_text.keyword:*invoke\-cimmethod\ * AND powershell.file.script_block_text.keyword:*\-classname\
+        * AND powershell.file.script_block_text.keyword:*win32_product\ * AND powershell.file.script_block_text.keyword:*\-methodname\
+        * AND powershell.file.script_block_text.keyword:*.msi*
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218.007
+risk: medium

@@ -1,10 +1,27 @@
 description: |
   Detects attempts to create a DLL file to a known desktop application dependencies folder such as Slack, Teams or OneDrive and by an unusual process. This may indicate an attempt to load a malicious module via DLL search order hijacking.
 name: Potential Initial Access via DLL Search Order Hijacking
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*\\winword.exe OR *\\excel.exe OR *\\powerpnt.exe OR *\\msaccess.exe OR *\\mspub.exe OR *\\fltldr.exe OR *\\cmd.exe OR *\\certutil.exe OR *\\mshta.exe OR *\\cscript.exe OR *\\wscript.exe OR *\\curl.exe OR *\\powershell.exe OR *\\pwsh.exe)) AND file.path.keyword:*.dll AND (file.path.keyword:*\\users\\* AND file.path.keyword:*\\appdata\\*) AND (file.path.keyword:(*\\microsoft\\onedrive\\* OR *\\microsoft\ onedrive\\* OR *\\microsoft\\teams\\* OR *\\local\\slack\\app\-* OR *\\local\\programs\\microsoft\ vs\ code\\*))) AND (NOT (process.executable.keyword:*\\cmd.exe AND (file.path.keyword:*\\users\\* AND file.path.keyword:*\\appdata\\* AND file.path.keyword:*\\microsoft\\onedrive\\* AND file.path.keyword:*\\api\-ms\-win\-core\-*)))
+      query: ((process.executable.keyword:(*\\winword.exe OR *\\excel.exe OR *\\powerpnt.exe
+        OR *\\msaccess.exe OR *\\mspub.exe OR *\\fltldr.exe OR *\\cmd.exe OR *\\certutil.exe
+        OR *\\mshta.exe OR *\\cscript.exe OR *\\wscript.exe OR *\\curl.exe OR *\\powershell.exe
+        OR *\\pwsh.exe)) AND file.path.keyword:*.dll AND (file.path.keyword:*\\users\\*
+        AND file.path.keyword:*\\appdata\\*) AND (file.path.keyword:(*\\microsoft\\onedrive\\*
+        OR *\\microsoft\ onedrive\\* OR *\\microsoft\\teams\\* OR *\\local\\slack\\app\-*
+        OR *\\local\\programs\\microsoft\ vs\ code\\*))) AND (NOT (process.executable.keyword:*\\cmd.exe
+        AND (file.path.keyword:*\\users\\* AND file.path.keyword:*\\appdata\\* AND
+        file.path.keyword:*\\microsoft\\onedrive\\* AND file.path.keyword:*\\api\-ms\-win\-core\-*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- initial-access
+- defense-evasion
+mitre_attack_technique:
+- t1566
+- t1566.001
+- t1574
+- t1574.001
+risk: medium

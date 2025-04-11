@@ -1,10 +1,20 @@
 description: |
   Detects a script interpreter wscript/cscript opening a network connection to a non-local network. Adversaries may use script to download malicious payloads.
 name: Outbound Network Connection Initiated By Script Interpreter
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (network.direction.keyword:true AND (process.executable.keyword:(*\\wscript.exe OR *\\cscript.exe))) AND (NOT ((destination.ip.keyword:127.0.0.0\/8 OR destination.ip.keyword:10.0.0.0\/8 OR destination.ip.keyword:172.16.0.0\/12 OR destination.ip.keyword:192.168.0.0\/16 OR destination.ip.keyword:169.254.0.0\/16 OR destination.ip.keyword:\:\:1\/128 OR destination.ip.keyword:fe80\:\:\/10 OR destination.ip.keyword:fc00\:\:\/7) OR destination.ip.keyword:20.0.0.0\/11))
+      query: (network.direction.keyword:true AND (process.executable.keyword:(*\\wscript.exe
+        OR *\\cscript.exe))) AND (NOT ((destination.ip.keyword:127.0.0.0\/8 OR destination.ip.keyword:10.0.0.0\/8
+        OR destination.ip.keyword:172.16.0.0\/12 OR destination.ip.keyword:192.168.0.0\/16
+        OR destination.ip.keyword:169.254.0.0\/16 OR destination.ip.keyword:\:\:1\/128
+        OR destination.ip.keyword:fe80\:\:\/10 OR destination.ip.keyword:fc00\:\:\/7)
+        OR destination.ip.keyword:20.0.0.0\/11))
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1105
+risk: high

@@ -1,10 +1,17 @@
 description: |
   Detects potential abuse of the "register_app.vbs" script that is part of the Windows SDK. The script offers the capability to register new VSS/VDS Provider as a COM+ application. Attackers can use this to install malicious DLLs for persistence and execution.
 name: Potential Register_App.Vbs LOLScript Abuse
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\cscript.exe OR *\\wscript.exe)) OR (winlog.event_data.originalfilename.keyword:(cscript.exe OR wscript.exe))) AND process.command_line.keyword:*.vbs\ \-register\ *
+      query: ((winlog.event_data.image.keyword:(*\\cscript.exe OR *\\wscript.exe))
+        OR (winlog.event_data.originalfilename.keyword:(cscript.exe OR wscript.exe)))
+        AND process.command_line.keyword:*.vbs\ \-register\ *
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218
+risk: medium

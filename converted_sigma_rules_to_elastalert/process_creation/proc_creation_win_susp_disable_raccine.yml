@@ -1,10 +1,19 @@
 description: |
   Detects commands that indicate a Raccine removal from an end system. Raccine is a free ransomware protection tool.
 name: Raccine Uninstall
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*taskkill\ * AND process.command_line.keyword:*raccinesettings.exe*) OR (process.command_line.keyword:*reg.exe* AND process.command_line.keyword:*delete* AND process.command_line.keyword:*raccine\ tray*) OR (process.command_line.keyword:*schtasks* AND process.command_line.keyword:*\/delete* AND process.command_line.keyword:*raccine\ rules\ updater*)
+      query: (process.command_line.keyword:*taskkill\ * AND process.command_line.keyword:*raccinesettings.exe*)
+        OR (process.command_line.keyword:*reg.exe* AND process.command_line.keyword:*delete*
+        AND process.command_line.keyword:*raccine\ tray*) OR (process.command_line.keyword:*schtasks*
+        AND process.command_line.keyword:*\/delete* AND process.command_line.keyword:*raccine\
+        rules\ updater*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high

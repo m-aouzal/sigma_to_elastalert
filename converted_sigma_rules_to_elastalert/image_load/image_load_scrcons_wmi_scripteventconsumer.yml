@@ -1,10 +1,18 @@
 description: |
   Detects signs of the WMI script host process "scrcons.exe" loading scripting DLLs which could indicates WMI ActiveScriptEventConsumers EventConsumers activity.
 name: WMI ActiveScriptEventConsumers Activity Via Scrcons.EXE DLL Load
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\scrcons.exe AND (file.path.keyword:(*\\vbscript.dll OR *\\wbemdisp.dll OR *\\wshom.ocx OR *\\scrrun.dll))
+      query: process.executable.keyword:*\\scrcons.exe AND (file.path.keyword:(*\\vbscript.dll
+        OR *\\wbemdisp.dll OR *\\wshom.ocx OR *\\scrrun.dll))
 type: any
 priority: 2
+mitre_attack_tactic:
+- lateral-movement
+- privilege-escalation
+- persistence
+mitre_attack_technique:
+- t1546.003
+risk: medium

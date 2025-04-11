@@ -1,10 +1,21 @@
 description: |
   Detects suspicious encoded payloads in WMI Event Consumers
 name: Suspicious Encoded Scripts in a WMI Consumer
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:(*d3JpdGVwcm9jZXNzbWVtb3J5* OR *dyaXRlcHJvY2Vzc21lbW9ye* OR *3cml0ZXByb2Nlc3NtZW1vcn*) OR process.executable.keyword:(*dGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gZG9zIG1vZG* OR *RoaXMgcHJvZ3JhbSBjYW5ub3QgYmUgcnVuIGluIGRvcyBtb2Rl* OR *0aGlzIHByb2dyYW0gY2Fubm90IGJlIHJ1biBpbiBkb3MgbW9kZ*) OR process.executable.keyword:(*dGhpcyBwcm9ncmFtIG11c3QgYmUgcnVuIHVuZGVyIHdpbjMy* OR *RoaXMgcHJvZ3JhbSBtdXN0IGJlIHJ1biB1bmRlciB3aW4zM* OR *0aGlzIHByb2dyYW0gbXVzdCBiZSBydW4gdW5kZXIgd2luMz*)
+      query: process.executable.keyword:(*d3JpdGVwcm9jZXNzbWVtb3J5* OR *dyaXRlcHJvY2Vzc21lbW9ye*
+        OR *3cml0ZXByb2Nlc3NtZW1vcn*) OR process.executable.keyword:(*dGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gZG9zIG1vZG*
+        OR *RoaXMgcHJvZ3JhbSBjYW5ub3QgYmUgcnVuIGluIGRvcyBtb2Rl* OR *0aGlzIHByb2dyYW0gY2Fubm90IGJlIHJ1biBpbiBkb3MgbW9kZ*)
+        OR process.executable.keyword:(*dGhpcyBwcm9ncmFtIG11c3QgYmUgcnVuIHVuZGVyIHdpbjMy*
+        OR *RoaXMgcHJvZ3JhbSBtdXN0IGJlIHJ1biB1bmRlciB3aW4zM* OR *0aGlzIHByb2dyYW0gbXVzdCBiZSBydW4gdW5kZXIgd2luMz*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+- persistence
+mitre_attack_technique:
+- t1047
+- t1546.003
+risk: high

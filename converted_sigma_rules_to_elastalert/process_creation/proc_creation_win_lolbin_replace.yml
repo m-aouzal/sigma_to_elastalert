@@ -1,10 +1,16 @@
 description: |
   Detects the use of Replace.exe which can be used to replace file with another file
 name: Replace.exe Usage
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\replace.exe AND process.command_line.keyword:(*\-a* OR *\/a* OR *–a* OR *—a* OR *―a*)
+      query: process.executable.keyword:*\\replace.exe AND process.command_line.keyword:(*\-a*
+        OR *\/a* OR *–a* OR *—a* OR *―a*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1105
+risk: medium

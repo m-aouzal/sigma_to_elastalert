@@ -1,10 +1,17 @@
 description: |
   Detects DCShadow via create new SPN
 name: Possible DC Shadow Attack
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND ((event.code.keyword:4742 AND winlog.event_data.ServicePrincipalNames.keyword:*gc\/*) OR (event.code.keyword:5136 AND winlog.event_data.AttributeLDAPDisplayName.keyword:serviceprincipalname AND winlog.event_data.AttributeValue.keyword:gc\/*))
+      query: winlog.channel.keyword:security AND ((event.code.keyword:4742 AND winlog.event_data.ServicePrincipalNames.keyword:*gc\/*)
+        OR (event.code.keyword:5136 AND winlog.event_data.AttributeLDAPDisplayName.keyword:serviceprincipalname
+        AND winlog.event_data.AttributeValue.keyword:gc\/*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1207
+risk: medium

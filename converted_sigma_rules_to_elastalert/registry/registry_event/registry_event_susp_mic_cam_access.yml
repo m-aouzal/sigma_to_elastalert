@@ -1,10 +1,20 @@
 description: |
   Detects Processes accessing the camera and microphone from suspicious folder
 name: Suspicious Camera and Microphone Access
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\capabilityaccessmanager\\consentstore\\* AND registry.path.keyword:*\\nonpackaged*) AND (registry.path.keyword:(*microphone* OR *webcam*)) AND (registry.path.keyword:(*\:#windows#temp#* OR *\:#$recycle.bin#* OR *\:#temp#* OR *\:#users#public#* OR *\:#users#default#* OR *\:#users#desktop#*))
+      query: 
+        (registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\capabilityaccessmanager\\consentstore\\*
+        AND registry.path.keyword:*\\nonpackaged*) AND (registry.path.keyword:(*microphone*
+        OR *webcam*)) AND (registry.path.keyword:(*\:#windows#temp#* OR *\:#$recycle.bin#*
+        OR *\:#temp#* OR *\:#users#public#* OR *\:#users#default#* OR *\:#users#desktop#*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- collection
+mitre_attack_technique:
+- t1125
+- t1123
+risk: high

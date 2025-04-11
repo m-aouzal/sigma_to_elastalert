@@ -1,10 +1,17 @@
 description: |
   Detects PAExec service installation
 name: PAExec Service Installation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND ((winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045) AND (winlog.event_data.servicename.keyword:paexec\-* OR winlog.event_data.imagepath.keyword:c\:\\windows\\paexec\-*))
+      query: winlog.channel.keyword:system AND ((winlog.provider_name.keyword:service\
+        control\ manager AND event.code.keyword:7045) AND (winlog.event_data.servicename.keyword:paexec\-*
+        OR winlog.event_data.imagepath.keyword:c\:\\windows\\paexec\-*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1569.002
+risk: medium

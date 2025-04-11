@@ -2,12 +2,18 @@ description: |
   Detects the execution of "Setup16.EXE" and old installation utility with a custom ".lst" file.
   These ".lst" file can contain references to external program that "Setup16.EXE" will execute.
   Attackers and adversaries might leverage this as a living of the land utility.
-  
+
 name: Setup16.EXE Execution With Custom .Lst File
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:c\:\\windows\\syswow64\\setup16.exe AND process.parent.command_line.keyword:*\ \-m\ *) AND (NOT process.executable.keyword:c\:\\\~mssetup.t\\*)
+      query: (process.parent.executable.keyword:c\:\\windows\\syswow64\\setup16.exe
+        AND process.parent.command_line.keyword:*\ \-m\ *) AND (NOT process.executable.keyword:c\:\\\~mssetup.t\\*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1574.005
+risk: medium

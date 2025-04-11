@@ -1,10 +1,17 @@
 description: |
   Detects creation of a local user via PowerShell
 name: PowerShell Create Local User
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: powershell.file.script_block_text.keyword:*new\-localuser*
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+- persistence
+mitre_attack_technique:
+- t1059.001
+- t1136.001
+risk: medium

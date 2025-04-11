@@ -1,10 +1,17 @@
 description: |
   Detects the creation of a new service using the "sc.exe" utility.
 name: New Service Creation Using Sc.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\sc.exe AND (process.command_line.keyword:*create* AND process.command_line.keyword:*binpath*)
+      query: process.executable.keyword:*\\sc.exe AND (process.command_line.keyword:*create*
+        AND process.command_line.keyword:*binpath*)
 type: any
 priority: 1
+mitre_attack_tactic:
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1543.003
+risk: low

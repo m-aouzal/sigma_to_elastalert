@@ -1,11 +1,18 @@
 description: |
   Detects Windows update errors including installation failures and connection issues. Defenders should observe this in case critical update KBs aren't installed.
-  
+
 name: Windows Update Error
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:microsoft\-windows\-windowsupdateclient AND (event.code.keyword:(16 OR 20 OR 24 OR 213 OR 217)))
+      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:microsoft\-windows\-windowsupdateclient
+        AND (event.code.keyword:(16 OR 20 OR 24 OR 213 OR 217)))
 type: any
 priority: 0
+mitre_attack_tactic:
+- impact
+- resource-development
+mitre_attack_technique:
+- t1584
+risk: informational

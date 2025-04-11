@@ -1,11 +1,23 @@
 description: |
   Detects processes spawned from web servers (PHP, Tomcat, IIS, etc.) that perform reconnaissance looking for the existence of popular scripting tools (perl, python, wget) on the system via the help commands
-  
+
 name: Webshell Tool Reconnaissance Activity
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((process.parent.executable.keyword:(*\\caddy.exe OR *\\httpd.exe OR *\\nginx.exe OR *\\php\-cgi.exe OR *\\w3wp.exe OR *\\ws_tomcatservice.exe)) OR ((process.parent.executable.keyword:(*\\java.exe OR *\\javaw.exe)) AND (process.parent.executable.keyword:(*\-tomcat\-* OR *\\tomcat*))) OR ((process.parent.executable.keyword:(*\\java.exe OR *\\javaw.exe)) AND (process.command_line.keyword:(*catalina_home* OR *catalina.jar*)))) AND (process.command_line.keyword:(*perl\ \-\-help* OR *perl\ \-h* OR *python\ \-\-help* OR *python\ \-h* OR *python3\ \-\-help* OR *python3\ \-h* OR *wget\ \-\-help*))
+      query: ((process.parent.executable.keyword:(*\\caddy.exe OR *\\httpd.exe OR
+        *\\nginx.exe OR *\\php\-cgi.exe OR *\\w3wp.exe OR *\\ws_tomcatservice.exe))
+        OR ((process.parent.executable.keyword:(*\\java.exe OR *\\javaw.exe)) AND
+        (process.parent.executable.keyword:(*\-tomcat\-* OR *\\tomcat*))) OR ((process.parent.executable.keyword:(*\\java.exe
+        OR *\\javaw.exe)) AND (process.command_line.keyword:(*catalina_home* OR *catalina.jar*))))
+        AND (process.command_line.keyword:(*perl\ \-\-help* OR *perl\ \-h* OR *python\
+        \-\-help* OR *python\ \-h* OR *python3\ \-\-help* OR *python3\ \-h* OR *wget\
+        \-\-help*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1505.003
+risk: high

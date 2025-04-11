@@ -1,0 +1,9 @@
+description: Detects the execution of Scheduled Tasks where the Program being run is located in a suspicious location or it's an unusale program to be run from a Scheduled Task
+name: Scheduled Task Executed From A Suspicious Location
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: winlog.channel:Microsoft\-Windows\-TaskScheduler\/Operational AND (event.code:129 AND (winlog.event_data.Path:(*C\:\\Windows\\Temp\\* OR *\\AppData\\Local\\Temp\\* OR *\\Desktop\\* OR *\\Downloads\\* OR *\\Users\\Public\\* OR *C\:\\Temp\\*)))
+type: any
+priority: 2

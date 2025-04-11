@@ -1,11 +1,17 @@
 description: |
   Detects file access attempts to sensitive Microsoft teams files (leveldb, cookies) by an uncommon process.
-  
+
 name: Microsoft Teams Sensitive File Access By Uncommon Applications
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:(*\\microsoft\\teams\\cookies* OR *\\microsoft\\teams\\local\ storage\\leveldb*)) AND (NOT process.executable.keyword:*\\microsoft\\teams\\current\\teams.exe)
+      query: (file.path.keyword:(*\\microsoft\\teams\\cookies* OR *\\microsoft\\teams\\local\
+        storage\\leveldb*)) AND (NOT process.executable.keyword:*\\microsoft\\teams\\current\\teams.exe)
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1528
+risk: medium

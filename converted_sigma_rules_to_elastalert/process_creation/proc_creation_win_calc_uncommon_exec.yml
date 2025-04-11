@@ -1,11 +1,18 @@
 description: |
   Detects suspicious use of 'calc.exe' with command line parameters or in a suspicious directory, which is likely caused by some PoC or detection evasion.
-  
+
 name: Suspicious Calculator Usage
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*\\calc.exe\ * OR (process.executable.keyword:*\\calc.exe AND (NOT (process.executable.keyword:(*\:\\windows\\system32\\* OR *\:\\windows\\syswow64\\* OR *\:\\windows\\winsxs\\*))))
+      query: process.command_line.keyword:*\\calc.exe\ * OR (process.executable.keyword:*\\calc.exe
+        AND (NOT (process.executable.keyword:(*\:\\windows\\system32\\* OR *\:\\windows\\syswow64\\*
+        OR *\:\\windows\\winsxs\\*))))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036
+risk: high

@@ -1,10 +1,14 @@
 description: |
   Detects the creation of a new PowerShell module in the first folder of the module directory structure "\WindowsPowerShell\Modules\malware\malware.psm1". This is somewhat an uncommon practice as legitimate modules often includes a version folder.
 name: Potential Suspicious PowerShell Module File Created
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: file.path.keyword:(*\\windowspowershell\\modules\\*\\.ps OR *\\windowspowershell\\modules\\*\\.dll)
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique: []
+risk: medium

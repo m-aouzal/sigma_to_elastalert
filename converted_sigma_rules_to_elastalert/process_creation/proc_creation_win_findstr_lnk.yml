@@ -1,10 +1,19 @@
 description: |
   Detects usage of findstr to identify and execute a lnk file as seen within the HHS redirect attack
 name: Findstr Launching .lnk File
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\find.exe OR *\\findstr.exe)) OR (winlog.event_data.originalfilename.keyword:(find.exe OR findstr.exe))) AND (process.command_line.keyword:(*.lnk OR *.lnk\" OR *.lnk'))
+      query: ((winlog.event_data.image.keyword:(*\\find.exe OR *\\findstr.exe)) OR
+        (winlog.event_data.originalfilename.keyword:(find.exe OR findstr.exe))) AND
+        (process.command_line.keyword:(*.lnk OR *.lnk\" OR *.lnk'))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036
+- t1202
+- t1027.003
+risk: medium

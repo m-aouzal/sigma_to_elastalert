@@ -1,10 +1,23 @@
 description: |
   Detects PowerShell commands that decrypt an ".LNK" "file to drop the next stage of the malware.
 name: PowerShell Execution With Potential Decryption Capabilities
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND (process.pe.original_file_name.keyword:(powershell.exe OR pwsh.dll))) AND (process.command_line.keyword:(*get\-childitem\ * OR *dir\ * OR *gci\ * OR *ls\ *)) AND (process.command_line.keyword:(*get\-content\ * OR *gc\ * OR *cat\ * OR *type\ * OR *readallbytes*)) AND ((winlog.event_data.commandline.keyword:*\ \^\|\ * AND winlog.event_data.commandline.keyword:*\*.lnk* AND winlog.event_data.commandline.keyword:*\-recurse* AND winlog.event_data.commandline.keyword:*\-skip\ *) OR (winlog.event_data.commandline.keyword:*\ \-expandproperty\ * AND winlog.event_data.commandline.keyword:*\*.lnk* AND winlog.event_data.commandline.keyword:*writeallbytes* AND winlog.event_data.commandline.keyword:*\ .length\ *))
+      query: ((process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND
+        (process.pe.original_file_name.keyword:(powershell.exe OR pwsh.dll))) AND
+        (process.command_line.keyword:(*get\-childitem\ * OR *dir\ * OR *gci\ * OR
+        *ls\ *)) AND (process.command_line.keyword:(*get\-content\ * OR *gc\ * OR
+        *cat\ * OR *type\ * OR *readallbytes*)) AND ((winlog.event_data.commandline.keyword:*\
+        \^\|\ * AND winlog.event_data.commandline.keyword:*\*.lnk* AND winlog.event_data.commandline.keyword:*\-recurse*
+        AND winlog.event_data.commandline.keyword:*\-skip\ *) OR (winlog.event_data.commandline.keyword:*\
+        \-expandproperty\ * AND winlog.event_data.commandline.keyword:*\*.lnk* AND
+        winlog.event_data.commandline.keyword:*writeallbytes* AND winlog.event_data.commandline.keyword:*\
+        .length\ *))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: high

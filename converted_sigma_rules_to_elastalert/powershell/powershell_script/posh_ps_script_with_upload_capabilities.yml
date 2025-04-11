@@ -1,10 +1,17 @@
 description: |
   Detects PowerShell scripts leveraging the "Invoke-WebRequest" cmdlet to send data via either "PUT" or "POST" method.
 name: PowerShell Script With File Upload Capabilities
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:(*invoke\-webrequest* OR *iwr\ *)) AND (powershell.file.script_block_text.keyword:(*\-method\ put* OR *\-method\ post*))
+      query: (powershell.file.script_block_text.keyword:(*invoke\-webrequest* OR *iwr\
+        *)) AND (powershell.file.script_block_text.keyword:(*\-method\ put* OR *\-method\
+        post*))
 type: any
 priority: 1
+mitre_attack_tactic:
+- exfiltration
+mitre_attack_technique:
+- t1020
+risk: low

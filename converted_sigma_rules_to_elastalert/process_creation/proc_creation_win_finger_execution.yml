@@ -2,12 +2,17 @@ description: |
   Detects execution of the "finger.exe" utility.
   Finger.EXE or "TCPIP Finger Command" is an old utility that is still present on modern Windows installation. It Displays information about users on a specified remote computer (typically a UNIX computer) that is running the finger service or daemon.
   Due to the old nature of this utility and the rareness of machines having the finger service. Any execution of "finger.exe" can be considered "suspicious" and worth investigating.
-  
+
 name: Finger.EXE Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.originalfilename.keyword:finger.exe OR winlog.event_data.image.keyword:*\\finger.exe
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1105
+risk: high

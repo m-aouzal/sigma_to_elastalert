@@ -1,10 +1,18 @@
 description: |
   Detects creation of a file named "ntds.dit" (Active Directory Database) by an uncommon parent process or directory
 name: NTDS.DIT Creation By Uncommon Parent Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\\ntds.dit AND ((process.parent.executable.keyword:(*\\cscript.exe OR *\\httpd.exe OR *\\nginx.exe OR *\\php\-cgi.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\w3wp.exe OR *\\wscript.exe)) OR (process.parent.executable.keyword:(*\\apache* OR *\\tomcat* OR *\\appdata\\* OR *\\temp\\* OR *\\public\\* OR *\\perflogs\\*)))
+      query: file.path.keyword:*\\ntds.dit AND ((process.parent.executable.keyword:(*\\cscript.exe
+        OR *\\httpd.exe OR *\\nginx.exe OR *\\php\-cgi.exe OR *\\powershell.exe OR
+        *\\pwsh.exe OR *\\w3wp.exe OR *\\wscript.exe)) OR (process.parent.executable.keyword:(*\\apache*
+        OR *\\tomcat* OR *\\appdata\\* OR *\\temp\\* OR *\\public\\* OR *\\perflogs\\*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.003
+risk: high

@@ -1,10 +1,17 @@
 description: |
   Detects use of WSReset.exe to bypass User Account Control (UAC). Adversaries use this technique to execute privileged processes.
 name: Bypass UAC via WSReset.exe
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\\wsreset.exe AND (NOT (winlog.event_data.image.keyword:*\\conhost.exe OR winlog.event_data.originalfilename.keyword:conhost.exe))
+      query: process.parent.executable.keyword:*\\wsreset.exe AND (NOT (winlog.event_data.image.keyword:*\\conhost.exe
+        OR winlog.event_data.originalfilename.keyword:conhost.exe))
 type: any
 priority: 3
+mitre_attack_tactic:
+- privilege-escalation
+- defense-evasion
+mitre_attack_technique:
+- t1548.002
+risk: high

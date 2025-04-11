@@ -1,10 +1,16 @@
 description: |
   Detects a suspicious child process of userinit
 name: Suspicious Userinit Child Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\\userinit.exe AND (NOT (process.command_line.keyword:*\\netlogon\\* OR (winlog.event_data.image.keyword:*\\explorer.exe OR winlog.event_data.originalfilename.keyword:explorer.exe)))
+      query: process.parent.executable.keyword:*\\userinit.exe AND (NOT (process.command_line.keyword:*\\netlogon\\*
+        OR (winlog.event_data.image.keyword:*\\explorer.exe OR winlog.event_data.originalfilename.keyword:explorer.exe)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1055
+risk: medium

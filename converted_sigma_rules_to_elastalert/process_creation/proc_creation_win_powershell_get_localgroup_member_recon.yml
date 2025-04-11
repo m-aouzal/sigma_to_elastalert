@@ -1,10 +1,18 @@
 description: |
   Detects suspicious reconnaissance command line activity on Windows systems using the PowerShell Get-LocalGroupMember Cmdlet
 name: Suspicious Reconnaissance Activity Using Get-LocalGroupMember Cmdlet
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*get\-localgroupmember\ * AND (process.command_line.keyword:(*domain\ admins* OR *\ administrator* OR *\ administrateur* OR *enterprise\ admins* OR *exchange\ trusted\ subsystem* OR *remote\ desktop\ users* OR *utilisateurs\ du\ bureau\ à\ distance* OR *usuarios\ de\ escritorio\ remoto*))
+      query: process.command_line.keyword:*get\-localgroupmember\ * AND (process.command_line.keyword:(*domain\
+        admins* OR *\ administrator* OR *\ administrateur* OR *enterprise\ admins*
+        OR *exchange\ trusted\ subsystem* OR *remote\ desktop\ users* OR *utilisateurs\
+        du\ bureau\ à\ distance* OR *usuarios\ de\ escritorio\ remoto*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1087.001
+risk: medium

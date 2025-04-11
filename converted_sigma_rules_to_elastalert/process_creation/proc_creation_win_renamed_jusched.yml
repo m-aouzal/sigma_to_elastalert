@@ -1,10 +1,17 @@
 description: |
   Detects the execution of a renamed "jusched.exe" as seen used by the cobalt group
 name: Renamed Jusched.EXE Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.pe.description.keyword:(java\ update\ scheduler OR java\(tm\)\ update\ scheduler)) AND (NOT process.executable.keyword:*\\jusched.exe)
+      query: (process.pe.description.keyword:(java\ update\ scheduler OR java\(tm\)\
+        update\ scheduler)) AND (NOT process.executable.keyword:*\\jusched.exe)
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+- defense-evasion
+mitre_attack_technique:
+- t1036.003
+risk: high

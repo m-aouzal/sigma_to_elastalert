@@ -1,10 +1,15 @@
 description: |
   Detects usage of the 'Get-Clipboard' cmdlet via CLI
 name: PowerShell Get-Clipboard Cmdlet Via CLI
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.command_line.keyword:*get\-clipboard*
 type: any
 priority: 2
+mitre_attack_tactic:
+- collection
+mitre_attack_technique:
+- t1115
+risk: medium

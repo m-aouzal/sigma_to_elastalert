@@ -1,10 +1,17 @@
 description: |
   Detects the execution of Sysinternals ADExplorer with the "-snapshot" flag in order to save a local copy of the active directory database.
 name: Active Directory Database Snapshot Via ADExplorer
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\adexplorer.exe OR winlog.event_data.originalfilename.keyword:adexp) AND process.command_line.keyword:*snapshot*
+      query: (winlog.event_data.image.keyword:*\\adexplorer.exe OR winlog.event_data.originalfilename.keyword:adexp)
+        AND process.command_line.keyword:*snapshot*
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1552.001
+- t1003.003
+risk: medium

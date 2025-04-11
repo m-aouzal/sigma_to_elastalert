@@ -1,10 +1,16 @@
 description: |
   Detects default PsExec service filename which indicates PsExec service installation and execution
 name: PsExec Service File Creation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: file.path.keyword:*\\psexesvc.exe
 type: any
 priority: 1
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1569.002
+- s0029
+risk: low

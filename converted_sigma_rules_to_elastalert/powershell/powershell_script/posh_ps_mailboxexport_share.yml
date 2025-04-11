@@ -1,10 +1,16 @@
 description: |
   Detects usage of the powerShell New-MailboxExportRequest Cmdlet to exports a mailbox to a remote or local share, as used in ProxyShell exploitations
 name: Suspicious PowerShell Mailbox Export to Share - PS
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*new\-mailboxexportrequest* AND powershell.file.script_block_text.keyword:*\ \-mailbox\ * AND powershell.file.script_block_text.keyword:*\ \-filepath\ \\\\*
+      query: powershell.file.script_block_text.keyword:*new\-mailboxexportrequest*
+        AND powershell.file.script_block_text.keyword:*\ \-mailbox\ * AND powershell.file.script_block_text.keyword:*\
+        \-filepath\ \\\\*
 type: any
 priority: 4
+mitre_attack_tactic:
+- exfiltration
+mitre_attack_technique: []
+risk: critical

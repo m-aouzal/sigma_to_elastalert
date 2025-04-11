@@ -1,10 +1,21 @@
 description: |
   Detect usage of the "sqlite" binary to query databases in Chromium-based browsers for potential data stealing.
 name: SQLite Chromium Profile Data DB Access
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.product.keyword:sqlite OR (winlog.event_data.image.keyword:(*\\sqlite.exe OR *\\sqlite3.exe))) AND (process.command_line.keyword:(*\\user\ data\\* OR *\\opera\ software\\* OR *\\chromiumviewer\\*)) AND (process.command_line.keyword:(*login\ data* OR *cookies* OR *web\ data* OR *history* OR *bookmarks*))
+      query: (winlog.event_data.product.keyword:sqlite OR (winlog.event_data.image.keyword:(*\\sqlite.exe
+        OR *\\sqlite3.exe))) AND (process.command_line.keyword:(*\\user\ data\\* OR
+        *\\opera\ software\\* OR *\\chromiumviewer\\*)) AND (process.command_line.keyword:(*login\
+        data* OR *cookies* OR *web\ data* OR *history* OR *bookmarks*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+- collection
+mitre_attack_technique:
+- t1539
+- t1555.003
+- t1005
+risk: high

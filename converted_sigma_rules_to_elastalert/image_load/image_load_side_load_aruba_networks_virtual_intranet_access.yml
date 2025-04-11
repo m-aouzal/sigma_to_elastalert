@@ -1,10 +1,22 @@
 description: |
   Detects potential DLL sideloading activity via the Aruba Networks Virtual Intranet Access "arubanetsvc.exe" process using DLL Search Order Hijacking
 name: Aruba Network Service Potential DLL Sideloading
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\arubanetsvc.exe AND (file.path.keyword:(*\\wtsapi32.dll OR *\\msvcr100.dll OR *\\msvcp100.dll OR *\\dbghelp.dll OR *\\dbgcore.dll OR *\\wininet.dll OR *\\iphlpapi.dll OR *\\version.dll OR *\\cryptsp.dll OR *\\cryptbase.dll OR *\\wldp.dll OR *\\profapi.dll OR *\\sspicli.dll OR *\\winsta.dll OR *\\dpapi.dll))) AND (NOT (file.path.keyword:(c\:\\windows\\system32\\* OR c\:\\windows\\syswow64\\* OR c\:\\windows\\winsxs\\*)))
+      query: (process.executable.keyword:*\\arubanetsvc.exe AND (file.path.keyword:(*\\wtsapi32.dll
+        OR *\\msvcr100.dll OR *\\msvcp100.dll OR *\\dbghelp.dll OR *\\dbgcore.dll
+        OR *\\wininet.dll OR *\\iphlpapi.dll OR *\\version.dll OR *\\cryptsp.dll OR
+        *\\cryptbase.dll OR *\\wldp.dll OR *\\profapi.dll OR *\\sspicli.dll OR *\\winsta.dll
+        OR *\\dpapi.dll))) AND (NOT (file.path.keyword:(c\:\\windows\\system32\\*
+        OR c\:\\windows\\syswow64\\* OR c\:\\windows\\winsxs\\*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- privilege-escalation
+- persistence
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: high

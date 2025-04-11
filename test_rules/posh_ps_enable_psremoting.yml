@@ -1,0 +1,48 @@
+es_host: "localhost"
+es_port: 9200
+description: Adversaries may use Valid Accounts to interact with remote systems using WinRM.
+name: Enable Windows Remote Management
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: powershell.file.script_block_text.keyword:*enable\-psremoting\ *
+
+# The following custom fields are defined as lists.
+# For example, from a Sigma rule for "AADInternals PowerShell Cmdlets Execution - PsScript":
+#   - The tactic tags: attack.execution, attack.reconnaissance, attack.discovery, attack.credential-access
+#   - The technique tags: T1210.12, T2021.12
+mitre_attack_tactic: 
+  - "attack.execution"
+  - "attack.reconnaissance"
+  - "attack.discovery"
+  - "attack.credential-access"
+mitre_attack_technique: 
+  - "T1210.12"
+  - "T2021.12"
+
+# A risk field can be defined as needed.
+risk: "High"
+
+type: any
+
+# Run enhancement to inject rule fields into the match document.
+match_enhancements:
+  - "elastalert_modules.inject_rule_fields.InjectRuleFieldsEnhancement"
+
+priority: 2
+alert:
+  - "debug"
+
+# Render the alert text using positional formatting:
+alert_text: >
+  Alert on debug mode.
+  Tactics: {0}.
+  Techniques: {1}.
+  Risk: {2}
+alert_text_args:
+  - mitre_attack_tactic
+  - mitre_attack_technique
+  - risk
+alert_text_type: alert_text_only
+

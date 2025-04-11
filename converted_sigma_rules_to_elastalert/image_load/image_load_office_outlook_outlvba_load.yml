@@ -1,10 +1,15 @@
 description: |
   Detects outlvba (Microsoft VBA for Outlook Addin) DLL being loaded by the outlook process
 name: Microsoft VBA For Outlook Addin Loaded Via Outlook
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:*\\outlook.exe AND file.path.keyword:*\\outlvba.dll
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1204.002
+risk: medium

@@ -1,10 +1,17 @@
 description: |
   Detects command line parameters used by Hydra password guessing hack tool
 name: HackTool - Hydra Password Bruteforce Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*\-u\ * AND process.command_line.keyword:*\-p\ *) AND (process.command_line.keyword:(*\^user\^* OR *\^pass\^*))
+      query: (process.command_line.keyword:*\-u\ * AND process.command_line.keyword:*\-p\
+        *) AND (process.command_line.keyword:(*\^user\^* OR *\^pass\^*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1110
+- t1110.001
+risk: high

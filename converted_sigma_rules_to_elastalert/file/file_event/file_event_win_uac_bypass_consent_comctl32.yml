@@ -1,10 +1,16 @@
 description: |
   Detects the pattern of UAC Bypass using consent.exe and comctl32.dll (UACMe 22)
 name: UAC Bypass Using Consent and Comctl32 - File
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: file.path.keyword:c\:\\windows\\system32\\consent.exe.@* AND file.path.keyword:*\\comctl32.dll
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1548.002
+risk: high

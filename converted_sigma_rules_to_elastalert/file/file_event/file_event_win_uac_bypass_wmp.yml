@@ -1,10 +1,18 @@
 description: |
   Detects the pattern of UAC Bypass using Windows Media Player osksupport.dll (UACMe 32)
 name: UAC Bypass Using Windows Media Player - File
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:c\:\\users\\* AND file.path.keyword:*\\appdata\\local\\temp\\osksupport.dll) OR (process.executable.keyword:c\:\\windows\\system32\\dllhost.exe AND file.path.keyword:c\:\\program\ files\\windows\ media\ player\\osk.exe)
+      query: (file.path.keyword:c\:\\users\\* AND file.path.keyword:*\\appdata\\local\\temp\\osksupport.dll)
+        OR (process.executable.keyword:c\:\\windows\\system32\\dllhost.exe AND file.path.keyword:c\:\\program\
+        files\\windows\ media\ player\\osk.exe)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1548.002
+risk: high

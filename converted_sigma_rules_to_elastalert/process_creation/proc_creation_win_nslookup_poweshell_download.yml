@@ -1,10 +1,17 @@
 description: |
   Detects suspicious powershell download cradle using nslookup. This cradle uses nslookup to extract payloads from DNS records
 name: Nslookup PowerShell Download Cradle - ProcessCreation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\nslookup.exe* OR winlog.event_data.originalfilename.keyword:\\nslookup.exe) AND ((process.parent.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND (process.command_line.keyword:(*\ \-q\=txt\ * OR *\ \-querytype\=txt\ *)))
+      query: (winlog.event_data.image.keyword:*\\nslookup.exe* OR winlog.event_data.originalfilename.keyword:\\nslookup.exe)
+        AND ((process.parent.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe))
+        AND (process.command_line.keyword:(*\ \-q\=txt\ * OR *\ \-querytype\=txt\
+        *)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

@@ -1,12 +1,20 @@
 description: |
   Detects usage of winget to add a new insecure (http) download source.
   Winget will not allow the addition of insecure sources, hence this could indicate potential suspicious activity (or typos)
-  
+
 name: Add Insecure Download Source To Winget
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\winget.exe OR winlog.event_data.originalfilename.keyword:winget.exe) AND (process.command_line.keyword:*source\ * AND process.command_line.keyword:*add\ * AND process.command_line.keyword:*http\:\/\/*)
+      query: (winlog.event_data.image.keyword:*\\winget.exe OR winlog.event_data.originalfilename.keyword:winget.exe)
+        AND (process.command_line.keyword:*source\ * AND process.command_line.keyword:*add\
+        * AND process.command_line.keyword:*http\:\/\/*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1059
+risk: high

@@ -1,12 +1,19 @@
 description: |
   Detects the creation of a file with the ".dll" extension that has the name of a System DLL in uncommon or unsuspected locations. (Outisde of "System32", "SysWOW64", etc.).
   It is highly recommended to perform an initial baseline before using this rule in production.
-  
+
 name: Files With System DLL Name In Unsuspected Locations
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:(*\\secur32.dll OR *\\tdh.dll)) AND (NOT (file.path.keyword:(*c\:\\$windows.\~bt\\* OR *c\:\\$winreagent\\* OR *c\:\\windows\\softwaredistribution\\* OR *c\:\\windows\\system32\\* OR *c\:\\windows\\syswow64\\* OR *c\:\\windows\\winsxs\\* OR *c\:\\windows\\uus\\*)))
+      query: (file.path.keyword:(*\\secur32.dll OR *\\tdh.dll)) AND (NOT (file.path.keyword:(*c\:\\$windows.\~bt\\*
+        OR *c\:\\$winreagent\\* OR *c\:\\windows\\softwaredistribution\\* OR *c\:\\windows\\system32\\*
+        OR *c\:\\windows\\syswow64\\* OR *c\:\\windows\\winsxs\\* OR *c\:\\windows\\uus\\*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036.005
+risk: medium

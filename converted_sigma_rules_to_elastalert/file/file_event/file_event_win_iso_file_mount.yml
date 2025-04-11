@@ -1,10 +1,18 @@
 description: |
   Detects the creation of a ISO file in the Outlook temp folder or in the Appdata temp folder. Typical of Qakbot TTP from end-July 2022.
 name: ISO File Created Within Temp Folders
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((file.path.keyword:*\\appdata\\local\\temp\\* AND file.path.keyword:*.zip\\*) AND file.path.keyword:*.iso) OR (file.path.keyword:*\\appdata\\local\\microsoft\\windows\\inetcache\\content.outlook\\* AND file.path.keyword:*.iso)
+      query: ((file.path.keyword:*\\appdata\\local\\temp\\* AND file.path.keyword:*.zip\\*)
+        AND file.path.keyword:*.iso) OR 
+        (file.path.keyword:*\\appdata\\local\\microsoft\\windows\\inetcache\\content.outlook\\*
+        AND file.path.keyword:*.iso)
 type: any
 priority: 3
+mitre_attack_tactic:
+- initial-access
+mitre_attack_technique:
+- t1566.001
+risk: high

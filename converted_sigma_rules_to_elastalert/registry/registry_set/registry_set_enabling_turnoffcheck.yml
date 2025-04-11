@@ -1,10 +1,17 @@
 description: |
   Detects enabling TurnOffCheck which can be used to bypass defense of MSDT Follina vulnerability
 name: Scripted Diagnostics Turn Off Check Enabled - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\policies\\microsoft\\windows\\scripteddiagnostics\\turnoffcheck AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)
+      query: 
+        registry.path.keyword:*\\policies\\microsoft\\windows\\scripteddiagnostics\\turnoffcheck
+        AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: medium

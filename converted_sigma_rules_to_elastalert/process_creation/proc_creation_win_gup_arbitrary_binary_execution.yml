@@ -1,10 +1,16 @@
 description: |
   Detects execution of the Notepad++ updater (gup) to launch other commands or executables
 name: Arbitrary Binary Execution Using GUP Utility
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:*\\gup.exe AND process.executable.keyword:*\\explorer.exe) AND (NOT ((process.executable.keyword:*\\explorer.exe AND process.command_line.keyword:*\\notepad\+\+\\notepad\+\+.exe*) OR process.parent.executable.keyword:*\\notepad\+\+\\updater\\* OR (NOT _exists_:process.command_line)))
+      query: (process.parent.executable.keyword:*\\gup.exe AND process.executable.keyword:*\\explorer.exe)
+        AND (NOT ((process.executable.keyword:*\\explorer.exe AND process.command_line.keyword:*\\notepad\+\+\\notepad\+\+.exe*)
+        OR process.parent.executable.keyword:*\\notepad\+\+\\updater\\* OR (NOT _exists_:process.command_line)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: medium

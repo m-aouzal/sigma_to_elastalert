@@ -1,10 +1,16 @@
 description: |
   Detects Crassus, a Windows privilege escalation discovery tool, based on PE metadata characteristics.
 name: PUA - Crassus Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\\crassus.exe OR winlog.event_data.originalfilename.keyword:crassus.exe OR winlog.event_data.description.keyword:*crassus*
+      query: winlog.event_data.image.keyword:*\\crassus.exe OR winlog.event_data.originalfilename.keyword:crassus.exe
+        OR winlog.event_data.description.keyword:*crassus*
 type: any
 priority: 3
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1590.001
+risk: high

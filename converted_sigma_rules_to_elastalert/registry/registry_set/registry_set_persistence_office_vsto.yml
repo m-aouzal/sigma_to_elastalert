@@ -1,10 +1,23 @@
 description: |
   Detects persistence via Visual Studio Tools for Office (VSTO) add-ins in Office applications.
 name: Potential Persistence Via Visual Studio Tools for Office
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*\\software\\microsoft\\office\\outlook\\addins\\* OR *\\software\\microsoft\\office\\word\\addins\\* OR *\\software\\microsoft\\office\\excel\\addins\\* OR *\\software\\microsoft\\office\\powerpoint\\addins\\* OR *\\software\\microsoft\\vsto\\security\\inclusion\\*)) AND (NOT ((process.executable.keyword:(*\\msiexec.exe OR *\\regsvr32.exe)) OR (process.executable.keyword:(*\\excel.exe OR *\\integrator.exe OR *\\officeclicktorun.exe OR *\\winword.exe OR *\\visio.exe)) OR process.executable.keyword:*\\teams.exe OR (process.executable.keyword:c\:\\program\ files\\avg\\antivirus\\regsvr.exe AND registry.path.keyword:*\\microsoft\\office\\outlook\\addins\\antivirus.asoutext\\*)))
+      query: (registry.path.keyword:(*\\software\\microsoft\\office\\outlook\\addins\\*
+        OR *\\software\\microsoft\\office\\word\\addins\\* OR *\\software\\microsoft\\office\\excel\\addins\\*
+        OR *\\software\\microsoft\\office\\powerpoint\\addins\\* OR *\\software\\microsoft\\vsto\\security\\inclusion\\*))
+        AND (NOT ((process.executable.keyword:(*\\msiexec.exe OR *\\regsvr32.exe))
+        OR (process.executable.keyword:(*\\excel.exe OR *\\integrator.exe OR *\\officeclicktorun.exe
+        OR *\\winword.exe OR *\\visio.exe)) OR process.executable.keyword:*\\teams.exe
+        OR (process.executable.keyword:c\:\\program\ files\\avg\\antivirus\\regsvr.exe
+        AND 
+        registry.path.keyword:*\\microsoft\\office\\outlook\\addins\\antivirus.asoutext\\*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1137.006
+risk: medium

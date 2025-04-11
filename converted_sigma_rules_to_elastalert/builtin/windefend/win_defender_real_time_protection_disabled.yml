@@ -1,11 +1,17 @@
 description: |
   Detects disabling of Windows Defender Real-time Protection. As this event doesn't contain a lot of information on who initiated this action you might want to reduce it to a "medium" level if this occurs too many times in your environment
-  
+
 name: Windows Defender Real-time Protection Disabled
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-windows\ defender\/operational AND event.code.keyword:5001
+      query: winlog.channel.keyword:microsoft\-windows\-windows\ defender\/operational
+        AND event.code.keyword:5001
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high

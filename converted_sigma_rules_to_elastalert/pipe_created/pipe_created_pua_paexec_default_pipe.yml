@@ -1,10 +1,15 @@
 description: |
   Detects PAExec default named pipe
 name: PUA - PAExec Default Named Pipe
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: file.name.keyword:\\paexec*
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1569.002
+risk: medium

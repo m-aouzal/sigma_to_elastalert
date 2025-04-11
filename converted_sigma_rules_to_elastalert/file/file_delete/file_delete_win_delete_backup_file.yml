@@ -1,10 +1,17 @@
 description: |
   Detects deletion of files with extensions often used for backup files. Adversaries may delete or remove built-in operating system data and turn off services designed to aid in the recovery of a corrupted system to prevent recovery.
 name: Backup Files Deleted
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\cmd.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\wt.exe OR *\\rundll32.exe OR *\\regsvr32.exe)) AND (file.path.keyword:(*.vhd OR *.bac OR *.bak OR *.wbcat OR *.bkf OR *.set OR *.win OR *.dsk))
+      query: (process.executable.keyword:(*\\cmd.exe OR *\\powershell.exe OR *\\pwsh.exe
+        OR *\\wt.exe OR *\\rundll32.exe OR *\\regsvr32.exe)) AND (file.path.keyword:(*.vhd
+        OR *.bac OR *.bak OR *.wbcat OR *.bkf OR *.set OR *.win OR *.dsk))
 type: any
 priority: 2
+mitre_attack_tactic:
+- impact
+mitre_attack_technique:
+- t1490
+risk: medium

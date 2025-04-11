@@ -1,10 +1,18 @@
 description: |
   Detects a file ending in jse, vbe, js, vba, vbs written by cscript.exe or wscript.exe
 name: WScript or CScript Dropper - File
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\wscript.exe OR *\\cscript.exe)) AND (file.path.keyword:(c\:\\users\\* OR c\:\\programdata*)) AND (file.path.keyword:(*.jse OR *.vbe OR *.js OR *.vba OR *.vbs))
+      query: (process.executable.keyword:(*\\wscript.exe OR *\\cscript.exe)) AND (file.path.keyword:(c\:\\users\\*
+        OR c\:\\programdata*)) AND (file.path.keyword:(*.jse OR *.vbe OR *.js OR *.vba
+        OR *.vbs))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.005
+- t1059.007
+risk: high

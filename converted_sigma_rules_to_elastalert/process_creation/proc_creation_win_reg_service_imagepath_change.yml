@@ -2,12 +2,20 @@ description: |
   Adversaries may execute their own malicious payloads by hijacking the Registry entries used by services.
   Adversaries may use flaws in the permissions for registry to redirect from the originally specified executable to one that they control, in order to launch their own code at Service start.
   Windows stores local service configuration information in the Registry under HKLM\SYSTEM\CurrentControlSet\Services
-  
+
 name: Changing Existing Service ImagePath Value Via Reg.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\reg.exe AND (process.command_line.keyword:*add\ * AND process.command_line.keyword:*system\\currentcontrolset\\services\\* AND process.command_line.keyword:*\ imagepath\ *)) AND process.command_line.keyword:(*\ \-d\ * OR *\ \/d\ * OR *\ –d\ * OR *\ —d\ * OR *\ ―d\ *)
+      query: (process.executable.keyword:*\\reg.exe AND (process.command_line.keyword:*add\
+        * AND process.command_line.keyword:*system\\currentcontrolset\\services\\*
+        AND process.command_line.keyword:*\ imagepath\ *)) AND process.command_line.keyword:(*\
+        \-d\ * OR *\ \/d\ * OR *\ –d\ * OR *\ —d\ * OR *\ ―d\ *)
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1574.011
+risk: medium

@@ -1,11 +1,17 @@
 description: |
   Detects DNS queries initiated by "QuickAssist.exe" to Microsoft Quick Assist primary endpoint that is used to establish a session.
-  
+
 name: DNS Query Request By QuickAssist.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:*\\quickassist.exe AND dns.question.name.keyword:*remoteassistance.support.services.microsoft.com
 type: any
 priority: 1
+mitre_attack_tactic:
+- initial-access
+mitre_attack_technique:
+- t1071.001
+- t1210
+risk: low

@@ -1,10 +1,15 @@
 description: |
   Detects execution of "curl.exe" with the "-c" flag in order to save cookie data.
 name: Potential Cookies Session Hijacking
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\curl.exe OR winlog.event_data.originalfilename.keyword:curl.exe) AND (winlog.event_data.commandline.keyword:/\s-c\s/ OR winlog.event_data.commandline.keyword:*\-\-cookie\-jar*)
+      query: (winlog.event_data.image.keyword:*\\curl.exe OR winlog.event_data.originalfilename.keyword:curl.exe)
+        AND (winlog.event_data.commandline.keyword:/\s-c\s/ OR winlog.event_data.commandline.keyword:*\-\-cookie\-jar*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: medium

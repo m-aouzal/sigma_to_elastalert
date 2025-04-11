@@ -1,10 +1,17 @@
 description: |
   RDP login with localhost source address may be a tunnelled login
 name: RDP Login from Localhost
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:10 AND (source.ip.keyword:(\:\:1 OR 127.0.0.1)))
+      query: winlog.channel.keyword:security AND (event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:10
+        AND (source.ip.keyword:(\:\:1 OR 127.0.0.1)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- lateral-movement
+mitre_attack_technique:
+- car.2013-07-002
+- t1021.001
+risk: high

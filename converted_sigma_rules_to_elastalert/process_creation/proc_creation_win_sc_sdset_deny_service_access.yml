@@ -1,10 +1,17 @@
 description: |
   Detects suspicious DACL modifications to deny access to a service that affects critical trustees. This can be used to hide services or make them unstoppable.
 name: Deny Service Access Using Security Descriptor Tampering Via Sc.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\sc.exe OR winlog.event_data.originalfilename.keyword:sc.exe) AND (process.command_line.keyword:*sdset* AND process.command_line.keyword:*d;*) AND (process.command_line.keyword:(*;iu* OR *;su* OR *;ba* OR *;sy* OR *;wd*))
+      query: (winlog.event_data.image.keyword:*\\sc.exe OR winlog.event_data.originalfilename.keyword:sc.exe)
+        AND (process.command_line.keyword:*sdset* AND process.command_line.keyword:*d;*)
+        AND (process.command_line.keyword:(*;iu* OR *;su* OR *;ba* OR *;sy* OR *;wd*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1543.003
+risk: high

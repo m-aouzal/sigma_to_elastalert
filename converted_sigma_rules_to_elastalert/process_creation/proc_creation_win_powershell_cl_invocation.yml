@@ -1,10 +1,15 @@
 description: |
   Detects calls to "SyncInvoke" that is part of the "CL_Invocation.ps1" script to proxy execution using "System.Diagnostics.Process"
 name: Potential Process Execution Proxy Via CL_Invocation.ps1
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.command_line.keyword:*syncinvoke\ *
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1216
+risk: medium

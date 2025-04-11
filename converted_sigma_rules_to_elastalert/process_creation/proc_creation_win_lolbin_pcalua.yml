@@ -1,10 +1,16 @@
 description: |
   Detects execition of commands and binaries from the context of The program compatibility assistant (Pcalua.exe). This can be used as a LOLBIN in order to bypass application whitelisting.
 name: Use of Pcalua For Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\pcalua.exe AND process.command_line.keyword:*\ \-a*
+      query: process.executable.keyword:*\\pcalua.exe AND process.command_line.keyword:*\
+        \-a*
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059
+risk: medium

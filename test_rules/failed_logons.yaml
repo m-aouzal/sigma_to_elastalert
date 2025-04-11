@@ -1,0 +1,17 @@
+# failed_logon.yaml
+es_host: "localhost"                # Change to your Elasticsearch host if needed
+es_port: 9200                       # Default port, update if different
+name: "Failed Logon Attempts"
+type: frequency
+index: "winlogbeat-*"               # Adjust if your logs are in a different index
+num_events: 3
+timeframe:
+  minutes: 5
+filter:
+- term:
+    "event.code.keyword": "4625"  # Filter on failed logon events (4625)
+alert:
+  - "telegram"
+telegram_bot_token: "7933726767:AAElAJQZhDW5zqRUJnIuyVMyLx_orGh_TOw"
+telegram_room_id: "6175210569"
+

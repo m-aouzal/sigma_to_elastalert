@@ -1,10 +1,16 @@
 description: |
   Detects creation of "UserInitMprLogonScript" registry value which can be used as a persistence method by malicious actors
 name: Potential Persistence Via Logon Scripts - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.EventType.keyword:createkey AND registry.path.keyword:*userinitmprlogonscript*
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+- lateral-movement
+mitre_attack_technique:
+- t1037.001
+risk: medium

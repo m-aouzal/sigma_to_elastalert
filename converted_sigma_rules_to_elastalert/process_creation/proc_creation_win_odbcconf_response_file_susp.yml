@@ -1,10 +1,19 @@
 description: |
   Detects execution of "odbcconf" with the "-f" flag in order to load a response file with a non-".rsp" extension.
 name: Suspicious Response File Execution Via Odbcconf.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\\odbcconf.exe OR winlog.event_data.originalfilename.keyword:odbcconf.exe) AND process.command_line.keyword:(*\ \-f\ * OR *\ \/f\ * OR *\ –f\ * OR *\ —f\ * OR *\ ―f\ *)) AND (NOT (process.command_line.keyword:*.rsp* OR (process.parent.executable.keyword:c\:\\windows\\system32\\runonce.exe AND process.executable.keyword:c\:\\windows\\system32\\odbcconf.exe AND process.command_line.keyword:*.exe\ \/e\ \/f\ \"c\:\\windows\\system32\\odbcconf.tmp\"*)))
+      query: ((winlog.event_data.image.keyword:*\\odbcconf.exe OR winlog.event_data.originalfilename.keyword:odbcconf.exe)
+        AND process.command_line.keyword:(*\ \-f\ * OR *\ \/f\ * OR *\ –f\ * OR *\
+        —f\ * OR *\ ―f\ *)) AND (NOT (process.command_line.keyword:*.rsp* OR (process.parent.executable.keyword:c\:\\windows\\system32\\runonce.exe
+        AND process.executable.keyword:c\:\\windows\\system32\\odbcconf.exe AND process.command_line.keyword:*.exe\
+        \/e\ \/f\ \"c\:\\windows\\system32\\odbcconf.tmp\"*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218.008
+risk: high

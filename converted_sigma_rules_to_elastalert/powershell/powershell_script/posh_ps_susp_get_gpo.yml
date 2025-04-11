@@ -1,10 +1,15 @@
 description: |
   Detect use of Get-GPO to get one GPO or all the GPOs in a domain.
 name: Suspicious GPO Discovery With Get-GPO
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: powershell.file.script_block_text.keyword:*get\-gpo*
 type: any
 priority: 1
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1615
+risk: low

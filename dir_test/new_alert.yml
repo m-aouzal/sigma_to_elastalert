@@ -1,0 +1,15 @@
+alert:
+  - "debug"
+
+# Render the alert text using positional formatting:
+alert_text: >
+  Alert on debug mode.
+  Tactics: {0}.
+  Techniques: {1}.
+  Risk: {2}
+alert_text_args:
+  - mitre_attack_tactic
+  - mitre_attack_technique
+  - risk
+alert_text_type: alert_text_only
+omega3: azqswx

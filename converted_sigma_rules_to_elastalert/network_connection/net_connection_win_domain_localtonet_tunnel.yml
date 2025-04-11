@@ -2,12 +2,20 @@ description: |
   Detects an executable initiating a network connection to "LocaltoNet" tunneling sub-domains.
   LocaltoNet is a reverse proxy that enables localhost services to be exposed to the Internet.
   Attackers have been seen to use this service for command-and-control activities to bypass MFA and perimeter controls.
-  
+
 name: Communication To LocaltoNet Tunneling Service Initiated
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (destination.domain.keyword:(*.localto.net OR *.localtonet.com)) AND network.direction.keyword:true
+      query: (destination.domain.keyword:(*.localto.net OR *.localtonet.com)) AND
+        network.direction.keyword:true
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1572
+- t1090
+- t1102
+risk: high

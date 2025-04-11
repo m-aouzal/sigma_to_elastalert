@@ -1,10 +1,18 @@
 description: |
   Detects the creation of a macro file for Outlook.
 name: New Outlook Macro Created
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:*\\outlook.exe AND file.path.keyword:*\\microsoft\\outlook\\vbaproject.otm
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+- command-and-control
+mitre_attack_technique:
+- t1137
+- t1008
+- t1546
+risk: medium

@@ -1,10 +1,19 @@
 description: |
   Detects execution of "Diskshadow.exe" in script mode using the "/s" flag where the script is located in a potentially suspicious location.
 name: Diskshadow Script Mode - Execution From Potential Suspicious Location
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:diskshadow.exe OR winlog.event_data.image.keyword:*\\diskshadow.exe) AND process.command_line.keyword:(*\-s\ * OR *\/s\ * OR *–s\ * OR *—s\ * OR *―s\ *) AND (process.command_line.keyword:(*\:\\temp\\* OR *\:\\windows\\temp\\* OR *\\appdata\\local\\* OR *\\appdata\\roaming\\* OR *\\programdata\\* OR *\\users\\public\\*))
+      query: (winlog.event_data.originalfilename.keyword:diskshadow.exe OR winlog.event_data.image.keyword:*\\diskshadow.exe)
+        AND process.command_line.keyword:(*\-s\ * OR *\/s\ * OR *–s\ * OR *—s\ * OR
+        *―s\ *) AND (process.command_line.keyword:(*\:\\temp\\* OR *\:\\windows\\temp\\*
+        OR *\\appdata\\local\\* OR *\\appdata\\roaming\\* OR *\\programdata\\* OR
+        *\\users\\public\\*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218
+risk: medium

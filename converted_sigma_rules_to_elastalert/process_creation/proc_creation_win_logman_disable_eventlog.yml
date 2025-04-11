@@ -1,10 +1,18 @@
 description: |
   Detects the execution of "logman" utility in order to disable or delete Windows trace sessions
 name: Suspicious Windows Trace ETW Session Tamper Via Logman.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\logman.exe OR winlog.event_data.originalfilename.keyword:logman.exe) AND (process.command_line.keyword:(*stop\ * OR *delete\ *)) AND (process.command_line.keyword:(*circular\ kernel\ context\ logger* OR *eventlog\-* OR *sysmon\ trace* OR *sysmondnsetwsession*))
+      query: (winlog.event_data.image.keyword:*\\logman.exe OR winlog.event_data.originalfilename.keyword:logman.exe)
+        AND (process.command_line.keyword:(*stop\ * OR *delete\ *)) AND (process.command_line.keyword:(*circular\
+        kernel\ context\ logger* OR *eventlog\-* OR *sysmon\ trace* OR *sysmondnsetwsession*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+- t1070.001
+risk: high

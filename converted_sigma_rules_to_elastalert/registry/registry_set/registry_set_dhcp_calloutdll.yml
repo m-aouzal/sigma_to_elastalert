@@ -1,10 +1,17 @@
 description: |
   Detects the installation of a Callout DLL via CalloutDlls and CalloutEnabled parameter in Registry, which can be used to execute code in context of the DHCP server (restart required)
 name: DHCP Callout DLL Installation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:(*\\services\\dhcpserver\\parameters\\calloutdlls OR *\\services\\dhcpserver\\parameters\\calloutenabled)
+      query: registry.path.keyword:(*\\services\\dhcpserver\\parameters\\calloutdlls
+        OR *\\services\\dhcpserver\\parameters\\calloutenabled)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1574.002
+- t1112
+risk: high

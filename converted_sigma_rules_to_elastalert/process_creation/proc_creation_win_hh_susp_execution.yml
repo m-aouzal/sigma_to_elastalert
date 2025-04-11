@@ -1,10 +1,29 @@
 description: |
   Detects a suspicious execution of a Microsoft HTML Help (HH.exe)
 name: Suspicious HH.EXE Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:hh.exe OR winlog.event_data.image.keyword:*\\hh.exe) AND (process.command_line.keyword:(*.application* OR *\\appdata\\local\\temp\\* OR *\\content.outlook\\* OR *\\downloads\\* OR *\\users\\public\\* OR *\\windows\\temp\\*))
+      query: (winlog.event_data.originalfilename.keyword:hh.exe OR winlog.event_data.image.keyword:*\\hh.exe)
+        AND (process.command_line.keyword:(*.application* OR *\\appdata\\local\\temp\\*
+        OR *\\content.outlook\\* OR *\\downloads\\* OR *\\users\\public\\* OR *\\windows\\temp\\*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- execution
+- initial-access
+mitre_attack_technique:
+- t1047
+- t1059.001
+- t1059.003
+- t1059.005
+- t1059.007
+- t1218
+- t1218.001
+- t1218.010
+- t1218.011
+- t1566
+- t1566.001
+risk: high

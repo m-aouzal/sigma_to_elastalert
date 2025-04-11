@@ -1,12 +1,26 @@
 description: |
   Adversaries may abuse msiexec.exe to proxy execution of malicious payloads.
   Msiexec.exe is the command-line utility for the Windows Installer and is thus commonly associated with executing installation packages (.msi)
-  
+
 name: Msiexec Quiet Installation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\\msiexec.exe OR winlog.event_data.originalfilename.keyword:msiexec.exe) AND (process.command_line.keyword:(*\-i* OR *\/i* OR *–i* OR *—i* OR *―i*) OR process.command_line.keyword:(*\-package* OR *\/package* OR *–package* OR *—package* OR *―package*) OR process.command_line.keyword:(*\-a* OR *\/a* OR *–a* OR *—a* OR *―a*) OR process.command_line.keyword:(*\-j* OR *\/j* OR *–j* OR *—j* OR *―j*)) AND process.command_line.keyword:(*\-q* OR *\/q* OR *–q* OR *—q* OR *―q*)) AND (NOT ((process.parent.executable.keyword:c\:\\users\\* AND process.parent.executable.keyword:*\\appdata\\local\\temp\\*) OR process.parent.executable.keyword:c\:\\windows\\temp\\* OR (process.parent.executable.keyword:c\:\\windows\\ccm\\ccm32bitlauncher.exe AND (winlog.event_data.IntegrityLevel.keyword:(system OR s\-1\-16\-16384)))))
+      query: ((winlog.event_data.image.keyword:*\\msiexec.exe OR winlog.event_data.originalfilename.keyword:msiexec.exe)
+        AND (process.command_line.keyword:(*\-i* OR *\/i* OR *–i* OR *—i* OR *―i*)
+        OR process.command_line.keyword:(*\-package* OR *\/package* OR *–package*
+        OR *—package* OR *―package*) OR process.command_line.keyword:(*\-a* OR *\/a*
+        OR *–a* OR *—a* OR *―a*) OR process.command_line.keyword:(*\-j* OR *\/j* OR
+        *–j* OR *—j* OR *―j*)) AND process.command_line.keyword:(*\-q* OR *\/q* OR
+        *–q* OR *—q* OR *―q*)) AND (NOT ((process.parent.executable.keyword:c\:\\users\\*
+        AND process.parent.executable.keyword:*\\appdata\\local\\temp\\*) OR process.parent.executable.keyword:c\:\\windows\\temp\\*
+        OR (process.parent.executable.keyword:c\:\\windows\\ccm\\ccm32bitlauncher.exe
+        AND (winlog.event_data.IntegrityLevel.keyword:(system OR s\-1\-16\-16384)))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218.007
+risk: medium

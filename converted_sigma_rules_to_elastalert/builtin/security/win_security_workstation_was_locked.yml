@@ -1,10 +1,14 @@
 description: |
   Detects locked workstation session events that occur automatically after a standard period of inactivity.
 name: Locked Workstation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.channel.keyword:security AND event.code.keyword:4800
 type: any
 priority: 0
+mitre_attack_tactic:
+- impact
+mitre_attack_technique: []
+risk: informational

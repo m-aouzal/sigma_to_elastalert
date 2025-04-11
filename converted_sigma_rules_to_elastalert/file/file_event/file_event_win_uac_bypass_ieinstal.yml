@@ -1,10 +1,18 @@
 description: |
   Detects the pattern of UAC Bypass using IEInstal.exe (UACMe 64)
 name: UAC Bypass Using IEInstal - File
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:c\:\\program\ files\\internet\ explorer\\ieinstal.exe AND file.path.keyword:c\:\\users\\* AND file.path.keyword:*\\appdata\\local\\temp\\* AND file.path.keyword:*consent.exe
+      query: process.executable.keyword:c\:\\program\ files\\internet\ explorer\\ieinstal.exe
+        AND file.path.keyword:c\:\\users\\* AND file.path.keyword:*\\appdata\\local\\temp\\*
+        AND file.path.keyword:*consent.exe
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1548.002
+risk: high

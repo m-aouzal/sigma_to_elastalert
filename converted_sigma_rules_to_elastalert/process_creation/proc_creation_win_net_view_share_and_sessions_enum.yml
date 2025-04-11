@@ -1,10 +1,16 @@
 description: |
   Detects attempts to enumerate file shares, printer shares and sessions using "net.exe" with the "view" flag.
 name: Share And Session Enumeration Using Net.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (((winlog.event_data.image.keyword:(*\\net.exe OR *\\net1.exe)) OR (winlog.event_data.originalfilename.keyword:(net.exe OR net1.exe))) AND process.command_line.keyword:*view*) AND (NOT process.command_line.keyword:*\\\\*)
+      query: (((winlog.event_data.image.keyword:(*\\net.exe OR *\\net1.exe)) OR (winlog.event_data.originalfilename.keyword:(net.exe
+        OR net1.exe))) AND process.command_line.keyword:*view*) AND (NOT process.command_line.keyword:*\\\\*)
 type: any
 priority: 1
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1018
+risk: low

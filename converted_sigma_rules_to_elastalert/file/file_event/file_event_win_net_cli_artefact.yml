@@ -1,10 +1,21 @@
 description: |
   Detects the creation of Usage Log files by the CLR (clr.dll). These files are named after the executing process once the assembly is finished executing for the first time in the (user) session context.
 name: Suspicious DotNET CLR Usage Log Artifact
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:(*\\usagelogs\\cmstp.exe.log OR *\\usagelogs\\cscript.exe.log OR *\\usagelogs\\mshta.exe.log OR *\\usagelogs\\msxsl.exe.log OR *\\usagelogs\\regsvr32.exe.log OR *\\usagelogs\\rundll32.exe.log OR *\\usagelogs\\svchost.exe.log OR *\\usagelogs\\wscript.exe.log OR *\\usagelogs\\wmic.exe.log)) AND (NOT (process.parent.executable.keyword:*\\msiexec.exe AND process.parent.command_line.keyword:*\ \-embedding* AND process.executable.keyword:*\\rundll32.exe AND (winlog.event_data.CommandLine.keyword:*temp* AND winlog.event_data.CommandLine.keyword:*zzzzinvokemanagedcustomactionoutofproc*)))
+      query: (file.path.keyword:(*\\usagelogs\\cmstp.exe.log OR *\\usagelogs\\cscript.exe.log
+        OR *\\usagelogs\\mshta.exe.log OR *\\usagelogs\\msxsl.exe.log OR *\\usagelogs\\regsvr32.exe.log
+        OR *\\usagelogs\\rundll32.exe.log OR *\\usagelogs\\svchost.exe.log OR *\\usagelogs\\wscript.exe.log
+        OR *\\usagelogs\\wmic.exe.log)) AND (NOT (process.parent.executable.keyword:*\\msiexec.exe
+        AND process.parent.command_line.keyword:*\ \-embedding* AND process.executable.keyword:*\\rundll32.exe
+        AND (winlog.event_data.CommandLine.keyword:*temp* AND 
+        winlog.event_data.CommandLine.keyword:*zzzzinvokemanagedcustomactionoutofproc*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218
+risk: high

@@ -1,10 +1,19 @@
 description: |
   Detects msdt.exe executed by a suspicious parent as seen in CVE-2022-30190 / Follina exploitation
 name: Suspicious MSDT Parent Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:(*\\cmd.exe OR *\\cscript.exe OR *\\mshta.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\regsvr32.exe OR *\\rundll32.exe OR *\\schtasks.exe OR *\\wmic.exe OR *\\wscript.exe OR *\\wsl.exe)) AND (winlog.event_data.image.keyword:*\\msdt.exe OR winlog.event_data.originalfilename.keyword:msdt.exe)
+      query: (process.parent.executable.keyword:(*\\cmd.exe OR *\\cscript.exe OR *\\mshta.exe
+        OR *\\powershell.exe OR *\\pwsh.exe OR *\\regsvr32.exe OR *\\rundll32.exe
+        OR *\\schtasks.exe OR *\\wmic.exe OR *\\wscript.exe OR *\\wsl.exe)) AND (winlog.event_data.image.keyword:*\\msdt.exe
+        OR winlog.event_data.originalfilename.keyword:msdt.exe)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036
+- t1218
+risk: high

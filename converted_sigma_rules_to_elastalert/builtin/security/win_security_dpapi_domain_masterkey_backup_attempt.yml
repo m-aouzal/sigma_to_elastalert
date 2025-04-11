@@ -1,10 +1,15 @@
 description: |
   Detects anyone attempting a backup for the DPAPI Master Key. This events gets generated at the source and not the Domain Controller.
 name: DPAPI Domain Master Key Backup Attempt
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.channel.keyword:security AND event.code.keyword:4692
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.004
+risk: medium

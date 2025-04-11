@@ -1,10 +1,15 @@
 description: |
   Detects the use of Advanced IP Scanner. Seems to be a popular tool for ransomware groups.
 name: Advanced IP Scanner - File Event
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: file.path.keyword:*\\appdata\\local\\temp\\advanced\ ip\ scanner\ 2*
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1046
+risk: medium

@@ -1,11 +1,18 @@
 description: |
   Detects the usage of the "Squirrel.exe" to download arbitrary files. This binary is part of multiple Electron based software installations (Slack, Teams, Discord, etc.)
-  
+
 name: Arbitrary File Download Via Squirrel.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\squirrel.exe OR *\\update.exe)) AND (process.command_line.keyword:(*\ \-\-download\ * OR *\ \-\-update\ * OR *\ \-\-updaterollback\=*)) AND process.command_line.keyword:*http*
+      query: (process.executable.keyword:(*\\squirrel.exe OR *\\update.exe)) AND (process.command_line.keyword:(*\
+        \-\-download\ * OR *\ \-\-update\ * OR *\ \-\-updaterollback\=*)) AND process.command_line.keyword:*http*
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1218
+risk: medium

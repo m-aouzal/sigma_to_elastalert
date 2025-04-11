@@ -1,10 +1,16 @@
 description: |
   Detects a ping command that uses a hex encoded IP address
 name: Ping Hex IP
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:*\\ping.exe AND process.command_line.keyword:*0x*
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1140
+- t1027
+risk: high

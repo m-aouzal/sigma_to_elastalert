@@ -1,11 +1,20 @@
 description: |
   Detects uncommon and potentially suspicious one-liner command containing both "ping" and "copy" at the same time, which is usually used by malware.
-  
+
 name: Potentially Suspicious Ping/Copy Command Combination
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe) AND (process.command_line.keyword:*ping* AND process.command_line.keyword:*copy\ *) AND process.command_line.keyword:(*\ \-n\ * OR *\ \/n\ * OR *\ –n\ * OR *\ —n\ * OR *\ ―n\ *) AND process.command_line.keyword:(*\ \-y\ * OR *\ \/y\ * OR *\ –y\ * OR *\ —y\ * OR *\ ―y\ *)
+      query: (winlog.event_data.image.keyword:*\\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe)
+        AND (process.command_line.keyword:*ping* AND process.command_line.keyword:*copy\
+        *) AND process.command_line.keyword:(*\ \-n\ * OR *\ \/n\ * OR *\ –n\ * OR
+        *\ —n\ * OR *\ ―n\ *) AND process.command_line.keyword:(*\ \-y\ * OR *\ \/y\
+        * OR *\ –y\ * OR *\ —y\ * OR *\ ―y\ *)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1070.004
+risk: medium

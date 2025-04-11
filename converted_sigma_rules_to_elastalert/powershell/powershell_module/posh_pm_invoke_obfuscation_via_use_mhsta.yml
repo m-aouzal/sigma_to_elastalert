@@ -1,10 +1,19 @@
 description: |
   Detects Obfuscated Powershell via use MSHTA in Scripts
 name: Invoke-Obfuscation Via Use MSHTA - PowerShell Module
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.Payload.keyword:*set* AND winlog.event_data.Payload.keyword:*\&\&* AND winlog.event_data.Payload.keyword:*mshta* AND winlog.event_data.Payload.keyword:*vbscript\:createobject* AND winlog.event_data.Payload.keyword:*.run* AND winlog.event_data.Payload.keyword:*\(window.close\)*
+      query: winlog.event_data.Payload.keyword:*set* AND winlog.event_data.Payload.keyword:*\&\&*
+        AND winlog.event_data.Payload.keyword:*mshta* AND winlog.event_data.Payload.keyword:*vbscript\:createobject*
+        AND winlog.event_data.Payload.keyword:*.run* AND winlog.event_data.Payload.keyword:*\(window.close\)*
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1027
+- t1059.001
+risk: high

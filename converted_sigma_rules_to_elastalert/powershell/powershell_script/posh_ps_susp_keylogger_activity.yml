@@ -1,10 +1,17 @@
 description: |
   Detects PowerShell scripts that contains reference to keystroke capturing functions
 name: Potential Keylogger Activity
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*\[windows.input.keyboard\]\:\:iskeydown\(\[system.windows.input.key\]\:\:*
+      query: 
+        powershell.file.script_block_text.keyword:*\[windows.input.keyboard\]\:\:iskeydown\(\[system.windows.input.key\]\:\:*
 type: any
 priority: 2
+mitre_attack_tactic:
+- collection
+- credential-access
+mitre_attack_technique:
+- t1056.001
+risk: medium

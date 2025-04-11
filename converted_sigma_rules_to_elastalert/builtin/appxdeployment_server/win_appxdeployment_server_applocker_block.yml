@@ -1,10 +1,15 @@
 description: |
   Detects an appx package deployment that was blocked by AppLocker policy
 name: Deployment AppX Package Was Blocked By AppLocker
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-appxdeploymentserver\/operational AND event.code.keyword:412
+      query: winlog.channel.keyword:microsoft\-windows\-appxdeploymentserver\/operational
+        AND event.code.keyword:412
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

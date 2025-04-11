@@ -1,10 +1,20 @@
 description: |
   Detects attempts to disable the Windows Firewall using PowerShell
 name: Windows Firewall Disabled via PowerShell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe OR *\\powershell_ise.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (process.command_line.keyword:*set\-netfirewallprofile\ * AND process.command_line.keyword:*\ \-enabled\ * AND process.command_line.keyword:*\ false*) AND (process.command_line.keyword:(*\ \-all\ * OR *public* OR *domain* OR *private*))
+      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe OR
+        *\\powershell_ise.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe
+        OR pwsh.dll))) AND (process.command_line.keyword:*set\-netfirewallprofile\
+        * AND process.command_line.keyword:*\ \-enabled\ * AND process.command_line.keyword:*\
+        false*) AND (process.command_line.keyword:(*\ \-all\ * OR *public* OR *domain*
+        OR *private*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562
+risk: medium

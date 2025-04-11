@@ -1,10 +1,20 @@
 description: |
   Detects the use of smbexec.py tool by detecting a specific service installation
 name: smbexec.py Service Installation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND ((winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045) AND (winlog.event_data.ServiceName.keyword:btobto OR (winlog.event_data.ImagePath.keyword:(*.bat\ \&\ del\ * OR *__output\ 2\^\>\^\&1\ \>*))))
+      query: winlog.channel.keyword:system AND ((winlog.provider_name.keyword:service\
+        control\ manager AND event.code.keyword:7045) AND (winlog.event_data.ServiceName.keyword:btobto
+        OR (winlog.event_data.ImagePath.keyword:(*.bat\ \&\ del\ * OR *__output\ 2\^\>\^\&1\
+        \>*))))
 type: any
 priority: 3
+mitre_attack_tactic:
+- lateral-movement
+- execution
+mitre_attack_technique:
+- t1021.002
+- t1569.002
+risk: high

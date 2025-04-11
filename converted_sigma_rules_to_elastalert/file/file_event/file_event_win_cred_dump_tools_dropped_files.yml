@@ -1,10 +1,24 @@
 description: |
   Files with well-known filenames (parts of credential dump software or files produced by them) creation
 name: Cred Dump Tools Dropped Files
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.targetfilename.keyword:(*\\fgdump\-log* OR *\\kirbi* OR *\\pwdump* OR *\\pwhashes* OR *\\wce_ccache* OR *\\wce_krbtkts*)) OR (winlog.event_data.targetfilename.keyword:(*\\cachedump.exe OR *\\cachedump64.exe OR *\\dumpext.dll OR *\\dumpsvc.exe OR *\\dumpy.exe OR *\\fgexec.exe OR *\\lsremora.dll OR *\\lsremora64.dll OR *\\ntds.out OR *\\procdump64.exe OR *\\pstgdump.exe OR *\\pwdump.exe OR *\\sam.out OR *\\security.out OR *\\servpw.exe OR *\\servpw64.exe OR *\\system.out OR *\\test.pwd OR *\\wceaux.dll))
+      query: (winlog.event_data.targetfilename.keyword:(*\\fgdump\-log* OR *\\kirbi*
+        OR *\\pwdump* OR *\\pwhashes* OR *\\wce_ccache* OR *\\wce_krbtkts*)) OR (winlog.event_data.targetfilename.keyword:(*\\cachedump.exe
+        OR *\\cachedump64.exe OR *\\dumpext.dll OR *\\dumpsvc.exe OR *\\dumpy.exe
+        OR *\\fgexec.exe OR *\\lsremora.dll OR *\\lsremora64.dll OR *\\ntds.out OR
+        *\\procdump64.exe OR *\\pstgdump.exe OR *\\pwdump.exe OR *\\sam.out OR *\\security.out
+        OR *\\servpw.exe OR *\\servpw64.exe OR *\\system.out OR *\\test.pwd OR *\\wceaux.dll))
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.001
+- t1003.002
+- t1003.003
+- t1003.004
+- t1003.005
+risk: high

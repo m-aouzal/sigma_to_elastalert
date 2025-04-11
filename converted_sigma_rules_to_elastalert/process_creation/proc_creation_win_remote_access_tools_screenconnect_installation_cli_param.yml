@@ -1,10 +1,17 @@
 description: |
   Detects ScreenConnect program starts that establish a remote access to a system.
 name: Remote Access Tool - ScreenConnect Installation Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*e\=access\&* AND process.command_line.keyword:*y\=guest\&* AND process.command_line.keyword:*\&p\=* AND process.command_line.keyword:*\&c\=* AND process.command_line.keyword:*\&k\=*
+      query: process.command_line.keyword:*e\=access\&* AND process.command_line.keyword:*y\=guest\&*
+        AND process.command_line.keyword:*\&p\=* AND process.command_line.keyword:*\&c\=*
+        AND process.command_line.keyword:*\&k\=*
 type: any
 priority: 2
+mitre_attack_tactic:
+- initial-access
+mitre_attack_technique:
+- t1133
+risk: medium

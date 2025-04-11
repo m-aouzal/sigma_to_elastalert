@@ -1,10 +1,15 @@
 description: |
   Detects when when a mounted share is removed. Adversaries may remove share connections that are no longer useful in order to clean up traces of their operation
 name: PowerShell Deleted Mounted Share
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: powershell.file.script_block_text.keyword:(*remove\-smbshare* OR *remove\-fileshare*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1070.005
+risk: medium

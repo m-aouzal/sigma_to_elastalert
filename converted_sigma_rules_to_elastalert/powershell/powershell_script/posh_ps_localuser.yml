@@ -1,12 +1,19 @@
 description: |
   Adversaries may manipulate accounts to maintain access to victim systems.
   Account manipulation may consist of any action that preserves adversary access to a compromised account, such as modifying credentials or permission groups
-  
+
 name: Powershell LocalAccount Manipulation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:(*disable\-localuser* OR *enable\-localuser* OR *get\-localuser* OR *set\-localuser* OR *new\-localuser* OR *rename\-localuser* OR *remove\-localuser*)
+      query: powershell.file.script_block_text.keyword:(*disable\-localuser* OR *enable\-localuser*
+        OR *get\-localuser* OR *set\-localuser* OR *new\-localuser* OR *rename\-localuser*
+        OR *remove\-localuser*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1098
+risk: medium

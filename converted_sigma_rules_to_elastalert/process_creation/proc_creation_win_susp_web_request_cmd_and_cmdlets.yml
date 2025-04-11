@@ -1,10 +1,17 @@
 description: |
   Detects the use of various web request commands with commandline tools and Windows PowerShell cmdlets (including aliases) via CommandLine
 name: Usage Of Web Request Commands And Cmdlets
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*\[system.net.webrequest\]\:\:create* OR *curl\ * OR *invoke\-restmethod* OR *invoke\-webrequest* OR *iwr\ * OR *net.webclient* OR *resume\-bitstransfer* OR *start\-bitstransfer* OR *wget\ * OR *winhttp.winhttprequest*)
+      query: process.command_line.keyword:(*\[system.net.webrequest\]\:\:create* OR
+        *curl\ * OR *invoke\-restmethod* OR *invoke\-webrequest* OR *iwr\ * OR *net.webclient*
+        OR *resume\-bitstransfer* OR *start\-bitstransfer* OR *wget\ * OR *winhttp.winhttprequest*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: medium

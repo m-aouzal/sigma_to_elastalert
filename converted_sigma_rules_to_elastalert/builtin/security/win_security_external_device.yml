@@ -1,10 +1,18 @@
 description: |
   Detects external disk drives or plugged-in USB devices.
 name: External Disk Drive Or USB Storage Device Was Recognized By The System
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:6416 AND (winlog.event_data.classname.keyword:diskdrive OR winlog.event_data.devicedescription.keyword:usb\ mass\ storage\ device))
+      query: winlog.channel.keyword:security AND (event.code.keyword:6416 AND (winlog.event_data.classname.keyword:diskdrive
+        OR winlog.event_data.devicedescription.keyword:usb\ mass\ storage\ device))
 type: any
 priority: 1
+mitre_attack_tactic:
+- lateral-movement
+- initial-access
+mitre_attack_technique:
+- t1091
+- t1200
+risk: low

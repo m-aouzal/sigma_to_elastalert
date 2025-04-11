@@ -1,10 +1,18 @@
 description: |
   Detects Cobalt Strike module/commands accidentally entered in CMD shell
 name: Operator Bloopers Cobalt Strike Modules
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:cmd.exe OR winlog.event_data.image.keyword:*\\cmd.exe) AND (process.command_line.keyword:(*invoke\-userhunter* OR *invoke\-sharefinder* OR *invoke\-kerberoast* OR *invoke\-smbautobrute* OR *invoke\-nightmare* OR *zerologon* OR *av_query*))
+      query: (winlog.event_data.originalfilename.keyword:cmd.exe OR winlog.event_data.image.keyword:*\\cmd.exe)
+        AND (process.command_line.keyword:(*invoke\-userhunter* OR *invoke\-sharefinder*
+        OR *invoke\-kerberoast* OR *invoke\-smbautobrute* OR *invoke\-nightmare* OR
+        *zerologon* OR *av_query*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.003
+risk: high

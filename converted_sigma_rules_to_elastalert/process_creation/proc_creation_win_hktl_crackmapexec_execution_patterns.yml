@@ -1,10 +1,22 @@
 description: |
   Detects various execution patterns of the CrackMapExec pentesting framework
 name: HackTool - CrackMapExec Execution Patterns
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*cmd.exe\ \/q\ \/c\ *\ 1\>\ \\\\*\\*\\*\ 2\>\&1* OR *cmd.exe\ \/c\ *\ \>\ \\\\*\\*\\*\ 2\>\&1* OR *cmd.exe\ \/c\ *\ \>\ *\\temp\\*\ 2\>\&1* OR *powershell.exe\ \-exec\ bypass\ \-noni\ \-nop\ \-w\ 1\ \-c\ \"* OR *powershell.exe\ \-noni\ \-nop\ \-w\ 1\ \-enc\ *)
+      query: process.command_line.keyword:(*cmd.exe\ \/q\ \/c\ *\ 1\>\ \\\\*\\*\\*\
+        2\>\&1* OR *cmd.exe\ \/c\ *\ \>\ \\\\*\\*\\*\ 2\>\&1* OR *cmd.exe\ \/c\ *\
+        \>\ *\\temp\\*\ 2\>\&1* OR *powershell.exe\ \-exec\ bypass\ \-noni\ \-nop\
+        \-w\ 1\ \-c\ \"* OR *powershell.exe\ \-noni\ \-nop\ \-w\ 1\ \-enc\ *)
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1047
+- t1053
+- t1059.003
+- t1059.001
+- s0106
+risk: high

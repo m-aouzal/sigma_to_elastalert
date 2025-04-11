@@ -1,10 +1,16 @@
 description: |
   Detects the installation of VsCode tunnel (code-tunnel) as a service.
 name: Visual Studio Code Tunnel Service Installation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*tunnel\ * AND process.command_line.keyword:*service* AND process.command_line.keyword:*internal\-run* AND process.command_line.keyword:*tunnel\-service.log*
+      query: process.command_line.keyword:*tunnel\ * AND process.command_line.keyword:*service*
+        AND process.command_line.keyword:*internal\-run* AND process.command_line.keyword:*tunnel\-service.log*
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1071.001
+risk: medium

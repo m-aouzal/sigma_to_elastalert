@@ -1,10 +1,17 @@
 description: |
   Detects potential process injection via Microsoft Remote Asssistance (Msra.exe) by looking at suspicious child processes spawned from the aforementioned process. It has been a target used by many threat actors and used for discovery and persistence tactics
 name: Potential Process Injection Via Msra.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\\msra.exe AND process.parent.command_line.keyword:*msra.exe AND (process.executable.keyword:(*\\arp.exe OR *\\cmd.exe OR *\\net.exe OR *\\netstat.exe OR *\\nslookup.exe OR *\\route.exe OR *\\schtasks.exe OR *\\whoami.exe))
+      query: process.parent.executable.keyword:*\\msra.exe AND process.parent.command_line.keyword:*msra.exe
+        AND (process.executable.keyword:(*\\arp.exe OR *\\cmd.exe OR *\\net.exe OR
+        *\\netstat.exe OR *\\nslookup.exe OR *\\route.exe OR *\\schtasks.exe OR *\\whoami.exe))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1055
+risk: high

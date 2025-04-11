@@ -1,10 +1,19 @@
 description: |
   Detects a Powershell process that contains download commands in its command line string
 name: PowerShell Download Pattern
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND ((process.command_line.keyword:*new\-object* AND process.command_line.keyword:*net.webclient\).* AND process.command_line.keyword:*download*) AND (process.command_line.keyword:(*string\(* OR *file\(*)))
+      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe))
+        OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll)))
+        AND ((process.command_line.keyword:*new\-object* AND process.command_line.keyword:*net.webclient\).*
+        AND process.command_line.keyword:*download*) AND (process.command_line.keyword:(*string\(*
+        OR *file\(*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: medium

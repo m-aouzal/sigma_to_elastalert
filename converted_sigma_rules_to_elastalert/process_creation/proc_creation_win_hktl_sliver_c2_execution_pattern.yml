@@ -1,10 +1,15 @@
 description: |
   Detects process activity patterns as seen being used by Sliver C2 framework implants
 name: HackTool - Sliver C2 Implant Activity Pattern
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.command_line.keyword:*\-noexit\ \-command\ \[console\]\:\:outputencoding\=\[text.utf8encoding\]\:\:utf8*
 type: any
 priority: 4
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059
+risk: critical

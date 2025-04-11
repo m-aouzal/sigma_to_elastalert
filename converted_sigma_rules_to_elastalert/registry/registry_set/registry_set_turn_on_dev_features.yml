@@ -1,10 +1,17 @@
 description: |
   Detects when the enablement of developer features such as "Developer Mode" or "Application Sideloading". Which allows the user to install untrusted packages.
 name: Potential Signing Bypass Via Windows Developer Features - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*\\microsoft\\windows\\currentversion\\appmodelunlock* OR *\\policies\\microsoft\\windows\\appx\\*)) AND (registry.path.keyword:(*\\allowalltrustedapps OR *\\allowdevelopmentwithoutdevlicense)) AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)
+      query: (registry.path.keyword:(*\\microsoft\\windows\\currentversion\\appmodelunlock*
+        OR *\\policies\\microsoft\\windows\\appx\\*)) AND (registry.path.keyword:(*\\allowalltrustedapps
+        OR *\\allowdevelopmentwithoutdevlicense)) AND winlog.event_data.Details.keyword:dword\
+        \(0x00000001\)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: high

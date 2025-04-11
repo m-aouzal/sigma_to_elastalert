@@ -1,10 +1,16 @@
 description: |
   Detects using register-cimprovider.exe to execute arbitrary dll file.
 name: DLL Execution Via Register-cimprovider.exe
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\register\-cimprovider.exe AND (process.command_line.keyword:*\-path* AND process.command_line.keyword:*dll*)
+      query: process.executable.keyword:*\\register\-cimprovider.exe AND (process.command_line.keyword:*\-path*
+        AND process.command_line.keyword:*dll*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1574
+risk: medium

@@ -1,10 +1,25 @@
 description: |
   Detects the execution of different compiled Windows binaries of the impacket toolset (based on names or part of their names - could lead to false positives)
 name: HackTool - Impacket Tools Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:(*\\goldenpac* OR *\\karmasmb* OR *\\kintercept* OR *\\ntlmrelayx* OR *\\rpcdump* OR *\\samrdump* OR *\\secretsdump* OR *\\smbexec* OR *\\smbrelayx* OR *\\wmiexec* OR *\\wmipersist*)) OR (winlog.event_data.image.keyword:(*\\atexec_windows.exe OR *\\dcomexec_windows.exe OR *\\dpapi_windows.exe OR *\\finddelegation_windows.exe OR *\\getadusers_windows.exe OR *\\getnpusers_windows.exe OR *\\getpac_windows.exe OR *\\getst_windows.exe OR *\\gettgt_windows.exe OR *\\getuserspns_windows.exe OR *\\ifmap_windows.exe OR *\\mimikatz_windows.exe OR *\\netview_windows.exe OR *\\nmapanswermachine_windows.exe OR *\\opdump_windows.exe OR *\\psexec_windows.exe OR *\\rdp_check_windows.exe OR *\\sambapipe_windows.exe OR *\\smbclient_windows.exe OR *\\smbserver_windows.exe OR *\\sniff_windows.exe OR *\\sniffer_windows.exe OR *\\split_windows.exe OR *\\ticketer_windows.exe))
+      query: (winlog.event_data.image.keyword:(*\\goldenpac* OR *\\karmasmb* OR *\\kintercept*
+        OR *\\ntlmrelayx* OR *\\rpcdump* OR *\\samrdump* OR *\\secretsdump* OR *\\smbexec*
+        OR *\\smbrelayx* OR *\\wmiexec* OR *\\wmipersist*)) OR (winlog.event_data.image.keyword:(*\\atexec_windows.exe
+        OR *\\dcomexec_windows.exe OR *\\dpapi_windows.exe OR *\\finddelegation_windows.exe
+        OR *\\getadusers_windows.exe OR *\\getnpusers_windows.exe OR *\\getpac_windows.exe
+        OR *\\getst_windows.exe OR *\\gettgt_windows.exe OR *\\getuserspns_windows.exe
+        OR *\\ifmap_windows.exe OR *\\mimikatz_windows.exe OR *\\netview_windows.exe
+        OR *\\nmapanswermachine_windows.exe OR *\\opdump_windows.exe OR *\\psexec_windows.exe
+        OR *\\rdp_check_windows.exe OR *\\sambapipe_windows.exe OR *\\smbclient_windows.exe
+        OR *\\smbserver_windows.exe OR *\\sniff_windows.exe OR *\\sniffer_windows.exe
+        OR *\\split_windows.exe OR *\\ticketer_windows.exe))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1557.001
+risk: high

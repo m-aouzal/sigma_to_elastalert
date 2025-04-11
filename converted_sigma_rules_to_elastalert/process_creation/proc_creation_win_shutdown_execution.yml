@@ -1,10 +1,16 @@
 description: |
   Use of the commandline to shutdown or reboot windows
 name: Suspicious Execution of Shutdown
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\shutdown.exe AND (process.command_line.keyword:(*\/r\ * OR *\/s\ *))
+      query: process.executable.keyword:*\\shutdown.exe AND (process.command_line.keyword:(*\/r\
+        * OR *\/s\ *))
 type: any
 priority: 2
+mitre_attack_tactic:
+- impact
+mitre_attack_technique:
+- t1529
+risk: medium

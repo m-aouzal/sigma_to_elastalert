@@ -1,10 +1,20 @@
 description: |
   Detects execution of "git" in order to clone a remote repository that contain suspicious keywords which might be suspicious
 name: Suspicious Git Clone
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\git.exe OR *\\git\-remote\-https.exe)) OR winlog.event_data.originalfilename.keyword:git.exe) AND (process.command_line.keyword:(*\ clone\ * OR *git\-remote\-https\ *)) AND (process.command_line.keyword:(*exploit* OR *vulns* OR *vulnerability* OR *remotecodeexecution* OR *invoke\-* OR *cve\-* OR *poc\-* OR *proofofconcept* OR *proxyshell* OR *log4shell* OR *eternalblue* OR *eternal\-blue* OR *ms17\-*))
+      query: ((winlog.event_data.image.keyword:(*\\git.exe OR *\\git\-remote\-https.exe))
+        OR winlog.event_data.originalfilename.keyword:git.exe) AND (process.command_line.keyword:(*\
+        clone\ * OR *git\-remote\-https\ *)) AND (process.command_line.keyword:(*exploit*
+        OR *vulns* OR *vulnerability* OR *remotecodeexecution* OR *invoke\-* OR *cve\-*
+        OR *poc\-* OR *proofofconcept* OR *proxyshell* OR *log4shell* OR *eternalblue*
+        OR *eternal\-blue* OR *ms17\-*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- reconnaissance
+mitre_attack_technique:
+- t1593.003
+risk: medium

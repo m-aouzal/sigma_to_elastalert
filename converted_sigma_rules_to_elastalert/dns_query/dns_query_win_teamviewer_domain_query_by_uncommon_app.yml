@@ -1,10 +1,16 @@
 description: |
   Detects DNS queries to a TeamViewer domain only resolved by a TeamViewer client by an image that isn't named TeamViewer (sometimes used by threat actors for obfuscation)
 name: TeamViewer Domain Query By Non-TeamViewer Application
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (dns.question.name.keyword:(taf.teamviewer.com OR udp.ping.teamviewer.com)) AND (NOT process.executable.keyword:*teamviewer*)
+      query: (dns.question.name.keyword:(taf.teamviewer.com OR udp.ping.teamviewer.com))
+        AND (NOT process.executable.keyword:*teamviewer*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1219
+risk: medium

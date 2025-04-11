@@ -1,10 +1,17 @@
 description: |
   Detects the modification of the registry to disable a system restore on the computer
 name: Registry Disable System Restore
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*\\policies\\microsoft\\windows\ nt\\systemrestore* OR *\\microsoft\\windows\ nt\\currentversion\\systemrestore*)) AND (registry.path.keyword:(*disableconfig OR *disablesr)) AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)
+      query: (registry.path.keyword:(*\\policies\\microsoft\\windows\ nt\\systemrestore*
+        OR *\\microsoft\\windows\ nt\\currentversion\\systemrestore*)) AND (registry.path.keyword:(*disableconfig
+        OR *disablesr)) AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)
 type: any
 priority: 3
+mitre_attack_tactic:
+- impact
+mitre_attack_technique:
+- t1490
+risk: high

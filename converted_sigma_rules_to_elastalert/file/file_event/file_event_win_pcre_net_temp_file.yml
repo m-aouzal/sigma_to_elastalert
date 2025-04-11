@@ -1,10 +1,15 @@
 description: |
   Detects processes creating temp files related to PCRE.NET package
 name: PCRE.NET Package Temp Files
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: file.path.keyword:*\\appdata\\local\\temp\\ba9ea7344a4a5f591d6e5dc32a13494b\\*
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059
+risk: high

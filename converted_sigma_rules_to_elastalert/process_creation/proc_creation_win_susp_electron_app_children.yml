@@ -1,11 +1,22 @@
 description: |
   Detects suspicious child processes of electron apps (teams, discord, slack, etc.). This could be a potential sign of ".asar" file tampering (See reference section for more information) or binary execution proxy through specific CLI arguments (see related rule)
-  
+
 name: Suspicious Electron Application Child Processes
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:(*\\chrome.exe OR *\\discord.exe OR *\\githubdesktop.exe OR *\\keybase.exe OR *\\msedge.exe OR *\\msedgewebview2.exe OR *\\msteams.exe OR *\\slack.exe OR *\\teams.exe)) AND ((process.executable.keyword:(*\\cmd.exe OR *\\cscript.exe OR *\\mshta.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\regsvr32.exe OR *\\whoami.exe OR *\\wscript.exe)) OR (process.executable.keyword:(*\:\\programdata\\* OR *\:\\temp\\* OR *\\appdata\\local\\temp\\* OR *\\users\\public\\* OR *\\windows\\temp\\*))) AND (NOT (process.parent.executable.keyword:*\\discord.exe AND process.executable.keyword:*\\cmd.exe AND process.command_line.keyword:*\\nvsmi\\nvidia\-smi.exe*))
+      query: (process.parent.executable.keyword:(*\\chrome.exe OR *\\discord.exe OR
+        *\\githubdesktop.exe OR *\\keybase.exe OR *\\msedge.exe OR *\\msedgewebview2.exe
+        OR *\\msteams.exe OR *\\slack.exe OR *\\teams.exe)) AND ((process.executable.keyword:(*\\cmd.exe
+        OR *\\cscript.exe OR *\\mshta.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\regsvr32.exe
+        OR *\\whoami.exe OR *\\wscript.exe)) OR (process.executable.keyword:(*\:\\programdata\\*
+        OR *\:\\temp\\* OR *\\appdata\\local\\temp\\* OR *\\users\\public\\* OR *\\windows\\temp\\*)))
+        AND (NOT (process.parent.executable.keyword:*\\discord.exe AND process.executable.keyword:*\\cmd.exe
+        AND process.command_line.keyword:*\\nvsmi\\nvidia\-smi.exe*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: medium

@@ -1,10 +1,17 @@
 description: |
   Detects creation of a scheduled task with a GUID like name
 name: Suspicious Scheduled Task Name As GUID
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\schtasks.exe AND process.command_line.keyword:*\/create\ *) AND (process.command_line.keyword:(*\/tn\ \"\{* OR *\/tn\ '\{* OR *\/tn\ \{*)) AND (process.command_line.keyword:(*\}\"* OR *\}'* OR *\}\ *))
+      query: (process.executable.keyword:*\\schtasks.exe AND process.command_line.keyword:*\/create\
+        *) AND (process.command_line.keyword:(*\/tn\ \"\{* OR *\/tn\ '\{* OR *\/tn\
+        \{*)) AND (process.command_line.keyword:(*\}\"* OR *\}'* OR *\}\ *))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1053.005
+risk: medium

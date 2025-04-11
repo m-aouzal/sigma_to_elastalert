@@ -1,12 +1,18 @@
 description: |
   Detects potential persistence activity via outlook home page.
   An attacker can set a home page to achieve code execution and persistence by editing the WebView registry keys.
-  
+
 name: Potential Persistence Via Outlook Home Page
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\\software\\microsoft\\office\\* AND registry.path.keyword:*\\outlook\\webview\\*) AND registry.path.keyword:*\\url
+      query: (registry.path.keyword:*\\software\\microsoft\\office\\* AND registry.path.keyword:*\\outlook\\webview\\*)
+        AND registry.path.keyword:*\\url
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1112
+risk: high

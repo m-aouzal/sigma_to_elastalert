@@ -1,10 +1,15 @@
 description: |
   Detects activity when a member is added to a security-enabled global group
 name: A Member Was Added to a Security-Enabled Global Group
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.channel.keyword:security AND (event.code.keyword:(4728 OR 632))
 type: any
 priority: 1
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1098
+risk: low

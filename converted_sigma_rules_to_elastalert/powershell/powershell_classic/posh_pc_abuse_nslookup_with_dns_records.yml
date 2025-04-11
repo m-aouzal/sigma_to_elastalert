@@ -1,10 +1,17 @@
 description: |
   Detects a powershell download cradle using nslookup. This cradle uses nslookup to extract payloads from DNS records.
 name: Nslookup PowerShell Download Cradle
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.Data.keyword:*powershell* AND winlog.event_data.Data.keyword:*nslookup* AND winlog.event_data.Data.keyword:*\[1\]*) AND (winlog.event_data.Data.keyword:(*\-q\=txt\ http* OR *\-querytype\=txt\ http* OR *\-type\=txt\ http*))
+      query: (winlog.event_data.Data.keyword:*powershell* AND winlog.event_data.Data.keyword:*nslookup*
+        AND winlog.event_data.Data.keyword:*\[1\]*) AND (winlog.event_data.Data.keyword:(*\-q\=txt\
+        http* OR *\-querytype\=txt\ http* OR *\-type\=txt\ http*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: medium

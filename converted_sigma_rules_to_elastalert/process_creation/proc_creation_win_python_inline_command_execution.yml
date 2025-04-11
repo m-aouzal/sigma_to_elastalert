@@ -1,10 +1,21 @@
 description: |
   Detects execution of python using the "-c" flag. This is could be used as a way to launch a reverse shell or execute live python code.
 name: Python Inline Command Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.originalfilename.keyword:python.exe OR (winlog.event_data.image.keyword:(*python.exe OR *python3.exe OR *python2.exe))) AND process.command_line.keyword:*\ \-c*) AND (NOT (process.parent.executable.keyword:c\:\\program\ files\\python* AND process.parent.executable.keyword:*\\python.exe AND process.parent.command_line.keyword:*\-e\ \-s\ \-m\ ensurepip\ \-u\ \-\-default\-pip*)) AND (NOT (process.parent.executable.keyword:*\\appdata\\local\\programs\\microsoft\ vs\ code\\code.exe OR (process.command_line.keyword:*\<pip\-setuptools\-caller\>* AND process.command_line.keyword:*exec\(compile\(*)))
+      query: ((winlog.event_data.originalfilename.keyword:python.exe OR (winlog.event_data.image.keyword:(*python.exe
+        OR *python3.exe OR *python2.exe))) AND process.command_line.keyword:*\ \-c*)
+        AND (NOT (process.parent.executable.keyword:c\:\\program\ files\\python* AND
+        process.parent.executable.keyword:*\\python.exe AND process.parent.command_line.keyword:*\-e\
+        \-s\ \-m\ ensurepip\ \-u\ \-\-default\-pip*)) AND (NOT (process.parent.executable.keyword:*\\appdata\\local\\programs\\microsoft\
+        vs\ code\\code.exe OR (process.command_line.keyword:*\<pip\-setuptools\-caller\>*
+        AND process.command_line.keyword:*exec\(compile\(*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059
+risk: medium

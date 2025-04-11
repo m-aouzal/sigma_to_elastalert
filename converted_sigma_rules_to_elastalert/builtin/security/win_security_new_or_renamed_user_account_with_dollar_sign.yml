@@ -1,11 +1,18 @@
 description: |
   Detects the creation of a user with the "$" character. This can be used by attackers to hide a user or trick detection systems that lack the parsing mechanisms.
-  
+
 name: New or Renamed User Account with '$' Character
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (((event.code.keyword:4720 AND winlog.event_data.SamAccountName.keyword:*$*) OR (event.code.keyword:4781 AND winlog.event_data.NewTargetUserName.keyword:*$*)) AND (NOT (event.code.keyword:4720 AND winlog.event_data.TargetUserName.keyword:homegroupuser$)))
+      query: winlog.channel.keyword:security AND (((event.code.keyword:4720 AND winlog.event_data.SamAccountName.keyword:*$*)
+        OR (event.code.keyword:4781 AND winlog.event_data.NewTargetUserName.keyword:*$*))
+        AND (NOT (event.code.keyword:4720 AND winlog.event_data.TargetUserName.keyword:homegroupuser$)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036
+risk: medium

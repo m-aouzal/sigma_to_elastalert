@@ -1,10 +1,19 @@
 description: |
   Detects suspicious commands that are related to scripting/powershell in WMI Event Consumers
 name: Suspicious Scripting in a WMI Consumer
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.destination.keyword:*new\-object* AND winlog.event_data.destination.keyword:*net.webclient* AND winlog.event_data.destination.keyword:*.downloadstring*) OR (winlog.event_data.destination.keyword:*new\-object* AND winlog.event_data.destination.keyword:*net.webclient* AND winlog.event_data.destination.keyword:*.downloadfile*) OR (winlog.event_data.destination.keyword:(*\ iex\(* OR *\ \-nop\ * OR *\ \-noprofile\ * OR *\ \-decode\ * OR *\ \-enc\ * OR *wscript.shell* OR *system.security.cryptography.frombase64transform*))
+      query: (winlog.event_data.destination.keyword:*new\-object* AND winlog.event_data.destination.keyword:*net.webclient*
+        AND winlog.event_data.destination.keyword:*.downloadstring*) OR (winlog.event_data.destination.keyword:*new\-object*
+        AND winlog.event_data.destination.keyword:*net.webclient* AND winlog.event_data.destination.keyword:*.downloadfile*)
+        OR (winlog.event_data.destination.keyword:(*\ iex\(* OR *\ \-nop\ * OR *\
+        \-noprofile\ * OR *\ \-decode\ * OR *\ \-enc\ * OR *wscript.shell* OR *system.security.cryptography.frombase64transform*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.005
+risk: high

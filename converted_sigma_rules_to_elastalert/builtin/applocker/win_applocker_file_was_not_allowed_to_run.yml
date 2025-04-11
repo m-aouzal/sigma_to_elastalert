@@ -1,10 +1,23 @@
 description: |
   Detect run not allowed files. Applocker is a very useful tool, especially on servers where unprivileged users have access. For example terminal servers. You need configure applocker and log collect to receive these events.
 name: File Was Not Allowed To Run
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.channel.keyword:(microsoft\-windows\-applocker\/msi\ and\ script OR Microsoft\-Windows\-AppLocker\/EXE\ and\ DLL OR Microsoft\-Windows\-AppLocker\/Packaged\ app\-Deployment OR Microsoft\-Windows\-AppLocker\/Packaged\ app\-Execution)) AND (event.code.keyword:(8004 OR 8007 OR 8022 OR 8025))
+      query: (winlog.channel.keyword:(microsoft\-windows\-applocker\/msi\ and\ script
+        OR Microsoft\-Windows\-AppLocker\/EXE\ and\ DLL OR Microsoft\-Windows\-AppLocker\/Packaged\
+        app\-Deployment OR Microsoft\-Windows\-AppLocker\/Packaged\ app\-Execution))
+        AND (event.code.keyword:(8004 OR 8007 OR 8022 OR 8025))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1204.002
+- t1059.001
+- t1059.003
+- t1059.005
+- t1059.006
+- t1059.007
+risk: medium

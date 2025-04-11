@@ -2,12 +2,19 @@ description: |
   Adversaries may search local file systems and remote file shares for files containing insecurely stored credentials.
   These can be files created by users to store their own credentials, shared credential stores for a group of individuals,
   configuration files containing passwords for a system or service, or source code/binary files containing embedded passwords.
-  
+
 name: Extracting Information with PowerShell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*ls* AND powershell.file.script_block_text.keyword:*\ \-r* AND powershell.file.script_block_text.keyword:*select\-string\ * AND powershell.file.script_block_text.keyword:*\-pattern\ *
+      query: powershell.file.script_block_text.keyword:*ls* AND powershell.file.script_block_text.keyword:*\
+        \-r* AND powershell.file.script_block_text.keyword:*select\-string\ * AND
+        powershell.file.script_block_text.keyword:*\-pattern\ *
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1552.001
+risk: medium

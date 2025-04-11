@@ -1,10 +1,16 @@
 description: |
   Detects the creation of an ADS (Alternate Data Stream) that contains an executable by looking at a non-empty Imphash
 name: Hidden Executable In NTFS Alternate Data Stream
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.Hash.keyword:*imphash\=* AND (NOT winlog.event_data.Hash.keyword:*imphash\=00000000000000000000000000000000*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- s0139
+- t1564.004
+risk: medium

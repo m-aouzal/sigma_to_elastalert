@@ -1,10 +1,16 @@
 description: |
   Detects dump of credentials in VeeamBackup dbo
 name: VeeamBackup Database Credentials Dump Via Sqlcmd.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\sqlcmd.exe AND (process.command_line.keyword:*select* AND process.command_line.keyword:*top* AND process.command_line.keyword:*\[veeambackup\].\[dbo\].\[credentials\]*)
+      query: process.executable.keyword:*\\sqlcmd.exe AND (process.command_line.keyword:*select*
+        AND process.command_line.keyword:*top* AND process.command_line.keyword:*\[veeambackup\].\[dbo\].\[credentials\]*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- collection
+mitre_attack_technique:
+- t1005
+risk: high

@@ -1,10 +1,17 @@
 description: |
   Attempts to detect system changes made by Blue Mockingbird
 name: Blue Mockingbird - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\currentcontrolset\\services\\wercplsupport\\parameters\\servicedll
+      query: 
+        registry.path.keyword:*\\currentcontrolset\\services\\wercplsupport\\parameters\\servicedll
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1112
+- t1047
+risk: high

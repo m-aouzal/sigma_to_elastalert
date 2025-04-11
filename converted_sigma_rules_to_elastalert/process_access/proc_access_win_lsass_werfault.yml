@@ -1,10 +1,17 @@
 description: |
   Detects process LSASS memory dump using Mimikatz, NanoDump, Invoke-Mimikatz, Procdump or Taskmgr based on the CallTrace pointing to ntdll.dll, dbghelp.dll or dbgcore.dll for win10, server2016 and up.
 name: Credential Dumping Attempt Via WerFault
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\werfault.exe AND winlog.event_data.TargetImage.keyword:*\\lsass.exe AND winlog.event_data.GrantedAccess.keyword:0x1fffff
+      query: process.executable.keyword:*\\werfault.exe AND winlog.event_data.TargetImage.keyword:*\\lsass.exe
+        AND winlog.event_data.GrantedAccess.keyword:0x1fffff
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.001
+- s0002
+risk: high

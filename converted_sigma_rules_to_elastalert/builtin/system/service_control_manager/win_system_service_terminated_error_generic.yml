@@ -1,10 +1,15 @@
 description: |
   Detects Windows services that got terminated for whatever reason
 name: Windows Service Terminated With Error
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7023)
+      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\
+        control\ manager AND event.code.keyword:7023)
 type: any
 priority: 1
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: low

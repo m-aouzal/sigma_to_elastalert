@@ -1,10 +1,17 @@
 description: |
   Detects usage of the WMI class "Win32_NTEventlogFile" in a potentially suspicious way (delete, backup, change permissions, etc.) from a PowerShell script
 name: Potentially Suspicious Call To Win32_NTEventlogFile Class - PSScript
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*win32_nteventlogfile* AND (powershell.file.script_block_text.keyword:(*.backupeventlog\(* OR *.changesecuritypermissions\(* OR *.changesecuritypermissionsex\(* OR *.cleareventlog\(* OR *.delete\(* OR *.deleteex\(* OR *.rename\(* OR *.takeownership\(* OR *.takeownershipex\(*))
+      query: powershell.file.script_block_text.keyword:*win32_nteventlogfile* AND
+        (powershell.file.script_block_text.keyword:(*.backupeventlog\(* OR *.changesecuritypermissions\(*
+        OR *.changesecuritypermissionsex\(* OR *.cleareventlog\(* OR *.delete\(* OR
+        *.deleteex\(* OR *.rename\(* OR *.takeownership\(* OR *.takeownershipex\(*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

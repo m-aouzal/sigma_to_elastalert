@@ -1,10 +1,21 @@
 description: |
   Detects suspicious shell spawn from Java utility keytool process (e.g. adselfservice plus exploitation)
 name: Suspicious Shells Spawn by Java Utility Keytool
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\\keytool.exe AND (process.executable.keyword:(*\\cmd.exe OR *\\sh.exe OR *\\bash.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\schtasks.exe OR *\\certutil.exe OR *\\whoami.exe OR *\\bitsadmin.exe OR *\\wscript.exe OR *\\cscript.exe OR *\\scrcons.exe OR *\\regsvr32.exe OR *\\hh.exe OR *\\wmic.exe OR *\\mshta.exe OR *\\rundll32.exe OR *\\forfiles.exe OR *\\scriptrunner.exe OR *\\mftrace.exe OR *\\appvlp.exe OR *\\systeminfo.exe OR *\\reg.exe OR *\\query.exe))
+      query: process.parent.executable.keyword:*\\keytool.exe AND (process.executable.keyword:(*\\cmd.exe
+        OR *\\sh.exe OR *\\bash.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\schtasks.exe
+        OR *\\certutil.exe OR *\\whoami.exe OR *\\bitsadmin.exe OR *\\wscript.exe
+        OR *\\cscript.exe OR *\\scrcons.exe OR *\\regsvr32.exe OR *\\hh.exe OR *\\wmic.exe
+        OR *\\mshta.exe OR *\\rundll32.exe OR *\\forfiles.exe OR *\\scriptrunner.exe
+        OR *\\mftrace.exe OR *\\appvlp.exe OR *\\systeminfo.exe OR *\\reg.exe OR *\\query.exe))
 type: any
 priority: 3
+mitre_attack_tactic:
+- initial-access
+- persistence
+- privilege-escalation
+mitre_attack_technique: []
+risk: high

@@ -1,10 +1,15 @@
 description: |
   Detect attacker collecting audio via SoundRecorder application.
 name: Audio Capture via SoundRecorder
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:*\\soundrecorder.exe AND process.command_line.keyword:*\/file*
 type: any
 priority: 2
+mitre_attack_tactic:
+- collection
+mitre_attack_technique:
+- t1123
+risk: medium

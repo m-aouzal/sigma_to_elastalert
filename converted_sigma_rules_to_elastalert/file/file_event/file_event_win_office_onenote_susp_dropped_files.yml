@@ -1,10 +1,17 @@
 description: |
   Detects suspicious files created via the OneNote application. This could indicate a potential malicious ".one"/".onepkg" file was executed as seen being used in malware activity in the wild
 name: Suspicious File Created Via OneNote Application
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\onenote.exe OR *\\onenotem.exe OR *\\onenoteim.exe)) AND file.path.keyword:*\\appdata\\local\\temp\\onenote\\* AND (file.path.keyword:(*.bat OR *.chm OR *.cmd OR *.dll OR *.exe OR *.hta OR *.htm OR *.html OR *.js OR *.lnk OR *.ps1 OR *.vbe OR *.vbs OR *.wsf))
+      query: (process.executable.keyword:(*\\onenote.exe OR *\\onenotem.exe OR *\\onenoteim.exe))
+        AND file.path.keyword:*\\appdata\\local\\temp\\onenote\\* AND (file.path.keyword:(*.bat
+        OR *.chm OR *.cmd OR *.dll OR *.exe OR *.hta OR *.htm OR *.html OR *.js OR
+        *.lnk OR *.ps1 OR *.vbe OR *.vbs OR *.wsf))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: high

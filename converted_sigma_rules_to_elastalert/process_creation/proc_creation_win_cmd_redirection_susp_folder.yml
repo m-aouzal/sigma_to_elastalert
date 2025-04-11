@@ -1,12 +1,22 @@
 description: |
   Detects inline Windows shell commands redirecting output via the ">" symbol to a suspicious location.
   This technique is sometimes used by malicious actors in order to redirect the output of reconnaissance commands such as "hostname" and "dir" to files for future exfiltration.
-  
+
 name: Potentially Suspicious CMD Shell Output Redirect
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe) AND ((process.command_line.keyword:(*\>?%appdata%\\* OR *\>?%temp%\\* OR *\>?%tmp%\\* OR *\>?%userprofile%\\* OR *\>?c\:\\programdata\\* OR *\>?c\:\\temp\\* OR *\>?c\:\\users\\public\\* OR *\>?c\:\\windows\\temp\\*)) OR ((process.command_line.keyword:(*\ \>* OR *\"\>* OR *'\>*)) AND (process.command_line.keyword:*c\:\\users\\* AND process.command_line.keyword:*\\appdata\\local\\*)))
+      query: (winlog.event_data.image.keyword:*\\cmd.exe OR winlog.event_data.originalfilename.keyword:cmd.exe)
+        AND ((process.command_line.keyword:(*\>?%appdata%\\* OR *\>?%temp%\\* OR *\>?%tmp%\\*
+        OR *\>?%userprofile%\\* OR *\>?c\:\\programdata\\* OR *\>?c\:\\temp\\* OR
+        *\>?c\:\\users\\public\\* OR *\>?c\:\\windows\\temp\\*)) OR ((process.command_line.keyword:(*\
+        \>* OR *\"\>* OR *'\>*)) AND (process.command_line.keyword:*c\:\\users\\*
+        AND process.command_line.keyword:*\\appdata\\local\\*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218
+risk: medium

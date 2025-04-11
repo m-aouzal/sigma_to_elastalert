@@ -1,10 +1,17 @@
 description: |
   Detects usage of the Get-ADComputer cmdlet to collect computer information and output it to a file
 name: Computer Discovery And Export Via Get-ADComputer Cmdlet - PowerShell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*get\-adcomputer\ * AND powershell.file.script_block_text.keyword:*\ \-filter\ \**) AND (powershell.file.script_block_text.keyword:(*\ \|\ select\ * OR *out\-file* OR *set\-content* OR *add\-content*))
+      query: (powershell.file.script_block_text.keyword:*get\-adcomputer\ * AND powershell.file.script_block_text.keyword:*\
+        \-filter\ \**) AND (powershell.file.script_block_text.keyword:(*\ \|\ select\
+        * OR *out\-file* OR *set\-content* OR *add\-content*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1033
+risk: medium

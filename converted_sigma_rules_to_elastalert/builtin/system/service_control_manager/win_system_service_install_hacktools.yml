@@ -1,10 +1,19 @@
 description: |
   Detects installation or execution of services
 name: HackTool Service Registration or Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND ((winlog.provider_name.keyword:service\ control\ manager AND (event.code.keyword:(7045 OR 7036))) AND ((winlog.event_data.ServiceName.keyword:(*cachedump* OR *dumpsvc* OR *gsecdump* OR *pwdump* OR *uacbypassedservice* OR *wce\ service* OR *wceservice* OR *winexesvc*)) OR winlog.event_data.ImagePath.keyword:*bypass*))
+      query: winlog.channel.keyword:system AND ((winlog.provider_name.keyword:service\
+        control\ manager AND (event.code.keyword:(7045 OR 7036))) AND ((winlog.event_data.ServiceName.keyword:(*cachedump*
+        OR *dumpsvc* OR *gsecdump* OR *pwdump* OR *uacbypassedservice* OR *wce\ service*
+        OR *wceservice* OR *winexesvc*)) OR winlog.event_data.ImagePath.keyword:*bypass*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1569.002
+- s0029
+risk: high

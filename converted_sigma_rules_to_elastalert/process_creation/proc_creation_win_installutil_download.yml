@@ -1,11 +1,17 @@
 description: |
   Detects use of .NET InstallUtil.exe in order to download arbitrary files. The files will be written to "%LOCALAPPDATA%\Microsoft\Windows\INetCache\IE\"
-  
+
 name: File Download Via InstallUtil.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\installutil.exe OR winlog.event_data.originalfilename.keyword:installutil.exe) AND (process.command_line.keyword:(*ftp\:\/\/* OR *http\:\/\/* OR *https\:\/\/*))
+      query: (winlog.event_data.image.keyword:*\\installutil.exe OR winlog.event_data.originalfilename.keyword:installutil.exe)
+        AND (process.command_line.keyword:(*ftp\:\/\/* OR *http\:\/\/* OR *https\:\/\/*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218
+risk: medium

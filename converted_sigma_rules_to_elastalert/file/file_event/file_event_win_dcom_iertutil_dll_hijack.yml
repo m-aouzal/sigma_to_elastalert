@@ -1,10 +1,17 @@
 description: |
   Detects potential DLL hijack of "iertutil.dll" found in the DCOM InternetExplorer.Application Class over the network
 name: Potential DCOM InternetExplorer.Application DLL Hijack
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:system AND file.path.keyword:*\\internet\ explorer\\iertutil.dll
+      query: process.executable.keyword:system AND file.path.keyword:*\\internet\
+        explorer\\iertutil.dll
 type: any
 priority: 4
+mitre_attack_tactic:
+- lateral-movement
+mitre_attack_technique:
+- t1021.002
+- t1021.003
+risk: critical

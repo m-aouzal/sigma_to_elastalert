@@ -1,10 +1,24 @@
 description: |
   Detects well-known credential dumping tools execution via service execution events
 name: Credential Dumping Tools Service Execution - System
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045 AND (winlog.event_data.ImagePath.keyword:(*cachedump* OR *dumpsvc* OR *fgexec* OR *gsecdump* OR *mimidrv* OR *pwdump* OR *servpw*)))
+      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\
+        control\ manager AND event.code.keyword:7045 AND (winlog.event_data.ImagePath.keyword:(*cachedump*
+        OR *dumpsvc* OR *fgexec* OR *gsecdump* OR *mimidrv* OR *pwdump* OR *servpw*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+- execution
+mitre_attack_technique:
+- t1003.001
+- t1003.002
+- t1003.004
+- t1003.005
+- t1003.006
+- t1569.002
+- s0005
+risk: high

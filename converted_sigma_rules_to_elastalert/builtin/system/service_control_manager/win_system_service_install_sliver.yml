@@ -1,10 +1,20 @@
 description: |
   Detects known malicious service installation that appear in cases in which a Sliver implants execute the PsExec commands
 name: Sliver C2 Default Service Installation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND ((winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045) AND (winlog.event_data.ImagePath.keyword:/^[a-za-z]:\\windows\\temp\\[a-za-z0-9]{10}\.exe/ OR (winlog.event_data.ServiceName.keyword:(sliver OR sliver\ implant))))
+      query: winlog.channel.keyword:system AND ((winlog.provider_name.keyword:service\
+        control\ manager AND event.code.keyword:7045) AND 
+        (winlog.event_data.ImagePath.keyword:/^[a-za-z]:\\windows\\temp\\[a-za-z0-9]{10}\.exe/
+        OR (winlog.event_data.ServiceName.keyword:(sliver OR sliver\ implant))))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+- privilege-escalation
+mitre_attack_technique:
+- t1543.003
+- t1569.002
+risk: high

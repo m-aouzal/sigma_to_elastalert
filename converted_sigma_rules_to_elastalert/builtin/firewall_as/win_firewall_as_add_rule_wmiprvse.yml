@@ -1,12 +1,20 @@
 description: |
   Detects the addition of a new "Allow" firewall rule by the WMI process (WmiPrvSE.EXE).
   This can occur if an attacker leverages PowerShell cmdlets such as "New-NetFirewallRule", or directly uses WMI CIM classes such as "MSFT_NetFirewallRule".
-  
+
 name: New Firewall Rule Added In Windows Firewall Exception List Via WmiPrvSE.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-windows\ firewall\ with\ advanced\ security\/firewall AND ((event.code.keyword:(2004 OR 2071 OR 2097)) AND winlog.event_data.Action.keyword:3 AND winlog.event_data.ModifyingApplication.keyword:*\:\\windows\\system32\\wbem\\wmiprvse.exe)
+      query: winlog.channel.keyword:microsoft\-windows\-windows\ firewall\ with\ advanced\
+        security\/firewall AND ((event.code.keyword:(2004 OR 2071 OR 2097)) AND winlog.event_data.Action.keyword:3
+        AND 
+        winlog.event_data.ModifyingApplication.keyword:*\:\\windows\\system32\\wbem\\wmiprvse.exe)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.004
+risk: medium

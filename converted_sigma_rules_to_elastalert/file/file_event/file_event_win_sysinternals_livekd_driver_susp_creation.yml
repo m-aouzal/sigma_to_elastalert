@@ -1,10 +1,16 @@
 description: |
   Detects the creation of the LiveKD driver by a process image other than "livekd.exe".
 name: LiveKD Driver Creation By Uncommon Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:c\:\\windows\\system32\\drivers\\livekdd.sys AND (NOT (process.executable.keyword:(*\\livekd.exe OR *\\livek64.exe)))
+      query: file.path.keyword:c\:\\windows\\system32\\drivers\\livekdd.sys AND (NOT
+        (process.executable.keyword:(*\\livekd.exe OR *\\livek64.exe)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique: []
+risk: high

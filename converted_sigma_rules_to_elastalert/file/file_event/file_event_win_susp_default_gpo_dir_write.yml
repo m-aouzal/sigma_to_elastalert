@@ -1,10 +1,16 @@
 description: |
   Detects the creation of copy of suspicious files (EXE/DLL) to the default GPO storage folder
 name: Suspicious Files in Default GPO Folder
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\\policies\\\{31b2f340\-016d\-11d2\-945f\-00c04fb984f9\}\\* AND (file.path.keyword:(*.dll OR *.exe))
+      query: file.path.keyword:*\\policies\\\{31b2f340\-016d\-11d2\-945f\-00c04fb984f9\}\\*
+        AND (file.path.keyword:(*.dll OR *.exe))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036.005
+risk: medium

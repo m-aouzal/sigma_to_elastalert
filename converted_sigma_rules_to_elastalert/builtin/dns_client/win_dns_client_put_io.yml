@@ -1,10 +1,16 @@
 description: |
   Detects DNS queries for subdomains related to "Put.io" sharing website.
 name: DNS Query To Put.io - DNS Client
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-dns\ client\ events\/operational AND (event.code.keyword:3008 AND (dns.question.name.keyword:(*api.put.io* OR *upload.put.io*)))
+      query: winlog.channel.keyword:microsoft\-windows\-dns\ client\ events\/operational
+        AND (event.code.keyword:3008 AND (dns.question.name.keyword:(*api.put.io*
+        OR *upload.put.io*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique: []
+risk: medium

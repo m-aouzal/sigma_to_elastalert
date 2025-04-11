@@ -4,12 +4,25 @@ description: |
   This user right does not apply to Plug and Play device drivers.
   If you exclude privileged users/admins and processes, which are allowed to do so, you are maybe left with bad programs trying to load malicious kernel drivers.
   This will detect Ghost-In-The-Logs (https://github.com/bats3c/Ghost-In-The-Logs) and the usage of Sysinternals and various other tools. So you have to work with a whitelist to find the bad stuff.
-  
+
 name: Potential Privileged System Service Operation - SeLoadDriverPrivilege
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND ((event.code.keyword:4673 AND winlog.event_data.PrivilegeList.keyword:seloaddriverprivilege AND winlog.event_data.Service.keyword:\-) AND (NOT ((process.executable.keyword:(c\:\\windows\\system32\\dism.exe OR c\:\\windows\\system32\\rundll32.exe OR c\:\\windows\\system32\\fltmc.exe OR c\:\\windows\\helppane.exe OR c\:\\windows\\system32\\mmc.exe OR c\:\\windows\\system32\\svchost.exe OR c\:\\windows\\system32\\wimserv.exe OR c\:\\windows\\system32\\runtimebroker.exe OR c\:\\windows\\system32\\systemsettingsbroker.exe OR c\:\\windows\\explorer.exe)) OR (process.executable.keyword:(*\\procexp64.exe OR *\\procexp.exe OR *\\procmon64.exe OR *\\procmon.exe OR *\\google\\chrome\\application\\chrome.exe OR *\\appdata\\local\\microsoft\\teams\\current\\teams.exe)) OR process.executable.keyword:c\:\\program\ files\\windowsapps\\microsoft*)))
+      query: winlog.channel.keyword:security AND ((event.code.keyword:4673 AND winlog.event_data.PrivilegeList.keyword:seloaddriverprivilege
+        AND winlog.event_data.Service.keyword:\-) AND (NOT ((process.executable.keyword:(c\:\\windows\\system32\\dism.exe
+        OR c\:\\windows\\system32\\rundll32.exe OR c\:\\windows\\system32\\fltmc.exe
+        OR c\:\\windows\\helppane.exe OR c\:\\windows\\system32\\mmc.exe OR c\:\\windows\\system32\\svchost.exe
+        OR c\:\\windows\\system32\\wimserv.exe OR c\:\\windows\\system32\\runtimebroker.exe
+        OR c\:\\windows\\system32\\systemsettingsbroker.exe OR c\:\\windows\\explorer.exe))
+        OR (process.executable.keyword:(*\\procexp64.exe OR *\\procexp.exe OR *\\procmon64.exe
+        OR *\\procmon.exe OR *\\google\\chrome\\application\\chrome.exe OR *\\appdata\\local\\microsoft\\teams\\current\\teams.exe))
+        OR process.executable.keyword:c\:\\program\ files\\windowsapps\\microsoft*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: medium

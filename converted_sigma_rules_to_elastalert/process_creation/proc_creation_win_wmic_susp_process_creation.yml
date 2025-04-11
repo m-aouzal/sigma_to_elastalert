@@ -1,10 +1,21 @@
 description: |
   Detects WMIC executing "process call create" with suspicious calls to processes such as "rundll32", "regsrv32", etc.
 name: Suspicious Process Created Via Wmic.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*process\ * AND process.command_line.keyword:*call\ * AND process.command_line.keyword:*create\ *) AND (process.command_line.keyword:(*rundll32* OR *bitsadmin* OR *regsvr32* OR *cmd.exe\ \/c\ * OR *cmd.exe\ \/k\ * OR *cmd.exe\ \/r\ * OR *cmd\ \/c\ * OR *cmd\ \/k\ * OR *cmd\ \/r\ * OR *powershell* OR *pwsh* OR *certutil* OR *cscript* OR *wscript* OR *mshta* OR *\\users\\public\\* OR *\\windows\\temp\\* OR *\\appdata\\local\\* OR *%temp%* OR *%tmp%* OR *%programdata%* OR *%appdata%* OR *%comspec%* OR *%localappdata%*))
+      query: (process.command_line.keyword:*process\ * AND process.command_line.keyword:*call\
+        * AND process.command_line.keyword:*create\ *) AND (process.command_line.keyword:(*rundll32*
+        OR *bitsadmin* OR *regsvr32* OR *cmd.exe\ \/c\ * OR *cmd.exe\ \/k\ * OR *cmd.exe\
+        \/r\ * OR *cmd\ \/c\ * OR *cmd\ \/k\ * OR *cmd\ \/r\ * OR *powershell* OR
+        *pwsh* OR *certutil* OR *cscript* OR *wscript* OR *mshta* OR *\\users\\public\\*
+        OR *\\windows\\temp\\* OR *\\appdata\\local\\* OR *%temp%* OR *%tmp%* OR *%programdata%*
+        OR *%appdata%* OR *%comspec%* OR *%localappdata%*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1047
+risk: high

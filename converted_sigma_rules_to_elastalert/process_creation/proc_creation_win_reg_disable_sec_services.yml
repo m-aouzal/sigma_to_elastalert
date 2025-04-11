@@ -1,10 +1,20 @@
 description: |
   Detects execution of "reg.exe" to disable security services such as Windows Defender.
 name: Security Service Disabled Via Reg.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*reg* AND process.command_line.keyword:*add*) AND ((process.command_line.keyword:*d\ 4* AND process.command_line.keyword:*v\ start*) AND (process.command_line.keyword:(*\\appidsvc* OR *\\msmpsvc* OR *\\nissrv* OR *\\securityhealthservice* OR *\\sense* OR *\\usosvc* OR *\\wdboot* OR *\\wdfilter* OR *\\wdnisdrv* OR *\\wdnissvc* OR *\\windefend* OR *\\wscsvc* OR *\\wuauserv*)))
+      query: (process.command_line.keyword:*reg* AND process.command_line.keyword:*add*)
+        AND ((process.command_line.keyword:*d\ 4* AND process.command_line.keyword:*v\
+        start*) AND (process.command_line.keyword:(*\\appidsvc* OR *\\msmpsvc* OR
+        *\\nissrv* OR *\\securityhealthservice* OR *\\sense* OR *\\usosvc* OR *\\wdboot*
+        OR *\\wdfilter* OR *\\wdnisdrv* OR *\\wdnissvc* OR *\\windefend* OR *\\wscsvc*
+        OR *\\wuauserv*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high

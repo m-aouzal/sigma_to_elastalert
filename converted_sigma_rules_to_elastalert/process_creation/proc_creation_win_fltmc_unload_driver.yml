@@ -1,10 +1,22 @@
 description: |
   Detect filter driver unloading activity via fltmc.exe
 name: Filter Driver Unloaded Via Fltmc.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\\fltmc.exe OR winlog.event_data.originalfilename.keyword:fltmc.exe) AND process.command_line.keyword:*unload*) AND (NOT ((process.parent.executable.keyword:c\:\\users\\* AND process.parent.executable.keyword:*\\appdata\\local\\temp\\* AND process.parent.executable.keyword:*\\endpoint\-protection\-installer\-x64.tmp AND process.command_line.keyword:*unload\ rtp_filesystem_filter) OR (process.parent.executable.keyword:c\:\\program\ files\ \(x86\)\\manageengine\\uems_agent\\bin\\dcfaservice64.exe AND process.command_line.keyword:*unload\ dfmfilter)))
+      query: ((winlog.event_data.image.keyword:*\\fltmc.exe OR winlog.event_data.originalfilename.keyword:fltmc.exe)
+        AND process.command_line.keyword:*unload*) AND (NOT ((process.parent.executable.keyword:c\:\\users\\*
+        AND process.parent.executable.keyword:*\\appdata\\local\\temp\\* AND process.parent.executable.keyword:*\\endpoint\-protection\-installer\-x64.tmp
+        AND process.command_line.keyword:*unload\ rtp_filesystem_filter) OR (process.parent.executable.keyword:c\:\\program\
+        files\ \(x86\)\\manageengine\\uems_agent\\bin\\dcfaservice64.exe AND process.command_line.keyword:*unload\
+        dfmfilter)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1070
+- t1562
+- t1562.002
+risk: medium

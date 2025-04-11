@@ -1,10 +1,18 @@
 description: |
   Detects Powershell as a child of the WmiPrvSE process. Which could be a sign of lateral movement via WMI.
 name: Potential WMI Lateral Movement WmiPrvSE Spawned PowerShell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\\wmiprvse.exe AND ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll)))
+      query: process.parent.executable.keyword:*\\wmiprvse.exe AND ((winlog.event_data.image.keyword:(*\\powershell.exe
+        OR *\\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe
+        OR pwsh.dll)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1047
+- t1059.001
+risk: medium

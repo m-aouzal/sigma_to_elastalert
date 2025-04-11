@@ -1,11 +1,33 @@
 description: |
   Detects the execution of a Windows system binary that is usually located in the system folder from an uncommon location.
-  
+
 name: System File Execution Location Anomaly
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\atbroker.exe OR *\\audiodg.exe OR *\\bcdedit.exe OR *\\bitsadmin.exe OR *\\certreq.exe OR *\\certutil.exe OR *\\cmstp.exe OR *\\conhost.exe OR *\\consent.exe OR *\\cscript.exe OR *\\csrss.exe OR *\\dashost.exe OR *\\defrag.exe OR *\\dfrgui.exe OR *\\dism.exe OR *\\dllhost.exe OR *\\dllhst3g.exe OR *\\dwm.exe OR *\\eventvwr.exe OR *\\logonui.exe OR *\\lsaiso.exe OR *\\lsass.exe OR *\\lsm.exe OR *\\msiexec.exe OR *\\ntoskrnl.exe OR *\\powershell_ise.exe OR *\\powershell.exe OR *\\pwsh.exe OR *\\regsvr32.exe OR *\\rundll32.exe OR *\\runonce.exe OR *\\runtimebroker.exe OR *\\schtasks.exe OR *\\services.exe OR *\\sihost.exe OR *\\smartscreen.exe OR *\\smss.exe OR *\\spoolsv.exe OR *\\svchost.exe OR *\\taskhost.exe OR *\\taskmgr.exe OR *\\userinit.exe OR *\\wininit.exe OR *\\winlogon.exe OR *\\winver.exe OR *\\wlanext.exe OR *\\wscript.exe OR *\\wsl.exe OR *\\wsmprovhost.exe)) AND (NOT ((process.executable.keyword:(c\:\\$windows.\~bt\\* OR c\:\\$winreagent\\* OR c\:\\windows\\softwaredistribution\\* OR c\:\\windows\\system32\\* OR c\:\\windows\\systemtemp\\* OR c\:\\windows\\syswow64\\* OR c\:\\windows\\uus\\* OR c\:\\windows\\winsxs\\*)) OR (process.executable.keyword:(c\:\\program\ files\\powershell\\7\\pwsh.exe OR c\:\\program\ files\\powershell\\7\-preview\\pwsh.exe)) OR (process.executable.keyword:c\:\\program\ files\\windowsapps\\microsoftcorporationii.windowssubsystemforlinux* AND process.executable.keyword:*\\wsl.exe))) AND (NOT process.executable.keyword:*\\systemroot\\system32\\*)
+      query: (process.executable.keyword:(*\\atbroker.exe OR *\\audiodg.exe OR *\\bcdedit.exe
+        OR *\\bitsadmin.exe OR *\\certreq.exe OR *\\certutil.exe OR *\\cmstp.exe OR
+        *\\conhost.exe OR *\\consent.exe OR *\\cscript.exe OR *\\csrss.exe OR *\\dashost.exe
+        OR *\\defrag.exe OR *\\dfrgui.exe OR *\\dism.exe OR *\\dllhost.exe OR *\\dllhst3g.exe
+        OR *\\dwm.exe OR *\\eventvwr.exe OR *\\logonui.exe OR *\\lsaiso.exe OR *\\lsass.exe
+        OR *\\lsm.exe OR *\\msiexec.exe OR *\\ntoskrnl.exe OR *\\powershell_ise.exe
+        OR *\\powershell.exe OR *\\pwsh.exe OR *\\regsvr32.exe OR *\\rundll32.exe
+        OR *\\runonce.exe OR *\\runtimebroker.exe OR *\\schtasks.exe OR *\\services.exe
+        OR *\\sihost.exe OR *\\smartscreen.exe OR *\\smss.exe OR *\\spoolsv.exe OR
+        *\\svchost.exe OR *\\taskhost.exe OR *\\taskmgr.exe OR *\\userinit.exe OR
+        *\\wininit.exe OR *\\winlogon.exe OR *\\winver.exe OR *\\wlanext.exe OR *\\wscript.exe
+        OR *\\wsl.exe OR *\\wsmprovhost.exe)) AND (NOT ((process.executable.keyword:(c\:\\$windows.\~bt\\*
+        OR c\:\\$winreagent\\* OR c\:\\windows\\softwaredistribution\\* OR c\:\\windows\\system32\\*
+        OR c\:\\windows\\systemtemp\\* OR c\:\\windows\\syswow64\\* OR c\:\\windows\\uus\\*
+        OR c\:\\windows\\winsxs\\*)) OR (process.executable.keyword:(c\:\\program\
+        files\\powershell\\7\\pwsh.exe OR c\:\\program\ files\\powershell\\7\-preview\\pwsh.exe))
+        OR (process.executable.keyword:c\:\\program\ files\\windowsapps\\microsoftcorporationii.windowssubsystemforlinux*
+        AND process.executable.keyword:*\\wsl.exe))) AND (NOT process.executable.keyword:*\\systemroot\\system32\\*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036
+risk: high

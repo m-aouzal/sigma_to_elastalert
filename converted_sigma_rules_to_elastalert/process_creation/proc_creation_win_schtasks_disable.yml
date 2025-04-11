@@ -1,10 +1,20 @@
 description: |
   Detects when adversaries stop services or processes by disabling their respective scheduled tasks in order to conduct data destructive activities
 name: Disable Important Scheduled Task
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\schtasks.exe AND (process.command_line.keyword:*\/change* AND process.command_line.keyword:*\/tn* AND process.command_line.keyword:*\/disable*) AND (process.command_line.keyword:(*\\windows\\bitlocker* OR *\\windows\\exploitguard* OR *\\windows\\exploitguard\\exploitguard\ mdm\ policy\ refresh* OR *\\windows\\systemrestore\\sr* OR *\\windows\\updateorchestrator\\* OR *\\windows\\windows\ defender\\* OR *\\windows\\windowsbackup\\* OR *\\windows\\windowsupdate\\*))
+      query: process.executable.keyword:*\\schtasks.exe AND (process.command_line.keyword:*\/change*
+        AND process.command_line.keyword:*\/tn* AND process.command_line.keyword:*\/disable*)
+        AND (process.command_line.keyword:(*\\windows\\bitlocker* OR *\\windows\\exploitguard*
+        OR *\\windows\\exploitguard\\exploitguard\ mdm\ policy\ refresh* OR *\\windows\\systemrestore\\sr*
+        OR *\\windows\\updateorchestrator\\* OR *\\windows\\windows\ defender\\* OR
+        *\\windows\\windowsbackup\\* OR *\\windows\\windowsupdate\\*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- impact
+mitre_attack_technique:
+- t1489
+risk: high

@@ -1,10 +1,18 @@
 description: |
   Detects rundll32 execution without parameters as observed when running Metasploit windows/smb/psexec exploit module
 name: Rundll32 Execution Without Parameters
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.command_line.keyword:(rundll32.exe OR rundll32)
 type: any
 priority: 3
+mitre_attack_tactic:
+- lateral-movement
+- execution
+mitre_attack_technique:
+- t1021.002
+- t1570
+- t1569.002
+risk: high

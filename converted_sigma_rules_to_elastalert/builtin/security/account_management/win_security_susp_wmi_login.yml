@@ -1,10 +1,15 @@
 description: |
   Detects successful logon attempts performed with WMI
 name: Successful Account Login Via WMI
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.channel.keyword:security AND (event.code.keyword:4624 AND process.executable.keyword:*\\wmiprvse.exe)
 type: any
 priority: 1
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1047
+risk: low

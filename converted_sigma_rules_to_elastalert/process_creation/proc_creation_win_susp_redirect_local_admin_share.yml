@@ -1,10 +1,16 @@
 description: |
   Detects a suspicious output redirection to the local admins share, this technique is often found in malicious scripts or hacktool stagers
 name: Suspicious Redirection to Local Admin Share
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*\>* AND (process.command_line.keyword:(*\\\\127.0.0.1\\admin$\\* OR *\\\\localhost\\admin$\\*))
+      query: process.command_line.keyword:*\>* AND (process.command_line.keyword:(*\\\\127.0.0.1\\admin$\\*
+        OR *\\\\localhost\\admin$\\*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- exfiltration
+mitre_attack_technique:
+- t1048
+risk: high

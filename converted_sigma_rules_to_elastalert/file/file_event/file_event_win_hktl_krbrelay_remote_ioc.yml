@@ -1,10 +1,16 @@
 description: |
   Detects the creation of file with specific names used by RemoteKrbRelay SMB Relay attack module.
 name: HackTool - RemoteKrbRelay SMB Relay Secrets Dump Module Indicators
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:(*\:\\windows\\temp\\sam.tmp OR *\:\\windows\\temp\\sec.tmp OR *\:\\windows\\temp\\sys.tmp)
+      query: file.path.keyword:(*\:\\windows\\temp\\sam.tmp OR *\:\\windows\\temp\\sec.tmp
+        OR *\:\\windows\\temp\\sys.tmp)
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1219
+risk: high

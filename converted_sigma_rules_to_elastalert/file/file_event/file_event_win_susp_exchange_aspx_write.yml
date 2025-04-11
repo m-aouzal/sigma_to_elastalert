@@ -1,10 +1,18 @@
 description: |
   Detects suspicious activity in which the MSExchangeMailboxReplication process writes .asp and .apsx files to disk, which could be a sign of ProxyShell exploitation
 name: Suspicious MSExchangeMailboxReplication ASPX Write
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\msexchangemailboxreplication.exe AND (file.path.keyword:(*.aspx OR *.asp))
+      query: process.executable.keyword:*\\msexchangemailboxreplication.exe AND (file.path.keyword:(*.aspx
+        OR *.asp))
 type: any
 priority: 3
+mitre_attack_tactic:
+- initial-access
+- persistence
+mitre_attack_technique:
+- t1190
+- t1505.003
+risk: high

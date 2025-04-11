@@ -1,10 +1,15 @@
 description: |
   Detects usage of the "Write-EventLog" cmdlet with 'RawData' flag. The cmdlet can be levreage to write malicious payloads to the EventLog and then retrieve them later for later use
 name: PowerShell Write-EventLog Usage
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*write\-eventlog* AND powershell.file.script_block_text.keyword:*\-rawdata\ *
+      query: powershell.file.script_block_text.keyword:*write\-eventlog* AND powershell.file.script_block_text.keyword:*\-rawdata\
+        *
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

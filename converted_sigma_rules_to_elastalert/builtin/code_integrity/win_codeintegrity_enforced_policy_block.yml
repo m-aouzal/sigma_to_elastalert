@@ -1,10 +1,16 @@
 description: |
   Detects blocked load events that did not meet the authenticode signing level requirements or violated the code integrity policy.
 name: CodeIntegrity - Blocked Image/Driver Load For Policy Violation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-codeintegrity\/operational AND event.code.keyword:3077
+      query: winlog.channel.keyword:microsoft\-windows\-codeintegrity\/operational
+        AND event.code.keyword:3077
 type: any
 priority: 3
+mitre_attack_tactic:
+- privilege-escalation
+mitre_attack_technique:
+- t1543
+risk: high

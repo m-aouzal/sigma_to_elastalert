@@ -3,12 +3,18 @@ description: |
   This procedure was highlighted in Red Canary Intel Insights Oct. 2021, "We frequently observe adversaries using PowerShell to write malicious .lnk files into the startup directory to establish persistence.
   Accordingly, this detection opportunity is likely to identify persistence mechanisms in multiple threats.
   In the context of Yellow Cockatoo, this persistence mechanism eventually launches the command-line script that leads to the installation of a malicious DLL"
-  
+
 name: Potential Startup Shortcut Persistence Via PowerShell.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND file.path.keyword:*\\start\ menu\\programs\\startup\\* AND file.path.keyword:*.lnk
+      query: (process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND file.path.keyword:*\\start\
+        menu\\programs\\startup\\* AND file.path.keyword:*.lnk
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1547.001
+risk: high

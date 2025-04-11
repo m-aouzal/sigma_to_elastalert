@@ -1,10 +1,16 @@
 description: |
   Detects the creation of log files during a TeamViewer remote session
 name: TeamViewer Remote Session
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:(*\\teamviewer\\remoteprinting\\tvprint.db OR *\\teamviewer\\tvnetwork.log)) OR (file.path.keyword:*\\teamviewer* AND file.path.keyword:*_logfile.log*)
+      query: (file.path.keyword:(*\\teamviewer\\remoteprinting\\tvprint.db OR *\\teamviewer\\tvnetwork.log))
+        OR (file.path.keyword:*\\teamviewer* AND file.path.keyword:*_logfile.log*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1219
+risk: medium

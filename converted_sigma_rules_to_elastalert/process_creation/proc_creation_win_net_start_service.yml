@@ -1,10 +1,16 @@
 description: |
   Detects the usage of the "net.exe" command to start a service using the "start" flag
 name: Start Windows Service Via Net.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\net.exe OR *\\net1.exe)) OR (winlog.event_data.originalfilename.keyword:(net.exe OR net1.exe))) AND process.command_line.keyword:*\ start\ *
+      query: ((winlog.event_data.image.keyword:(*\\net.exe OR *\\net1.exe)) OR (winlog.event_data.originalfilename.keyword:(net.exe
+        OR net1.exe))) AND process.command_line.keyword:*\ start\ *
 type: any
 priority: 1
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1569.002
+risk: low

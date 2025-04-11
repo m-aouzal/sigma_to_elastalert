@@ -1,10 +1,17 @@
 description: |
   Detects potential psexec command that initiate execution on a remote systems via common commandline flags used by the utility
 name: Potential PsExec Remote Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*accepteula* AND process.command_line.keyword:*\ \-u\ * AND process.command_line.keyword:*\ \-p\ * AND process.command_line.keyword:*\ \\\\*
+      query: process.command_line.keyword:*accepteula* AND process.command_line.keyword:*\
+        \-u\ * AND process.command_line.keyword:*\ \-p\ * AND process.command_line.keyword:*\
+        \\\\*
 type: any
 priority: 3
+mitre_attack_tactic:
+- resource-development
+mitre_attack_technique:
+- t1587.001
+risk: high

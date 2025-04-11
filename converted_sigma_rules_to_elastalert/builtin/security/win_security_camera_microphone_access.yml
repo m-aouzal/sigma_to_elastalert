@@ -1,10 +1,19 @@
 description: |
   Potential adversaries accessing the microphone and webcam in an endpoint.
 name: Processes Accessing the Microphone and Webcam
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND ((event.code.keyword:(4657 OR 4656 OR 4663)) AND (winlog.event_data.ObjectName.keyword:(*\\software\\microsoft\\windows\\currentversion\\capabilityaccessmanager\\consentstore\\microphone\\nonpackaged* OR *\\software\\microsoft\\windows\\currentversion\\capabilityaccessmanager\\consentstore\\webcam\\nonpackaged*)))
+      query: winlog.channel.keyword:security AND ((event.code.keyword:(4657 OR 4656
+        OR 4663)) AND 
+        (winlog.event_data.ObjectName.keyword:(*\\software\\microsoft\\windows\\currentversion\\capabilityaccessmanager\\consentstore\\microphone\\nonpackaged*
+        OR 
+        *\\software\\microsoft\\windows\\currentversion\\capabilityaccessmanager\\consentstore\\webcam\\nonpackaged*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- collection
+mitre_attack_technique:
+- t1123
+risk: medium

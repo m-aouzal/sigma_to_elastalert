@@ -1,10 +1,17 @@
 description: |
   Detects a threat actor creating a file named `iertutil.dll` in the `C:\Program Files\Internet Explorer\` directory over the network for a DCOM InternetExplorer DLL Hijack scenario.
 name: DCOM InternetExplorer.Application Iertutil DLL Hijack - Security
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND ((event.code.keyword:5145 AND winlog.event_data.RelativeTargetName.keyword:*\\internet\ explorer\\iertutil.dll) AND (NOT user.name.keyword:*$))
+      query: winlog.channel.keyword:security AND ((event.code.keyword:5145 AND winlog.event_data.RelativeTargetName.keyword:*\\internet\
+        explorer\\iertutil.dll) AND (NOT user.name.keyword:*$))
 type: any
 priority: 3
+mitre_attack_tactic:
+- lateral-movement
+mitre_attack_technique:
+- t1021.002
+- t1021.003
+risk: high

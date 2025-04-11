@@ -1,12 +1,19 @@
 description: |
   Detects PowerShell scripts that make use of the "Compress-Archive" Cmdlet in order to compress folders and files where the output is stored in a potentially suspicious location that is used often by malware for exfiltration.
   An adversary might compress data (e.g., sensitive documents) that is collected prior to exfiltration in order to make it portable and minimize the amount of data sent over the network.
-  
+
 name: Zip A Folder With PowerShell For Staging In Temp - PowerShell Script
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:(*compress\-archive\ \-path*\-destinationpath\ $env\:temp* OR *compress\-archive\ \-path*\-destinationpath*\\appdata\\local\\temp\\* OR *compress\-archive\ \-path*\-destinationpath*\:\\windows\\temp\\*)
+      query: powershell.file.script_block_text.keyword:(*compress\-archive\ \-path*\-destinationpath\
+        $env\:temp* OR *compress\-archive\ \-path*\-destinationpath*\\appdata\\local\\temp\\*
+        OR *compress\-archive\ \-path*\-destinationpath*\:\\windows\\temp\\*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- collection
+mitre_attack_technique:
+- t1074.001
+risk: medium

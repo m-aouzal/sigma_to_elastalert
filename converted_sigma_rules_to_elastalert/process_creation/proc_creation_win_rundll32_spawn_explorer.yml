@@ -1,10 +1,16 @@
 description: |
   Detects RunDLL32.exe spawning explorer.exe as child, which is very uncommon, often observes Gamarue spawning the explorer.exe process in an unusual way
 name: RunDLL32 Spawning Explorer
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:*\\rundll32.exe AND process.executable.keyword:*\\explorer.exe) AND (NOT process.parent.command_line.keyword:*\\shell32.dll,control_rundll*)
+      query: (process.parent.executable.keyword:*\\rundll32.exe AND process.executable.keyword:*\\explorer.exe)
+        AND (NOT process.parent.command_line.keyword:*\\shell32.dll,control_rundll*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218.011
+risk: high

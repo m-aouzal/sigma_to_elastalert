@@ -1,10 +1,17 @@
 description: |
   Detects the execution of WMIC with the "csproduct" which is used to obtain information such as hardware models and vendor information
 name: Hardware Model Reconnaissance Via Wmic.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\wmic.exe OR winlog.event_data.originalfilename.keyword:wmic.exe) AND process.command_line.keyword:*csproduct*
+      query: (winlog.event_data.image.keyword:*\\wmic.exe OR winlog.event_data.originalfilename.keyword:wmic.exe)
+        AND process.command_line.keyword:*csproduct*
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1047
+- car.2016-03-002
+risk: medium

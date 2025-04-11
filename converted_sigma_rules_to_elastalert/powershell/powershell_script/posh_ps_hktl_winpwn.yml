@@ -1,11 +1,28 @@
 description: |
   Detects scriptblock text keywords indicative of potential usge of the tool WinPwn. A tool for Windows and Active Directory reconnaissance and exploitation.
-  
+
 name: HackTool - WinPwn Execution - ScriptBlock
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:(*offline_winpwn* OR *winpwn\ * OR *winpwn.exe* OR *winpwn.ps1*)
+      query: powershell.file.script_block_text.keyword:(*offline_winpwn* OR *winpwn\
+        * OR *winpwn.exe* OR *winpwn.ps1*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+- defense-evasion
+- discovery
+- execution
+- privilege-escalation
+mitre_attack_technique:
+- t1046
+- t1082
+- t1106
+- t1518
+- t1548.002
+- t1552.001
+- t1555
+- t1555.003
+risk: high

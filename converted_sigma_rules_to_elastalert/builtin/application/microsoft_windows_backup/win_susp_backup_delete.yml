@@ -1,10 +1,15 @@
 description: |
   Detects backup catalog deletions
 name: Backup Catalog Deleted
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.channel.keyword:application AND (event.code.keyword:524 AND winlog.provider_name.keyword:microsoft\-windows\-backup)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1070.004
+risk: medium

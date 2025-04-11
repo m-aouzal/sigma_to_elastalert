@@ -1,10 +1,19 @@
 description: |
   Detects potentially suspicious keywords that could indicate the use of a PowerShell exploitation framework
 name: Potential Suspicious PowerShell Keywords
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:(*system.reflection.assembly.load\($* OR *\[system.reflection.assembly\]\:\:load\($* OR *\[reflection.assembly\]\:\:load\($* OR *system.reflection.assemblyname* OR *reflection.emit.assemblybuilderaccess* OR *reflection.emit.customattributebuilder* OR *runtime.interopservices.unmanagedtype* OR *runtime.interopservices.dllimportattribute* OR *suspendthread* OR *rundll32*)
+      query: powershell.file.script_block_text.keyword:(*system.reflection.assembly.load\($*
+        OR *\[system.reflection.assembly\]\:\:load\($* OR *\[reflection.assembly\]\:\:load\($*
+        OR *system.reflection.assemblyname* OR *reflection.emit.assemblybuilderaccess*
+        OR *reflection.emit.customattributebuilder* OR *runtime.interopservices.unmanagedtype*
+        OR *runtime.interopservices.dllimportattribute* OR *suspendthread* OR *rundll32*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: medium

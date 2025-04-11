@@ -1,10 +1,19 @@
 description: |
   Detects creation of files with names used by different memory dumping tools to create a memory dump of the LSASS process memory, which contains user credentials.
 name: LSASS Process Memory Dump Files
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:(*\\andrew.dmp OR *\\coredump.dmp OR *\\lsass.dmp OR *\\lsass.rar OR *\\lsass.zip OR *\\notlsass.zip OR *\\pplblade.dmp OR *\\rustive.dmp)) OR (file.path.keyword:(*\\lsass_2* OR *\\lsassdmp* OR *\\lsassdump*)) OR (file.path.keyword:*\\lsass* AND file.path.keyword:*.dmp*) OR (file.path.keyword:*sqldmpr* AND file.path.keyword:*.mdmp) OR ((file.path.keyword:(*\\nanodump* OR *\\proc_*)) AND file.path.keyword:*.dmp)
+      query: (file.path.keyword:(*\\andrew.dmp OR *\\coredump.dmp OR *\\lsass.dmp
+        OR *\\lsass.rar OR *\\lsass.zip OR *\\notlsass.zip OR *\\pplblade.dmp OR *\\rustive.dmp))
+        OR (file.path.keyword:(*\\lsass_2* OR *\\lsassdmp* OR *\\lsassdump*)) OR (file.path.keyword:*\\lsass*
+        AND file.path.keyword:*.dmp*) OR (file.path.keyword:*sqldmpr* AND file.path.keyword:*.mdmp)
+        OR ((file.path.keyword:(*\\nanodump* OR *\\proc_*)) AND file.path.keyword:*.dmp)
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.001
+risk: high

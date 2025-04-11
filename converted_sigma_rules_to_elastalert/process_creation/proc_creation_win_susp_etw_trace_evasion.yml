@@ -1,11 +1,25 @@
 description: |
   Detects command line activity that tries to clear or disable any ETW trace log which could be a sign of logging evasion.
-  
+
 name: ETW Trace Evasion Activity
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*cl* AND process.command_line.keyword:*\/trace*) OR (process.command_line.keyword:*clear\-log* AND process.command_line.keyword:*\/trace*) OR (process.command_line.keyword:*sl* AND process.command_line.keyword:*\/e\:false*) OR (process.command_line.keyword:*set\-log* AND process.command_line.keyword:*\/e\:false*) OR (process.command_line.keyword:*logman* AND process.command_line.keyword:*update* AND process.command_line.keyword:*trace* AND process.command_line.keyword:*\-\-p* AND process.command_line.keyword:*\-ets*) OR process.command_line.keyword:*remove\-etwtraceprovider* OR (process.command_line.keyword:*set\-etwtraceprovider* AND process.command_line.keyword:*0x11*)
+      query: (process.command_line.keyword:*cl* AND process.command_line.keyword:*\/trace*)
+        OR (process.command_line.keyword:*clear\-log* AND process.command_line.keyword:*\/trace*)
+        OR (process.command_line.keyword:*sl* AND process.command_line.keyword:*\/e\:false*)
+        OR (process.command_line.keyword:*set\-log* AND process.command_line.keyword:*\/e\:false*)
+        OR (process.command_line.keyword:*logman* AND process.command_line.keyword:*update*
+        AND process.command_line.keyword:*trace* AND process.command_line.keyword:*\-\-p*
+        AND process.command_line.keyword:*\-ets*) OR process.command_line.keyword:*remove\-etwtraceprovider*
+        OR (process.command_line.keyword:*set\-etwtraceprovider* AND process.command_line.keyword:*0x11*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1070
+- t1562.006
+- car.2016-04-002
+risk: high

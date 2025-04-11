@@ -1,12 +1,31 @@
 description: |
   Detects abusing Azure Browser SSO by requesting OAuth 2.0 refresh tokens for an Azure-AD-authenticated Windows user (i.e. the machine is joined to Azure AD and a user logs in with their Azure AD account) wanting to perform SSO authentication in the browser.
   An attacker can use this to authenticate to Azure AD in a browser as that user.
-  
+
 name: Potential Azure Browser SSO Abuse
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:c\:\\windows\\system32\\microsoftaccounttokenprovider.dll AND (NOT ((process.executable.keyword:(c\:\\windows\\system32\\* OR c\:\\windows\\syswow64\\*)) AND process.executable.keyword:*\\backgroundtaskhost.exe)) AND (NOT (((process.executable.keyword:(c\:\\program\ files\\microsoft\ visual\ studio\\* OR c\:\\program\ files\ \(x86\)\\microsoft\ visual\ studio\\*)) AND process.executable.keyword:*\\ide\\devenv.exe) OR (process.executable.keyword:(c\:\\program\ files\ \(x86\)\\internet\ explorer\\iexplore.exe OR c\:\\program\ files\\internet\ explorer\\iexplore.exe)) OR (winlog.event_data.image.keyword:c\:\\program\ files\ \(x86\)\\microsoft\\edgewebview\\application\\* OR winlog.event_data.image.keyword:*\\windowsapps\\microsoftedge.exe OR (winlog.event_data.image.keyword:(c\:\\program\ files\ \(x86\)\\microsoft\\edge\\application\\msedge.exe OR c\:\\program\ files\\microsoft\\edge\\application\\msedge.exe))) OR ((process.executable.keyword:(c\:\\program\ files\ \(x86\)\\microsoft\\edgecore\\* OR c\:\\program\ files\\microsoft\\edgecore\\*)) AND (process.executable.keyword:(*\\msedge.exe OR *\\msedgewebview2.exe))) OR process.executable.keyword:*\\appdata\\local\\microsoft\\onedrive\\onedrive.exe OR (NOT _exists_:process.executable)))
+      query: file.path.keyword:c\:\\windows\\system32\\microsoftaccounttokenprovider.dll
+        AND (NOT ((process.executable.keyword:(c\:\\windows\\system32\\* OR c\:\\windows\\syswow64\\*))
+        AND process.executable.keyword:*\\backgroundtaskhost.exe)) AND (NOT (((process.executable.keyword:(c\:\\program\
+        files\\microsoft\ visual\ studio\\* OR c\:\\program\ files\ \(x86\)\\microsoft\
+        visual\ studio\\*)) AND process.executable.keyword:*\\ide\\devenv.exe) OR
+        (process.executable.keyword:(c\:\\program\ files\ \(x86\)\\internet\ explorer\\iexplore.exe
+        OR c\:\\program\ files\\internet\ explorer\\iexplore.exe)) OR (winlog.event_data.image.keyword:c\:\\program\
+        files\ \(x86\)\\microsoft\\edgewebview\\application\\* OR winlog.event_data.image.keyword:*\\windowsapps\\microsoftedge.exe
+        OR (winlog.event_data.image.keyword:(c\:\\program\ files\ \(x86\)\\microsoft\\edge\\application\\msedge.exe
+        OR c\:\\program\ files\\microsoft\\edge\\application\\msedge.exe))) OR ((process.executable.keyword:(c\:\\program\
+        files\ \(x86\)\\microsoft\\edgecore\\* OR c\:\\program\ files\\microsoft\\edgecore\\*))
+        AND (process.executable.keyword:(*\\msedge.exe OR *\\msedgewebview2.exe)))
+        OR process.executable.keyword:*\\appdata\\local\\microsoft\\onedrive\\onedrive.exe
+        OR (NOT _exists_:process.executable)))
 type: any
 priority: 1
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1574.002
+risk: low

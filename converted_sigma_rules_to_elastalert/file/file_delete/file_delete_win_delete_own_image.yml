@@ -1,11 +1,15 @@
 description: |
   Detects the deletion of a process's executable by itself. This is usually not possible without workarounds and may be used by malware to hide its traces.
-  
+
 name: Process Deletion of Its Own Executable
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: file.path.keyword:image
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

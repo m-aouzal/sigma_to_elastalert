@@ -1,10 +1,16 @@
 description: |
   Detects the use of the spoolss named pipe over SMB. This can be used to trigger the authentication via NTLM of any machine that has the spoolservice enabled.
 name: DCERPC SMB Spoolss Named Pipe
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:5145 AND winlog.event_data.ShareName.keyword:\\\\\*\\ipc$ AND winlog.event_data.RelativeTargetName.keyword:spoolss)
+      query: winlog.channel.keyword:security AND (event.code.keyword:5145 AND winlog.event_data.ShareName.keyword:\\\\\*\\ipc$
+        AND winlog.event_data.RelativeTargetName.keyword:spoolss)
 type: any
 priority: 2
+mitre_attack_tactic:
+- lateral-movement
+mitre_attack_technique:
+- t1021.002
+risk: medium

@@ -1,10 +1,18 @@
 description: |
   Detects the use of the PowerShell "Set-Service" cmdlet to change the startup type of a service to "disabled" or "manual"
 name: Service StartupType Change Via PowerShell Set-Service
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\powershell.exe OR winlog.event_data.originalfilename.keyword:powershell.exe) AND ((process.command_line.keyword:*set\-service* AND process.command_line.keyword:*\-startuptype*) AND (process.command_line.keyword:(*disabled* OR *manual*)))
+      query: (winlog.event_data.image.keyword:*\\powershell.exe OR winlog.event_data.originalfilename.keyword:powershell.exe)
+        AND ((process.command_line.keyword:*set\-service* AND process.command_line.keyword:*\-startuptype*)
+        AND (process.command_line.keyword:(*disabled* OR *manual*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: medium

@@ -1,10 +1,18 @@
 description: |
   Detects the execution of "whoami.exe" with the "/all" flag
 name: Enumerate All Information With Whoami.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\whoami.exe OR winlog.event_data.originalfilename.keyword:whoami.exe) AND process.command_line.keyword:(*\ \-all* OR *\ \/all* OR *\ –all* OR *\ —all* OR *\ ―all*)
+      query: (winlog.event_data.image.keyword:*\\whoami.exe OR winlog.event_data.originalfilename.keyword:whoami.exe)
+        AND process.command_line.keyword:(*\ \-all* OR *\ \/all* OR *\ –all* OR *\
+        —all* OR *\ ―all*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1033
+- car.2016-03-001
+risk: medium

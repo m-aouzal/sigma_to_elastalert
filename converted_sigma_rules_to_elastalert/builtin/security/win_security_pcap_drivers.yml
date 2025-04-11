@@ -1,10 +1,18 @@
 description: |
   Detects Windows Pcap driver installation based on a list of associated .sys files.
 name: Windows Pcap Drivers
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:4697 AND (winlog.event_data.ServiceFileName.keyword:(*pcap* OR *npcap* OR *npf* OR *nm3* OR *ndiscap* OR *nmnt* OR *windivert* OR *usbpcap* OR *pktmon*)))
+      query: winlog.channel.keyword:security AND (event.code.keyword:4697 AND (winlog.event_data.ServiceFileName.keyword:(*pcap*
+        OR *npcap* OR *npf* OR *nm3* OR *ndiscap* OR *nmnt* OR *windivert* OR *usbpcap*
+        OR *pktmon*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+- credential-access
+mitre_attack_technique:
+- t1040
+risk: medium

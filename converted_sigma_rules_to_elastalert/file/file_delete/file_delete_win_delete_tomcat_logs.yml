@@ -1,10 +1,16 @@
 description: |
   Detects the deletion of tomcat WebServer logs which may indicate an attempt to destroy forensic evidence
 name: Tomcat WebServer Logs Deleted
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:*\\tomcat* AND file.path.keyword:*\\logs\\*) AND (file.path.keyword:(*catalina.* OR *_access_log.* OR *localhost.*))
+      query: (file.path.keyword:*\\tomcat* AND file.path.keyword:*\\logs\\*) AND (file.path.keyword:(*catalina.*
+        OR *_access_log.* OR *localhost.*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1070
+risk: medium

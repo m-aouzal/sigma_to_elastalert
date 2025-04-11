@@ -1,10 +1,17 @@
 description: |
   Detects powershell script installed as a Service
 name: PowerShell Scripts Installed as Services
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045 AND (winlog.event_data.ImagePath.keyword:(*powershell* OR *pwsh*)))
+      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\
+        control\ manager AND event.code.keyword:7045 AND (winlog.event_data.ImagePath.keyword:(*powershell*
+        OR *pwsh*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1569.002
+risk: high

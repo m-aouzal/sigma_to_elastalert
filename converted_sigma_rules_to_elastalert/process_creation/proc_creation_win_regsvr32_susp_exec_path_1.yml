@@ -1,10 +1,18 @@
 description: |
   Detects execution of regsvr32 where the DLL is located in a potentially suspicious location.
 name: Regsvr32 Execution From Potential Suspicious Location
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\regsvr32.exe OR winlog.event_data.originalfilename.keyword:regsvr32.exe) AND (process.command_line.keyword:(*\:\\programdata\\* OR *\:\\temp\\* OR *\:\\users\\public\\* OR *\:\\windows\\temp\\* OR *\\appdata\\local\\temp\\* OR *\\appdata\\roaming\\*))
+      query: (winlog.event_data.image.keyword:*\\regsvr32.exe OR winlog.event_data.originalfilename.keyword:regsvr32.exe)
+        AND (process.command_line.keyword:(*\:\\programdata\\* OR *\:\\temp\\* OR
+        *\:\\users\\public\\* OR *\:\\windows\\temp\\* OR *\\appdata\\local\\temp\\*
+        OR *\\appdata\\roaming\\*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218.010
+risk: medium

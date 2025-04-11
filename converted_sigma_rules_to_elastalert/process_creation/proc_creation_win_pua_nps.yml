@@ -1,10 +1,18 @@
 description: |
   Detects the use of NPS, a port forwarding and intranet penetration proxy server
 name: PUA - NPS Tunneling Tool Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\npc.exe OR (process.command_line.keyword:*\ \-server\=* AND process.command_line.keyword:*\ \-vkey\=* AND process.command_line.keyword:*\ \-password\=*) OR process.command_line.keyword:*\ \-config\=npc* OR (winlog.event_data.Hashes.keyword:(*md5\=ae8acf66bfe3a44148964048b826d005* OR *sha1\=cea49e9b9b67f3a13ad0be1c2655293ea3c18181* OR *sha256\=5a456283392ffceeeaca3d3426c306eb470304637520d72fed1cc1febbbd6856*))
+      query: process.executable.keyword:*\\npc.exe OR (process.command_line.keyword:*\
+        \-server\=* AND process.command_line.keyword:*\ \-vkey\=* AND process.command_line.keyword:*\
+        \-password\=*) OR process.command_line.keyword:*\ \-config\=npc* OR (winlog.event_data.Hashes.keyword:(*md5\=ae8acf66bfe3a44148964048b826d005*
+        OR *sha1\=cea49e9b9b67f3a13ad0be1c2655293ea3c18181* OR *sha256\=5a456283392ffceeeaca3d3426c306eb470304637520d72fed1cc1febbbd6856*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1090
+risk: high

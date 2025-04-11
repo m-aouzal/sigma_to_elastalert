@@ -1,10 +1,18 @@
 description: |
   Detects potential DLL sideloading of "mfdetours.dll". While using "mftrace.exe" it can be abused to attach to an arbitrary process and force load any DLL named "mfdetours.dll" from the current directory of execution.
 name: Potential Mfdetours.DLL Sideloading
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\\mfdetours.dll AND (NOT file.path.keyword:*\:\\program\ files\ \(x86\)\\windows\ kits\\10\\bin\\*)
+      query: file.path.keyword:*\\mfdetours.dll AND (NOT file.path.keyword:*\:\\program\
+        files\ \(x86\)\\windows\ kits\\10\\bin\\*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: medium

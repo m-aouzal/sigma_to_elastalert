@@ -1,10 +1,17 @@
 description: |
   Detects when an attacker tries to backdoor the MSSQL server by adding a backdoor account to the sysadmin fixed server role
 name: MSSQL Add Account To Sysadmin Role
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:application AND (winlog.provider_name.keyword:*mssql* AND event.code.keyword:33205 AND (winlog.event_data.Data.keyword:*object_name\:sysadmin* AND winlog.event_data.Data.keyword:*statement\:alter\ server\ role\ \[sysadmin\]\ add\ member\ *))
+      query: winlog.channel.keyword:application AND (winlog.provider_name.keyword:*mssql*
+        AND event.code.keyword:33205 AND (winlog.event_data.Data.keyword:*object_name\:sysadmin*
+        AND winlog.event_data.Data.keyword:*statement\:alter\ server\ role\ \[sysadmin\]\
+        add\ member\ *))
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique: []
+risk: high

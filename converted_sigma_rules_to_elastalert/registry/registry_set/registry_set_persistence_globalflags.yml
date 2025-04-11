@@ -1,10 +1,22 @@
 description: |
   Detects registry persistence technique using the GlobalFlags and SilentProcessExit keys
 name: Potential Persistence Via GlobalFlags
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\\microsoft\\windows\ nt\\currentversion\\* AND registry.path.keyword:*\\image\ file\ execution\ options\\* AND registry.path.keyword:*\\globalflag*) OR ((registry.path.keyword:*\\microsoft\\windows\ nt\\currentversion\\* AND registry.path.keyword:*\\silentprocessexit\\*) AND (registry.path.keyword:(*\\reportingmode* OR *\\monitorprocess*)))
+      query: (registry.path.keyword:*\\microsoft\\windows\ nt\\currentversion\\* AND
+        registry.path.keyword:*\\image\ file\ execution\ options\\* AND registry.path.keyword:*\\globalflag*)
+        OR ((registry.path.keyword:*\\microsoft\\windows\ nt\\currentversion\\* AND
+        registry.path.keyword:*\\silentprocessexit\\*) AND (registry.path.keyword:(*\\reportingmode*
+        OR *\\monitorprocess*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- privilege-escalation
+- persistence
+- defense-evasion
+mitre_attack_technique:
+- t1546.012
+- car.2013-01-002
+risk: high

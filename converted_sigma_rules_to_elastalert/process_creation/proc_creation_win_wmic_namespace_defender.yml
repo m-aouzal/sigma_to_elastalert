@@ -1,10 +1,17 @@
 description: |
   Detects potential tampering with Windows Defender settings such as adding exclusion using wmic
 name: Potential Windows Defender Tampering Via Wmic.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:wmic.exe OR winlog.event_data.image.keyword:*\\wmic.exe) AND process.command_line.keyword:*\/namespace\:\\\\root\\microsoft\\windows\\defender*
+      query: (winlog.event_data.originalfilename.keyword:wmic.exe OR winlog.event_data.image.keyword:*\\wmic.exe)
+        AND 
+        process.command_line.keyword:*\/namespace\:\\\\root\\microsoft\\windows\\defender*
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1546.008
+risk: high

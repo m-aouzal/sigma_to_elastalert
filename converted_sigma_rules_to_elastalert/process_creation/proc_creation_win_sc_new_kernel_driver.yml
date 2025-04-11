@@ -1,10 +1,18 @@
 description: |
   Detects creation of a new service (kernel driver) with the type "kernel"
 name: New Kernel Driver Via SC.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\sc.exe AND (process.command_line.keyword:(*create* OR *config*)) AND (process.command_line.keyword:*binpath* AND process.command_line.keyword:*type* AND process.command_line.keyword:*kernel*)
+      query: process.executable.keyword:*\\sc.exe AND (process.command_line.keyword:(*create*
+        OR *config*)) AND (process.command_line.keyword:*binpath* AND process.command_line.keyword:*type*
+        AND process.command_line.keyword:*kernel*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1543.003
+risk: medium

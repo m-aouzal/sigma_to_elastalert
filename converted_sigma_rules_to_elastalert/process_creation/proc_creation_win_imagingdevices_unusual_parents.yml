@@ -1,10 +1,17 @@
 description: |
   Detects unusual parent or children of the ImagingDevices.exe (Windows Contacts) process as seen being used with Bumblebee activity
 name: ImagingDevices Unusual Parent/Child Processes
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((process.parent.executable.keyword:(*\\wmiprvse.exe OR *\\svchost.exe OR *\\dllhost.exe)) AND process.executable.keyword:*\\imagingdevices.exe) OR process.parent.executable.keyword:*\\imagingdevices.exe
+      query: ((process.parent.executable.keyword:(*\\wmiprvse.exe OR *\\svchost.exe
+        OR *\\dllhost.exe)) AND process.executable.keyword:*\\imagingdevices.exe)
+        OR process.parent.executable.keyword:*\\imagingdevices.exe
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique: []
+risk: high

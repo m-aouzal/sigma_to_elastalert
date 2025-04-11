@@ -1,10 +1,17 @@
 description: |
   Detects PowerShell creating a PowerShell file (.ps1). While often times this behavior is benign, sometimes it can be a sign of a dropper script trying to achieve persistence.
 name: PowerShell Script Dropped Via PowerShell.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND file.path.keyword:*.ps1) AND (NOT (file.path.keyword:*__psscriptpolicytest_* OR (file.path.keyword:c\:\\users\\* AND file.path.keyword:*\\appdata\\local\\temp\\*) OR file.path.keyword:c\:\\windows\\temp\\*))
+      query: ((process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND
+        file.path.keyword:*.ps1) AND (NOT (file.path.keyword:*__psscriptpolicytest_*
+        OR (file.path.keyword:c\:\\users\\* AND file.path.keyword:*\\appdata\\local\\temp\\*)
+        OR file.path.keyword:c\:\\windows\\temp\\*))
 type: any
 priority: 1
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique: []
+risk: low

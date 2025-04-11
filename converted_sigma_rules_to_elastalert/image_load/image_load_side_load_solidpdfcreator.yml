@@ -1,10 +1,19 @@
 description: |
   Detects potential DLL sideloading of "SolidPDFCreator.dll"
 name: Potential SolidPDFCreator.DLL Sideloading
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\\solidpdfcreator.dll AND (NOT (process.executable.keyword:*\\solidpdfcreator.exe AND (file.path.keyword:(c\:\\program\ files\ \(x86\)\\soliddocuments\\solidpdfcreator\\* OR c\:\\program\ files\\soliddocuments\\solidpdfcreator\\*))))
+      query: file.path.keyword:*\\solidpdfcreator.dll AND (NOT (process.executable.keyword:*\\solidpdfcreator.exe
+        AND (file.path.keyword:(c\:\\program\ files\ \(x86\)\\soliddocuments\\solidpdfcreator\\*
+        OR c\:\\program\ files\\soliddocuments\\solidpdfcreator\\*))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: medium

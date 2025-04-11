@@ -1,10 +1,58 @@
 description: |
   Detects PowerShell command line contents that include a suspicious abnormal casing in the Net.Webclient (e.g. nEt.WEbCliEnT) string as used in obfuscation techniques
 name: Net WebClient Casing Anomalies
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (process.command_line.keyword:(*tgblafqalgb3aeuaqg* OR *4azqbuac4adwbfaeia* OR *oaguavaauahcarqbca* OR *bgbfahqalgb3aguayg* OR *4arqb0ac4adwblagia* OR *uaeuadaauahcazqbia* OR *tgbfahqalgb3aguayg* OR *oaeuadaauahcazqbia* OR *bgblafqalgb3aguayg* OR *4azqbuac4adwblagia* OR *uaguavaauahcazqbia* OR *tgblafqalgb3aguayg* OR *oaguavaauahcazqbia* OR *bgbfafqalgb3aguayg* OR *4arqbuac4adwblagia* OR *uaeuavaauahcazqbia* OR *bgblahqalgbxaguayg* OR *4azqb0ac4avwblagia* OR *uaguadaauafcazqbia* OR *bgbfahqalgbxaguayg* OR *4arqb0ac4avwblagia* OR *uaeuadaauafcazqbia* OR *tgbfahqalgbxaguayg* OR *oaeuadaauafcazqbia* OR *bgblafqalgbxaguayg* OR *4azqbuac4avwblagia* OR *uaguavaauafcazqbia* OR *tgblafqalgbxaguayg* OR *oaguavaauafcazqbia* OR *bgbfafqalgbxaguayg* OR *4arqbuac4avwblagia* OR *uaeuavaauafcazqbia* OR *bgblahqalgb3aeuayg* OR *4azqb0ac4adwbfagia* OR *uaguadaauahcarqbia* OR *tgblahqalgb3aeuayg* OR *oaguadaauahcarqbia* OR *bgbfahqalgb3aeuayg* OR *4arqb0ac4adwbfagia* OR *uaeuadaauahcarqbia* OR *tgbfahqalgb3aeuayg* OR *oaeuadaauahcarqbia* OR *bgblafqalgb3aeuayg* OR *4azqbuac4adwbfagia* OR *uaguavaauahcarqbia* OR *tgblafqalgb3aeuayg* OR *oaguavaauahcarqbia* OR *bgbfafqalgb3aeuayg* OR *4arqbuac4adwbfagia* OR *uaeuavaauahcarqbia* OR *tgbfafqalgb3aeuayg* OR *oaeuavaauahcarqbia* OR *bgblahqalgbxaeuayg* OR *4azqb0ac4avwbfagia* OR *uaguadaauafcarqbia* OR *tgblahqalgbxaeuayg* OR *oaguadaauafcarqbia* OR *bgbfahqalgbxaeuayg* OR *4arqb0ac4avwbfagia* OR *uaeuadaauafcarqbia* OR *tgbfahqalgbxaeuayg* OR *oaeuadaauafcarqbia* OR *bgblafqalgbxaeuayg* OR *4azqbuac4avwbfagia* OR *uaguavaauafcarqbia* OR *tgblafqalgbxaeuayg* OR *oaguavaauafcarqbia* OR *bgbfafqalgbxaeuayg* OR *4arqbuac4avwbfagia* OR *uaeuavaauafcarqbia* OR *tgbfafqalgbxaeuayg* OR *oaeuavaauafcarqbia* OR *bgblahqalgb3aguaqg* OR *4azqb0ac4adwblaeia* OR *uaguadaauahcazqbca* OR *tgblahqalgb3aguaqg* OR *oaguadaauahcazqbca* OR *bgbfahqalgb3aguaqg* OR *4arqb0ac4adwblaeia* OR *uaeuadaauahcazqbca* OR *tgbfahqalgb3aguaqg* OR *oaeuadaauahcazqbca* OR *bgblafqalgb3aguaqg* OR *4azqbuac4adwblaeia* OR *uaguavaauahcazqbca* OR *tgblafqalgb3aguaqg* OR *oaguavaauahcazqbca* OR *bgbfafqalgb3aguaqg* OR *4arqbuac4adwblaeia* OR *uaeuavaauahcazqbca* OR *tgbfafqalgb3aguaqg* OR *oaeuavaauahcazqbca* OR *bgblahqalgbxaguaqg* OR *4azqb0ac4avwblaeia* OR *uaguadaauafcazqbca* OR *tgblahqalgbxaguaqg* OR *oaguadaauafcazqbca* OR *bgbfahqalgbxaguaqg* OR *4arqb0ac4avwblaeia* OR *uaeuadaauafcazqbca* OR *tgbfahqalgbxaguaqg* OR *oaeuadaauafcazqbca* OR *bgblafqalgbxaguaqg* OR *4azqbuac4avwblaeia* OR *uaguavaauafcazqbca* OR *tgblafqalgbxaguaqg* OR *oaguavaauafcazqbca* OR *bgbfafqalgbxaguaqg* OR *4arqbuac4avwblaeia* OR *uaeuavaauafcazqbca* OR *tgbfafqalgbxaguaqg* OR *oaeuavaauafcazqbca* OR *bgblahqalgb3aeuaqg* OR *4azqb0ac4adwbfaeia* OR *uaguadaauahcarqbca* OR *tgblahqalgb3aeuaqg* OR *oaguadaauahcarqbca* OR *bgbfahqalgb3aeuaqg* OR *4arqb0ac4adwbfaeia* OR *uaeuadaauahcarqbca* OR *tgbfahqalgb3aeuaqg* OR *oaeuadaauahcarqbca* OR *bgblafqalgb3aeuaqg* OR *uaguavaauahcarqbca* OR *bgbfafqalgb3aeuaqg* OR *4arqbuac4adwbfaeia* OR *uaeuavaauahcarqbca* OR *tgbfafqalgb3aeuaqg* OR *oaeuavaauahcarqbca* OR *tgblahqalgbxaeuaqg* OR *4azqb0ac4avwbfaeia* OR *oaguadaauafcarqbca* OR *bgbfahqalgbxaeuaqg* OR *4arqb0ac4avwbfaeia* OR *uaeuadaauafcarqbca* OR *tgbfahqalgbxaeuaqg* OR *oaeuadaauafcarqbca* OR *bgblafqalgbxaeuaqg* OR *4azqbuac4avwbfaeia* OR *uaguavaauafcarqbca* OR *tgblafqalgbxaeuaqg* OR *oaguavaauafcarqbca* OR *bgbfafqalgbxaeuaqg* OR *4arqbuac4avwbfaeia* OR *uaeuavaauafcarqbca*))
+      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe))
+        OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll)))
+        AND (process.command_line.keyword:(*tgblafqalgb3aeuaqg* OR *4azqbuac4adwbfaeia*
+        OR *oaguavaauahcarqbca* OR *bgbfahqalgb3aguayg* OR *4arqb0ac4adwblagia* OR
+        *uaeuadaauahcazqbia* OR *tgbfahqalgb3aguayg* OR *oaeuadaauahcazqbia* OR *bgblafqalgb3aguayg*
+        OR *4azqbuac4adwblagia* OR *uaguavaauahcazqbia* OR *tgblafqalgb3aguayg* OR
+        *oaguavaauahcazqbia* OR *bgbfafqalgb3aguayg* OR *4arqbuac4adwblagia* OR *uaeuavaauahcazqbia*
+        OR *bgblahqalgbxaguayg* OR *4azqb0ac4avwblagia* OR *uaguadaauafcazqbia* OR
+        *bgbfahqalgbxaguayg* OR *4arqb0ac4avwblagia* OR *uaeuadaauafcazqbia* OR *tgbfahqalgbxaguayg*
+        OR *oaeuadaauafcazqbia* OR *bgblafqalgbxaguayg* OR *4azqbuac4avwblagia* OR
+        *uaguavaauafcazqbia* OR *tgblafqalgbxaguayg* OR *oaguavaauafcazqbia* OR *bgbfafqalgbxaguayg*
+        OR *4arqbuac4avwblagia* OR *uaeuavaauafcazqbia* OR *bgblahqalgb3aeuayg* OR
+        *4azqb0ac4adwbfagia* OR *uaguadaauahcarqbia* OR *tgblahqalgb3aeuayg* OR *oaguadaauahcarqbia*
+        OR *bgbfahqalgb3aeuayg* OR *4arqb0ac4adwbfagia* OR *uaeuadaauahcarqbia* OR
+        *tgbfahqalgb3aeuayg* OR *oaeuadaauahcarqbia* OR *bgblafqalgb3aeuayg* OR *4azqbuac4adwbfagia*
+        OR *uaguavaauahcarqbia* OR *tgblafqalgb3aeuayg* OR *oaguavaauahcarqbia* OR
+        *bgbfafqalgb3aeuayg* OR *4arqbuac4adwbfagia* OR *uaeuavaauahcarqbia* OR *tgbfafqalgb3aeuayg*
+        OR *oaeuavaauahcarqbia* OR *bgblahqalgbxaeuayg* OR *4azqb0ac4avwbfagia* OR
+        *uaguadaauafcarqbia* OR *tgblahqalgbxaeuayg* OR *oaguadaauafcarqbia* OR *bgbfahqalgbxaeuayg*
+        OR *4arqb0ac4avwbfagia* OR *uaeuadaauafcarqbia* OR *tgbfahqalgbxaeuayg* OR
+        *oaeuadaauafcarqbia* OR *bgblafqalgbxaeuayg* OR *4azqbuac4avwbfagia* OR *uaguavaauafcarqbia*
+        OR *tgblafqalgbxaeuayg* OR *oaguavaauafcarqbia* OR *bgbfafqalgbxaeuayg* OR
+        *4arqbuac4avwbfagia* OR *uaeuavaauafcarqbia* OR *tgbfafqalgbxaeuayg* OR *oaeuavaauafcarqbia*
+        OR *bgblahqalgb3aguaqg* OR *4azqb0ac4adwblaeia* OR *uaguadaauahcazqbca* OR
+        *tgblahqalgb3aguaqg* OR *oaguadaauahcazqbca* OR *bgbfahqalgb3aguaqg* OR *4arqb0ac4adwblaeia*
+        OR *uaeuadaauahcazqbca* OR *tgbfahqalgb3aguaqg* OR *oaeuadaauahcazqbca* OR
+        *bgblafqalgb3aguaqg* OR *4azqbuac4adwblaeia* OR *uaguavaauahcazqbca* OR *tgblafqalgb3aguaqg*
+        OR *oaguavaauahcazqbca* OR *bgbfafqalgb3aguaqg* OR *4arqbuac4adwblaeia* OR
+        *uaeuavaauahcazqbca* OR *tgbfafqalgb3aguaqg* OR *oaeuavaauahcazqbca* OR *bgblahqalgbxaguaqg*
+        OR *4azqb0ac4avwblaeia* OR *uaguadaauafcazqbca* OR *tgblahqalgbxaguaqg* OR
+        *oaguadaauafcazqbca* OR *bgbfahqalgbxaguaqg* OR *4arqb0ac4avwblaeia* OR *uaeuadaauafcazqbca*
+        OR *tgbfahqalgbxaguaqg* OR *oaeuadaauafcazqbca* OR *bgblafqalgbxaguaqg* OR
+        *4azqbuac4avwblaeia* OR *uaguavaauafcazqbca* OR *tgblafqalgbxaguaqg* OR *oaguavaauafcazqbca*
+        OR *bgbfafqalgbxaguaqg* OR *4arqbuac4avwblaeia* OR *uaeuavaauafcazqbca* OR
+        *tgbfafqalgbxaguaqg* OR *oaeuavaauafcazqbca* OR *bgblahqalgb3aeuaqg* OR *4azqb0ac4adwbfaeia*
+        OR *uaguadaauahcarqbca* OR *tgblahqalgb3aeuaqg* OR *oaguadaauahcarqbca* OR
+        *bgbfahqalgb3aeuaqg* OR *4arqb0ac4adwbfaeia* OR *uaeuadaauahcarqbca* OR *tgbfahqalgb3aeuaqg*
+        OR *oaeuadaauahcarqbca* OR *bgblafqalgb3aeuaqg* OR *uaguavaauahcarqbca* OR
+        *bgbfafqalgb3aeuaqg* OR *4arqbuac4adwbfaeia* OR *uaeuavaauahcarqbca* OR *tgbfafqalgb3aeuaqg*
+        OR *oaeuavaauahcarqbca* OR *tgblahqalgbxaeuaqg* OR *4azqb0ac4avwbfaeia* OR
+        *oaguadaauafcarqbca* OR *bgbfahqalgbxaeuaqg* OR *4arqb0ac4avwbfaeia* OR *uaeuadaauafcarqbca*
+        OR *tgbfahqalgbxaeuaqg* OR *oaeuadaauafcarqbca* OR *bgblafqalgbxaeuaqg* OR
+        *4azqbuac4avwbfaeia* OR *uaguavaauafcarqbca* OR *tgblafqalgbxaeuaqg* OR *oaguavaauafcarqbca*
+        OR *bgbfafqalgbxaeuaqg* OR *4arqbuac4avwbfaeia* OR *uaeuavaauafcarqbca*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: high

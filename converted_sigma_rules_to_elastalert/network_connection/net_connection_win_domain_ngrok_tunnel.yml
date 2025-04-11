@@ -2,12 +2,25 @@ description: |
   Detects an executable initiating a network connection to "ngrok" tunneling domains.
   Attackers were seen using this "ngrok" in order to store their second stage payloads and malware.
   While communication with such domains can be legitimate, often times is a sign of either data exfiltration by malicious actors or additional download.
-  
+
 name: Communication To Ngrok Tunneling Service Initiated
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: destination.domain.keyword:(*tunnel.us.ngrok.com* OR *tunnel.eu.ngrok.com* OR *tunnel.ap.ngrok.com* OR *tunnel.au.ngrok.com* OR *tunnel.sa.ngrok.com* OR *tunnel.jp.ngrok.com* OR *tunnel.in.ngrok.com*)
+      query: destination.domain.keyword:(*tunnel.us.ngrok.com* OR *tunnel.eu.ngrok.com*
+        OR *tunnel.ap.ngrok.com* OR *tunnel.au.ngrok.com* OR *tunnel.sa.ngrok.com*
+        OR *tunnel.jp.ngrok.com* OR *tunnel.in.ngrok.com*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- exfiltration
+- command-and-control
+mitre_attack_technique:
+- t1567
+- t1568.002
+- t1572
+- t1090
+- t1102
+- s0508
+risk: high

@@ -2,12 +2,19 @@ description: |
   This rule will collect the data needed to start looking into possible kerberoasting activity.
   Further analysis or computation within the query is needed focusing on requests from one specific host/IP towards multiple service names within a time period of 5 seconds.
   You can then set a threshold for the number of requests and time between the requests to turn this into an alert.
-  
+
 name: Kerberoasting Activity - Initial Query
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND ((event.code.keyword:4769 AND winlog.event_data.Status.keyword:0x0 AND winlog.event_data.TicketEncryptionType.keyword:0x17) AND (NOT ((service.name.keyword:(*krbtgt OR *$)) AND winlog.event_data.TargetUserName.keyword:*$@*)))
+      query: winlog.channel.keyword:security AND ((event.code.keyword:4769 AND winlog.event_data.Status.keyword:0x0
+        AND winlog.event_data.TicketEncryptionType.keyword:0x17) AND (NOT ((service.name.keyword:(*krbtgt
+        OR *$)) AND winlog.event_data.TargetUserName.keyword:*$@*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1558.003
+risk: medium

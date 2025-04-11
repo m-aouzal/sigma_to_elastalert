@@ -1,10 +1,14 @@
 description: |
   Detect the use of processes with no name (".exe"), which can be used to evade Image-based detections.
 name: Process Launched Without Image Name
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:*\\.exe
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

@@ -1,12 +1,19 @@
 description: |
   Detects the creation of the PROCEXP152.sys file in the application-data local temporary folder.
   This driver is used by Sysinternals Process Explorer but also by KDU (https://github.com/hfiref0x/KDU) or Ghost-In-The-Logs (https://github.com/bats3c/Ghost-In-The-Logs), which uses KDU.
-  
+
 name: Suspicious PROCEXP152.sys File Created In TMP
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:*\\appdata\\local\\temp\\* AND file.path.keyword:*procexp152.sys) AND (NOT (process.executable.keyword:(*\\procexp64.exe* OR *\\procexp.exe* OR *\\procmon64.exe* OR *\\procmon.exe*)))
+      query: (file.path.keyword:*\\appdata\\local\\temp\\* AND file.path.keyword:*procexp152.sys)
+        AND (NOT (process.executable.keyword:(*\\procexp64.exe* OR *\\procexp.exe*
+        OR *\\procmon64.exe* OR *\\procmon.exe*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: medium

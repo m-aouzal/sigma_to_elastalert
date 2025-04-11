@@ -1,10 +1,19 @@
 description: |
   Detects the usage of "reg.exe" to add Defender folder exclusions. Qbot has been seen using this technique to add exclusions for folders within AppData and ProgramData.
 name: Suspicious Windows Defender Folder Exclusion Added Via Reg.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\reg.exe AND (process.command_line.keyword:(*software\\microsoft\\windows\ defender\\exclusions\\paths* OR *software\\microsoft\\microsoft\ antimalware\\exclusions\\paths*)) AND (process.command_line.keyword:*add\ * AND process.command_line.keyword:*\/t\ * AND process.command_line.keyword:*reg_dword\ * AND process.command_line.keyword:*\/v\ * AND process.command_line.keyword:*\/d\ * AND process.command_line.keyword:*0*)
+      query: process.executable.keyword:*\\reg.exe AND (process.command_line.keyword:(*software\\microsoft\\windows\
+        defender\\exclusions\\paths* OR *software\\microsoft\\microsoft\ antimalware\\exclusions\\paths*))
+        AND (process.command_line.keyword:*add\ * AND process.command_line.keyword:*\/t\
+        * AND process.command_line.keyword:*reg_dword\ * AND process.command_line.keyword:*\/v\
+        * AND process.command_line.keyword:*\/d\ * AND process.command_line.keyword:*0*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: medium

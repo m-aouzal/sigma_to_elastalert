@@ -2,12 +2,21 @@ description: |
   Adversaries may acquire credentials from web browsers by reading files specific to the target browser.
   Web browsers commonly save credentials such as website usernames and passwords so that they do not need to be entered manually in the future.
   Web browsers typically store the credentials in an encrypted format within a credential store.
-  
+
 name: Access to Browser Login Data
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*copy\-item* AND powershell.file.script_block_text.keyword:*\-destination*) AND (powershell.file.script_block_text.keyword:(*\\opera\ software\\opera\ stable\\login\ data* OR *\\mozilla\\firefox\\profiles* OR *\\microsoft\\edge\\user\ data\\default* OR *\\google\\chrome\\user\ data\\default\\login\ data* OR *\\google\\chrome\\user\ data\\default\\login\ data\ for\ account*))
+      query: (powershell.file.script_block_text.keyword:*copy\-item* AND powershell.file.script_block_text.keyword:*\-destination*)
+        AND (powershell.file.script_block_text.keyword:(*\\opera\ software\\opera\
+        stable\\login\ data* OR *\\mozilla\\firefox\\profiles* OR *\\microsoft\\edge\\user\
+        data\\default* OR *\\google\\chrome\\user\ data\\default\\login\ data* OR
+        *\\google\\chrome\\user\ data\\default\\login\ data\ for\ account*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1555.003
+risk: medium

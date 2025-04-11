@@ -1,10 +1,18 @@
 description: |
   Detects technique used by MAZE ransomware to enumerate directories using Powershell
 name: Powershell Directory Enumeration
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*foreach* AND powershell.file.script_block_text.keyword:*get\-childitem* AND powershell.file.script_block_text.keyword:*\-path\ * AND powershell.file.script_block_text.keyword:*\-erroraction\ * AND powershell.file.script_block_text.keyword:*silentlycontinue* AND powershell.file.script_block_text.keyword:*out\-file\ * AND powershell.file.script_block_text.keyword:*\-append*
+      query: powershell.file.script_block_text.keyword:*foreach* AND powershell.file.script_block_text.keyword:*get\-childitem*
+        AND powershell.file.script_block_text.keyword:*\-path\ * AND powershell.file.script_block_text.keyword:*\-erroraction\
+        * AND powershell.file.script_block_text.keyword:*silentlycontinue* AND powershell.file.script_block_text.keyword:*out\-file\
+        * AND powershell.file.script_block_text.keyword:*\-append*
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1083
+risk: medium

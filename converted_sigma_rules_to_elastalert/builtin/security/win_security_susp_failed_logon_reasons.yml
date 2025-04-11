@@ -1,10 +1,20 @@
 description: |
   This method uses uncommon error codes on failed logons to determine suspicious activity and tampering with accounts that have been disabled or somehow restricted.
 name: Account Tampering - Suspicious Failed Logon Reasons
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (((event.code.keyword:(4625 OR 4776)) AND (winlog.event_data.Status.keyword:(0xc0000072 OR 0xc000006f OR 0xc0000070 OR 0xc0000413 OR 0xc000018c OR 0xc000015b))) AND (NOT user.id.keyword:s\-1\-0\-0))
+      query: winlog.channel.keyword:security AND (((event.code.keyword:(4625 OR 4776))
+        AND (winlog.event_data.Status.keyword:(0xc0000072 OR 0xc000006f OR 0xc0000070
+        OR 0xc0000413 OR 0xc000018c OR 0xc000015b))) AND (NOT user.id.keyword:s\-1\-0\-0))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+- defense-evasion
+- privilege-escalation
+- initial-access
+mitre_attack_technique:
+- t1078
+risk: medium

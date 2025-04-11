@@ -1,11 +1,15 @@
 description: |
   Detects changes to the "HVCIDisallowedImages" registry value to potentially add a driver to the list, in order to prevent it from loading.
-  
+
 name: Driver Added To Disallowed Images In HVCI - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: registry.path.keyword:*\\control\\ci\\* AND registry.path.keyword:*\\hvcidisallowedimages*
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: high

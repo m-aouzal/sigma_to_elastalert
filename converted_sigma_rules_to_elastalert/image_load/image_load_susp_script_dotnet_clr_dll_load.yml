@@ -1,10 +1,18 @@
 description: |
   Detects .NET CLR DLLs being loaded by scripting applications such as wscript or cscript. This could be an indication of potential suspicious execution.
 name: DotNet CLR DLL Loaded By Scripting Applications
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\cmstp.exe OR *\\cscript.exe OR *\\mshta.exe OR *\\msxsl.exe OR *\\regsvr32.exe OR *\\wmic.exe OR *\\wscript.exe)) AND (file.path.keyword:(*\\clr.dll OR *\\mscoree.dll OR *\\mscorlib.dll))
+      query: (process.executable.keyword:(*\\cmstp.exe OR *\\cscript.exe OR *\\mshta.exe
+        OR *\\msxsl.exe OR *\\regsvr32.exe OR *\\wmic.exe OR *\\wscript.exe)) AND
+        (file.path.keyword:(*\\clr.dll OR *\\mscoree.dll OR *\\mscorlib.dll))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+- privilege-escalation
+mitre_attack_technique:
+- t1055
+risk: high

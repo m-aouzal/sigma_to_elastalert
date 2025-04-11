@@ -1,10 +1,15 @@
 description: |
   Detects when an attacker modifies the registry key "HtmlHelp Author" to achieve persistence
 name: Potential Persistence Via CHM Helper DLL
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:(*\\software\\microsoft\\htmlhelp\ author\\location* OR *\\software\\wow6432node\\microsoft\\htmlhelp\ author\\location*)
+      query: registry.path.keyword:(*\\software\\microsoft\\htmlhelp\ author\\location*
+        OR *\\software\\wow6432node\\microsoft\\htmlhelp\ author\\location*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique: []
+risk: high

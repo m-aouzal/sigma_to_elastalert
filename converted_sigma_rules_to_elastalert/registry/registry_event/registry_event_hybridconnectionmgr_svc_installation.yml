@@ -1,10 +1,17 @@
 description: |
   Detects the installation of the Azure Hybrid Connection Manager service to allow remote code execution from Azure function.
 name: HybridConnectionManager Service Installation - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\services\\hybridconnectionmanager* OR (winlog.event_data.EventType.keyword:setvalue AND winlog.event_data.Details.keyword:*microsoft.hybridconnectionmanager.listener.exe*)
+      query: registry.path.keyword:*\\services\\hybridconnectionmanager* OR (winlog.event_data.EventType.keyword:setvalue
+        AND 
+        winlog.event_data.Details.keyword:*microsoft.hybridconnectionmanager.listener.exe*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- resource-development
+mitre_attack_technique:
+- t1608
+risk: high

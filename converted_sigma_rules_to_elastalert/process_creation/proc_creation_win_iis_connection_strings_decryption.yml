@@ -1,10 +1,17 @@
 description: |
   Detects use of aspnet_regiis to decrypt Microsoft IIS connection strings. An attacker with Microsoft IIS web server access via a webshell or alike can decrypt and dump any hardcoded connection strings, such as the MSSQL service account password using aspnet_regiis command.
 name: Microsoft IIS Connection Strings Decryption
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\aspnet_regiis.exe OR winlog.event_data.originalfilename.keyword:aspnet_regiis.exe) AND (process.command_line.keyword:*connectionstrings* AND process.command_line.keyword:*\ \-pdf*)
+      query: (winlog.event_data.image.keyword:*\\aspnet_regiis.exe OR winlog.event_data.originalfilename.keyword:aspnet_regiis.exe)
+        AND (process.command_line.keyword:*connectionstrings* AND process.command_line.keyword:*\
+        \-pdf*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003
+risk: high

@@ -1,10 +1,15 @@
 description: |
   Detects the use of the filename DumpStack.log to evade Microsoft Defender
 name: DumpStack.log Defender Evasion
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\dumpstack.log OR process.command_line.keyword:*\ \-o\ dumpstack.log*
+      query: process.executable.keyword:*\\dumpstack.log OR process.command_line.keyword:*\
+        \-o\ dumpstack.log*
 type: any
 priority: 4
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: critical

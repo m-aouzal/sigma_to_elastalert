@@ -1,10 +1,19 @@
 description: |
   Detects suspicious access to the "svchost" process such as that used by Invoke-Phantom to kill the thread of the Windows event logging service.
 name: Suspicious Svchost Process Access
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.TargetImage.keyword:*\:\\windows\\system32\\svchost.exe AND winlog.event_data.GrantedAccess.keyword:0x1f3fff AND winlog.event_data.CallTrace.keyword:*unknown*) AND (NOT (process.executable.keyword:*\:\\program\ files\\microsoft\ visual\ studio\\* AND process.executable.keyword:*\\msbuild\\current\\bin\\msbuild.exe AND (winlog.event_data.CallTrace.keyword:(*microsoft.build.ni.dll* OR *system.ni.dll*))))
+      query: (winlog.event_data.TargetImage.keyword:*\:\\windows\\system32\\svchost.exe
+        AND winlog.event_data.GrantedAccess.keyword:0x1f3fff AND winlog.event_data.CallTrace.keyword:*unknown*)
+        AND (NOT (process.executable.keyword:*\:\\program\ files\\microsoft\ visual\
+        studio\\* AND process.executable.keyword:*\\msbuild\\current\\bin\\msbuild.exe
+        AND (winlog.event_data.CallTrace.keyword:(*microsoft.build.ni.dll* OR *system.ni.dll*))))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.002
+risk: high

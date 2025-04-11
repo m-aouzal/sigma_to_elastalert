@@ -1,11 +1,30 @@
 description: |
   Detects the usage of the "Squirrel.exe" binary to execute arbitrary processes. This binary is part of multiple Electron based software installations (Slack, Teams, Discord, etc.)
-  
+
 name: Process Proxy Execution Via Squirrel.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*\\squirrel.exe OR *\\update.exe)) AND (process.command_line.keyword:(*\-\-processstart* OR *\-\-processstartandwait* OR *\-\-createshortcut*))) AND (NOT ((process.command_line.keyword:*\:\\users\\* AND process.command_line.keyword:*\\appdata\\local\\discord\\update.exe* AND process.command_line.keyword:*\ \-\-processstart* AND process.command_line.keyword:*discord.exe*) OR ((process.command_line.keyword:*\:\\users\\* AND process.command_line.keyword:*\\appdata\\local\\githubdesktop\\update.exe* AND process.command_line.keyword:*githubdesktop.exe*) AND (process.command_line.keyword:(*\-\-createshortcut* OR *\-\-processstartandwait*))) OR ((process.command_line.keyword:*\:\\users\\* AND process.command_line.keyword:*\\appdata\\local\\microsoft\\teams\\update.exe* AND process.command_line.keyword:*teams.exe*) AND (process.command_line.keyword:(*\-\-processstart* OR *\-\-createshortcut*))) OR ((process.command_line.keyword:*\:\\users\\* AND process.command_line.keyword:*\\appdata\\local\\yammerdesktop\\update.exe* AND process.command_line.keyword:*yammer.exe*) AND (process.command_line.keyword:(*\-\-processstart* OR *\-\-createshortcut*)))))
+      query: ((process.executable.keyword:(*\\squirrel.exe OR *\\update.exe)) AND
+        (process.command_line.keyword:(*\-\-processstart* OR *\-\-processstartandwait*
+        OR *\-\-createshortcut*))) AND (NOT ((process.command_line.keyword:*\:\\users\\*
+        AND process.command_line.keyword:*\\appdata\\local\\discord\\update.exe* AND
+        process.command_line.keyword:*\ \-\-processstart* AND process.command_line.keyword:*discord.exe*)
+        OR ((process.command_line.keyword:*\:\\users\\* AND process.command_line.keyword:*\\appdata\\local\\githubdesktop\\update.exe*
+        AND process.command_line.keyword:*githubdesktop.exe*) AND (process.command_line.keyword:(*\-\-createshortcut*
+        OR *\-\-processstartandwait*))) OR ((process.command_line.keyword:*\:\\users\\*
+        AND process.command_line.keyword:*\\appdata\\local\\microsoft\\teams\\update.exe*
+        AND process.command_line.keyword:*teams.exe*) AND (process.command_line.keyword:(*\-\-processstart*
+        OR *\-\-createshortcut*))) OR ((process.command_line.keyword:*\:\\users\\*
+        AND process.command_line.keyword:*\\appdata\\local\\yammerdesktop\\update.exe*
+        AND process.command_line.keyword:*yammer.exe*) AND (process.command_line.keyword:(*\-\-processstart*
+        OR *\-\-createshortcut*)))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1218
+risk: medium

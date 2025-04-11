@@ -1,10 +1,19 @@
 description: |
   Detects the creation of a office macro file from a a suspicious process
 name: Office Macro File Creation From Suspicious Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\cscript.exe OR *\\mshta.exe OR *\\regsvr32.exe OR *\\rundll32.exe OR *\\wscript.exe)) OR (winlog.event_data.parentimage.keyword:(*\\cscript.exe OR *\\mshta.exe OR *\\regsvr32.exe OR *\\rundll32.exe OR *\\wscript.exe))) AND (file.path.keyword:(*.docm OR *.dotm OR *.xlsm OR *.xltm OR *.potm OR *.pptm))
+      query: ((winlog.event_data.image.keyword:(*\\cscript.exe OR *\\mshta.exe OR
+        *\\regsvr32.exe OR *\\rundll32.exe OR *\\wscript.exe)) OR (winlog.event_data.parentimage.keyword:(*\\cscript.exe
+        OR *\\mshta.exe OR *\\regsvr32.exe OR *\\rundll32.exe OR *\\wscript.exe)))
+        AND (file.path.keyword:(*.docm OR *.dotm OR *.xlsm OR *.xltm OR *.potm OR
+        *.pptm))
 type: any
 priority: 3
+mitre_attack_tactic:
+- initial-access
+mitre_attack_technique:
+- t1566.001
+risk: high

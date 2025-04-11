@@ -1,10 +1,16 @@
 description: |
   Detect Attempt PrintNightmare (CVE-2021-1675) Remote code execution in Windows Spooler Service
 name: Suspicious Rejected SMB Guest Logon From IP
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-smbclient\/security AND (event.code.keyword:31017 AND winlog.event_data.UserName.keyword:"" AND winlog.event_data.ServerName.keyword:\\1*)
+      query: winlog.channel.keyword:microsoft\-windows\-smbclient\/security AND (event.code.keyword:31017
+        AND winlog.event_data.UserName.keyword:"" AND winlog.event_data.ServerName.keyword:\\1*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1110.001
+risk: medium

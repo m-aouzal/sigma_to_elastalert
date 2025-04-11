@@ -1,10 +1,17 @@
 description: |
   Detects execution of rundll32 where the DLL being called is stored in an Alternate Data Stream (ADS).
 name: Potential Rundll32 Execution With DLL Stored In ADS
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe) AND process.command_line.keyword:/[rr][uu][nn][dd][ll][ll]32(\.[ee][xx][ee])? \s+?\w:\s+?:/
+      query: (winlog.event_data.image.keyword:*\\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe)
+        AND process.command_line.keyword:/[rr][uu][nn][dd][ll][ll]32(\.[ee][xx][ee])?
+        \s+?\w:\s+?:/
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1564.004
+risk: high

@@ -1,10 +1,21 @@
 description: |
   Detects a suspicious call to Invoke-WebRequest cmdlet where the and output is located in a suspicious location
 name: Suspicious Invoke-WebRequest Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (process.command_line.keyword:(*curl\ * OR *invoke\-webrequest* OR *iwr\ * OR *wget\ *)) AND (process.command_line.keyword:(*\ \-ur* OR *\ \-o*)) AND (process.command_line.keyword:(*\\appdata\\* OR *\\desktop\\* OR *\\temp\\* OR *\\users\\public\\* OR *%appdata%* OR *%public%* OR *%temp%* OR *%tmp%* OR *\:\\windows\\*))
+      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe))
+        OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll)))
+        AND (process.command_line.keyword:(*curl\ * OR *invoke\-webrequest* OR *iwr\
+        * OR *wget\ *)) AND (process.command_line.keyword:(*\ \-ur* OR *\ \-o*)) AND
+        (process.command_line.keyword:(*\\appdata\\* OR *\\desktop\\* OR *\\temp\\*
+        OR *\\users\\public\\* OR *%appdata%* OR *%public%* OR *%temp%* OR *%tmp%*
+        OR *\:\\windows\\*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1105
+risk: high

@@ -1,10 +1,17 @@
 description: |
   The 'LsaRegisterLogonProcess' function verifies that the application making the function call is a logon process by checking that it has the SeTcbPrivilege privilege set. Possible Rubeus tries to get a handle to LSA.
 name: User Couldn't Call a Privileged Service 'LsaRegisterLogonProcess'
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:4673 AND winlog.event_data.Service.keyword:lsaregisterlogonprocess\(\) AND winlog.event_data.Keywords.keyword:0x8010000000000000)
+      query: winlog.channel.keyword:security AND (event.code.keyword:4673 AND winlog.event_data.Service.keyword:lsaregisterlogonprocess\(\)
+        AND winlog.event_data.Keywords.keyword:0x8010000000000000)
 type: any
 priority: 3
+mitre_attack_tactic:
+- lateral-movement
+- privilege-escalation
+mitre_attack_technique:
+- t1558.003
+risk: high

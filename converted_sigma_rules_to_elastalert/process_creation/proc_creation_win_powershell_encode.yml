@@ -1,10 +1,20 @@
 description: |
   Commandline to launch powershell with a base64 payload
 name: Suspicious Execution of Powershell with Base64
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND (process.command_line.keyword:(*\ \-e\ * OR *\ \-en\ * OR *\ \-enc\ * OR *\ \-enco* OR *\ \-ec\ *))) AND (NOT (process.command_line.keyword:*\ \-encoding\ * OR (process.parent.executable.keyword:(*c\:\\packages\\plugins\\microsoft.guestconfiguration.configurationforwindows\\* OR *\\gc_worker.exe*))))
+      query: ((process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND
+        (process.command_line.keyword:(*\ \-e\ * OR *\ \-en\ * OR *\ \-enc\ * OR *\
+        \-enco* OR *\ \-ec\ *))) AND (NOT (process.command_line.keyword:*\ \-encoding\
+        * OR 
+        (process.parent.executable.keyword:(*c\:\\packages\\plugins\\microsoft.guestconfiguration.configurationforwindows\\*
+        OR *\\gc_worker.exe*))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: medium

@@ -1,10 +1,16 @@
 description: |
   Detects the execution of a signed binary dropped by Kaspersky Lab Products Remover (kavremover) which can be abused as a LOLBIN to execute arbitrary commands and binaries.
 name: Kavremover Dropped Binary LOLBIN Usage
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*\ run\ run\-cmd\ * AND (NOT (process.parent.executable.keyword:(*\\cleanapi.exe OR *\\kavremover.exe)))
+      query: process.command_line.keyword:*\ run\ run\-cmd\ * AND (NOT (process.parent.executable.keyword:(*\\cleanapi.exe
+        OR *\\kavremover.exe)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1127
+risk: high

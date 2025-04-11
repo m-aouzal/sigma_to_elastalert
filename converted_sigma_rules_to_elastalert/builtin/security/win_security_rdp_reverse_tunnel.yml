@@ -1,10 +1,23 @@
 description: |
   Detects svchost hosting RDP termsvcs communicating with the loopback address
 name: RDP over Reverse SSH Tunnel WFP
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:5156 AND ((source.port:3389 AND (destination.ip.keyword:(127.* OR \:\:1))) OR (destination.port:3389 AND (source.ip.keyword:(127.* OR \:\:1)))) AND (NOT (winlog.event_data.FilterOrigin.keyword:appcontainer\ loopback OR (process.executable.keyword:(*\\thor.exe OR *\\thor64.exe)))))
+      query: winlog.channel.keyword:security AND (event.code.keyword:5156 AND ((source.port:3389
+        AND (destination.ip.keyword:(127.* OR \:\:1))) OR (destination.port:3389 AND
+        (source.ip.keyword:(127.* OR \:\:1)))) AND (NOT (winlog.event_data.FilterOrigin.keyword:appcontainer\
+        loopback OR (process.executable.keyword:(*\\thor.exe OR *\\thor64.exe)))))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- command-and-control
+- lateral-movement
+mitre_attack_technique:
+- t1090.001
+- t1090.002
+- t1021.001
+- car.2013-07-002
+risk: high

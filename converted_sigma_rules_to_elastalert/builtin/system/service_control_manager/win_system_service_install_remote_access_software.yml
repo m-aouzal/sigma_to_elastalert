@@ -1,10 +1,22 @@
 description: |
   Detects service installation of different remote access tools software. These software are often abused by threat actors to perform
 name: Remote Access Tool Services Have Been Installed - System
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\ control\ manager AND (event.code.keyword:(7045 OR 7036)) AND (winlog.event_data.ServiceName.keyword:(*ammyyadmin* OR *atera* OR *basupportexpresssrvcupdater* OR *basupportexpressstandaloneservice* OR *chromoting* OR *gotoassist* OR *gotomypc* OR *jumpcloud* OR *lmiguardiansvc* OR *logmein* OR *monblanking* OR *parsec* OR *rmanservice* OR *rpcperformanceservice* OR *rpcservice* OR *splashtopremoteservice* OR *ssuservice* OR *teamviewer* OR *tightvnc* OR *vncserver* OR *zoho*)))
+      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\
+        control\ manager AND (event.code.keyword:(7045 OR 7036)) AND (winlog.event_data.ServiceName.keyword:(*ammyyadmin*
+        OR *atera* OR *basupportexpresssrvcupdater* OR *basupportexpressstandaloneservice*
+        OR *chromoting* OR *gotoassist* OR *gotomypc* OR *jumpcloud* OR *lmiguardiansvc*
+        OR *logmein* OR *monblanking* OR *parsec* OR *rmanservice* OR *rpcperformanceservice*
+        OR *rpcservice* OR *splashtopremoteservice* OR *ssuservice* OR *teamviewer*
+        OR *tightvnc* OR *vncserver* OR *zoho*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1543.003
+- t1569.002
+risk: medium

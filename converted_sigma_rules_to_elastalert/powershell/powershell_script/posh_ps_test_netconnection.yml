@@ -1,12 +1,20 @@
 description: |
   Adversaries may communicate using a protocol and port paring that are typically not associated.
   For example, HTTPS over port 8088(Citation: Symantec Elfin Mar 2019) or port 587(Citation: Fortinet Agent Tesla April 2018) as opposed to the traditional port 443.
-  
+
 name: Testing Usage of Uncommonly Used Port
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*test\-netconnection* AND powershell.file.script_block_text.keyword:*\-computername\ * AND powershell.file.script_block_text.keyword:*\-port\ *) AND (NOT (powershell.file.script_block_text.keyword:(*\ 443\ * OR *\ 80\ *)))
+      query: (powershell.file.script_block_text.keyword:*test\-netconnection* AND
+        powershell.file.script_block_text.keyword:*\-computername\ * AND powershell.file.script_block_text.keyword:*\-port\
+        *) AND (NOT (powershell.file.script_block_text.keyword:(*\ 443\ * OR *\ 80\
+        *)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1571
+risk: medium

@@ -1,10 +1,16 @@
 description: |
   Detects the creation of a new office macro files on the systems
 name: Office Macro File Creation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:(*.docm OR *.dotm OR *.xlsm OR *.xltm OR *.potm OR *.pptm)
+      query: file.path.keyword:(*.docm OR *.dotm OR *.xlsm OR *.xltm OR *.potm OR
+        *.pptm)
 type: any
 priority: 1
+mitre_attack_tactic:
+- initial-access
+mitre_attack_technique:
+- t1566.001
+risk: low

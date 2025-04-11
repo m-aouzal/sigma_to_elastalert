@@ -1,10 +1,16 @@
 description: |
   Rule to detect the Hybrid Connection Manager service installation.
 name: HybridConnectionManager Service Installation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:4697 AND service.name.keyword:hybridconnectionmanager AND winlog.event_data.ServiceFileName.keyword:*hybridconnectionmanager*)
+      query: winlog.channel.keyword:security AND (event.code.keyword:4697 AND service.name.keyword:hybridconnectionmanager
+        AND winlog.event_data.ServiceFileName.keyword:*hybridconnectionmanager*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1554
+risk: high

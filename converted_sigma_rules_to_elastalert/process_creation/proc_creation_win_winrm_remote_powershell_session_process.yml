@@ -1,10 +1,16 @@
 description: |
   Detects remote PowerShell sections by monitoring for wsmprovhost (WinRM host process) as a parent or child process (sign of an active PowerShell remote session).
 name: Remote PowerShell Session Host Process (WinRM)
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.image.keyword:*\\wsmprovhost.exe OR winlog.event_data.parentimage.keyword:*\\wsmprovhost.exe
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+- t1021.006
+risk: medium

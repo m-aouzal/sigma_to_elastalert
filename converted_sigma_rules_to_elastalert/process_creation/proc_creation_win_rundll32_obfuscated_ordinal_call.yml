@@ -1,10 +1,17 @@
 description: |
   Detects execution of "rundll32" with potential obfuscated ordinal calls
 name: Potential Obfuscated Ordinal Call Via Rundll32
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe OR winlog.event_data.commandline.keyword:*rundll32*) AND (process.command_line.keyword:(*#\+* OR *#\-* OR *#0* OR *#655* OR *#656*))
+      query: (winlog.event_data.image.keyword:*\\rundll32.exe OR winlog.event_data.originalfilename.keyword:rundll32.exe
+        OR winlog.event_data.commandline.keyword:*rundll32*) AND (process.command_line.keyword:(*#\+*
+        OR *#\-* OR *#0* OR *#655* OR *#656*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1027.010
+risk: medium

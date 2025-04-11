@@ -1,12 +1,26 @@
 description: |
   Adversaries may establish persistence by executing malicious content triggered by user inactivity.
   Screensavers are programs that execute after a configurable time of user inactivity and consist of Portable Executable (PE) files with a .scr file extension
-  
+
 name: Suspicious ScreenSave Change by Reg.exe
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\reg.exe AND (process.command_line.keyword:(*hkey_current_user\\control\ panel\\desktop* OR *hkcu\\control\ panel\\desktop*))) AND ((process.command_line.keyword:*\/v\ screensaveactive* AND process.command_line.keyword:*\/t\ reg_sz* AND process.command_line.keyword:*\/d\ 1* AND process.command_line.keyword:*\/f*) OR (process.command_line.keyword:*\/v\ screensavetimeout* AND process.command_line.keyword:*\/t\ reg_sz* AND process.command_line.keyword:*\/d\ * AND process.command_line.keyword:*\/f*) OR (process.command_line.keyword:*\/v\ screensaverissecure* AND process.command_line.keyword:*\/t\ reg_sz* AND process.command_line.keyword:*\/d\ 0* AND process.command_line.keyword:*\/f*) OR (process.command_line.keyword:*\/v\ scrnsave.exe* AND process.command_line.keyword:*\/t\ reg_sz* AND process.command_line.keyword:*\/d\ * AND process.command_line.keyword:*.scr* AND process.command_line.keyword:*\/f*))
+      query: (process.executable.keyword:*\\reg.exe AND (process.command_line.keyword:(*hkey_current_user\\control\
+        panel\\desktop* OR *hkcu\\control\ panel\\desktop*))) AND ((process.command_line.keyword:*\/v\
+        screensaveactive* AND process.command_line.keyword:*\/t\ reg_sz* AND process.command_line.keyword:*\/d\
+        1* AND process.command_line.keyword:*\/f*) OR (process.command_line.keyword:*\/v\
+        screensavetimeout* AND process.command_line.keyword:*\/t\ reg_sz* AND process.command_line.keyword:*\/d\
+        * AND process.command_line.keyword:*\/f*) OR (process.command_line.keyword:*\/v\
+        screensaverissecure* AND process.command_line.keyword:*\/t\ reg_sz* AND process.command_line.keyword:*\/d\
+        0* AND process.command_line.keyword:*\/f*) OR (process.command_line.keyword:*\/v\
+        scrnsave.exe* AND process.command_line.keyword:*\/t\ reg_sz* AND process.command_line.keyword:*\/d\
+        * AND process.command_line.keyword:*.scr* AND process.command_line.keyword:*\/f*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- privilege-escalation
+mitre_attack_technique:
+- t1546.002
+risk: medium

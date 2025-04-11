@@ -1,10 +1,17 @@
 description: |
   Execution of plink to perform data exfiltration and tunneling
 name: Potential RDP Tunneling Via Plink
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\plink.exe AND process.command_line.keyword:*\:127.0.0.1\:3389*) OR ((process.executable.keyword:*\\plink.exe AND process.command_line.keyword:*\:3389*) AND (process.command_line.keyword:(*\ \-p\ 443* OR *\ \-p\ 22*)))
+      query: (process.executable.keyword:*\\plink.exe AND process.command_line.keyword:*\:127.0.0.1\:3389*)
+        OR ((process.executable.keyword:*\\plink.exe AND process.command_line.keyword:*\:3389*)
+        AND (process.command_line.keyword:(*\ \-p\ 443* OR *\ \-p\ 22*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1572
+risk: high

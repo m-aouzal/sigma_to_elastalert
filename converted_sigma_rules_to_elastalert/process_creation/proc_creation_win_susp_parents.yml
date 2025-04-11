@@ -1,10 +1,19 @@
 description: |
   Detects suspicious parent processes that should not have any children or should only have a single possible child program
 name: Suspicious Process Parents
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:(*\\minesweeper.exe OR *\\winver.exe OR *\\bitsadmin.exe)) OR ((process.parent.executable.keyword:(*\\csrss.exe OR *\\certutil.exe OR *\\eventvwr.exe OR *\\calc.exe OR *\\notepad.exe)) AND (NOT ((process.executable.keyword:(*\\werfault.exe OR *\\wermgr.exe OR *\\conhost.exe OR *\\mmc.exe OR *\\win32calc.exe OR *\\notepad.exe)) OR (NOT _exists_:process.executable))))
+      query: (process.parent.executable.keyword:(*\\minesweeper.exe OR *\\winver.exe
+        OR *\\bitsadmin.exe)) OR ((process.parent.executable.keyword:(*\\csrss.exe
+        OR *\\certutil.exe OR *\\eventvwr.exe OR *\\calc.exe OR *\\notepad.exe)) AND
+        (NOT ((process.executable.keyword:(*\\werfault.exe OR *\\wermgr.exe OR *\\conhost.exe
+        OR *\\mmc.exe OR *\\win32calc.exe OR *\\notepad.exe)) OR (NOT _exists_:process.executable))))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036
+risk: high

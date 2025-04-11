@@ -1,10 +1,15 @@
 description: |
   Detects remote thread creation by PowerShell processes into "lsass.exe"
 name: Potential Credential Dumping Attempt Via PowerShell Remote Thread
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: (process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND winlog.event_data.TargetImage.keyword:*\\lsass.exe
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.001
+risk: high

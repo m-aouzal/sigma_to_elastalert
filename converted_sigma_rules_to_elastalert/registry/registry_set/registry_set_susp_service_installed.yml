@@ -1,12 +1,22 @@
 description: |
   Detects installation of NalDrv or PROCEXP152 services via registry-keys to non-system32 folders.
   Both services are used in the tool Ghost-In-The-Logs (https://github.com/bats3c/Ghost-In-The-Logs), which uses KDU (https://github.com/hfiref0x/KDU)
-  
+
 name: Suspicious Service Installed
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(hklm\\system\\currentcontrolset\\services\\naldrv\\imagepath OR hklm\\system\\currentcontrolset\\services\\procexp152\\imagepath)) AND (NOT ((process.executable.keyword:(*\\procexp64.exe OR *\\procexp.exe OR *\\procmon64.exe OR *\\procmon.exe OR *\\handle.exe OR *\\handle64.exe)) AND winlog.event_data.Details.keyword:*\\windows\\system32\\drivers\\procexp152.sys*))
+      query: 
+        (registry.path.keyword:(hklm\\system\\currentcontrolset\\services\\naldrv\\imagepath
+        OR hklm\\system\\currentcontrolset\\services\\procexp152\\imagepath)) AND
+        (NOT ((process.executable.keyword:(*\\procexp64.exe OR *\\procexp.exe OR *\\procmon64.exe
+        OR *\\procmon.exe OR *\\handle.exe OR *\\handle64.exe)) AND 
+        winlog.event_data.Details.keyword:*\\windows\\system32\\drivers\\procexp152.sys*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: medium

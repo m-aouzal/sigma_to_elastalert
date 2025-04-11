@@ -1,10 +1,26 @@
 description: |
   Detects suspicious base64 encoded and obfuscated "LOAD" keyword used in .NET "reflection.assembly"
 name: Suspicious Encoded And Obfuscated Reflection Assembly Load Function Call
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*oga6acgaigbmaciakwaiag8ayqbkaciakq* OR *oaogaoaciataaiacsaigbvageazaaiacka* OR *6adoakaaiaewaigaraciabwbhagqaigapa* OR *oga6acgaigbmag8aigaraciayqbkaciakq* OR *oaogaoaciatabvaciakwaiageazaaiacka* OR *6adoakaaiaewabwaiacsaigbhagqaigapa* OR *oga6acgaigbmag8ayqaiacsaigbkaciakq* OR *oaogaoaciatabvageaigaraciazaaiacka* OR *6adoakaaiaewabwbhaciakwaiagqaigapa* OR *oga6acgajwbmaccakwanag8ayqbkaccakq* OR *oaogaoaccataanacsajwbvageazaanacka* OR *6adoakaanaewajwaraccabwbhagqajwapa* OR *oga6acgajwbmag8ajwaraccayqbkaccakq* OR *oaogaoaccatabvaccakwanageazaanacka* OR *6adoakaanaewabwanacsajwbhagqajwapa* OR *oga6acgajwbmag8ayqanacsajwbkaccakq* OR *oaogaoaccatabvageajwaraccazaanacka* OR *6adoakaanaewabwbhaccakwanagqajwapa*)
+      query: process.command_line.keyword:(*oga6acgaigbmaciakwaiag8ayqbkaciakq* OR
+        *oaogaoaciataaiacsaigbvageazaaiacka* OR *6adoakaaiaewaigaraciabwbhagqaigapa*
+        OR *oga6acgaigbmag8aigaraciayqbkaciakq* OR *oaogaoaciatabvaciakwaiageazaaiacka*
+        OR *6adoakaaiaewabwaiacsaigbhagqaigapa* OR *oga6acgaigbmag8ayqaiacsaigbkaciakq*
+        OR *oaogaoaciatabvageaigaraciazaaiacka* OR *6adoakaaiaewabwbhaciakwaiagqaigapa*
+        OR *oga6acgajwbmaccakwanag8ayqbkaccakq* OR *oaogaoaccataanacsajwbvageazaanacka*
+        OR *6adoakaanaewajwaraccabwbhagqajwapa* OR *oga6acgajwbmag8ajwaraccayqbkaccakq*
+        OR *oaogaoaccatabvaccakwanageazaanacka* OR *6adoakaanaewabwanacsajwbhagqajwapa*
+        OR *oga6acgajwbmag8ayqanacsajwbkaccakq* OR *oaogaoaccatabvageajwaraccazaanacka*
+        OR *6adoakaanaewabwbhaccakwanagqajwapa*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+- defense-evasion
+mitre_attack_technique:
+- t1059.001
+- t1027
+risk: high

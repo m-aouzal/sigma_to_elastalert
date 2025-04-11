@@ -1,10 +1,17 @@
 description: |
   Detects scenarios where an attacker enables the OpenSSH server and server starts to listening on SSH socket.
 name: OpenSSH Server Listening On Socket
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:openssh\/operational AND (event.code.keyword:4 AND winlog.event_data.process.keyword:sshd AND winlog.event_data.payload.keyword:server\ listening\ on\ *)
+      query: winlog.channel.keyword:openssh\/operational AND (event.code.keyword:4
+        AND winlog.event_data.process.keyword:sshd AND winlog.event_data.payload.keyword:server\
+        listening\ on\ *)
 type: any
 priority: 2
+mitre_attack_tactic:
+- lateral-movement
+mitre_attack_technique:
+- t1021.004
+risk: medium

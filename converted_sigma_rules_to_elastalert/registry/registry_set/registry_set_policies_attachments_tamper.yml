@@ -1,10 +1,19 @@
 description: |
   Detects tampering with attachment manager settings policies attachments (See reference for more information)
 name: Potential Attachment Manager Settings Attachments Tamper
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\policies\\attachments\\* AND ((registry.path.keyword:*\\hidezoneinfoonproperties AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)) OR (registry.path.keyword:*\\savezoneinformation AND winlog.event_data.Details.keyword:dword\ \(0x00000002\)) OR (registry.path.keyword:*\\scanwithantivirus AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)))
+      query: 
+        registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\policies\\attachments\\*
+        AND ((registry.path.keyword:*\\hidezoneinfoonproperties AND winlog.event_data.Details.keyword:dword\
+        \(0x00000001\)) OR (registry.path.keyword:*\\savezoneinformation AND winlog.event_data.Details.keyword:dword\
+        \(0x00000002\)) OR (registry.path.keyword:*\\scanwithantivirus AND winlog.event_data.Details.keyword:dword\
+        \(0x00000001\)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: high

@@ -1,10 +1,18 @@
 description: |
   Detects actions that clear the local ShimCache and remove forensic evidence
 name: ShimCache Flush
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((process.command_line.keyword:*rundll32* AND process.command_line.keyword:*apphelp.dll*) AND (process.command_line.keyword:(*shimflushcache* OR *#250*))) OR ((process.command_line.keyword:*rundll32* AND process.command_line.keyword:*kernel32.dll*) AND (process.command_line.keyword:(*baseflushappcompatcache* OR *#46*)))
+      query: ((process.command_line.keyword:*rundll32* AND process.command_line.keyword:*apphelp.dll*)
+        AND (process.command_line.keyword:(*shimflushcache* OR *#250*))) OR ((process.command_line.keyword:*rundll32*
+        AND process.command_line.keyword:*kernel32.dll*) AND (process.command_line.keyword:(*baseflushappcompatcache*
+        OR *#46*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1112
+risk: high

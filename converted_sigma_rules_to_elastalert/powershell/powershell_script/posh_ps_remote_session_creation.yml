@@ -1,12 +1,18 @@
 description: |
   Adversaries may abuse PowerShell commands and scripts for execution.
   PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system
-  
+
 name: PowerShell Remote Session Creation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*new\-pssession* AND powershell.file.script_block_text.keyword:*\-computername\ *
+      query: powershell.file.script_block_text.keyword:*new\-pssession* AND powershell.file.script_block_text.keyword:*\-computername\
+        *
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: medium

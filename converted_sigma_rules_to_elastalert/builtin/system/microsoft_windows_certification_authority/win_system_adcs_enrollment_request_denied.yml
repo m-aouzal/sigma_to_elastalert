@@ -1,12 +1,18 @@
 description: |
   Detects denied requests by Active Directory Certificate Services.
   Example of these requests denial include issues with permissions on the certificate template or invalid signatures.
-  
+
 name: Active Directory Certificate Services Denied Certificate Enrollment Request
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:microsoft\-windows\-certificationauthority AND event.code.keyword:53)
+      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:microsoft\-windows\-certificationauthority
+        AND event.code.keyword:53)
 type: any
 priority: 1
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1553.004
+risk: low

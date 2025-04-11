@@ -1,10 +1,15 @@
 description: |
   Addition of domains is seldom and should be verified for legitimacy.
 name: A New Trust Was Created To A Domain
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.channel.keyword:security AND event.code.keyword:4706
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1098
+risk: medium

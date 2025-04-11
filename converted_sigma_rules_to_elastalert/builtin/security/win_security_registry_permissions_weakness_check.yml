@@ -2,12 +2,20 @@ description: |
   Detects "read access" requests on the services registry key.
   Adversaries may execute their own malicious payloads by hijacking the Registry entries used by services.
   Adversaries may use flaws in the permissions for Registry keys related to services to redirect from the originally specified executable to one that they control, in order to launch their own code when a service starts.
-  
+
 name: Service Registry Key Read Access Request
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:4663 AND (winlog.event_data.ObjectName.keyword:*\\system\\* AND winlog.event_data.ObjectName.keyword:*controlset\\services\\*) AND winlog.event_data.AccessList.keyword:*%%1538*)
+      query: winlog.channel.keyword:security AND (event.code.keyword:4663 AND (winlog.event_data.ObjectName.keyword:*\\system\\*
+        AND winlog.event_data.ObjectName.keyword:*controlset\\services\\*) AND winlog.event_data.AccessList.keyword:*%%1538*)
 type: any
 priority: 1
+mitre_attack_tactic:
+- defense-evasion
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1574.011
+risk: low

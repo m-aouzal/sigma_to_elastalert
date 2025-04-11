@@ -1,10 +1,19 @@
 description: |
   Detects potential DLL files being downloaded using the PowerShell Invoke-WebRequest cmdlet
 name: Potential DLL File Download Via PowerShell Invoke-WebRequest
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*invoke\-webrequest\ * OR *iwr\ *)) AND (process.command_line.keyword:*http* AND process.command_line.keyword:*outfile* AND process.command_line.keyword:*.dll*)
+      query: (process.command_line.keyword:(*invoke\-webrequest\ * OR *iwr\ *)) AND
+        (process.command_line.keyword:*http* AND process.command_line.keyword:*outfile*
+        AND process.command_line.keyword:*.dll*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+- execution
+mitre_attack_technique:
+- t1059.001
+- t1105
+risk: medium

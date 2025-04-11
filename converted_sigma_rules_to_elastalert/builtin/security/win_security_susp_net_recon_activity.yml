@@ -1,10 +1,19 @@
 description: |
   Detects activity as "net user administrator /domain" and "net group domain admins /domain"
 name: Reconnaissance Activity
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:4661 AND winlog.event_data.AccessMask.keyword:0x2d AND (winlog.event_data.ObjectType.keyword:(sam_user OR sam_group)) AND winlog.event_data.ObjectName.keyword:s\-1\-5\-21\-* AND (winlog.event_data.ObjectName.keyword:(*\-500 OR *\-512)))
+      query: winlog.channel.keyword:security AND (event.code.keyword:4661 AND winlog.event_data.AccessMask.keyword:0x2d
+        AND (winlog.event_data.ObjectType.keyword:(sam_user OR sam_group)) AND winlog.event_data.ObjectName.keyword:s\-1\-5\-21\-*
+        AND (winlog.event_data.ObjectName.keyword:(*\-500 OR *\-512)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1087.002
+- t1069.002
+- s0039
+risk: high

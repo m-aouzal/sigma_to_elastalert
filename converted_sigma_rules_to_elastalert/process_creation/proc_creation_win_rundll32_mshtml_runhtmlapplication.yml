@@ -1,11 +1,17 @@
 description: |
   Detects execution of commands that leverage the "mshtml.dll" RunHTMLApplication export to run arbitrary code via different protocol handlers (vbscript, javascript, file, http...)
-  
+
 name: Mshtml.DLL RunHTMLApplication Suspicious Usage
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*\\..\\* AND process.command_line.keyword:*mshtml*) AND (process.command_line.keyword:(*#135* OR *runhtmlapplication*))
+      query: (process.command_line.keyword:*\\..\\* AND process.command_line.keyword:*mshtml*)
+        AND (process.command_line.keyword:(*#135* OR *runhtmlapplication*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique: []
+risk: high

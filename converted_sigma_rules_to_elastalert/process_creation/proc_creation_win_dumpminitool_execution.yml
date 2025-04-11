@@ -1,10 +1,19 @@
 description: |
   Detects the use of "DumpMinitool.exe" a tool that allows the dump of process memory via the use of the "MiniDumpWriteDump"
 name: DumpMinitool Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\dumpminitool.exe OR *\\dumpminitool.x86.exe OR *\\dumpminitool.arm64.exe)) OR (winlog.event_data.originalfilename.keyword:(dumpminitool.exe OR dumpminitool.x86.exe OR dumpminitool.arm64.exe))) AND (process.command_line.keyword:(*\ full* OR *\ mini* OR *\ withheap*))
+      query: ((winlog.event_data.image.keyword:(*\\dumpminitool.exe OR *\\dumpminitool.x86.exe
+        OR *\\dumpminitool.arm64.exe)) OR (winlog.event_data.originalfilename.keyword:(dumpminitool.exe
+        OR dumpminitool.x86.exe OR dumpminitool.arm64.exe))) AND (process.command_line.keyword:(*\
+        full* OR *\ mini* OR *\ withheap*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036
+- t1003.001
+risk: medium

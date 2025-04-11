@@ -1,10 +1,32 @@
 description: |
   Detects Cmdlet names from PowerView of the PowerSploit exploitation framework.
 name: PowerView PowerShell Cmdlets - ScriptBlock
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:(*export\-powerviewcsv* OR *find\-domainlocalgroupmember* OR *find\-domainobjectpropertyoutlier* OR *find\-domainprocess* OR *find\-domainshare* OR *find\-domainuserevent* OR *find\-domainuserlocation* OR *find\-foreigngroup* OR *find\-foreignuser* OR *find\-gpocomputeradmin* OR *find\-gpolocation* OR *find\-interestingdomain* OR *find\-interestingfile* OR *find\-localadminaccess* OR *find\-managedsecuritygroups* OR *get\-cachedrdpconnection* OR *get\-dfsshare* OR *get\-domaindfsshare* OR *get\-domaindnsrecord* OR *get\-domaindnszone* OR *get\-domainfileserver* OR *get\-domaingpocomputerlocalgroupmapping* OR *get\-domaingpolocalgroup* OR *get\-domaingpouserlocalgroupmapping* OR *get\-lastloggedon* OR *get\-loggedonlocal* OR *get\-netfileserver* OR *get\-netforest* OR *get\-netgpogroup* OR *get\-netprocess* OR *get\-netrdpsession* OR *get\-registrymounteddrive* OR *get\-regloggedon* OR *get\-wmiregcachedrdpconnection* OR *get\-wmireglastloggedon* OR *get\-wmiregmounteddrive* OR *get\-wmiregproxy* OR *invoke\-aclscanner* OR *invoke\-checklocaladminaccess* OR *invoke\-enumeratelocaladmin* OR *invoke\-eventhunter* OR *invoke\-filefinder* OR *invoke\-kerberoast* OR *invoke\-mapdomaintrust* OR *invoke\-processhunter* OR *invoke\-reverttoself* OR *invoke\-sharefinder* OR *invoke\-userhunter* OR *invoke\-userimpersonation* OR *remove\-remoteconnection* OR *request\-spnticket* OR *resolve\-ipaddress*)
+      query: powershell.file.script_block_text.keyword:(*export\-powerviewcsv* OR
+        *find\-domainlocalgroupmember* OR *find\-domainobjectpropertyoutlier* OR *find\-domainprocess*
+        OR *find\-domainshare* OR *find\-domainuserevent* OR *find\-domainuserlocation*
+        OR *find\-foreigngroup* OR *find\-foreignuser* OR *find\-gpocomputeradmin*
+        OR *find\-gpolocation* OR *find\-interestingdomain* OR *find\-interestingfile*
+        OR *find\-localadminaccess* OR *find\-managedsecuritygroups* OR *get\-cachedrdpconnection*
+        OR *get\-dfsshare* OR *get\-domaindfsshare* OR *get\-domaindnsrecord* OR *get\-domaindnszone*
+        OR *get\-domainfileserver* OR *get\-domaingpocomputerlocalgroupmapping* OR
+        *get\-domaingpolocalgroup* OR *get\-domaingpouserlocalgroupmapping* OR *get\-lastloggedon*
+        OR *get\-loggedonlocal* OR *get\-netfileserver* OR *get\-netforest* OR *get\-netgpogroup*
+        OR *get\-netprocess* OR *get\-netrdpsession* OR *get\-registrymounteddrive*
+        OR *get\-regloggedon* OR *get\-wmiregcachedrdpconnection* OR *get\-wmireglastloggedon*
+        OR *get\-wmiregmounteddrive* OR *get\-wmiregproxy* OR *invoke\-aclscanner*
+        OR *invoke\-checklocaladminaccess* OR *invoke\-enumeratelocaladmin* OR *invoke\-eventhunter*
+        OR *invoke\-filefinder* OR *invoke\-kerberoast* OR *invoke\-mapdomaintrust*
+        OR *invoke\-processhunter* OR *invoke\-reverttoself* OR *invoke\-sharefinder*
+        OR *invoke\-userhunter* OR *invoke\-userimpersonation* OR *remove\-remoteconnection*
+        OR *request\-spnticket* OR *resolve\-ipaddress*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: high

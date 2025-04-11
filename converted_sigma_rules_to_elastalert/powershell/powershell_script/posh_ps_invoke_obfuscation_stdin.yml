@@ -1,10 +1,18 @@
 description: |
   Detects Obfuscated use of stdin to execute PowerShell
 name: Invoke-Obfuscation STDIN+ Launcher - Powershell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:/cmd.{0,5}(?:\/c|\/r).+powershell.+(?:\$?\{?input\}?|noexit).+"/
+      query: 
+        powershell.file.script_block_text.keyword:/cmd.{0,5}(?:\/c|\/r).+powershell.+(?:\$?\{?input\}?|noexit).+"/
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1027
+- t1059.001
+risk: high

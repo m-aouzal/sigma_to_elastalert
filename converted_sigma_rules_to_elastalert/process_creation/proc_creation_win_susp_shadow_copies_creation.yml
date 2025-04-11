@@ -1,10 +1,20 @@
 description: |
   Shadow Copies creation using operating systems utilities, possible credential access
 name: Shadow Copies Creation Using Operating Systems Utilities
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe OR *\\wmic.exe OR *\\vssadmin.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll OR wmic.exe OR vssadmin.exe))) AND (process.command_line.keyword:*shadow* AND process.command_line.keyword:*create*)
+      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe OR
+        *\\wmic.exe OR *\\vssadmin.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe
+        OR pwsh.dll OR wmic.exe OR vssadmin.exe))) AND (process.command_line.keyword:*shadow*
+        AND process.command_line.keyword:*create*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003
+- t1003.002
+- t1003.003
+risk: medium

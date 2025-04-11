@@ -1,10 +1,17 @@
 description: |
   Detects known sensitive file extensions accessed on a network share
 name: Suspicious Access to Sensitive File Extensions
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:5145 AND (winlog.event_data.RelativeTargetName.keyword:(*.bak OR *.dmp OR *.edb OR *.kirbi OR *.msg OR *.nsf OR *.nst OR *.oab OR *.ost OR *.pst OR *.rdp OR *\\groups.xml)))
+      query: winlog.channel.keyword:security AND (event.code.keyword:5145 AND (winlog.event_data.RelativeTargetName.keyword:(*.bak
+        OR *.dmp OR *.edb OR *.kirbi OR *.msg OR *.nsf OR *.nst OR *.oab OR *.ost
+        OR *.pst OR *.rdp OR *\\groups.xml)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- collection
+mitre_attack_technique:
+- t1039
+risk: medium

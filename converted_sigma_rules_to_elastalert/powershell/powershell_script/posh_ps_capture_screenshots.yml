@@ -1,12 +1,17 @@
 description: |
   Adversaries may attempt to take screen captures of the desktop to gather information over the course of an operation.
   Screen capturing functionality may be included as a feature of a remote access tool used in post-compromise operations
-  
+
 name: Windows Screen Capture with CopyFromScreen
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: powershell.file.script_block_text.keyword:*.copyfromscreen*
 type: any
 priority: 2
+mitre_attack_tactic:
+- collection
+mitre_attack_technique:
+- t1113
+risk: medium

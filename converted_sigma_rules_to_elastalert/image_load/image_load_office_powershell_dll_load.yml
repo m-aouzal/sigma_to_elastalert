@@ -1,10 +1,16 @@
 description: |
   Detects PowerShell core DLL being loaded by an Office Product
 name: PowerShell Core DLL Loaded Via Office Application
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\excel.exe OR *\\mspub.exe OR *\\outlook.exe OR *\\onenote.exe OR *\\onenoteim.exe OR *\\powerpnt.exe OR *\\winword.exe)) AND (file.path.keyword:(*\\system.management.automation.dll* OR *\\system.management.automation.ni.dll*))
+      query: (process.executable.keyword:(*\\excel.exe OR *\\mspub.exe OR *\\outlook.exe
+        OR *\\onenote.exe OR *\\onenoteim.exe OR *\\powerpnt.exe OR *\\winword.exe))
+        AND (file.path.keyword:(*\\system.management.automation.dll* OR *\\system.management.automation.ni.dll*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

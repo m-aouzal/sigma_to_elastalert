@@ -1,10 +1,18 @@
 description: |
   Detects a suspicious IIS module registration as described in Microsoft threat report on IIS backdoors
 name: Suspicious IIS Module Registration
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\\w3wp.exe AND (process.command_line.keyword:*appcmd.exe\ add\ module* OR (process.command_line.keyword:*\ system.enterpriseservices.internal.publish* AND process.executable.keyword:*\\powershell.exe) OR (process.command_line.keyword:*gacutil* AND process.command_line.keyword:*\ \/i*))
+      query: process.parent.executable.keyword:*\\w3wp.exe AND (process.command_line.keyword:*appcmd.exe\
+        add\ module* OR (process.command_line.keyword:*\ system.enterpriseservices.internal.publish*
+        AND process.executable.keyword:*\\powershell.exe) OR (process.command_line.keyword:*gacutil*
+        AND process.command_line.keyword:*\ \/i*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1505.004
+risk: high

@@ -1,12 +1,18 @@
 description: |
   Detects changes in Sysmon driver altitude value.
   If the Sysmon driver is configured to load at an altitude of another registered service, it will fail to load at boot.
-  
+
 name: Sysmon Driver Altitude Change
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\services\\* AND registry.path.keyword:*\\instances\\sysmon\ instance\\altitude
+      query: registry.path.keyword:*\\services\\* AND registry.path.keyword:*\\instances\\sysmon\
+        instance\\altitude
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high

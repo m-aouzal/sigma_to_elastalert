@@ -1,10 +1,19 @@
 description: |
   Detects port forwarding activity via SSH.exe
 name: Port Forwarding Activity Via SSH.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\ssh.exe AND process.command_line.keyword:(*\ \-r\ * OR *\ \/r\ * OR *\ –r\ * OR *\ —r\ * OR *\ ―r\ *)
+      query: process.executable.keyword:*\\ssh.exe AND process.command_line.keyword:(*\
+        \-r\ * OR *\ \/r\ * OR *\ –r\ * OR *\ —r\ * OR *\ ―r\ *)
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+- lateral-movement
+mitre_attack_technique:
+- t1572
+- t1021.001
+- t1021.004
+risk: medium

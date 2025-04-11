@@ -1,10 +1,19 @@
 description: |
   Detects the execution of AdvancedRun utility in the context of the TrustedInstaller, SYSTEM, Local Service or Network Service accounts
 name: PUA - AdvancedRun Suspicious Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*\/exefilename* OR *\/commandline*)) AND ((winlog.event_data.commandline.keyword:(*\ \/runas\ 8\ * OR *\ \/runas\ 4\ * OR *\ \/runas\ 10\ * OR *\ \/runas\ 11\ *)) OR (winlog.event_data.commandline.keyword:(*\/runas\ 8 OR *\/runas\ 4 OR *\/runas\ 10 OR *\/runas\ 11)))
+      query: (process.command_line.keyword:(*\/exefilename* OR *\/commandline*)) AND
+        ((winlog.event_data.commandline.keyword:(*\ \/runas\ 8\ * OR *\ \/runas\ 4\
+        * OR *\ \/runas\ 10\ * OR *\ \/runas\ 11\ *)) OR (winlog.event_data.commandline.keyword:(*\/runas\
+        8 OR *\/runas\ 4 OR *\/runas\ 10 OR *\/runas\ 11)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1134.002
+risk: high

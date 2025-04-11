@@ -1,11 +1,17 @@
 description: |
   Detects the execution of "dotnet-dump" with the "collect" flag. The execution could indicate potential process dumping of critical processes such as LSASS.
-  
+
 name: Process Memory Dump Via Dotnet-Dump
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\dotnet\-dump.exe OR winlog.event_data.originalfilename.keyword:dotnet\-dump.dll) AND process.command_line.keyword:*collect*
+      query: (winlog.event_data.image.keyword:*\\dotnet\-dump.exe OR winlog.event_data.originalfilename.keyword:dotnet\-dump.dll)
+        AND process.command_line.keyword:*collect*
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218
+risk: medium

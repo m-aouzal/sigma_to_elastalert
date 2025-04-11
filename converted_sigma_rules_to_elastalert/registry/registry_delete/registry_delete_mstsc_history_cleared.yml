@@ -1,10 +1,18 @@
 description: |
   Detects the deletion of registry keys containing the MSTSC connection history
 name: Terminal Server Client Connection History Cleared - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.EventType.keyword:deletevalue AND registry.path.keyword:*\\microsoft\\terminal\ server\ client\\default\\mru*) OR (winlog.event_data.EventType.keyword:deletekey AND registry.path.keyword:*\\microsoft\\terminal\ server\ client\\servers\\*)
+      query: (winlog.event_data.EventType.keyword:deletevalue AND registry.path.keyword:*\\microsoft\\terminal\
+        server\ client\\default\\mru*) OR (winlog.event_data.EventType.keyword:deletekey
+        AND registry.path.keyword:*\\microsoft\\terminal\ server\ client\\servers\\*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1070
+- t1112
+risk: high

@@ -1,0 +1,9 @@
+description: Detects file renames where the target filename uses an uncommon double extension. Could indicate potential ransomware activity renaming files and adding a custom extension to the encrypted files, such as ".jpg.crypted", ".docx.locky", etc.
+name: Suspicious Appended Extension
+index: "winlogbeat-*"
+filter:
+- query:
+    query_string:
+      query: ((winlog.event_data.SourceFilename:(*.doc OR *.docx OR *.jpeg OR *.jpg OR *.lnk OR *.pdf OR *.png OR *.pst OR *.rtf OR *.xls OR *.xlsx)) AND (file.path:(*.doc.* OR *.docx.* OR *.jpeg.* OR *.jpg.* OR *.lnk.* OR *.pdf.* OR *.png.* OR *.pst.* OR *.rtf.* OR *.xls.* OR *.xlsx.*))) AND (NOT (file.path:(*.backup OR *.bak OR *.old OR *.orig OR *.temp OR *.tmp))) AND (NOT (file.path:*\:\\ProgramData\\Anaconda3\\* AND file.path:*.c\~))
+type: any
+priority: 2

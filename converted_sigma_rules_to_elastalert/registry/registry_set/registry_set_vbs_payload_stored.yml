@@ -1,10 +1,23 @@
 description: |
   Detects VBScript content stored into registry keys as seen being used by UNC2452 group
 name: VBScript Payload Stored in Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*software\\microsoft\\windows\\currentversion* AND (winlog.event_data.Details.keyword:(*vbscript\:* OR *jscript\:* OR *mshtml,* OR *runhtmlapplication* OR *execute\(* OR *createobject* OR *window.close*))) AND (NOT (registry.path.keyword:*software\\microsoft\\windows\\currentversion\\run* OR (process.executable.keyword:*\\msiexec.exe AND registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\installer\\userdata\\* AND (winlog.event_data.Details.keyword:(*\\microsoft.net\\primary\ interop\ assemblies\\microsoft.mshtml.dll* OR *\<\\microsoft.mshtml,fileversion\=* OR *_mshtml_dll_* OR *\<\\microsoft.mshtml,culture\=*)))))
+      query: (registry.path.keyword:*software\\microsoft\\windows\\currentversion*
+        AND (winlog.event_data.Details.keyword:(*vbscript\:* OR *jscript\:* OR *mshtml,*
+        OR *runhtmlapplication* OR *execute\(* OR *createobject* OR *window.close*)))
+        AND (NOT (registry.path.keyword:*software\\microsoft\\windows\\currentversion\\run*
+        OR (process.executable.keyword:*\\msiexec.exe AND 
+        registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\installer\\userdata\\*
+        AND (winlog.event_data.Details.keyword:(*\\microsoft.net\\primary\ interop\
+        assemblies\\microsoft.mshtml.dll* OR *\<\\microsoft.mshtml,fileversion\=*
+        OR *_mshtml_dll_* OR *\<\\microsoft.mshtml,culture\=*)))))
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1547.001
+risk: high

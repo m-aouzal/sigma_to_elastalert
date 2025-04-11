@@ -1,10 +1,18 @@
 description: |
   Detects scheduled task creations or modification on a suspicious schedule type
 name: Suspicious Schtasks Schedule Types
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\\schtasks.exe OR winlog.event_data.originalfilename.keyword:schtasks.exe) AND (process.command_line.keyword:(*\ onlogon\ * OR *\ onstart\ * OR *\ once\ * OR *\ onidle\ *))) AND (NOT (process.command_line.keyword:(*nt\ aut* OR *\ system* OR *highest*)))
+      query: ((winlog.event_data.image.keyword:*\\schtasks.exe OR winlog.event_data.originalfilename.keyword:schtasks.exe)
+        AND (process.command_line.keyword:(*\ onlogon\ * OR *\ onstart\ * OR *\ once\
+        * OR *\ onidle\ *))) AND (NOT (process.command_line.keyword:(*nt\ aut* OR
+        *\ system* OR *highest*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1053.005
+risk: high

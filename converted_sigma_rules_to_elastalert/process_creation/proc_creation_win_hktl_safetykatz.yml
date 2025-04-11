@@ -1,10 +1,16 @@
 description: |
   Detects the execution of the hacktool SafetyKatz via PE information and default Image name
 name: HackTool - SafetyKatz Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.image.keyword:*\\safetykatz.exe OR winlog.event_data.originalfilename.keyword:safetykatz.exe OR winlog.event_data.description.keyword:safetykatz
+      query: winlog.event_data.image.keyword:*\\safetykatz.exe OR winlog.event_data.originalfilename.keyword:safetykatz.exe
+        OR winlog.event_data.description.keyword:safetykatz
 type: any
 priority: 4
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.001
+risk: critical

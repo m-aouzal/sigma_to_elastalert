@@ -1,10 +1,15 @@
 description: |
   Windows Defender logs when the history of detected infections is deleted.
 name: Windows Defender Malware Detection History Deletion
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-windows\ defender\/operational AND event.code.keyword:1013
+      query: winlog.channel.keyword:microsoft\-windows\-windows\ defender\/operational
+        AND event.code.keyword:1013
 type: any
 priority: 0
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: informational

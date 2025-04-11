@@ -1,10 +1,18 @@
 description: |
   Detects suspicious starts of explorer.exe that use the /NOUACCHECK flag that allows to run all sub processes of that newly started explorer.exe without any UAC checks
 name: Explorer NOUACCHECK Flag
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\explorer.exe AND process.command_line.keyword:*\/nouaccheck*) AND (NOT (winlog.event_data.parentcommandline.keyword:c\:\\windows\\system32\\svchost.exe\ \-k\ netsvcs\ \-p\ \-s\ schedule OR winlog.event_data.parentimage.keyword:c\:\\windows\\system32\\svchost.exe))
+      query: (process.executable.keyword:*\\explorer.exe AND process.command_line.keyword:*\/nouaccheck*)
+        AND (NOT 
+        (winlog.event_data.parentcommandline.keyword:c\:\\windows\\system32\\svchost.exe\
+        \-k\ netsvcs\ \-p\ \-s\ schedule OR winlog.event_data.parentimage.keyword:c\:\\windows\\system32\\svchost.exe))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1548.002
+risk: high

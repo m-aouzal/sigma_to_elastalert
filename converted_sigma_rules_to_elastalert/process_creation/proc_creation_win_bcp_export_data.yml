@@ -1,12 +1,18 @@
 description: |
   Detects the execution of the BCP utility in order to export data from the database.
   Attackers were seen saving their malware to a database column or table and then later extracting it via "bcp.exe" into a file.
-  
+
 name: Data Export From MSSQL Table Via BCP.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\bcp.exe OR winlog.event_data.originalfilename.keyword:bcp.exe) AND (process.command_line.keyword:(*\ out\ * OR *\ queryout\ *))
+      query: (winlog.event_data.image.keyword:*\\bcp.exe OR winlog.event_data.originalfilename.keyword:bcp.exe)
+        AND (process.command_line.keyword:(*\ out\ * OR *\ queryout\ *))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1048
+risk: medium

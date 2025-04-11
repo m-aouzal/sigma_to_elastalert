@@ -1,12 +1,19 @@
 description: |
   Detects the command line executed when TeamViewer starts a session started by a remote host.
   Once a connection has been started, an investigator can verify the connection details by viewing the "incoming_connections.txt" log file in the TeamViewer folder.
-  
+
 name: Remote Access Tool - Team Viewer Session Started On Windows Host
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:teamviewer_desktop.exe AND process.parent.executable.keyword:teamviewer_service.exe AND process.command_line.keyword:*teamviewer_desktop.exe\ \-\-ipcport\ 5939\ \-\-module\ 1
+      query: process.executable.keyword:teamviewer_desktop.exe AND process.parent.executable.keyword:teamviewer_service.exe
+        AND process.command_line.keyword:*teamviewer_desktop.exe\ \-\-ipcport\ 5939\
+        \-\-module\ 1
 type: any
 priority: 1
+mitre_attack_tactic:
+- initial-access
+mitre_attack_technique:
+- t1133
+risk: low

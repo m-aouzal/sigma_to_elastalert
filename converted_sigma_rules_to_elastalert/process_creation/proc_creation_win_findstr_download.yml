@@ -1,11 +1,22 @@
 description: |
   Detects execution of "findstr" with specific flags and a remote share path. This specific set of CLI flags would allow "findstr" to download the content of the file located on the remote share as described in the LOLBAS entry.
-  
+
 name: Remote File Download Via Findstr.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.commandline.keyword:*findstr* OR winlog.event_data.image.keyword:*findstr.exe OR winlog.event_data.originalfilename.keyword:findstr.exe) AND (process.command_line.keyword:(*\ \-v\ * OR *\ \/v\ * OR *\ –v\ * OR *\ —v\ * OR *\ ―v\ *) AND process.command_line.keyword:(*\ \-l\ * OR *\ \/l\ * OR *\ –l\ * OR *\ —l\ * OR *\ ―l\ *) AND process.command_line.keyword:*\\\\*)
+      query: (winlog.event_data.commandline.keyword:*findstr* OR winlog.event_data.image.keyword:*findstr.exe
+        OR winlog.event_data.originalfilename.keyword:findstr.exe) AND (process.command_line.keyword:(*\
+        \-v\ * OR *\ \/v\ * OR *\ –v\ * OR *\ —v\ * OR *\ ―v\ *) AND process.command_line.keyword:(*\
+        \-l\ * OR *\ \/l\ * OR *\ –l\ * OR *\ —l\ * OR *\ ―l\ *) AND process.command_line.keyword:*\\\\*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218
+- t1564.004
+- t1552.001
+- t1105
+risk: medium

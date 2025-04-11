@@ -1,10 +1,16 @@
 description: |
   Detects command that type the content of ntdll.dll to a different file or a pipe in order to evade AV / EDR detection. As seen being used in the POC NtdllPipe
 name: NtdllPipe Like Activity Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*type\ %windir%\\system32\\ntdll.dll* OR *type\ %systemroot%\\system32\\ntdll.dll* OR *type\ c\:\\windows\\system32\\ntdll.dll* OR *\\ntdll.dll\ \>\ \\\\.\\pipe\\*)
+      query: process.command_line.keyword:(*type\ %windir%\\system32\\ntdll.dll* OR
+        *type\ %systemroot%\\system32\\ntdll.dll* OR *type\ c\:\\windows\\system32\\ntdll.dll*
+        OR *\\ntdll.dll\ \>\ \\\\.\\pipe\\*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: high

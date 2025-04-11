@@ -2,12 +2,17 @@ description: |
   Detects the load of dbghelp/dbgcore DLL (used to make memory dumps) by suspicious processes.
   Tools like ProcessHacker and some attacker tradecract use MiniDumpWriteDump API found in dbghelp.dll or dbgcore.dll.
   As an example, SilentTrynity C2 Framework has a module that leverages this API to dump the contents of Lsass.exe and transfer it over the network back to the attacker's machine.
-  
+
 name: Suspicious Unsigned Dbghelp/Dbgcore DLL Loaded
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: (file.path.keyword:(*\\dbghelp.dll OR *\\dbgcore.dll)) AND file.code_signature.signed.keyword:false
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.001
+risk: high

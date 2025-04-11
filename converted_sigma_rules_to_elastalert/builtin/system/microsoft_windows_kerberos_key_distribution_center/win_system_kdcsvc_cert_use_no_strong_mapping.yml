@@ -2,12 +2,17 @@ description: |
   Detects a user certificate that was valid but could not be mapped to a user in a strong way (such as via explicit mapping, key trust mapping, or a SID)
   This could be a sign of exploitation of the elevation of privilege vulnerabilities (CVE-2022-34691, CVE-2022-26931, CVE-2022-26923) that can occur when the KDC allows certificate spoofing by not requiring a strong mapping.
   Events where the AccountName and CN of the Subject do not match, or where the CN ends in a dollar sign indicating a machine, may indicate certificate spoofing.
-  
+
 name: Certificate Use With No Strong Mapping
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:kerberos\-key\-distribution\-center AND (event.code.keyword:(39 OR 41)))
+      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:kerberos\-key\-distribution\-center
+        AND (event.code.keyword:(39 OR 41)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- privilege-escalation
+mitre_attack_technique: []
+risk: medium

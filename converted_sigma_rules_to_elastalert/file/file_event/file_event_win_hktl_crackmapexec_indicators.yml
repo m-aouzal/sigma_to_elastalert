@@ -1,10 +1,18 @@
 description: |
   Detects file creation events with filename patterns used by CrackMapExec.
 name: HackTool - CrackMapExec File Indicators
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:c\:\\windows\\temp\\* AND ((file.path.keyword:(*\\temp.ps1 OR *\\msol.ps1)) OR (winlog.event_data.targetfilename.keyword:/\\[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.txt$/ OR winlog.event_data.targetfilename.keyword:/\\[a-za-z]{8}\.tmp$/))
+      query: file.path.keyword:c\:\\windows\\temp\\* AND ((file.path.keyword:(*\\temp.ps1
+        OR *\\msol.ps1)) OR 
+        (winlog.event_data.targetfilename.keyword:/\\[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.txt$/
+        OR winlog.event_data.targetfilename.keyword:/\\[a-za-z]{8}\.tmp$/))
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.001
+risk: high

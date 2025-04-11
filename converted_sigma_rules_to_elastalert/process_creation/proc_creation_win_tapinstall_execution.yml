@@ -1,10 +1,19 @@
 description: |
   Well-known TAP software installation. Possible preparation for data exfiltration using tunneling techniques
 name: Tap Installer Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\tapinstall.exe AND (NOT ((process.executable.keyword:(*\:\\program\ files\\avast\ software\\secureline\ vpn\\* OR *\:\\program\ files\ \(x86\)\\avast\ software\\secureline\ vpn\\*)) OR process.executable.keyword:*\:\\program\ files\\openvpn\ connect\\drivers\\tap\\* OR process.executable.keyword:*\:\\program\ files\ \(x86\)\\proton\ technologies\\protonvpntap\\installer\\*))
+      query: process.executable.keyword:*\\tapinstall.exe AND (NOT ((process.executable.keyword:(*\:\\program\
+        files\\avast\ software\\secureline\ vpn\\* OR *\:\\program\ files\ \(x86\)\\avast\
+        software\\secureline\ vpn\\*)) OR process.executable.keyword:*\:\\program\
+        files\\openvpn\ connect\\drivers\\tap\\* OR process.executable.keyword:*\:\\program\
+        files\ \(x86\)\\proton\ technologies\\protonvpntap\\installer\\*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- exfiltration
+mitre_attack_technique:
+- t1048
+risk: medium

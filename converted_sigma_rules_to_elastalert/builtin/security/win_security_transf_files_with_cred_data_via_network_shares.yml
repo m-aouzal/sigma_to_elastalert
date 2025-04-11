@@ -1,10 +1,19 @@
 description: |
   Transferring files with well-known filenames (sensitive files with credential data) using network shares
 name: Transferring Files with Credential Data via Network Shares
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:5145 AND (winlog.event_data.RelativeTargetName.keyword:(*\\mimidrv* OR *\\lsass* OR *\\windows\\minidump\\* OR *\\hiberfil* OR *\\sqldmpr* OR *\\sam* OR *\\ntds.dit* OR *\\security*)))
+      query: winlog.channel.keyword:security AND (event.code.keyword:5145 AND (winlog.event_data.RelativeTargetName.keyword:(*\\mimidrv*
+        OR *\\lsass* OR *\\windows\\minidump\\* OR *\\hiberfil* OR *\\sqldmpr* OR
+        *\\sam* OR *\\ntds.dit* OR *\\security*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.002
+- t1003.001
+- t1003.003
+risk: medium

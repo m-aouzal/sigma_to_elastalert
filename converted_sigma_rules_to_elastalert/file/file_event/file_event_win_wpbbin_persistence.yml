@@ -1,10 +1,16 @@
 description: |
   Detects creation of a file named "wpbbin" in the "%systemroot%\system32\" directory. Which could be indicative of UEFI based persistence method
 name: UEFI Persistence Via Wpbbin - FileCreation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: file.path.keyword:c\:\\windows\\system32\\wpbbin.exe
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+- defense-evasion
+mitre_attack_technique:
+- t1542.001
+risk: high

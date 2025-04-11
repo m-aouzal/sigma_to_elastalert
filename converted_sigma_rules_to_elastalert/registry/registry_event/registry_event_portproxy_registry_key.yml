@@ -1,10 +1,17 @@
 description: |
   Detects the modification of the PortProxy registry key which is used for port forwarding.
 name: New PortProxy Registry Entry Added
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: registry.path.keyword:*\\services\\portproxy\\v4tov4\\tcp\\*
 type: any
 priority: 2
+mitre_attack_tactic:
+- lateral-movement
+- defense-evasion
+- command-and-control
+mitre_attack_technique:
+- t1090
+risk: medium

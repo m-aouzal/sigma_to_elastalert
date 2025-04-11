@@ -1,10 +1,16 @@
 description: |
   Detects indirect command execution via Program Compatibility Assistant "pcwrun.exe" leveraging the follina (CVE-2022-30190) vulnerability
 name: Execute Pcwrun.EXE To Leverage Follina
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:*\\pcwrun.exe AND process.command_line.keyword:*..\/*
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1218
+risk: high

@@ -1,10 +1,20 @@
 description: |
   Detects the use of SysmonEnte, a tool to attack the integrity of Sysmon
 name: HackTool - SysmonEnte Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (((winlog.event_data.TargetImage.keyword:(*\:\\windows\\sysmon.exe* OR *\:\\windows\\sysmon64.exe*)) AND winlog.event_data.GrantedAccess.keyword:0x1400) AND (NOT ((process.executable.keyword:(*\:\\program\ files\ \(x86\)\\* OR *\:\\program\ files\\* OR *\:\\windows\\system32\\* OR *\:\\windows\\syswow64\\*)) OR (process.executable.keyword:*\:\\programdata\\microsoft\\windows\ defender\\platform\\* AND process.executable.keyword:*\\msmpeng.exe)))) OR winlog.event_data.CallTrace.keyword:ente
+      query: (((winlog.event_data.TargetImage.keyword:(*\:\\windows\\sysmon.exe* OR
+        *\:\\windows\\sysmon64.exe*)) AND winlog.event_data.GrantedAccess.keyword:0x1400)
+        AND (NOT ((process.executable.keyword:(*\:\\program\ files\ \(x86\)\\* OR
+        *\:\\program\ files\\* OR *\:\\windows\\system32\\* OR *\:\\windows\\syswow64\\*))
+        OR (process.executable.keyword:*\:\\programdata\\microsoft\\windows\ defender\\platform\\*
+        AND process.executable.keyword:*\\msmpeng.exe)))) OR winlog.event_data.CallTrace.keyword:ente
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.002
+risk: high

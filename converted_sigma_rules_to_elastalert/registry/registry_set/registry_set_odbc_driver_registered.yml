@@ -1,10 +1,18 @@
 description: |
   Detects the registration of a new ODBC driver.
 name: New ODBC Driver Registered
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\\software\\odbc\\odbcinst.ini\\* AND registry.path.keyword:*\\driver) AND (NOT (registry.path.keyword:*\\sql\ server\\* AND winlog.event_data.Details.keyword:%windir%\\system32\\sqlsrv32.dll)) AND (NOT ((registry.path.keyword:*\\microsoft\ access\ * AND winlog.event_data.Details.keyword:c\:\\progra* AND winlog.event_data.Details.keyword:*\\aceodbc.dll) OR (registry.path.keyword:*\\microsoft\ excel\ driver* AND winlog.event_data.Details.keyword:c\:\\progra* AND winlog.event_data.Details.keyword:*\\aceodbc.dll)))
+      query: (registry.path.keyword:*\\software\\odbc\\odbcinst.ini\\* AND registry.path.keyword:*\\driver)
+        AND (NOT (registry.path.keyword:*\\sql\ server\\* AND winlog.event_data.Details.keyword:%windir%\\system32\\sqlsrv32.dll))
+        AND (NOT ((registry.path.keyword:*\\microsoft\ access\ * AND winlog.event_data.Details.keyword:c\:\\progra*
+        AND winlog.event_data.Details.keyword:*\\aceodbc.dll) OR (registry.path.keyword:*\\microsoft\
+        excel\ driver* AND winlog.event_data.Details.keyword:c\:\\progra* AND winlog.event_data.Details.keyword:*\\aceodbc.dll)))
 type: any
 priority: 1
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique: []
+risk: low

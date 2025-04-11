@@ -1,10 +1,24 @@
 description: |
   Detection well-known mimikatz command line arguments
 name: HackTool - Mimikatz Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*dumpcreds* OR *mimikatz*)) OR (process.command_line.keyword:(*\:\:aadcookie* OR *\:\:detours* OR *\:\:memssp* OR *\:\:mflt* OR *\:\:ncroutemon* OR *\:\:ngcsign* OR *\:\:printnightmare* OR *\:\:skeleton* OR *\:\:preshutdown* OR *\:\:mstsc* OR *\:\:multirdp*)) OR (process.command_line.keyword:(*rpc\:\:* OR *token\:\:* OR *crypto\:\:* OR *dpapi\:\:* OR *sekurlsa\:\:* OR *kerberos\:\:* OR *lsadump\:\:* OR *privilege\:\:* OR *process\:\:* OR *vault\:\:*))
+      query: (process.command_line.keyword:(*dumpcreds* OR *mimikatz*)) OR (process.command_line.keyword:(*\:\:aadcookie*
+        OR *\:\:detours* OR *\:\:memssp* OR *\:\:mflt* OR *\:\:ncroutemon* OR *\:\:ngcsign*
+        OR *\:\:printnightmare* OR *\:\:skeleton* OR *\:\:preshutdown* OR *\:\:mstsc*
+        OR *\:\:multirdp*)) OR (process.command_line.keyword:(*rpc\:\:* OR *token\:\:*
+        OR *crypto\:\:* OR *dpapi\:\:* OR *sekurlsa\:\:* OR *kerberos\:\:* OR *lsadump\:\:*
+        OR *privilege\:\:* OR *process\:\:* OR *vault\:\:*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.001
+- t1003.002
+- t1003.004
+- t1003.005
+- t1003.006
+risk: high

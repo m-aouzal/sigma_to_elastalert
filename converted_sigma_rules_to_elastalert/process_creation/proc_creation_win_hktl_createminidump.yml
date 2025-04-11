@@ -1,10 +1,15 @@
 description: |
   Detects the use of CreateMiniDump hack tool used to dump the LSASS process memory for credential extraction on the attacker's machine
 name: HackTool - CreateMiniDump Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.image.keyword:*\\createminidump.exe OR winlog.event_data.hashes.keyword:*imphash\=4a07f944a83e8a7c2525efa35dd30e2f*
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.001
+risk: high

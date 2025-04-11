@@ -1,10 +1,15 @@
 description: |
   Detects the use of DefenderCheck, a tool to evaluate the signatures used in Microsoft Defender. It can be used to figure out the strings / byte chains used in Microsoft Defender to detect a tool and thus used for AV evasion.
 name: PUA - DefenderCheck Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.image.keyword:*\\defendercheck.exe OR winlog.event_data.description.keyword:defendercheck
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1027.005
+risk: high

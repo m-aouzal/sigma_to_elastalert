@@ -1,10 +1,27 @@
 description: |
   Detects ADDInternals Cmdlet execution. A tool for administering Azure AD and Office 365. Which can be abused by threat actors to attack Azure AD or Office 365.
 name: AADInternals PowerShell Cmdlets Execution - ProccessCreation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\powershell_ise.exe OR *\\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (process.command_line.keyword:(*add\-aadint* OR *convertto\-aadint* OR *disable\-aadint* OR *enable\-aadint* OR *export\-aadint* OR *find\-aadint* OR *get\-aadint* OR *grant\-aadint* OR *initialize\-aadint* OR *install\-aadint* OR *invoke\-aadint* OR *join\-aadint* OR *new\-aadint* OR *open\-aadint* OR *read\-aadint* OR *register\-aadint* OR *remove\-aadint* OR *reset\-aadint* OR *resolve\-aadint* OR *restore\-aadint* OR *save\-aadint* OR *search\-aadint* OR *send\-aadint* OR *set\-aadint* OR *start\-aadint* OR *unprotect\-aadint* OR *update\-aadint*))
+      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\powershell_ise.exe
+        OR *\\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe
+        OR pwsh.dll))) AND (process.command_line.keyword:(*add\-aadint* OR *convertto\-aadint*
+        OR *disable\-aadint* OR *enable\-aadint* OR *export\-aadint* OR *find\-aadint*
+        OR *get\-aadint* OR *grant\-aadint* OR *initialize\-aadint* OR *install\-aadint*
+        OR *invoke\-aadint* OR *join\-aadint* OR *new\-aadint* OR *open\-aadint* OR
+        *read\-aadint* OR *register\-aadint* OR *remove\-aadint* OR *reset\-aadint*
+        OR *resolve\-aadint* OR *restore\-aadint* OR *save\-aadint* OR *search\-aadint*
+        OR *send\-aadint* OR *set\-aadint* OR *start\-aadint* OR *unprotect\-aadint*
+        OR *update\-aadint*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+- reconnaissance
+- discovery
+- credential-access
+- impact
+mitre_attack_technique: []
+risk: high

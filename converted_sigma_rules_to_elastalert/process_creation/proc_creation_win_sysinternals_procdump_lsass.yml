@@ -1,12 +1,21 @@
 description: |
   Detects suspicious uses of the SysInternals Procdump utility by using a special command line parameter in combination with the lsass.exe process.
   This way we are also able to catch cases in which the attacker has renamed the procdump executable.
-  
+
 name: Potential LSASS Process Dump Via Procdump
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*\ \-ma\ * OR *\ \/ma\ * OR *\ –ma\ * OR *\ —ma\ * OR *\ ―ma\ *) AND process.command_line.keyword:*\ ls*
+      query: process.command_line.keyword:(*\ \-ma\ * OR *\ \/ma\ * OR *\ –ma\ * OR
+        *\ —ma\ * OR *\ ―ma\ *) AND process.command_line.keyword:*\ ls*
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- credential-access
+mitre_attack_technique:
+- t1036
+- t1003.001
+- car.2013-05-009
+risk: high

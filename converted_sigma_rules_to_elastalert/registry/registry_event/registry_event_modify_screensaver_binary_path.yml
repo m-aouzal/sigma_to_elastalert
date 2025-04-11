@@ -1,10 +1,17 @@
 description: |
   Detects value modification of registry key containing path to binary used as screensaver.
 name: Path To Screensaver Binary Modified
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\control\ panel\\desktop\\scrnsave.exe AND (NOT (process.executable.keyword:(*\\rundll32.exe OR *\\explorer.exe)))
+      query: registry.path.keyword:*\\control\ panel\\desktop\\scrnsave.exe AND (NOT
+        (process.executable.keyword:(*\\rundll32.exe OR *\\explorer.exe)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1546.002
+risk: medium

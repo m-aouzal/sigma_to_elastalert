@@ -1,10 +1,17 @@
 description: |
   Detects changes to the "TracingDisabled" key in order to disable ETW logging for services.exe (SCM)
 name: ETW Logging Disabled For SCM
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*software\\microsoft\\windows\ nt\\currentversion\\tracing\\scm\\regular\\tracingdisabled AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)
+      query: registry.path.keyword:*software\\microsoft\\windows\ nt\\currentversion\\tracing\\scm\\regular\\tracingdisabled
+        AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)
 type: any
 priority: 1
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1112
+- t1562
+risk: low

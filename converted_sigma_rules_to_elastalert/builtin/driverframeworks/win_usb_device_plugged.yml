@@ -1,10 +1,17 @@
 description: |
   Detects plugged/unplugged USB devices
 name: USB Device Plugged
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-driverframeworks\-usermode\/operational AND (event.code.keyword:(2003 OR 2100 OR 2102))
+      query: 
+        winlog.channel.keyword:microsoft\-windows\-driverframeworks\-usermode\/operational
+        AND (event.code.keyword:(2003 OR 2100 OR 2102))
 type: any
 priority: 1
+mitre_attack_tactic:
+- initial-access
+mitre_attack_technique:
+- t1200
+risk: low

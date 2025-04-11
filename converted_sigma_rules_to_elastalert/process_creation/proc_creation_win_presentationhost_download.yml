@@ -1,10 +1,17 @@
 description: |
   Detects usage of "PresentationHost" which is a utility that runs ".xbap" (Browser Applications) files to download arbitrary files
 name: Arbitrary File Download Via PresentationHost.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\presentationhost.exe OR winlog.event_data.originalfilename.keyword:presentationhost.exe) AND (process.command_line.keyword:(*http\:\/\/* OR *https\:\/\/* OR *ftp\:\/\/*))
+      query: (winlog.event_data.image.keyword:*\\presentationhost.exe OR winlog.event_data.originalfilename.keyword:presentationhost.exe)
+        AND (process.command_line.keyword:(*http\:\/\/* OR *https\:\/\/* OR *ftp\:\/\/*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1218
+risk: medium

@@ -1,11 +1,19 @@
 description: |
   Detects the first occurrence of a modification to Group Policy Object Attributes to add privileges to user accounts or use them to add users as local admins.
-  
+
 name: Group Policy Abuse for Privilege Addition
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:5136 AND winlog.event_data.AttributeLDAPDisplayName.keyword:gpcmachineextensionnames AND (winlog.event_data.AttributeValue.keyword:(*827d319e\-6eac\-11d2\-a4ea\-00c04f79f83a* OR *803e14a0\-b4fb\-11d0\-a0d0\-00a0c90f574b*)))
+      query: winlog.channel.keyword:security AND (event.code.keyword:5136 AND winlog.event_data.AttributeLDAPDisplayName.keyword:gpcmachineextensionnames
+        AND 
+        (winlog.event_data.AttributeValue.keyword:(*827d319e\-6eac\-11d2\-a4ea\-00c04f79f83a*
+        OR *803e14a0\-b4fb\-11d0\-a0d0\-00a0c90f574b*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- privilege-escalation
+mitre_attack_technique:
+- t1484.001
+risk: medium

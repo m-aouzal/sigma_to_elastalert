@@ -1,11 +1,17 @@
 description: |
   Detects the initial execution of "cmd.exe" which spawns "explorer.exe" with the appropriate command line arguments for opening the "My Computer" folder.
-  
+
 name: File Explorer Folder Opened Using Explorer Folder Shortcut Via Shell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:(*\\cmd.exe OR *\\powershell.exe OR *\\pwsh.exe)) AND process.executable.keyword:*\\explorer.exe AND process.command_line.keyword:*shell\:mycomputerfolder*
+      query: (process.parent.executable.keyword:(*\\cmd.exe OR *\\powershell.exe OR
+        *\\pwsh.exe)) AND process.executable.keyword:*\\explorer.exe AND process.command_line.keyword:*shell\:mycomputerfolder*
 type: any
 priority: 3
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1135
+risk: high

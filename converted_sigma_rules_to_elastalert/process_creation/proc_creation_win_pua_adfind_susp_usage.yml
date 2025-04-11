@@ -1,10 +1,23 @@
 description: |
   Detects AdFind execution with common flags seen used during attacks
 name: PUA - AdFind Suspicious Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*domainlist* OR *trustdmp* OR *dcmodes* OR *adinfo* OR *\ dclist\ * OR *computer_pwdnotreqd* OR *objectcategory\=* OR *\-subnets\ \-f* OR *name\=\"domain\ admins\"* OR *\-sc\ u\:* OR *domainncs* OR *dompol* OR *\ oudmp\ * OR *subnetdmp* OR *gpodmp* OR *fspdmp* OR *users_noexpire* OR *computers_active* OR *computers_pwdnotreqd*)
+      query: process.command_line.keyword:(*domainlist* OR *trustdmp* OR *dcmodes*
+        OR *adinfo* OR *\ dclist\ * OR *computer_pwdnotreqd* OR *objectcategory\=*
+        OR *\-subnets\ \-f* OR *name\=\"domain\ admins\"* OR *\-sc\ u\:* OR *domainncs*
+        OR *dompol* OR *\ oudmp\ * OR *subnetdmp* OR *gpodmp* OR *fspdmp* OR *users_noexpire*
+        OR *computers_active* OR *computers_pwdnotreqd*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1018
+- t1087.002
+- t1482
+- t1069.002
+- stp.1u
+risk: high

@@ -1,10 +1,17 @@
 description: |
   Detects the removal of Sysmon, which could be a potential attempt at defense evasion
 name: Uninstall Sysinternals Sysmon
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\sysmon64.exe OR *\\sysmon.exe)) OR winlog.event_data.description.keyword:system\ activity\ monitor) AND process.command_line.keyword:(*\-u* OR *\/u* OR *–u* OR *—u* OR *―u*)
+      query: ((winlog.event_data.image.keyword:(*\\sysmon64.exe OR *\\sysmon.exe))
+        OR winlog.event_data.description.keyword:system\ activity\ monitor) AND process.command_line.keyword:(*\-u*
+        OR *\/u* OR *–u* OR *—u* OR *―u*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high

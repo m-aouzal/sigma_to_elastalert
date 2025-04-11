@@ -1,10 +1,16 @@
 description: |
   Detects the registration of the security event source VSSAudit. It would usually trigger when volume shadow copy operations happen.
 name: VSSAudit Security Event Source Registration
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (winlog.event_data.AuditSourceName.keyword:vssaudit AND (event.code.keyword:(4904 OR 4905)))
+      query: winlog.channel.keyword:security AND (winlog.event_data.AuditSourceName.keyword:vssaudit
+        AND (event.code.keyword:(4904 OR 4905)))
 type: any
 priority: 0
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.002
+risk: informational

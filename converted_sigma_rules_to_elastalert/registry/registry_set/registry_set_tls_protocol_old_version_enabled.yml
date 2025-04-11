@@ -1,10 +1,17 @@
 description: |
   Detects applications or users re-enabling old TLS versions by setting the "Enabled" value to "1" for the "Protocols" registry key.
 name: Old TLS1.0/TLS1.1 Protocol Version Enabled
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*\\control\\securityproviders\\schannel\\protocols\\tls\ 1.0\\* OR *\\control\\securityproviders\\schannel\\protocols\\tls\ 1.1\\*)) AND registry.path.keyword:*\\enabled AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)
+      query: (registry.path.keyword:(*\\control\\securityproviders\\schannel\\protocols\\tls\
+        1.0\\* OR *\\control\\securityproviders\\schannel\\protocols\\tls\ 1.1\\*))
+        AND registry.path.keyword:*\\enabled AND winlog.event_data.Details.keyword:dword\
+        \(0x00000001\)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

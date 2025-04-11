@@ -1,10 +1,20 @@
 description: |
   Detects execution of RClone utility for exfiltration as used by various ransomwares strains like REvil, Conti, FiveHands, etc
 name: PUA - Rclone Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*\-\-config\ * AND process.command_line.keyword:*\-\-no\-check\-certificate\ * AND process.command_line.keyword:*\ copy\ *) OR ((winlog.event_data.image.keyword:*\\rclone.exe OR winlog.event_data.description.keyword:rsync\ for\ cloud\ storage) AND (process.command_line.keyword:(*pass* OR *user* OR *copy* OR *sync* OR *config* OR *lsd* OR *remote* OR *ls* OR *mega* OR *pcloud* OR *ftp* OR *ignore\-existing* OR *auto\-confirm* OR *transfers* OR *multi\-thread\-streams* OR *no\-check\-certificate\ *)))
+      query: (process.command_line.keyword:*\-\-config\ * AND process.command_line.keyword:*\-\-no\-check\-certificate\
+        * AND process.command_line.keyword:*\ copy\ *) OR ((winlog.event_data.image.keyword:*\\rclone.exe
+        OR winlog.event_data.description.keyword:rsync\ for\ cloud\ storage) AND (process.command_line.keyword:(*pass*
+        OR *user* OR *copy* OR *sync* OR *config* OR *lsd* OR *remote* OR *ls* OR
+        *mega* OR *pcloud* OR *ftp* OR *ignore\-existing* OR *auto\-confirm* OR *transfers*
+        OR *multi\-thread\-streams* OR *no\-check\-certificate\ *)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- exfiltration
+mitre_attack_technique:
+- t1567.002
+risk: high

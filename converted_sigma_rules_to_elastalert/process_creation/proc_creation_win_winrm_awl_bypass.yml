@@ -1,10 +1,17 @@
 description: |
   Detects execution of attacker-controlled WsmPty.xsl or WsmTxt.xsl via winrm.vbs and copied cscript.exe (can be renamed)
 name: AWL Bypass with Winrm.vbs and Malicious WsmPty.xsl/WsmTxt.xsl
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*winrm* AND ((process.command_line.keyword:(*format\:pretty* OR *format\:\"pretty\"* OR *format\:\"text\"* OR *format\:text*)) AND (NOT (process.executable.keyword:(c\:\\windows\\system32\\* OR c\:\\windows\\syswow64\\*))))
+      query: process.command_line.keyword:*winrm* AND ((process.command_line.keyword:(*format\:pretty*
+        OR *format\:\"pretty\"* OR *format\:\"text\"* OR *format\:text*)) AND (NOT
+        (process.executable.keyword:(c\:\\windows\\system32\\* OR c\:\\windows\\syswow64\\*))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1216
+risk: medium

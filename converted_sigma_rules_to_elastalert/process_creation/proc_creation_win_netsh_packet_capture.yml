@@ -1,10 +1,17 @@
 description: |
   Detects the execution of netsh with the "trace" flag in order to start a network capture
 name: New Network Trace Capture Started Via Netsh.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\netsh.exe OR winlog.event_data.originalfilename.keyword:netsh.exe) AND (process.command_line.keyword:*trace* AND process.command_line.keyword:*start*)
+      query: (winlog.event_data.image.keyword:*\\netsh.exe OR winlog.event_data.originalfilename.keyword:netsh.exe)
+        AND (process.command_line.keyword:*trace* AND process.command_line.keyword:*start*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+- credential-access
+mitre_attack_technique:
+- t1040
+risk: medium

@@ -1,10 +1,16 @@
 description: |
   Detects execution of Chromium based browser in headless mode
 name: Browser Execution In Headless Mode
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\brave.exe OR *\\chrome.exe OR *\\msedge.exe OR *\\opera.exe OR *\\vivaldi.exe)) AND process.command_line.keyword:*\-\-headless*
+      query: (process.executable.keyword:(*\\brave.exe OR *\\chrome.exe OR *\\msedge.exe
+        OR *\\opera.exe OR *\\vivaldi.exe)) AND process.command_line.keyword:*\-\-headless*
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1105
+risk: medium

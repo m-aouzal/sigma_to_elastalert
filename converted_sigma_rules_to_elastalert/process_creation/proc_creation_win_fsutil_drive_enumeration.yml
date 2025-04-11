@@ -1,10 +1,16 @@
 description: |
   Attackers may leverage fsutil to enumerated connected drives.
 name: Fsutil Drive Enumeration
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\fsutil.exe OR winlog.event_data.originalfilename.keyword:fsutil.exe) AND process.command_line.keyword:*drives*
+      query: (winlog.event_data.image.keyword:*\\fsutil.exe OR winlog.event_data.originalfilename.keyword:fsutil.exe)
+        AND process.command_line.keyword:*drives*
 type: any
 priority: 1
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1120
+risk: low

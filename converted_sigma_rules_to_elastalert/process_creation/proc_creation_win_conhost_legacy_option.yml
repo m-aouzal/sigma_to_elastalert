@@ -1,10 +1,17 @@
 description: |
   ForceV1 asks for information directly from the kernel space. Conhost connects to the console application. High IntegrityLevel means the process is running with elevated privileges, such as an Administrator context.
 name: Suspicious High IntegrityLevel Conhost Legacy Option
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.IntegrityLevel.keyword:(high OR s\-1\-16\-12288)) AND (process.command_line.keyword:*conhost.exe* AND process.command_line.keyword:*0xffffffff* AND process.command_line.keyword:*\-forcev1*)
+      query: (winlog.event_data.IntegrityLevel.keyword:(high OR s\-1\-16\-12288))
+        AND (process.command_line.keyword:*conhost.exe* AND process.command_line.keyword:*0xffffffff*
+        AND process.command_line.keyword:*\-forcev1*)
 type: any
 priority: 0
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1202
+risk: informational

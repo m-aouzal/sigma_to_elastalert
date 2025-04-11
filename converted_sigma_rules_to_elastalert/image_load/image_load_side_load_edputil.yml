@@ -1,10 +1,18 @@
 description: |
   Detects potential DLL sideloading of "edputil.dll"
 name: Potential Edputil.DLL Sideloading
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\\edputil.dll AND (NOT (file.path.keyword:(c\:\\windows\\system32\\* OR c\:\\windows\\syswow64\\* OR c\\windows\\winsxs\\*)))
+      query: file.path.keyword:*\\edputil.dll AND (NOT (file.path.keyword:(c\:\\windows\\system32\\*
+        OR c\:\\windows\\syswow64\\* OR c\\windows\\winsxs\\*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: high

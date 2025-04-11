@@ -1,10 +1,17 @@
 description: |
   Detects usage of the "FromBase64String" function in the commandline which is used to decode a base64 encoded string
 name: Base64 Encoded PowerShell Command Detected
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.command_line.keyword:*\:\:frombase64string\(*
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1027
+- t1140
+- t1059.001
+risk: high

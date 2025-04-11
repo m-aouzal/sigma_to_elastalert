@@ -1,10 +1,17 @@
 description: |
   Detects attempts to remove Windows Defender configurations using the 'MpPreference' cmdlet
 name: Tamper Windows Defender Remove-MpPreference
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*remove\-mppreference* AND (process.command_line.keyword:(*\-controlledfolderaccessprotectedfolders\ * OR *\-attacksurfacereductionrules_ids\ * OR *\-attacksurfacereductionrules_actions\ * OR *\-checkforsignaturesbeforerunningscan\ *))
+      query: process.command_line.keyword:*remove\-mppreference* AND (process.command_line.keyword:(*\-controlledfolderaccessprotectedfolders\
+        * OR *\-attacksurfacereductionrules_ids\ * OR *\-attacksurfacereductionrules_actions\
+        * OR *\-checkforsignaturesbeforerunningscan\ *))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high

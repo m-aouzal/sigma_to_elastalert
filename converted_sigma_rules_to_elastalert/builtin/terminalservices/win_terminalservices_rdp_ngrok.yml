@@ -1,10 +1,17 @@
 description: |
   Detects cases in which ngrok, a reverse proxy tool, forwards events to the local RDP port, which could be a sign of malicious behaviour
 name: Ngrok Usage with Remote Desktop Service
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-terminalservices\-localsessionmanager\/operational AND (event.code.keyword:21 AND winlog.event_data.Address.keyword:*16777216*)
+      query: 
+        winlog.channel.keyword:microsoft\-windows\-terminalservices\-localsessionmanager\/operational
+        AND (event.code.keyword:21 AND winlog.event_data.Address.keyword:*16777216*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1090
+risk: high

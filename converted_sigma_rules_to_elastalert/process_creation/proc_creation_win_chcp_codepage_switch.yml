@@ -1,10 +1,16 @@
 description: |
   Detects a code page switch in command line or batch scripts to a rare language
 name: Suspicious CodePage Switch Via CHCP
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\chcp.com AND (process.command_line.keyword:(*\ 936 OR *\ 1258))
+      query: process.executable.keyword:*\\chcp.com AND (process.command_line.keyword:(*\
+        936 OR *\ 1258))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036
+risk: medium

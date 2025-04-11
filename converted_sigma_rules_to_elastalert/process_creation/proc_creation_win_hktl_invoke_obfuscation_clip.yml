@@ -1,10 +1,19 @@
 description: |
   Detects Obfuscated use of Clip.exe to execute PowerShell
 name: Invoke-Obfuscation CLIP+ Launcher
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*cmd* AND process.command_line.keyword:*\&\&* AND process.command_line.keyword:*clipboard\]\:\:* AND process.command_line.keyword:*\-f*) AND (process.command_line.keyword:(*\/c* OR *\/r*))
+      query: (process.command_line.keyword:*cmd* AND process.command_line.keyword:*\&\&*
+        AND process.command_line.keyword:*clipboard\]\:\:* AND process.command_line.keyword:*\-f*)
+        AND (process.command_line.keyword:(*\/c* OR *\/r*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1027
+- t1059.001
+risk: high

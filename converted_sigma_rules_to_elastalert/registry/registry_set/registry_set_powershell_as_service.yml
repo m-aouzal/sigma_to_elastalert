@@ -1,10 +1,16 @@
 description: |
   Detects that a powershell code is written to the registry as a service.
 name: PowerShell as a Service in Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\services\\* AND registry.path.keyword:*\\imagepath AND (winlog.event_data.Details.keyword:(*powershell* OR *pwsh*))
+      query: registry.path.keyword:*\\services\\* AND registry.path.keyword:*\\imagepath
+        AND (winlog.event_data.Details.keyword:(*powershell* OR *pwsh*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1569.002
+risk: high

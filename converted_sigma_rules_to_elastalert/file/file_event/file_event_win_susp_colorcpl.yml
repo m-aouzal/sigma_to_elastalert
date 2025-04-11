@@ -1,10 +1,16 @@
 description: |
   Once executed, colorcpl.exe will copy the arbitrary file to c:\windows\system32\spool\drivers\color\
 name: Suspicious Creation with Colorcpl
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\colorcpl.exe AND (NOT (file.path.keyword:(*.icm OR *.gmmp OR *.cdmp OR *.camp)))
+      query: process.executable.keyword:*\\colorcpl.exe AND (NOT (file.path.keyword:(*.icm
+        OR *.gmmp OR *.cdmp OR *.camp)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1564
+risk: high

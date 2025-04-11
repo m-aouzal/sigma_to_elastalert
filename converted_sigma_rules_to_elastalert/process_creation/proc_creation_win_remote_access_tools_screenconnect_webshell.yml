@@ -1,10 +1,16 @@
 description: |
   Detects potential web shell execution from the ScreenConnect server process.
 name: Remote Access Tool - ScreenConnect Server Web Shell Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\\screenconnect.service.exe AND (process.executable.keyword:(*\\cmd.exe OR *\\csc.exe))
+      query: process.parent.executable.keyword:*\\screenconnect.service.exe AND (process.executable.keyword:(*\\cmd.exe
+        OR *\\csc.exe))
 type: any
 priority: 3
+mitre_attack_tactic:
+- initial-access
+mitre_attack_technique:
+- t1190
+risk: high

@@ -1,10 +1,16 @@
 description: |
   Detects suspicious PowerShell download command
 name: Suspicious PowerShell Download
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.Data.keyword:*net.webclient* AND (winlog.event_data.Data.keyword:(*.downloadfile\(* OR *.downloadstring\(*))
+      query: winlog.event_data.Data.keyword:*net.webclient* AND (winlog.event_data.Data.keyword:(*.downloadfile\(*
+        OR *.downloadstring\(*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: medium

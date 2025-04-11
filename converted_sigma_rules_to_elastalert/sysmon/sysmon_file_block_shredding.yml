@@ -1,10 +1,14 @@
 description: |
   Triggers on any Sysmon "FileBlockShredding" event, which indicates a violation of the configured shredding policy.
 name: Sysmon Blocked File Shredding
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.channel.keyword:microsoft\-windows\-sysmon\/operational AND event.code.keyword:28
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: high

@@ -1,10 +1,16 @@
 description: |
   An adversary may use legitimate desktop support and remote access software,to establish an interactive command and control channel to target systems within networks
 name: Use of UltraVNC Remote Access Software
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.description.keyword:vncviewer OR winlog.event_data.product.keyword:ultravnc\ vncviewer OR winlog.event_data.company.keyword:ultravnc OR winlog.event_data.originalfilename.keyword:vncviewer.exe
+      query: winlog.event_data.description.keyword:vncviewer OR winlog.event_data.product.keyword:ultravnc\
+        vncviewer OR winlog.event_data.company.keyword:ultravnc OR winlog.event_data.originalfilename.keyword:vncviewer.exe
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1219
+risk: medium

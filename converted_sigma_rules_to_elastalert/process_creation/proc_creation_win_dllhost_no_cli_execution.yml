@@ -1,10 +1,16 @@
 description: |
   Detects a "dllhost" process spawning with no commandline arguments which is very rare to happen and could indicate process injection activity or malware mimicking similar system processes.
 name: Dllhost.EXE Execution Anomaly
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\dllhost.exe AND (process.command_line.keyword:(dllhost.exe OR dllhost))) AND _exists_:process.command_line
+      query: (process.executable.keyword:*\\dllhost.exe AND (process.command_line.keyword:(dllhost.exe
+        OR dllhost))) AND _exists_:process.command_line
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1055
+risk: high

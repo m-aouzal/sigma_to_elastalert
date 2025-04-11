@@ -1,10 +1,17 @@
 description: |
   Detects nltest commands that can be used for information discovery
 name: Nltest.EXE Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.image.keyword:*\\nltest.exe OR winlog.event_data.originalfilename.keyword:nltestrk.exe
 type: any
 priority: 1
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1016
+- t1018
+- t1482
+risk: low

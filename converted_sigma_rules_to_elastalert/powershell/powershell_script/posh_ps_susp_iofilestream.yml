@@ -1,10 +1,16 @@
 description: |
   Open a handle on the drive volume via the \\.\ DOS device path specifier and perform direct access read of the first few bytes of the volume.
 name: Suspicious IO.FileStream
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*new\-object* AND powershell.file.script_block_text.keyword:*io.filestream* AND powershell.file.script_block_text.keyword:*\\\\.\\*
+      query: powershell.file.script_block_text.keyword:*new\-object* AND powershell.file.script_block_text.keyword:*io.filestream*
+        AND powershell.file.script_block_text.keyword:*\\\\.\\*
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1070.003
+risk: medium

@@ -1,12 +1,24 @@
 description: |
   Detects DLL sideloading of system DLLs that are not present on the system by default (at least not in system directories).
   Usually this technique is used to achieve UAC bypass or privilege escalation.
-  
+
 name: Potential DLL Sideloading Of Non-Existent DLLs From System Folders
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:(*\:\\windows\\system32\\tsmsisrv.dll OR *\:\\windows\\system32\\tsvipsrv.dll OR *\:\\windows\\system32\\wbem\\wbemcomn.dll OR *\:\\windows\\system32\\wlbsctrl.dll OR *\:\\windows\\system32\\wow64log.dll OR *\:\\windows\\system32\\wptsextensions.dll)) AND (NOT (file.code_signature.signed.keyword:true AND file.code_signature.status.keyword:valid AND winlog.event_data.Signature.keyword:microsoft\ windows))
+      query: (file.path.keyword:(*\:\\windows\\system32\\tsmsisrv.dll OR *\:\\windows\\system32\\tsvipsrv.dll
+        OR *\:\\windows\\system32\\wbem\\wbemcomn.dll OR *\:\\windows\\system32\\wlbsctrl.dll
+        OR *\:\\windows\\system32\\wow64log.dll OR *\:\\windows\\system32\\wptsextensions.dll))
+        AND (NOT (file.code_signature.signed.keyword:true AND file.code_signature.status.keyword:valid
+        AND winlog.event_data.Signature.keyword:microsoft\ windows))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: high

@@ -1,10 +1,15 @@
 description: |
   Detects the deletion of the PowerShell console History logs which may indicate an attempt to destroy forensic evidence
 name: PowerShell Console History Logs Deleted
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: file.path.keyword:*\\psreadline\\consolehost_history.txt
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1070
+risk: medium

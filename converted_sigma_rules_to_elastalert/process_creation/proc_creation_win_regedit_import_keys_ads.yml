@@ -1,10 +1,20 @@
 description: |
   Detects the import of a alternate datastream to the registry with regedit.exe.
 name: Imports Registry Key From an ADS
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\\regedit.exe OR winlog.event_data.originalfilename.keyword:regedit.exe) AND ((process.command_line.keyword:(*\ \/i\ * OR *.reg*)) AND process.command_line.keyword:/:[^ \\]/)) AND (NOT (process.command_line.keyword:(*\ \-e\ * OR *\ \/e\ * OR *\ –e\ * OR *\ —e\ * OR *\ ―e\ *) OR process.command_line.keyword:(*\ \-a\ * OR *\ \/a\ * OR *\ –a\ * OR *\ —a\ * OR *\ ―a\ *) OR process.command_line.keyword:(*\ \-c\ * OR *\ \/c\ * OR *\ –c\ * OR *\ —c\ * OR *\ ―c\ *)))
+      query: ((winlog.event_data.image.keyword:*\\regedit.exe OR winlog.event_data.originalfilename.keyword:regedit.exe)
+        AND ((process.command_line.keyword:(*\ \/i\ * OR *.reg*)) AND process.command_line.keyword:/:[^
+        \\]/)) AND (NOT (process.command_line.keyword:(*\ \-e\ * OR *\ \/e\ * OR *\
+        –e\ * OR *\ —e\ * OR *\ ―e\ *) OR process.command_line.keyword:(*\ \-a\ *
+        OR *\ \/a\ * OR *\ –a\ * OR *\ —a\ * OR *\ ―a\ *) OR process.command_line.keyword:(*\
+        \-c\ * OR *\ \/c\ * OR *\ –c\ * OR *\ —c\ * OR *\ ―c\ *)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1112
+risk: high

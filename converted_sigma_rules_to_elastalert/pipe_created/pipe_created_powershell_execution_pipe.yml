@@ -1,10 +1,15 @@
 description: |
   Detects the execution of PowerShell via the creation of a named pipe starting with PSHost
 name: New PowerShell Instance Created
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: file.name.keyword:\\pshost*
 type: any
 priority: 0
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: informational

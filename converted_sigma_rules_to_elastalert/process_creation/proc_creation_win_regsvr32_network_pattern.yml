@@ -1,10 +1,17 @@
 description: |
   Detects regsvr32 execution to download/install/register new DLLs that are hosted on Web or FTP servers.
 name: Potentially Suspicious Regsvr32 HTTP/FTP Pattern
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\regsvr32.exe OR winlog.event_data.originalfilename.keyword:regsvr32.exe) AND (process.command_line.keyword:(*\ \/i* OR *\ \-i*)) AND (process.command_line.keyword:(*ftp* OR *http*))
+      query: (winlog.event_data.image.keyword:*\\regsvr32.exe OR winlog.event_data.originalfilename.keyword:regsvr32.exe)
+        AND (process.command_line.keyword:(*\ \/i* OR *\ \-i*)) AND (process.command_line.keyword:(*ftp*
+        OR *http*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218.010
+risk: medium

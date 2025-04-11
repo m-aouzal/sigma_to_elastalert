@@ -1,10 +1,15 @@
 description: |
   Detects the use of Tor or Tor-Browser to connect to onion routing networks
 name: Tor Client/Browser Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:(*\\tor.exe OR *\\tor\ browser\\browser\\firefox.exe)
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1090.003
+risk: high

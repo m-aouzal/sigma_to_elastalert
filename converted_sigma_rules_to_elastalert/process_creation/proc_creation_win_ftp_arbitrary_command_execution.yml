@@ -1,10 +1,19 @@
 description: |
   Detects execution of "ftp.exe" script with the "-s" or "/s" flag and any child processes ran by "ftp.exe".
 name: Potential Arbitrary Command Execution Via FTP.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:*\\ftp.exe OR ((winlog.event_data.image.keyword:*\\ftp.exe OR winlog.event_data.originalfilename.keyword:ftp.exe) AND process.command_line.keyword:(*\-s\:* OR *\/s\:* OR *–s\:* OR *—s\:* OR *―s\:*))
+      query: process.parent.executable.keyword:*\\ftp.exe OR ((winlog.event_data.image.keyword:*\\ftp.exe
+        OR winlog.event_data.originalfilename.keyword:ftp.exe) AND process.command_line.keyword:(*\-s\:*
+        OR *\/s\:* OR *–s\:* OR *—s\:* OR *―s\:*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+- defense-evasion
+mitre_attack_technique:
+- t1059
+- t1202
+risk: medium

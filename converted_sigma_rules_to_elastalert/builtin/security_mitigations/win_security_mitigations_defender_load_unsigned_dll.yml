@@ -1,10 +1,17 @@
 description: |
   Detects Code Integrity (CI) engine blocking Microsoft Defender's processes (MpCmdRun and NisSrv) from loading unsigned DLLs which may be an attempt to sideload arbitrary DLL
 name: Microsoft Defender Blocked from Loading Unsigned DLL
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.channel.keyword:(microsoft\-windows\-security\-mitigations\/kernel\ mode OR Microsoft\-Windows\-Security\-Mitigations\/User\ Mode)) AND ((event.code.keyword:(11 OR 12)) AND (winlog.event_data.ProcessPath.keyword:(*\\mpcmdrun.exe OR *\\nissrv.exe)))
+      query: (winlog.channel.keyword:(microsoft\-windows\-security\-mitigations\/kernel\
+        mode OR Microsoft\-Windows\-Security\-Mitigations\/User\ Mode)) AND ((event.code.keyword:(11
+        OR 12)) AND (winlog.event_data.ProcessPath.keyword:(*\\mpcmdrun.exe OR *\\nissrv.exe)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1574.002
+risk: high

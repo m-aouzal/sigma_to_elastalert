@@ -1,10 +1,19 @@
 description: |
   Detects potential DLL sideloading of rcdll.dll
 name: Potential Rcdll.DLL Sideloading
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\\rcdll.dll AND (NOT (file.path.keyword:(c\:\\program\ files\ \(x86\)\\microsoft\ visual\ studio\\* OR c\:\\program\ files\ \(x86\)\\windows\ kits\\*)))
+      query: file.path.keyword:*\\rcdll.dll AND (NOT (file.path.keyword:(c\:\\program\
+        files\ \(x86\)\\microsoft\ visual\ studio\\* OR c\:\\program\ files\ \(x86\)\\windows\
+        kits\\*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: high

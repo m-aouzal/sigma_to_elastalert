@@ -1,10 +1,16 @@
 description: |
   Detects the use of a renamed SysInternals Sdelete, which is something an administrator shouldn't do (the renaming)
 name: Renamed Sysinternals Sdelete Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.pe.original_file_name.keyword:sdelete.exe AND (NOT (process.executable.keyword:(*\\sdelete.exe OR *\\sdelete64.exe)))
+      query: process.pe.original_file_name.keyword:sdelete.exe AND (NOT (process.executable.keyword:(*\\sdelete.exe
+        OR *\\sdelete64.exe)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- impact
+mitre_attack_technique:
+- t1485
+risk: high

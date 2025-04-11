@@ -1,10 +1,21 @@
 description: |
   Detect lateral movement using GPO scheduled task, usually used to deploy ransomware at scale
 name: Persistence and Execution at Scale via GPO Scheduled Task
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND ((event.code.keyword:5136 AND (winlog.event_data.AttributeLDAPDisplayName.keyword:(gpcmachineextensionnames OR gpcuserextensionnames)) AND (winlog.event_data.AttributeValue.keyword:(*cab54552\-deea\-4691\-817e\-ed4a4d1afc72* OR *aadced64\-746c\-4633\-a97c\-d61349046527*))) OR (event.code.keyword:5145 AND winlog.event_data.ShareName.keyword:*\\sysvol AND winlog.event_data.RelativeTargetName.keyword:*scheduledtasks.xml AND (winlog.event_data.AccessList.keyword:(*writedata* OR *%%4417*))))
+      query: winlog.channel.keyword:security AND ((event.code.keyword:5136 AND (winlog.event_data.AttributeLDAPDisplayName.keyword:(gpcmachineextensionnames
+        OR gpcuserextensionnames)) AND 
+        (winlog.event_data.AttributeValue.keyword:(*cab54552\-deea\-4691\-817e\-ed4a4d1afc72*
+        OR *aadced64\-746c\-4633\-a97c\-d61349046527*))) OR (event.code.keyword:5145
+        AND winlog.event_data.ShareName.keyword:*\\sysvol AND winlog.event_data.RelativeTargetName.keyword:*scheduledtasks.xml
+        AND (winlog.event_data.AccessList.keyword:(*writedata* OR *%%4417*))))
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+- lateral-movement
+mitre_attack_technique:
+- t1053.005
+risk: high

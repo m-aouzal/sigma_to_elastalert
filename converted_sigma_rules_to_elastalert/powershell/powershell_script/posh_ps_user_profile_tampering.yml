@@ -1,10 +1,20 @@
 description: |
   Detects calls to "Add-Content" cmdlet in order to modify the content of the user profile and potentially adding suspicious commands for persistence
 name: Potential Persistence Via PowerShell User Profile Using Add-Content
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*add\-content\ $profile* AND (powershell.file.script_block_text.keyword:(*\-value\ \"iex\ * OR *\-value\ \"invoke\-expression* OR *\-value\ \"invoke\-webrequest* OR *\-value\ \"start\-process* OR *\-value\ 'iex\ * OR *\-value\ 'invoke\-expression* OR *\-value\ 'invoke\-webrequest* OR *\-value\ 'start\-process*))
+      query: powershell.file.script_block_text.keyword:*add\-content\ $profile* AND
+        (powershell.file.script_block_text.keyword:(*\-value\ \"iex\ * OR *\-value\
+        \"invoke\-expression* OR *\-value\ \"invoke\-webrequest* OR *\-value\ \"start\-process*
+        OR *\-value\ 'iex\ * OR *\-value\ 'invoke\-expression* OR *\-value\ 'invoke\-webrequest*
+        OR *\-value\ 'start\-process*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1546.013
+risk: medium

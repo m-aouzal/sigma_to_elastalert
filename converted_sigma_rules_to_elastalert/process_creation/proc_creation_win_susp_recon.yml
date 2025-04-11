@@ -1,10 +1,18 @@
 description: |
   Once established within a system or network, an adversary may use automated techniques for collecting internal data.
 name: Recon Information for Export with Command Prompt
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\tree.com OR *\\wmic.exe OR *\\doskey.exe OR *\\sc.exe)) OR (winlog.event_data.originalfilename.keyword:(wmic.exe OR doskey.exe OR sc.exe))) AND (process.parent.command_line.keyword:(*\ \>\ %temp%\\* OR *\ \>\ %tmp%\\*))
+      query: ((winlog.event_data.image.keyword:(*\\tree.com OR *\\wmic.exe OR *\\doskey.exe
+        OR *\\sc.exe)) OR (winlog.event_data.originalfilename.keyword:(wmic.exe OR
+        doskey.exe OR sc.exe))) AND (process.parent.command_line.keyword:(*\ \>\ %temp%\\*
+        OR *\ \>\ %tmp%\\*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- collection
+mitre_attack_technique:
+- t1119
+risk: medium

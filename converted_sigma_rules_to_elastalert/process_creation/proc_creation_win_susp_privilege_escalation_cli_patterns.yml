@@ -1,10 +1,19 @@
 description: |
   Detects suspicious command line flags that let the user set a target user and command as e.g. seen in PsExec-like tools
 name: Suspicious RunAs-Like Flag Combination
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*\ \-u\ system\ * OR *\ \-\-user\ system\ * OR *\ \-u\ nt* OR *\ \-u\ \"nt* OR *\ \-u\ 'nt* OR *\ \-\-system\ * OR *\ \-u\ administrator\ *)) AND (process.command_line.keyword:(*\ \-c\ cmd* OR *\ \-c\ \"cmd* OR *\ \-c\ powershell* OR *\ \-c\ \"powershell* OR *\ \-\-command\ cmd* OR *\ \-\-command\ powershell* OR *\ \-c\ whoami* OR *\ \-c\ wscript* OR *\ \-c\ cscript*))
+      query: (process.command_line.keyword:(*\ \-u\ system\ * OR *\ \-\-user\ system\
+        * OR *\ \-u\ nt* OR *\ \-u\ \"nt* OR *\ \-u\ 'nt* OR *\ \-\-system\ * OR *\
+        \-u\ administrator\ *)) AND (process.command_line.keyword:(*\ \-c\ cmd* OR
+        *\ \-c\ \"cmd* OR *\ \-c\ powershell* OR *\ \-c\ \"powershell* OR *\ \-\-command\
+        cmd* OR *\ \-\-command\ powershell* OR *\ \-c\ whoami* OR *\ \-c\ wscript*
+        OR *\ \-c\ cscript*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- privilege-escalation
+mitre_attack_technique: []
+risk: medium

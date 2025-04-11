@@ -1,10 +1,17 @@
 description: |
   Detects the stopping of a Windows service via the PowerShell Cmdlet "Stop-Service"
 name: Stop Windows Service Via PowerShell Stop-Service
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll)) OR (winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe))) AND process.command_line.keyword:*stop\-service\ *
+      query: ((winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))
+        OR (winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe))) AND
+        process.command_line.keyword:*stop\-service\ *
 type: any
 priority: 1
+mitre_attack_tactic:
+- impact
+mitre_attack_technique:
+- t1489
+risk: low

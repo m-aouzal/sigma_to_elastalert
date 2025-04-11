@@ -1,10 +1,20 @@
 description: |
   This rule detects execution of PowerShell scripts located in the "C:\Users\Public" folder
 name: Execution of Powershell Script in Public Folder
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND (process.command_line.keyword:(*\-f\ c\:\\users\\public* OR *\-f\ \"c\:\\users\\public* OR *\-f\ %public%* OR *\-fi\ c\:\\users\\public* OR *\-fi\ \"c\:\\users\\public* OR *\-fi\ %public%* OR *\-fil\ c\:\\users\\public* OR *\-fil\ \"c\:\\users\\public* OR *\-fil\ %public%* OR *\-file\ c\:\\users\\public* OR *\-file\ \"c\:\\users\\public* OR *\-file\ %public%*))
+      query: (process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND (process.command_line.keyword:(*\-f\
+        c\:\\users\\public* OR *\-f\ \"c\:\\users\\public* OR *\-f\ %public%* OR *\-fi\
+        c\:\\users\\public* OR *\-fi\ \"c\:\\users\\public* OR *\-fi\ %public%* OR
+        *\-fil\ c\:\\users\\public* OR *\-fil\ \"c\:\\users\\public* OR *\-fil\ %public%*
+        OR *\-file\ c\:\\users\\public* OR *\-file\ \"c\:\\users\\public* OR *\-file\
+        %public%*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.001
+risk: high

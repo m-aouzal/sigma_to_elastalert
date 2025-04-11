@@ -3,12 +3,20 @@ description: |
   When the job runs on the system the command specified in the BITS job will be executed.
   This can be abused by actors to create a backdoor within the system and for persistence.
   It will be chained in a BITS job to schedule the download of malware/additional binaries and execute the program after being downloaded.
-  
+
 name: Monitoring For Persistence Via BITS
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\bitsadmin.exe OR winlog.event_data.originalfilename.keyword:bitsadmin.exe) AND ((process.command_line.keyword:*\/setnotifycmdline* AND (process.command_line.keyword:(*%comspec%* OR *cmd.exe* OR *regsvr32.exe*))) OR (process.command_line.keyword:*\/addfile* AND (process.command_line.keyword:(*http\:* OR *https\:* OR *ftp\:* OR *ftps\:*))))
+      query: (winlog.event_data.image.keyword:*\\bitsadmin.exe OR winlog.event_data.originalfilename.keyword:bitsadmin.exe)
+        AND ((process.command_line.keyword:*\/setnotifycmdline* AND (process.command_line.keyword:(*%comspec%*
+        OR *cmd.exe* OR *regsvr32.exe*))) OR (process.command_line.keyword:*\/addfile*
+        AND (process.command_line.keyword:(*http\:* OR *https\:* OR *ftp\:* OR *ftps\:*))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1197
+risk: medium

@@ -1,10 +1,23 @@
 description: |
   Detects suspicious use of the WSMAN provider without PowerShell.exe as the host application.
 name: Suspicious Non PowerShell WSMAN COM Provider
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:windows\ powershell AND (winlog.event_data.Data.keyword:*providername\=wsman* AND (NOT ((winlog.event_data.Data.keyword:(*hostapplication\=powershell* OR *hostapplication\=c\:\\windows\\system32\\windowspowershell\\v1.0\\powershell* OR *hostapplication\=c\:\\windows\\syswow64\\windowspowershell\\v1.0\\powershell* OR *hostapplication\=c\:\/windows\/system32\/windowspowershell\/v1.0\/powershell* OR *hostapplication\=c\:\/windows\/syswow64\/windowspowershell\/v1.0\/powershell*)) OR winlog.event_data.Data.keyword:/hostid=[a-za-z0-9-]{36}\s+engineversion=/)))
+      query: winlog.channel.keyword:windows\ powershell AND (winlog.event_data.Data.keyword:*providername\=wsman*
+        AND (NOT ((winlog.event_data.Data.keyword:(*hostapplication\=powershell* OR
+        *hostapplication\=c\:\\windows\\system32\\windowspowershell\\v1.0\\powershell*
+        OR *hostapplication\=c\:\\windows\\syswow64\\windowspowershell\\v1.0\\powershell*
+        OR *hostapplication\=c\:\/windows\/system32\/windowspowershell\/v1.0\/powershell*
+        OR *hostapplication\=c\:\/windows\/syswow64\/windowspowershell\/v1.0\/powershell*))
+        OR winlog.event_data.Data.keyword:/hostid=[a-za-z0-9-]{36}\s+engineversion=/)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+- lateral-movement
+mitre_attack_technique:
+- t1059.001
+- t1021.003
+risk: medium

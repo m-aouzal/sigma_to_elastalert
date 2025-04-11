@@ -1,10 +1,16 @@
 description: |
   Detects modification addition to the 'TypedPaths' key in the user or admin registry from a non standard application. Which might indicate persistence attempt
 name: Potential Persistence Via TypedPaths
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\explorer\\typedpaths\\* AND (NOT (process.executable.keyword:(c\:\\windows\\explorer.exe OR c\:\\windows\\syswow64\\explorer.exe)))
+      query: 
+        registry.path.keyword:*\\software\\microsoft\\windows\\currentversion\\explorer\\typedpaths\\*
+        AND (NOT (process.executable.keyword:(c\:\\windows\\explorer.exe OR c\:\\windows\\syswow64\\explorer.exe)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique: []
+risk: high

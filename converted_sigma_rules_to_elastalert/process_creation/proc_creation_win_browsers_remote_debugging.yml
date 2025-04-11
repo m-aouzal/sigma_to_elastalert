@@ -1,10 +1,16 @@
 description: |
   Detects browsers starting with the remote debugging flags. Which is a technique often used to perform browser injection attacks
 name: Browser Started with Remote Debugging
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*\ \-\-remote\-debugging\-* OR (process.executable.keyword:*\\firefox.exe AND process.command_line.keyword:*\ \-start\-debugger\-server*)
+      query: process.command_line.keyword:*\ \-\-remote\-debugging\-* OR (process.executable.keyword:*\\firefox.exe
+        AND process.command_line.keyword:*\ \-start\-debugger\-server*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1185
+risk: medium

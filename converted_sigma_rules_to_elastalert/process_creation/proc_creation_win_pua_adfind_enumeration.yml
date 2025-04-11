@@ -1,10 +1,18 @@
 description: |
   Detects active directory enumeration activity using known AdFind CLI flags
 name: PUA - Suspicious ActiveDirectory Enumeration Via AdFind.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:(*lockoutduration* OR *lockoutthreshold* OR *lockoutobservationwindow* OR *maxpwdage* OR *minpwdage* OR *minpwdlength* OR *pwdhistorylength* OR *pwdproperties*)) OR process.command_line.keyword:*\-sc\ admincountdmp* OR process.command_line.keyword:*\-sc\ exchaddresses*
+      query: (process.command_line.keyword:(*lockoutduration* OR *lockoutthreshold*
+        OR *lockoutobservationwindow* OR *maxpwdage* OR *minpwdage* OR *minpwdlength*
+        OR *pwdhistorylength* OR *pwdproperties*)) OR process.command_line.keyword:*\-sc\
+        admincountdmp* OR process.command_line.keyword:*\-sc\ exchaddresses*
 type: any
 priority: 3
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1087.002
+risk: high

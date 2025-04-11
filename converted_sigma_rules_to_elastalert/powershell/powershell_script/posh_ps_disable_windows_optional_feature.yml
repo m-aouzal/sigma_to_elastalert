@@ -1,12 +1,20 @@
 description: |
   Detect built in PowerShell cmdlet Disable-WindowsOptionalFeature, Deployment Image Servicing and Management tool.
   Similar to DISM.exe, this cmdlet is used to enumerate, install, uninstall, configure, and update features and packages in Windows images
-  
+
 name: Disable-WindowsOptionalFeature Command PowerShell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*disable\-windowsoptionalfeature* AND powershell.file.script_block_text.keyword:*\-online* AND powershell.file.script_block_text.keyword:*\-featurename*) AND (powershell.file.script_block_text.keyword:(*windows\-defender\-gui* OR *windows\-defender\-features* OR *windows\-defender* OR *windows\-defender\-applicationguard*))
+      query: (powershell.file.script_block_text.keyword:*disable\-windowsoptionalfeature*
+        AND powershell.file.script_block_text.keyword:*\-online* AND powershell.file.script_block_text.keyword:*\-featurename*)
+        AND (powershell.file.script_block_text.keyword:(*windows\-defender\-gui* OR
+        *windows\-defender\-features* OR *windows\-defender* OR *windows\-defender\-applicationguard*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high

@@ -1,10 +1,18 @@
 description: |
   Detects addition of users to the local administrator group via "Net" or "Add-LocalGroupMember".
 name: User Added to Local Administrators Group
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.commandline.keyword:*localgroup\ * AND winlog.event_data.commandline.keyword:*\ \/add*) OR (winlog.event_data.commandline.keyword:*add\-localgroupmember\ * AND winlog.event_data.commandline.keyword:*\ \-group\ *)) AND (process.command_line.keyword:(*\ administrators\ * OR *\ administrateur*))
+      query: ((winlog.event_data.commandline.keyword:*localgroup\ * AND winlog.event_data.commandline.keyword:*\
+        \/add*) OR (winlog.event_data.commandline.keyword:*add\-localgroupmember\
+        * AND winlog.event_data.commandline.keyword:*\ \-group\ *)) AND (process.command_line.keyword:(*\
+        administrators\ * OR *\ administrateur*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1098
+risk: medium

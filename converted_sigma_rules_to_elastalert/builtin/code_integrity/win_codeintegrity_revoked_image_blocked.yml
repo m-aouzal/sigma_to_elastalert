@@ -1,10 +1,15 @@
 description: |
   Detects blocked image load events with revoked certificates by code integrity.
 name: CodeIntegrity - Blocked Image Load With Revoked Certificate
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-codeintegrity\/operational AND event.code.keyword:3036
+      query: winlog.channel.keyword:microsoft\-windows\-codeintegrity\/operational
+        AND event.code.keyword:3036
 type: any
 priority: 3
+mitre_attack_tactic:
+- privilege-escalation
+mitre_attack_technique: []
+risk: high

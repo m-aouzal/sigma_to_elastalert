@@ -1,10 +1,15 @@
 description: |
   Detects execution of "curl.exe" with a potential custom "User-Agent". Attackers can leverage this to download or exfiltrate data via "curl" to a domain that only accept specific "User-Agent" strings
 name: Curl Web Request With Potential Custom User-Agent
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\curl.exe OR winlog.event_data.originalfilename.keyword:curl.exe) AND (process.command_line.keyword:/\s-h\s/ AND process.command_line.keyword:*user\-agent\:*)
+      query: (winlog.event_data.image.keyword:*\\curl.exe OR winlog.event_data.originalfilename.keyword:curl.exe)
+        AND (process.command_line.keyword:/\s-h\s/ AND process.command_line.keyword:*user\-agent\:*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: medium

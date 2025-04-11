@@ -1,10 +1,16 @@
 description: |
   Detects execution of "dsquery.exe" for domain trust discovery
 name: Domain Trust Discovery Via Dsquery
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\dsquery.exe OR winlog.event_data.originalfilename.keyword:dsquery.exe) AND process.command_line.keyword:*trusteddomain*
+      query: (winlog.event_data.image.keyword:*\\dsquery.exe OR winlog.event_data.originalfilename.keyword:dsquery.exe)
+        AND process.command_line.keyword:*trusteddomain*
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1482
+risk: medium

@@ -1,10 +1,17 @@
 description: |
   Detects usage of "appcmd" to create new global URL rewrite rules. This behaviour has been observed being used by threat actors to add new rules so they can access their webshells.
 name: Suspicious IIS URL GlobalRules Rewrite Via AppCmd
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\appcmd.exe OR winlog.event_data.originalfilename.keyword:appcmd.exe) AND (process.command_line.keyword:*set* AND process.command_line.keyword:*config* AND process.command_line.keyword:*section\:system.webserver\/rewrite\/globalrules* AND process.command_line.keyword:*commit\:*)
+      query: (winlog.event_data.image.keyword:*\\appcmd.exe OR winlog.event_data.originalfilename.keyword:appcmd.exe)
+        AND (process.command_line.keyword:*set* AND process.command_line.keyword:*config*
+        AND process.command_line.keyword:*section\:system.webserver\/rewrite\/globalrules*
+        AND process.command_line.keyword:*commit\:*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

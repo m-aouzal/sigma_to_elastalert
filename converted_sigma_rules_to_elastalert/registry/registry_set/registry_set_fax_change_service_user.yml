@@ -1,10 +1,16 @@
 description: |
   Detect change of the user account associated with the FAX service to avoid the escalation problem.
 name: Change User Account Associated with the FAX Service
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:hklm\\system\\currentcontrolset\\services\\fax\\objectname AND (NOT winlog.event_data.Details.keyword:*networkservice*)
+      query: registry.path.keyword:hklm\\system\\currentcontrolset\\services\\fax\\objectname
+        AND (NOT winlog.event_data.Details.keyword:*networkservice*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1112
+risk: high

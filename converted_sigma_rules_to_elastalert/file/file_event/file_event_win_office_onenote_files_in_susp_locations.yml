@@ -1,10 +1,17 @@
 description: |
   Detects creation of files with the ".one"/".onepkg" extension in suspicious or uncommon locations. This could be a sign of attackers abusing OneNote attachments
 name: OneNote Attachment File Dropped In Suspicious Location
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((file.path.keyword:(*\\appdata\\local\\temp\\* OR *\\users\\public\\* OR *\\windows\\temp\\* OR *\:\\temp\\*)) AND (file.path.keyword:(*.one OR *.onepkg))) AND (NOT (process.executable.keyword:*\:\\program\ files\\microsoft\ office\\* AND process.executable.keyword:*\\onenote.exe))
+      query: ((file.path.keyword:(*\\appdata\\local\\temp\\* OR *\\users\\public\\*
+        OR *\\windows\\temp\\* OR *\:\\temp\\*)) AND (file.path.keyword:(*.one OR
+        *.onepkg))) AND (NOT (process.executable.keyword:*\:\\program\ files\\microsoft\
+        office\\* AND process.executable.keyword:*\\onenote.exe))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

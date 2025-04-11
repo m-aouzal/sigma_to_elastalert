@@ -1,10 +1,19 @@
 description: |
   Detects potential DLL sideloading of "libvlc.dll", a DLL that is legitimately used by "VLC.exe"
 name: Potential Libvlc.DLL Sideloading
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\\libvlc.dll AND (NOT (file.path.keyword:(c\:\\program\ files\ \(x86\)\\videolan\\vlc\\* OR c\:\\program\ files\\videolan\\vlc\\*)))
+      query: file.path.keyword:*\\libvlc.dll AND (NOT (file.path.keyword:(c\:\\program\
+        files\ \(x86\)\\videolan\\vlc\\* OR c\:\\program\ files\\videolan\\vlc\\*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: medium

@@ -1,10 +1,17 @@
 description: |
   Detects execution of chromium based browser in headless mode using the "dump-dom" command line to download files
 name: File Download with Headless Browser
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\brave.exe OR *\\chrome.exe OR *\\msedge.exe OR *\\opera.exe OR *\\vivaldi.exe)) AND (process.command_line.keyword:*\-\-headless* AND process.command_line.keyword:*dump\-dom* AND process.command_line.keyword:*http*)
+      query: (process.executable.keyword:(*\\brave.exe OR *\\chrome.exe OR *\\msedge.exe
+        OR *\\opera.exe OR *\\vivaldi.exe)) AND (process.command_line.keyword:*\-\-headless*
+        AND process.command_line.keyword:*dump\-dom* AND process.command_line.keyword:*http*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1105
+risk: high

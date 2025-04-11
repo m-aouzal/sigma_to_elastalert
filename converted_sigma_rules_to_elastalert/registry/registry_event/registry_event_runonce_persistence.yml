@@ -1,10 +1,22 @@
 description: |
   Rule to detect the configuration of Run Once registry key. Configured payload can be run by runonce.exe /AlternateShellStartup
 name: Run Once Task Configuration in Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*\\microsoft\\active\ setup\\installed\ components* AND registry.path.keyword:*\\stubpath) AND (NOT ((winlog.event_data.Details.keyword:*c\:\\program\ files\\google\\chrome\\application\\* AND winlog.event_data.Details.keyword:*\\installer\\chrmstp.exe\"\ \-\-configure\-user\-settings\ \-\-verbose\-logging\ \-\-system\-level*) OR ((winlog.event_data.Details.keyword:(*c\:\\program\ files\ \(x86\)\\microsoft\\edge\\application\\* OR *c\:\\program\ files\\microsoft\\edge\\application\\*)) AND winlog.event_data.Details.keyword:*\\installer\\setup.exe\"\ \-\-configure\-user\-settings\ \-\-verbose\-logging\ \-\-system\-level\ \-\-msedge\ \-\-channel\=stable)))
+      query: (registry.path.keyword:*\\microsoft\\active\ setup\\installed\ components*
+        AND registry.path.keyword:*\\stubpath) AND (NOT ((winlog.event_data.Details.keyword:*c\:\\program\
+        files\\google\\chrome\\application\\* AND winlog.event_data.Details.keyword:*\\installer\\chrmstp.exe\"\
+        \-\-configure\-user\-settings\ \-\-verbose\-logging\ \-\-system\-level*) OR
+        ((winlog.event_data.Details.keyword:(*c\:\\program\ files\ \(x86\)\\microsoft\\edge\\application\\*
+        OR *c\:\\program\ files\\microsoft\\edge\\application\\*)) AND winlog.event_data.Details.keyword:*\\installer\\setup.exe\"\
+        \-\-configure\-user\-settings\ \-\-verbose\-logging\ \-\-system\-level\ \-\-msedge\
+        \-\-channel\=stable)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1112
+risk: medium

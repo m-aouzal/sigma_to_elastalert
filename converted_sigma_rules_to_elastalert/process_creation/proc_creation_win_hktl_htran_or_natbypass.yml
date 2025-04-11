@@ -1,10 +1,17 @@
 description: |
   Detects executable names or flags used by Htran or Htran-like tools (e.g. NATBypass)
 name: HackTool - Htran/NATBypass Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:(*\\htran.exe OR *\\lcx.exe)) OR (process.command_line.keyword:(*.exe\ \-tran\ * OR *.exe\ \-slave\ *))
+      query: (process.executable.keyword:(*\\htran.exe OR *\\lcx.exe)) OR (process.command_line.keyword:(*.exe\
+        \-tran\ * OR *.exe\ \-slave\ *))
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1090
+- s0040
+risk: high

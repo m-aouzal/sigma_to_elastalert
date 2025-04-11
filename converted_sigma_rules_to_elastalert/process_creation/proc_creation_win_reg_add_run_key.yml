@@ -1,10 +1,16 @@
 description: |
   Detects suspicious command line reg.exe tool adding key to RUN key in Registry
 name: Potential Persistence Attempt Via Run Keys Using Reg.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*reg* AND process.command_line.keyword:*\ add\ * AND process.command_line.keyword:*software\\microsoft\\windows\\currentversion\\run*
+      query: process.command_line.keyword:*reg* AND process.command_line.keyword:*\
+        add\ * AND process.command_line.keyword:*software\\microsoft\\windows\\currentversion\\run*
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1547.001
+risk: medium

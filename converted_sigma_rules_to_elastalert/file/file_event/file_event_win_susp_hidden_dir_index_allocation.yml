@@ -1,11 +1,16 @@
 description: |
   Detects the creation of hidden file/folder with the "::$index_allocation" stream. Which can be used as a technique to prevent access to folder and files from tooling such as "explorer.exe" and "powershell.exe"
-  
+
 name: Potential Hidden Directory Creation Via NTFS INDEX_ALLOCATION Stream
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: file.path.keyword:*\:\:$index_allocation*
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1564.004
+risk: medium

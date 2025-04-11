@@ -1,10 +1,20 @@
 description: |
   Potential adversaries stopping ETW providers recording loaded .NET assemblies.
 name: ETW Logging Disabled In .NET Processes - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND ((event.code.keyword:4657 AND winlog.event_data.ObjectName.keyword:*\\software\\microsoft\\.netframework AND winlog.event_data.ObjectValueName.keyword:etwenabled AND winlog.event_data.NewValue.keyword:0) OR (event.code.keyword:4657 AND winlog.event_data.ObjectName.keyword:*\\environment* AND (winlog.event_data.ObjectValueName.keyword:(complus_etwenabled OR complus_etwflags)) AND winlog.event_data.NewValue.keyword:0))
+      query: winlog.channel.keyword:security AND ((event.code.keyword:4657 AND winlog.event_data.ObjectName.keyword:*\\software\\microsoft\\.netframework
+        AND winlog.event_data.ObjectValueName.keyword:etwenabled AND winlog.event_data.NewValue.keyword:0)
+        OR (event.code.keyword:4657 AND winlog.event_data.ObjectName.keyword:*\\environment*
+        AND (winlog.event_data.ObjectValueName.keyword:(complus_etwenabled OR complus_etwflags))
+        AND winlog.event_data.NewValue.keyword:0))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1112
+- t1562
+risk: high

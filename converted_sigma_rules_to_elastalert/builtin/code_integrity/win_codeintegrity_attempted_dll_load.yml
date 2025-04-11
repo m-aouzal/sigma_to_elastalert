@@ -1,12 +1,57 @@
 description: |
   Detects attempted file load events that did not meet the signing level requirements. It often means the file's signature is revoked or a signature with the Lifetime Signing EKU has expired.
   This event is best correlated with EID 3089 to determine the error of the validation.
-  
+
 name: CodeIntegrity - Unmet Signing Level Requirements By File Under Validation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-codeintegrity\/operational AND ((event.code.keyword:(3033 OR 3034)) AND (NOT (winlog.event_data.FileNameBuffer.keyword:*\\windows\\assembly\\gac\\* AND winlog.event_data.ProcessNameBuffer.keyword:*\\mscorsvw.exe AND winlog.event_data.ProcessNameBuffer.keyword:*\\windows\\microsoft.net\\* AND winlog.event_data.RequestedPolicy.keyword:8)) AND (NOT ((winlog.event_data.FileNameBuffer.keyword:*\\program\ files\\dtrace\\dtrace.dll AND winlog.event_data.ProcessNameBuffer.keyword:*\\windows\\system32\\svchost.exe AND winlog.event_data.RequestedPolicy.keyword:12) OR (winlog.event_data.FileNameBuffer.keyword:*\\windows\\system32\\driverstore\\filerepository\\* AND winlog.event_data.FileNameBuffer.keyword:*\\igd10iumd64.dll AND winlog.event_data.RequestedPolicy.keyword:7) OR (winlog.event_data.FileNameBuffer.keyword:*\\windows\\system32\\nvspcap64.dll AND (winlog.event_data.ProcessNameBuffer.keyword:(*\\appdata\\local\\keybase\\gui\\keybase.exe OR *\\microsoft\\teams\\stage\\teams.exe)) AND winlog.event_data.RequestedPolicy.keyword:8) OR (winlog.event_data.FileNameBuffer.keyword:*\\program\ files\\bonjour\\mdnsnsp.dll AND (winlog.event_data.ProcessNameBuffer.keyword:(*\\windows\\system32\\svchost.exe OR *\\windows\\system32\\sihclient.exe)) AND (winlog.event_data.RequestedPolicy.keyword:(8 OR 12))) OR (winlog.event_data.FileNameBuffer.keyword:*\\microsoft\ office\\root\\vfs\\programfilescommonx64\\microsoft\ shared\\office* AND winlog.event_data.FileNameBuffer.keyword:*\\msoxmlmf.dll AND winlog.event_data.RequestedPolicy.keyword:7) OR (winlog.event_data.FileNameBuffer.keyword:*\\windows\\system32\\nvspcap64.dll AND winlog.event_data.ProcessNameBuffer.keyword:*\\appdata\\local\\slack\\app\-* AND winlog.event_data.ProcessNameBuffer.keyword:*\\slack.exe AND winlog.event_data.RequestedPolicy.keyword:8) OR ((winlog.event_data.FileNameBuffer.keyword:(*\\mozilla\ firefox\\mozavcodec.dll OR *\\mozilla\ firefox\\mozavutil.dll)) AND winlog.event_data.ProcessNameBuffer.keyword:*\\mozilla\ firefox\\firefox.exe AND winlog.event_data.RequestedPolicy.keyword:8) OR ((winlog.event_data.FileNameBuffer.keyword:(*\\program\ files\\avast\ software\\avast\\aswamsi.dll OR *\\program\ files\ \(x86\)\\avast\ software\\avast\\aswamsi.dll)) AND (winlog.event_data.RequestedPolicy.keyword:(8 OR 12))) OR (winlog.event_data.FileNameBuffer.keyword:*\\program\ files\\google\\drive\ file\ stream\\* AND winlog.event_data.FileNameBuffer.keyword:*\\crashpad_handler.exe AND winlog.event_data.ProcessNameBuffer.keyword:*\\windows\\immersivecontrolpanel\\systemsettings.exe AND winlog.event_data.RequestedPolicy.keyword:8) OR (winlog.event_data.FileNameBuffer.keyword:*\\trend\ micro\\client\ server\ security\ agent\\perficrcperfmonmgr.dll AND winlog.event_data.RequestedPolicy.keyword:8) OR winlog.event_data.FileNameBuffer.keyword:*\\program\ files\\national\ instruments\\shared\\mdns\ responder\\nimdnsnsp.dll\  OR (winlog.event_data.FileNameBuffer.keyword:(*\\program\ files\\mcafee\\endpoint\ security\\threat\ prevention\\mfeamsiprovider.dll OR *\\program\ files\\mcafee\\mfeav\\amsiext.dll)) OR winlog.event_data.FileNameBuffer.keyword:*\\program\ files\\eset\\eset\ security\\eamsi.dll OR winlog.event_data.FileNameBuffer.keyword:*\\program\ files\\comodo\\comodo\ internet\ security\\amsiprovider_x64.dll OR (winlog.event_data.filenamebuffer.keyword:*\\program\ files\\sentinelone\\sentinel\ agent* OR winlog.event_data.processnamebuffer.keyword:*\\program\ files\\sentinelone\\sentinel\ agent*) OR winlog.event_data.FileNameBuffer.keyword:*\\national\ instruments\\shared\\mdns\ responder\\* OR ((winlog.event_data.processnamebuffer.keyword:*\\kaspersky\ lab\\* AND winlog.event_data.processnamebuffer.keyword:*\\avp.exe*) OR (winlog.event_data.filenamebuffer.keyword:*\\kaspersky\ lab\\* AND winlog.event_data.filenamebuffer.keyword:*\\antimalware_provider.dll*)))))
+      query: winlog.channel.keyword:microsoft\-windows\-codeintegrity\/operational
+        AND ((event.code.keyword:(3033 OR 3034)) AND (NOT (winlog.event_data.FileNameBuffer.keyword:*\\windows\\assembly\\gac\\*
+        AND winlog.event_data.ProcessNameBuffer.keyword:*\\mscorsvw.exe AND winlog.event_data.ProcessNameBuffer.keyword:*\\windows\\microsoft.net\\*
+        AND winlog.event_data.RequestedPolicy.keyword:8)) AND (NOT ((winlog.event_data.FileNameBuffer.keyword:*\\program\
+        files\\dtrace\\dtrace.dll AND winlog.event_data.ProcessNameBuffer.keyword:*\\windows\\system32\\svchost.exe
+        AND winlog.event_data.RequestedPolicy.keyword:12) OR 
+        (winlog.event_data.FileNameBuffer.keyword:*\\windows\\system32\\driverstore\\filerepository\\*
+        AND winlog.event_data.FileNameBuffer.keyword:*\\igd10iumd64.dll AND winlog.event_data.RequestedPolicy.keyword:7)
+        OR (winlog.event_data.FileNameBuffer.keyword:*\\windows\\system32\\nvspcap64.dll
+        AND 
+        (winlog.event_data.ProcessNameBuffer.keyword:(*\\appdata\\local\\keybase\\gui\\keybase.exe
+        OR *\\microsoft\\teams\\stage\\teams.exe)) AND winlog.event_data.RequestedPolicy.keyword:8)
+        OR (winlog.event_data.FileNameBuffer.keyword:*\\program\ files\\bonjour\\mdnsnsp.dll
+        AND (winlog.event_data.ProcessNameBuffer.keyword:(*\\windows\\system32\\svchost.exe
+        OR *\\windows\\system32\\sihclient.exe)) AND (winlog.event_data.RequestedPolicy.keyword:(8
+        OR 12))) OR (winlog.event_data.FileNameBuffer.keyword:*\\microsoft\ office\\root\\vfs\\programfilescommonx64\\microsoft\
+        shared\\office* AND winlog.event_data.FileNameBuffer.keyword:*\\msoxmlmf.dll
+        AND winlog.event_data.RequestedPolicy.keyword:7) OR (winlog.event_data.FileNameBuffer.keyword:*\\windows\\system32\\nvspcap64.dll
+        AND winlog.event_data.ProcessNameBuffer.keyword:*\\appdata\\local\\slack\\app\-*
+        AND winlog.event_data.ProcessNameBuffer.keyword:*\\slack.exe AND winlog.event_data.RequestedPolicy.keyword:8)
+        OR ((winlog.event_data.FileNameBuffer.keyword:(*\\mozilla\ firefox\\mozavcodec.dll
+        OR *\\mozilla\ firefox\\mozavutil.dll)) AND winlog.event_data.ProcessNameBuffer.keyword:*\\mozilla\
+        firefox\\firefox.exe AND winlog.event_data.RequestedPolicy.keyword:8) OR ((winlog.event_data.FileNameBuffer.keyword:(*\\program\
+        files\\avast\ software\\avast\\aswamsi.dll OR *\\program\ files\ \(x86\)\\avast\
+        software\\avast\\aswamsi.dll)) AND (winlog.event_data.RequestedPolicy.keyword:(8
+        OR 12))) OR (winlog.event_data.FileNameBuffer.keyword:*\\program\ files\\google\\drive\
+        file\ stream\\* AND winlog.event_data.FileNameBuffer.keyword:*\\crashpad_handler.exe
+        AND 
+        winlog.event_data.ProcessNameBuffer.keyword:*\\windows\\immersivecontrolpanel\\systemsettings.exe
+        AND winlog.event_data.RequestedPolicy.keyword:8) OR (winlog.event_data.FileNameBuffer.keyword:*\\trend\
+        micro\\client\ server\ security\ agent\\perficrcperfmonmgr.dll AND winlog.event_data.RequestedPolicy.keyword:8)
+        OR winlog.event_data.FileNameBuffer.keyword:*\\program\ files\\national\ instruments\\shared\\mdns\
+        responder\\nimdnsnsp.dll\  OR (winlog.event_data.FileNameBuffer.keyword:(*\\program\
+        files\\mcafee\\endpoint\ security\\threat\ prevention\\mfeamsiprovider.dll
+        OR *\\program\ files\\mcafee\\mfeav\\amsiext.dll)) OR winlog.event_data.FileNameBuffer.keyword:*\\program\
+        files\\eset\\eset\ security\\eamsi.dll OR winlog.event_data.FileNameBuffer.keyword:*\\program\
+        files\\comodo\\comodo\ internet\ security\\amsiprovider_x64.dll OR (winlog.event_data.filenamebuffer.keyword:*\\program\
+        files\\sentinelone\\sentinel\ agent* OR winlog.event_data.processnamebuffer.keyword:*\\program\
+        files\\sentinelone\\sentinel\ agent*) OR winlog.event_data.FileNameBuffer.keyword:*\\national\
+        instruments\\shared\\mdns\ responder\\* OR ((winlog.event_data.processnamebuffer.keyword:*\\kaspersky\
+        lab\\* AND winlog.event_data.processnamebuffer.keyword:*\\avp.exe*) OR (winlog.event_data.filenamebuffer.keyword:*\\kaspersky\
+        lab\\* AND winlog.event_data.filenamebuffer.keyword:*\\antimalware_provider.dll*)))))
 type: any
 priority: 1
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: low

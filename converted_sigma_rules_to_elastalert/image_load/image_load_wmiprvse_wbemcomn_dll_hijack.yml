@@ -1,10 +1,17 @@
 description: |
   Detects a threat actor creating a file named `wbemcomn.dll` in the `C:\Windows\System32\wbem\` directory over the network and loading it for a WMI DLL Hijack scenario.
 name: Wmiprvse Wbemcomn DLL Hijack
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:*\\wmiprvse.exe AND file.path.keyword:*\\wbem\\wbemcomn.dll
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+- lateral-movement
+mitre_attack_technique:
+- t1047
+- t1021.002
+risk: high

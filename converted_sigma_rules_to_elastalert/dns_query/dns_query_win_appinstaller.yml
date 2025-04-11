@@ -1,11 +1,17 @@
 description: |
   Detects DNS queries made by "AppInstaller.EXE". The AppInstaller is the default handler for the "ms-appinstaller" URI. It attempts to load/install a package from the referenced URL
-  
+
 name: AppX Package Installation Attempts Via AppInstaller.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:c\:\\program\ files\\windowsapps\\microsoft.desktopappinstaller_* AND process.executable.keyword:*\\appinstaller.exe
+      query: process.executable.keyword:c\:\\program\ files\\windowsapps\\microsoft.desktopappinstaller_*
+        AND process.executable.keyword:*\\appinstaller.exe
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1105
+risk: medium

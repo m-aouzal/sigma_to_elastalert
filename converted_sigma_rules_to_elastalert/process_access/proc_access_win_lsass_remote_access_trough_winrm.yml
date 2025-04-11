@@ -1,10 +1,21 @@
 description: |
   Detects remote access to the LSASS process via WinRM. This could be a sign of credential dumping from tools like mimikatz.
 name: Remote LSASS Process Access Through Windows Remote Management
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.TargetImage.keyword:*\\lsass.exe AND process.executable.keyword:*\:\\windows\\system32\\wsmprovhost.exe) AND (NOT winlog.event_data.GrantedAccess.keyword:0x80000000)
+      query: (winlog.event_data.TargetImage.keyword:*\\lsass.exe AND process.executable.keyword:*\:\\windows\\system32\\wsmprovhost.exe)
+        AND (NOT winlog.event_data.GrantedAccess.keyword:0x80000000)
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+- execution
+- lateral-movement
+mitre_attack_technique:
+- t1003.001
+- t1059.001
+- t1021.006
+- s0002
+risk: high

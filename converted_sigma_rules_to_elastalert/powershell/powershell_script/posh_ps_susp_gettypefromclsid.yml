@@ -1,10 +1,17 @@
 description: |
   Detects suspicious Powershell code that execute COM Objects
 name: Suspicious GetTypeFromCLSID ShellExecute
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*\:\:gettypefromclsid\(* AND powershell.file.script_block_text.keyword:*.shellexecute\(*
+      query: powershell.file.script_block_text.keyword:*\:\:gettypefromclsid\(* AND
+        powershell.file.script_block_text.keyword:*.shellexecute\(*
 type: any
 priority: 2
+mitre_attack_tactic:
+- privilege-escalation
+- persistence
+mitre_attack_technique:
+- t1546.015
+risk: medium

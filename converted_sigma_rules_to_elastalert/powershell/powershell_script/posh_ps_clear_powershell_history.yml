@@ -1,10 +1,21 @@
 description: |
   Detects keywords that could indicate clearing PowerShell history
 name: Clear PowerShell History - PowerShell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((powershell.file.script_block_text.keyword:*set\-psreadlineoption* AND powershell.file.script_block_text.keyword:*–historysavestyle* AND powershell.file.script_block_text.keyword:*savenothing*) OR (powershell.file.script_block_text.keyword:*set\-psreadlineoption* AND powershell.file.script_block_text.keyword:*\-historysavestyle* AND powershell.file.script_block_text.keyword:*savenothing*)) OR ((powershell.file.script_block_text.keyword:(*del* OR *remove\-item* OR *rm*)) AND powershell.file.script_block_text.keyword:*\(get\-psreadlineoption\).historysavepath*)
+      query: ((powershell.file.script_block_text.keyword:*set\-psreadlineoption* AND
+        powershell.file.script_block_text.keyword:*–historysavestyle* AND powershell.file.script_block_text.keyword:*savenothing*)
+        OR (powershell.file.script_block_text.keyword:*set\-psreadlineoption* AND
+        powershell.file.script_block_text.keyword:*\-historysavestyle* AND powershell.file.script_block_text.keyword:*savenothing*))
+        OR ((powershell.file.script_block_text.keyword:(*del* OR *remove\-item* OR
+        *rm*)) AND 
+        powershell.file.script_block_text.keyword:*\(get\-psreadlineoption\).historysavepath*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1070.003
+risk: medium

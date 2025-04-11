@@ -1,12 +1,19 @@
 description: |
   Adversaries may employ various system checks to detect and avoid virtualization and analysis environments.
   This may include changing behaviors based on the results of checks for the presence of artifacts indicative of a virtual machine environment (VME) or sandbox
-  
+
 name: Powershell Detect Virtualization Environment
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:(*get\-wmiobject* OR *gwmi*)) AND (powershell.file.script_block_text.keyword:(*msacpi_thermalzonetemperature* OR *win32_computersystem*))
+      query: (powershell.file.script_block_text.keyword:(*get\-wmiobject* OR *gwmi*))
+        AND (powershell.file.script_block_text.keyword:(*msacpi_thermalzonetemperature*
+        OR *win32_computersystem*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1497.001
+risk: medium

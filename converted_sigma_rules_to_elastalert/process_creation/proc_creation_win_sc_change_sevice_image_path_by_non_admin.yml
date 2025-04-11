@@ -1,10 +1,19 @@
 description: |
   Detection of sc.exe utility spawning by user with Medium integrity level to change service ImagePath or FailureCommand
 name: Possible Privilege Escalation via Weak Service Permissions
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\sc.exe AND (winlog.event_data.IntegrityLevel.keyword:(medium OR s\-1\-16\-8192))) AND ((process.command_line.keyword:*config* AND process.command_line.keyword:*binpath*) OR (process.command_line.keyword:*failure* AND process.command_line.keyword:*command*))
+      query: (process.executable.keyword:*\\sc.exe AND (winlog.event_data.IntegrityLevel.keyword:(medium
+        OR s\-1\-16\-8192))) AND ((process.command_line.keyword:*config* AND process.command_line.keyword:*binpath*)
+        OR (process.command_line.keyword:*failure* AND process.command_line.keyword:*command*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1574.011
+risk: high

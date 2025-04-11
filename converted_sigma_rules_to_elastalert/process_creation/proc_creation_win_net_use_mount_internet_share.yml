@@ -1,10 +1,17 @@
 description: |
   Detects when an internet hosted webdav share is mounted using the "net.exe" utility
 name: Windows Internet Hosted WebDav Share Mount Via Net.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\net.exe OR *\\net1.exe)) OR (winlog.event_data.originalfilename.keyword:(net.exe OR net1.exe))) AND (process.command_line.keyword:*\ use\ * AND process.command_line.keyword:*\ http*)
+      query: ((winlog.event_data.image.keyword:(*\\net.exe OR *\\net1.exe)) OR (winlog.event_data.originalfilename.keyword:(net.exe
+        OR net1.exe))) AND (process.command_line.keyword:*\ use\ * AND process.command_line.keyword:*\
+        http*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- lateral-movement
+mitre_attack_technique:
+- t1021.002
+risk: high

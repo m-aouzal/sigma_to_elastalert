@@ -1,10 +1,16 @@
 description: |
   Powershell use PassThru option to start in background
 name: Suspicious Start-Process PassThru
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*start\-process* AND powershell.file.script_block_text.keyword:*\-passthru\ * AND powershell.file.script_block_text.keyword:*\-filepath\ *
+      query: powershell.file.script_block_text.keyword:*start\-process* AND powershell.file.script_block_text.keyword:*\-passthru\
+        * AND powershell.file.script_block_text.keyword:*\-filepath\ *
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1036.003
+risk: medium

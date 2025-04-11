@@ -1,10 +1,16 @@
 description: |
   Detects Exfiltration Over Alternative Protocol - ICMP. Adversaries may steal data by exfiltrating it over an un-encrypted network protocol other than that of the existing command and control channel.
 name: PowerShell ICMP Exfiltration
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*new\-object* AND powershell.file.script_block_text.keyword:*system.net.networkinformation.ping* AND powershell.file.script_block_text.keyword:*.send\(*
+      query: powershell.file.script_block_text.keyword:*new\-object* AND powershell.file.script_block_text.keyword:*system.net.networkinformation.ping*
+        AND powershell.file.script_block_text.keyword:*.send\(*
 type: any
 priority: 2
+mitre_attack_tactic:
+- exfiltration
+mitre_attack_technique:
+- t1048.003
+risk: medium

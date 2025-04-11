@@ -1,10 +1,20 @@
 description: |
   Detects DLL sideloading of VMGuestLib.dll by the WmiApSrv service.
 name: VMGuestLib DLL Sideload
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((file.path.keyword:*\\vmware\\vmware\ tools\\vmstatsprovider\\win32* AND file.path.keyword:*\\vmguestlib.dll*) AND process.executable.keyword:*\\windows\\system32\\wbem\\wmiapsrv.exe) AND (NOT file.code_signature.signed.keyword:true)
+      query: ((file.path.keyword:*\\vmware\\vmware\ tools\\vmstatsprovider\\win32*
+        AND file.path.keyword:*\\vmguestlib.dll*) AND process.executable.keyword:*\\windows\\system32\\wbem\\wmiapsrv.exe)
+        AND (NOT file.code_signature.signed.keyword:true)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: medium

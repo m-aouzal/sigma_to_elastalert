@@ -1,11 +1,16 @@
 description: |
   Detects DNS query requests to Devtunnels domains. Attackers can abuse that feature to establish a reverse shell or persistence on a machine.
-  
+
 name: DNS Query To Devtunnels Domain
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: dns.question.name.keyword:*.devtunnels.ms
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1071.001
+risk: medium

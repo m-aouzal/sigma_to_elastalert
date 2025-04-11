@@ -1,12 +1,16 @@
 description: |
   Detects the creation of a file with the ".pdf" extension by the "RegEdit.exe" process.
   This indicates that a user is trying to print/save a registry key as a PDF in order to potentially extract sensitive information and bypass defenses.
-  
+
 name: PDF File Created By RegEdit.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:*\\regedit.exe AND file.path.keyword:*.pdf
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: high

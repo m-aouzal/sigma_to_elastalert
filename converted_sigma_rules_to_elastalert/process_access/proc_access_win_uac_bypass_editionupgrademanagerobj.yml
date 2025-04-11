@@ -1,10 +1,16 @@
 description: |
   Detects function calls from the EditionUpgradeManager COM interface. Which is an interface that is not used by standard executables.
 name: Function Call From Undocumented COM Interface EditionUpgradeManager
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.CallTrace.keyword:*editionupgrademanagerobj.dll*
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1548.002
+risk: medium

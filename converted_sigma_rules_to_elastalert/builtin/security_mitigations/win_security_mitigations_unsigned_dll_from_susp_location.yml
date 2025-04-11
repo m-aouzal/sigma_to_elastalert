@@ -1,10 +1,18 @@
 description: |
   Detects Code Integrity (CI) engine blocking processes from loading unsigned DLLs residing in suspicious locations
 name: Unsigned Binary Loaded From Suspicious Location
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.channel.keyword:(microsoft\-windows\-security\-mitigations\/kernel\ mode OR Microsoft\-Windows\-Security\-Mitigations\/User\ Mode)) AND ((event.code.keyword:(11 OR 12)) AND (winlog.event_data.ImageName.keyword:(*\\users\\public\\* OR *\\perflogs\\* OR *\\desktop\\* OR *\\downloads\\* OR *\\appdata\\local\\temp\\* OR *c\:\\windows\\temp\\*)))
+      query: (winlog.channel.keyword:(microsoft\-windows\-security\-mitigations\/kernel\
+        mode OR Microsoft\-Windows\-Security\-Mitigations\/User\ Mode)) AND ((event.code.keyword:(11
+        OR 12)) AND (winlog.event_data.ImageName.keyword:(*\\users\\public\\* OR *\\perflogs\\*
+        OR *\\desktop\\* OR *\\downloads\\* OR *\\appdata\\local\\temp\\* OR *c\:\\windows\\temp\\*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1574.002
+risk: high

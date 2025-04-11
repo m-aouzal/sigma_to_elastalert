@@ -1,10 +1,17 @@
 description: |
   In Kaspersky's 2020 Incident Response Analyst Report they listed legitimate tool "Mouse Lock" as being used for both credential access and collection in security incidents.
 name: PUA - Mouse Lock Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.product.keyword:*mouse\ lock* OR winlog.event_data.company.keyword:*misc314* OR winlog.event_data.commandline.keyword:*mouse\ lock_*
+      query: winlog.event_data.product.keyword:*mouse\ lock* OR winlog.event_data.company.keyword:*misc314*
+        OR winlog.event_data.commandline.keyword:*mouse\ lock_*
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+- collection
+mitre_attack_technique:
+- t1056.002
+risk: medium

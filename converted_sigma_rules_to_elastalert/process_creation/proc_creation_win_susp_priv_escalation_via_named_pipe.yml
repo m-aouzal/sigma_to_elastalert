@@ -1,10 +1,18 @@
 description: |
   Detects a remote file copy attempt to a hidden network share. This may indicate lateral movement or data staging activity.
 name: Privilege Escalation via Named Pipe Impersonation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\cmd.exe OR *\\powershell.exe)) OR (winlog.event_data.originalfilename.keyword:(cmd.exe OR powershell.exe))) AND (process.command_line.keyword:*echo* AND process.command_line.keyword:*\>* AND process.command_line.keyword:*\\\\.\\pipe\\*)
+      query: ((winlog.event_data.image.keyword:(*\\cmd.exe OR *\\powershell.exe))
+        OR (winlog.event_data.originalfilename.keyword:(cmd.exe OR powershell.exe)))
+        AND (process.command_line.keyword:*echo* AND process.command_line.keyword:*\>*
+        AND process.command_line.keyword:*\\\\.\\pipe\\*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- lateral-movement
+mitre_attack_technique:
+- t1021
+risk: high

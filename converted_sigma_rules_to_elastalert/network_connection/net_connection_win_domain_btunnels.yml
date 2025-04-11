@@ -1,12 +1,17 @@
 description: |
   Detects network connections to BTunnels domains initiated by a process on the system.
   Attackers can abuse that feature to establish a reverse shell or persistence on a machine.
-  
+
 name: Network Connection Initiated To BTunnels Domains
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: network.direction.keyword:true AND destination.domain.keyword:*.btunnel.co.in
 type: any
 priority: 2
+mitre_attack_tactic:
+- exfiltration
+mitre_attack_technique:
+- t1567.001
+risk: medium

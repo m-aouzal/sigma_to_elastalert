@@ -3,12 +3,21 @@ description: |
   Prior to version 8.0.8, the Anydesk application used a signing certificate that got compromised by threat actors.
   Use this rule to detect instances of older versions of Anydesk using the compromised certificate
   This is recommended in order to avoid attackers leveraging the certificate and signing their binaries to bypass detections.
-  
+
 name: Remote Access Tool - AnyDesk Execution With Known Revoked Signing Certificate
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:*\\anydesk.exe OR winlog.event_data.description.keyword:anydesk OR winlog.event_data.product.keyword:anydesk OR winlog.event_data.company.keyword:anydesk\ software\ gmbh) AND (process.pe.file_version.keyword:(7.0.* OR 7.1.* OR 8.0.1* OR 8.0.2* OR 8.0.3* OR 8.0.4* OR 8.0.5* OR 8.0.6* OR 8.0.7*))) AND (NOT (process.command_line.keyword:(*\ \-\-remove* OR *\ \-\-uninstall*)))
+      query: ((winlog.event_data.image.keyword:*\\anydesk.exe OR winlog.event_data.description.keyword:anydesk
+        OR winlog.event_data.product.keyword:anydesk OR winlog.event_data.company.keyword:anydesk\
+        software\ gmbh) AND (process.pe.file_version.keyword:(7.0.* OR 7.1.* OR 8.0.1*
+        OR 8.0.2* OR 8.0.3* OR 8.0.4* OR 8.0.5* OR 8.0.6* OR 8.0.7*))) AND (NOT (process.command_line.keyword:(*\
+        \-\-remove* OR *\ \-\-uninstall*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+- initial-access
+mitre_attack_technique: []
+risk: medium

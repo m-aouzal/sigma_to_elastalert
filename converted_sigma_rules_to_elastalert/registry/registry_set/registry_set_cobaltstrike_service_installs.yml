@@ -1,11 +1,24 @@
 description: |
   Detects known malicious service installs that appear in cases in which a Cobalt Strike beacon elevates privileges or lateral movement.
-  
+
 name: Potential CobaltStrike Service Installations - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.targetobject.keyword:*\\system\\currentcontrolset\\services* OR (winlog.event_data.targetobject.keyword:*\\system\\controlset* AND winlog.event_data.targetobject.keyword:*\\services*)) AND ((winlog.event_data.details.keyword:*admin$* AND winlog.event_data.details.keyword:*.exe*) OR (winlog.event_data.details.keyword:*%comspec%* AND winlog.event_data.details.keyword:*start* AND winlog.event_data.details.keyword:*powershell*))
+      query: (winlog.event_data.targetobject.keyword:*\\system\\currentcontrolset\\services*
+        OR (winlog.event_data.targetobject.keyword:*\\system\\controlset* AND winlog.event_data.targetobject.keyword:*\\services*))
+        AND ((winlog.event_data.details.keyword:*admin$* AND winlog.event_data.details.keyword:*.exe*)
+        OR (winlog.event_data.details.keyword:*%comspec%* AND winlog.event_data.details.keyword:*start*
+        AND winlog.event_data.details.keyword:*powershell*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+- privilege-escalation
+- lateral-movement
+mitre_attack_technique:
+- t1021.002
+- t1543.003
+- t1569.002
+risk: high

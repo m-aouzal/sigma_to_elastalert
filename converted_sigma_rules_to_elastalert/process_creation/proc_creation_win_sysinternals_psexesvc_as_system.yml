@@ -1,10 +1,15 @@
 description: |
   Detects suspicious launch of the PSEXESVC service on this system and a sub process run as LOCAL_SYSTEM (-s), which means that someone remotely started a command on this system running it with highest privileges and not only the privileges of the login user account (e.g. the administrator account)
 name: PsExec Service Child Process Execution as LOCAL SYSTEM
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.parent.executable.keyword:c\:\\windows\\psexesvc.exe AND (user.name.keyword:(*authori* OR *autori*))
+      query: process.parent.executable.keyword:c\:\\windows\\psexesvc.exe AND (user.name.keyword:(*authori*
+        OR *autori*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: high

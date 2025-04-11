@@ -1,10 +1,16 @@
 description: |
   Detects activity when Windows Defender Firewall has been reset to its default configuration
 name: Windows Defender Firewall Has Been Reset To Its Default Configuration
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-windows\ firewall\ with\ advanced\ security\/firewall AND (event.code.keyword:(2032 OR 2060))
+      query: winlog.channel.keyword:microsoft\-windows\-windows\ firewall\ with\ advanced\
+        security\/firewall AND (event.code.keyword:(2032 OR 2060))
 type: any
 priority: 1
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.004
+risk: low

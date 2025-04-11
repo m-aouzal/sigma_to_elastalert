@@ -1,10 +1,18 @@
 description: |
   Detects the import of '.reg' files from suspicious paths using the 'reg.exe' utility
 name: Potential Suspicious Registry File Imported Via Reg.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe) AND process.command_line.keyword:*\ import\ * AND (process.command_line.keyword:(*c\:\\users\\* OR *%temp%* OR *%tmp%* OR *%appdata%* OR *\\appdata\\local\\temp\\* OR *c\:\\windows\\temp\\* OR *c\:\\programdata\\*))
+      query: (winlog.event_data.image.keyword:*\\reg.exe OR winlog.event_data.originalfilename.keyword:reg.exe)
+        AND process.command_line.keyword:*\ import\ * AND (process.command_line.keyword:(*c\:\\users\\*
+        OR *%temp%* OR *%tmp%* OR *%appdata%* OR *\\appdata\\local\\temp\\* OR *c\:\\windows\\temp\\*
+        OR *c\:\\programdata\\*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1112
+risk: medium

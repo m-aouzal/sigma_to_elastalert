@@ -1,10 +1,21 @@
 description: |
   Detects NetNTLM downgrade attack
 name: NetNTLM Downgrade Attack - Registry
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:*system\\* AND registry.path.keyword:*controlset* AND registry.path.keyword:*\\control\\lsa*) AND ((registry.path.keyword:*\\lmcompatibilitylevel AND (winlog.event_data.Details.keyword:(dword\ \(0x00000000\) OR dword\ \(0x00000001\) OR dword\ \(0x00000002\)))) OR (registry.path.keyword:*\\ntlmminclientsec AND (winlog.event_data.Details.keyword:(dword\ \(0x00000000\) OR dword\ \(0x00000010\) OR dword\ \(0x00000020\) OR dword\ \(0x00000030\)))) OR registry.path.keyword:*\\restrictsendingntlmtraffic)
+      query: (registry.path.keyword:*system\\* AND registry.path.keyword:*controlset*
+        AND registry.path.keyword:*\\control\\lsa*) AND ((registry.path.keyword:*\\lmcompatibilitylevel
+        AND (winlog.event_data.Details.keyword:(dword\ \(0x00000000\) OR dword\ \(0x00000001\)
+        OR dword\ \(0x00000002\)))) OR (registry.path.keyword:*\\ntlmminclientsec
+        AND (winlog.event_data.Details.keyword:(dword\ \(0x00000000\) OR dword\ \(0x00000010\)
+        OR dword\ \(0x00000020\) OR dword\ \(0x00000030\)))) OR registry.path.keyword:*\\restrictsendingntlmtraffic)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+- t1112
+risk: high

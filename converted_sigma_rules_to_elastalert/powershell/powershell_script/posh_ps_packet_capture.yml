@@ -2,12 +2,18 @@ description: |
   Detects the execution of powershell scripts with calls to the "Start-NetEventSession" cmdlet. Which allows an attacker to start event and packet capture for a network event session.
   Adversaries may attempt to capture network to gather information over the course of an operation.
   Data captured via this technique may include user credentials, especially those sent over an insecure, unencrypted protocol.
-  
+
 name: Potential Packet Capture Activity Via Start-NetEventSession - ScriptBlock
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: powershell.file.script_block_text.keyword:*start\-neteventsession*
 type: any
 priority: 2
+mitre_attack_tactic:
+- credential-access
+- discovery
+mitre_attack_technique:
+- t1040
+risk: medium

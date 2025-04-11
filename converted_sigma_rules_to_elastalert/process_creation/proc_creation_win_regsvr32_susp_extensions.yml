@@ -1,10 +1,18 @@
 description: |
   Detects the execution of REGSVR32.exe with DLL files masquerading as other files
 name: Regsvr32 DLL Execution With Suspicious File Extension
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\regsvr32.exe OR winlog.event_data.originalfilename.keyword:regsvr32.exe) AND (process.command_line.keyword:(*.bin OR *.bmp OR *.cr2 OR *.dat OR *.eps OR *.gif OR *.ico OR *.jpeg OR *.jpg OR *.nef OR *.orf OR *.png OR *.raw OR *.sr2 OR *.temp OR *.tif OR *.tiff OR *.tmp OR *.rtf OR *.txt))
+      query: (winlog.event_data.image.keyword:*\\regsvr32.exe OR winlog.event_data.originalfilename.keyword:regsvr32.exe)
+        AND (process.command_line.keyword:(*.bin OR *.bmp OR *.cr2 OR *.dat OR *.eps
+        OR *.gif OR *.ico OR *.jpeg OR *.jpg OR *.nef OR *.orf OR *.png OR *.raw OR
+        *.sr2 OR *.temp OR *.tif OR *.tiff OR *.tmp OR *.rtf OR *.txt))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218.010
+risk: high

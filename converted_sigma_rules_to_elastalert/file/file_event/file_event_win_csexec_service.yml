@@ -1,10 +1,16 @@
 description: |
   Detects default CSExec service filename which indicates CSExec service installation and execution
 name: CSExec Service File Creation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: file.path.keyword:*\\csexecsvc.exe
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1569.002
+- s0029
+risk: medium

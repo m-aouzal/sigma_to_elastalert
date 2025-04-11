@@ -1,10 +1,24 @@
 description: |
   Detects usage of the PsLogList utility to dump event log in order to extract admin accounts and perform account discovery or delete events logs
 name: Suspicious Use of PsLogList
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.originalfilename.keyword:psloglist.exe OR (winlog.event_data.image.keyword:(*\\psloglist.exe OR *\\psloglist64.exe))) AND (process.command_line.keyword:(*\ security* OR *\ application* OR *\ system*)) AND (process.command_line.keyword:(*\ \-d* OR *\ \/d* OR *\ –d* OR *\ —d* OR *\ ―d*) OR process.command_line.keyword:(*\ \-x* OR *\ \/x* OR *\ –x* OR *\ —x* OR *\ ―x*) OR process.command_line.keyword:(*\ \-s* OR *\ \/s* OR *\ –s* OR *\ —s* OR *\ ―s*) OR process.command_line.keyword:(*\ \-c* OR *\ \/c* OR *\ –c* OR *\ —c* OR *\ ―c*) OR process.command_line.keyword:(*\ \-g* OR *\ \/g* OR *\ –g* OR *\ —g* OR *\ ―g*))
+      query: (winlog.event_data.originalfilename.keyword:psloglist.exe OR (winlog.event_data.image.keyword:(*\\psloglist.exe
+        OR *\\psloglist64.exe))) AND (process.command_line.keyword:(*\ security* OR
+        *\ application* OR *\ system*)) AND (process.command_line.keyword:(*\ \-d*
+        OR *\ \/d* OR *\ –d* OR *\ —d* OR *\ ―d*) OR process.command_line.keyword:(*\
+        \-x* OR *\ \/x* OR *\ –x* OR *\ —x* OR *\ ―x*) OR process.command_line.keyword:(*\
+        \-s* OR *\ \/s* OR *\ –s* OR *\ —s* OR *\ ―s*) OR process.command_line.keyword:(*\
+        \-c* OR *\ \/c* OR *\ –c* OR *\ —c* OR *\ ―c*) OR process.command_line.keyword:(*\
+        \-g* OR *\ \/g* OR *\ –g* OR *\ —g* OR *\ ―g*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1087
+- t1087.001
+- t1087.002
+risk: medium

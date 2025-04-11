@@ -1,10 +1,15 @@
 description: |
   Detects loading of "Amsi.dll" by a living of the land process. This could be an indication of a "PowerShell without PowerShell" attack
 name: Amsi.DLL Loaded Via LOLBIN Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\\amsi.dll AND (process.executable.keyword:(*\\extexport.exe OR *\\odbcconf.exe OR *\\regsvr32.exe OR *\\rundll32.exe))
+      query: file.path.keyword:*\\amsi.dll AND (process.executable.keyword:(*\\extexport.exe
+        OR *\\odbcconf.exe OR *\\regsvr32.exe OR *\\rundll32.exe))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

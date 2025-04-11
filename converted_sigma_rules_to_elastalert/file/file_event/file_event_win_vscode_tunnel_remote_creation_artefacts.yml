@@ -1,11 +1,16 @@
 description: |
   Detects the creation of file by the "node.exe" process in the ".vscode-server" directory. Could be a sign of remote file creation via VsCode tunnel feature
-  
+
 name: Visual Studio Code Tunnel Remote File Creation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\servers\\stable\-* AND process.executable.keyword:*\\server\\node.exe AND file.path.keyword:*\\.vscode\-server\\data\\user\\history\\*
+      query: process.executable.keyword:*\\servers\\stable\-* AND process.executable.keyword:*\\server\\node.exe
+        AND file.path.keyword:*\\.vscode\-server\\data\\user\\history\\*
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique: []
+risk: medium

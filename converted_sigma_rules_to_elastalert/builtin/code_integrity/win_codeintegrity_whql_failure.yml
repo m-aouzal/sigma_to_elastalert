@@ -1,10 +1,16 @@
 description: |
   Detects loaded kernel modules that did not meet the WHQL signing requirements.
 name: CodeIntegrity - Unmet WHQL Requirements For Loaded Kernel Module
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-codeintegrity\/operational AND ((event.code.keyword:(3082 OR 3083)) AND (NOT (winlog.event_data.FileNameBuffer.keyword:(system32\\drivers\\vsock.sys OR system32\\drivers\\vmci.sys))))
+      query: winlog.channel.keyword:microsoft\-windows\-codeintegrity\/operational
+        AND ((event.code.keyword:(3082 OR 3083)) AND (NOT (winlog.event_data.FileNameBuffer.keyword:(system32\\drivers\\vsock.sys
+        OR system32\\drivers\\vmci.sys))))
 type: any
 priority: 3
+mitre_attack_tactic:
+- privilege-escalation
+mitre_attack_technique: []
+risk: high

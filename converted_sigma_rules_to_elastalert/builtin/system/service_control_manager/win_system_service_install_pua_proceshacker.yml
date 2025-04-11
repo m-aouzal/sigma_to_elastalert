@@ -1,10 +1,19 @@
 description: |
   Detects a ProcessHacker tool that elevated privileges to a very high level
 name: ProcessHacker Privilege Elevation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045 AND winlog.event_data.ServiceName.keyword:processhacker* AND user.name.keyword:localsystem)
+      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\
+        control\ manager AND event.code.keyword:7045 AND winlog.event_data.ServiceName.keyword:processhacker*
+        AND user.name.keyword:localsystem)
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+- privilege-escalation
+mitre_attack_technique:
+- t1543.003
+- t1569.002
+risk: high

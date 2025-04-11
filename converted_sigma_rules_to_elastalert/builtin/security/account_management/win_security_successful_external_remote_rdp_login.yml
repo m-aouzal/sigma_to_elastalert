@@ -1,10 +1,22 @@
 description: |
   Detects successful logon from public IP address via RDP. This can indicate a publicly-exposed RDP port.
 name: External Remote RDP Logon from Public IP
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND ((event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:10) AND (NOT ((source.ip.keyword:\:\:1\/128 OR source.ip.keyword:10.0.0.0\/8 OR source.ip.keyword:127.0.0.0\/8 OR source.ip.keyword:172.16.0.0\/12 OR source.ip.keyword:192.168.0.0\/16 OR source.ip.keyword:169.254.0.0\/16 OR source.ip.keyword:fc00\:\:\/7 OR source.ip.keyword:fe80\:\:\/10) OR source.ip.keyword:\-)))
+      query: winlog.channel.keyword:security AND ((event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:10)
+        AND (NOT ((source.ip.keyword:\:\:1\/128 OR source.ip.keyword:10.0.0.0\/8 OR
+        source.ip.keyword:127.0.0.0\/8 OR source.ip.keyword:172.16.0.0\/12 OR source.ip.keyword:192.168.0.0\/16
+        OR source.ip.keyword:169.254.0.0\/16 OR source.ip.keyword:fc00\:\:\/7 OR source.ip.keyword:fe80\:\:\/10)
+        OR source.ip.keyword:\-)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- initial-access
+- credential-access
+mitre_attack_technique:
+- t1133
+- t1078
+- t1110
+risk: medium

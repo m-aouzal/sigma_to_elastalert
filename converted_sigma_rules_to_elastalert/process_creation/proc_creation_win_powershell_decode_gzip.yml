@@ -1,10 +1,15 @@
 description: |
   Detects attempts of decoding encoded Gzip archives via PowerShell.
 name: Gzip Archive Decode Via PowerShell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.command_line.keyword:*gzipstream* AND process.command_line.keyword:*\:\:decompress*
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1132.001
+risk: medium

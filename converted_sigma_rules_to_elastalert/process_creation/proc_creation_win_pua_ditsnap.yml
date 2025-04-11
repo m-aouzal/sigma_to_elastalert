@@ -1,10 +1,15 @@
 description: |
   Detects the use of Ditsnap tool, an inspection tool for Active Directory database, ntds.dit.
 name: PUA - DIT Snapshot Viewer
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.image.keyword:*\\ditsnap.exe OR winlog.event_data.commandline.keyword:*ditsnap.exe*
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1003.003
+risk: high

@@ -1,10 +1,16 @@
 description: |
   Ransomware create txt file in the user Desktop
 name: Suspicious Creation TXT File in User Desktop
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.executable.keyword:*\\cmd.exe AND (file.path.keyword:*\\users\\* AND file.path.keyword:*\\desktop\\*) AND file.path.keyword:*.txt
+      query: process.executable.keyword:*\\cmd.exe AND (file.path.keyword:*\\users\\*
+        AND file.path.keyword:*\\desktop\\*) AND file.path.keyword:*.txt
 type: any
 priority: 3
+mitre_attack_tactic:
+- impact
+mitre_attack_technique:
+- t1486
+risk: high

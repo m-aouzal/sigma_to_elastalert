@@ -1,10 +1,20 @@
 description: |
   Detects suspicious service installation commands
 name: Suspicious Service Installation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\ control\ manager AND event.code.keyword:7045 AND (winlog.event_data.ImagePath.keyword:(*\ \-nop\ * OR *\ \-sta\ * OR *\ \-w\ hidden\ * OR *\:\\temp\\* OR *.downloadfile\(* OR *.downloadstring\(* OR *\\admin$\\* OR *\\perflogs\\* OR *\&\&*)))
+      query: winlog.channel.keyword:system AND (winlog.provider_name.keyword:service\
+        control\ manager AND event.code.keyword:7045 AND (winlog.event_data.ImagePath.keyword:(*\
+        \-nop\ * OR *\ \-sta\ * OR *\ \-w\ hidden\ * OR *\:\\temp\\* OR *.downloadfile\(*
+        OR *.downloadstring\(* OR *\\admin$\\* OR *\\perflogs\\* OR *\&\&*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- car.2013-09-005
+- t1543.003
+risk: high

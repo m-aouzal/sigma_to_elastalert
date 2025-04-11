@@ -1,10 +1,20 @@
 description: |
   Detects the execution of netsh to configure a port forwarding of port 3389 (RDP) rule
 name: RDP Port Forwarding Rule Added Via Netsh.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\netsh.exe OR winlog.event_data.originalfilename.keyword:netsh.exe) AND (process.command_line.keyword:*\ i* AND process.command_line.keyword:*\ p* AND process.command_line.keyword:*\=3389* AND process.command_line.keyword:*\ c*)
+      query: (winlog.event_data.image.keyword:*\\netsh.exe OR winlog.event_data.originalfilename.keyword:netsh.exe)
+        AND (process.command_line.keyword:*\ i* AND process.command_line.keyword:*\
+        p* AND process.command_line.keyword:*\=3389* AND process.command_line.keyword:*\
+        c*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- lateral-movement
+- defense-evasion
+- command-and-control
+mitre_attack_technique:
+- t1090
+risk: high

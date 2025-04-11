@@ -1,10 +1,17 @@
 description: |
   Deployment Image Servicing and Management tool. DISM is used to enumerate, install, uninstall, configure, and update features and packages in Windows images
 name: Dism Remove Online Package
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\dismhost.exe AND (process.parent.command_line.keyword:*\/online* AND process.parent.command_line.keyword:*\/disable\-feature*)) OR (process.executable.keyword:*\\dism.exe AND (process.command_line.keyword:*\/online* AND process.command_line.keyword:*\/disable\-feature*))
+      query: (process.executable.keyword:*\\dismhost.exe AND (process.parent.command_line.keyword:*\/online*
+        AND process.parent.command_line.keyword:*\/disable\-feature*)) OR (process.executable.keyword:*\\dism.exe
+        AND (process.command_line.keyword:*\/online* AND process.command_line.keyword:*\/disable\-feature*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: medium

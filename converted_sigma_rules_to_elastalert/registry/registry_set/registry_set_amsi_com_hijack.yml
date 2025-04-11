@@ -1,10 +1,17 @@
 description: |
   Detects changes to the AMSI come server registry key in order disable AMSI scanning functionalities. When AMSI attempts to starts its COM component, it will query its registered CLSID and return a non-existent COM server. This causes a load failure and prevents any scanning methods from being accessed, ultimately rendering AMSI useless
 name: Potential AMSI COM Server Hijacking
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*\\clsid\\\{fdb00e52\-a214\-4aa1\-8fba\-4357bb0072ec\}\\inprocserver32\\\(default\) AND (NOT winlog.event_data.Details.keyword:%windir%\\system32\\amsi.dll)
+      query: 
+        registry.path.keyword:*\\clsid\\\{fdb00e52\-a214\-4aa1\-8fba\-4357bb0072ec\}\\inprocserver32\\\(default\)
+        AND (NOT winlog.event_data.Details.keyword:%windir%\\system32\\amsi.dll)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high

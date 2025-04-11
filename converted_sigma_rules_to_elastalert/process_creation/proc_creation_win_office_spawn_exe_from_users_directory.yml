@@ -1,10 +1,20 @@
 description: |
   Detects an executable in the users directory started from one of the Microsoft Office suite applications (Word, Excel, PowerPoint, Publisher, Visio)
 name: Suspicious Binary In User Directory Spawned From Office Application
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((process.parent.executable.keyword:(*\\winword.exe OR *\\excel.exe OR *\\powerpnt.exe OR *\\mspub.exe OR *\\visio.exe OR *\\msaccess.exe OR *\\eqnedt32.exe)) AND process.executable.keyword:c\:\\users\\* AND process.executable.keyword:*.exe) AND (NOT process.executable.keyword:*\\teams.exe)
+      query: ((process.parent.executable.keyword:(*\\winword.exe OR *\\excel.exe OR
+        *\\powerpnt.exe OR *\\mspub.exe OR *\\visio.exe OR *\\msaccess.exe OR *\\eqnedt32.exe))
+        AND process.executable.keyword:c\:\\users\\* AND process.executable.keyword:*.exe)
+        AND (NOT process.executable.keyword:*\\teams.exe)
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1204.002
+- g0046
+- car.2013-05-002
+risk: high

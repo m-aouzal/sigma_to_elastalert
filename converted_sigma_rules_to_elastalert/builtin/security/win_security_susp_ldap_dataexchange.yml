@@ -1,10 +1,18 @@
 description: |
   Detects the usage of particular AttributeLDAPDisplayNames, which are known for data exchange via LDAP by the tool LDAPFragger and are additionally not commonly used in companies.
 name: Suspicious LDAP-Attributes Used
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:5136 AND winlog.event_data.AttributeValue.keyword:* AND (winlog.event_data.AttributeLDAPDisplayName.keyword:(primaryinternationalisdnnumber OR otherfacsimiletelephonenumber OR primarytelexnumber)))
+      query: winlog.channel.keyword:security AND (event.code.keyword:5136 AND winlog.event_data.AttributeValue.keyword:*
+        AND 
+        (winlog.event_data.AttributeLDAPDisplayName.keyword:(primaryinternationalisdnnumber
+        OR otherfacsimiletelephonenumber OR primarytelexnumber)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1001.003
+risk: high

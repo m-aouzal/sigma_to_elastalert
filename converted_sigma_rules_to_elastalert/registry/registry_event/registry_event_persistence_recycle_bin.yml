@@ -1,10 +1,18 @@
 description: |
   Detects persistence registry keys for Recycle Bin
 name: Registry Persistence Mechanisms in Recycle Bin
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.EventType.keyword:renamekey AND winlog.event_data.NewName.keyword:*\\clsid\\\{645ff040\-5081\-101b\-9f08\-00aa002f954e\}\\shell\\open*) OR (winlog.event_data.EventType.keyword:setvalue AND registry.path.keyword:*\\clsid\\\{645ff040\-5081\-101b\-9f08\-00aa002f954e\}\\shell\\open\\command\\\(default\)*)
+      query: (winlog.event_data.EventType.keyword:renamekey AND 
+        winlog.event_data.NewName.keyword:*\\clsid\\\{645ff040\-5081\-101b\-9f08\-00aa002f954e\}\\shell\\open*)
+        OR (winlog.event_data.EventType.keyword:setvalue AND 
+        registry.path.keyword:*\\clsid\\\{645ff040\-5081\-101b\-9f08\-00aa002f954e\}\\shell\\open\\command\\\(default\)*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1547
+risk: high

@@ -1,10 +1,17 @@
 description: |
   Detects potential DLL sideloading of "MpSvc.dll".
 name: Potential DLL Sideloading Of MpSvc.DLL
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:*\\mpsvc.dll AND (NOT (file.path.keyword:(c\:\\program\ files\\windows\ defender\\* OR c\:\\programdata\\microsoft\\windows\ defender\\platform\\* OR c\:\\windows\\winsxs\\*)))
+      query: file.path.keyword:*\\mpsvc.dll AND (NOT (file.path.keyword:(c\:\\program\
+        files\\windows\ defender\\* OR c\:\\programdata\\microsoft\\windows\ defender\\platform\\*
+        OR c\:\\windows\\winsxs\\*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1574.002
+risk: medium

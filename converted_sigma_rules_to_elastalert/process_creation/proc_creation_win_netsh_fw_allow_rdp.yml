@@ -1,10 +1,18 @@
 description: |
   Detects usage of the netsh command to open and allow connections to port 3389 (RDP). As seen used by Sarwent Malware
 name: RDP Connection Allowed Via Netsh.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\netsh.exe OR winlog.event_data.originalfilename.keyword:netsh.exe) AND ((process.command_line.keyword:*firewall\ * AND process.command_line.keyword:*add\ * AND process.command_line.keyword:*tcp\ * AND process.command_line.keyword:*3389*) AND (process.command_line.keyword:(*portopening* OR *allow*)))
+      query: (winlog.event_data.image.keyword:*\\netsh.exe OR winlog.event_data.originalfilename.keyword:netsh.exe)
+        AND ((process.command_line.keyword:*firewall\ * AND process.command_line.keyword:*add\
+        * AND process.command_line.keyword:*tcp\ * AND process.command_line.keyword:*3389*)
+        AND (process.command_line.keyword:(*portopening* OR *allow*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.004
+risk: high

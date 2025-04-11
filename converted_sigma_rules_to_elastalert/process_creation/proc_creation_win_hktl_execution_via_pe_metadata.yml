@@ -1,10 +1,16 @@
 description: |
   Detects the execution of different Windows based hacktools via PE metadata (company, product, etc.) even if the files have been renamed
 name: Hacktool Execution - PE Metadata
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.pe.company.keyword:cube0x0
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1588.002
+- t1003
+risk: high

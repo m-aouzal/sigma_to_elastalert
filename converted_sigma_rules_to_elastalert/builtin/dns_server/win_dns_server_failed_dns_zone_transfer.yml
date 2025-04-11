@@ -1,10 +1,15 @@
 description: |
   Detects when a DNS zone transfer failed.
 name: Failed DNS Zone Transfer
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.channel.keyword:dns\ server AND event.code.keyword:6004
 type: any
 priority: 2
+mitre_attack_tactic:
+- reconnaissance
+mitre_attack_technique:
+- t1590.002
+risk: medium

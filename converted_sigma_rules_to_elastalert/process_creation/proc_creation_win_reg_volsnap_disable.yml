@@ -1,10 +1,16 @@
 description: |
   Detects commands that temporarily turn off Volume Snapshots
 name: Disabled Volume Snapshots
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:*\\services\\vss\\diag* AND process.command_line.keyword:*\/d\ disabled*
+      query: process.command_line.keyword:*\\services\\vss\\diag* AND process.command_line.keyword:*\/d\
+        disabled*
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high

@@ -1,12 +1,21 @@
 description: |
   Adversaries may steal data by exfiltrating it over an un-encrypted network protocol other than that of the existing command and control channel.
   The data may also be sent to an alternate network location from the main command and control server.
-  
+
 name: Suspicious Outbound SMTP Connections
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((destination.port:(25 OR 587 OR 465 OR 2525)) AND network.direction.keyword:true) AND (NOT ((process.executable.keyword:(*\\thunderbird.exe OR *\\outlook.exe)) OR process.executable.keyword:c\:\\program\ files\\microsoft\\exchange\ server\\* OR (process.executable.keyword:c\:\\program\ files\\windowsapps\\microsoft.windowscommunicationsapps_* AND process.executable.keyword:*\\hxtsr.exe)))
+      query: ((destination.port:(25 OR 587 OR 465 OR 2525)) AND network.direction.keyword:true)
+        AND (NOT ((process.executable.keyword:(*\\thunderbird.exe OR *\\outlook.exe))
+        OR process.executable.keyword:c\:\\program\ files\\microsoft\\exchange\ server\\*
+        OR (process.executable.keyword:c\:\\program\ files\\windowsapps\\microsoft.windowscommunicationsapps_*
+        AND process.executable.keyword:*\\hxtsr.exe)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- exfiltration
+mitre_attack_technique:
+- t1048.003
+risk: medium

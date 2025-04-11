@@ -1,10 +1,17 @@
 description: |
   Detects changes to of the IIS server configuration in order to disable/remove the ETW logging/processing option.
 name: ETW Logging/Processing Option Disabled On IIS Server
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (event.code.keyword:29 AND winlog.event_data.Configuration.keyword:*@logtargetw3c AND winlog.event_data.OldValue.keyword:*etw*) AND (NOT winlog.event_data.NewValue.keyword:*etw*)
+      query: (event.code.keyword:29 AND winlog.event_data.Configuration.keyword:*@logtargetw3c
+        AND winlog.event_data.OldValue.keyword:*etw*) AND (NOT winlog.event_data.NewValue.keyword:*etw*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.002
+- t1505.004
+risk: medium

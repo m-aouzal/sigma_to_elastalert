@@ -1,10 +1,22 @@
 description: |
   ZipExec is a Proof-of-Concept (POC) tool to wrap binary-based tools into a password-protected zip file.
 name: Suspicious ZipExec Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*\/generic\:microsoft_windows_shell_zipfolder\:filename\=* AND process.command_line.keyword:*.zip* AND process.command_line.keyword:*\/pass\:* AND process.command_line.keyword:*\/user\:*) OR (process.command_line.keyword:*\/delete* AND process.command_line.keyword:*microsoft_windows_shell_zipfolder\:filename\=* AND process.command_line.keyword:*.zip*)
+      query: 
+        (process.command_line.keyword:*\/generic\:microsoft_windows_shell_zipfolder\:filename\=*
+        AND process.command_line.keyword:*.zip* AND process.command_line.keyword:*\/pass\:*
+        AND process.command_line.keyword:*\/user\:*) OR (process.command_line.keyword:*\/delete*
+        AND process.command_line.keyword:*microsoft_windows_shell_zipfolder\:filename\=*
+        AND process.command_line.keyword:*.zip*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+- defense-evasion
+mitre_attack_technique:
+- t1218
+- t1202
+risk: medium

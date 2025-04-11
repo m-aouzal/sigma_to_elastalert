@@ -1,10 +1,17 @@
 description: |
   Detects successful logon with logon type 9 (NewCredentials) which matches the Overpass the Hash behavior of e.g Mimikatz's sekurlsa::pth module.
 name: Successful Overpass the Hash Attempt
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:9 AND winlog.event_data.LogonProcessName.keyword:seclogo AND winlog.event_data.AuthenticationPackageName.keyword:negotiate)
+      query: winlog.channel.keyword:security AND (event.code.keyword:4624 AND winlog.event_data.LogonType.keyword:9
+        AND winlog.event_data.LogonProcessName.keyword:seclogo AND winlog.event_data.AuthenticationPackageName.keyword:negotiate)
 type: any
 priority: 3
+mitre_attack_tactic:
+- lateral-movement
+mitre_attack_technique:
+- s0002
+- t1550.002
+risk: high

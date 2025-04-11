@@ -1,10 +1,17 @@
 description: |
   Detects usage of the "Get-AdComputer" to enumerate Computers or properties within Active Directory.
 name: Active Directory Computers Enumeration With Get-AdComputer
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*get\-adcomputer\ * AND (powershell.file.script_block_text.keyword:(*\-filter\ * OR *\-ldapfilter\ * OR *\-properties\ *))
+      query: powershell.file.script_block_text.keyword:*get\-adcomputer\ * AND (powershell.file.script_block_text.keyword:(*\-filter\
+        * OR *\-ldapfilter\ * OR *\-properties\ *))
 type: any
 priority: 1
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1018
+- t1087.002
+risk: low

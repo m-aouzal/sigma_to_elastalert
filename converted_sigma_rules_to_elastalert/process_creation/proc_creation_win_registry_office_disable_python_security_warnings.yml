@@ -1,12 +1,19 @@
 description: |
   Detects changes to the registry value "PythonFunctionWarnings" that would prevent any warnings or alerts from showing when Python functions are about to be executed.
   Threat actors could run malicious code through the new Microsoft Excel feature that allows Python to run within the spreadsheet.
-  
+
 name: Python Function Execution Security Warning Disabled In Excel
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.command_line.keyword:*\\microsoft\\office\\* AND process.command_line.keyword:*\\excel\\security* AND process.command_line.keyword:*pythonfunctionwarnings*) AND process.command_line.keyword:*\ 0*
+      query: (process.command_line.keyword:*\\microsoft\\office\\* AND process.command_line.keyword:*\\excel\\security*
+        AND process.command_line.keyword:*pythonfunctionwarnings*) AND process.command_line.keyword:*\
+        0*
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high

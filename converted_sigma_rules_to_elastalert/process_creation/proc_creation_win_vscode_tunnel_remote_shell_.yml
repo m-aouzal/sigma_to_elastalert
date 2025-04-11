@@ -1,10 +1,18 @@
 description: |
   Detects the execution of a shell (powershell, bash, wsl...) via Visual Studio Code tunnel. Attackers can abuse this functionality to establish a C2 channel and execute arbitrary commands on the system.
 name: Visual Studio Code Tunnel Shell Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.parent.executable.keyword:*\\servers\\stable\-* AND process.parent.executable.keyword:*\\server\\node.exe AND process.parent.command_line.keyword:*.vscode\-server*) AND (((process.executable.keyword:(*\\powershell.exe OR *\\pwsh.exe)) AND process.command_line.keyword:*\\terminal\\browser\\media\\shellintegration.ps1*) OR (process.executable.keyword:(*\\wsl.exe OR *\\bash.exe)))
+      query: (process.parent.executable.keyword:*\\servers\\stable\-* AND process.parent.executable.keyword:*\\server\\node.exe
+        AND process.parent.command_line.keyword:*.vscode\-server*) AND (((process.executable.keyword:(*\\powershell.exe
+        OR *\\pwsh.exe)) AND process.command_line.keyword:*\\terminal\\browser\\media\\shellintegration.ps1*)
+        OR (process.executable.keyword:(*\\wsl.exe OR *\\bash.exe)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1071.001
+risk: medium

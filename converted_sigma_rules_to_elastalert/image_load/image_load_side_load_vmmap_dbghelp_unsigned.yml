@@ -1,10 +1,19 @@
 description: |
   Detects potential DLL sideloading of an unsigned dbghelp.dll by the Sysinternals VMMap.
 name: VMMap Unsigned Dbghelp.DLL Potential Sideloading
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:*c\:\\debuggers\\dbghelp.dll* AND (process.executable.keyword:(*\\vmmap.exe OR *\\vmmap64.exe))) AND (NOT file.code_signature.signed.keyword:true)
+      query: (file.path.keyword:*c\:\\debuggers\\dbghelp.dll* AND (process.executable.keyword:(*\\vmmap.exe
+        OR *\\vmmap64.exe))) AND (NOT file.code_signature.signed.keyword:true)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: high

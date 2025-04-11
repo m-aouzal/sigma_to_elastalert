@@ -1,10 +1,17 @@
 description: |
   Detects the pattern of UAC Bypass using a path parsing issue in winsat.exe (UACMe 52)
 name: UAC Bypass Abusing Winsat Path Parsing - File
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:c\:\\users\\* AND (file.path.keyword:(*\\appdata\\local\\temp\\system32\\winsat.exe OR *\\appdata\\local\\temp\\system32\\winmm.dll))
+      query: file.path.keyword:c\:\\users\\* AND (file.path.keyword:(*\\appdata\\local\\temp\\system32\\winsat.exe
+        OR *\\appdata\\local\\temp\\system32\\winmm.dll))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1548.002
+risk: high

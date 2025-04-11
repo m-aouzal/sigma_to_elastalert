@@ -1,10 +1,18 @@
 description: |
   Detects execution of the AgentExecutor.exe binary. Which can be abused as a LOLBIN to execute powershell scripts with the ExecutionPolicy "Bypass" or any binary named "powershell.exe" located in the path provided by 6th positional argument
 name: AgentExecutor PowerShell Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:\\agentexecutor.exe OR winlog.event_data.originalfilename.keyword:agentexecutor.exe) AND (process.command_line.keyword:(*\ \-powershell* OR *\ \-remediationscript*))) AND (NOT process.parent.executable.keyword:*\\microsoft.management.services.intunewindowsagent.exe)
+      query: ((winlog.event_data.image.keyword:\\agentexecutor.exe OR winlog.event_data.originalfilename.keyword:agentexecutor.exe)
+        AND (process.command_line.keyword:(*\ \-powershell* OR *\ \-remediationscript*)))
+        AND (NOT 
+        process.parent.executable.keyword:*\\microsoft.management.services.intunewindowsagent.exe)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218
+risk: medium

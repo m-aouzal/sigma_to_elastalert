@@ -1,10 +1,15 @@
 description: |
   This rule detects a DHCP server in which a specified Callout DLL (in registry) was loaded
 name: DHCP Server Loaded the CallOut DLL
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.channel.keyword:system AND (event.code.keyword:1033 AND winlog.provider_name.keyword:microsoft\-windows\-dhcp\-server)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1574.002
+risk: high

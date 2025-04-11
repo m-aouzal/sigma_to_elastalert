@@ -1,10 +1,16 @@
 description: |
   Detects when a user enable developer features such as "Developer Mode" or "Application Sideloading". Which allows the user to install untrusted packages.
 name: Potential Signing Bypass Via Windows Developer Features
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\systemsettingsadminflows.exe OR winlog.event_data.originalfilename.keyword:systemsettingsadminflows.exe) AND process.command_line.keyword:*turnondeveloperfeatures* AND (process.command_line.keyword:(*developerunlock* OR *enablesideloading*))
+      query: (winlog.event_data.image.keyword:*\\systemsettingsadminflows.exe OR winlog.event_data.originalfilename.keyword:systemsettingsadminflows.exe)
+        AND process.command_line.keyword:*turnondeveloperfeatures* AND (process.command_line.keyword:(*developerunlock*
+        OR *enablesideloading*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: high

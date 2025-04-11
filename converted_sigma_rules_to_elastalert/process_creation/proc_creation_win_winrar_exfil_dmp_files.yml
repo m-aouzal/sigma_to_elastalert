@@ -1,10 +1,16 @@
 description: |
   Detects execution of WinRAR in order to compress a file with a ".dmp"/".dump" extension, which could be a step in a process of dump file exfiltration.
 name: Winrar Compressing Dump Files
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\rar.exe OR *\\winrar.exe)) OR winlog.event_data.description.keyword:command\ line\ rar) AND (process.command_line.keyword:(*.dmp* OR *.dump* OR *.hdmp*))
+      query: ((winlog.event_data.image.keyword:(*\\rar.exe OR *\\winrar.exe)) OR winlog.event_data.description.keyword:command\
+        line\ rar) AND (process.command_line.keyword:(*.dmp* OR *.dump* OR *.hdmp*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- collection
+mitre_attack_technique:
+- t1560.001
+risk: medium

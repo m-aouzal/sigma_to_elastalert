@@ -1,11 +1,35 @@
 description: |
   Detects a non-browser process interacting with the Google API which could indicate the use of a covert C2 such as Google Sheet C2 (GC2-sheet)
-  
+
 name: Suspicious Non-Browser Network Communication With Google API
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (destination.domain.keyword:(*drive.googleapis.com* OR *oauth2.googleapis.com* OR *sheets.googleapis.com* OR *www.googleapis.com*)) AND (NOT ((NOT _exists_:process.executable) OR process.executable.keyword:"")) AND (NOT (process.executable.keyword:*\\brave.exe OR (process.executable.keyword:(*\:\\program\ files\\google\\chrome\\application\\chrome.exe OR *\:\\program\ files\ \(x86\)\\google\\chrome\\application\\chrome.exe)) OR (process.executable.keyword:*\:\\program\ files\\google\\drive\ file\ stream\\* AND process.executable.keyword:*\\googledrivefs.exe) OR (process.executable.keyword:(*\:\\program\ files\\mozilla\ firefox\\firefox.exe OR *\:\\program\ files\ \(x86\)\\mozilla\ firefox\\firefox.exe)) OR (process.executable.keyword:(*\:\\program\ files\ \(x86\)\\internet\ explorer\\iexplore.exe OR *\:\\program\ files\\internet\ explorer\\iexplore.exe)) OR process.executable.keyword:*\\maxthon.exe OR (winlog.event_data.image.keyword:*\:\\program\ files\ \(x86\)\\microsoft\\edgewebview\\application\\* OR (winlog.event_data.image.keyword:(*\:\\program\ files\ \(x86\)\\microsoft\\edge\\application\\msedge.exe OR *\:\\program\ files\\microsoft\\edge\\application\\msedge.exe OR *\\windowsapps\\microsoftedge.exe))) OR ((process.executable.keyword:(*\:\\program\ files\ \(x86\)\\microsoft\\edgecore\\* OR *\:\\program\ files\\microsoft\\edgecore\\*)) AND (process.executable.keyword:(*\\msedge.exe OR *\\msedgewebview2.exe))) OR process.executable.keyword:*\\opera.exe OR process.executable.keyword:*\\safari.exe OR process.executable.keyword:*\\seamonkey.exe OR process.executable.keyword:*\\vivaldi.exe OR process.executable.keyword:*\\whale.exe OR process.executable.keyword:*\\googleupdate.exe OR process.executable.keyword:*\\outlook.exe))
+      query: (destination.domain.keyword:(*drive.googleapis.com* OR *oauth2.googleapis.com*
+        OR *sheets.googleapis.com* OR *www.googleapis.com*)) AND (NOT ((NOT _exists_:process.executable)
+        OR process.executable.keyword:"")) AND (NOT (process.executable.keyword:*\\brave.exe
+        OR (process.executable.keyword:(*\:\\program\ files\\google\\chrome\\application\\chrome.exe
+        OR *\:\\program\ files\ \(x86\)\\google\\chrome\\application\\chrome.exe))
+        OR (process.executable.keyword:*\:\\program\ files\\google\\drive\ file\ stream\\*
+        AND process.executable.keyword:*\\googledrivefs.exe) OR (process.executable.keyword:(*\:\\program\
+        files\\mozilla\ firefox\\firefox.exe OR *\:\\program\ files\ \(x86\)\\mozilla\
+        firefox\\firefox.exe)) OR (process.executable.keyword:(*\:\\program\ files\
+        \(x86\)\\internet\ explorer\\iexplore.exe OR *\:\\program\ files\\internet\
+        explorer\\iexplore.exe)) OR process.executable.keyword:*\\maxthon.exe OR (winlog.event_data.image.keyword:*\:\\program\
+        files\ \(x86\)\\microsoft\\edgewebview\\application\\* OR (winlog.event_data.image.keyword:(*\:\\program\
+        files\ \(x86\)\\microsoft\\edge\\application\\msedge.exe OR *\:\\program\
+        files\\microsoft\\edge\\application\\msedge.exe OR *\\windowsapps\\microsoftedge.exe)))
+        OR ((process.executable.keyword:(*\:\\program\ files\ \(x86\)\\microsoft\\edgecore\\*
+        OR *\:\\program\ files\\microsoft\\edgecore\\*)) AND (process.executable.keyword:(*\\msedge.exe
+        OR *\\msedgewebview2.exe))) OR process.executable.keyword:*\\opera.exe OR
+        process.executable.keyword:*\\safari.exe OR process.executable.keyword:*\\seamonkey.exe
+        OR process.executable.keyword:*\\vivaldi.exe OR process.executable.keyword:*\\whale.exe
+        OR process.executable.keyword:*\\googleupdate.exe OR process.executable.keyword:*\\outlook.exe))
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1102
+risk: medium

@@ -1,12 +1,30 @@
 description: |
   Detects the use of the Windows Update Client binary (wuauclt.exe) to proxy execute code and making network connections.
   One could easily make the DLL spawn a new process and inject to it to proxy the network connection and bypass this rule.
-  
+
 name: Potentially Suspicious Wuauclt Network Connection
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*wuauclt* AND winlog.event_data.CommandLine.keyword:*\ \/runhandlercomserver*) AND (NOT ((destination.ip.keyword:127.0.0.0\/8 OR destination.ip.keyword:10.0.0.0\/8 OR destination.ip.keyword:169.254.0.0\/16 OR destination.ip.keyword:172.16.0.0\/12 OR destination.ip.keyword:192.168.0.0\/16 OR destination.ip.keyword:\:\:1\/128 OR destination.ip.keyword:fe80\:\:\/10 OR destination.ip.keyword:fc00\:\:\/7) OR (destination.ip.keyword:20.184.0.0\/13 OR destination.ip.keyword:20.192.0.0\/10 OR destination.ip.keyword:23.79.0.0\/16 OR destination.ip.keyword:51.10.0.0\/15 OR destination.ip.keyword:51.103.0.0\/16 OR destination.ip.keyword:51.104.0.0\/15 OR destination.ip.keyword:52.224.0.0\/11) OR (winlog.event_data.CommandLine.keyword:(*\:\\windows\\uus\\packages\\preview\\amd64\\updatedeploy.dll\ \/classid* OR *\:\\windows\\uus\\amd64\\updatedeploy.dll\ \/classid*)) OR (winlog.event_data.CommandLine.keyword:*\:\\windows\\winsxs\\* AND winlog.event_data.CommandLine.keyword:*\\updatedeploy.dll\ \/classid\ *) OR (NOT _exists_:winlog.event_data.CommandLine) OR winlog.event_data.CommandLine.keyword:""))
+      query: (process.executable.keyword:*wuauclt* AND winlog.event_data.CommandLine.keyword:*\
+        \/runhandlercomserver*) AND (NOT ((destination.ip.keyword:127.0.0.0\/8 OR
+        destination.ip.keyword:10.0.0.0\/8 OR destination.ip.keyword:169.254.0.0\/16
+        OR destination.ip.keyword:172.16.0.0\/12 OR destination.ip.keyword:192.168.0.0\/16
+        OR destination.ip.keyword:\:\:1\/128 OR destination.ip.keyword:fe80\:\:\/10
+        OR destination.ip.keyword:fc00\:\:\/7) OR (destination.ip.keyword:20.184.0.0\/13
+        OR destination.ip.keyword:20.192.0.0\/10 OR destination.ip.keyword:23.79.0.0\/16
+        OR destination.ip.keyword:51.10.0.0\/15 OR destination.ip.keyword:51.103.0.0\/16
+        OR destination.ip.keyword:51.104.0.0\/15 OR destination.ip.keyword:52.224.0.0\/11)
+        OR 
+        (winlog.event_data.CommandLine.keyword:(*\:\\windows\\uus\\packages\\preview\\amd64\\updatedeploy.dll\
+        \/classid* OR *\:\\windows\\uus\\amd64\\updatedeploy.dll\ \/classid*)) OR
+        (winlog.event_data.CommandLine.keyword:*\:\\windows\\winsxs\\* AND winlog.event_data.CommandLine.keyword:*\\updatedeploy.dll\
+        \/classid\ *) OR (NOT _exists_:winlog.event_data.CommandLine) OR winlog.event_data.CommandLine.keyword:""))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218
+risk: medium

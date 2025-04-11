@@ -2,12 +2,21 @@ description: |
   Detects outbound network connection initiated by Microsoft Dialer.
   The Microsoft Dialer, also known as Phone Dialer, is a built-in utility application included in various versions of the Microsoft Windows operating system. Its primary function is to provide users with a graphical interface for managing phone calls via a modem or a phone line connected to the computer.
   This is an outdated process in the current conext of it's usage and is a common target for info stealers for process injection, and is used to make C2 connections, common example is "Rhadamanthys"
-  
+
 name: Outbound Network Connection Initiated By Microsoft Dialer
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\:\\windows\\system32\\dialer.exe AND network.direction.keyword:true) AND (NOT (destination.ip.keyword:127.0.0.0\/8 OR destination.ip.keyword:10.0.0.0\/8 OR destination.ip.keyword:172.16.0.0\/12 OR destination.ip.keyword:192.168.0.0\/16 OR destination.ip.keyword:169.254.0.0\/16 OR destination.ip.keyword:\:\:1\/128 OR destination.ip.keyword:fe80\:\:\/10 OR destination.ip.keyword:fc00\:\:\/7))
+      query: (process.executable.keyword:*\:\\windows\\system32\\dialer.exe AND network.direction.keyword:true)
+        AND (NOT (destination.ip.keyword:127.0.0.0\/8 OR destination.ip.keyword:10.0.0.0\/8
+        OR destination.ip.keyword:172.16.0.0\/12 OR destination.ip.keyword:192.168.0.0\/16
+        OR destination.ip.keyword:169.254.0.0\/16 OR destination.ip.keyword:\:\:1\/128
+        OR destination.ip.keyword:fe80\:\:\/10 OR destination.ip.keyword:fc00\:\:\/7))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1071.001
+risk: high

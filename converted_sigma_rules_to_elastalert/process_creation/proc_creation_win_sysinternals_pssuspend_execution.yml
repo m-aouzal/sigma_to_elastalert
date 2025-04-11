@@ -1,10 +1,17 @@
 description: |
   Detects usage of Sysinternals PsSuspend which can be abused to suspend critical processes
 name: Sysinternals PsSuspend Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.originalfilename.keyword:pssuspend.exe OR (winlog.event_data.image.keyword:(*\\pssuspend.exe OR *\\pssuspend64.exe))
+      query: winlog.event_data.originalfilename.keyword:pssuspend.exe OR (winlog.event_data.image.keyword:(*\\pssuspend.exe
+        OR *\\pssuspend64.exe))
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+- persistence
+mitre_attack_technique:
+- t1543.003
+risk: medium

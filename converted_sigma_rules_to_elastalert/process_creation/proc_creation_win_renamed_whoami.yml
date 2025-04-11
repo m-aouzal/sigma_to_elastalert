@@ -1,10 +1,16 @@
 description: |
   Detects the execution of whoami that has been renamed to a different name to avoid detection
 name: Renamed Whoami Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.pe.original_file_name.keyword:whoami.exe AND (NOT process.executable.keyword:*\\whoami.exe)
 type: any
 priority: 4
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1033
+- car.2016-03-001
+risk: critical

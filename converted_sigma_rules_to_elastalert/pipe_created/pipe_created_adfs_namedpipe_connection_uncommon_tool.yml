@@ -1,12 +1,22 @@
 description: |
   Detects suspicious local connections via a named pipe to the AD FS configuration database (Windows Internal Database).
   Used to access information such as the AD FS configuration settings which contains sensitive information used to sign SAML tokens.
-  
+
 name: ADFS Database Named Pipe Connection By Uncommon Tool
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.name.keyword:\\microsoft##wid\\tsql\\query AND (NOT (process.executable.keyword:(*\:\\windows\\system32\\mmc.exe OR *\:\\windows\\system32\\svchost.exe OR *\:\\windows\\system32\\wsmprovhost.exe OR *\:\\windows\\syswow64\\mmc.exe OR *\:\\windows\\syswow64\\wsmprovhost.exe OR *\:\\windows\\wid\\binn\\sqlwriter.exe OR *\\azureadconnect.exe OR *\\microsoft.identity.health.adfs.pshsurrogate.exe OR *\\microsoft.identityserver.servicehost.exe OR *\\microsoft.tri.sensor.exe OR *\\sqlservr.exe OR *\\tssdis.exe)))
+      query: file.name.keyword:\\microsoft##wid\\tsql\\query AND (NOT (process.executable.keyword:(*\:\\windows\\system32\\mmc.exe
+        OR *\:\\windows\\system32\\svchost.exe OR *\:\\windows\\system32\\wsmprovhost.exe
+        OR *\:\\windows\\syswow64\\mmc.exe OR *\:\\windows\\syswow64\\wsmprovhost.exe
+        OR *\:\\windows\\wid\\binn\\sqlwriter.exe OR *\\azureadconnect.exe OR *\\microsoft.identity.health.adfs.pshsurrogate.exe
+        OR *\\microsoft.identityserver.servicehost.exe OR *\\microsoft.tri.sensor.exe
+        OR *\\sqlservr.exe OR *\\tssdis.exe)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- collection
+mitre_attack_technique:
+- t1005
+risk: medium

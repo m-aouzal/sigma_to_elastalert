@@ -1,10 +1,17 @@
 description: |
   Detects the stopping of a Windows service via the "net" utility.
 name: Stop Windows Service Via Net.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.originalfilename.keyword:(net.exe OR net1.exe)) OR (winlog.event_data.image.keyword:(*\\net.exe OR *\\net1.exe))) AND process.command_line.keyword:*\ stop\ *
+      query: ((winlog.event_data.originalfilename.keyword:(net.exe OR net1.exe)) OR
+        (winlog.event_data.image.keyword:(*\\net.exe OR *\\net1.exe))) AND process.command_line.keyword:*\
+        stop\ *
 type: any
 priority: 1
+mitre_attack_tactic:
+- impact
+mitre_attack_technique:
+- t1489
+risk: low

@@ -1,10 +1,15 @@
 description: |
   Detects an unexpected process spawning from dns.exe which may indicate activity related to remote code execution or other forms of exploitation as seen in CVE-2020-1350 (SigRed)
 name: Unusual Child Process of dns.exe
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.parent.executable.keyword:*\\dns.exe AND (NOT process.executable.keyword:*\\conhost.exe)
 type: any
 priority: 3
+mitre_attack_tactic:
+- initial-access
+mitre_attack_technique:
+- t1133
+risk: high

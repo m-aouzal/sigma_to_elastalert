@@ -1,10 +1,16 @@
 description: |
   Detects the use of SDelete to erase a file not the free space
 name: Potential File Overwrite Via Sysinternals SDelete
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.pe.original_file_name.keyword:sdelete.exe AND (NOT (process.command_line.keyword:(*\ \-h* OR *\ \-c* OR *\ \-z* OR *\ \/\?*)))
+      query: process.pe.original_file_name.keyword:sdelete.exe AND (NOT (process.command_line.keyword:(*\
+        \-h* OR *\ \-c* OR *\ \-z* OR *\ \/\?*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- impact
+mitre_attack_technique:
+- t1485
+risk: high

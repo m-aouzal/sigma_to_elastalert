@@ -1,10 +1,15 @@
 description: |
   Detects usage of a PowerShell command to dump the live memory of a Windows machine
 name: Live Memory Dump Using Powershell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: powershell.file.script_block_text.keyword:*get\-storagediagnosticinfo* AND powershell.file.script_block_text.keyword:*\-includelivedump*
+      query: powershell.file.script_block_text.keyword:*get\-storagediagnosticinfo*
+        AND powershell.file.script_block_text.keyword:*\-includelivedump*
 type: any
 priority: 3
+mitre_attack_tactic: []
+mitre_attack_technique:
+- t1003
+risk: high

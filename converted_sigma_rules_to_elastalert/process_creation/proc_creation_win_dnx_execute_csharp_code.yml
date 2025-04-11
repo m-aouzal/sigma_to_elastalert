@@ -1,12 +1,18 @@
 description: |
   Detects the execution of Dnx.EXE. The Dnx utility allows for the execution of C# code.
   Attackers might abuse this in order to bypass application whitelisting.
-  
+
 name: Potential Application Whitelisting Bypass via Dnx.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:*\\dnx.exe
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218
+- t1027.004
+risk: medium

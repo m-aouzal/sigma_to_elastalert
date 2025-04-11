@@ -1,10 +1,18 @@
 description: |
   Detects Executables in the Downloads folder without FileVersion,Description,Product,Company likely created with py2exe
 name: Suspicious File Characteristics Due to Missing Fields
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((process.pe.description.keyword:\? AND process.pe.file_version.keyword:\?) OR (process.pe.description.keyword:\? AND process.pe.product.keyword:\?) OR (process.pe.description.keyword:\? AND process.pe.company.keyword:\?)) AND process.executable.keyword:*\\downloads\\*
+      query: ((process.pe.description.keyword:\? AND process.pe.file_version.keyword:\?)
+        OR (process.pe.description.keyword:\? AND process.pe.product.keyword:\?) OR
+        (process.pe.description.keyword:\? AND process.pe.company.keyword:\?)) AND
+        process.executable.keyword:*\\downloads\\*
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.006
+risk: medium

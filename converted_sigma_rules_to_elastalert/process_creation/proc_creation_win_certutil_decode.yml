@@ -1,10 +1,18 @@
 description: |
   Detects the execution of certutil with either the "decode" or "decodehex" flags to decode base64 or hex encoded files. This can be abused by attackers to decode an encoded payload before execution
 name: File Decoded From Base64/Hex Via Certutil.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\certutil.exe OR winlog.event_data.originalfilename.keyword:certutil.exe) AND (process.command_line.keyword:(*\-decode\ * OR *\/decode\ * OR *–decode\ * OR *—decode\ * OR *―decode\ *) OR process.command_line.keyword:(*\-decodehex\ * OR *\/decodehex\ * OR *–decodehex\ * OR *—decodehex\ * OR *―decodehex\ *))
+      query: (winlog.event_data.image.keyword:*\\certutil.exe OR winlog.event_data.originalfilename.keyword:certutil.exe)
+        AND (process.command_line.keyword:(*\-decode\ * OR *\/decode\ * OR *–decode\
+        * OR *—decode\ * OR *―decode\ *) OR process.command_line.keyword:(*\-decodehex\
+        * OR *\/decodehex\ * OR *–decodehex\ * OR *—decodehex\ * OR *―decodehex\ *))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1027
+risk: medium

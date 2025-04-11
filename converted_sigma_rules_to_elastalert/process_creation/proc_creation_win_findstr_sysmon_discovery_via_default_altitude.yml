@@ -1,10 +1,17 @@
 description: |
   Detects usage of "findstr" with the argument "385201". Which could indicate potential discovery of an installed Sysinternals Sysmon service using the default driver altitude (even if the name is changed).
 name: Sysmon Discovery Via Default Driver Altitude Using Findstr.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\find.exe OR *\\findstr.exe)) OR (winlog.event_data.originalfilename.keyword:(find.exe OR findstr.exe))) AND process.command_line.keyword:*\ 385201*
+      query: ((winlog.event_data.image.keyword:(*\\find.exe OR *\\findstr.exe)) OR
+        (winlog.event_data.originalfilename.keyword:(find.exe OR findstr.exe))) AND
+        process.command_line.keyword:*\ 385201*
 type: any
 priority: 3
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1518.001
+risk: high

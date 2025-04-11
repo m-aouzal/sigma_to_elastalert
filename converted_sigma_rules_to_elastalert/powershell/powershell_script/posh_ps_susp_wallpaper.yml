@@ -1,12 +1,20 @@
 description: |
   An adversary may deface systems internal to an organization in an attempt to intimidate or mislead users.
   This may take the form of modifications to internal websites, or directly to user systems with the replacement of the desktop wallpaper
-  
+
 name: Replace Desktop Wallpaper by Powershell
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*get\-itemproperty* AND powershell.file.script_block_text.keyword:*registry\:\:* AND powershell.file.script_block_text.keyword:*hkey_current_user\\control\ panel\\desktop\\* AND powershell.file.script_block_text.keyword:*wallpaper*) OR powershell.file.script_block_text.keyword:*systemparametersinfo\(20,0,*,3\)*
+      query: (powershell.file.script_block_text.keyword:*get\-itemproperty* AND powershell.file.script_block_text.keyword:*registry\:\:*
+        AND powershell.file.script_block_text.keyword:*hkey_current_user\\control\
+        panel\\desktop\\* AND powershell.file.script_block_text.keyword:*wallpaper*)
+        OR powershell.file.script_block_text.keyword:*systemparametersinfo\(20,0,*,3\)*
 type: any
 priority: 1
+mitre_attack_tactic:
+- impact
+mitre_attack_technique:
+- t1491.001
+risk: low

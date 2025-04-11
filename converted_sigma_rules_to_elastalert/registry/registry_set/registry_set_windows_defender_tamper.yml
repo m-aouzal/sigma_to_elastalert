@@ -1,10 +1,28 @@
 description: |
   Detects when attackers or tools disable Windows Defender functionalities via the Windows registry
 name: Disable Windows Defender Functionalities Via Registry Keys
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*\\software\\microsoft\\windows\ defender\\* OR *\\software\\policies\\microsoft\\windows\ defender\ security\ center\\* OR *\\software\\policies\\microsoft\\windows\ defender\\*)) AND (((registry.path.keyword:(*\\disableantispyware OR *\\disableantivirus OR *\\disablebehaviormonitoring OR *\\disableblockatfirstseen OR *\\disableenhancednotifications OR *\\disableintrusionpreventionsystem OR *\\disableioavprotection OR *\\disableonaccessprotection OR *\\disablerealtimemonitoring OR *\\disablescanonrealtimeenable OR *\\disablescriptscanning)) AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)) OR ((registry.path.keyword:(*\\disallowexploitprotectionoverride OR *\\features\\tamperprotection OR *\\mpengine\\mpenablepus OR *\\puaprotection OR *\\signature\ update\\forceupdatefrommu OR *\\spynet\\spynetreporting OR *\\spynet\\submitsamplesconsent OR *\\windows\ defender\ exploit\ guard\\controlled\ folder\ access\\enablecontrolledfolderaccess)) AND winlog.event_data.Details.keyword:dword\ \(0x00000000\))) AND (NOT (process.executable.keyword:c\:\\program\ files\\symantec\\symantec\ endpoint\ protection\\* AND process.executable.keyword:*\\sepwscsvc64.exe))
+      query: (registry.path.keyword:(*\\software\\microsoft\\windows\ defender\\*
+        OR *\\software\\policies\\microsoft\\windows\ defender\ security\ center\\*
+        OR *\\software\\policies\\microsoft\\windows\ defender\\*)) AND (((registry.path.keyword:(*\\disableantispyware
+        OR *\\disableantivirus OR *\\disablebehaviormonitoring OR *\\disableblockatfirstseen
+        OR *\\disableenhancednotifications OR *\\disableintrusionpreventionsystem
+        OR *\\disableioavprotection OR *\\disableonaccessprotection OR *\\disablerealtimemonitoring
+        OR *\\disablescanonrealtimeenable OR *\\disablescriptscanning)) AND winlog.event_data.Details.keyword:dword\
+        \(0x00000001\)) OR ((registry.path.keyword:(*\\disallowexploitprotectionoverride
+        OR *\\features\\tamperprotection OR *\\mpengine\\mpenablepus OR *\\puaprotection
+        OR *\\signature\ update\\forceupdatefrommu OR *\\spynet\\spynetreporting OR
+        *\\spynet\\submitsamplesconsent OR *\\windows\ defender\ exploit\ guard\\controlled\
+        folder\ access\\enablecontrolledfolderaccess)) AND winlog.event_data.Details.keyword:dword\
+        \(0x00000000\))) AND (NOT (process.executable.keyword:c\:\\program\ files\\symantec\\symantec\
+        endpoint\ protection\\* AND process.executable.keyword:*\\sepwscsvc64.exe))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high

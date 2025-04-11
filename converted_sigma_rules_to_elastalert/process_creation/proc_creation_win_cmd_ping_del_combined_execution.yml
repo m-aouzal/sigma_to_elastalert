@@ -1,10 +1,19 @@
 description: |
   Detects a method often used by ransomware. Which combines the "ping" to wait a couple of seconds and then "del" to delete the file in question. Its used to hide the file responsible for the initial infection for example
 name: Suspicious Ping/Del Command Combination
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: process.command_line.keyword:(*\ \-n\ * OR *\ \/n\ * OR *\ –n\ * OR *\ —n\ * OR *\ ―n\ *) AND process.command_line.keyword:*nul* AND (process.command_line.keyword:(*\ \-f\ * OR *\ \/f\ * OR *\ –f\ * OR *\ —f\ * OR *\ ―f\ *) OR process.command_line.keyword:(*\ \-q\ * OR *\ \/q\ * OR *\ –q\ * OR *\ —q\ * OR *\ ―q\ *)) AND (process.command_line.keyword:*ping* AND process.command_line.keyword:*del\ *)
+      query: process.command_line.keyword:(*\ \-n\ * OR *\ \/n\ * OR *\ –n\ * OR *\
+        —n\ * OR *\ ―n\ *) AND process.command_line.keyword:*nul* AND (process.command_line.keyword:(*\
+        \-f\ * OR *\ \/f\ * OR *\ –f\ * OR *\ —f\ * OR *\ ―f\ *) OR process.command_line.keyword:(*\
+        \-q\ * OR *\ \/q\ * OR *\ –q\ * OR *\ —q\ * OR *\ ―q\ *)) AND (process.command_line.keyword:*ping*
+        AND process.command_line.keyword:*del\ *)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1070.004
+risk: high

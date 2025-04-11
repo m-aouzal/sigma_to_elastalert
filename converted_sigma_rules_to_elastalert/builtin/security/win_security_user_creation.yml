@@ -1,11 +1,16 @@
 description: |
   Detects local user creation on Windows servers, which shouldn't happen in an Active Directory environment. Apply this Sigma Use Case on your Windows server logs and not on your DC logs.
-  
+
 name: Local User Creation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.channel.keyword:security AND event.code.keyword:4720
 type: any
 priority: 1
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1136.001
+risk: low

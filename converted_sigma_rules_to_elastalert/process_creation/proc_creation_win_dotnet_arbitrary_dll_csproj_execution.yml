@@ -1,10 +1,17 @@
 description: |
   Detects execution of arbitrary DLLs or unsigned code via a ".csproj" files via Dotnet.EXE.
 name: Arbitrary DLL or Csproj Code Execution Via Dotnet.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\dotnet.exe OR winlog.event_data.originalfilename.keyword:.net\ host) AND (process.command_line.keyword:(*.csproj OR *.csproj\" OR *.dll OR *.dll\" OR *.csproj' OR *.dll'))
+      query: (winlog.event_data.image.keyword:*\\dotnet.exe OR winlog.event_data.originalfilename.keyword:.net\
+        host) AND (process.command_line.keyword:(*.csproj OR *.csproj\" OR *.dll OR
+        *.dll\" OR *.csproj' OR *.dll'))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1218
+risk: medium

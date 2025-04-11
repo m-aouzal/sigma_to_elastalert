@@ -1,10 +1,16 @@
 description: |
   Detects child processes of Microsoft.NodejsTools.PressAnyKey.exe that can be used to execute any other binary
 name: Visual Studio NodejsTools PressAnyKey Arbitrary Binary Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.parent.executable.keyword:*\\microsoft.nodejstools.pressanykey.exe
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+- defense-evasion
+mitre_attack_technique:
+- t1218
+risk: medium

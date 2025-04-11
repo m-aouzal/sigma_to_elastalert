@@ -1,10 +1,19 @@
 description: |
   Detects DNS server discovery via LDAP query requests from uncommon applications
 name: DNS Server Discovery Via LDAP Query
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: dns.question.name.keyword:_ldap.* AND (NOT ((process.executable.keyword:(*\:\\program\ files\\* OR *\:\\program\ files\ \(x86\)\\* OR *\:\\windows\\*)) OR (process.executable.keyword:*\:\\programdata\\microsoft\\windows\ defender\\platform\\* AND process.executable.keyword:*\\msmpeng.exe) OR process.executable.keyword:\<unknown\ process\> OR (NOT _exists_:process.executable))) AND (NOT (process.executable.keyword:c\:\\windowsazure\\guestagent* OR (process.executable.keyword:(*\\chrome.exe OR *\\firefox.exe OR *\\opera.exe))))
+      query: dns.question.name.keyword:_ldap.* AND (NOT ((process.executable.keyword:(*\:\\program\
+        files\\* OR *\:\\program\ files\ \(x86\)\\* OR *\:\\windows\\*)) OR (process.executable.keyword:*\:\\programdata\\microsoft\\windows\
+        defender\\platform\\* AND process.executable.keyword:*\\msmpeng.exe) OR process.executable.keyword:\<unknown\
+        process\> OR (NOT _exists_:process.executable))) AND (NOT (process.executable.keyword:c\:\\windowsazure\\guestagent*
+        OR (process.executable.keyword:(*\\chrome.exe OR *\\firefox.exe OR *\\opera.exe))))
 type: any
 priority: 1
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1482
+risk: low

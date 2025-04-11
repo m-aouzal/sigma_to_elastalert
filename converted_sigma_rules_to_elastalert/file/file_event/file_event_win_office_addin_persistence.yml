@@ -1,10 +1,19 @@
 description: |
   Detects potential persistence activity via startup add-ins that load when Microsoft Office starts (.wll/.xll are simply .dll fit for Word or Excel).
 name: Potential Persistence Via Microsoft Office Add-In
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:*\\microsoft\\word\\startup\\* AND file.path.keyword:*.wll) OR (file.path.keyword:*\\microsoft\\excel\\startup\\* AND file.path.keyword:*.xll) OR (file.path.keyword:*microsoft\\excel\\xlstart\\* AND file.path.keyword:*.xlam) OR (file.path.keyword:*\\microsoft\\addins\\* AND (file.path.keyword:(*.xlam OR *.xla OR *.ppam)))
+      query: (file.path.keyword:*\\microsoft\\word\\startup\\* AND file.path.keyword:*.wll)
+        OR (file.path.keyword:*\\microsoft\\excel\\startup\\* AND file.path.keyword:*.xll)
+        OR (file.path.keyword:*microsoft\\excel\\xlstart\\* AND file.path.keyword:*.xlam)
+        OR (file.path.keyword:*\\microsoft\\addins\\* AND (file.path.keyword:(*.xlam
+        OR *.xla OR *.ppam)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique:
+- t1137.006
+risk: high

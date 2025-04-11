@@ -1,10 +1,18 @@
 description: |
   Detects usage of the "sc.exe" utility adding a new service with special permission seen used by threat actors which makes the service hidden and unremovable.
 name: Service DACL Abuse To Hide Services Via Sc.EXE
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\sc.exe OR winlog.event_data.originalfilename.keyword:sc.exe) AND (process.command_line.keyword:*sdset* AND process.command_line.keyword:*dclcwpdtsd*)
+      query: (winlog.event_data.image.keyword:*\\sc.exe OR winlog.event_data.originalfilename.keyword:sc.exe)
+        AND (process.command_line.keyword:*sdset* AND process.command_line.keyword:*dclcwpdtsd*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- persistence
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1574.011
+risk: high

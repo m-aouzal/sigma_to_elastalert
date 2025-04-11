@@ -4,12 +4,19 @@ description: |
   One way of doing this is to request a Kerberos Ticket Granting Ticket using a tool like Rubeus.
   This request will generate a 4768 event with some unusual fields depending on the environment.
   This analytic will require tuning, we recommend filtering Account_Name to the Domain Controller computer accounts.
-  
+
 name: PetitPotam Suspicious Kerberos TGT Request
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND ((event.code.keyword:4768 AND winlog.event_data.TargetUserName.keyword:*$ AND winlog.event_data.CertThumbprint.keyword:*) AND (NOT (source.ip.keyword:\:\:1 OR winlog.event_data.CertThumbprint.keyword:"")))
+      query: winlog.channel.keyword:security AND ((event.code.keyword:4768 AND winlog.event_data.TargetUserName.keyword:*$
+        AND winlog.event_data.CertThumbprint.keyword:*) AND (NOT (source.ip.keyword:\:\:1
+        OR winlog.event_data.CertThumbprint.keyword:"")))
 type: any
 priority: 3
+mitre_attack_tactic:
+- credential-access
+mitre_attack_technique:
+- t1187
+risk: high

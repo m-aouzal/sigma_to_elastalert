@@ -1,10 +1,20 @@
 description: |
   Detects calls to PowerShell with Invoke-WebRequest cmdlet using direct IP access
 name: Suspicious Invoke-WebRequest Execution With DirectIP
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (process.command_line.keyword:(*curl\ * OR *invoke\-webrequest* OR *iwr\ * OR *wget\ *)) AND (process.command_line.keyword:(*\:\/\/1* OR *\:\/\/2* OR *\:\/\/3* OR *\:\/\/4* OR *\:\/\/5* OR *\:\/\/6* OR *\:\/\/7* OR *\:\/\/8* OR *\:\/\/9*))
+      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe))
+        OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll)))
+        AND (process.command_line.keyword:(*curl\ * OR *invoke\-webrequest* OR *iwr\
+        * OR *wget\ *)) AND (process.command_line.keyword:(*\:\/\/1* OR *\:\/\/2*
+        OR *\:\/\/3* OR *\:\/\/4* OR *\:\/\/5* OR *\:\/\/6* OR *\:\/\/7* OR *\:\/\/8*
+        OR *\:\/\/9*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- command-and-control
+mitre_attack_technique:
+- t1105
+risk: medium

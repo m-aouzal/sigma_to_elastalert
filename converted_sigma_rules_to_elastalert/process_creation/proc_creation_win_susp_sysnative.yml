@@ -1,10 +1,16 @@
 description: |
   Detects process creation events that use the Sysnative folder (common for CobaltStrike spawns)
 name: Process Creation Using Sysnative Folder
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: winlog.event_data.commandline.keyword:*\:\\windows\\sysnative\\* OR winlog.event_data.image.keyword:*\:\\windows\\sysnative\\*
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1055
+risk: medium

@@ -1,10 +1,20 @@
 description: |
   Detects Obfuscated Powershell via VAR++ LAUNCHER
 name: Invoke-Obfuscation VAR++ LAUNCHER OBFUSCATION - Security
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:security AND (event.code.keyword:4697 AND (winlog.event_data.ServiceFileName.keyword:*\&\&set* AND winlog.event_data.ServiceFileName.keyword:*cmd* AND winlog.event_data.ServiceFileName.keyword:*\/c* AND winlog.event_data.ServiceFileName.keyword:*\-f*) AND (winlog.event_data.ServiceFileName.keyword:(*\{0\}* OR *\{1\}* OR *\{2\}* OR *\{3\}* OR *\{4\}* OR *\{5\}*)))
+      query: winlog.channel.keyword:security AND (event.code.keyword:4697 AND (winlog.event_data.ServiceFileName.keyword:*\&\&set*
+        AND winlog.event_data.ServiceFileName.keyword:*cmd* AND winlog.event_data.ServiceFileName.keyword:*\/c*
+        AND winlog.event_data.ServiceFileName.keyword:*\-f*) AND (winlog.event_data.ServiceFileName.keyword:(*\{0\}*
+        OR *\{1\}* OR *\{2\}* OR *\{3\}* OR *\{4\}* OR *\{5\}*)))
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1027
+- t1059.001
+risk: high

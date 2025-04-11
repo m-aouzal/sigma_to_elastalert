@@ -1,12 +1,19 @@
 description: |
   Detects usage of the built-in PowerShell cmdlet "Enable-WindowsOptionalFeature" used as a Deployment Image Servicing and Management tool.
   Similar to DISM.exe, this cmdlet is used to enumerate, install, uninstall, configure, and update features and packages in Windows images
-  
+
 name: Potential Suspicious Windows Feature Enabled
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (powershell.file.script_block_text.keyword:*enable\-windowsoptionalfeature* AND powershell.file.script_block_text.keyword:*\-online* AND powershell.file.script_block_text.keyword:*\-featurename*) AND (powershell.file.script_block_text.keyword:(*telnetserver* OR *internet\-explorer\-optional\-amd64* OR *tftp* OR *smb1protocol* OR *client\-projfs* OR *microsoft\-windows\-subsystem\-linux*))
+      query: (powershell.file.script_block_text.keyword:*enable\-windowsoptionalfeature*
+        AND powershell.file.script_block_text.keyword:*\-online* AND powershell.file.script_block_text.keyword:*\-featurename*)
+        AND (powershell.file.script_block_text.keyword:(*telnetserver* OR *internet\-explorer\-optional\-amd64*
+        OR *tftp* OR *smb1protocol* OR *client\-projfs* OR *microsoft\-windows\-subsystem\-linux*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique: []
+risk: medium

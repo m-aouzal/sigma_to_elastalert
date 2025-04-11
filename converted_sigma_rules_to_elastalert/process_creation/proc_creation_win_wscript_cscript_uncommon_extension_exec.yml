@@ -1,10 +1,19 @@
 description: |
   Detects Wscript/Cscript executing a file with an uncommon (i.e. non-script) extension
 name: Cscript/Wscript Uncommon Script Extension Execution
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.originalfilename.keyword:(wscript.exe OR cscript.exe)) OR (winlog.event_data.image.keyword:(*\\wscript.exe OR *\\cscript.exe))) AND (process.command_line.keyword:(*.csv* OR *.dat* OR *.doc* OR *.gif* OR *.jpeg* OR *.jpg* OR *.png* OR *.ppt* OR *.txt* OR *.xls* OR *.xml*))
+      query: ((winlog.event_data.originalfilename.keyword:(wscript.exe OR cscript.exe))
+        OR (winlog.event_data.image.keyword:(*\\wscript.exe OR *\\cscript.exe))) AND
+        (process.command_line.keyword:(*.csv* OR *.dat* OR *.doc* OR *.gif* OR *.jpeg*
+        OR *.jpg* OR *.png* OR *.ppt* OR *.txt* OR *.xls* OR *.xml*))
 type: any
 priority: 3
+mitre_attack_tactic:
+- execution
+mitre_attack_technique:
+- t1059.005
+- t1059.007
+risk: high

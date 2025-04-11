@@ -1,10 +1,19 @@
 description: |
   Detects when a memory process image does not match the disk image, indicative of process hollowing.
 name: Potential Process Hollowing Activity
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.Type.keyword:image\ is\ replaced AND (NOT (process.executable.keyword:(*\:\\program\ files\ \(x86\)* OR *\:\\program\ files\\* OR *\:\\windows\\system32\\wbem\\wmiadap.exe* OR *\:\\windows\\syswow64\\wbem\\wmiadap.exe*))) AND (NOT ((process.executable.keyword:*\\appdata\\local\\programs\\opera\\* AND process.executable.keyword:*\\opera.exe) OR process.executable.keyword:*\\windowsapps\\microsoftedge.exe))
+      query: winlog.event_data.Type.keyword:image\ is\ replaced AND (NOT (process.executable.keyword:(*\:\\program\
+        files\ \(x86\)* OR *\:\\program\ files\\* OR *\:\\windows\\system32\\wbem\\wmiadap.exe*
+        OR *\:\\windows\\syswow64\\wbem\\wmiadap.exe*))) AND (NOT ((process.executable.keyword:*\\appdata\\local\\programs\\opera\\*
+        AND process.executable.keyword:*\\opera.exe) OR process.executable.keyword:*\\windowsapps\\microsoftedge.exe))
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- privilege-escalation
+mitre_attack_technique:
+- t1055.012
+risk: medium

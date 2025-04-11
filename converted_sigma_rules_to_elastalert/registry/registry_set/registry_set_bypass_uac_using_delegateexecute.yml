@@ -1,10 +1,16 @@
 description: |
   Bypasses User Account Control using a fileless method
 name: Bypass UAC Using DelegateExecute
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: registry.path.keyword:*\\open\\command\\delegateexecute AND winlog.event_data.Details.keyword:\(empty\)
 type: any
 priority: 3
+mitre_attack_tactic:
+- privilege-escalation
+- defense-evasion
+mitre_attack_technique:
+- t1548.002
+risk: high

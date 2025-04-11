@@ -1,10 +1,15 @@
 description: |
   Exports the target Registry key and hides it in the specified alternate data stream.
 name: Exports Registry Key To an Alternate Data Stream
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
       query: process.executable.keyword:*\\regedit.exe
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1564.004
+risk: high

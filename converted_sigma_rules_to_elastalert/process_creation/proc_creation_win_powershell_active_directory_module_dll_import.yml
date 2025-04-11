@@ -1,10 +1,18 @@
 description: |
   Detects usage of the "Import-Module" cmdlet to load the "Microsoft.ActiveDirectory.Management.dl" DLL. Which is often used by attackers to perform AD enumeration.
 name: Potential Active Directory Enumeration Using AD Module - ProcCreation
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe)) OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll))) AND (process.command_line.keyword:(*import\-module\ * OR *ipmo\ *)) AND process.command_line.keyword:*microsoft.activedirectory.management.dll*
+      query: ((winlog.event_data.image.keyword:(*\\powershell.exe OR *\\pwsh.exe))
+        OR (winlog.event_data.originalfilename.keyword:(powershell.exe OR pwsh.dll)))
+        AND (process.command_line.keyword:(*import\-module\ * OR *ipmo\ *)) AND process.command_line.keyword:*microsoft.activedirectory.management.dll*
 type: any
 priority: 2
+mitre_attack_tactic:
+- reconnaissance
+- discovery
+- impact
+mitre_attack_technique: []
+risk: medium

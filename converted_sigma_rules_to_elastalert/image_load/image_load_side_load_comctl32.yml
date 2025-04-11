@@ -1,10 +1,20 @@
 description: |
   Detects potential DLL sideloading using comctl32.dll to obtain system privileges
 name: Potential DLL Sideloading Via comctl32.dll
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:(c\:\\windows\\system32\\logonui.exe.local\\* OR c\:\\windows\\system32\\werfault.exe.local\\* OR c\:\\windows\\system32\\consent.exe.local\\* OR c\:\\windows\\system32\\narrator.exe.local\\* OR c\:\\windows\\system32\\wermgr.exe.local\\*)) AND file.path.keyword:*\\comctl32.dll
+      query: (file.path.keyword:(c\:\\windows\\system32\\logonui.exe.local\\* OR c\:\\windows\\system32\\werfault.exe.local\\*
+        OR c\:\\windows\\system32\\consent.exe.local\\* OR c\:\\windows\\system32\\narrator.exe.local\\*
+        OR c\:\\windows\\system32\\wermgr.exe.local\\*)) AND file.path.keyword:*\\comctl32.dll
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: high

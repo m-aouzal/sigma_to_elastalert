@@ -1,12 +1,19 @@
 description: |
   Detects the use of powershell commands from headless ConHost window.
   The "--headless" flag hides the windows from the user upon execution.
-  
+
 name: Powershell Executed From Headless ConHost Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\conhost.exe OR winlog.event_data.originalfilename.keyword:conhost.exe) AND (process.command_line.keyword:*\-\-headless* AND process.command_line.keyword:*powershell*)
+      query: (winlog.event_data.image.keyword:*\\conhost.exe OR winlog.event_data.originalfilename.keyword:conhost.exe)
+        AND (process.command_line.keyword:*\-\-headless* AND process.command_line.keyword:*powershell*)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1059.001
+- t1059.003
+risk: medium

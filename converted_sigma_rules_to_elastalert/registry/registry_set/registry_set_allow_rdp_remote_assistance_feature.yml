@@ -1,10 +1,16 @@
 description: |
   Detect enable rdp feature to allow specific user to rdp connect on the targeted machine
 name: Allow RDP Remote Assistance Feature
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*system\\currentcontrolset\\control\\terminal\ server\\fallowtogethelp AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)
+      query: registry.path.keyword:*system\\currentcontrolset\\control\\terminal\
+        server\\fallowtogethelp AND winlog.event_data.Details.keyword:dword\ \(0x00000001\)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1112
+risk: medium

@@ -1,10 +1,18 @@
 description: |
   Detects Obfuscated Powershell via VAR++ LAUNCHER
 name: Invoke-Obfuscation VAR++ LAUNCHER OBFUSCATION - PowerShell Module
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.event_data.Payload.keyword:/(?i)&&set.*(\{\d\}){2,}\\"\s+?-f.*&&.*cmd.*\/c/
+      query: 
+        winlog.event_data.Payload.keyword:/(?i)&&set.*(\{\d\}){2,}\\"\s+?-f.*&&.*cmd.*\/c/
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+- execution
+mitre_attack_technique:
+- t1027
+- t1059.001
+risk: high

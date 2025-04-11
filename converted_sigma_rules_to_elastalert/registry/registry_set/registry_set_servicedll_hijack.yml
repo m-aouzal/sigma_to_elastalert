@@ -1,12 +1,25 @@
 description: |
   Detects changes to the "ServiceDLL" value related to a service in the registry.
   This is often used as a method of persistence.
-  
+
 name: ServiceDll Hijack
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: ((registry.path.keyword:*\\system\\* AND registry.path.keyword:*controlset* AND registry.path.keyword:*\\services\\*) AND registry.path.keyword:*\\parameters\\servicedll) AND (NOT (winlog.event_data.Details.keyword:c\:\\windows\\system32\\spool\\drivers\\x64\\3\\printconfig.dll OR (process.executable.keyword:c\:\\windows\\system32\\lsass.exe AND registry.path.keyword:*\\services\\ntds\\parameters\\servicedll AND winlog.event_data.Details.keyword:%%systemroot%%\\system32\\ntdsa.dll) OR process.executable.keyword:c\:\\windows\\system32\\poqexec.exe)) AND (NOT (process.executable.keyword:*\\regsvr32.exe AND winlog.event_data.Details.keyword:c\:\\windows\\system32\\stagent.dll))
+      query: ((registry.path.keyword:*\\system\\* AND registry.path.keyword:*controlset*
+        AND registry.path.keyword:*\\services\\*) AND registry.path.keyword:*\\parameters\\servicedll)
+        AND (NOT 
+        (winlog.event_data.Details.keyword:c\:\\windows\\system32\\spool\\drivers\\x64\\3\\printconfig.dll
+        OR (process.executable.keyword:c\:\\windows\\system32\\lsass.exe AND registry.path.keyword:*\\services\\ntds\\parameters\\servicedll
+        AND winlog.event_data.Details.keyword:%%systemroot%%\\system32\\ntdsa.dll)
+        OR process.executable.keyword:c\:\\windows\\system32\\poqexec.exe)) AND (NOT
+        (process.executable.keyword:*\\regsvr32.exe AND winlog.event_data.Details.keyword:c\:\\windows\\system32\\stagent.dll))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1543.003
+risk: medium

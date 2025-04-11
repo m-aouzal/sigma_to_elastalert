@@ -1,10 +1,20 @@
 description: |
   Detects the creation of a new PowerShell module ".psm1", ".psd1", ".dll", ".ps1", etc. by a non-PowerShell process
 name: PowerShell Module File Created By Non-PowerShell Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:(*\\windowspowershell\\modules\\* OR *\\powershell\\7\\modules\\*)) AND (NOT (process.executable.keyword:(*\:\\program\ files\\powershell\\7\-preview\\pwsh.exe OR *\:\\program\ files\\powershell\\7\\pwsh.exe OR *\:\\windows\\system32\\poqexec.exe OR *\:\\windows\\system32\\windowspowershell\\v1.0\\powershell_ise.exe OR *\:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe OR *\:\\windows\\syswow64\\poqexec.exe OR *\:\\windows\\syswow64\\windowspowershell\\v1.0\\powershell_ise.exe OR *\:\\windows\\syswow64\\windowspowershell\\v1.0\\powershell.exe)))
+      query: (file.path.keyword:(*\\windowspowershell\\modules\\* OR *\\powershell\\7\\modules\\*))
+        AND (NOT (process.executable.keyword:(*\:\\program\ files\\powershell\\7\-preview\\pwsh.exe
+        OR *\:\\program\ files\\powershell\\7\\pwsh.exe OR *\:\\windows\\system32\\poqexec.exe
+        OR *\:\\windows\\system32\\windowspowershell\\v1.0\\powershell_ise.exe OR
+        *\:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe OR *\:\\windows\\syswow64\\poqexec.exe
+        OR *\:\\windows\\syswow64\\windowspowershell\\v1.0\\powershell_ise.exe OR
+        *\:\\windows\\syswow64\\windowspowershell\\v1.0\\powershell.exe)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- persistence
+mitre_attack_technique: []
+risk: medium

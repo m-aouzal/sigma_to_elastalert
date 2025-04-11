@@ -1,10 +1,16 @@
 description: |
   Detects the creation of binaries in the WinSxS folder by non-system processes
 name: WinSxS Executable File Creation By Non-System Process
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (file.path.keyword:c\:\\windows\\winsxs\\* AND file.path.keyword:*.exe) AND (NOT (process.executable.keyword:(c\:\\windows\\systems32\\* OR c\:\\windows\\syswow64\\* OR c\:\\windows\\winsxs\\*)))
+      query: (file.path.keyword:c\:\\windows\\winsxs\\* AND file.path.keyword:*.exe)
+        AND (NOT (process.executable.keyword:(c\:\\windows\\systems32\\* OR c\:\\windows\\syswow64\\*
+        OR c\:\\windows\\winsxs\\*)))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: medium

@@ -1,10 +1,16 @@
 description: |
   Detects suspicious way to dump the kernel on Windows systems using dtrace.exe, which is available on Windows systems since Windows 10 19H1
 name: Suspicious Kernel Dump Using Dtrace
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (process.executable.keyword:*\\dtrace.exe AND process.command_line.keyword:*lkd\(0\)*) OR (process.command_line.keyword:*syscall\:\:\:return* AND process.command_line.keyword:*lkd\(*)
+      query: (process.executable.keyword:*\\dtrace.exe AND process.command_line.keyword:*lkd\(0\)*)
+        OR (process.command_line.keyword:*syscall\:\:\:return* AND process.command_line.keyword:*lkd\(*)
 type: any
 priority: 3
+mitre_attack_tactic:
+- discovery
+mitre_attack_technique:
+- t1082
+risk: high

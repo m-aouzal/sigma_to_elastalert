@@ -1,12 +1,23 @@
 description: |
   Detects the creation of system DLLs that are usually not present on the system (or at least not in system directories).
   Usually this technique is used to achieve DLL hijacking.
-  
+
 name: Creation Of Non-Existent System DLL
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: file.path.keyword:(*\:\\windows\\system32\\tsmsisrv.dll OR *\:\\windows\\system32\\tsvipsrv.dll OR *\:\\windows\\system32\\wbem\\wbemcomn.dll OR *\:\\windows\\system32\\wlbsctrl.dll OR *\:\\windows\\system32\\wow64log.dll OR *\:\\windows\\system32\\wptsextensions.dll OR *\\sprintcsp.dll)
+      query: file.path.keyword:(*\:\\windows\\system32\\tsmsisrv.dll OR *\:\\windows\\system32\\tsvipsrv.dll
+        OR *\:\\windows\\system32\\wbem\\wbemcomn.dll OR *\:\\windows\\system32\\wlbsctrl.dll
+        OR *\:\\windows\\system32\\wow64log.dll OR *\:\\windows\\system32\\wptsextensions.dll
+        OR *\\sprintcsp.dll)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+- persistence
+- privilege-escalation
+mitre_attack_technique:
+- t1574.001
+- t1574.002
+risk: medium

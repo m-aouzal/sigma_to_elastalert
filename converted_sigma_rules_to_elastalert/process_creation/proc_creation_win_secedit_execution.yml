@@ -1,10 +1,34 @@
 description: |
   Detects potential suspicious behaviour using secedit.exe. Such as exporting or modifying the security policy
 name: Potential Suspicious Activity Using SeCEdit
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (winlog.event_data.image.keyword:*\\secedit.exe OR winlog.event_data.originalfilename.keyword:secedit) AND ((process.command_line.keyword:*\/export* AND process.command_line.keyword:*\/cfg*) OR (process.command_line.keyword:*\/configure* AND process.command_line.keyword:*\/db*))
+      query: (winlog.event_data.image.keyword:*\\secedit.exe OR winlog.event_data.originalfilename.keyword:secedit)
+        AND ((process.command_line.keyword:*\/export* AND process.command_line.keyword:*\/cfg*)
+        OR (process.command_line.keyword:*\/configure* AND process.command_line.keyword:*\/db*))
 type: any
 priority: 2
+mitre_attack_tactic:
+- discovery
+- persistence
+- defense-evasion
+- credential-access
+- privilege-escalation
+mitre_attack_technique:
+- t1562.002
+- t1547.001
+- t1505.005
+- t1556.002
+- t1562
+- t1574.007
+- t1564.002
+- t1546.008
+- t1546.007
+- t1547.014
+- t1547.010
+- t1547.002
+- t1557
+- t1082
+risk: medium

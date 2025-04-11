@@ -1,10 +1,18 @@
 description: |
   Detects suspicious application installed by looking at the added shortcut to the app resolver cache
 name: Suspicious Application Installed
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: winlog.channel.keyword:microsoft\-windows\-shell\-core\/operational AND ((event.code.keyword:28115 AND (winlog.event_data.Name.keyword:(*zenmap* OR *anydesk* OR *wireshark* OR *openvpn*))) OR (event.code.keyword:28115 AND (winlog.event_data.AppID.keyword:(*zenmap.exe* OR *prokzult\ ad* OR *wireshark* OR *openvpn*))))
+      query: winlog.channel.keyword:microsoft\-windows\-shell\-core\/operational AND
+        ((event.code.keyword:28115 AND (winlog.event_data.Name.keyword:(*zenmap* OR
+        *anydesk* OR *wireshark* OR *openvpn*))) OR (event.code.keyword:28115 AND
+        (winlog.event_data.AppID.keyword:(*zenmap.exe* OR *prokzult\ ad* OR *wireshark*
+        OR *openvpn*))))
 type: any
 priority: 2
+mitre_attack_tactic:
+- execution
+mitre_attack_technique: []
+risk: medium

@@ -1,10 +1,17 @@
 description: |
   Detect set UseActionCenterExperience to 0 to disable the Windows security center notification
 name: Disable Windows Security Center Notifications
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: registry.path.keyword:*windows\\currentversion\\immersiveshell\\useactioncenterexperience AND winlog.event_data.Details.keyword:dword\ \(0x00000000\)
+      query: 
+        registry.path.keyword:*windows\\currentversion\\immersiveshell\\useactioncenterexperience
+        AND winlog.event_data.Details.keyword:dword\ \(0x00000000\)
 type: any
 priority: 2
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1112
+risk: medium

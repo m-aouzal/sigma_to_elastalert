@@ -1,10 +1,18 @@
 description: |
   Detects tamper attempts to sophos av functionality via registry key modification
 name: Tamper With Sophos AV Registry Keys
-index: "winlogbeat-*"
+index: winlogbeat-*
 filter:
 - query:
     query_string:
-      query: (registry.path.keyword:(*\\sophos\ endpoint\ defense\\tamperprotection\\config\\savenabled* OR *\\sophos\ endpoint\ defense\\tamperprotection\\config\\sedenabled* OR *\\sophos\\savservice\\tamperprotection\\enabled*)) AND winlog.event_data.Details.keyword:dword\ \(0x00000000\)
+      query: (registry.path.keyword:(*\\sophos\ endpoint\ defense\\tamperprotection\\config\\savenabled*
+        OR *\\sophos\ endpoint\ defense\\tamperprotection\\config\\sedenabled* OR
+        *\\sophos\\savservice\\tamperprotection\\enabled*)) AND winlog.event_data.Details.keyword:dword\
+        \(0x00000000\)
 type: any
 priority: 3
+mitre_attack_tactic:
+- defense-evasion
+mitre_attack_technique:
+- t1562.001
+risk: high
