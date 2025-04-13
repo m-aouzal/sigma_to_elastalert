@@ -7,7 +7,7 @@ and a "valid alert fields" dictionary.
 
 There are two modes:
 
-1. Append Mode (--mode append): For every key in the new alert section that is present in the rule and is a valid alert key,
+1. Append Mode (--mode modify): For every key in the new alert section that is present in the rule and is a valid alert key,
    update its value.
 2. Override Mode (--mode override): Remove any alert-related keys (as determined by the valid alert fields dictionary)
    from the rule, then insert all keys from the new alert section.
